@@ -1,16 +1,16 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './client/index.html',
+  template: './src/index.html',
   filename: 'index.html',
   inject: 'body'
 })
 
 module.exports = {
-  entry: './app.js',
+  entry: './src/app.js',
   output: {
-    path: (__dirname + '/build/'),
-    filename: 'compiled_app.js'
+    path: (__dirname + '/compiled/'),
+    filename: 'app.js'
   },
   module: {
     loaders: [
