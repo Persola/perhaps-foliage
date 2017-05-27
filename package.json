@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "build": "webpack",
-    "dev-server": "webpack-dev-server",
-    "serve": "node --inspect ./serve.js"
+    "dev-server": "webpack-dev-server server.js",
+    "serve": "node --inspect ./server.js"
   },
   "author": "Luke Persola",
   "engines": {

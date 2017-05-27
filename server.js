@@ -9,7 +9,7 @@ http.createServer(function (request, response) {
 
   var filePath = '.' + request.url;
   if (filePath == './')
-    filePath = './index.html';
+    filePath = './compiled/index.html';
 
   var extname = String(path.extname(filePath)).toLowerCase();
   var contentType = 'text/html';
@@ -42,7 +42,7 @@ http.createServer(function (request, response) {
       }
       else {
         response.writeHead(500);
-        response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
+        response.end('the server exploded: ' + error.code + ' ..\n');
         response.end();
       }
     }
