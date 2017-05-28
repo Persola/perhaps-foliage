@@ -12,10 +12,11 @@ module.exports = {
     path: (__dirname + '/compiled'),
     filename: 'app.js'
   },
-  // module: {
-  //   loaders: [
-  //     { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
-  //   ]
-  // },
+  module: {
+    loaders: [
+      { test: /\.css$/, loader: "style-loader!css-loader" }
+      // { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+    ]
+  },
   plugins: [HtmlWebpackPluginConfig]
 }

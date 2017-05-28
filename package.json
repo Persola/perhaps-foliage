@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "connect": "^3.6.2",
+    "css-loader": "^0.28.3",
     "express": "^4.15.3",
     "html-webpack-plugin": "^2.28.0",
     "redux": "3.6.0",
+    "style-loader": "^0.18.1",
     "webpack": "2.5.1"
   },
   "devDependencies": {
