@@ -3,13 +3,16 @@ var fs = require('fs');
 var path = require('path');
 
 const PORT = 8000
+const ROOT_PATH = './serve'
+const DEFAULT_PATH = ROOT_PATH + '/index.html'
+const NOT_FOUND_PATH = './static/404.html'
 
 http.createServer(function (request, response) {
   console.log('request ', request.url);
 
-  var filePath = '.' + request.url;
-  if (filePath == './')
-    filePath = './compiled/index.html';
+  var filePath = ROOT_PATH + request.url;
+  if (request.url == '/')
+    filePath = DEFAULT_PATH;
 
   var extname = String(path.extname(filePath)).toLowerCase();
   var contentType = 'text/html';
@@ -32,17 +35,19 @@ http.createServer(function (request, response) {
 
   contentType = mimeTypes[extname] || 'application/octet-stream';
 
+  console.log(filePath)
   fs.readFile(filePath, function(error, content) {
     if (error) {
       if(error.code == 'ENOENT'){
-        fs.readFile('./404.html', function(error, content) {
+        fs.readFile(NOT_FOUND_PATH, function(error, content) {
+          console.log(error)
           response.writeHead(200, { 'Content-Type': contentType });
           response.end(content, 'utf-8');
         });
       }
       else {
         response.writeHead(500);
-        response.end('the server exploded: ' + error.code + ' ..\n');
+        response.end('unspecified server error: ' + error.code + ' ..\n');
         response.end();
       }
     }
@@ -53,5 +58,5 @@ http.createServer(function (request, response) {
   });
 
 }).listen(PORT);
-console.log('Server running at http://127.0.0.1:' + PORT + '/');
+console.log('HTTP server: http://127.0.0.1:' + PORT + '/');
 

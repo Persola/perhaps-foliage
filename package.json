@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "dev-server": "webpack-dev-server server.js",
-    "serve": "node --inspect ./server.js"
+    "serve": "node --inspect ./server.js",
+    "clean": "rm -dr serve/*"
   },
   "author": "Luke Persola",
   "engines": {
