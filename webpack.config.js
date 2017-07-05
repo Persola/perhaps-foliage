@@ -14,9 +14,12 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: "style-loader!css-loader" }
-      // { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig],
+  resolve: {
+    alias: { projectRoot: __dirname + '/src' }
+  }
 }
