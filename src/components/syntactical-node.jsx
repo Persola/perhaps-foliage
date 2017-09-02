@@ -1,8 +1,15 @@
 // @flow
 import React from 'react';
 
-export default () => {
-  const { serialization } = this.props;
+type Props = {
+  serialization: {
+    klass: String,
+    data: Object,
+  }
+}
+
+export default (props: Props) => {
+  const { serialization } = props;
   if (serialization.klass !== 'numberLiteral') { throw new Error('no types yet'); }
 
   const contextualType = 'expression';

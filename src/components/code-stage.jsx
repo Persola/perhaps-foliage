@@ -4,8 +4,12 @@ import { connect } from 'react-redux';
 
 import SyntacticalNode from './syntactical-node.jsx';
 
-const codeStage = () => {
-  const { code } = this.props;
+type Props = {
+  code: Object
+}
+
+const codeStage = (props: Props) => {
+  const { code } = props;
 
   return (
     <SyntacticalNode

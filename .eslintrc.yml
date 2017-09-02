@@ -14,5 +14,7 @@ rules:
     - as-needed
   'import/extensions':
     - 0
+  flow-vars/define-flow-type: 1
+  flow-vars/use-flow-type: 1
 plugins:
   - flow-vars
