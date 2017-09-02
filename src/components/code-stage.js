@@ -1,7 +1,8 @@
+// @flow
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { SyntacticalNode } from 'projectRoot/components/syntactical-node.js'
+import { SyntacticalNode } from './syntactical-node.js'
 
 export class CodeStage extends React.Component {
   render() {

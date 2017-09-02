@@ -20,6 +20,11 @@ module.exports = {
   },
   plugins: [HtmlWebpackPluginConfig],
   resolve: {
-    alias: { projectRoot: __dirname + '/src' }
+    alias: {
+      // this worked, but flow didn't know about it so it would fail to find files
+      // tried to use flow's module.name_mapper.extension option but it had no apparent effect
+      // so using relative paths for now
+      projectRoot: __dirname + '/src'
+    }
   }
 }

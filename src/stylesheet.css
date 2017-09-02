@@ -24,6 +24,14 @@ a {
   display: table;
 }
 
+.code-stage .expression {
+  background-color: #056;
+}
+
+.code-stage .number-literal {
+  color: #D3F;
+}
+
 .code-stage .leaf {
   padding: 4px 12px 2px 12px;
 }
