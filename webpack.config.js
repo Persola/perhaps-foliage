@@ -7,7 +7,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/app.jsx',
   output: {
     path: (__dirname + '/serve'),
     filename: 'app.js'
@@ -15,7 +15,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+      { test: /(\.js|\.jsx)$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
   plugins: [HtmlWebpackPluginConfig],

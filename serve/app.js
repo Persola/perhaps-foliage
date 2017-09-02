@@ -11270,6 +11270,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 __webpack_require__(227);
 
+
 console.log('CRUMBLECANO!');
 
 var defaultState = {
@@ -11292,6 +11293,12 @@ var entry = function entry() {
   if (document.readyState !== 'complete') {
     throw 'readyState error';
   }
+
+  var testFunc = function testFunc(x) {
+    return x + 1;
+  };
+
+  console.log(testFunc(1));
 
   _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
@@ -24804,8 +24811,6 @@ var CodeStage = exports.CodeStage = function (_React$Component) {
 }(_react2.default.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('ffff');
-  console.log(state.code);
   return {
     code: state.code
   };
@@ -24867,9 +24872,12 @@ var SyntacticalNode = exports.SyntacticalNode = function (_React$Component) {
         throw 'No types yet';
       }
 
+      var contextualType = 'expression';
+      var contentualType = 'number-literal';
+
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'leaf ${contextualType} ${contentualType}' },
         serialization.data
       );
     }
@@ -24918,7 +24926,7 @@ exports = module.exports = __webpack_require__(229)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background-color: #111;\n  font-family: 'Courier New', monospace;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\n.code-stage div {\n  margin: 0 8px;\n  border-radius: 15px 15px 15px 15px;\n  /*  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.8);  */\n  font-weight: bold;\n  font-size: 16px;\n}\n\n.code-stage .same-line {\n  display: inline-block;\n}\n\n.code-stage .new-line {\n  display: table;\n}\n\n.code-stage .leaf {\n  padding: 4px 12px 2px 12px;\n}\n\n.button {\n  display: inline-block;\n  margin: 16px;\n  padding: 4px 8px;\n  background-color: #aaa;\n  color: #000;\n}\n\n.button:hover{\n  cursor: pointer;\n  background-color: #dd6;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #111;\n  font-family: 'Courier New', monospace;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\n.code-stage div {\n  margin: 0 8px;\n  border-radius: 15px 15px 15px 15px;\n  /*  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.8);  */\n  font-weight: bold;\n  font-size: 16px;\n}\n\n.code-stage .same-line {\n  display: inline-block;\n}\n\n.code-stage .new-line {\n  display: table;\n}\n\n.code-stage .expression {\n  background-color: #056;\n}\n\n.code-stage .number-literal {\n  color: #D3F;\n}\n\n.code-stage .leaf {\n  padding: 4px 12px 2px 12px;\n}\n\n.button {\n  display: inline-block;\n  margin: 16px;\n  padding: 4px 8px;\n  background-color: #aaa;\n  color: #000;\n}\n\n.button:hover{\n  cursor: pointer;\n  background-color: #dd6;\n}\n", ""]);
 
 // exports
 

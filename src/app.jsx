@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux';
 import ReactRedux from 'react-redux'
 
-import CodeStageContainer from './components/code-stage.js'
+import CodeStageContainer from './components/code-stage.jsx'
 
 require('./stylesheet.css')
 

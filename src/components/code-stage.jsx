@@ -2,13 +2,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { SyntacticalNode } from './syntactical-node.js'
+import { SyntacticalNode } from './syntactical-node.jsx'
 
 export class CodeStage extends React.Component {
   render() {
     const { code } = this.props
 
-    return(
+    return (
       <SyntacticalNode
         serialization={code}
       />
