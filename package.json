@@ -47,5 +47,25 @@
     "style-loader": "*",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.7.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom" : [
+      "**/*.{js,jsx}",
+      "!{node_modules,serve,tmp}/**"
+    ],
+    "coverageDirectory": "tmp/coverage",
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+      }
   }
 }
