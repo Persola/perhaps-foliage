@@ -11256,11 +11256,7 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _redux = __webpack_require__(85);
 
-var _redux2 = _interopRequireDefault(_redux);
-
 var _reactRedux = __webpack_require__(91);
-
-var _reactRedux2 = _interopRequireDefault(_reactRedux);
 
 var _codeStage = __webpack_require__(225);
 
@@ -11282,7 +11278,6 @@ var defaultState = {
 
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-  var action = arguments[1];
   return state;
 };
 
@@ -11291,14 +11286,8 @@ var store = (0, _redux.createStore)(reducer);
 var entry = function entry() {
   var rootEl = document.getElementById('code-stage');
   if (document.readyState !== 'complete') {
-    throw 'readyState error';
+    throw new Error('readyState error');
   }
-
-  var testFunc = function testFunc(x) {
-    return x + 1;
-  };
-
-  console.log(testFunc(1));
 
   _reactDom2.default.render(_react2.default.createElement(
     _reactRedux.Provider,
@@ -11307,7 +11296,7 @@ var entry = function entry() {
   ), rootEl);
 };
 
-window.addEventListener('load', function (event) {
+window.addEventListener('load', function () {
   entry();
 });
 
@@ -24766,9 +24755,6 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CodeStage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(20);
 
@@ -24778,53 +24764,30 @@ var _reactRedux = __webpack_require__(91);
 
 var _syntacticalNode = __webpack_require__(226);
 
+var _syntacticalNode2 = _interopRequireDefault(_syntacticalNode);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CodeStage = exports.CodeStage = function (_React$Component) {
-  _inherits(CodeStage, _React$Component);
-
-  function CodeStage() {
-    _classCallCheck(this, CodeStage);
-
-    return _possibleConstructorReturn(this, (CodeStage.__proto__ || Object.getPrototypeOf(CodeStage)).apply(this, arguments));
-  }
-
-  _createClass(CodeStage, [{
-    key: 'render',
-    value: function render() {
-      var code = this.props.code;
+var codeStage = function codeStage() {
+  var code = undefined.props.code;
 
 
-      return _react2.default.createElement(_syntacticalNode.SyntacticalNode, {
-        serialization: code
-      });
-    }
-  }]);
+  return _react2.default.createElement(_syntacticalNode2.default, {
+    serialization: code
+  });
+};
 
-  return CodeStage;
-}(_react2.default.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {
-    code: state.code
-  };
+  return { code: state.code };
 };
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onTodoClick: function onTodoClick(id) {
-      dispatch();
-    }
-  };
+  return { onTodoClick: function onTodoClick() {
+      return dispatch();
+    } };
 };
 
-var CodeStageContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CodeStage);
+var CodeStageContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(codeStage);
 
 exports.default = CodeStageContainer;
 
@@ -24838,9 +24801,6 @@ exports.default = CodeStageContainer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SyntacticalNode = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(20);
 
@@ -24848,43 +24808,24 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+exports.default = function () {
+  var serialization = undefined.props.serialization;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SyntacticalNode = exports.SyntacticalNode = function (_React$Component) {
-  _inherits(SyntacticalNode, _React$Component);
-
-  function SyntacticalNode() {
-    _classCallCheck(this, SyntacticalNode);
-
-    return _possibleConstructorReturn(this, (SyntacticalNode.__proto__ || Object.getPrototypeOf(SyntacticalNode)).apply(this, arguments));
+  if (serialization.klass !== 'numberLiteral') {
+    throw new Error('no types yet');
   }
 
-  _createClass(SyntacticalNode, [{
-    key: 'render',
-    value: function render() {
-      var serialization = this.props.serialization;
+  var contextualType = 'expression';
+  var contentualType = 'number-literal';
 
-      if (serialization.klass !== 'numberLiteral') {
-        throw 'No types yet';
-      }
+  var htmlClassString = 'leaf ' + contextualType + ' ' + contentualType;
 
-      var contextualType = 'expression';
-      var contentualType = 'number-literal';
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'leaf ${contextualType} ${contentualType}' },
-        serialization.data
-      );
-    }
-  }]);
-
-  return SyntacticalNode;
-}(_react2.default.Component);
+  return _react2.default.createElement(
+    'div',
+    { className: htmlClassString },
+    serialization.data
+  );
+};
 
 /***/ }),
 /* 227 */

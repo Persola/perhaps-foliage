@@ -1,38 +1,25 @@
 // @flow
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { SyntacticalNode } from './syntactical-node.jsx'
+import SyntacticalNode from './syntactical-node.jsx';
 
-export class CodeStage extends React.Component {
-  render() {
-    const { code } = this.props
+const codeStage = () => {
+  const { code } = this.props;
 
-    return (
-      <SyntacticalNode
-        serialization={code}
-      />
-    )
-  }
-}
+  return (
+    <SyntacticalNode
+      serialization={code}
+    />
+  );
+};
 
-const mapStateToProps = state => {
-  return {
-    code: state.code
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onTodoClick: id => {
-      dispatch()
-    }
-  }
-}
+const mapStateToProps = state => ({ code: state.code });
+const mapDispatchToProps = dispatch => ({ onTodoClick: () => dispatch() });
 
 const CodeStageContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
-)(CodeStage)
+  mapDispatchToProps,
+)(codeStage);
 
-export default CodeStageContainer
+export default CodeStageContainer;

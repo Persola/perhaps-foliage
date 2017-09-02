@@ -1,18 +1,18 @@
 // @flow
-import React from 'react'
+import React from 'react';
 
-export class SyntacticalNode extends React.Component {
-  render() {
-  	const { serialization } = this.props
-  	if(serialization.klass !== 'numberLiteral') { throw 'No types yet' }
+export default () => {
+  const { serialization } = this.props;
+  if (serialization.klass !== 'numberLiteral') { throw new Error('no types yet'); }
 
-  	const contextualType = 'expression'
-    const contentualType = 'number-literal'
+  const contextualType = 'expression';
+  const contentualType = 'number-literal';
 
-    return(
-      <div className="leaf ${contextualType} ${contentualType}">
-        {serialization.data}
-      </div>
-    )
-  }
-}
+  const htmlClassString = `leaf ${contextualType} ${contentualType}`;
+
+  return (
+    <div className={htmlClassString}>
+      {serialization.data}
+    </div>
+  );
+};

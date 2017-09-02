@@ -1,46 +1,38 @@
 // @flow
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Redux from 'redux'
-import { createStore } from 'redux'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import ReactRedux from 'react-redux'
 
-import CodeStageContainer from './components/code-stage.jsx'
+import CodeStageContainer from './components/code-stage.jsx';
 
-require('./stylesheet.css')
+require('./stylesheet.css');
 
-console.log('CRUMBLECANO!')
+console.log('CRUMBLECANO!');
 
 const defaultState = {
   code: {
     klass: 'numberLiteral',
-    data: 1
-  }
-}
+    data: 1,
+  },
+};
 
-const reducer = (state = defaultState, action) => state
+const reducer = (state = defaultState) => state;
 
 const store = createStore(reducer);
 
-const entry = function() {
-  var rootEl = document.getElementById('code-stage')
-  if(document.readyState !== 'complete') { throw('readyState error') }
-
-  const testFunc = (x: number): number => x + 1
-
-  console.log(testFunc(1))
+const entry = () => {
+  const rootEl = document.getElementById('code-stage');
+  if (document.readyState !== 'complete') { throw (new Error('readyState error')); }
 
   ReactDOM.render(
     (
       <Provider store={store}>
         <CodeStageContainer />
-	    </Provider>
-	  ),
-	  rootEl
-  )
-}
+      </Provider>
+    ),
+    rootEl,
+  );
+};
 
-window.addEventListener('load', function(event) {
-  entry()
-})
+window.addEventListener('load', () => { entry(); });

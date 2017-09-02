@@ -1,6 +1,18 @@
-extends: airbnb
+extends:
+  - airbnb
+  - eslint:recommended
+  - plugin:import/errors
+  - plugin:import/warnings
 parser: babel-eslint
+env:
+  browser: true
 rules:
   strict: 0
+  no-console: 1
+  arrow-parens:
+    - 2
+    - as-needed
+  'import/extensions':
+    - 0
 plugins:
   - flow-vars
