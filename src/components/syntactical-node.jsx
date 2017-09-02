@@ -15,10 +15,8 @@ export default (props: Props) => {
   const contextualType = 'expression';
   const contentualType = 'number-literal';
 
-  const htmlClassString = `leaf ${contextualType} ${contentualType}`;
-
   return (
-    <div className={htmlClassString}>
+    <div className={`leaf ${contextualType} ${contentualType}`}>
       {serialization.data}
     </div>
   );

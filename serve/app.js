@@ -24768,8 +24768,8 @@ var _syntacticalNode2 = _interopRequireDefault(_syntacticalNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var codeStage = function codeStage() {
-  var code = undefined.props.code;
+var codeStage = function codeStage(props) {
+  var code = props.code;
 
 
   return _react2.default.createElement(_syntacticalNode2.default, {
@@ -24808,8 +24808,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
-  var serialization = undefined.props.serialization;
+exports.default = function (props) {
+  var serialization = props.serialization;
 
   if (serialization.klass !== 'numberLiteral') {
     throw new Error('no types yet');
@@ -24818,11 +24818,9 @@ exports.default = function () {
   var contextualType = 'expression';
   var contentualType = 'number-literal';
 
-  var htmlClassString = 'leaf ' + contextualType + ' ' + contentualType;
-
   return _react2.default.createElement(
     'div',
-    { className: htmlClassString },
+    { className: 'leaf ' + contextualType + ' ' + contentualType },
     serialization.data
   );
 };
