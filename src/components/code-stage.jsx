@@ -16,8 +16,8 @@ export const CodeStage = (props: Props) => {
   );
 };
 
-const mapStateToProps = state => ({ code: state.code });
-const mapDispatchToProps = dispatch => ({ onTodoClick: () => dispatch() });
+export const mapStateToProps = state => ({ code: state.code });
+export const mapDispatchToProps = () => ({});
 
 const CodeStageContainer = connect(
   mapStateToProps,
