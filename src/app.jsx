@@ -9,7 +9,7 @@ import CodeStageContainer from './components/code-stage.jsx';
 require('./stylesheet.css');
 
 const defaultState = {
-  code: {
+  stageful: {
     klass: 'numberLiteral',
     data: 1,
   },

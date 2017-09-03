@@ -5,18 +5,18 @@ import { connect } from 'react-redux';
 import SyntacticalNode from './syntactical-node.jsx';
 
 type Props = {
-  code: Object
+  stageful: Object
 }
 
 export const CodeStage = (props: Props) => {
-  const { code } = props;
+  const { stageful } = props;
 
   return (
-    <SyntacticalNode serialization={code} />
+    <SyntacticalNode serialization={stageful} />
   );
 };
 
-export const mapStateToProps = state => ({ code: state.code });
+export const mapStateToProps = state => ({ code: state.stageful });
 export const mapDispatchToProps = () => ({});
 
 const CodeStageContainer = connect(
