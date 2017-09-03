@@ -4,8 +4,11 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
 parser: babel-eslint
+plugins:
+- flow-vars
 env:
   browser: true
+  jest: true
 rules:
   strict: 0
   no-console: 1
@@ -16,5 +19,10 @@ rules:
     - 0
   flow-vars/define-flow-type: 1
   flow-vars/use-flow-type: 1
-plugins:
-  - flow-vars
+overrides:
+  -
+    files:
+      - "test/**"
+    rules:
+      "import/no-extraneous-dependencies":
+        - 0

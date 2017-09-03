@@ -8,13 +8,11 @@ type Props = {
   code: Object
 }
 
-const codeStage = (props: Props) => {
+export const CodeStage = (props: Props) => {
   const { code } = props;
 
   return (
-    <SyntacticalNode
-      serialization={code}
-    />
+    <SyntacticalNode serialization={code} />
   );
 };
 
@@ -24,6 +22,6 @@ const mapDispatchToProps = dispatch => ({ onTodoClick: () => dispatch() });
 const CodeStageContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(codeStage);
+)(CodeStage);
 
 export default CodeStageContainer;

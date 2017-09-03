@@ -1,2 +1,4 @@
 node_modules
 serve
+test/__snapshots__
+tmp
