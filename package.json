@@ -5,10 +5,11 @@
   "main": "serve.js",
   "scripts": {
     "clean": "rm -dr serve/* tmp/*",
+    "clean:serve": "rm -dr serve/*",
     "build": "webpack",
     "webpack-dev-server": "webpack-dev-server server.js",
     "start": "node --inspect ./server.js",
-    "redo": "npm run clean; npm run build; npm run start",
+    "redo": "npm run clean:serve; npm run build; npm run start",
     "test": "jest",
     "flow": "flow",
     "lint": "eslint --ext js,jsx ."
