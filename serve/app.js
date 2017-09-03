@@ -24755,6 +24755,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.CodeStage = undefined;
 
 var _react = __webpack_require__(20);
 
@@ -24768,13 +24769,11 @@ var _syntacticalNode2 = _interopRequireDefault(_syntacticalNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var codeStage = function codeStage(props) {
+var CodeStage = exports.CodeStage = function CodeStage(props) {
   var code = props.code;
 
 
-  return _react2.default.createElement(_syntacticalNode2.default, {
-    serialization: code
-  });
+  return _react2.default.createElement(_syntacticalNode2.default, { serialization: code });
 };
 
 
@@ -24787,7 +24786,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     } };
 };
 
-var CodeStageContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(codeStage);
+var CodeStageContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CodeStage);
 
 exports.default = CodeStageContainer;
 
