@@ -1,4 +1,4 @@
 node_modules
 serve
-test/__snapshots__
+test/**/__snapshots__
 tmp
