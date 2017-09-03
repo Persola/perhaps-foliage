@@ -7,7 +7,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 
 module.exports = {
-  entry: './src/app.jsx',
+  entry: './src/app.js',
   output: {
     path: (__dirname + '/serve'),
     filename: 'app.js'

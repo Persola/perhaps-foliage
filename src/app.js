@@ -1,10 +1,6 @@
 // @flow
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
-import CodeStageContainer from './components/code-stage.jsx';
+import renderer from './renderer.jsx'
 
 require('./stylesheet.css');
 const defaultCode = require("./initial-code-state.yml");
@@ -13,17 +9,8 @@ const defaultState = { stageful: defaultCode }
 const reducer = (state = defaultState) => state;
 const store = createStore(reducer);
 const entry = () => {
-  const rootEl = document.getElementById('code-stage');
   if (document.readyState !== 'complete') { throw (new Error('readyState error')); }
-
-  ReactDOM.render(
-    (
-      <Provider store={store}>
-        <CodeStageContainer />
-      </Provider>
-    ),
-    rootEl,
-  );
+  renderer.render(store);
 };
 
 window.addEventListener('load', () => { entry(); });
