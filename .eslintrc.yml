@@ -26,3 +26,9 @@ overrides:
     rules:
       "import/no-extraneous-dependencies":
         - 0
+  -
+    files:
+      - "server.js"
+    rules:
+      "no-console":
+        - 0

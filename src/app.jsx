@@ -8,8 +8,6 @@ import CodeStageContainer from './components/code-stage.jsx';
 
 require('./stylesheet.css');
 
-console.log('CRUMBLECANO!');
-
 const defaultState = {
   code: {
     klass: 'numberLiteral',
