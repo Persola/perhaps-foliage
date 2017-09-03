@@ -4,16 +4,14 @@
   "description": " sdlfwhoflfawelfea",
   "main": "serve.js",
   "scripts": {
-    "clean": "rm -dr serve/*",
+    "clean": "rm -dr serve/* tmp/*",
     "build": "webpack",
     "webpack-dev-server": "webpack-dev-server server.js",
     "start": "node --inspect ./server.js",
     "redo": "npm run clean; npm run build; npm run start",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
     "flow": "flow",
-    "lint": "eslint --ext js,jsx src/"
+    "lint": "eslint --ext js,jsx ."
   },
   "author": "Luke Persola",
   "engines": {
