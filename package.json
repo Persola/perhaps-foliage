@@ -7,6 +7,7 @@
     "clean": "rm -dr serve/* tmp/*",
     "clean:serve": "rm -dr serve/*",
     "build": "webpack",
+    "build:noisily": "webpack --verbose",
     "webpack-dev-server": "webpack-dev-server server.js",
     "start": "node --inspect ./server.js",
     "redo": "npm run clean:serve; npm run build; npm run start",
@@ -21,11 +22,14 @@
   "dependencies": {
     "connect": "~3.6.3",
     "express": "~4.15.4",
+    "json-loader": "^0.5.7",
     "proptypes": "^1.1.0",
     "react": "~15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "~5.0.5",
-    "redux": "^3.7.1"
+    "redux": "^3.7.1",
+    "yaml-loader": "^0.5.0",
+    "yml-loader": "^2.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

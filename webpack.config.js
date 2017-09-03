@@ -13,9 +13,10 @@ module.exports = {
     filename: 'app.js'
   },
   module: {
-    loaders: [
-      { test: /\.css$/, loader: "style-loader!css-loader" },
-      { test: /(\.js|\.jsx)$/, loader: 'babel-loader', exclude: /node_modules/ }
+    rules: [
+      { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: [{ loader: 'babel-loader' }]},
+      { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]},
+      { test: /\.yml$/, use: [{ loader: 'json-loader' }, { loader: 'yaml-loader' }]}
     ]
   },
   plugins: [HtmlWebpackPluginConfig],

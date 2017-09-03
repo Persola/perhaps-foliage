@@ -16,7 +16,7 @@ export const CodeStage = (props: Props) => {
   );
 };
 
-export const mapStateToProps = state => ({ code: state.stageful });
+export const mapStateToProps = (state: Object) => ({ stageful: state.stageful });
 export const mapDispatchToProps = () => ({});
 
 const CodeStageContainer = connect(

@@ -7,18 +7,11 @@ import { Provider } from 'react-redux';
 import CodeStageContainer from './components/code-stage.jsx';
 
 require('./stylesheet.css');
+const defaultCode = require("./initial-code-state.yml");
 
-const defaultState = {
-  stageful: {
-    klass: 'numberLiteral',
-    data: 1,
-  },
-};
-
+const defaultState = { stageful: defaultCode }
 const reducer = (state = defaultState) => state;
-
 const store = createStore(reducer);
-
 const entry = () => {
   const rootEl = document.getElementById('code-stage');
   if (document.readyState !== 'complete') { throw (new Error('readyState error')); }

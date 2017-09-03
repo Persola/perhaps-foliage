@@ -16,7 +16,7 @@ describe ('CodeStage', () => {
 
 describe ('mapStateToProps', () => {
   it ('returns the state', () => {
-    const state = { code: 72 }
+    const state = { stageful: 72 }
 
     expect(mapStateToProps(state)).toEqual(state);
   });

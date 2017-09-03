@@ -11266,23 +11266,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 __webpack_require__(227);
 
+var defaultCode = __webpack_require__(232);
 
-console.log('CRUMBLECANO!');
-
-var defaultState = {
-  code: {
-    klass: 'numberLiteral',
-    data: 1
-  }
-};
-
+var defaultState = { stageful: defaultCode };
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
   return state;
 };
-
 var store = (0, _redux.createStore)(reducer);
-
 var entry = function entry() {
   var rootEl = document.getElementById('code-stage');
   if (document.readyState !== 'complete') {
@@ -24755,7 +24746,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CodeStage = undefined;
+exports.mapDispatchToProps = exports.mapStateToProps = exports.CodeStage = undefined;
 
 var _react = __webpack_require__(20);
 
@@ -24770,20 +24761,16 @@ var _syntacticalNode2 = _interopRequireDefault(_syntacticalNode);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CodeStage = exports.CodeStage = function CodeStage(props) {
-  var code = props.code;
+  var stageful = props.stageful;
 
 
-  return _react2.default.createElement(_syntacticalNode2.default, { serialization: code });
+  return _react2.default.createElement(_syntacticalNode2.default, { serialization: stageful });
 };
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return { code: state.code };
+var mapStateToProps = exports.mapStateToProps = function mapStateToProps(state) {
+  return { stageful: state.stageful };
 };
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return { onTodoClick: function onTodoClick() {
-      return dispatch();
-    } };
+var mapDispatchToProps = exports.mapDispatchToProps = function mapDispatchToProps() {
+  return {};
 };
 
 var CodeStageContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CodeStage);
@@ -25404,6 +25391,12 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports) {
+
+module.exports = {"klass":"numberLiteral","data":1}
 
 /***/ })
 /******/ ]);
