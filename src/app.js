@@ -1,11 +1,11 @@
 // @flow
 import { createStore } from 'redux';
+import codeLoader from './code-loader.js'
 import renderer from './renderer.jsx'
 
 require('./stylesheet.css');
-const defaultCode = require("./initial-code-state.yml");
 
-const defaultState = { stageful: defaultCode }
+const defaultState = { stageful: codeLoader.default() };
 const reducer = (state = defaultState) => state;
 const store = createStore(reducer);
 const entry = () => {
