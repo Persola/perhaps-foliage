@@ -8,6 +8,7 @@ plugins:
 - flow-vars
 env:
   browser: true
+  # this can be removed after extracting renderer into another repo
   jest: true
 rules:
   strict: 0

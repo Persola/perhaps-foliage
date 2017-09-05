@@ -11,6 +11,14 @@ type Props = {
 export const CodeStage = (props: Props) => {
   const { stageful } = props;
 
+  if (stageful === false) {
+    return (
+      <div>
+        (Code stage is empty)
+      </div>
+    );
+  }
+
   return (
     <SyntacticalNode serialization={stageful} />
   );

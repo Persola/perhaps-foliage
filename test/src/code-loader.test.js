@@ -1,9 +1,9 @@
-import CodeLoader from '../../src/code-loader.js';
+import codeLoader from '../../src/code-loader.js';
 
 describe ('CodeStage', () => {
-  describe ('.default', () => {
+  describe ('.syntaticGraphSeed', () => {
     it ('returns a syntactic graph of the number literal one', () => {
-      expect(CodeLoader.default()).toEqual({
+      expect(codeLoader()).toEqual({
         klass: 'numberLiteral',
         data: 1
       });

@@ -1,5 +1,4 @@
-const defaultCode = require("./initial-code-state.yml");
-
-export default {
-  default: (): Object => defaultCode
+export default () => {
+  const syntaticGraphSeed = require("./syntactic-graph-seed.yml");
+  return syntaticGraphSeed;
 }

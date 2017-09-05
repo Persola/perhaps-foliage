@@ -7,7 +7,6 @@ import CodeStageContainer from './components/code-stage.jsx';
 export default {
   render: (store: Object) => {
     const rootEl = document.getElementById('code-stage');
-    if (document.readyState !== 'complete') { throw (new Error('readyState error')); }
 
     ReactDOM.render(
       (
