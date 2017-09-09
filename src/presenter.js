@@ -21,12 +21,29 @@ export default class Presenter {
   }
 
   generatePresentation(editorState) {
-    const omniValue = {
-      klass: 'numberLiteral',
-      data: 1
-    }
+    const validEditorState = candidateEditorState => {
+      if (!Object.keys(candidateEditorState) === ['stageful']) {
+        return false;
+      }
 
-    if (!this.syntacticGraphsIdentical(editorState, { stageful: omniValue })) {
+      const { stageful } = candidateEditorState;
+
+      if (!Object.keys(stageful) === ['klass', 'data']) {
+        return false;
+      }
+
+      if (!stageful.klass === 'numberLiteral') {
+        return false;
+      }
+
+      if (![0, 1].includes(stageful.data)) {
+        return false;
+      }
+
+      return true;
+    };
+
+    if (!validEditorState(editorState)) {
       throw new Error('Only the omnivalue can be presented');
     }
 

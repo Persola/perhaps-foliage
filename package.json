@@ -23,6 +23,7 @@
     "connect": "~3.6.3",
     "express": "~4.15.4",
     "json-loader": "^0.5.7",
+    "mousetrap": "^1.6.1",
     "proptypes": "^1.1.0",
     "react": "~15.6.1",
     "react-dom": "^15.6.1",
