@@ -1,14 +1,12 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
-
 import SyntacticalNode from './syntactical-node.jsx';
 
 type Props = {
   stageful: Object
 }
 
-export const CodeStage = (props: Props) => {
+export default (props: Props) => {
   const { stageful } = props;
 
   if (stageful === false) {
@@ -17,19 +15,11 @@ export const CodeStage = (props: Props) => {
         (Code stage is empty)
       </div>
     );
+  } else if (typeof stageful !== 'object') {
+    throw new Error('stageful missing')
   }
 
   return (
     <SyntacticalNode serialization={stageful} />
   );
 };
-
-export const mapStateToProps = (state: Object) => ({ stageful: state.stageful });
-export const mapDispatchToProps = () => ({});
-
-const CodeStageContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CodeStage);
-
-export default CodeStageContainer;
