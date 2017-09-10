@@ -36,6 +36,10 @@ a {
   padding: 4px 12px 2px 12px;
 }
 
+::selection {
+  background-color: #c88;
+}
+
 button {
   display: inline-block;
   margin: 16px;

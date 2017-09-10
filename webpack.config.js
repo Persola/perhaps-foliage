@@ -27,5 +27,6 @@ module.exports = {
       // so using relative paths for now
       projectRoot: __dirname + '/src'
     }
-  }
+  },
+  devtool: 'source-map'
 }
