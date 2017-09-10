@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import codeLoader from './code-loader.js'
+import codeLoader from './code-loader/code-loader.js'
 
 const defaultEdtiorState = { stageful: codeLoader() };
 

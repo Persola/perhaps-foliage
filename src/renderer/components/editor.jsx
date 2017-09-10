@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import CodeStage from './code-stage.jsx';
 import InterpretButton from './interpret-button.jsx';
-import interpreter from '../interpreter.js'
-import editorStateStore from '../editor-state-store.js'
+import interpreter from '../../interpreter/interpreter.js'
+import editorStateStore from '../../editor-state-store.js'
 
 type Props = {
   stageful: Object,

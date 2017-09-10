@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SyntacticalNode from '../../../src/components/syntactical-node.jsx';
+import SyntacticalNode from '../../../src/renderer/components/syntactical-node.jsx';
 
 describe ('SyntacticalNode', () => {
   const validProps = {

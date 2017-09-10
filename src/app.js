@@ -1,8 +1,8 @@
 // @flow
 import { createStore } from 'redux';
 import Mousetrap from 'mousetrap';
-import presenter from './presenter.js'
-import renderer from './renderer.jsx'
+import presenter from './presenter/presenter.js'
+import renderer from './renderer/renderer.jsx'
 import editorStateStore from './editor-state-store.js'
 
 require('./stylesheet.css');

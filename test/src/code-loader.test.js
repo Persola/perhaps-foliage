@@ -1,4 +1,4 @@
-import codeLoader from '../../src/code-loader.js';
+import codeLoader from '../../src/code-loader/code-loader.js';
 
 describe ('CodeStage', () => {
   describe ('.syntaticGraphSeed', () => {

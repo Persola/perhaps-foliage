@@ -4,7 +4,7 @@ import {
   CodeStage,
   mapStateToProps,
   mapDispatchToProps
-} from '../../../src/components/code-stage.jsx';
+} from '../../../src/renderer/components/code-stage.jsx';
 
 describe ('CodeStage', () => {
   it ('renders', () => {
