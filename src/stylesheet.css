@@ -8,47 +8,6 @@ a {
   color: #05f;
 }
 
-.code-stage div {
-  margin: 0 8px;
-  border-radius: 15px 15px 15px 15px;
-  /*  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.8);  */
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.code-stage .same-line {
-  display: inline-block;
-}
-
-.code-stage .new-line {
-  display: table;
-}
-
-.code-stage .expression {
-  background-color: #056;
-}
-
-.code-stage .number-literal {
-  color: #D3F;
-}
-
-.code-stage .leaf {
-  padding: 4px 12px 2px 12px;
-}
-
 ::selection {
   background-color: #c88;
-}
-
-button {
-  display: inline-block;
-  margin: 16px;
-  padding: 4px 8px;
-  background-color: #aaa;
-  color: #000;
-}
-
-.button:hover{
-  cursor: pointer;
-  background-color: #dd6;
 }
