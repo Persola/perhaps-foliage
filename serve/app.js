@@ -11258,10 +11258,10 @@ var _codeLoader2 = _interopRequireDefault(_codeLoader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var defaultEdtiorState = { stageful: (0, _codeLoader2.default)() };
+var defaultEdtiorstate = { stageful: (0, _codeLoader2.default)() };
 
-var editorStateReducer = function editorStateReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEdtiorState;
+var editorstateReducer = function editorstateReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultEdtiorstate;
   var action = arguments[1];
   var type = action.type;
 
@@ -11288,7 +11288,7 @@ var editorStateReducer = function editorStateReducer() {
   }
 };
 
-exports.default = (0, _redux.createStore)(editorStateReducer);
+exports.default = (0, _redux.createStore)(editorstateReducer);
 
 /***/ }),
 /* 98 */
@@ -13037,8 +13037,8 @@ var Presenter = function () {
   function Presenter(editorStateStore, presentationStore, validEditorState) {
     _classCallCheck(this, Presenter);
 
-    this.presentationStore = presentationStore;
     this.editorStateStore = editorStateStore;
+    this.presentationStore = presentationStore;
     this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(this.present.bind(this));
@@ -26184,8 +26184,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+
+var syntaticGraphSeed = __webpack_require__(235);
+
 exports.default = function () {
-  var syntaticGraphSeed = __webpack_require__(235);
   return syntaticGraphSeed;
 };
 
