@@ -1,9 +1,16 @@
+// @flow
 import { createStore } from 'redux';
 import codeLoader from './code-loader/code-loader.js'
+import type { reduxAction } from './types/redux-action.js'
 
-const defaultEdtiorState = { stageful: codeLoader() };
+type state = Object
 
-const editorStateReducer = (state = defaultEdtiorState, action) => {
+const defaultEdtiorstate = { stageful: codeLoader() };
+
+const editorstateReducer = (
+  state: state = defaultEdtiorstate,
+  action: reduxAction
+): state => {
   const { type } = action
 
   if (type === 'UPDATE') {
@@ -27,4 +34,4 @@ const editorStateReducer = (state = defaultEdtiorState, action) => {
   }
 }
 
-export default createStore(editorStateReducer);
+export default createStore(editorstateReducer);

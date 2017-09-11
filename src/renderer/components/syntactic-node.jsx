@@ -3,7 +3,7 @@ import React from 'react';
 
 type Props = {
   serialization: {
-    klass: String,
+    klass: string,
     data: Object,
   }
 }

@@ -11,8 +11,10 @@ type Props = {
   stageful: Object,
   result: Object
 }
+type syntacticGraph = Object
+type state = Object
 
-const interpretStage = syntacticGraph => {
+const interpretStage = (syntacticGraph: syntacticGraph) => {
   editorStateStore.dispatch({
     type: 'UPDATE_RESULT',
     result: interpreter(syntacticGraph)
@@ -35,7 +37,7 @@ export const Editor = (props: Props) => {
   );
 };
 
-export const mapStateToProps = (state: Object) => {
+export const mapStateToProps = (state: state): Object => {
   const { stageful, result } = state;
   return { stageful, result };
 }

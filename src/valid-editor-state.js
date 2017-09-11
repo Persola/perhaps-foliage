@@ -1,4 +1,7 @@
-export default candidateEditorState => {
+// @flow
+import type { editorState } from './types/editor-state.js'
+
+export default (candidateEditorState: editorState): boolean => {
   if (!Object.keys(candidateEditorState) === ['stageful']) {
     return false;
   }

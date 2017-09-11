@@ -3,9 +3,10 @@ extends:
   - eslint:recommended
   - plugin:import/errors
   - plugin:import/warnings
+  - plugin:flowtype/recommended
 parser: babel-eslint
 plugins:
-- flow-vars
+  - flowtype
 env:
   browser: true
   # this can be removed after extracting renderer into another repo
@@ -18,8 +19,6 @@ rules:
     - as-needed
   'import/extensions':
     - 0
-  flow-vars/define-flow-type: 1
-  flow-vars/use-flow-type: 1
 overrides:
   -
     files:

@@ -8,6 +8,8 @@ import validEditorState from './valid-editor-state.js';
 
 require('./stylesheet.css');
 
+
+
 const defaultPresentation = { stageful: false }
 
 const presentationStateReducer = (oldPresentation = defaultPresentation, action) => {

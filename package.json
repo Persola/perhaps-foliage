@@ -13,7 +13,7 @@
     "redo": "npm run clean:serve; npm run build; npm run start",
     "test": "jest",
     "type": "flow",
-    "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -o tmp/flow-coverage/",
+    "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -x {'server.js','src/types/**'} -o tmp/flow-coverage/",
     "lint": "eslint --ext js,jsx ."
   },
   "author": "Luke Persola",
@@ -47,7 +47,7 @@
     "enzyme-to-json": "^1.5.1",
     "eslint": "^4.6.0",
     "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-flow-vars": "^0.5.0",
+    "eslint-plugin-flowtype": "^2.35.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",

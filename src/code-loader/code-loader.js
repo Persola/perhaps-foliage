@@ -1,4 +1,6 @@
-export default () => {
-  const syntaticGraphSeed = require("./../syntactic-graph-seed.yml");
-  return syntaticGraphSeed;
-}
+// @flow
+type syntacticGraph = Object
+
+const syntaticGraphSeed: syntacticGraph = require("../syntactic-graph-seed.yml");
+
+export default (): syntacticGraph => { return syntaticGraphSeed; }
