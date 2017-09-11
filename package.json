@@ -12,7 +12,7 @@
     "start": "node --inspect ./server.js",
     "redo": "npm run clean:serve; npm run build; npm run start",
     "test": "jest",
-    "flow": "flow",
+    "type": "flow",
     "lint": "eslint --ext js,jsx ."
   },
   "author": "Luke Persola",
