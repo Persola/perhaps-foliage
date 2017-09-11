@@ -19,6 +19,9 @@ rules:
     - as-needed
   'import/extensions':
     - 0
+  no-undef:
+    # despite the flowtype plugin, this excepts various flowtyping
+    - 0
 overrides:
   -
     files:
