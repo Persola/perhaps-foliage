@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SyntacticalNode from '../../../src/renderer/components/syntactical-node.jsx';
+import SyntacticNode from '../../../../src/renderer/components/syntactic-node.jsx';
 
-describe ('SyntacticalNode', () => {
+describe ('SyntacticNode', () => {
   const validProps = {
     serialization: {
       klass: 'numberLiteral',
@@ -14,7 +14,7 @@ describe ('SyntacticalNode', () => {
     const { serialization } = validProps
 
     expect(shallow(
-      <SyntacticalNode serialization={serialization} />
+      <SyntacticNode serialization={serialization} />
     )).toMatchSnapshot();
   });
 
@@ -25,7 +25,7 @@ describe ('SyntacticalNode', () => {
 
     expect( () => {
       shallow(
-        <SyntacticalNode serialization={serialization} />
+        <SyntacticNode serialization={serialization} />
       )
     }).toThrow('no types yet');
   });

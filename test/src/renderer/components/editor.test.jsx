@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import {
-  CodeStage,
+  Editor,
   mapStateToProps,
   mapDispatchToProps
-} from '../../../src/renderer/components/code-stage.jsx';
+} from '../../../../src/renderer/components/editor.jsx';
 
-describe ('CodeStage', () => {
+describe ('Editor', () => {
   it ('renders', () => {
     expect(shallow(
-      <CodeStage />
+      <Editor />
     )).toMatchSnapshot();
   });
 })

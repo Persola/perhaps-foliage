@@ -11315,10 +11315,13 @@ var _editorStateStore = __webpack_require__(97);
 
 var _editorStateStore2 = _interopRequireDefault(_editorStateStore);
 
+var _validEditorState = __webpack_require__(236);
+
+var _validEditorState2 = _interopRequireDefault(_validEditorState);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(236);
-
+__webpack_require__(237);
 
 var defaultPresentation = { stageful: false };
 
@@ -11369,8 +11372,8 @@ var presentationStateReducer = function presentationStateReducer() {
 
 var presentationStore = (0, _redux.createStore)(presentationStateReducer);
 
-new _presenter2.default(_editorStateStore2.default, presentationStore);
-_renderer2.default.render(presentationStore);
+new _presenter2.default(_editorStateStore2.default, presentationStore, _validEditorState2.default);
+_renderer2.default.render(presentationStore, document);
 
 var entry = function entry() {
   if (document.readyState !== 'complete') {
@@ -13031,12 +13034,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var RENDER_ACTION_TYPE = 'RENDER';
 
 var Presenter = function () {
-  function Presenter(editorStateStore, presentationStore, syntacticGraphsIdentical) {
+  function Presenter(editorStateStore, presentationStore, validEditorState) {
     _classCallCheck(this, Presenter);
 
     this.presentationStore = presentationStore;
     this.editorStateStore = editorStateStore;
-    this.syntacticGraphsIdentical = syntacticGraphsIdentical;
+    this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(this.present.bind(this));
   }
@@ -13054,31 +13057,8 @@ var Presenter = function () {
   }, {
     key: 'generatePresentation',
     value: function generatePresentation(editorState) {
-      var validEditorState = function validEditorState(candidateEditorState) {
-        if (!Object.keys(candidateEditorState) === ['stageful']) {
-          return false;
-        }
-
-        var stageful = candidateEditorState.stageful;
-
-
-        if (!Object.keys(stageful) === ['klass', 'data']) {
-          return false;
-        }
-
-        if (!stageful.klass === 'numberLiteral') {
-          return false;
-        }
-
-        if (![0, 1].includes(stageful.data)) {
-          return false;
-        }
-
-        return true;
-      };
-
-      if (!validEditorState(editorState)) {
-        throw new Error('Only the omnivalue can be presented');
+      if (!this.validEditorState(editorState)) {
+        throw new Error('Provided editor state is invalid');
       }
 
       return editorState;
@@ -13118,7 +13098,7 @@ var _editor2 = _interopRequireDefault(_editor);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  render: function render(store) {
+  render: function render(store, document) {
     var rootEl = document.getElementById('editor');
 
     _reactDom2.default.render(_react2.default.createElement(
@@ -26093,9 +26073,9 @@ var _react = __webpack_require__(14);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _syntacticalNode = __webpack_require__(231);
+var _syntacticNode = __webpack_require__(231);
 
-var _syntacticalNode2 = _interopRequireDefault(_syntacticalNode);
+var _syntacticNode2 = _interopRequireDefault(_syntacticNode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26113,7 +26093,7 @@ exports.default = function (props) {
     throw new Error('stageful missing');
   }
 
-  return _react2.default.createElement(_syntacticalNode2.default, { serialization: stageful });
+  return _react2.default.createElement(_syntacticNode2.default, { serialization: stageful });
 };
 
 /***/ }),
@@ -26213,16 +26193,50 @@ exports.default = function () {
 /* 235 */
 /***/ (function(module, exports) {
 
-module.exports = {"klass":"numberLiteral","data":1}
+module.exports = {"klass":"numberLiteral","data":0}
 
 /***/ }),
 /* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (candidateEditorState) {
+  if (!Object.keys(candidateEditorState) === ['stageful']) {
+    return false;
+  }
+
+  var stageful = candidateEditorState.stageful;
+
+
+  if (!Object.keys(stageful) === ['klass', 'data']) {
+    return false;
+  }
+
+  if (!stageful.klass === 'numberLiteral') {
+    return false;
+  }
+
+  if (![0, 1].includes(stageful.data)) {
+    return false;
+  }
+
+  return true;
+};
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(237);
+var content = __webpack_require__(238);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -26230,7 +26244,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(239)(content, options);
+var update = __webpack_require__(240)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -26247,10 +26261,10 @@ if(false) {
 }
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(238)(undefined);
+exports = module.exports = __webpack_require__(239)(undefined);
 // imports
 
 
@@ -26261,7 +26275,7 @@ exports.push([module.i, "body {\n  background-color: #111;\n  font-family: 'Cour
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports) {
 
 /*
@@ -26343,7 +26357,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -26389,7 +26403,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(240);
+var	fixUrls = __webpack_require__(241);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -26702,7 +26716,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports) {
 
 

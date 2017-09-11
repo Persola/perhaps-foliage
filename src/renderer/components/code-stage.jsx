@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import SyntacticalNode from './syntactical-node.jsx';
+import SyntacticNode from './syntactic-node.jsx';
 
 type Props = {
   stageful: Object
@@ -20,6 +20,6 @@ export default (props: Props) => {
   }
 
   return (
-    <SyntacticalNode serialization={stageful} />
+    <SyntacticNode serialization={stageful} />
   );
 };

@@ -4,6 +4,7 @@ import Mousetrap from 'mousetrap';
 import presenter from './presenter/presenter.js'
 import renderer from './renderer/renderer.jsx'
 import editorStateStore from './editor-state-store.js'
+import validEditorState from './valid-editor-state.js';
 
 require('./stylesheet.css');
 
@@ -51,8 +52,8 @@ const presentationStateReducer = (oldPresentation = defaultPresentation, action)
 
 const presentationStore = createStore(presentationStateReducer);
 
-new presenter(editorStateStore, presentationStore);
-renderer.render(presentationStore);
+new presenter(editorStateStore, presentationStore, validEditorState);
+renderer.render(presentationStore, document);
 
 const entry = () => {
   if (document.readyState !== 'complete') { throw (new Error('readyState error')); }

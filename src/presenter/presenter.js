@@ -1,10 +1,10 @@
 const RENDER_ACTION_TYPE = 'RENDER';
 
 export default class Presenter {
-  constructor(editorStateStore, presentationStore, syntacticGraphsIdentical) {
+  constructor(editorStateStore, presentationStore, validEditorState) {
     this.presentationStore = presentationStore;
     this.editorStateStore = editorStateStore;
-    this.syntacticGraphsIdentical = syntacticGraphsIdentical;
+    this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(
       this.present.bind(this)
@@ -21,30 +21,8 @@ export default class Presenter {
   }
 
   generatePresentation(editorState) {
-    const validEditorState = candidateEditorState => {
-      if (!Object.keys(candidateEditorState) === ['stageful']) {
-        return false;
-      }
-
-      const { stageful } = candidateEditorState;
-
-      if (!Object.keys(stageful) === ['klass', 'data']) {
-        return false;
-      }
-
-      if (!stageful.klass === 'numberLiteral') {
-        return false;
-      }
-
-      if (![0, 1].includes(stageful.data)) {
-        return false;
-      }
-
-      return true;
-    };
-
-    if (!validEditorState(editorState)) {
-      throw new Error('Only the omnivalue can be presented');
+    if (!this.validEditorState(editorState)) {
+      throw new Error('Provided editor state is invalid');
     }
 
     return editorState;
