@@ -5,7 +5,6 @@ var path = require('path');
 const PORT = 8000
 const ROOT_PATH = './serve'
 const DEFAULT_PATH = ROOT_PATH + '/index.html'
-const NOT_FOUND_PATH = './static/404.html'
 
 http.createServer(function (request, response) {
   console.log('request ', request.url);
@@ -38,17 +37,14 @@ http.createServer(function (request, response) {
   console.log(filePath)
   fs.readFile(filePath, function(error, content) {
     if (error) {
+      console.log(error)
       if(error.code == 'ENOENT'){
-        fs.readFile(NOT_FOUND_PATH, function(error, content) {
-          console.log(error)
-          response.writeHead(200, { 'Content-Type': contentType });
-          response.end(content, 'utf-8');
-        });
+        response.writeHead(404);
+        response.end('Resource not found');
       }
       else {
         response.writeHead(500);
-        response.end('unspecified server error: ' + error.code + ' ..\n');
-        response.end();
+        response.end('Unspecified server error');
       }
     }
     else {
@@ -59,4 +55,3 @@ http.createServer(function (request, response) {
 
 }).listen(PORT);
 console.log('HTTP server: http://127.0.0.1:' + PORT + '/');
-

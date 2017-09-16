@@ -11317,13 +11317,13 @@ var _presentationStore = __webpack_require__(236);
 
 var _presentationStore2 = _interopRequireDefault(_presentationStore);
 
-var _validEditorState = __webpack_require__(237);
+var _validEditorState = __webpack_require__(238);
 
 var _validEditorState2 = _interopRequireDefault(_validEditorState);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(238);
+__webpack_require__(239);
 
 new _presenter2.default(_editorStateStore2.default, _presentationStore2.default, _validEditorState2.default);
 
@@ -26163,8 +26163,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(52);
 
-var defaultPresentation = { stageful: false };
+var _validPresentation = __webpack_require__(237);
 
+var _validPresentation2 = _interopRequireDefault(_validPresentation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var defaultPresentation = { stageful: false };
 
 var presentationStateReducer = function presentationStateReducer() {
   var oldPresentation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultPresentation;
@@ -26181,30 +26186,7 @@ var presentationStateReducer = function presentationStateReducer() {
     }
   }
 
-  var validPresentation = function validPresentation(candidatePresentation) {
-    if (!Object.keys(candidatePresentation) === ['stageful']) {
-      return false;
-    }
-
-    var stageful = candidatePresentation.stageful;
-
-
-    if (!Object.keys(stageful) === ['klass', 'data']) {
-      return false;
-    }
-
-    if (!stageful.klass === 'numberLiteral') {
-      return false;
-    }
-
-    if (![0, 1].includes(stageful.data)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  if (!validPresentation(presentation)) {
+  if (!(0, _validPresentation2.default)(presentation)) {
     throw new Error('Only the omnivalue can be rendered');
   }
 
@@ -26215,6 +26197,40 @@ exports.default = (0, _redux.createStore)(presentationStateReducer);
 
 /***/ }),
 /* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (candidatePresentation) {
+  if (!Object.keys(candidatePresentation) === ['stageful']) {
+    return false;
+  }
+
+  var stageful = candidatePresentation.stageful;
+
+
+  if (!Object.keys(stageful) === ['klass', 'data']) {
+    return false;
+  }
+
+  if (!stageful.klass === 'numberLiteral') {
+    return false;
+  }
+
+  if (![0, 1].includes(stageful.data)) {
+    return false;
+  }
+
+  return true;
+};
+
+/***/ }),
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26248,13 +26264,13 @@ exports.default = function (candidateEditorState) {
 };
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(239);
+var content = __webpack_require__(240);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -26262,7 +26278,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(241)(content, options);
+var update = __webpack_require__(242)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -26279,10 +26295,10 @@ if(false) {
 }
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(240)(undefined);
+exports = module.exports = __webpack_require__(241)(undefined);
 // imports
 
 
@@ -26293,7 +26309,7 @@ exports.push([module.i, "body {\n  background-color: #111;\n  font-family: 'Cour
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports) {
 
 /*
@@ -26375,7 +26391,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -26421,7 +26437,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(242);
+var	fixUrls = __webpack_require__(243);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -26734,7 +26750,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports) {
 
 
