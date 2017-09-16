@@ -1,5 +1,5 @@
 // @flow
-export default candidatePresentation => {
+export default (candidatePresentation: Object) => {
   if (!Object.keys(candidatePresentation) === ['stageful']) {
     return false;
   }
