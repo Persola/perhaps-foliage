@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl",
   "version": "0.0.1",
-  "description": " sdlfwhoflfawelfea",
+  "description": " Scaffold for an experimental programming interface",
   "main": "serve.js",
   "scripts": {
     "clean": "rm -dr serve/* tmp/*",
