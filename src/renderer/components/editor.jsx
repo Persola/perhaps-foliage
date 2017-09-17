@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
 
 import CodeStage from './code-stage.jsx';
 import InterpretButton from './interpret-button.jsx';
@@ -8,9 +7,9 @@ import interpreter from '../../interpreter/interpreter.js'
 import editorStateStore from '../../editor-state-store.js'
 
 type Props = {
-  stageful: Object,
-  result: Object
+  presentation: Object
 }
+
 type syntacticGraph = Object
 type state = Object
 
@@ -21,8 +20,8 @@ const interpretStage = (syntacticGraph: syntacticGraph) => {
   });
 };
 
-export const Editor = (props: Props) => {
-  const { stageful } = props;
+export default (props: Props) => {
+  const { presentation: { stageful, result } } = props;
 
   const interpret = () => {
     interpretStage(stageful);
@@ -30,23 +29,9 @@ export const Editor = (props: Props) => {
 
   return (
     <div>
-      <CodeStage stageful={props.stageful} />
+      <CodeStage stageful={stageful} />
       <InterpretButton interpret={interpret} />
-      <CodeStage stageful={props.result || false} />
+      <CodeStage stageful={result || false} />
     </div>
   );
 };
-
-export const mapStateToProps = (state: state): Object => {
-  const { stageful, result } = state;
-  return { stageful, result };
-}
-
-export const mapDispatchToProps = () => ({});
-
-const EditorContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Editor);
-
-export default EditorContainer;

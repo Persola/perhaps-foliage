@@ -1,20 +1,24 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import EditorContainer from './components/editor.jsx';
+import validPresentation from '../valid-presentation.js';
 
-export default {
-  render: (store: Object, document: any) => {
-    const rootEl = document.getElementById('editor');
+export default class {
+  constructor(document) {
+    this.editorEl = document.getElementById('editor');
+  }
+
+  render(presentation) {
+    if(!validPresentation(presentation)) {
+      throw new Error('Invalid presentation')
+    }
 
     ReactDOM.render(
       (
-        <Provider store={store}>
-          <EditorContainer />
-        </Provider>
+        <EditorContainer presentation={presentation} />
       ),
-      rootEl,
+      this.editorEl
     );
   }
 }

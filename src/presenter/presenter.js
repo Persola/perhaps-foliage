@@ -1,6 +1,4 @@
 // @flow
-const RENDER_ACTION_TYPE = 'RENDER';
-
 type reduxStore = Object
 type state = Object
 
@@ -11,11 +9,11 @@ export default class Presenter {
 
   constructor(
     editorStateStore: reduxStore,
-    presentationStore: reduxStore,
+    renderer: Object,
     validEditorState: Function
   ) {
     this.editorStateStore = editorStateStore;
-    this.presentationStore = presentationStore;
+    this.renderer = renderer;
     this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(
@@ -25,11 +23,8 @@ export default class Presenter {
 
   present() {
     const editorState = this.editorStateStore.getState();
-    const presentation = this.generatePresentation(editorState)
-    this.presentationStore.dispatch({
-      type: RENDER_ACTION_TYPE,
-      presentation
-    })
+    const presentation = this.generatePresentation(editorState);
+    this.renderer.render(presentation);
   }
 
   generatePresentation(editorState: state): state {

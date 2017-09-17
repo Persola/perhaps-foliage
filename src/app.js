@@ -2,17 +2,16 @@
 import Mousetrap from 'mousetrap';
 
 import presenter from './presenter/presenter.js';
-import renderer from './renderer/renderer.jsx';
+import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store.js';
-import presentationStore from './presentation-store.js';
 import validEditorState from './valid-editor-state.js';
 
 require('./stylesheet.css');
 
-new presenter(editorStateStore, presentationStore, validEditorState);
+const renderer = new Renderer(document);
+new presenter(editorStateStore, renderer, validEditorState);
 
 const entry = () => {
-  renderer.render(presentationStore, document);
   editorStateStore.dispatch({ type: 'INITIALIZE' });
   [0, 1].forEach(binumber => {
     Mousetrap.bind(String(binumber), () => {
