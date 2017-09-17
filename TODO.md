@@ -1,5 +1,5 @@
-* extract/organize redux things
-** editor state validator -> syntactic graph validator (two layers)
+* [?] extract/organize redux things
+** [?] editor state validator -> syntactic graph validator (two layers)
 * remove presenter's redux and react-redux
 * [?] more testing/linting
 * [?] better styling
@@ -10,4 +10,4 @@
 * [?] update babel es version
 * operationalize
 * pick license
-* release minimum version
+* release minimal viable project

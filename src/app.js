@@ -12,10 +12,6 @@ require('./stylesheet.css');
 new presenter(editorStateStore, presentationStore, validEditorState);
 
 const entry = () => {
-  if (document.readyState !== 'complete') {
-    throw (new Error('readyState error'));
-  }
-
   renderer.render(presentationStore, document);
   editorStateStore.dispatch({ type: 'INITIALIZE' });
   [0, 1].forEach(binumber => {
