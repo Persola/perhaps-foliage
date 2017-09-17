@@ -1,6 +1,6 @@
 body {
   background-color: #111;
-  font-family: 'Courier New', monospace;
+  font-family: "Helvetica", Arial, sans-serif;
   color: #fff;
 }
 
@@ -8,6 +8,42 @@ a {
   color: #05f;
 }
 
+button {
+  outline: none;
+  border: none;
+  padding: 8px 12px;
+  margin: 8px;
+  background-color: #666;
+  color: #ffd;
+  font-size: 100%;
+  font-family: "Helvetica", Arial, sans-serif;
+}
+
+button:hover {
+  background-color: #755;
+}
+
+button:active {
+  background-color: #842;
+}
+
 ::selection {
   background-color: #c88;
+}
+
+.editor {
+  padding: 2px 0;
+}
+
+.code-stage {
+  margin: 8px;
+  background-color: #333;
+  color: #eee;
+  padding: 8px 12px;
+  font-family: 'Courier New', monospace;
+}
+
+.non-syntactic {
+  color: #666;
+  font-family: "Helvetica", Arial, sans-serif;
 }

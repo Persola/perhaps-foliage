@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EditorContainer from './components/editor.jsx';
+import Editor from './components/editor.jsx';
 import validPresentation from '../valid-presentation.js';
 
 export default class {
@@ -16,7 +16,7 @@ export default class {
 
     ReactDOM.render(
       (
-        <EditorContainer presentation={presentation} />
+        <Editor presentation={presentation} />
       ),
       this.editorEl
     );

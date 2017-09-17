@@ -10274,8 +10274,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 __webpack_require__(219);
 
 
-var theRenderer = new _renderer2.default(document);
-new _presenter2.default(_editorStateStore2.default, theRenderer, _validEditorState2.default);
+var renderer = new _renderer2.default(document);
+new _presenter2.default(_editorStateStore2.default, renderer, _validEditorState2.default);
 
 var entry = function entry() {
   _editorStateStore2.default.dispatch({ type: 'INITIALIZE' });
@@ -24124,7 +24124,7 @@ exports.default = function (props) {
 
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'editor' },
     _react2.default.createElement(_codeStage2.default, { stageful: stageful }),
     _react2.default.createElement(_interpretButton2.default, { interpret: interpret }),
     _react2.default.createElement(_codeStage2.default, { stageful: result || false })
@@ -24158,17 +24158,24 @@ exports.default = function (props) {
   var stageful = props.stageful;
 
 
+  var stageContents = void 0;
   if (stageful === false) {
-    return _react2.default.createElement(
+    stageContents = _react2.default.createElement(
       'div',
-      null,
+      { className: 'non-syntactic' },
       '(Code stage is empty)'
     );
   } else if ((typeof stageful === 'undefined' ? 'undefined' : _typeof(stageful)) !== 'object') {
     throw new Error('stageful missing');
+  } else {
+    stageContents = _react2.default.createElement(_syntacticNode2.default, { serialization: stageful });
   }
 
-  return _react2.default.createElement(_syntacticNode2.default, { serialization: stageful });
+  return _react2.default.createElement(
+    'div',
+    { className: 'code-stage' },
+    stageContents
+  );
 };
 
 /***/ }),
@@ -24990,7 +24997,7 @@ exports = module.exports = __webpack_require__(221)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background-color: #111;\n  font-family: 'Courier New', monospace;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\n::selection {\n  background-color: #c88;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #111;\n  font-family: \"Helvetica\", Arial, sans-serif;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\nbutton {\n  outline: none; /* override default */\n  border: none; /* override default */\n  padding: 8px 12px;\n  margin: 8px;\n  background-color: #666;\n  color: #ffd;\n  font-size: 100%;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n\nbutton:hover {\n  background-color: #755;\n}\n\nbutton:active {\n  background-color: #842;\n}\n\n::selection {\n  background-color: #c88;\n}\n\n.editor {\n  padding: 2px 0;\n}\n\n.code-stage {\n  margin: 8px;\n  background-color: #333;\n  color: #eee;\n  padding: 8px 12px;\n  font-family: 'Courier New', monospace;\n}\n\n.non-syntactic {\n  color: #666;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n", ""]);
 
 // exports
 

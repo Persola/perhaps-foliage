@@ -9,17 +9,24 @@ type Props = {
 export default (props: Props) => {
   const { stageful } = props;
 
+  let stageContents;
   if (stageful === false) {
-    return (
-      <div>
+    stageContents = (
+      <div className="non-syntactic">
         (Code stage is empty)
       </div>
     );
   } else if (typeof stageful !== 'object') {
     throw new Error('stageful missing')
+  } else {
+    stageContents = (
+      <SyntacticNode serialization={stageful} />
+    );
   }
 
   return (
-    <SyntacticNode serialization={stageful} />
+    <div className="code-stage">
+      {stageContents}
+    </div>
   );
 };
