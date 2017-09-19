@@ -11403,8 +11403,6 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _editor = __webpack_require__(194);
 
-var _editor2 = _interopRequireDefault(_editor);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11421,7 +11419,7 @@ var _class = function () {
   _createClass(_class, [{
     key: 'render',
     value: function render(presentation) {
-      _reactDom2.default.render(_react2.default.createElement(_editor2.default, { presentation: presentation }), this.editorEl);
+      _reactDom2.default.render(_react2.default.createElement(_editor.Editor, { presentation: presentation }), this.editorEl);
     }
   }]);
 
@@ -24066,6 +24064,7 @@ module.exports = ReactDOMInvalidARIAHook;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Editor = exports.interpretStage = undefined;
 
 var _react = __webpack_require__(20);
 
@@ -24089,14 +24088,13 @@ var _editorStateStore2 = _interopRequireDefault(_editorStateStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var interpretStage = function interpretStage(syntacticGraph) {
+var interpretStage = exports.interpretStage = function interpretStage(syntacticGraph) {
   _editorStateStore2.default.dispatch({
     type: 'UPDATE_RESULT',
     result: (0, _interpreter2.default)(syntacticGraph)
   });
 };
-
-exports.default = function (props) {
+var Editor = exports.Editor = function Editor(props) {
   var _props$presentation = props.presentation,
       stageful = _props$presentation.stageful,
       result = _props$presentation.result;

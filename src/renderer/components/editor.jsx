@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-
 import CodeStage from './code-stage.jsx';
 import InterpretButton from './interpret-button.jsx';
 import interpreter from '../../interpreter/interpreter.js'
@@ -13,14 +12,14 @@ type Props = {
 type syntacticGraph = Object
 type state = Object
 
-const interpretStage = (syntacticGraph: syntacticGraph) => {
+export const interpretStage = (syntacticGraph: syntacticGraph) => {
   editorStateStore.dispatch({
     type: 'UPDATE_RESULT',
     result: interpreter(syntacticGraph)
   });
 };
 
-export default (props: Props) => {
+export const Editor = (props: Props) => {
   const { presentation: { stageful, result } } = props;
 
   const interpret = () => {

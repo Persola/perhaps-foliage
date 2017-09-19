@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Editor from './components/editor.jsx';
+import { Editor } from './components/editor.jsx';
 import type { presentation } from '../types/presentation' // eslint-disable-line no-unused-vars
 
 type element = Object;

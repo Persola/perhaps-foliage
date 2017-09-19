@@ -47,10 +47,17 @@ describe ('presenter', () => {
 
     it ('generates the presentation', () => {
       const presentation = {};
-      presenter.generatePresentation = jest.fn();
-      presenter.generatePresentation.mockReturnValueOnce(presentation)
+      presenter.generatePresentation = (
+        jest.fn().mockReturnValueOnce(presentation)
+      );
 
       expect(renderer.render).toHaveBeenCalledWith(presentation);
+    })
+  })
+
+  describe ('generatePresentation', () => {
+    it ('is the identity function', () => {
+      expect(presenter.generatePresentation(editorState)).toBe(editorState);
     })
   })
 })
