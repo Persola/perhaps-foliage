@@ -1,20 +1,18 @@
 // @flow
-type reduxStore = Object
-type state = Object
+type reduxStore = Object;
+type state = Object;
+type renderer = Object;
 
 export default class Presenter {
   editorStateStore: reduxStore;
-  presentationStore: reduxStore;
-  validEditorState: (state) => boolean;
+  renderer: renderer;
 
   constructor(
     editorStateStore: reduxStore,
-    renderer: Object,
-    validEditorState: Function
+    renderer: Object
   ) {
     this.editorStateStore = editorStateStore;
     this.renderer = renderer;
-    this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(
       this.present.bind(this)
@@ -28,10 +26,6 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: state): state {
-    if (!this.validEditorState(editorState)) {
-      throw new Error('Provided editor state is invalid');
-    }
-
     return editorState;
   }
 }

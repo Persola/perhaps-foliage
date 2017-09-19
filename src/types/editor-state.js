@@ -1,7 +1,6 @@
 // @flow
+import type { syntacticGraph } from './syntactic-graph'
+
 export type editorState = {
-  stageful: {
-    klass: string,
-    data: number
-  }
+  stageful: syntacticGraph
 }

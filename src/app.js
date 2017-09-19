@@ -4,12 +4,11 @@ import Mousetrap from 'mousetrap';
 import presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store.js';
-import validEditorState from './valid-editor-state.js';
 
 require('./stylesheet.css');
 
 const renderer = new Renderer(document);
-new presenter(editorStateStore, renderer, validEditorState);
+new presenter(editorStateStore, renderer);
 
 const entry = () => {
   editorStateStore.dispatch({ type: 'INITIALIZE' });

@@ -3,24 +3,15 @@ import Presenter from '../../../src/presenter/presenter.js';
 describe ('presenter', () => {
   const editorState = {};
   let editorStateStore;
-  let presentationStore;
-  let validEditorState = jest.fn();
+  let renderer = { render: jest.fn() };
   let presenter;
-  jest.mock(
-    '../../../src/presenter/valid-editor-state.js',
-    () => true,
-    { virtual: true }
-  )
 
   beforeEach(() => {
     editorStateStore = {
       subscribe: jest.fn(),
       getState: jest.fn().mockReturnValue(editorState)
     };
-    presentationStore = {
-      dispatch:  jest.fn()
-    };
-    presenter = new Presenter(editorStateStore, presentationStore, validEditorState);
+    presenter = new Presenter(editorStateStore, renderer);
   })
 
   describe ('constructor', () => {
@@ -28,12 +19,8 @@ describe ('presenter', () => {
       expect(presenter.editorStateStore).toBe(editorStateStore)
     })
 
-    it ('saves a reference to the presentationStore', () => {
-      expect(presenter.presentationStore).toBe(presentationStore)
-    })
-
-    it ('saves a reference to the validEditorState', () => {
-      expect(presenter.validEditorState).toBe(validEditorState)
+    it ('saves a reference to the renderer', () => {
+      expect(presenter.renderer).toBe(renderer)
     })
 
     it ('subscribes to the editorStateStore with its present method', () => {
@@ -47,7 +34,6 @@ describe ('presenter', () => {
 
     beforeEach(() => {
       presenter.generatePresentation = jest.fn().mockReturnValue(presentation);
-      presenter.presentationStore.dispatch = jest.fn();
       presenter.present();
     })
 
@@ -55,41 +41,16 @@ describe ('presenter', () => {
       expect(presenter.editorStateStore.getState).toHaveBeenCalled();
     })
 
-    it ('fetches the editor state from its store', () => {
+    it ('generates the presentation', () => {
       expect(presenter.generatePresentation).toHaveBeenCalledWith(editorState);
     })
 
-    it ('saves a reference to the presentationStore', () => {
-      expect(presentationStore.dispatch).toHaveBeenCalledWith({
-        type: 'RENDER',
-        presentation
-      })
-    })
-  })
+    it ('generates the presentation', () => {
+      const presentation = {};
+      presenter.generatePresentation = jest.fn();
+      presenter.generatePresentation.mockReturnValueOnce(presentation)
 
-  describe ('generatePresentation', () => {
-    describe ('when the editor state is deemed valid', () => {
-      beforeEach(() => {
-        validEditorState = jest.fn().mockReturnValue(true);
-        presenter = new Presenter(editorStateStore, presentationStore, validEditorState);
-      })
-
-      it ('validate the editor state provided using validEditorState', () => {
-        expect(presenter.generatePresentation(editorState)).toBe(editorState);
-      })
-    })
-
-    describe ('when the editor state is deemed invalid', () => {
-      beforeEach(() => {
-        validEditorState = jest.fn().mockReturnValue(false);
-        presenter = new Presenter(editorStateStore, presentationStore, validEditorState);
-      })
-
-      it ('validate the editor state provided using validEditorState', () => {
-        expect(() => {
-          presenter.generatePresentation(editorState)
-        }).toThrowError();
-      })
+      expect(renderer.render).toHaveBeenCalledWith(presentation);
     })
   })
 })

@@ -5,6 +5,7 @@ var path = require('path');
 const PORT = 8000
 const ROOT_PATH = './serve'
 const DEFAULT_PATH = ROOT_PATH + '/index.html'
+const FAVICON_PATH = './favicon.ico'
 
 http.createServer(function (request, response) {
   console.log('request ', request.url);
@@ -12,6 +13,8 @@ http.createServer(function (request, response) {
   var filePath = ROOT_PATH + request.url;
   if (request.url == '/')
     filePath = DEFAULT_PATH;
+  else if (request.url == '/favicon.ico')
+    filePath = FAVICON_PATH;
 
   var extname = String(path.extname(filePath)).toLowerCase();
   var contentType = 'text/html';

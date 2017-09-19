@@ -10265,17 +10265,12 @@ var _editorStateStore = __webpack_require__(82);
 
 var _editorStateStore2 = _interopRequireDefault(_editorStateStore);
 
-var _validEditorState = __webpack_require__(218);
-
-var _validEditorState2 = _interopRequireDefault(_validEditorState);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(219);
-
+__webpack_require__(217);
 
 var renderer = new _renderer2.default(document);
-new _presenter2.default(_editorStateStore2.default, renderer, _validEditorState2.default);
+new _presenter2.default(_editorStateStore2.default, renderer);
 
 var entry = function entry() {
   _editorStateStore2.default.dispatch({ type: 'INITIALIZE' });
@@ -11357,30 +11352,25 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Presenter = function () {
-  function Presenter(editorStateStore, renderer, validEditorState) {
+  function Presenter(editorStateStore, renderer) {
     _classCallCheck(this, Presenter);
 
     this.editorStateStore = editorStateStore;
     this.renderer = renderer;
-    this.validEditorState = validEditorState;
 
     editorStateStore.subscribe(this.present.bind(this));
   }
 
   _createClass(Presenter, [{
-    key: 'present',
+    key: "present",
     value: function present() {
       var editorState = this.editorStateStore.getState();
       var presentation = this.generatePresentation(editorState);
       this.renderer.render(presentation);
     }
   }, {
-    key: 'generatePresentation',
+    key: "generatePresentation",
     value: function generatePresentation(editorState) {
-      if (!this.validEditorState(editorState)) {
-        throw new Error('Provided editor state is invalid');
-      }
-
       return editorState;
     }
   }]);
@@ -11415,13 +11405,11 @@ var _editor = __webpack_require__(194);
 
 var _editor2 = _interopRequireDefault(_editor);
 
-var _validPresentation = __webpack_require__(217);
-
-var _validPresentation2 = _interopRequireDefault(_validPresentation);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// eslint-disable-line no-unused-vars
 
 var _class = function () {
   function _class(document) {
@@ -11433,10 +11421,6 @@ var _class = function () {
   _createClass(_class, [{
     key: 'render',
     value: function render(presentation) {
-      if (!(0, _validPresentation2.default)(presentation)) {
-        throw new Error('Invalid presentation');
-      }
-
       _reactDom2.default.render(_react2.default.createElement(_editor2.default, { presentation: presentation }), this.editorEl);
     }
   }]);
@@ -24125,9 +24109,9 @@ exports.default = function (props) {
   return _react2.default.createElement(
     'div',
     { className: 'editor' },
-    _react2.default.createElement(_codeStage2.default, { stageful: stageful }),
+    _react2.default.createElement(_codeStage2.default, { key: 'code', stageful: stageful }),
     _react2.default.createElement(_interpretButton2.default, { interpret: interpret }),
-    _react2.default.createElement(_codeStage2.default, { stageful: result || false })
+    _react2.default.createElement(_codeStage2.default, { key: 'result', stageful: result || false })
   );
 };
 
@@ -24141,8 +24125,6 @@ exports.default = function (props) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _react = __webpack_require__(20);
 
@@ -24165,8 +24147,6 @@ exports.default = function (props) {
       { className: 'non-syntactic' },
       '(Code stage is empty)'
     );
-  } else if ((typeof stageful === 'undefined' ? 'undefined' : _typeof(stageful)) !== 'object') {
-    throw new Error('stageful missing');
   } else {
     stageContents = _react2.default.createElement(_syntacticNode2.default, { serialization: stageful });
   }
@@ -24250,6 +24230,8 @@ exports.default = function (props) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+// eslint-disable-line no-unused-vars
 
 exports.default = function (syntacticGraph) {
   return syntacticGraph;
@@ -24893,78 +24875,10 @@ module.exports = {"klass":"numberLiteral","data":0}
 /* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (candidatePresentation) {
-  if (!Object.keys(candidatePresentation) === ['stageful']) {
-    return false;
-  }
-
-  var stageful = candidatePresentation.stageful;
-
-
-  if (!Object.keys(stageful) === ['klass', 'data']) {
-    return false;
-  }
-
-  if (!stageful.klass === 'numberLiteral') {
-    return false;
-  }
-
-  if (![0, 1].includes(stageful.data)) {
-    return false;
-  }
-
-  return true;
-};
-
-/***/ }),
-/* 218 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-exports.default = function (candidateEditorState) {
-  if (!Object.keys(candidateEditorState) === ['stageful']) {
-    return false;
-  }
-
-  var stageful = candidateEditorState.stageful;
-
-
-  if (!Object.keys(stageful) === ['klass', 'data']) {
-    return false;
-  }
-
-  if (!stageful.klass === 'numberLiteral') {
-    return false;
-  }
-
-  if (![0, 1].includes(stageful.data)) {
-    return false;
-  }
-
-  return true;
-};
-
-/***/ }),
-/* 219 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(220);
+var content = __webpack_require__(218);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -24972,7 +24886,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(222)(content, options);
+var update = __webpack_require__(220)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -24989,21 +24903,21 @@ if(false) {
 }
 
 /***/ }),
-/* 220 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(221)(undefined);
+exports = module.exports = __webpack_require__(219)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "body {\n  background-color: #111;\n  font-family: \"Helvetica\", Arial, sans-serif;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\nbutton {\n  outline: none; /* override default */\n  border: none; /* override default */\n  padding: 8px 12px;\n  margin: 8px;\n  background-color: #666;\n  color: #ffd;\n  font-size: 100%;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n\nbutton:hover {\n  background-color: #755;\n}\n\nbutton:active {\n  background-color: #842;\n}\n\n::selection {\n  background-color: #c88;\n}\n\n.editor {\n  padding: 2px 0;\n}\n\n.code-stage {\n  margin: 8px;\n  background-color: #333;\n  color: #eee;\n  padding: 8px 12px;\n  font-family: 'Courier New', monospace;\n}\n\n.non-syntactic {\n  color: #666;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n", ""]);
+exports.push([module.i, "body {\n  background-color: #111;\n  font-family: \"Helvetica\", Arial, sans-serif;\n  color: #fff;\n}\n\na {\n  color: #05f;\n}\n\nbutton {\n  outline: none;\n  border: none;\n  padding: 8px 12px;\n  margin: 8px;\n  background-color: #666;\n  color: #ffd;\n  font-size: 100%;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n\nbutton:hover {\n  background-color: #755;\n}\n\nbutton:active {\n  background-color: #844;\n}\n\n::selection {\n  background-color: #c88;\n}\n\n.editor {\n  padding: 2px 0;\n}\n\n.code-stage {\n  margin: 8px;\n  background-color: #333;\n  color: #eee;\n  padding: 8px 12px;\n  font-family: 'Courier New', monospace;\n}\n\n.non-syntactic {\n  color: #666;\n  font-family: \"Helvetica\", Arial, sans-serif;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 221 */
+/* 219 */
 /***/ (function(module, exports) {
 
 /*
@@ -25085,7 +24999,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 222 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -25131,7 +25045,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(223);
+var	fixUrls = __webpack_require__(221);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -25444,7 +25358,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 223 */
+/* 221 */
 /***/ (function(module, exports) {
 
 

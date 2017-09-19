@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import SyntacticNode from './syntactic-node.jsx';
+import type { syntacticGraph } from '../../types/syntactic-graph'
 
 type Props = {
-  stageful: Object
+  stageful: syntacticGraph | false
 }
 
 export default (props: Props) => {
@@ -16,8 +17,6 @@ export default (props: Props) => {
         (Code stage is empty)
       </div>
     );
-  } else if (typeof stageful !== 'object') {
-    throw new Error('stageful missing')
   } else {
     stageContents = (
       <SyntacticNode serialization={stageful} />

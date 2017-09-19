@@ -29,9 +29,9 @@ export default (props: Props) => {
 
   return (
     <div className="editor">
-      <CodeStage stageful={stageful} />
+      <CodeStage key="code" stageful={stageful} />
       <InterpretButton interpret={interpret} />
-      <CodeStage stageful={result || false} />
+      <CodeStage key="result" stageful={result || false} />
     </div>
   );
 };
