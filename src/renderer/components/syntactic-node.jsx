@@ -8,14 +8,14 @@ type Props = {
 
 export default (props: Props) => {
   const { serialization } = props;
-  if (serialization.klass !== 'numberLiteral') { throw new Error('no types yet'); }
+  if (serialization.klass !== 'booleanLiteral') { throw new Error('no types yet'); }
 
   const contextualType = 'expression';
-  const contentualType = 'number-literal';
+  const contentualType = 'boolean-literal';
 
   return (
     <div className={`leaf ${contextualType} ${contentualType}`}>
-      {serialization.data}
+      {String(serialization.data)}
     </div>
   );
 };

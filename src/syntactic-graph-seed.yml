@@ -1,2 +1,2 @@
-klass: 'numberLiteral'
-data: 0
+klass: 'booleanLiteral'
+data: false

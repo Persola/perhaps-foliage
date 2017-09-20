@@ -12,9 +12,9 @@ new presenter(editorStateStore, renderer);
 
 const entry = () => {
   editorStateStore.dispatch({ type: 'INITIALIZE' });
-  [0, 1].forEach(binumber => {
-    Mousetrap.bind(String(binumber), () => {
-      editorStateStore.dispatch({ type: 'UPDATE', value: binumber });
+  [false, true].forEach(boolean => {
+    Mousetrap.bind(String(Number(boolean)), () => {
+      editorStateStore.dispatch({ type: 'UPDATE', value: boolean });
     });
   });
 };

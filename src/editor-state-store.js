@@ -16,8 +16,8 @@ const editorstateReducer = (
   if (type === 'UPDATE') {
     const { value } = action
 
-    if (![0, 1].includes(value)) {
-      throw new Error('UPDATE value may only be 0 or 1')
+    if (![false, true].includes(value)) {
+      throw new Error('UPDATE value may only be false or true')
     }
 
     return Object.assign({}, state, {

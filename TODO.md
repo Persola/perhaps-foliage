@@ -1,7 +1,6 @@
 * maintainence
 ** add tests for editorStateStore
 ** organize static web assets and root dir files
-** convert binumber to Boolean
 ** [?] extract/organize actions (=~ create command dispatcher)
 * new functionality
 ** add function declarations and calls (identity) + syntactic node nesting

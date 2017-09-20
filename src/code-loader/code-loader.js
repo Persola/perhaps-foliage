@@ -1,6 +1,6 @@
 // @flow
-type syntacticGraph = Object
+import type { syntacticGraph } from '../types/syntactic-graph';
 
 const syntaticGraphSeed: syntacticGraph = require("../syntactic-graph-seed.yml");
 
-export default (): syntacticGraph => { return syntaticGraphSeed; }
+export default (): syntacticGraph => syntaticGraphSeed;

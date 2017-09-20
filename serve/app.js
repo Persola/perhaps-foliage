@@ -9783,8 +9783,8 @@ var editorstateReducer = function editorstateReducer() {
     var value = action.value;
 
 
-    if (![0, 1].includes(value)) {
-      throw new Error('UPDATE value may only be 0 or 1');
+    if (![false, true].includes(value)) {
+      throw new Error('UPDATE value may only be false or true');
     }
 
     return Object.assign({}, state, {
@@ -10274,9 +10274,9 @@ new _presenter2.default(_editorStateStore2.default, renderer);
 
 var entry = function entry() {
   _editorStateStore2.default.dispatch({ type: 'INITIALIZE' });
-  [0, 1].forEach(function (binumber) {
-    _mousetrap2.default.bind(String(binumber), function () {
-      _editorStateStore2.default.dispatch({ type: 'UPDATE', value: binumber });
+  [false, true].forEach(function (boolean) {
+    _mousetrap2.default.bind(String(Number(boolean)), function () {
+      _editorStateStore2.default.dispatch({ type: 'UPDATE', value: boolean });
     });
   });
 };
@@ -24176,17 +24176,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = function (props) {
   var serialization = props.serialization;
 
-  if (serialization.klass !== 'numberLiteral') {
+  if (serialization.klass !== 'booleanLiteral') {
     throw new Error('no types yet');
   }
 
   var contextualType = 'expression';
-  var contentualType = 'number-literal';
+  var contentualType = 'boolean-literal';
 
   return _react2.default.createElement(
     'div',
     { className: 'leaf ' + contextualType + ' ' + contentualType },
-    serialization.data
+    String(serialization.data)
   );
 };
 
@@ -24867,7 +24867,7 @@ exports.default = function () {
 /* 216 */
 /***/ (function(module, exports) {
 
-module.exports = {"klass":"numberLiteral","data":0}
+module.exports = {"klass":"booleanLiteral","data":false}
 
 /***/ }),
 /* 217 */

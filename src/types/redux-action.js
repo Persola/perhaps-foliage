@@ -1,6 +1,6 @@
 // @flow
 export type reduxAction = {
-  type: string,
+  type: ('UPDATE' | 'UPDATE_RESULT'), // doesn't work
   value?: number,
   result?: Object
 }

@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CodeStage from '../../../../src/renderer/components/code-stage.jsx';
 
-const syntaticGraph = require("../../../data_mocks/syntactic-graph.yml");
+const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
 
 describe ('codeLoader', () => {
   describe ('with normal props', () => {
-    const stageful = syntaticGraph;
+    const stageful = syntacticGraph;
 
     it ('renders', () => {
       expect(shallow(

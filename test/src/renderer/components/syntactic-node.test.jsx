@@ -5,7 +5,7 @@ import SyntacticNode from '../../../../src/renderer/components/syntactic-node.js
 describe ('SyntacticNode', () => {
   const validProps = {
     serialization: {
-      klass: 'numberLiteral',
+      klass: 'booleanLiteral',
       data: 678,
     }
   }
@@ -18,7 +18,7 @@ describe ('SyntacticNode', () => {
     )).toMatchSnapshot();
   });
 
-  it ('only works for numberLiterals', () => {
+  it ('only works for booleanLiterals', () => {
     const serialization = Object.assign({}, validProps.serialization, {
       klass: 'otherKlass',
     })
