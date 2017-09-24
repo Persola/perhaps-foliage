@@ -4,10 +4,12 @@ import Mousetrap from 'mousetrap';
 import presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store.js';
+import createInterpretForStore from './interpreter/create-interpret-for-store.js'
 
 require('./stylesheet.css');
 
-const renderer = new Renderer(document);
+const interpret = createInterpretForStore(editorStateStore);
+const renderer = new Renderer(document, interpret);
 new presenter(editorStateStore, renderer);
 
 const entry = () => {
@@ -16,6 +18,9 @@ const entry = () => {
     Mousetrap.bind(String(Number(boolean)), () => {
       editorStateStore.dispatch({ type: 'UPDATE', value: boolean });
     });
+  });
+  Mousetrap.bind('enter', () => {
+    interpret();
   });
 };
 

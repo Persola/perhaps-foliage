@@ -1,15 +1,15 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import editorStateStore from '../../../../src/editor-state-store.js'
-import Editor from '../../../../src/renderer/components/editor.jsx';
+import createInterpretForStore from '../../../src/interpreter/create-interpret-for-store.js';
+import editorStateStore from '../../../src/editor-state-store.js'
 
-const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
+const syntacticGraph = require('../../data-mocks/syntactic-graph.json');
 
 describe ('interpretStage', () => {
   const mockResult = {};
+  let interpret; // eslint-disable-line no-unused-vars
 
   beforeEach(() => {
     editorStateStore.dispatch = jest.fn();
+    interpret = createInterpretForStore(editorStateStore);
     interpretStage(syntacticGraph);
   })
 
@@ -22,18 +22,5 @@ describe ('interpretStage', () => {
       type: 'UPDATE_RESULT',
       result: mockResult
     });
-  });
-})
-
-describe ('Editor', () => {
-  it ('renders', () => {
-    const presentation = {
-      stageful: syntacticGraph,
-      result: syntacticGraph
-    }
-
-    expect(shallow(
-      <Editor presentation={presentation} />
-    )).toMatchSnapshot();
   });
 })

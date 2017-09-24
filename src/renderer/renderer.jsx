@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Editor } from './components/editor.jsx';
+import Editor from './components/editor.jsx';
 import type { presentation } from '../types/presentation' // eslint-disable-line no-unused-vars
 
 type element = Object;
@@ -9,15 +9,17 @@ type document = any;
 
 export default class {
   editorEl: element
+  interpret: Function
 
-  constructor(document: document) {
+  constructor(document: document, interpret: Function) {
     this.editorEl = document.getElementById('editor');
+    this.interpret = interpret;
   }
 
   render(presentation: presentation) {
     ReactDOM.render(
       (
-        <Editor presentation={presentation} />
+        <Editor presentation={presentation} interpret={this.interpret} />
       ),
       this.editorEl
     );

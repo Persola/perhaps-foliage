@@ -1,4 +1,8 @@
+/* eslint-disable import/no-unresolved, import/no-extraneous-dependencies */
 const electron = require ('electron');
+/* eslint-enable import/no-unresolved, import/no-extraneous-dependencies */
+
+
 const { app, BrowserWindow } = electron;
 
 app.on('ready', () => {

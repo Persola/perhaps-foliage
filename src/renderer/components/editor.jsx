@@ -2,29 +2,15 @@
 import React from 'react';
 import CodeStage from './code-stage.jsx';
 import InterpretButton from './interpret-button.jsx';
-import interpreter from '../../interpreter/interpreter.js'
-import editorStateStore from '../../editor-state-store.js'
+import type { presentation } from '../../types/presentation' // eslint-disable-line no-unused-vars
 
 type Props = {
-  presentation: Object
+  presentation: presentation,
+  interpret: Function
 }
 
-type syntacticGraph = Object
-type state = Object
-
-export const interpretStage = (syntacticGraph: syntacticGraph) => {
-  editorStateStore.dispatch({
-    type: 'UPDATE_RESULT',
-    result: interpreter(syntacticGraph)
-  });
-};
-
-export const Editor = (props: Props) => {
-  const { presentation: { stageful, result } } = props;
-
-  const interpret = () => {
-    interpretStage(stageful);
-  };
+export default (props: Props) => {
+  const { presentation: { stageful, result }, interpret } = props;
 
   return (
     <div className="editor">
