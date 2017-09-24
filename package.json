@@ -2,15 +2,14 @@
   "name": "saliva-repl",
   "version": "0.0.1",
   "description": " Scaffold for an experimental programming interface",
-  "main": "serve.js",
   "scripts": {
-    "clean": "rm -dr serve/* tmp/*",
-    "clean:serve": "rm -dr serve/*",
+    "clean": "rm -dr dist/* tmp/*",
+    "clean:dist": "rm -dr dist/*",
     "build": "webpack",
     "build:noisily": "webpack --verbose",
     "webpack-dev-server": "webpack-dev-server server.js",
     "start": "node --inspect ./server.js",
-    "redo": "npm run clean:serve; npm run build; npm run start",
+    "redo": "npm run clean:dist; npm run build; npm run start",
     "test": "jest",
     "type": "flow",
     "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -x {'server.js','src/types/**'} -o tmp/flow-coverage/",
@@ -64,7 +63,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
-      "!{node_modules,serve,tmp}/**",
+      "!{node_modules,dist,tmp}/**",
       "!webpack.config.js"
     ],
     "coverageDirectory": "tmp/coverage",

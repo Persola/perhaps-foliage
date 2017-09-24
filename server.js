@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 
 const PORT = 8000
-const ROOT_PATH = './serve'
+const ROOT_PATH = './dist'
 const DEFAULT_PATH = ROOT_PATH + '/index.html'
 const FAVICON_PATH = './favicon.ico'
 
