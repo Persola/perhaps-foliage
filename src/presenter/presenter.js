@@ -1,7 +1,8 @@
 // @flow
-type reduxStore = Object;
-type state = Object;
-type renderer = Object;
+import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
+import type { presentation } from '../types/presentation.js' // eslint-disable-line no-unused-vars
+import type { reduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
+import type { renderer } from '../types/renderer.js' // eslint-disable-line no-unused-vars
 
 export default class Presenter {
   editorStateStore: reduxStore;
@@ -25,7 +26,7 @@ export default class Presenter {
     this.renderer.render(presentation);
   }
 
-  generatePresentation(editorState: state): state {
+  generatePresentation(editorState: editorState): presentation {
     return editorState;
   }
 }

@@ -2,5 +2,6 @@
 import type { syntacticGraph } from './syntactic-graph'
 
 export type editorState = {
-  stageful: syntacticGraph
+  stageful: syntacticGraph,
+  result?: syntacticGraph
 }

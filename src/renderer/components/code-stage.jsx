@@ -19,7 +19,7 @@ export default (props: Props) => {
     );
   } else {
     stageContents = (
-      <SyntacticNode serialization={stageful} />
+      <SyntacticNode syntacticGraph={stageful} />
     );
   }
 

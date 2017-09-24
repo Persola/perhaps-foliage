@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       { test: /(\.js|\.jsx)$/, exclude: /node_modules/, use: [{ loader: 'babel-loader' }]},
       { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]},
-      { test: /\.yml$/, use: [{ loader: 'json-loader' }, { loader: 'yaml-loader' }]}
+      { test: /\.ya?ml$/, use: [{ loader: 'json-loader' }, { loader: 'yaml-loader' }]}
     ]
   },
   plugins: [HtmlWebpackPluginConfig],
