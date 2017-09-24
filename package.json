@@ -8,6 +8,7 @@
     "build": "webpack",
     "build:noisily": "webpack --verbose",
     "start:web": "node --inspect ./web-repl/server.js",
+    "start:electron": "electron electron-repl/",
     "redo": "npm run clean:dist; npm run build; npm run start:web",
     "test": "jest",
     "type": "flow",
@@ -21,6 +22,7 @@
   "dependencies": {
     "connect": "~3.6.3",
     "express": "~4.15.4",
+    "electron-prebuilt": "^1.4.13",
     "json-loader": "^0.5.7",
     "mousetrap": "^1.6.1",
     "proptypes": "^1.1.0",
