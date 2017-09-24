@@ -31,7 +31,7 @@ overrides:
         - 0
   -
     files:
-      - "server.js"
+      - "web-repl/server.js"
     rules:
       "no-console":
         - 0
