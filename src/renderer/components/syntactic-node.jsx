@@ -10,11 +10,8 @@ export default (props: Props) => {
   const { serialization } = props;
   if (serialization.klass !== 'booleanLiteral') { throw new Error('no types yet'); }
 
-  const contextualType = 'expression';
-  const contentualType = 'boolean-literal';
-
   return (
-    <div className={`leaf ${contextualType} ${contentualType}`}>
+    <div className={'same-line leaf expression boolean-literal'}>
       {String(serialization.data)}
     </div>
   );

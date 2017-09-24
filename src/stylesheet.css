@@ -1,5 +1,5 @@
 body {
-  background-color: #111;
+  background-color: #333;
   font-family: "Helvetica", Arial, sans-serif;
   color: #fff;
 }
@@ -14,7 +14,7 @@ button {
   padding: 8px 12px;
   margin: 8px;
   background-color: #666;
-  color: #ffd;
+  color: #ffc;
   font-size: 100%;
   font-family: "Helvetica", Arial, sans-serif;
 }
@@ -37,13 +37,36 @@ button:active {
 
 .code-stage {
   margin: 8px;
-  background-color: #333;
-  color: #eee;
-  padding: 8px 12px;
+  background-color: #111;
+  color: #ddd;
+  padding: 12px;
   font-family: 'Courier New', monospace;
 }
 
-.non-syntactic {
-  color: #666;
+.code-stage div {
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.code-stage .non-syntactic {
+  color: #333;
   font-family: "Helvetica", Arial, sans-serif;
+  font-weight: normal;
+}
+
+.code-stage .leaf {
+  padding: 6px 10px 3px 10px;
+}
+
+.code-stage .expression {
+  background-color: #045;
+}
+
+.code-stage .boolean-literal {
+  color: #ea1;
+}
+
+.code-stage .same-line {
+  display: inline-block;
 }
