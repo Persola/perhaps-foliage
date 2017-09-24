@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import CodeStage from '../../../../src/renderer/components/code-stage.jsx';
+import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
 const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
 
@@ -9,9 +9,9 @@ describe ('codeLoader', () => {
     const stageful = syntacticGraph;
 
     it ('renders', () => {
-      expect(shallow(
+      expectSnapshotMatch(
         <CodeStage stageful={stageful} />
-      )).toMatchSnapshot();
+      );
     });
   });
 
@@ -19,9 +19,9 @@ describe ('codeLoader', () => {
     const stageful = false;
 
     it ('renders', () => {
-      expect(shallow(
+      expectSnapshotMatch(
         <CodeStage stageful={stageful} />
-      )).toMatchSnapshot();
+      );
     });
   });
 });

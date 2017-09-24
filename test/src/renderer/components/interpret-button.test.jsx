@@ -1,9 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import InterpretButton from '../../../../src/renderer/components/interpret-button.jsx';
+import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
 it ('renders', () => {
-  expect(shallow(
+  expectSnapshotMatch(
     <InterpretButton interpret={() => {}} />
-  )).toMatchSnapshot();
+  );
 });

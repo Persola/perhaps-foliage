@@ -64,7 +64,7 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
-      "!{node_modules,dist,tmp}/**",
+      "!{test,node_modules,dist,tmp}/**",
       "!webpack.config.js"
     ],
     "coverageDirectory": "tmp/coverage",

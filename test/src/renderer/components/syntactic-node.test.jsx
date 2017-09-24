@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import SyntacticNode from '../../../../src/renderer/components/syntactic-node.jsx';
+import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
 describe ('SyntacticNode', () => {
   const validProps = {
@@ -13,9 +14,9 @@ describe ('SyntacticNode', () => {
   it ('renders', () => {
     const { serialization } = validProps
 
-    expect(shallow(
+    expectSnapshotMatch(
       <SyntacticNode serialization={serialization} />
-    )).toMatchSnapshot();
+    );
   });
 
   it ('only works for booleanLiterals', () => {
