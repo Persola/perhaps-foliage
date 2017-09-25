@@ -1,6 +1,5 @@
 // @flow
 import Mousetrap from 'mousetrap';
-
 import presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store.js';
@@ -16,7 +15,11 @@ const entry = () => {
   editorStateStore.dispatch({ type: 'INITIALIZE' });
   [false, true].forEach(boolean => {
     Mousetrap.bind(String(Number(boolean)), () => {
-      editorStateStore.dispatch({ type: 'UPDATE', value: boolean });
+      const newStageful = {
+        klass: 'booleanLiteral',
+        value: boolean
+      }
+      editorStateStore.dispatch({ type: 'UPDATE', stageful: newStageful });
     });
   });
   Mousetrap.bind('enter', () => {

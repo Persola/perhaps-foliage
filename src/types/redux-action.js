@@ -1,6 +1,9 @@
 // @flow
+import type { syntacticGraph } from './syntactic-graph'
+import type { result } from './result'
+
 export type reduxAction = {
-  type: ('UPDATE' | 'UPDATE_RESULT'), // doesn't work
-  value?: number,
-  result?: Object
+  type: ('@@redux/INIT' | 'UPDATE' | 'UPDATE_RESULT'),
+  stageful?: syntacticGraph,
+  result?: result
 }

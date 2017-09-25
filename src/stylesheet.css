@@ -45,7 +45,6 @@ button:active {
 
 .code-stage div {
   border-radius: 15px;
-  font-weight: bold;
   font-size: 16px;
 }
 
@@ -56,15 +55,53 @@ button:active {
 }
 
 .code-stage .leaf {
-  padding: 6px 10px 3px 10px;
+  /* pad vertically to center font */
+  padding-top: 6px;
+  padding-bottom: 3px;
+}
+
+.code-stage .bubble-even {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.code-stage .bubble-plus {
+  /* pad horizontally to even bubble area on either side of text */
+  padding-right: 6px;
+  padding-left: 14px;
+}
+
+.code-stage .bubble-minus {
+  /* pad horizontally to even bubble area on either side of text */
+  padding-right: 14px;
+  padding-left: 6px;
 }
 
 .code-stage .expression {
   background-color: #045;
 }
 
+.code-stage .argument {
+  background-color: #361;
+}
+
 .code-stage .boolean-literal {
   color: #ea1;
+}
+
+.code-stage .function-call {
+  color: #e18;
+}
+
+.code-stage .unresolved-function-call {
+  color: #;
+  background: repeating-linear-gradient(
+    45deg,
+    #a11,
+    #a11 3px,
+    #111 3px,
+    #111 8px
+  );
 }
 
 .code-stage .same-line {

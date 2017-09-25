@@ -1,2 +1,8 @@
-klass: 'booleanLiteral'
-data: false
+klass: functionCall
+functionRef: '!'
+arguments: [
+  {
+    klass: booleanLiteral,
+    value: false
+  }
+]

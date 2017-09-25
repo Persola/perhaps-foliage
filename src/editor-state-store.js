@@ -2,35 +2,34 @@
 import { createStore } from 'redux';
 import codeLoader from './code-loader/code-loader.js'
 import type { reduxAction } from './types/redux-action.js'
+import type { editorState } from './types/editor-state.js'
 
-type state = Object
-
-const defaultEdtiorstate = { stageful: codeLoader() };
+const defaultEdtiorstate = { stageful: codeLoader(), result: false };
+const naturalReduxStates = ['@@redux/INIT']
 
 const editorstateReducer = (
-  state: state = defaultEdtiorstate,
+  originalState: editorState = defaultEdtiorstate,
   action: reduxAction
-): state => {
-  const { type } = action
+): editorState => {
+  const { type } = action;
 
   if (type === 'UPDATE') {
-    const { value } = action
+    const { stageful } = action;
 
-    if (![false, true].includes(value)) {
-      throw new Error('UPDATE value may only be false or true')
-    }
-
-    return Object.assign({}, state, {
-      stageful: Object.assign({}, state.stageful, {
-        data: value
-      })
-    })
+    return Object.assign({}, originalState, {
+      stageful
+    });
   } else if (type === 'UPDATE_RESULT') {
-    return Object.assign({}, state, {
-      result: action.result
+    const { result } = action;
+
+    return Object.assign({}, originalState, {
+      result
     })
+  } else if (naturalReduxStates.includes(type)) {
+    return originalState;
   } else {
-    return state;
+    console.warn(`Unrecognized action type: '${type}'`); // eslint-disable-line no-console
+    return originalState;
   }
 }
 

@@ -1,4 +1,4 @@
 // @flow
-export type renderer = {
+export type aRenderer = {
   render: Function
 }

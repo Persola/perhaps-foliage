@@ -1,8 +1,17 @@
 * maintenance
-** add tests for editorStateStore
-** [?] extract/organize actions (=~ create command dispatcher)
+** tests
+** add CSS transpilation
+** extract editor
+*** add command resolution
+* language neutrality review
+** make sure all modules are language neutral or Saliva specific
+** extract Saliva-specific modules as local npm packages
 * new functionality
-** add function declarations and calls (identity) + syntactic node nesting
+** make presentation node subjective
+*** allow editor to store unrelated graphs
+*** add focus
+*** [?] add selection
+** add function declarations and calls (identity)
 ** add a unary bitwise operator
 ** allow multiple parameters to functions + syntactic node siblinghood
 ** add a binary bitwise operator
