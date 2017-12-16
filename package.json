@@ -22,7 +22,7 @@
   "dependencies": {
     "connect": "~3.6.5",
     "express": "~4.16.2",
-    "electron-prebuilt": "~1.4.13",
+    "electron": "~1.7.9",
     "json-loader": "^0.5.7",
     "mousetrap": "~1.6.1",
     "proptypes": "~1.1.0",
