@@ -5,7 +5,7 @@ var path = require('path');
 const PORT = 8000
 const ROOT_PATH = './dist'
 const DEFAULT_PATH = ROOT_PATH + '/index.html'
-const FAVICON_PATH = './favicon.ico'
+const FAVICON_PATH = './web-repl/favicon.ico'
 
 http.createServer(function (request, response) {
   console.log('request ', request.url);
