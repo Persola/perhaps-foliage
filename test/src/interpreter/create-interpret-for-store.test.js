@@ -1,23 +1,24 @@
 import createInterpretForStore from '../../../src/interpreter/create-interpret-for-store.js';
 import editorStateStore from '../../../src/editor-state-store.js'
 
-const syntacticGraph = require('../../data-mocks/syntactic-graph.json');
-
 describe ('interpretStage', () => {
   const mockResult = {};
+  const interpreter = jest.fn();
+  let currentEditorState;
   let interpret; // eslint-disable-line no-unused-vars
 
   beforeEach(() => {
     editorStateStore.dispatch = jest.fn();
     interpret = createInterpretForStore(editorStateStore);
-    interpretStage(syntacticGraph);
+    currentEditorState = editorStateStore.getState();
+    interpret();
   })
 
-  xit ('interprets the stageful', () => { // scope trouble mocking interpreter
-    expect(interpreter).toHaveBeenCalledWith(syntacticGraph);
+  xit ('interprets the stageful', () => {
+    expect(interpreter).toHaveBeenCalledWith(currentEditorState.stageful);
   });
 
-  xit ('dispatches an UPDATE_RESULT action', () => { // scope trouble mocking interpreter
+  xit ('dispatches an UPDATE_RESULT action', () => {
     expect(editorStateStore.dispatch).toHaveBeenCalledWith({
       type: 'UPDATE_RESULT',
       result: mockResult
