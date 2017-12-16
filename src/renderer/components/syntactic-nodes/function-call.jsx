@@ -15,7 +15,7 @@ export default (props: Props) => {
   }
 
   return (
-    <div className={'same-line expression unresolved-function-call'}>
+    <div className="same-line expression unresolved-function-call">
       <NamePart namePart={String(syntacticGraph.functionRef)} />
       <SyntacticNode syntacticGraph={syntacticGraph.arguments[0]} />
     </div>

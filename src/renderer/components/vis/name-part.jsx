@@ -9,7 +9,7 @@ export default (props: Props) => {
   const { namePart } = props
 
   return (
-    <div className={'same-line leaf bubble-plus'}>
+    <div className="same-line leaf bubble-plus">
       {namePart}
     </div>
   );

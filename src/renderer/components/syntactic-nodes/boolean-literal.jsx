@@ -13,7 +13,7 @@ export default (props: Props) => {
   }
 
   return (
-    <div className={'same-line leaf bubble-even argument boolean-literal'}>
+    <div className="same-line leaf bubble-even argument boolean-literal">
       {String(syntacticGraph.value)}
     </div>
   );

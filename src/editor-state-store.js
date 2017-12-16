@@ -13,7 +13,9 @@ const editorstateReducer = (
 ): editorState => {
   const { type } = action;
 
-  if (type === 'UPDATE') {
+  if (type === 'INITIALIZE') {
+    return originalState;
+  } else if (type === 'UPDATE') {
     const { stageful } = action;
 
     return Object.assign({}, originalState, {
