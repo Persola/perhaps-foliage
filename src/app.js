@@ -5,7 +5,7 @@ import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store.js';
 import createInterpretForStore from './interpreter/create-interpret-for-store.js'
 
-require('./stylesheet.css');
+require('./stylesheet.sass');
 
 const interpret = createInterpretForStore(editorStateStore);
 const renderer = new Renderer(document, interpret);

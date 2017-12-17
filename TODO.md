@@ -1,5 +1,4 @@
 * maintenance
-  * add CSS transpilation
   * extract editor
     * add command resolution
 * language neutrality review
