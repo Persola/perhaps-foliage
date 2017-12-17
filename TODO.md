@@ -1,8 +1,6 @@
 * maintainence
   * trouble specs
   * type coverage augmentation
-* language neutrality review
-  * make sure all modules are language neutral or Saliva specific
   * extract Saliva-specific modules as local npm packages
 * new functionality
   * make presentation node subjective
