@@ -13,7 +13,7 @@ export default (props: Props) => {
   const { presentation: { stageful, result }, interpret } = props;
 
   return (
-    <div className="editor">
+    <div className="editor mousetrap">
       <CodeStage key="code" stageful={stageful} />
       <InterpretButton interpret={interpret} />
       <CodeStage key="result" stageful={result || false} />
