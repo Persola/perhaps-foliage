@@ -1,5 +1,4 @@
 * maintenance
-  * [...] tests
   * add CSS transpilation
   * extract editor
     * add command resolution
