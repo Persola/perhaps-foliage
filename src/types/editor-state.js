@@ -1,8 +1,9 @@
 // @flow
-import type { syntacticGraph } from './syntactic-graph'
 import type { result } from './result'
+import type { syntacticGraph } from './syntactic-graph'
 
 export type editorState = {
-  stageful: syntacticGraph,
+  drafts: syntacticGraph[],
+  stagedDraftIndex: number,
   result: result
 }

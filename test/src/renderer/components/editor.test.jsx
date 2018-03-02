@@ -9,7 +9,8 @@ describe ('Editor', () => {
 
   describe ('with normal props', () => {
     const presentation = {
-      stageful: syntacticGraph,
+      drafts: [syntacticGraph],
+      stagedDraftIndex: 0,
       result: syntacticGraph
     }
 
@@ -22,7 +23,8 @@ describe ('Editor', () => {
 
   describe ('with result as false', () => {
     const presentation = {
-      stageful: syntacticGraph,
+      drafts: [syntacticGraph],
+      stagedDraftIndex: 0,
       result: false
     }
 

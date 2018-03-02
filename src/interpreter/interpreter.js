@@ -1,7 +1,7 @@
 // @flow
 import type { syntacticGraph } from '../types/syntactic-graph' // eslint-disable-line no-unused-vars
 
-export default (syntacticGraph: syntacticGraph): (syntacticGraph | void) => {
+export default (syntacticGraph: syntacticGraph): syntacticGraph => {
   let result;
   switch (syntacticGraph.klass) {
     case 'booleanLiteral':
@@ -14,7 +14,8 @@ export default (syntacticGraph: syntacticGraph): (syntacticGraph | void) => {
       } else {
         throw new Error('syntactic graph is incomplete');
       }
-    // break;
+    default:
+      throw new Error('unrecognized type');
   }
 
   return result;

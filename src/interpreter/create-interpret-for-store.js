@@ -7,7 +7,8 @@ export default (editorStateStore: reduxStore) => {
     const editorState = editorStateStore.getState();
     let result;
     try {
-      result = interpreter(editorState.stageful);
+      const stageful = editorState.drafts[editorState.stagedDraftIndex]
+      result = interpreter(stageful);
     }
     catch (error) {
       if (error.message === 'syntactic graph is incomplete') {

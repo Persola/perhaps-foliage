@@ -1,8 +1,4 @@
 // @flow
-import type { syntacticGraph } from './syntactic-graph'
-import type { result } from './result'
+import type { editorState } from './editor-state'
 
-export type presentation = {
-  stageful: syntacticGraph,
-  result: result
-}
+export type presentation = editorState

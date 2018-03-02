@@ -1,14 +1,20 @@
 // @flow
 import { createStore } from 'redux';
 import codeLoader from './code-loader/code-loader.js'
+import dupDrafts from './dup-drafts.js'
 import type { reduxAction } from './types/redux-action.js'
 import type { editorState } from './types/editor-state.js'
+import type { syntacticGraph } from './types/syntactic-graph.js'
 
-const defaultEdtiorstate = { stageful: codeLoader(), result: false };
+const defaultStageful: syntacticGraph = codeLoader();
+const defaultEditorstate = {
+  drafts: [defaultStageful],
+  stagedDraftIndex: 1,
+  result: false
+};
 const naturalReduxStates = ['@@redux/INIT']
-
 const editorstateReducer = (
-  originalState: editorState = defaultEdtiorstate,
+  originalState: editorState = defaultEditorstate,
   action: reduxAction
 ): editorState => {
   const { type } = action;
@@ -17,9 +23,11 @@ const editorstateReducer = (
     return originalState;
   } else if (type === 'UPDATE') {
     const { stageful } = action;
+    const newDraftList: syntacticGraph[] = dupDrafts(originalState.drafts);
+    newDraftList[originalState.stagedDraftIndex] = stageful;
 
     return Object.assign({}, originalState, {
-      stageful
+      drafts: newDraftList
     });
   } else if (type === 'UPDATE_RESULT') {
     const { result } = action;

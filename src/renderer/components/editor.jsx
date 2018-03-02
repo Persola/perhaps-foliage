@@ -10,7 +10,8 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const { presentation: { stageful, result }, interpret } = props;
+  const stageful = props.presentation.drafts[props.presentation.stagedDraftIndex];
+  const { presentation: { result }, interpret } = props;
 
   return (
     <div className="editor mousetrap">
