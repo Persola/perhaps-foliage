@@ -32,6 +32,9 @@ npm run start:electron
 npm run test
 ```
 
+### Test Coverage Check
+Open `./tmp/coverage/index.html` in a browser. The interface refreshes when tests are run.
+
 ### Type Check
 ```
 npm run type

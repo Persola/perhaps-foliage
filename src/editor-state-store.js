@@ -7,21 +7,19 @@ import type { editorState } from './types/editor-state.js'
 import type { syntacticGraph } from './types/syntactic-graph.js'
 
 const defaultStageful: syntacticGraph = codeLoader();
-const defaultEditorstate = {
+const defaultEditorState = {
   drafts: [defaultStageful],
   stagedDraftIndex: 1,
   result: false
 };
 const naturalReduxStates = ['@@redux/INIT']
 const editorstateReducer = (
-  originalState: editorState = defaultEditorstate,
+  originalState: editorState = defaultEditorState,
   action: reduxAction
 ): editorState => {
-  const { type } = action;
-
-  if (type === 'INITIALIZE') {
+  if (action.type === 'INITIALIZE') {
     return originalState;
-  } else if (type === 'UPDATE') {
+  } else if (action.type === 'UPDATE') {
     const { stageful } = action;
     const newDraftList: syntacticGraph[] = dupDrafts(originalState.drafts);
     newDraftList[originalState.stagedDraftIndex] = stageful;
@@ -29,16 +27,16 @@ const editorstateReducer = (
     return Object.assign({}, originalState, {
       drafts: newDraftList
     });
-  } else if (type === 'UPDATE_RESULT') {
+  } else if (action.type === 'UPDATE_RESULT') {
     const { result } = action;
 
     return Object.assign({}, originalState, {
       result
     })
-  } else if (naturalReduxStates.includes(type)) {
+  } else if (naturalReduxStates.includes(action.type)) {
     return originalState;
   } else {
-    console.warn(`Unrecognized action type: '${type}'`); // eslint-disable-line no-console
+    console.warn(`Unrecognized action type: '${action.type}'`); // eslint-disable-line no-console
     return originalState;
   }
 }
