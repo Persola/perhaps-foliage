@@ -10,8 +10,9 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const stageful = props.presentation.graphs[props.presentation.stagedGraphIndex];
-  const { presentation: { result }, interpret } = props;
+  const stageful = props.presentation.graphs[props.presentation.stagedGraphKey];
+  const { presentation: { graphs, resultGraphKey }, interpret } = props;
+  const result = graphs[resultGraphKey];
 
   return (
     <div className="editor mousetrap">

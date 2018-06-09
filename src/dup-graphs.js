@@ -1,7 +1,9 @@
 // @flow
+import syntacticGraphMap from './types/syntactic-graph-map.js'
+
 // $FlowFixMe
-export default (value: any[]): any[] => {
-  JSON.parse(
+export default (value: syntacticGraphMap): syntacticGraphMap => {
+  return JSON.parse(
     JSON.stringify(value)
   )
 }

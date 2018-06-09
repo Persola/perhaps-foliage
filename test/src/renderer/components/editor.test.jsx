@@ -10,22 +10,8 @@ describe ('Editor', () => {
   describe ('with normal props', () => {
     const presentation = {
       graphs: [syntacticGraph],
-      stagedGraphIndex: 0,
+      stagedGraphKey: 0,
       result: syntacticGraph
-    }
-
-    it ('renders', () => {
-      expectSnapshotMatch(
-        <Editor presentation={presentation} interpret={interpret} />
-      )
-    });
-  });
-
-  describe ('with result as false', () => {
-    const presentation = {
-      graphs: [syntacticGraph],
-      stagedGraphIndex: 0,
-      result: false
     }
 
     it ('renders', () => {
