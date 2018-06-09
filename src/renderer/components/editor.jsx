@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import CodeStage from './code-stage.jsx';
+import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
 import type { presentation } from '../../types/presentation' // eslint-disable-line no-unused-vars
 
@@ -10,15 +10,13 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const stageful = props.presentation.graphs[props.presentation.stagedGraphKey];
-  const { presentation: { graphs, resultGraphKey }, interpret } = props;
-  const result = graphs[resultGraphKey];
+  const { interpret, presentation: { stage: stageful, result } } = props;
 
   return (
     <div className="editor mousetrap">
-      <CodeStage key="code" stageful={stageful} />
+      <CodeView key="stage" code={stageful} />
       <InterpretButton interpret={interpret} />
-      <CodeStage key="result" stageful={result || false} />
+      <CodeView key="result" code={result || false} />
     </div>
   );
 };

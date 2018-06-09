@@ -1,11 +1,11 @@
 // @flow
 import interpreter from './interpreter.js'
 import type { reduxStore } from '../types/redux-store'
-import type { editorState } from '../types/editor-state'
+import type { editorState } from '../types/editor-state' // eslint-disable-line no-unused-vars
 
 export default (editorStateStore: reduxStore) => {
   return () => {
-    const editorState:editorState = editorStateStore.getState();
+    const editorState: editorState = editorStateStore.getState();
     try {
       const stageful = editorState.graphs[editorState.stagedGraphKey]
       const result = interpreter(stageful);

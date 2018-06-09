@@ -4,28 +4,28 @@ import SyntacticNode from './syntactic-node.jsx';
 import type { syntacticGraph } from '../../types/syntactic-graph'
 
 type Props = {
-  stageful: syntacticGraph | false
+  code: syntacticGraph | false
 }
 
 export default (props: Props) => {
-  const { stageful } = props;
+  const { code } = props;
 
-  let stageContents;
-  if (stageful === false) {
-    stageContents = (
+  let content;
+  if (code === false) {
+    content = (
       <div className="non-syntactic">
         (Code stage is empty)
       </div>
     );
   } else {
-    stageContents = (
-      <SyntacticNode syntacticGraph={stageful} />
+    content = (
+      <SyntacticNode syntacticGraph={code} />
     );
   }
 
   return (
-    <div className="code-stage">
-      {stageContents}
+    <div className="code-view">
+      {content}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 // @flow
+import retrieveNode from '../retrieve-node.js'
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 import type { presentation } from '../types/presentation.js' // eslint-disable-line no-unused-vars
 import type { reduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
@@ -27,6 +28,12 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: editorState): presentation {
-    return editorState;
+    const stagedGraph = editorState.graphs[editorState.stagedGraphKey];
+    const result = editorState.graphs[editorState.resultGraphKey];
+
+    return {
+      stage: retrieveNode(stagedGraph, editorState.focusedNodePath),
+      result
+    };
   }
 }

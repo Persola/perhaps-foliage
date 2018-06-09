@@ -11,7 +11,8 @@ const defaultStageful: syntacticGraph = codeLoader();
 const defaultEditorState = {
   graphs: {'1': defaultStageful, '2': codeLoader()},
   stagedGraphKey: '1',
-  resultGraphKey: '2'
+  resultGraphKey: '2',
+  focusedNodePath: []
 };
 const naturalReduxStates = ['@@redux/INIT']
 const editorstateReducer = (

@@ -4,8 +4,6 @@
   * extract Saliva-specific modules as local npm packages
 * new functionality
   * make presentation node subjective
-    * allow editor to store unrelated graphs
-    * add focus
     * [?] add selection
   * add function declarations and calls (identity)
   * add a unary bitwise operator

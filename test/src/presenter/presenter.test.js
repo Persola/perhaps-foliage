@@ -1,15 +1,26 @@
 import Presenter from '../../../src/presenter/presenter.js';
 
 describe ('presenter', () => {
-  const editorState = {};
+  const focusedNode = {};
+  const resultGraph = {};
+  const editorState = {
+    graphs: {
+      journey: {'road': focusedNode},
+      reward: resultGraph
+    },
+    stagedGraphKey: 'journey',
+    resultGraphKey: 'reward',
+    focusedNodePath: ['road']
+  };
   let editorStateStore;
   let renderer = { render: jest.fn() };
   let presenter;
+  let presentation;
 
   beforeEach(() => {
     editorStateStore = {
       subscribe: jest.fn(),
-      getState: jest.fn().mockReturnValue(editorState)
+      getState: jest.fn().mockReturnValue(editorState),
     };
     presenter = new Presenter(editorStateStore, renderer);
   })
@@ -30,9 +41,10 @@ describe ('presenter', () => {
   })
 
   describe ('present', () => {
-    const presentation = {};
+    let presentation;
 
     beforeEach(() => {
+      presentation = {};
       presenter.generatePresentation = jest.fn().mockReturnValue(presentation);
       presenter.present();
     })
@@ -46,18 +58,21 @@ describe ('presenter', () => {
     })
 
     it ('generates the presentation', () => {
-      const presentation = {};
-      presenter.generatePresentation = (
-        jest.fn().mockReturnValueOnce(presentation)
-      );
-
       expect(renderer.render).toHaveBeenCalledWith(presentation);
     })
   })
 
   describe ('generatePresentation', () => {
-    it ('is the identity function', () => {
-      expect(presenter.generatePresentation(editorState)).toBe(editorState);
+    beforeEach(() => {
+      presentation = presenter.generatePresentation(editorState);
+    })
+
+    it ('sets the stage using the stagedGraphKey and focusedNodePath', () => {
+      expect(presentation.stage).toBe(focusedNode);
+    })
+
+    it ('sets the result using the resultGraphKey', () => {
+      expect(presentation.result).toBe(resultGraph);
     })
   })
 })

@@ -1,4 +1,7 @@
 // @flow
-import type { editorState } from './editor-state'
+import type { syntacticGraph } from './syntactic-graph'
 
-export type presentation = editorState
+export type presentation = {
+  stage: syntacticGraph,
+  result: syntacticGraph
+};

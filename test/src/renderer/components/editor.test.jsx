@@ -3,15 +3,15 @@ import Editor from '../../../../src/renderer/components/editor.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
 const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
+const otherSyntacticGraph = require('../../../data-mocks/syntactic-graphs/syntactic-graph-2.json');
 
 describe ('Editor', () => {
   const interpret = jest.fn()
 
   describe ('with normal props', () => {
     const presentation = {
-      graphs: [syntacticGraph],
-      stagedGraphKey: 0,
-      result: syntacticGraph
+      stage: syntacticGraph,
+      result: otherSyntacticGraph
     }
 
     it ('renders', () => {
