@@ -19,7 +19,7 @@ const editorstateReducer = (
 ): editorState => {
   if (action.type === 'INITIALIZE') {
     return originalState;
-  } else if (action.type === 'UPDATE') {
+  } else if (action.type === 'UPDATE_STAGE') {
     const { stageful } = action;
     const newDraftList: syntacticGraph[] = dupDrafts(originalState.drafts);
     newDraftList[originalState.stagedDraftIndex] = stageful;

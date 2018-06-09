@@ -1,7 +1,7 @@
 // @flow
 import type { syntacticGraph } from '../syntactic-graph'
 
-export type update = {
-  type: 'UPDATE',
+export type updateStage = {
+  type: 'UPDATE_STAGE',
   stageful: syntacticGraph
 }

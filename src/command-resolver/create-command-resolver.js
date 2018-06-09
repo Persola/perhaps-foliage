@@ -7,7 +7,7 @@ export default (editorStateStore: reduxStore, interpret: sideEffectFunction) => 
     if(['0', '1'].includes(key)) {
       return () => {
         editorStateStore.dispatch({
-          type: 'UPDATE',
+          type: 'UPDATE_STAGE',
           stageful: {
             klass: 'booleanLiteral',
             value: Boolean(Number(key))
