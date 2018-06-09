@@ -7,7 +7,7 @@ export default (editorStateStore: reduxStore) => {
     const editorState = editorStateStore.getState();
     let result;
     try {
-      const stageful = editorState.drafts[editorState.stagedDraftIndex]
+      const stageful = editorState.graphs[editorState.stagedGraphIndex]
       result = interpreter(stageful);
     }
     catch (error) {

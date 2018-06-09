@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const stageful = props.presentation.drafts[props.presentation.stagedDraftIndex];
+  const stageful = props.presentation.graphs[props.presentation.stagedGraphIndex];
   const { presentation: { result }, interpret } = props;
 
   return (

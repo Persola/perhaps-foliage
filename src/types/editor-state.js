@@ -3,7 +3,7 @@ import type { result } from './result'
 import type { syntacticGraph } from './syntactic-graph'
 
 export type editorState = {
-  drafts: syntacticGraph[],
-  stagedDraftIndex: number,
+  graphs: syntacticGraph[],
+  stagedGraphIndex: number,
   result: result
 }
