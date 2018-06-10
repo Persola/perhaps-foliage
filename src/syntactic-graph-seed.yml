@@ -1,6 +1,6 @@
 klass: functionCall
-functionRef: '!'
-arguments: [
+functionRef: {graphId: 'id', nodePath: []}
+argumentz: [
   {
     klass: booleanLiteral,
     value: false

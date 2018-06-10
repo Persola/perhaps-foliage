@@ -1,7 +1,10 @@
 {
   "klass": "functionCall",
-  "functionRef": 5621,
-  "arguments": {
+  "functionRef": {
+    "graphId": "mockGraphId",
+    "nodePath": ["mock", "path2", "amiableFunction"]
+  },
+  "argumentz": {
     "klass": "booleanLiteral",
     "value": false
   }

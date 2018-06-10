@@ -2,20 +2,30 @@ import interpreter from '../../../src/interpreter/interpreter.js';
 
 describe ('interpreter', () => {
   describe ('given a boolean literal', () => {
-    const value = { klass: 'booleanLiteral' };
+    const graphToInterpret = { klass: 'booleanLiteral' };
+    const graphCollection = {};
 
-    it ('is the identity function', () => {
-      expect(interpreter(value)).toBe(value);
+    it ('returns the value wrapped in a interpretation resolution', () => {
+      expect(
+        interpreter(graphToInterpret, graphCollection)
+      ).toEqual({success: true, result: graphToInterpret});
     })
   })
 
   describe ('given a function call', () => {
-    const value = { klass: 'functionCall' };
+    const graphToInterpret = require('../../data-mocks/syntactic-nodes/function-call.json');
+    const graphCollection = require('../../data-mocks/syntactic-nodes/function-call/function-call-target-collection.json');
 
-    it ('is the identity function', () => {
-      expect(() => {
-        interpreter(value)
-      }).toThrow('syntactic graph is incomplete');
+    it ('returns the universal return value', () => { // see resolve-function
+      expect(
+        interpreter(graphToInterpret, graphCollection)
+      ).toEqual({
+        success: true,
+        result: {
+          klass: 'booleanLiteral',
+          value: true
+        }
+      });
     })
   })
 })

@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
+import type { nodeId } from '../../../types/node-id'
 
 type Props = {
-  namePart: string
+  namePart: nodeId
 }
 
 export default (props: Props) => {
@@ -10,7 +11,7 @@ export default (props: Props) => {
 
   return (
     <div className="same-line leaf bubble-plus">
-      {namePart}
+      {String(namePart)}
     </div>
   );
 };

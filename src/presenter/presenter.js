@@ -22,7 +22,7 @@ export default class Presenter {
   }
 
   present() {
-    const editorState = this.editorStateStore.getState();
+    const editorState: editorState = this.editorStateStore.getState();
     const presentation = this.generatePresentation(editorState);
     this.renderer.render(presentation);
   }
@@ -30,9 +30,14 @@ export default class Presenter {
   generatePresentation(editorState: editorState): presentation {
     const stagedGraph = editorState.graphs[editorState.stagedGraphKey];
     const result = editorState.graphs[editorState.resultGraphKey];
+    const focusedNode = retrieveNode(stagedGraph, editorState.focusedNodePath);
+
+    if (focusedNode === false) {
+      throw new Error('focus node not found in editor state')
+    }
 
     return {
-      stage: retrieveNode(stagedGraph, editorState.focusedNodePath),
+      stage: focusedNode,
       result
     };
   }

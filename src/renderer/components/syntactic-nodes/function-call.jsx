@@ -9,15 +9,22 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const { syntacticGraph } = props;
+  const {
+    syntacticGraph,
+    syntacticGraph: { functionRef }
+  } = props;
+
   if (syntacticGraph.klass !== 'functionCall') {
     throw new Error('non-function call masquerading as function call');
   }
 
+  const candidateNames = [functionRef.graphId].concat(functionRef.nodePath)
+  const name = candidateNames[candidateNames.length - 1]
+
   return (
     <div className="same-line expression unresolved-function-call">
-      <NamePart namePart={String(syntacticGraph.functionRef)} />
-      <SyntacticNode syntacticGraph={syntacticGraph.arguments[0]} />
+      <NamePart namePart={name} />
+      <SyntacticNode syntacticGraph={syntacticGraph.argumentz[0]} />
     </div>
   );
 };

@@ -1,0 +1,11 @@
+{
+  "mockGraphId": {
+    "mock": {
+      "path2": {
+        "amiableFunction": {
+          "klass": "functionDeclaration"
+        }
+      }
+    }
+  }
+}
