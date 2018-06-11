@@ -4,8 +4,8 @@
     "graphId": "mockGraphId",
     "nodePath": ["mock", "path2", "amiableFunction"]
   },
-  "argumentz": {
+  "argumentz": [{
     "klass": "booleanLiteral",
     "value": false
-  }
+  }]
 }

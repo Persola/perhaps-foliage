@@ -16,16 +16,8 @@ describe ('interpreter', () => {
     const graphToInterpret = require('../../data-mocks/syntactic-nodes/function-call.json');
     const graphCollection = require('../../data-mocks/syntactic-nodes/function-call/function-call-target-collection.json');
 
-    it ('returns the universal return value', () => { // see resolve-function
-      expect(
-        interpreter(graphToInterpret, graphCollection)
-      ).toEqual({
-        success: true,
-        result: {
-          klass: 'booleanLiteral',
-          value: true
-        }
-      });
+    xit ('returns the universal return value', () => { // see resolve-function
+      expect(interpretFunctionCall).toHaveBeenCalledWith(graphToInterpret, graphCollection);
     })
   })
 })

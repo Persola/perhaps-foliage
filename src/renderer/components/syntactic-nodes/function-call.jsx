@@ -9,22 +9,28 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const {
-    syntacticGraph,
-    syntacticGraph: { functionRef }
-  } = props;
+  const { syntacticGraph: { klass, functionRef, argumentz } } = props;
 
-  if (syntacticGraph.klass !== 'functionCall') {
+  if (klass !== 'functionCall') {
     throw new Error('non-function call masquerading as function call');
   }
 
-  const candidateNames = [functionRef.graphId].concat(functionRef.nodePath)
-  const name = candidateNames[candidateNames.length - 1]
+  let name
+  if (functionRef === 'NOR') {
+    name = 'NOR'
+  } else {
+    const candidateNames = [functionRef.graphId].concat(functionRef.nodePath)
+    name = candidateNames[candidateNames.length - 1]
+  }
 
   return (
     <div className="same-line expression unresolved-function-call">
       <NamePart namePart={name} />
-      <SyntacticNode syntacticGraph={syntacticGraph.argumentz[0]} />
+      {
+        argumentz.map((arg, ind) => {
+          return <SyntacticNode key={`arg_${ind + 1}`} syntacticGraph={arg} />
+        })
+      }
     </div>
   );
 };

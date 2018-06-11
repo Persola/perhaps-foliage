@@ -1,5 +1,5 @@
 // @flow
-import retrieveNode from '../retrieve-node.js'
+import descendToNode from '../descend-to-node.js'
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 import type { presentation } from '../types/presentation.js' // eslint-disable-line no-unused-vars
 import type { reduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
@@ -30,7 +30,7 @@ export default class Presenter {
   generatePresentation(editorState: editorState): presentation {
     const stagedGraph = editorState.graphs[editorState.stagedGraphKey];
     const result = editorState.graphs[editorState.resultGraphKey];
-    const focusedNode = retrieveNode(stagedGraph, editorState.focusedNodePath);
+    const focusedNode = descendToNode(stagedGraph, editorState.focusedNodePath);
 
     if (focusedNode === false) {
       throw new Error('focus node not found in editor state')

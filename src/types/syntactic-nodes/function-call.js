@@ -4,6 +4,6 @@ import type { nodeRef } from '../node-ref'
 
 export type functionCall = {
   klass: 'functionCall',
-  functionRef: nodeRef,
+  functionRef: nodeRef | 'NOR',
   argumentz: functionArgument[]
 }

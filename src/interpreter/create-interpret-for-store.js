@@ -16,7 +16,7 @@ export default (editorStateStore: reduxStore) => {
           result: resolution.result
         });
       } else {
-        throw new Error(resolution.error.message);
+        throw new Error(`interpretation failed: "${resolution.error.message}"`);
       }
     }
     catch (error) {

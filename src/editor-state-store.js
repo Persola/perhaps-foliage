@@ -7,7 +7,21 @@ import type { editorState } from './types/editor-state.js'
 import type { syntacticGraph } from './types/syntactic-graph.js'
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
-const defaultStageful: syntacticGraph = codeLoader();
+// const defaultStageful: syntacticGraph = codeLoader();
+const defaultStageful: syntacticGraph = {
+  klass: 'functionCall',
+  functionRef: 'NOR',
+  argumentz: [
+    {
+      klass: 'booleanLiteral',
+      value: true
+    },
+    {
+      klass: 'booleanLiteral',
+      value: false
+    }
+  ]
+};
 const defaultEditorState = {
   graphs: {'1': defaultStageful, '2': codeLoader()},
   stagedGraphKey: '1',
