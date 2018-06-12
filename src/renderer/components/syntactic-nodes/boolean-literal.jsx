@@ -1,20 +1,20 @@
 // @flow
 import React from 'react';
-import type { booleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
+import type { booleanLiteralPres } from '../../../types/presentations/boolean-literal'
 
 type Props = {
-  syntacticGraph: booleanLiteral
+  codePresentation: booleanLiteralPres
 }
 
 export default (props: Props) => {
-  const { syntacticGraph } = props;
-  if (syntacticGraph.klass !== 'booleanLiteral') {
+  const { codePresentation } = props;
+  if (codePresentation.klass !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
 
   return (
     <div className="same-line leaf bubble-even argument boolean-literal">
-      {String(syntacticGraph.value)}
+      {String(codePresentation.value)}
     </div>
   );
 };

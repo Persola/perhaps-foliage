@@ -5,25 +5,49 @@ import dupGraphs from './dup-graphs.js'
 import type { reduxAction } from './types/redux-action.js'
 import type { editorState } from './types/editor-state.js'
 import type { syntacticGraph } from './types/syntactic-graph.js'
+import type { functionDefinition } from './types/syntactic-nodes/function-definition.js'
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
 // const defaultStageful: syntacticGraph = codeLoader();
 const defaultStageful: syntacticGraph = {
   klass: 'functionCall',
-  functionRef: 'NOR',
-  argumentz: [
+  nor: false,
+  functionRef: {
+    graphId: '3',
+    nodePath: []
+  },
+  argumentz: []
+};
+const andGraph: functionDefinition = {
+  klass: 'functionDefinition',
+  name: 'AND',
+  parameterz: [
     {
       klass: 'booleanLiteral',
-      value: true
+      name: 'first AND para'
     },
     {
       klass: 'booleanLiteral',
-      value: false
+      name: 'second AND para'
     }
-  ]
+  ],
+  body: {
+    klass: 'functionCall',
+    nor: true,
+    argumentz: [
+      {
+        klass: 'booleanLiteral',
+        value: true
+      },
+      {
+        klass: 'booleanLiteral',
+        value: true
+      }
+    ]
+  }
 };
 const defaultEditorState = {
-  graphs: {'1': defaultStageful, '2': codeLoader()},
+  graphs: {'1': defaultStageful, '2': codeLoader(), '3': andGraph},
   stagedGraphKey: '1',
   resultGraphKey: '2',
   focusedNodePath: []

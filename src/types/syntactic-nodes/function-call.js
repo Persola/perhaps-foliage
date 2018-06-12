@@ -1,9 +1,5 @@
 // @flow
-import type { functionArgument } from './function-argument'
-import type { nodeRef } from '../node-ref'
+import type { primitiveFunctionCall } from './function-call/primitive-function-call'
+import type { nonPrimitiveFunctionCall } from './function-call/non-primitive-function-call'
 
-export type functionCall = {
-  klass: 'functionCall',
-  functionRef: nodeRef | 'NOR',
-  argumentz: functionArgument[]
-}
+export type functionCall = (primitiveFunctionCall | nonPrimitiveFunctionCall)

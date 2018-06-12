@@ -2,34 +2,42 @@
 import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
-import type { functionCall } from '../../../types/syntactic-nodes/function-call'
+import type { presentationGraph } from '../../../types/presentations/presentation-graph'
+import type { functionCallPres } from '../../../types/presentations/function-call'
 
 type Props = {
-  syntacticGraph: functionCall
+  codePresentation: functionCallPres
+}
+
+const argumentEls = (argumentz: presentationGraph[]) => {
+  return (
+    argumentz.map((arg, ind) => {
+      if (arg.klass === 'booleanLiteral') {
+        return (
+          <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
+        )
+      } else if (arg.klass === 'functionCall') {
+        return (
+          <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
+        )
+      } else {
+        throw new Error('should be unreachable (new type?)')
+      }
+    })
+  );
 }
 
 export default (props: Props) => {
-  const { syntacticGraph: { klass, functionRef, argumentz } } = props;
+  const codePresentation: functionCallPres = props.codePresentation;
 
-  if (klass !== 'functionCall') {
-    throw new Error('non-function call masquerading as function call');
-  }
-
-  let name
-  if (functionRef === 'NOR') {
-    name = 'NOR'
-  } else {
-    const candidateNames = [functionRef.graphId].concat(functionRef.nodePath)
-    name = candidateNames[candidateNames.length - 1]
-  }
+  const name = codePresentation.nor ? 'NOR' : codePresentation.name
+  const argumentz = codePresentation.argumentz
 
   return (
     <div className="same-line expression unresolved-function-call">
       <NamePart namePart={name} />
       {
-        argumentz.map((arg, ind) => {
-          return <SyntacticNode key={`arg_${ind + 1}`} syntacticGraph={arg} />
-        })
+        argumentEls(argumentz)
       }
     </div>
   );

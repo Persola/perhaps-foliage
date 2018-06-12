@@ -1,17 +1,17 @@
 // @flow
 import React from 'react';
 import SyntacticNode from './syntactic-node.jsx';
-import type { syntacticGraph } from '../../types/syntactic-graph'
+import type { presentationGraph } from '../../types/presentations/presentation-graph'
 
 type Props = {
-  code: syntacticGraph | false
+  codePresentation: presentationGraph | false
 }
 
 export default (props: Props) => {
-  const { code } = props;
+  const { codePresentation } = props;
 
   let content;
-  if (code === false) {
+  if (codePresentation === false) {
     content = (
       <div className="non-syntactic">
         (Code stage is empty)
@@ -19,7 +19,7 @@ export default (props: Props) => {
     );
   } else {
     content = (
-      <SyntacticNode syntacticGraph={code} />
+      <SyntacticNode codePresentation={codePresentation} />
     );
   }
 

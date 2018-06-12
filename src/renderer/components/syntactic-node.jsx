@@ -2,30 +2,25 @@
 import React from 'react';
 import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
-import type { syntacticGraph } from '../../types/syntactic-graph'
+import type { presentationGraph } from '../../types/presentations/presentation-graph'
 
 type Props = {
-  syntacticGraph: syntacticGraph
+  codePresentation: presentationGraph
 }
 
 export default (props: Props) => {
-  const { syntacticGraph } = props;
+  const { codePresentation } = props;
 
-  let rendering;
-  switch (syntacticGraph.klass) {
+  switch (codePresentation.klass) {
     case 'booleanLiteral':
-      rendering = (
-        <BooleanLiteral syntacticGraph={syntacticGraph} />
+      return(
+        <BooleanLiteral codePresentation={codePresentation} />
       )
-      break;
     case 'functionCall':
-      rendering = (
-        <FunctionCall syntacticGraph={syntacticGraph} />
+      return(
+        <FunctionCall codePresentation={codePresentation} />
       )
-      break;
     default:
       throw new Error('no types yet');
   }
-
-  return (rendering);
 };

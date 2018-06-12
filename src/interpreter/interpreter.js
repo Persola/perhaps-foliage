@@ -5,7 +5,7 @@ import type { syntacticGraph } from '../types/syntactic-graph' // eslint-disable
 import type { syntacticGraphMap } from '../types/syntactic-graph-map' // eslint-disable-line no-unused-vars
 import type { graphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
 
-export default (
+const interpreter = (
   graphToInterpret: syntacticGraph,
   graphCollection: syntacticGraphMap
 ): interpretationResolution => {
@@ -16,8 +16,10 @@ export default (
         result: graphToInterpret
       };
     case 'functionCall': // eslint-disable-line
-      return interpretFunctionCall(graphToInterpret, graphCollection);
+      return interpretFunctionCall(interpreter, graphToInterpret, graphCollection);
     default:
       throw new Error('invalid syntactic node (unrecognized type)');
   }
 }
+
+export default interpreter
