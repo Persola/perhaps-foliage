@@ -7,7 +7,7 @@ describe ('interpreter', () => {
 
     it ('returns the value wrapped in a interpretation resolution', () => {
       expect(
-        interpreter(graphToInterpret, graphCollection)
+        interpreter(graphToInterpret, graphCollection, {})
       ).toEqual({success: true, result: graphToInterpret});
     })
   })

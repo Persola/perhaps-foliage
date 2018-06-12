@@ -1,6 +1,6 @@
 {
   "klass": "functionCall",
-  "functionRef": {
+  "callee": {
     "nor": false,
     "graphId": "mockGraphId",
     "nodePath": ["mock", "path2", "amiableFunction"]

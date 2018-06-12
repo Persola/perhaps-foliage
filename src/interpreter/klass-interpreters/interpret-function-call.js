@@ -1,5 +1,6 @@
-// @flow
+// @noflow
 import retrieveNodeFromGraphCollection from '../retrieve-node-from-graph-collection.js'
+import resolveArguments from '../resolve-arguments.js'
 import NOR_Primitive from './NOR-primitive.js'
 import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 import type { syntacticGraphMap } from '../../types/syntactic-graph-map' // eslint-disable-line no-unused-vars
@@ -12,17 +13,27 @@ import type { graphId } from '../../types/graph-id' // eslint-disable-line no-un
 
 const interpretFunction = (
   interpreter: Function,
+  parentScope: {},
   graphToInterpret: functionCall,
   graphCollection: syntacticGraphMap
 ): interpretationResolution => {
+  // allow argumentz to be variableRef, resolve them using scope passed in
+  const ownScope = {};
+
+  let argumentz: functionArgument[] = graphToInterpret.argumentz;
+  let resolvedArguments;
   if (graphToInterpret.nor) {
-    const argumentz: booleanLiteral[] = graphToInterpret.argumentz;
-    return NOR_Primitive(argumentz);
+    (resolvedArguments: booleanLiteral[]) = resolveArguments(parentScope, argumentz); // eslint-disable-line no-unused-vars
   } else {
-    // const argumentz: functionArgument[] = graphToInterpret.argumentz;
-    let functionDefNode: functionDefinition; // eslint-disable-line no-unused-vars
+    (resolvedArguments: functionArgument[]) = resolveArguments(parentScope, argumentz); // eslint-disable-line no-unused-vars
+  }
+
+  if (graphToInterpret.nor) {
+    return NOR_Primitive(resolvedArguments);
+  } else {
+    let functionDefNode: syntacticGraph; // eslint-disable-line no-unused-vars
     try {
-      functionDefNode = retrieveNodeFromGraphCollection(graphCollection, graphToInterpret.functionRef);
+      functionDefNode = retrieveNodeFromGraphCollection(graphCollection, graphToInterpret.callee);
     }
     catch (error) {
       return {
@@ -31,18 +42,20 @@ const interpretFunction = (
       }
     }
 
-    const functionResolution = interpreter(functionDefNode.body, graphCollection);
-    // const universalNonPrimitiveFunctionResult: booleanLiteral = {
-    //   klass: 'booleanLiteral',
-    //   value: true
-    // };
+    if (functionDefNode.klass !== 'functionDefinition') {
+      throw new Error(`invalid function ref (returned syno of wrong klass)`);
+    }
 
-    // if (functionResolution.success === false) {
-    //   return {
-    //     success: false,
-    //     error: {message: functionResolution.error.message}
-    //   };
-    // }
+    const functionDefParameters = functionDefNode.parameterz;
+    functionDefParameters.forEach((param, ind) => {
+      ownScope[param.name] = resolvedArguments[ind];
+    });
+
+    const functionResolution = interpreter(
+      functionDefNode.body,
+      graphCollection,
+      ownScope
+    );
 
     if (functionResolution.success) {
       return {

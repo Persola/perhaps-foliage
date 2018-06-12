@@ -1,0 +1,8 @@
+klass: functionCall
+nor: false
+callee:
+  graphId: 'id'
+  nodePath: []
+argumentz:
+  - klass: booleanLiteral
+    value: false

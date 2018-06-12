@@ -9,45 +9,10 @@ import type { functionDefinition } from './types/syntactic-nodes/function-defini
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
 // const defaultStageful: syntacticGraph = codeLoader();
-const defaultStageful: syntacticGraph = {
-  klass: 'functionCall',
-  nor: false,
-  functionRef: {
-    graphId: '3',
-    nodePath: []
-  },
-  argumentz: []
-};
-const andGraph: functionDefinition = {
-  klass: 'functionDefinition',
-  name: 'AND',
-  parameterz: [
-    {
-      klass: 'booleanLiteral',
-      name: 'first AND para'
-    },
-    {
-      klass: 'booleanLiteral',
-      name: 'second AND para'
-    }
-  ],
-  body: {
-    klass: 'functionCall',
-    nor: true,
-    argumentz: [
-      {
-        klass: 'booleanLiteral',
-        value: true
-      },
-      {
-        klass: 'booleanLiteral',
-        value: true
-      }
-    ]
-  }
-};
+const defaultStageful: syntacticGraph = codeLoader('proxyNorCall');
+const proxyNorGraph: functionDefinition = codeLoader('proxyNorDef');
 const defaultEditorState = {
-  graphs: {'1': defaultStageful, '2': codeLoader(), '3': andGraph},
+  graphs: {'1': defaultStageful, '2': codeLoader(), '3': proxyNorGraph},
   stagedGraphKey: '1',
   resultGraphKey: '2',
   focusedNodePath: []

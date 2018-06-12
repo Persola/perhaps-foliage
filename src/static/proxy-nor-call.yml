@@ -1,0 +1,10 @@
+klass: 'functionCall'
+nor: false
+callee:
+  graphId: '3'
+  nodePath: []
+argumentz:
+  - klass: 'booleanLiteral'
+    value: false
+  - klass: 'booleanLiteral'
+    value: false

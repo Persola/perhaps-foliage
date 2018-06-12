@@ -9,7 +9,7 @@ export default (editorStateStore: reduxStore) => {
     const editorState: editorState = editorStateStore.getState();
     try {
       const stageful = editorState.graphs[editorState.stagedGraphKey];
-      const resolution: interpretationResolution = interpreter(stageful, editorState.graphs);
+      const resolution: interpretationResolution = interpreter(stageful, editorState.graphs, {});
       if (resolution.success) {
         editorStateStore.dispatch({
           type: 'UPDATE_RESULT',

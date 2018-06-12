@@ -2,16 +2,16 @@ import React from 'react';
 import Editor from '../../../../src/renderer/components/editor.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
-const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
-const otherSyntacticGraph = require('../../../data-mocks/syntactic-graphs/syntactic-graph-2.json');
+const stagePresentation = require('../../../data-mocks/presentations/function-call.json');
+const resultPresentation = require('../../../data-mocks/presentations/boolean-literal.json');
 
 describe ('Editor', () => {
   const interpret = jest.fn()
 
   describe ('with normal props', () => {
     const presentation = {
-      stage: syntacticGraph,
-      result: otherSyntacticGraph
+      stage: stagePresentation,
+      result: resultPresentation
     }
 
     it ('renders', () => {

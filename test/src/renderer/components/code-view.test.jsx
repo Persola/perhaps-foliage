@@ -2,25 +2,21 @@ import React from 'react';
 import CodeView from '../../../../src/renderer/components/code-view.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
-const syntacticGraph = require('../../../data-mocks/syntactic-graph.json');
+const codePresentation = require('../../../data-mocks/presentations/boolean-literal.json');
 
-describe ('codeLoader', () => {
+describe ('CodeView', () => {
   describe ('with normal props', () => {
-    const code = syntacticGraph;
-
     it ('renders', () => {
       expectSnapshotMatch(
-        <CodeView code={code} />
+        <CodeView codePresentation={codePresentation} />
       );
     });
   });
 
   describe ('when the stageful is false', () => {
-    const code = false;
-
     it ('renders', () => {
       expectSnapshotMatch(
-        <CodeView code={code} />
+        <CodeView codePresentation={false} />
       );
     });
   });

@@ -1,9 +1,0 @@
-klass: functionCall
-nor: false
-functionRef: {graphId: 'id', nodePath: []}
-argumentz: [
-  {
-    klass: booleanLiteral,
-    value: false
-  }
-]

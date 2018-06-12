@@ -5,6 +5,6 @@ import type { nodeRef } from '../../node-ref'
 export type nonPrimitiveFunctionCall = {
   klass: 'functionCall',
   nor: false,
-  functionRef: nodeRef,
+  callee: nodeRef,
   argumentz: functionArgument[]
 }

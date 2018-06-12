@@ -7,7 +7,8 @@ import type { graphId } from '../types/graph-id' // eslint-disable-line no-unuse
 
 const interpreter = (
   graphToInterpret: syntacticGraph,
-  graphCollection: syntacticGraphMap
+  graphCollection: syntacticGraphMap,
+  scope: {}
 ): interpretationResolution => {
   switch (graphToInterpret.klass) {
     case 'booleanLiteral':
@@ -16,7 +17,7 @@ const interpreter = (
         result: graphToInterpret
       };
     case 'functionCall': // eslint-disable-line
-      return interpretFunctionCall(interpreter, graphToInterpret, graphCollection);
+      return interpretFunctionCall(interpreter, scope, graphToInterpret, graphCollection);
     default:
       throw new Error('invalid syntactic node (unrecognized type)');
   }

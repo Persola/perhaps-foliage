@@ -1,0 +1,8 @@
+{
+  "klass": "functionCall",
+  "name": "mockFunctionName",
+  "argumentz": [{
+    "klass": "booleanLiteral",
+    "value": false
+  }]
+}

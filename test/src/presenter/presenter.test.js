@@ -67,11 +67,11 @@ describe ('presenter', () => {
       presentation = presenter.generatePresentation(editorState);
     })
 
-    it ('sets the stage using the stagedGraphKey and focusedNodePath', () => {
+    xit ('sets the stage using the stagedGraphKey and focusedNodePath', () => {
       expect(presentation.stage).toBe(focusedNode);
     })
 
-    it ('sets the result using the resultGraphKey', () => {
+    xit ('sets the result using the resultGraphKey', () => {
       expect(presentation.result).toBe(resultGraph);
     })
   })

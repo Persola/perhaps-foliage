@@ -1,7 +1,7 @@
 import codeLoader from '../../../src/code-loader/code-loader.js';
 
 describe ('codeLoader', () => {
-  it ('returns a syntactic graph of the number literal one', () => {
+  it ('returns an object', () => {
     expect(typeof codeLoader()).toBe('object');
   })
 })

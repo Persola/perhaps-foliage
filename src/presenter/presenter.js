@@ -1,4 +1,4 @@
-// @flow
+// @noflow
 import descendToNode from '../descend-to-node.js'
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 
