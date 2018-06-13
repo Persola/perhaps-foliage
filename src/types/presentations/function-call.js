@@ -4,5 +4,7 @@ import type { presentationGraph } from './presentation-graph'
 export type functionCallPres = {
   klass: 'functionCall',
   name: string,
-  argumentz: presentationGraph[]
+  argumentz: presentationGraph[],
+  resolved: boolean,
+  focusNode: boolean
 }

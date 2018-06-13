@@ -1,5 +1,7 @@
 // @flow
 export type booleanLiteralPres = {
   klass: 'booleanLiteral',
-  value: boolean
+  value: boolean,
+  resolved: boolean,
+  focusNode: boolean
 }

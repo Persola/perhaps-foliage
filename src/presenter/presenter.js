@@ -48,30 +48,42 @@ export default class Presenter {
     }
 
     return {
-      stage: this.presentNode(focusedNode, {}),
+      stage: this.presentNode(focusedNode, {}, true),
       result: this.presentNode(result, {})
     };
   }
 
-  presentNode(focusedSyntacticGraph: syntacticGraph, scope: {}): presentationGraph {
+  presentNode(
+    focusedSyntacticGraph: syntacticGraph,
+    scope: {},
+    focusNode = false
+  ): presentationGraph {
     if (focusedSyntacticGraph.klass === 'functionCall') {
-      return this.presentFunctionCall(focusedSyntacticGraph, scope);
+      return this.presentFunctionCall(focusedSyntacticGraph, scope, focusNode);
     } else if (focusedSyntacticGraph.klass === 'booleanLiteral') {
-      return this.presentBooleanLiteral(focusedSyntacticGraph);
+      return this.presentBooleanLiteral(focusedSyntacticGraph, focusNode);
     } else {
       throw new Error('should be unreachable (new type?)')
     }
   }
 
-  presentBooleanLiteral(focusedBooleanLiteral: booleanLiteral): booleanLiteralPres { // should be reducer?
+  presentBooleanLiteral( // should be reducer?
+    focusedBooleanLiteral: booleanLiteral,
+    focusNode: boolean
+  ): booleanLiteralPres {
     const { value } = focusedBooleanLiteral
     return {
       klass: 'booleanLiteral',
-      value
+      value,
+      focusNode
     }
   }
 
-  presentFunctionCall(focusedfunctionCall: functionCall, scope: {}): functionCallPres { // should be reducer?
+  presentFunctionCall( // should be reducer?
+    focusedfunctionCall: functionCall,
+    scope: {},
+    focusNode: boolean
+  ): functionCallPres {
     let resolved: boolean;
     let internalScope;
     if (focusedfunctionCall.callee.klass === 'functionDefinition') {
@@ -88,9 +100,10 @@ export default class Presenter {
       klass: 'functionCall',
       name: focusedfunctionCall.callee.name,
       argumentz: focusedfunctionCall.argumentz.map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(arg, internalScope);
+        return this.presentNode(arg, internalScope, false);
       }),
-      resolved
+      resolved,
+      focusNode
     }
   }
 

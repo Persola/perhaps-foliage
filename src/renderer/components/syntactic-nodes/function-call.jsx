@@ -32,7 +32,7 @@ export default (props: Props) => {
 
   const name = codePresentation.nor ? 'NOR' : codePresentation.name;
   const argumentz = codePresentation.argumentz;
-  const classes = `same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'}`;
+  const classes = `same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focusNode ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes}>
