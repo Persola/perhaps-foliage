@@ -1,10 +1,11 @@
 // @flow
+import type { functionDefinition } from '../function-definition'
+import type { variableRef } from '../variable-ref'
 import type { functionArgument } from './function-argument'
-import type { nodeRef } from '../../node-ref'
 
 export type nonPrimitiveFunctionCall = {
   klass: 'functionCall',
   nor: false,
-  callee: nodeRef,
+  callee: (functionDefinition | variableRef),
   argumentz: functionArgument[]
 }

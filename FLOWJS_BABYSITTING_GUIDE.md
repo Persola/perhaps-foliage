@@ -1,17 +1,13 @@
 Disjoint union types' subtypes must share a single distinguishing attribute WHICH MUST TYPED AS A LITERAL IN EACH
 
-retyping is mandatory inside callbacks:
-<!-- const argumentEls = (argumentz: any[]) => {
+refining types is mandatory inside callbacks:
+<!-- (mapTargets: (A | B)[]) => {
   return (
-    argumentz.map((arg, ind) => {
-      if (arg.klass === 'booleanLiteral') {
-        return (
-          <SyntacticNode key={`arg_${ind + 1}`} syntacticGraph={arg} />
-        )
+    mapTargets.map((el, ind) => {
+      if (el.klass === 'A') {
+        return el.somethingUnrelated;
       } else {
-        return (
-          <SyntacticNode key={`arg_${ind + 1}`} syntacticGraph={arg} />
-        )
+        return el.somethingUnrelated;
       }
     })
   );

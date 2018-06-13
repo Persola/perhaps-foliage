@@ -30,11 +30,12 @@ const argumentEls = (argumentz: presentationGraph[]) => {
 export default (props: Props) => {
   const codePresentation: functionCallPres = props.codePresentation;
 
-  const name = codePresentation.nor ? 'NOR' : codePresentation.name
-  const argumentz = codePresentation.argumentz
+  const name = codePresentation.nor ? 'NOR' : codePresentation.name;
+  const argumentz = codePresentation.argumentz;
+  const classes = `same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'}`;
 
   return (
-    <div className="same-line expression unresolved-function-call">
+    <div className={classes}>
       <NamePart namePart={name} />
       {
         argumentEls(argumentz)

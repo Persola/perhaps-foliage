@@ -5,6 +5,7 @@ import type { editorState } from '../types/editor-state.js' // eslint-disable-li
 import type { syntacticGraph } from '../types/syntactic-graph.js' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
+import type { functionParameter } from '../types/syntactic-nodes/function-definition/function-parameter'
 
 import type { presentation } from '../types/presentations/presentation.js' // eslint-disable-line no-unused-vars
 import type { presentationGraph } from '../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
@@ -47,14 +48,14 @@ export default class Presenter {
     }
 
     return {
-      stage: this.presentNode(focusedNode),
-      result: this.presentNode(result)
+      stage: this.presentNode(focusedNode, {}),
+      result: this.presentNode(result, {})
     };
   }
 
-  presentNode(focusedSyntacticGraph: syntacticGraph): presentationGraph {
+  presentNode(focusedSyntacticGraph: syntacticGraph, scope: {}): presentationGraph {
     if (focusedSyntacticGraph.klass === 'functionCall') {
-      return this.presentFunctionCall(focusedSyntacticGraph);
+      return this.presentFunctionCall(focusedSyntacticGraph, scope);
     } else if (focusedSyntacticGraph.klass === 'booleanLiteral') {
       return this.presentBooleanLiteral(focusedSyntacticGraph);
     } else {
@@ -70,19 +71,36 @@ export default class Presenter {
     }
   }
 
-  presentFunctionCall(focusedSyntacticGraph: functionCall): functionCallPres { // should be reducer?
-    const name: string = 'function name'
+  presentFunctionCall(focusedfunctionCall: functionCall, scope: {}): functionCallPres { // should be reducer?
+    let resolved: boolean;
+    let internalScope;
+    if (focusedfunctionCall.callee.klass === 'functionDefinition') {
+      resolved = true;
+      internalScope = this.parametersToScope(focusedfunctionCall.callee.parameterz);
+    } else if (focusedfunctionCall.callee.klass === 'variableRef') {
+      resolved = Object.keys(scope).includes(focusedfunctionCall.callee.name);
+      // need to access parent to get scope (to get parameters from functionDefinition)
+      // instead, mark them as unresolved
+      internalScope = {};
+    }
 
     return {
       klass: 'functionCall',
-      name,
-      argumentz: focusedSyntacticGraph.argumentz.map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(arg);
-      })
+      name: focusedfunctionCall.callee.name,
+      argumentz: focusedfunctionCall.argumentz.map((arg: syntacticGraph): presentationGraph => {
+        return this.presentNode(arg, internalScope);
+      }),
+      resolved
     }
   }
 
-  // get nodeAttrs() {
-  //
-  // }
+  parametersToScope(parameters: functionParameter[]) {
+    const scope = {};
+
+    parameters.forEach((param: functionParameter) => {
+      scope[param.name] = param.klass;
+    });
+
+    return scope;
+  }
 }

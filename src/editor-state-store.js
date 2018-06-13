@@ -5,14 +5,12 @@ import dupGraphs from './dup-graphs.js'
 import type { reduxAction } from './types/redux-action.js'
 import type { editorState } from './types/editor-state.js'
 import type { syntacticGraph } from './types/syntactic-graph.js'
-import type { functionDefinition } from './types/syntactic-nodes/function-definition.js'
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
 // const defaultStageful: syntacticGraph = codeLoader();
 const defaultStageful: syntacticGraph = codeLoader('proxyNorCall');
-const proxyNorGraph: functionDefinition = codeLoader('proxyNorDef');
 const defaultEditorState = {
-  graphs: {'1': defaultStageful, '2': codeLoader(), '3': proxyNorGraph},
+  graphs: {'1': defaultStageful, '2': codeLoader()},
   stagedGraphKey: '1',
   resultGraphKey: '2',
   focusedNodePath: []

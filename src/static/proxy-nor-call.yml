@@ -1,10 +1,27 @@
 klass: 'functionCall'
 nor: false
-callee:
-  graphId: '3'
-  nodePath: []
 argumentz:
   - klass: 'booleanLiteral'
-    value: false
+    value: true
   - klass: 'booleanLiteral'
     value: false
+callee:
+  klass: 'functionDefinition'
+  name: 'proxyNor'
+  parameterz:
+    - klass: 'functionParameter'
+      valueKlass: 'booleanLiteral'
+      name: 'firstB'
+    - klass: 'functionParameter'
+      valueKlass: 'booleanLiteral'
+      name: 'secondB'
+  body:
+    klass: 'functionCall'
+    nor: true
+    argumentz:
+      - klass: 'variableRef'
+        valueKlass: 'booleanLiteral'
+        name: 'firstB'
+      - klass: 'variableRef'
+        valueKlass: 'booleanLiteral'
+        name: 'secondB'

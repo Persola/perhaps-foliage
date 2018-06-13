@@ -10,7 +10,6 @@
   * allow multiple parameters to functions + syntactic node siblinghood
   * add a binary bitwise operator
 * rearchitecture
-  * function call should retrieve function value, then execute
   * [?] use redux in presenter again?
   * [?] eliminate syntactic graphs, replace with universal node reference
 * longview
