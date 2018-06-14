@@ -5,7 +5,7 @@ import type { editorState } from '../types/editor-state.js' // eslint-disable-li
 import type { syntacticGraph } from '../types/syntactic-graph.js' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
-import type { functionParameter } from '../types/syntactic-nodes/function-definition/function-parameter'
+// import type { functionParameter } from '../types/syntactic-nodes/function-definition/function-parameter'
 
 import type { presentation } from '../types/presentations/presentation.js' // eslint-disable-line no-unused-vars
 import type { presentationGraph } from '../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
@@ -99,21 +99,23 @@ export default class Presenter {
     return {
       klass: 'functionCall',
       name: focusedfunctionCall.callee.name,
-      argumentz: focusedfunctionCall.argumentz.map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(arg, internalScope, false);
+      argumentz: Object.values(focusedfunctionCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
+        return this.presentNode(arg, internalScope);
       }),
       resolved,
       focusNode
     }
   }
 
-  parametersToScope(parameters: functionParameter[]) {
-    const scope = {};
+  parametersToScope(parameters: {}) {
+    // const scope = {};
+    //
+    // parameters.forEach((param: functionParameter) => {
+    //   scope[param.name] = param.klass;
+    // });
+    //
+    // return scope;
 
-    parameters.forEach((param: functionParameter) => {
-      scope[param.name] = param.klass;
-    });
-
-    return scope;
+    return parameters;
   }
 }

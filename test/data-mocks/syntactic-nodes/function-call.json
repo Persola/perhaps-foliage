@@ -5,8 +5,10 @@
     "graphId": "mockGraphId",
     "nodePath": ["mock", "path2", "amiableFunction"]
   },
-  "argumentz": [{
-    "klass": "booleanLiteral",
-    "value": false
-  }]
+  "argumentz": {
+    "mockArgSlotName": {
+      "klass": "booleanLiteral",
+      "value": false
+    }
+  }
 }

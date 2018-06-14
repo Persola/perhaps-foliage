@@ -1,19 +1,19 @@
 klass: 'functionDefinition'
 name: 'proxyNor'
 parameterz:
-  - klass: 'functionParameter'
+  firstB:
+    klass: 'functionParameter'
     valueKlass: 'booleanLiteral'
-    name: 'firstB'
-  - klass: 'functionParameter'
+  secondB:
+    klass: 'functionParameter'
     valueKlass: 'booleanLiteral'
-    name: 'secondB'
 body:
   klass: 'functionCall'
   nor: true
   argumentz:
-    - klass: 'variableRef'
+    firstB:
+      klass: 'variableRef'
       valueKlass: 'booleanLiteral'
-      name: 'firstB'
-    - klass: 'variableRef'
+    secondB:
+      klass: 'variableRef'
       valueKlass: 'booleanLiteral'
-      name: 'secondB'

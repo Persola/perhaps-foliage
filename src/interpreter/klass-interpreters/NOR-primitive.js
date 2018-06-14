@@ -15,19 +15,20 @@ const nor = (
   }
 }
 
-export default (argumentz: booleanLiteral[]): interpretationResolution => {
-  if (argumentz.length !== 2) {
+export default (argumentz: {}): interpretationResolution => {
+  if (Object.values(argumentz).length !== 2) {
     return {
       success: false,
-      error: {message: `NOR recieved wrong number of arguments (${typeof argumentz.length} "${argumentz.length}" instead of 2)`}
+      error: {message: `NOR recieved wrong number of arguments (${typeof Object.values(argumentz).length} "${Object.values(argumentz).length}" instead of 2)`}
     }
   }
 
+  const argValues = Object.values(argumentz);
   if (
-    (!isBoolean(argumentz[0])) ||
-    (!isBoolean(argumentz[1]))
+    (!isBoolean(argValues[0])) ||
+    (!isBoolean(argValues[1]))
   ) {
-    const badArg = !isBoolean(argumentz[0]) ? isBoolean(argumentz[0]) : isBoolean(argumentz[1])
+    const badArg = !isBoolean(argValues[0]) ? isBoolean(argValues[0]) : isBoolean(argValues[1])
     return {
       success: false,
       error: {message: `NOR recieved non-boolean argument '${String(badArg)}' (${typeof badArg})`}
@@ -36,6 +37,6 @@ export default (argumentz: booleanLiteral[]): interpretationResolution => {
 
   return {
     success: true,
-    result: nor(argumentz[0], argumentz[1])
+    result: nor(argValues[0], argValues[1])
   };
 }

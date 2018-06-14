@@ -1,5 +1,5 @@
 // @noflow
-import descendToNode from '../descend-to-node.js'
+import descendToNode from './descend-to-node.js'
 
 import type { syntacticGraphMap } from '../types/syntactic-graph-map.js'
 import type { syntacticGraph } from '../types/syntactic-graph.js'

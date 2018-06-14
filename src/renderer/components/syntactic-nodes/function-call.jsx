@@ -11,7 +11,7 @@ type Props = {
 
 const argumentEls = (argumentz: presentationGraph[]) => {
   return (
-    argumentz.map((arg, ind) => {
+    Object.values(argumentz).map((arg, ind) => {
       if (arg.klass === 'booleanLiteral') {
         return (
           <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />

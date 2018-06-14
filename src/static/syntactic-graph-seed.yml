@@ -4,5 +4,6 @@ callee:
   graphId: 'id'
   nodePath: []
 argumentz:
-  - klass: booleanLiteral
+  someArg:
+    klass: booleanLiteral
     value: false

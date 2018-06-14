@@ -17,11 +17,13 @@ const commandResolver = createCommandResolver(editorStateStore, interpret);
 
 const entry = () => {
   editorStateStore.dispatch({ type: 'INITIALIZE' });
-  ['0', '1', 'enter'].forEach(binaryInteger => {
-    Mousetrap.bind(binaryInteger, () => {
-      const commandResolution = commandResolver(binaryInteger);
-      if (commandResolution !== false) {
+  ['0', '1', 'enter', 'left', 'right', 'up', 'down'].forEach(key => {
+    Mousetrap.bind(key, () => {
+      const commandResolution = commandResolver(key);
+      if (commandResolution) {
         commandResolution();
+      } else {
+        throw new Error(`unrecognized command (key: ${key})`);
       }
     });
   });

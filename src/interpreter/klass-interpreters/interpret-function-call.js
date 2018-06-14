@@ -21,7 +21,7 @@ const interpretFunction = (
   // allow argumentz to be variableRef, resolve them using scope passed in
   const ownScope = {};
 
-  let argumentz: functionArgument[] = graphToInterpret.argumentz;
+  let argumentz: {} = graphToInterpret.argumentz;
   let resolvedArguments;
   if (graphToInterpret.nor) {
     (resolvedArguments: booleanLiteral[]) = resolveAny(parentScope, argumentz); // eslint-disable-line no-unused-vars
@@ -45,8 +45,20 @@ const interpretFunction = (
     }
 
     const functionDefParameters = resolvedCallee.parameterz;
-    functionDefParameters.forEach((param, ind) => {
-      ownScope[param.name] = resolvedArguments[ind];
+    const paramCount = Object.keys(functionDefParameters).length;
+    const satisfiedParamCount = Object.keys(functionDefParameters).filter((paramSlotName: string) => {
+      return Object.keys(resolvedArguments).includes(paramSlotName);
+    }).length;
+
+    if (satisfiedParamCount !== paramCount) {
+      return {
+        success: false,
+        error: {message: `function "${resolvedCallee.name}" called with ${satisfiedParamCount} arguments (needs ${paramCount})`}
+      };
+    }
+
+    Object.keys(functionDefParameters).forEach(slotName => {
+      ownScope[slotName] = resolvedArguments[slotName];
     });
 
     const functionResolution = interpreter(

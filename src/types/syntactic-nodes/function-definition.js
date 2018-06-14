@@ -5,6 +5,6 @@ import type { functionCall } from './function-call'
 export type functionDefinition = {
   klass: 'functionDefinition',
   name: string,
-  parameterz: functionParameter[],
+  parameterz: { [slotName: string]: functionParameter },
   body: functionCall
 }
