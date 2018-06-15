@@ -1,4 +1,5 @@
 '1-1':
+  id: '1-1'
   klass: 'functionCall'
   parent: false
   nor: false
@@ -14,6 +15,7 @@
     id: '1-4'
 
 '1-2':
+  id: '1-2'
   parent:
     synoRef: true
     id: '1-1'
@@ -21,6 +23,7 @@
   value: true
 
 '1-3':
+  id: '1-3'
   parent:
     synoRef: true
     id: '1-1'
@@ -28,6 +31,7 @@
   value: false
 
 '1-4':
+  id: '1-4'
   parent:
     synoRef: true
     id: '1-1'
@@ -45,6 +49,7 @@
     id: '1-7'
 
 '1-5':
+  id: '1-5'
   parent:
     synoRef: true
     id: '1-4'
@@ -52,6 +57,7 @@
   valueKlass: 'booleanLiteral'
 
 '1-6':
+  id: '1-6'
   parent:
     synoRef: true
     id: '1-4'
@@ -59,6 +65,7 @@
   valueKlass: 'booleanLiteral'
 
 '1-7':
+  id: '1-7'
   parent:
     synoRef: true
     id: '1-4'
@@ -73,6 +80,7 @@
       id: '1-9'
 
 '1-8':
+  id: '1-8'
   parent:
     synoRef: true
     id: '1-7'
@@ -81,6 +89,7 @@
   name: first
 
 '1-9':
+  id: '1-9'
   parent:
     synoRef: true
     id: '1-7'

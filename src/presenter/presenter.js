@@ -49,49 +49,61 @@ export default class Presenter {
     }
 
     return {
-      stage: this.presentNode(stagedSyno, {}, getSyno, true),
-      result: this.presentNode(resultSyno, {}, getSyno)
+      stage: this.presentFocusedNode(stagedSyno, {}, getSyno, stagedNodeId),
+      result: this.presentFocusedNode(resultSyno, {}, getSyno, false)
     };
   }
 
-  presentNode(
-    focusedSyntacticGraph: syntacticGraph,
+  presentFocusedNode(
+    focusedSyno: syntacticGraph,
     scope: {},
     getSyno: Function,
-    focusNode = false
+    focusNodeId: (string | false)
   ): presentationGraph {
-    if (focusedSyntacticGraph === false) {
+    const renderingRoot = focusedSyno.parent ? getSyno(focusedSyno.parent) : focusedSyno;
+    return this.presentNode(renderingRoot, scope, getSyno, focusNodeId);
+  }
+
+  presentNode(
+    node: syntacticGraph,
+    scope: {},
+    getSyno: Function,
+    focusNodeId: (string | false)
+  ): presentationGraph {
+    if (node === false) {
       return false;
-    } else if (focusedSyntacticGraph.klass === 'functionCall') {
-      return this.presentFunctionCall(focusedSyntacticGraph, scope, getSyno, focusNode);
-    } else if (focusedSyntacticGraph.klass === 'booleanLiteral') {
-      return this.presentBooleanLiteral(focusedSyntacticGraph, focusNode);
+    } else if (node.klass === 'functionCall') {
+      return this.presentFunctionCall(node, scope, getSyno, focusNodeId);
+    } else if (node.klass === 'booleanLiteral') {
+      return this.presentBooleanLiteral(node, focusNodeId);
     } else {
       throw new Error('should be unreachable (new type?)')
     }
   }
 
   presentBooleanLiteral( // should be reducer?
-    focusedBooleanLiteral: booleanLiteral,
-    focusNode: boolean
+    leBooleanLiteral: booleanLiteral,
+    focusNodeId: (string | false)
   ): booleanLiteralPres {
-    const { value } = focusedBooleanLiteral
+    const { value } = leBooleanLiteral
+    let focused = (leBooleanLiteral.id === focusNodeId)
     return {
       klass: 'booleanLiteral',
       value,
-      focusNode
+      focused
     }
   }
 
   presentFunctionCall( // should be reducer?
-    focusedfunctionCall: functionCall,
+    funkshunCall: functionCall,
     scope: {},
     getSyno: Function,
-    focusNode: boolean
+    focusNodeId: (string | false)
   ): functionCallPres {
     let resolved: boolean;
     let internalScope;
-    const callee = getSyno(focusedfunctionCall.callee);
+    let focused = (funkshunCall.id === focusNodeId)
+    const callee = getSyno(funkshunCall.callee);
     if (callee.klass === 'functionDefinition') {
       resolved = true;
       internalScope = this.parametersToScope(callee.parameterz);
@@ -105,11 +117,11 @@ export default class Presenter {
     return {
       klass: 'functionCall',
       name: callee.name,
-      argumentz: Object.values(focusedfunctionCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(getSyno(arg), internalScope);
+      argumentz: Object.values(funkshunCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
+        return this.presentNode(getSyno(arg), internalScope, getSyno, focusNodeId);
       }),
       resolved,
-      focusNode
+      focused
     }
   }
 

@@ -49,25 +49,41 @@ const editorstateReducer = (
     const { direction } = action;
     const oldFocusedNode = originalState.graphs[originalState.stagedNodeId];
     let newStagedNodeId;
+    const { parent: parentRef } = oldFocusedNode;
+    let parent;
 
     switch (direction) {
       case 'out':
-        if (!oldFocusedNode.parent) { throw new Error('navigate failed; no parent!'); }
-        newStagedNodeId = oldFocusedNode.parent.id;
+        if (!parentRef) { throw new Error('navigate failed; no parent!'); }
+        newStagedNodeId = parentRef.id;
         break;
       case 'in':
-        if (oldFocusNode.argumentz && Object.keys(oldFocusNode.argumentz).length > 0) {
-          newStagedNodeId = Object.values(oldFocusNode.argumentz)[0].id
+        if (oldFocusedNode.argumentz && Object.keys(oldFocusedNode.argumentz).length > 0) {
+          newStagedNodeId = Object.values(oldFocusedNode.argumentz)[0].id
           break;
         } else {
           throw new Error('navigate failed; no argumentz!');
         }
         break;
       case 'prev':
-        throw new Error('navigate failed; no implementation!');
+        parent = originalState.graphs[parentRef.id];
+        if (!parent) { throw new Error('navigate failed; no parent!'); }
+        if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
+          newStagedNodeId = Object.values(parent.argumentz)[0].id
+          break;
+        } else {
+          throw new Error('navigate failed; no argumentz!');
+        }
         break;
       case 'next':
-        throw new Error('navigate failed; no implementation!');
+        parent = originalState.graphs[parentRef.id];
+        if (!parent) { throw new Error('navigate failed; no parent!'); }
+        if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
+          newStagedNodeId = Object.values(parent.argumentz)[1].id
+          break;
+        } else {
+          throw new Error('navigate failed; no argumentz!');
+        }
         break;
     }
 

@@ -12,7 +12,7 @@ export default (props: Props) => {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `same-line leaf bubble-even argument boolean-literal ${codePresentation.focusNode ? 'focused' : 'unfocused'}`
+  const classes = `same-line leaf bubble-even argument boolean-literal ${codePresentation.focused ? 'focused' : 'unfocused'}`
 
   return (
     <div className={classes}>
