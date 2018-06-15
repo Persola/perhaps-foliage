@@ -1,11 +1,9 @@
 // @flow
-import type { syntacticGraphMap } from './syntactic-graph-map'
-import type { graphId } from './graph-id'
-import type { nodeId } from './node-id'
+import type { synoId } from './syno-id'
+import type { synoRef } from './syno-ref'
 
 export type editorState = {
-  graphs: syntacticGraphMap,
-  stagedGraphKey: graphId,
-  resultGraphKey: graphId,
-  focusedNodePath: nodeId[]
+  stagedNodeId: synoId,
+  resultNodeId: synoId,
+  graphs: {  [synoId: synoId]: synoRef }
 }

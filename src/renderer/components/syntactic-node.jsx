@@ -11,6 +11,10 @@ type Props = {
 export default (props: Props) => {
   const { codePresentation } = props;
 
+  if (codePresentation === false) {
+    return 'NO CODE YO';
+  }
+
   switch (codePresentation.klass) {
     case 'booleanLiteral':
       return(

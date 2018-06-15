@@ -9,12 +9,11 @@ import type { syntacticGraph } from './types/syntactic-graph.js'
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
 // const defaultStageful: syntacticGraph = codeLoader();
-const defaultStageful: syntacticGraph = codeLoader('proxyNorCall');
+// const defaultStageful: syntacticGraph = codeLoader('proxyNorCall');
 const defaultEditorState = {
-  graphs: {'1': defaultStageful, '2': codeLoader()},
-  stagedGraphKey: '1',
-  resultGraphKey: '2',
-  focusedNodePath: []
+  graphs: codeLoader('synoMap'),
+  stagedNodeId: '1-1',
+  resultNodeId: false
 };
 const naturalReduxStates = ['@@redux/INIT']
 const editorstateReducer = (
@@ -24,67 +23,56 @@ const editorstateReducer = (
   if (action.type === 'INITIALIZE') {
     return originalState;
   } else if (action.type === 'REPLACE_STAGE') {
-    const { stageful } = action;
-    const newGraphList: syntacticGraphMap = dupGraphs(originalState.graphs);
-    newGraphList[originalState.stagedGraphKey] = stageful;
-
-    return Object.assign({}, originalState, {
-      graphs: newGraphList
-    });
+    throw new Error('why replace entire stageful?');
+    // const { stageful } = action;
+    // const newSynoMap: syntacticGraphMap = dupGraphs(originalState.graphs);
+    // newSynoMap[originalState.stagedGraphKey] = stageful;
+    //
+    // return Object.assign({}, originalState, {
+    //   graphs: newSynoMap
+    // });
   } else if (action.type === 'UPDATE_RESULT') {
     const { result } = action;
-    const newGraphList: syntacticGraphMap = dupGraphs(originalState.graphs);
-    newGraphList[originalState.resultGraphKey] = result;
+    if (result.klass !== 'booleanLiteral') {
+      throw new Error('fuck, I cant update result unless its a single boolean literal, need to deconstruct');
+    }
+
+    const newSynoMap: syntacticGraphMap = dupGraphs(originalState.graphs);
+    const rootId = `interpResult-${String(Math.random()).substring(2)}}`;
+    newSynoMap[rootId] = result;
 
     return Object.assign({}, originalState, {
-      graphs: newGraphList
+      graphs: newSynoMap,
+      resultNodeId: rootId
     });
   } else if (action.type === 'NAVIGATE') {
     const { direction } = action;
-    const { focusedNodePath: oldPath } = originalState;
-    let newPath = [];
+    const oldFocusedNode = originalState.graphs[originalState.stagedNodeId];
+    let newStagedNodeId;
 
     switch (direction) {
       case 'out':
-        oldPath.forEach((propName, ind) => {
-          // how to determine which levels are nodes (-> node map?)
-          if (ind < (oldPath.length - 2)) {
-            newPath.push(propName);
-          }
-        });
+        if (!oldFocusedNode.parent) { throw new Error('navigate failed; no parent!'); }
+        newStagedNodeId = oldFocusedNode.parent.id;
         break;
       case 'in':
-        const oldFocusNode = retrieveNodeFromGraphCollection(
-          originalState.graphs,
-          {
-            graphId: originalState.stagedGraphKey,
-            nodePath: originalState.focusedNodePath
-          }
-        );
-
         if (oldFocusNode.argumentz && Object.keys(oldFocusNode.argumentz).length > 0) {
-          oldPath.forEach((propName, ind) => {
-            if (ind === (oldPath.length - 1)) {
-              newPath.push(propName);
-            }
-          });
-
-          newPath.push('argumentz');
-          newPath.push(Object.keys(oldFocusNode.argumentz)[0]);
+          newStagedNodeId = Object.values(oldFocusNode.argumentz)[0].id
+          break;
         } else {
-          newPath = oldPath;
+          throw new Error('navigate failed; no argumentz!');
         }
         break;
       case 'prev':
-        newPath = oldPath;
+        throw new Error('navigate failed; no implementation!');
         break;
       case 'next':
-        newPath = oldPath;
+        throw new Error('navigate failed; no implementation!');
         break;
     }
 
     return Object.assign({}, originalState, {
-      focusedNodePath: newPath
+      stagedNodeId: newStagedNodeId
     });
   } else if (naturalReduxStates.includes(action.type)) {
     return originalState;

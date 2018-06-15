@@ -6,6 +6,7 @@ import type { functionCall } from '../types/syntactic-nodes/function-call.js'
 const defaultSeed: functionCall = require('../static/syntactic-graph-seed.yml');
 const proxyNorDef: functionDefinition = require('../static/proxy-nor-def.yml');
 const proxyNorCall: functionCall = require('../static/proxy-nor-call.yml');
+const synoMap: functionCall = require('../static/syno-map.yml');
 
 export default (name: ?string): syntacticGraph => {
   switch (name) {
@@ -13,6 +14,8 @@ export default (name: ?string): syntacticGraph => {
       return proxyNorDef;
     case 'proxyNorCall':
       return proxyNorCall;
+    case 'synoMap':
+      return synoMap;
     default:
       return defaultSeed;
   }

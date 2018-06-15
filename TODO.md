@@ -11,7 +11,6 @@
   * add a binary bitwise operator
 * rearchitecture
   * [?] use redux in presenter again?
-  * [?] eliminate syntactic graphs, replace with universal node reference
 * longview
   * pick license
   * package (some?) subprojects

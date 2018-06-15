@@ -1,10 +1,9 @@
 // @flow
-import type { functionParameter } from './function-definition/function-parameter'
-import type { functionCall } from './function-call'
+import type { synoRef } from '../syno-ref'
 
 export type functionDefinition = {
   klass: 'functionDefinition',
   name: string,
-  parameterz: { [slotName: string]: functionParameter },
-  body: functionCall
+  body: synoRef,
+  parameterz: { [slotName: string]: synoRef }
 }

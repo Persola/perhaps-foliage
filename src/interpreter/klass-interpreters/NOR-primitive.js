@@ -1,5 +1,6 @@
 // @noflow
 import isBoolean from './is-boolean.js'
+import type { synoRef } from '../../types/syno-ref' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
 import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 
@@ -15,7 +16,7 @@ const nor = (
   }
 }
 
-export default (argumentz: {}): interpretationResolution => {
+export default (argumentz: {}, getSyno: Function): interpretationResolution => {
   if (Object.values(argumentz).length !== 2) {
     return {
       success: false,

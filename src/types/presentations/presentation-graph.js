@@ -5,4 +5,5 @@ import type { functionCallPres } from './function-call'
 export type presentationGraph = (
   | booleanLiteralPres
   | functionCallPres
+  | false
 )

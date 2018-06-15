@@ -16,7 +16,7 @@ const interpretFunction = (
   interpreter: Function,
   parentScope: {},
   graphToInterpret: functionCall,
-  graphCollection: syntacticGraphMap
+  getSyno: Function
 ): interpretationResolution => {
   // allow argumentz to be variableRef, resolve them using scope passed in
   const ownScope = {};
@@ -24,19 +24,19 @@ const interpretFunction = (
   let argumentz: {} = graphToInterpret.argumentz;
   let resolvedArguments;
   if (graphToInterpret.nor) {
-    (resolvedArguments: booleanLiteral[]) = resolveAny(parentScope, argumentz); // eslint-disable-line no-unused-vars
+    (resolvedArguments: booleanLiteral[]) = resolveAny(parentScope, argumentz, getSyno); // eslint-disable-line no-unused-vars
   } else {
-    (resolvedArguments: functionArgument[]) = resolveAny(parentScope, argumentz); // eslint-disable-line no-unused-vars
+    (resolvedArguments: functionArgument[]) = resolveAny(parentScope, argumentz, getSyno); // eslint-disable-line no-unused-vars
   }
 
   if (graphToInterpret.nor) {
-    return NOR_Primitive(resolvedArguments);
+    return NOR_Primitive(resolvedArguments, getSyno);
   } else {
-    const { callee } = graphToInterpret;
+    const callee = getSyno(graphToInterpret.callee);
     let resolvedCallee;
     if (callee.klass === 'variableRef') {
       resolvedCallee = resolveRef(callee);
-    } else if (graphToInterpret.callee.klass === 'functionDefinition') {
+    } else if (callee.klass === 'functionDefinition') {
       resolvedCallee = callee;
     }
 
@@ -62,9 +62,9 @@ const interpretFunction = (
     });
 
     const functionResolution = interpreter(
-      resolvedCallee.body,
-      graphCollection,
-      ownScope
+      getSyno(resolvedCallee.body),
+      ownScope,
+      getSyno
     );
 
     if (functionResolution.success) {

@@ -1,5 +1,6 @@
 // @flow
 import interpreter from './interpreter.js'
+import createSynoFetcher from '../create-syno-fetcher.js'
 import type { interpretationResolution } from '../types/interpreter/interpretation-resolution'
 import type { reduxStore } from '../types/redux-store'
 import type { editorState } from '../types/editor-state' // eslint-disable-line no-unused-vars
@@ -8,8 +9,9 @@ export default (editorStateStore: reduxStore) => {
   return () => {
     const editorState: editorState = editorStateStore.getState();
     try {
-      const stageful = editorState.graphs[editorState.stagedGraphKey];
-      const resolution: interpretationResolution = interpreter(stageful, editorState.graphs, {});
+      const stagedSyno = editorState.graphs[editorState.stagedNodeId];
+      const getSyno = createSynoFetcher(editorState.graphs);
+      const resolution: interpretationResolution = interpreter(stagedSyno, {}, getSyno);
       if (resolution.success) {
         editorStateStore.dispatch({
           type: 'UPDATE_RESULT',

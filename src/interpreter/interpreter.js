@@ -6,18 +6,18 @@ import type { syntacticGraphMap } from '../types/syntactic-graph-map' // eslint-
 import type { graphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
 
 const interpreter = (
-  graphToInterpret: syntacticGraph,
-  graphCollection: syntacticGraphMap,
-  scope: {}
+  stagedSyno: syntacticGraph,
+  scope: {},
+  getSyno: Function
 ): interpretationResolution => {
-  switch (graphToInterpret.klass) {
+  switch (stagedSyno.klass) {
     case 'booleanLiteral':
       return {
         success: true,
-        result: graphToInterpret
+        result: stagedSyno
       };
     case 'functionCall': // eslint-disable-line
-      return interpretFunctionCall(interpreter, scope, graphToInterpret, graphCollection);
+      return interpretFunctionCall(interpreter, scope, stagedSyno, getSyno);
     default:
       throw new Error('invalid syntactic node (unrecognized type)');
   }

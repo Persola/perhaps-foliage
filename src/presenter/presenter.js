@@ -1,5 +1,6 @@
 // @noflow
-import descendToNode from '../descend-to-node.js'
+import createSynoFetcher from '../create-syno-fetcher.js'
+
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 
 import type { syntacticGraph } from '../types/syntactic-graph.js' // eslint-disable-line no-unused-vars
@@ -38,28 +39,31 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: editorState): presentation {
-    const graphCollection = editorState.graphs;
-    const stagedGraph = graphCollection[editorState.stagedGraphKey];
-    const result = graphCollection[editorState.resultGraphKey];
-    const focusedNode = descendToNode(stagedGraph, editorState.focusedNodePath);
+    const { graphs, stagedNodeId, resultNodeId } = editorState
+    const getSyno = createSynoFetcher(graphs);
+    const stagedSyno = stagedNodeId ? graphs[stagedNodeId] : false;
+    const resultSyno = resultNodeId ? graphs[resultNodeId] : false;
 
-    if (focusedNode === false) {
+    if (stagedSyno === undefined) {
       throw new Error('focus node not found in editor state')
     }
 
     return {
-      stage: this.presentNode(focusedNode, {}, true),
-      result: this.presentNode(result, {})
+      stage: this.presentNode(stagedSyno, {}, getSyno, true),
+      result: this.presentNode(resultSyno, {}, getSyno)
     };
   }
 
   presentNode(
     focusedSyntacticGraph: syntacticGraph,
     scope: {},
+    getSyno: Function,
     focusNode = false
   ): presentationGraph {
-    if (focusedSyntacticGraph.klass === 'functionCall') {
-      return this.presentFunctionCall(focusedSyntacticGraph, scope, focusNode);
+    if (focusedSyntacticGraph === false) {
+      return false;
+    } else if (focusedSyntacticGraph.klass === 'functionCall') {
+      return this.presentFunctionCall(focusedSyntacticGraph, scope, getSyno, focusNode);
     } else if (focusedSyntacticGraph.klass === 'booleanLiteral') {
       return this.presentBooleanLiteral(focusedSyntacticGraph, focusNode);
     } else {
@@ -82,15 +86,17 @@ export default class Presenter {
   presentFunctionCall( // should be reducer?
     focusedfunctionCall: functionCall,
     scope: {},
+    getSyno: Function,
     focusNode: boolean
   ): functionCallPres {
     let resolved: boolean;
     let internalScope;
-    if (focusedfunctionCall.callee.klass === 'functionDefinition') {
+    const callee = getSyno(focusedfunctionCall.callee);
+    if (callee.klass === 'functionDefinition') {
       resolved = true;
-      internalScope = this.parametersToScope(focusedfunctionCall.callee.parameterz);
-    } else if (focusedfunctionCall.callee.klass === 'variableRef') {
-      resolved = Object.keys(scope).includes(focusedfunctionCall.callee.name);
+      internalScope = this.parametersToScope(callee.parameterz);
+    } else if (callee.klass === 'variableRef') {
+      resolved = Object.keys(scope).includes(callee.name);
       // need to access parent to get scope (to get parameters from functionDefinition)
       // instead, mark them as unresolved
       internalScope = {};
@@ -98,9 +104,9 @@ export default class Presenter {
 
     return {
       klass: 'functionCall',
-      name: focusedfunctionCall.callee.name,
+      name: callee.name,
       argumentz: Object.values(focusedfunctionCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(arg, internalScope);
+        return this.presentNode(getSyno(arg), internalScope);
       }),
       resolved,
       focusNode
