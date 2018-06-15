@@ -22,15 +22,42 @@ const editorstateReducer = (
 ): editorState => {
   if (action.type === 'INITIALIZE') {
     return originalState;
-  } else if (action.type === 'REPLACE_STAGE') {
-    throw new Error('why replace entire stageful?');
-    // const { stageful } = action;
-    // const newSynoMap: syntacticGraphMap = dupGraphs(originalState.graphs);
-    // newSynoMap[originalState.stagedGraphKey] = stageful;
-    //
-    // return Object.assign({}, originalState, {
-    //   graphs: newSynoMap
-    // });
+  } else if (action.type === 'REPLACE_FOCUSED_NODE') {
+    const { newSynoAttrs } = action;
+    const newSynoId = `inputValue-${String(Math.random()).substring(2)}`;
+    const newSynoMap: syntacticGraphMap = dupGraphs(originalState.graphs);
+    const newSyno = Object.assign({}, newSynoAttrs, { id: newSynoId });
+
+    const parentRef = originalState.graphs[originalState.stagedNodeId].parent;
+    if (parentRef) {
+      const parent = originalState.graphs[parentRef.id];
+
+      if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
+        const focusedNodeArgumentKey = Object.keys(parent.argumentz).find((argKey) => {
+          return (parent.argumentz[argKey].id === originalState.stagedNodeId);
+        });
+        // need to remove any uneeded (i.e., deleted) nodes from store
+        const newParent = newSynoMap[parent.id];
+        newParent.argumentz[focusedNodeArgumentKey] = {
+          synoRef: true,
+          id: newSynoId
+        }
+      }
+
+      newSyno.parent = {
+        synoRef: true,
+        id: parentRef.id
+      }
+    } else {
+      newSyno.parent = false;
+    }
+
+    newSynoMap[newSynoId] = newSyno;
+
+    return Object.assign({}, originalState, {
+      stagedNodeId: newSynoId,
+      graphs: newSynoMap
+    });
   } else if (action.type === 'UPDATE_RESULT') {
     const { result } = action;
     if (result.klass !== 'booleanLiteral') {

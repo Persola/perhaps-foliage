@@ -14,7 +14,7 @@ export default (props: Props) => {
   if (codePresentation === false) {
     content = (
       <div className="non-syntactic">
-        (Code stage is empty)
+        (Nothing to display)
       </div>
     );
   } else {

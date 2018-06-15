@@ -9,6 +9,8 @@
   * add a unary bitwise operator
   * allow multiple parameters to functions + syntactic node siblinghood
   * add a binary bitwise operator
+  * add Nothing type
+    * replace false flags in type data structures
 * rearchitecture
   * [?] use redux in presenter again?
 * longview

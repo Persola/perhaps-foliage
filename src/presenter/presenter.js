@@ -1,5 +1,6 @@
 // @noflow
 import createSynoFetcher from '../create-syno-fetcher.js'
+import ascendToRoot from '../ascend-to-root.js'
 
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 
@@ -44,13 +45,13 @@ export default class Presenter {
     const stagedSyno = stagedNodeId ? graphs[stagedNodeId] : false;
     const resultSyno = resultNodeId ? graphs[resultNodeId] : false;
 
-    if (stagedSyno === undefined) {
+    if (!stagedSyno) {
       throw new Error('focus node not found in editor state')
     }
 
     return {
       stage: this.presentFocusedNode(stagedSyno, {}, getSyno, stagedNodeId),
-      result: this.presentFocusedNode(resultSyno, {}, getSyno, false)
+      result: this.presentNode(resultSyno, {}, getSyno, false)
     };
   }
 
@@ -60,7 +61,7 @@ export default class Presenter {
     getSyno: Function,
     focusNodeId: (string | false)
   ): presentationGraph {
-    const renderingRoot = focusedSyno.parent ? getSyno(focusedSyno.parent) : focusedSyno;
+    const renderingRoot = ascendToRoot(focusedSyno, getSyno);
     return this.presentNode(renderingRoot, scope, getSyno, focusNodeId);
   }
 

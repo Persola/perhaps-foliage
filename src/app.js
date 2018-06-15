@@ -17,7 +17,7 @@ const commandResolver = createCommandResolver(editorStateStore, interpret);
 
 const entry = () => {
   editorStateStore.dispatch({ type: 'INITIALIZE' });
-  ['0', '1', 'enter', 'left', 'right', 'up', 'down'].forEach(key => {
+  ['0', '1', 't', 'f', 'enter', 'left', 'right', 'up', 'down'].forEach(key => {
     Mousetrap.bind(key, () => {
       const commandResolution = commandResolver(key);
       if (commandResolution) {

@@ -4,13 +4,19 @@ import type { sideEffectFunction } from '../types/side-effect-function'
 
 export default (editorStateStore: reduxStore, interpret: sideEffectFunction) => {
   return (key: string) => {
-    if(['0', '1'].includes(key)) {
+    if(['0', '1', 'f', 't'].includes(key)) {
+      const value = (
+        ['0', '1'].includes(key)
+        ? Boolean(Number(key))
+        : key === 'f' ? false : true
+      )
+
       return () => {
         editorStateStore.dispatch({
-          type: 'REPLACE_STAGE',
-          stageful: {
+          type: 'REPLACE_FOCUSED_NODE',
+          newSynoAttrs: {
             klass: 'booleanLiteral',
-            value: Boolean(Number(key))
+            value
           }
         });
       }
