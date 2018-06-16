@@ -19,7 +19,11 @@ export default (props: Props) => {
 
   return (
     <div className="editor mousetrap">
-      <CodeView key="stage" codePresentation={stageful} />
+      <CodeView
+        key="stage"
+        codePresentation={stageful}
+        outdated={false}
+      />
       <InterpretButton interpret={interpret} />
       <CodeView
         key="result"

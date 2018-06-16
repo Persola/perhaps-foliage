@@ -30,7 +30,7 @@ const interpretFunction = (
   }
 
   if (graphToInterpret.nor) {
-    return NOR_Primitive(resolvedArguments, getSyno);
+    return NOR_Primitive(resolvedArguments);
   } else {
     const callee = getSyno(graphToInterpret.callee);
     let resolvedCallee;

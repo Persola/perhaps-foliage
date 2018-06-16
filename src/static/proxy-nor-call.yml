@@ -1,31 +1,96 @@
-klass: 'functionCall'
-nor: false
-argumentz:
-  first:
-    klass: 'booleanLiteral'
-    value: true
-  second:
-    klass: 'booleanLiteral'
-    value: false
-callee:
+'1-1':
+  id: '1-1'
+  klass: 'functionCall'
+  parent: false
+  nor: false
+  argumentz:
+    first:
+      synoRef: true
+      id: '1-2'
+    second:
+      synoRef: true
+      id: '1-3'
+  callee:
+    synoRef: true
+    id: '1-4'
+
+'1-2':
+  id: '1-2'
+  parent:
+    synoRef: true
+    id: '1-1'
+  klass: 'booleanLiteral'
+  value: true
+
+'1-3':
+  id: '1-3'
+  parent:
+    synoRef: true
+    id: '1-1'
+  klass: 'booleanLiteral'
+  value: false
+
+'1-4':
+  id: '1-4'
+  parent:
+    synoRef: true
+    id: '1-1'
   klass: 'functionDefinition'
   name: 'proxyNor'
   parameterz:
     first:
-      klass: 'functionParameter'
-      valueKlass: 'booleanLiteral'
+      synoRef: true
+      id: '1-5'
     second:
-      klass: 'functionParameter'
-      valueKlass: 'booleanLiteral'
+      synoRef: true
+      id: '1-6'
   body:
-    klass: 'functionCall'
-    nor: true
-    argumentz:
-      firstB:
-        klass: 'variableRef'
-        valueKlass: 'booleanLiteral'
-        name: first
-      secondB:
-        klass: 'variableRef'
-        valueKlass: 'booleanLiteral'
-        name: second
+    synoRef: true
+    id: '1-7'
+
+'1-5':
+  id: '1-5'
+  parent:
+    synoRef: true
+    id: '1-4'
+  klass: 'functionParameter'
+  valueKlass: 'booleanLiteral'
+
+'1-6':
+  id: '1-6'
+  parent:
+    synoRef: true
+    id: '1-4'
+  klass: 'functionParameter'
+  valueKlass: 'booleanLiteral'
+
+'1-7':
+  id: '1-7'
+  parent: false
+  klass: 'functionCall'
+  nor: true
+  argumentz:
+    firstB:
+      synoRef: true
+      id: '1-8'
+    secondB:
+      synoRef: true
+      id: '1-9'
+
+'1-8':
+  id: '1-8'
+  parent:
+    synoRef: true
+    id: '1-7'
+  klass: 'variableRef'
+  valueKlass: 'booleanLiteral'
+  name: first
+
+'1-9':
+  id: '1-9'
+  parent:
+    synoRef: true
+    id: '1-7'
+  klass: 'variableRef'
+  valueKlass: 'booleanLiteral'
+  name: second

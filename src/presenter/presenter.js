@@ -102,39 +102,45 @@ export default class Presenter {
     focusNodeId: (string | false)
   ): functionCallPres {
     let resolved: boolean;
-    let internalScope;
     let focused = (funkshunCall.id === focusNodeId)
+    if (funkshunCall.nor) {
+      return(this.presentNorCall(funkshunCall, scope, getSyno, focusNodeId));
+    }
+
     const callee = getSyno(funkshunCall.callee);
-    if (callee.klass === 'functionDefinition') {
+     if (callee.klass === 'functionDefinition') {
       resolved = true;
-      internalScope = this.parametersToScope(callee.parameterz);
     } else if (callee.klass === 'variableRef') {
       resolved = Object.keys(scope).includes(callee.name);
-      // need to access parent to get scope (to get parameters from functionDefinition)
-      // instead, mark them as unresolved
-      internalScope = {};
     }
 
     return {
       klass: 'functionCall',
       name: callee.name,
       argumentz: Object.values(funkshunCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
-        return this.presentNode(getSyno(arg), internalScope, getSyno, focusNodeId);
+        return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
       }),
       resolved,
       focused
     }
   }
 
-  parametersToScope(parameters: {}) {
-    // const scope = {};
-    //
-    // parameters.forEach((param: functionParameter) => {
-    //   scope[param.name] = param.klass;
-    // });
-    //
-    // return scope;
+  presentNorCall(
+    funkshunCall: functionCall,
+    scope: {},
+    getSyno: Function,
+    focusNodeId: (string | false)
+  ) {
+    let focused = (funkshunCall.id === focusNodeId)
 
-    return parameters;
+    return {
+      klass: 'functionCall',
+      name: 'NOR',
+      argumentz: Object.values(funkshunCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
+        return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
+      }),
+      resolved: true,
+      focused
+    }
   }
 }

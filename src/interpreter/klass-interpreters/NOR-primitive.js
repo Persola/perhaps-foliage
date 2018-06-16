@@ -16,7 +16,7 @@ const nor = (
   }
 }
 
-export default (argumentz: {}, getSyno: Function): interpretationResolution => {
+export default (argumentz: {}): interpretationResolution => {
   if (Object.values(argumentz).length !== 2) {
     return {
       success: false,

@@ -6,7 +6,7 @@ import type { presentationGraph } from '../../types/presentations/presentation-g
 
 type Props = {
   codePresentation: presentationGraph | false,
-  outdated?: boolean
+  outdated: boolean
 }
 
 const outdatedMessage = (

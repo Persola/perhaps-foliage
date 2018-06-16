@@ -2,16 +2,13 @@
 import { createStore } from 'redux';
 import codeLoader from './code-loader/code-loader.js'
 import dupGraphs from './dup-graphs.js'
-import retrieveNodeFromGraphCollection from './retrieve-node-from-graph-collection.js'
 import type { reduxAction } from './types/redux-action.js'
 import type { editorState } from './types/editor-state.js'
-import type { syntacticGraph } from './types/syntactic-graph.js'
 import type { syntacticGraphMap } from './types/syntactic-graph-map'
 
-// const defaultStageful: syntacticGraph = codeLoader();
-// const defaultStageful: syntacticGraph = codeLoader('proxyNorCall');
 const defaultEditorState = {
-  graphs: codeLoader('synoMap'),
+  graphs: codeLoader('norCall'),
+  // graphs: codeLoader('synoMap'),
   stagedNodeId: '1-1',
   resultNodeId: false,
   resultOutdated: false
@@ -34,7 +31,7 @@ const editorstateReducer = (
       const parent = originalState.graphs[parentRef.id];
 
       if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
-        const focusedNodeArgumentKey = Object.keys(parent.argumentz).find((argKey) => {
+        const focusedNodeArgumentKey = Object.keys(parent.argumentz).find(argKey => {
           return (parent.argumentz[argKey].id === originalState.stagedNodeId);
         });
         // need to remove any uneeded (i.e., deleted) nodes from store
@@ -90,7 +87,6 @@ const editorstateReducer = (
       case 'in':
         if (oldFocusedNode.argumentz && Object.keys(oldFocusedNode.argumentz).length > 0) {
           newStagedNodeId = Object.values(oldFocusedNode.argumentz)[0].id
-          break;
         } else {
           throw new Error('navigate failed; no argumentz!');
         }
@@ -100,7 +96,6 @@ const editorstateReducer = (
         if (!parent) { throw new Error('navigate failed; no parent!'); }
         if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
           newStagedNodeId = Object.values(parent.argumentz)[0].id
-          break;
         } else {
           throw new Error('navigate failed; no argumentz!');
         }
@@ -110,7 +105,6 @@ const editorstateReducer = (
         if (!parent) { throw new Error('navigate failed; no parent!'); }
         if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
           newStagedNodeId = Object.values(parent.argumentz)[1].id
-          break;
         } else {
           throw new Error('navigate failed; no argumentz!');
         }
