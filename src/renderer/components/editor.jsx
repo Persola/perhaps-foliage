@@ -6,17 +6,26 @@ import type { presentation } from '../../types/presentations/presentation.js' //
 
 type Props = {
   presentation: presentation,
-  interpret: Function
+  interpret: Function,
+  resultOutdated: boolean
 }
 
 export default (props: Props) => {
-  const { interpret, presentation: { stage: stageful, result } } = props;
+  const {
+    interpret,
+    presentation: { stage: stageful, result },
+    resultOutdated
+  } = props;
 
   return (
     <div className="editor mousetrap">
       <CodeView key="stage" codePresentation={stageful} />
       <InterpretButton interpret={interpret} />
-      <CodeView key="result" codePresentation={result || false} />
+      <CodeView
+        key="result"
+        codePresentation={result || false}
+        outdated={resultOutdated}
+      />
     </div>
   );
 };

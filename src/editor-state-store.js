@@ -13,7 +13,8 @@ import type { syntacticGraphMap } from './types/syntactic-graph-map'
 const defaultEditorState = {
   graphs: codeLoader('synoMap'),
   stagedNodeId: '1-1',
-  resultNodeId: false
+  resultNodeId: false,
+  resultOutdated: false
 };
 const naturalReduxStates = ['@@redux/INIT']
 const editorstateReducer = (
@@ -56,7 +57,8 @@ const editorstateReducer = (
 
     return Object.assign({}, originalState, {
       stagedNodeId: newSynoId,
-      graphs: newSynoMap
+      graphs: newSynoMap,
+      resultOutdated: true
     });
   } else if (action.type === 'UPDATE_RESULT') {
     const { result } = action;
@@ -70,7 +72,8 @@ const editorstateReducer = (
 
     return Object.assign({}, originalState, {
       graphs: newSynoMap,
-      resultNodeId: rootId
+      resultNodeId: rootId,
+      resultOutdated: false
     });
   } else if (action.type === 'NAVIGATE') {
     const { direction } = action;

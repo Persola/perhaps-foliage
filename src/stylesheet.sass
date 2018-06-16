@@ -32,6 +32,8 @@ button:active
   padding: 2px 0
 
 .code-view
+  position: relative
+  min-height: 27px
   margin: 8px
   background-color: $stage-background
   color: #ddd
@@ -99,3 +101,14 @@ button:active
 
   .same-line
     display: inline-block
+
+  .outdated-message
+    position: absolute
+    bottom: 0
+    right: 0
+    padding: 0 6px 2px 6px
+    border-radius: 0
+    font-size: 12px
+    font-family: "Helvetica", Arial, sans-serif
+    background-color: #282828
+    color: #999

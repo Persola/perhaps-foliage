@@ -15,8 +15,7 @@ const renderer = new Renderer(document, interpret);
 new presenter(editorStateStore, renderer);
 const commandResolver = createCommandResolver(editorStateStore, interpret);
 
-const entry = () => {
-  editorStateStore.dispatch({ type: 'INITIALIZE' });
+const initializeMousetrap = () => {
   ['0', '1', 't', 'f', 'enter', 'left', 'right', 'up', 'down'].forEach(key => {
     Mousetrap.bind(key, () => {
       const commandResolution = commandResolver(key);
@@ -27,6 +26,13 @@ const entry = () => {
       }
     });
   });
+
+  document.documentElement.click(); // bindings don't work before this (focus?)
+};
+
+const entry = () => {
+  editorStateStore.dispatch({ type: 'INITIALIZE' });
+  initializeMousetrap();
 };
 
 window.addEventListener('load', () => { entry(); });
