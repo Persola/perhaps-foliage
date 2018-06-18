@@ -1,12 +1,12 @@
 // @flow
-import type { syntacticGraph } from './types/syntactic-graph.js'
+import type { syno } from './types/syno.js'
 import type { synoId } from './types/syno-id.js'
 
 // $FlowFixMe
 export default (
-  graph: syntacticGraph,
+  graph: syno,
   nodePath: synoId[]
-): syntacticGraph | false => {
+): syno | false => {
   let currentNode = graph;
   for(let i = 0; i < nodePath.length; i++) {
     if (currentNode === undefined) { return false }

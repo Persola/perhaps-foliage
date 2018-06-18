@@ -1,4 +1,4 @@
-// @noflow
+// @flow
 import isBoolean from './is-boolean.js'
 import type { synoRef } from '../../types/syno-ref' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars

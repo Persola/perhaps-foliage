@@ -1,5 +1,5 @@
 // @flow
-import type { syntacticGraph } from './syntactic-graph'
+import type { syno } from './syno'
 import type { synoId } from './syno-id'
 
-export type syntacticGraphMap = { [synoId]: syntacticGraph }
+export type syntacticGraphMap = { [synoId]: syno }

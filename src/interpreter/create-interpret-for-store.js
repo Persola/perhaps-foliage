@@ -17,7 +17,8 @@ export default (editorStateStore: reduxStore) => {
       if (resolution.success) {
         editorStateStore.dispatch({
           type: 'UPDATE_RESULT',
-          result: resolution.result
+          result: resolution.result,
+          resultRootId: `interpResult-${String(Math.random()).substring(2)}`
         });
       } else {
         throw new Error(`interpretation failed: "${resolution.error.message}"`);

@@ -1,10 +1,10 @@
-// @noflow
+// @flow
 import resolveRef from '../resolve-ref.js'
 import resolveAny from '../resolve-any.js'
 import NOR_Primitive from './NOR-primitive.js'
 import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 import type { syntacticGraphMap } from '../../types/syntactic-graph-map' // eslint-disable-line no-unused-vars
-import type { syntacticGraph } from '../../types/syntactic-graph' // eslint-disable-line no-unused-vars
+import type { syno } from '../../types/syno' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../../types/syntactic-nodes/function-call' // eslint-disable-line no-unused-vars
 import type { functionArgument } from '../../types/syntactic-nodes/function-call/function-argument' // eslint-disable-line no-unused-vars
 import type { functionDefinition } from '../../types/syntactic-nodes/function-definition' // eslint-disable-line no-unused-vars

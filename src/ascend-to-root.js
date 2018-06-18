@@ -1,7 +1,7 @@
 // @flow
-import type { syntacticGraph } from './types/syntactic-graph.js'
+import type { syno } from './types/syno.js'
 
-export default (startingSyno: syntacticGraph, getSyno: Function) => {
+export default (startingSyno: syno, getSyno: Function) => {
   let currentSyno = startingSyno;
   while (currentSyno.parent) {
     currentSyno = getSyno(currentSyno.parent);

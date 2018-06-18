@@ -4,14 +4,15 @@ import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
 import type { presentationGraph } from '../../../types/presentations/presentation-graph'
 import type { functionCallPres } from '../../../types/presentations/function-call'
+import type { argumentz } from '../../../types/presentations/argumentz'
 
 type Props = {
   codePresentation: functionCallPres
 }
 
-const argumentEls = (argumentz: presentationGraph[]) => {
+const argumentEls = (argumentzz: argumentz) => {
   return (
-    Object.values(argumentz).map((arg, ind) => {
+    Object.values(argumentzz).map((arg: presentationGraph, ind) => {
       if (arg.klass === 'booleanLiteral') {
         return (
           <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />

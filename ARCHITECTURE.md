@@ -1,6 +1,6 @@
 ### Language neutral modules
 * codeLoader
-* commandResolver (but not yet)
+* inputResolver (but not yet)
 * renderer
 
 ### Saliva specific modules

@@ -2,14 +2,14 @@
 import descendToNode from './descend-to-node.js'
 
 import type { syntacticGraphMap } from './types/syntactic-graph-map.js'
-import type { syntacticGraph } from './types/syntactic-graph.js'
+import type { syno } from './types/syno.js'
 import type { graphId } from './types/graph-id.js'
 import type { synoRef } from './types/syno-ref.js'
 
 export default (
   graphCollection: syntacticGraphMap,
   targetSynoRef: synoRef,
-): syntacticGraph => {
+): syno => {
   const { graphId: refGraphId, nodePath: refNodePath } = targetSynoRef;
   const collectionGraphsIds: graphId[] = Object.keys(graphCollection);
   if (!collectionGraphsIds.includes(refGraphId)) {

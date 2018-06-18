@@ -1,10 +1,10 @@
-// @noflow
+// @flow
 import createSynoFetcher from '../create-syno-fetcher.js'
 import ascendToRoot from '../ascend-to-root.js'
 
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 
-import type { syntacticGraph } from '../types/syntactic-graph.js' // eslint-disable-line no-unused-vars
+import type { syno } from '../types/syno.js' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
 // import type { functionParameter } from '../types/syntactic-nodes/function-definition/function-parameter'
@@ -56,7 +56,7 @@ export default class Presenter {
   }
 
   presentFocusedNode(
-    focusedSyno: syntacticGraph,
+    focusedSyno: syno,
     scope: {},
     getSyno: Function,
     focusNodeId: (string | false)
@@ -66,7 +66,7 @@ export default class Presenter {
   }
 
   presentNode(
-    node: syntacticGraph,
+    node: syno,
     scope: {},
     getSyno: Function,
     focusNodeId: (string | false)
@@ -112,12 +112,12 @@ export default class Presenter {
       resolved = true;
     } else if (callee.klass === 'variableRef') {
       resolved = Object.keys(scope).includes(callee.name);
-    }
+    } else { throw new Error('new type?'); }
 
     return {
       klass: 'functionCall',
       name: callee.name,
-      argumentz: Object.values(funkshunCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
+      argumentz: Object.values(funkshunCall.argumentz).map((arg: syno): presentationGraph => {
         return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
       }),
       resolved,
@@ -136,7 +136,7 @@ export default class Presenter {
     return {
       klass: 'functionCall',
       name: 'NOR',
-      argumentz: Object.values(funkshunCall.argumentz).map((arg: syntacticGraph): presentationGraph => {
+      argumentz: Object.values(funkshunCall.argumentz).map((arg: syno): presentationGraph => {
         return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
       }),
       resolved: true,

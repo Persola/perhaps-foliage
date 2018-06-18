@@ -1,7 +1,6 @@
 // @flow
-import type { syntacticGraph } from '../syntactic-graph'
+import type { syno } from '../syno'
 
 export type interpretationResolutionSuccess = {
   success: true,
-  result: syntacticGraph
-}
+  result: syno }

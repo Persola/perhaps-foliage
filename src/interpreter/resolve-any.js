@@ -1,6 +1,6 @@
-// @noflow
+// @flow
 import resolveRef from './resolve-ref.js'
-import type { syntacticGraph } from '../types/syntactic-graph' // eslint-disable-line no-unused-vars
+import type { syno } from '../types/syno' // eslint-disable-line no-unused-vars
 import type { functionArgument } from '../types/syntactic-nodes/function-call/function-argument' // eslint-disable-line no-unused-vars
 
 export default (parentScope: {}, argumentz: {}, getSyno: Function): {} => {

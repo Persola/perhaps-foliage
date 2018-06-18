@@ -6,7 +6,7 @@ import type { variableRef } from './syntactic-nodes/variable-ref'
 import type { functionParameter } from './syntactic-nodes/function-definition/function-parameter'
 import type { functionArgument } from './syntactic-nodes/function-call/function-argument'
 
-export type syntacticGraph = (
+export type syno = (
   | booleanLiteral
   | functionCall
   | functionDefinition

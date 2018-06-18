@@ -1,7 +1,8 @@
 // @flow
-import type { syntacticGraph } from '../syntactic-graph'
+import type { syno } from '../syno'
 
 export type updateResult = {
   type: 'UPDATE_RESULT',
-  result: syntacticGraph
+  result: syno,
+  resultRootId: string
 }

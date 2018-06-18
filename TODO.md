@@ -3,8 +3,8 @@
   * get back on the type train
   * lint
   * extract Saliva-specific modules as local npm packages
-  * extract reducers from editorStateStore into commandResolver
-  * add inputResolver in between moustrap and commandResolver
+  * extract reducers from editorStateStore into inputResolver
+  * add inputResolver in between moustrap and inputResolver
   * review directory structure
 * new functionality
   * add syno deletion and insertation

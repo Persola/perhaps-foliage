@@ -1,12 +1,12 @@
 // @flow
 import interpretFunctionCall from './klass-interpreters/interpret-function-call.js'
 import type { interpretationResolution } from '../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
-import type { syntacticGraph } from '../types/syntactic-graph' // eslint-disable-line no-unused-vars
+import type { syno } from '../types/syno' // eslint-disable-line no-unused-vars
 import type { syntacticGraphMap } from '../types/syntactic-graph-map' // eslint-disable-line no-unused-vars
 import type { graphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
 
 const interpreter = (
-  stagedSyno: syntacticGraph,
+  stagedSyno: syno,
   scope: {},
   getSyno: Function
 ): interpretationResolution => {

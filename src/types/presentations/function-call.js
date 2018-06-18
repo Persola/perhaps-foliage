@@ -1,10 +1,10 @@
 // @flow
-import type { presentationGraph } from './presentation-graph'
+import type { argumentz } from './argumentz'
 
 export type functionCallPres = {
   klass: 'functionCall',
   name: string,
-  argumentz: {[slotName: string]: presentationGraph},
+  argumentz: argumentz,
   resolved: boolean,
-  focusNode: boolean
+  focused: boolean
 }
