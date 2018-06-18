@@ -27,6 +27,8 @@
       * looks like the diffing is inside ReactDom, not React, so being that I can't use ReactDom b/c it produces HTML, it may be infeasible to reuse their code
       * the diffing isn't worth it: a large proportion of presenters would need a large proportion of the state in their props to present, so they would largely get represented anyway
         * wait, no, I don't think they need the whole state--after all the point of typing is that you can do it locally, right? ...not sure if feasible
+        * can also use react and just pass all props, if necessary I don't think it's architecturally wrong
+      * problem: react components decide what other nodes to generate by choosing who their children will be starting from some root node. The presentation is centered on a node but has to render in several directions: mostly towards decendants but also to siblings, towards ancestors, and possibly to arbitrary references.
     * [?] replace interpreter with existing language interpreter (minus parsing?)
       * need bidirectional transformation between AST and text code
       * need to wrap some features (e.g., named parameters) in language (e.g., always pass a map or list)
@@ -37,3 +39,14 @@
   * [?] update babel es version
   * operationalize
   * release minimal viable project
+
+  I understand the importance of:
+  * the directional causal cycle, not mutating parameters, etc.
+  * actions as atomic changes which trigger rerendering
+  * dividing reducers by state slice
+    * though I don't see why it's more important than by action
+      * but I guess people do it both--hard _not_ to divide by action
+
+I don't understand:
+  * why components can get the whole state as props
+    * similar to presentation generation getting the whole syno tree

@@ -1,6 +1,8 @@
 // @flow
 import createSynoFetcher from '../create-syno-fetcher.js'
 import ascendToRoot from '../ascend-to-root.js'
+import presentFocusedSyno from './presenters/present-focused-syno.js'
+import presentSyno from './presenters/present-syno.js'
 
 import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
 
@@ -50,97 +52,8 @@ export default class Presenter {
     }
 
     return {
-      stage: this.presentFocusedNode(stagedSyno, {}, getSyno, stagedNodeId),
-      result: this.presentNode(resultSyno, {}, getSyno, false)
+      stage: presentFocusedSyno(stagedSyno, {}, getSyno, stagedNodeId),
+      result: presentSyno(resultSyno, {}, getSyno, false)
     };
-  }
-
-  presentFocusedNode(
-    focusedSyno: syno,
-    scope: {},
-    getSyno: Function,
-    focusNodeId: (string | false)
-  ): presentationGraph {
-    const renderingRoot = ascendToRoot(focusedSyno, getSyno);
-    return this.presentNode(renderingRoot, scope, getSyno, focusNodeId);
-  }
-
-  presentNode(
-    node: syno,
-    scope: {},
-    getSyno: Function,
-    focusNodeId: (string | false)
-  ): presentationGraph {
-    if (node === false) {
-      return false;
-    } else if (node.klass === 'functionCall') {
-      return this.presentFunctionCall(node, scope, getSyno, focusNodeId);
-    } else if (node.klass === 'booleanLiteral') {
-      return this.presentBooleanLiteral(node, focusNodeId);
-    } else {
-      throw new Error('should be unreachable (new type?)')
-    }
-  }
-
-  presentBooleanLiteral( // should be reducer?
-    leBooleanLiteral: booleanLiteral,
-    focusNodeId: (string | false)
-  ): booleanLiteralPres {
-    const { value } = leBooleanLiteral
-    let focused = (leBooleanLiteral.id === focusNodeId)
-    return {
-      klass: 'booleanLiteral',
-      value,
-      focused
-    }
-  }
-
-  presentFunctionCall( // should be reducer?
-    funkshunCall: functionCall,
-    scope: {},
-    getSyno: Function,
-    focusNodeId: (string | false)
-  ): functionCallPres {
-    let resolved: boolean;
-    let focused = (funkshunCall.id === focusNodeId)
-    if (funkshunCall.nor) {
-      return(this.presentNorCall(funkshunCall, scope, getSyno, focusNodeId));
-    }
-
-    const callee = getSyno(funkshunCall.callee);
-     if (callee.klass === 'functionDefinition') {
-      resolved = true;
-    } else if (callee.klass === 'variableRef') {
-      resolved = Object.keys(scope).includes(callee.name);
-    } else { throw new Error('new type?'); }
-
-    return {
-      klass: 'functionCall',
-      name: callee.name,
-      argumentz: Object.values(funkshunCall.argumentz).map((arg: syno): presentationGraph => {
-        return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
-      }),
-      resolved,
-      focused
-    }
-  }
-
-  presentNorCall(
-    funkshunCall: functionCall,
-    scope: {},
-    getSyno: Function,
-    focusNodeId: (string | false)
-  ) {
-    let focused = (funkshunCall.id === focusNodeId)
-
-    return {
-      klass: 'functionCall',
-      name: 'NOR',
-      argumentz: Object.values(funkshunCall.argumentz).map((arg: syno): presentationGraph => {
-        return this.presentNode(getSyno(arg), scope, getSyno, focusNodeId);
-      }),
-      resolved: true,
-      focused
-    }
   }
 }
