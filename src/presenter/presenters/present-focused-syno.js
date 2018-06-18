@@ -1,5 +1,5 @@
 // @flow
-import ascendToRoot from '../../ascend-to-root.js'
+import ascendToRoot from '../../syntree-utils/ascend-to-root.js'
 import presentSyno from './present-syno.js'
 
 import type { presentationGraph } from '../../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars

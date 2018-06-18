@@ -1,7 +1,7 @@
 // @flow
 import interpreter from './interpreter.js'
-import createSynoFetcher from '../create-syno-fetcher.js'
-import ascendToRoot from '../ascend-to-root.js'
+import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
+import ascendToRoot from '../syntree-utils/ascend-to-root.js'
 import type { interpretationResolution } from '../types/interpreter/interpretation-resolution'
 import type { reduxStore } from '../types/redux-store'
 import type { editorState } from '../types/editor-state' // eslint-disable-line no-unused-vars

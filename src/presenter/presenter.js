@@ -1,6 +1,6 @@
 // @flow
-import createSynoFetcher from '../create-syno-fetcher.js'
-import ascendToRoot from '../ascend-to-root.js'
+import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
+import ascendToRoot from '../syntree-utils/ascend-to-root.js'
 import presentFocusedSyno from './presenters/present-focused-syno.js'
 import presentSyno from './presenters/present-syno.js'
 
@@ -9,7 +9,6 @@ import type { editorState } from '../types/editor-state.js' // eslint-disable-li
 import type { syno } from '../types/syno.js' // eslint-disable-line no-unused-vars
 import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
-// import type { functionParameter } from '../types/syntactic-nodes/function-definition/function-parameter'
 
 import type { presentation } from '../types/presentations/presentation.js' // eslint-disable-line no-unused-vars
 import type { presentationGraph } from '../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars

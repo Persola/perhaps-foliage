@@ -1,5 +1,5 @@
 // @flow
-import type { syntacticGraphMap } from './types/syntactic-graph-map.js'
+import type { syntacticGraphMap } from '../types/syntactic-graph-map.js'
 
 // $FlowFixMe
 export default (value: syntacticGraphMap): syntacticGraphMap => {

@@ -1,7 +1,7 @@
 // @flow
 import { createStore } from 'redux';
 import codeLoader from '../code-loader/code-loader.js'
-import dupGraphs from '../dup-graphs.js'
+import dupGraphs from '../syntree-utils/dup-graphs.js'
 
 import graphsReducer from './reducers/graphs.js'
 import stagedNodeIdReducer from './reducers/staged-node-id.js'

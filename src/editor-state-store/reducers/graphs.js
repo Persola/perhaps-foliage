@@ -1,4 +1,4 @@
-import dupGraphs from '../../dup-graphs.js'
+import dupGraphs from '../../syntree-utils/dup-graphs.js'
 
 export default (oldState, action) => {
   const newSynoMap: syntacticGraphMap = dupGraphs(oldState);
