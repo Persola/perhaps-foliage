@@ -1,7 +1,7 @@
 // @flow
 import type { presentationGraph } from './presentation-graph'
 
-export type presentation = {
+export type editorPresentation = {
   stage: presentationGraph,
   result: presentationGraph
 };

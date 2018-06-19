@@ -13,9 +13,9 @@ export default (
 ): presentationGraph => {
   if (node === false) {
     return false;
-  } else if (node.klass === 'functionCall') {
+  } else if (node.syntype === 'functionCall') {
     return presentFunctionCall(node, scope, getSyno, focusNodeId);
-  } else if (node.klass === 'booleanLiteral') {
+  } else if (node.syntype === 'booleanLiteral') {
     return presentBooleanLiteral(node, focusNodeId);
   } else {
     throw new Error('should be unreachable (new type?)')

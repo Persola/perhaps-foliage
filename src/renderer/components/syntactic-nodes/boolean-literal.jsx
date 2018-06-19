@@ -8,7 +8,7 @@ type Props = {
 
 export default (props: Props) => {
   const { codePresentation } = props;
-  if (codePresentation.klass !== 'booleanLiteral') {
+  if (codePresentation.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
 

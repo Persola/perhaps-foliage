@@ -4,7 +4,7 @@ import type { synoId } from '../syno-id'
 export type replaceFocusedNode = {
   type: 'REPLACE_FOCUSED_NODE',
   newSynoAttrs: {
-    klass: 'booleanLiteral',
+    syntype: 'booleanLiteral',
     value: boolean
   },
   newSynoId: synoId,

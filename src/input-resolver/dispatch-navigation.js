@@ -1,6 +1,5 @@
 // @flow
 import type { reduxStore } from '../types/redux-store'
-import type { editorState } from '../types/editor-state'
 import type { parentSynoRef } from '../types/parent-syno-ref'
 import type { syno } from '../types/syno'
 

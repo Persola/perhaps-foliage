@@ -1,6 +1,6 @@
 // @flow
 export type booleanLiteralPres = {
-  klass: 'booleanLiteral',
+  syntype: 'booleanLiteral',
   value: boolean,
   focused: boolean
 }

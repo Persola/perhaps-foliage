@@ -1,6 +1,5 @@
 // @flow
 import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
-import ascendToRoot from '../syntree-utils/ascend-to-root.js'
 import presentFocusedSyno from './presenters/present-focused-syno.js'
 import presentSyno from './presenters/present-syno.js'
 
@@ -10,7 +9,7 @@ import type { syno } from '../types/syno.js' // eslint-disable-line no-unused-va
 import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
 
-import type { presentation } from '../types/presentations/presentation.js' // eslint-disable-line no-unused-vars
+import type { editorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
 import type { presentationGraph } from '../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
 import type { booleanLiteralPres } from '../types/presentations/boolean-literal.js' // eslint-disable-line no-unused-vars
 import type { functionCallPres } from '../types/presentations/function-call.js' // eslint-disable-line no-unused-vars
@@ -40,7 +39,7 @@ export default class Presenter {
     this.renderer.render(presentation, editorState.resultOutdated);
   }
 
-  generatePresentation(editorState: editorState): presentation {
+  generatePresentation(editorState: editorState): editorPresentation {
     const { graphs, stagedNodeId, resultNodeId } = editorState
     const getSyno = createSynoFetcher(graphs);
     const stagedSyno = stagedNodeId ? graphs[stagedNodeId] : false;

@@ -1,8 +1,7 @@
 '1-1':
   id: '1-1'
-  klass: 'functionCall'
+  syntype: 'functionCall'
   parent: false
-  nor: false
   argumentz:
     first:
       synoRef: true
@@ -19,7 +18,7 @@
   parent:
     synoRef: true
     id: '1-1'
-  klass: 'booleanLiteral'
+  syntype: 'booleanLiteral'
   value: true
 
 '1-3':
@@ -27,7 +26,7 @@
   parent:
     synoRef: true
     id: '1-1'
-  klass: 'booleanLiteral'
+  syntype: 'booleanLiteral'
   value: false
 
 '1-4':
@@ -35,7 +34,7 @@
   parent:
     synoRef: true
     id: '1-1'
-  klass: 'functionDefinition'
+  syntype: 'functionDefinition'
   name: 'proxyNor'
   parameterz:
     first:
@@ -53,7 +52,7 @@
   parent:
     synoRef: true
     id: '1-4'
-  klass: 'functionParameter'
+  syntype: 'functionParameter'
   valueKlass: 'booleanLiteral'
 
 '1-6':
@@ -61,14 +60,16 @@
   parent:
     synoRef: true
     id: '1-4'
-  klass: 'functionParameter'
+  syntype: 'functionParameter'
   valueKlass: 'booleanLiteral'
 
 '1-7':
   id: '1-7'
   parent: false
-  klass: 'functionCall'
-  nor: true
+  syntype: 'functionCall'
+  callee:
+    synoRef: true
+    id: primitives-nor
   argumentz:
     firstB:
       synoRef: true
@@ -82,7 +83,7 @@
   parent:
     synoRef: true
     id: '1-7'
-  klass: 'variableRef'
+  syntype: 'variableRef'
   valueKlass: 'booleanLiteral'
   name: first
 
@@ -91,6 +92,6 @@
   parent:
     synoRef: true
     id: '1-7'
-  klass: 'variableRef'
+  syntype: 'variableRef'
   valueKlass: 'booleanLiteral'
   name: second

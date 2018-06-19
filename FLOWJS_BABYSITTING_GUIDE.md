@@ -4,7 +4,7 @@ refining types is mandatory inside callbacks:
 <!-- (mapTargets: (A | B)[]) => {
   return (
     mapTargets.map((el, ind) => {
-      if (el.klass === 'A') {
+      if (el.syntype === 'A') {
         return el.somethingUnrelated;
       } else {
         return el.somethingUnrelated;

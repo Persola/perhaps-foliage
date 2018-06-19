@@ -1,8 +1,8 @@
 // @flow
-import interpretFunctionCall from './klass-interpreters/interpret-function-call.js'
+import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js'
 import type { interpretationResolution } from '../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 import type { syno } from '../types/syno' // eslint-disable-line no-unused-vars
-import type { syntacticGraphMap } from '../types/syntactic-graph-map' // eslint-disable-line no-unused-vars
+import type { synoMap } from '../types/editor-state/syno-map' // eslint-disable-line no-unused-vars
 import type { graphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
 
 const interpreter = (
@@ -10,7 +10,7 @@ const interpreter = (
   scope: {},
   getSyno: Function
 ): interpretationResolution => {
-  switch (stagedSyno.klass) {
+  switch (stagedSyno.syntype) {
     case 'booleanLiteral':
       return {
         success: true,

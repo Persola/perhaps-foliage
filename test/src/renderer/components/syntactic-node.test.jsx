@@ -16,7 +16,7 @@ describe ('SyntacticNode', () => {
 
   it ('only works for booleanLiterals', () => {
     const nonBooleanGraph = Object.assign({}, validProps.codePresentation, {
-      klass: 'otherKlass',
+      syntype: 'otherKlass',
     })
 
     expect( () => {

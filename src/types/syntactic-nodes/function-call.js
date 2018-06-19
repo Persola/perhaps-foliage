@@ -1,5 +1,10 @@
 // @flow
-import type { primitiveFunctionCall } from './function-call/primitive-function-call'
-import type { nonPrimitiveFunctionCall } from './function-call/non-primitive-function-call'
+import type { synoRef } from '../syno-ref'
 
-export type functionCall = (primitiveFunctionCall | nonPrimitiveFunctionCall)
+export type functionCall = {
+  id: string,
+  parent: synoRef,
+  syntype: 'functionCall',
+  callee: synoRef,
+  argumentz: {[string]: synoRef}
+}

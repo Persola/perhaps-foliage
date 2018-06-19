@@ -1,9 +1,9 @@
 {
-  "klass": "functionCall",
+  "syntype": "functionCall",
   "name": "mockFunctionName",
   "argumentz": {
     "mockArgSlotName": {
-      "klass": "booleanLiteral",
+      "syntype": "booleanLiteral",
       "value": false
     }
   }

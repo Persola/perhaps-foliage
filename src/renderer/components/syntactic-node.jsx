@@ -15,7 +15,7 @@ export default (props: Props) => {
     return 'NO CODE YO';
   }
 
-  switch (codePresentation.klass) {
+  switch (codePresentation.syntype) {
     case 'booleanLiteral':
       return(
         <BooleanLiteral codePresentation={codePresentation} />

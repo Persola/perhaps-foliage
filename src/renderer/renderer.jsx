@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Editor from './components/editor.jsx';
-import type { presentation } from '../types/presentations/presentation.js' // eslint-disable-line no-unused-vars
+import type { editorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
 
 type element = Object;
 type document = any;
@@ -16,7 +16,7 @@ export default class {
     this.interpret = interpret;
   }
 
-  render(presentation: presentation, resultOutdated: boolean) {
+  render(presentation: editorPresentation, resultOutdated: boolean) {
     ReactDOM.render(
       (
         <Editor

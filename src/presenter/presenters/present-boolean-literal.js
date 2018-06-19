@@ -9,7 +9,7 @@ export default (
   const { value } = leBooleanLiteral
   let focused = (leBooleanLiteral.id === focusNodeId)
   return {
-    klass: 'booleanLiteral',
+    syntype: 'booleanLiteral',
     value,
     focused
   }

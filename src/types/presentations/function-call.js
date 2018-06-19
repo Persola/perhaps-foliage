@@ -2,7 +2,7 @@
 import type { argumentz } from './argumentz'
 
 export type functionCallPres = {
-  klass: 'functionCall',
+  syntype: 'functionCall',
   name: string,
   argumentz: argumentz,
   resolved: boolean,

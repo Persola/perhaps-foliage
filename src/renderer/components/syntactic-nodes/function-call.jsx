@@ -13,17 +13,9 @@ type Props = {
 const argumentEls = (argumentzz: argumentz) => {
   return (
     Object.values(argumentzz).map((arg: presentationGraph, ind) => {
-      if (arg.klass === 'booleanLiteral') {
-        return (
-          <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
-        )
-      } else if (arg.klass === 'functionCall') {
-        return (
-          <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
-        )
-      } else {
-        throw new Error('should be unreachable (new type?)')
-      }
+      return (
+        <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
+      )
     })
   );
 }

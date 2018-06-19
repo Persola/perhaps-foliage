@@ -1,4 +1,9 @@
-export default (oldState, action) => {
+// @flow
+import type { stagedNodeId } from '../../types/editor-state/staged-node-id'
+import type { reduxAction } from '../../types/redux-action'
+import type { syno } from '../../types/syno'
+
+export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
   switch (action.type) {
     case 'INITIALIZE':
       return oldState;
@@ -39,6 +44,8 @@ export default (oldState, action) => {
             throw new Error('navigate failed; no argumentz!');
           }
           break;
+        default:
+          throw new Error('unrecognized navigation direction');
       }
 
       return newStagedNodeId;

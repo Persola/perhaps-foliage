@@ -4,7 +4,7 @@ import type { synoRef } from '../syno-ref'
 export type variableRef = {
   id: string,
   parent: synoRef,
-  klass: 'variableRef',
+  syntype: 'variableRef',
   valueKlass: 'booleanLiteral',
   name: string
 }

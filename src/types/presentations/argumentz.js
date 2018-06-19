@@ -1,4 +1,4 @@
 // @flow
 import type { valuePresentation } from './value-presentation'
 
-export type argumentz = {[string]: valuePresentation}
+export type argumentz = valuePresentation[]

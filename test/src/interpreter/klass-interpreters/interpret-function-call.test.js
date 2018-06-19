@@ -1,4 +1,4 @@
-import interpretFunctionCall from '../../../../src/interpreter/klass-interpreters/interpret-function-call.js';
+import interpretFunctionCall from '../../../../src/interpreter/syntype-interpreters/interpret-function-call.js';
 
 describe ('interpretFunctionCall', () => {
   const graphToInterpret = require('../../../data-mocks/syntactic-nodes/function-call.json');
@@ -10,7 +10,7 @@ describe ('interpretFunctionCall', () => {
     ).toEqual({
       success: true,
       result: {
-        klass: 'booleanLiteral',
+        syntype: 'booleanLiteral',
         value: true
       }
     });

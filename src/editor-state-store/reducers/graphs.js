@@ -1,7 +1,10 @@
+// @flow
 import dupGraphs from '../../syntree-utils/dup-graphs.js'
+import type { synoMap } from '../../types/editor-state/syno-map'
+import type { reduxAction } from '../../types/redux-action'
 
-export default (oldState, action) => {
-  const newSynoMap: syntacticGraphMap = dupGraphs(oldState);
+export default (oldState: synoMap, action: reduxAction): synoMap => {
+  const newSynoMap: synoMap = dupGraphs(oldState);
 
   switch (action.type) {
     case 'INITIALIZE':
@@ -39,7 +42,7 @@ export default (oldState, action) => {
       return newSynoMap;
     case 'UPDATE_RESULT':
       const { result, resultRootId } = action;
-      if (result.klass !== 'booleanLiteral') {
+      if (result.syntype !== 'booleanLiteral') {
         throw new Error('fuck, I cant update result unless its a single boolean literal, need to deconstruct refs');
       }
       newSynoMap[resultRootId] = result;

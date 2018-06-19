@@ -3,7 +3,7 @@
     "mock": {
       "path2": {
         "amiableFunction": {
-          "klass": "functionDeclaration"
+          "syntype": "functionDeclaration"
         }
       }
     }

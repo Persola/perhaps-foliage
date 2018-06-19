@@ -11,7 +11,7 @@ const nor = (
   const resultValue = (!firstArg.value && !secondArg.value) ? true : false
 
   return {
-    klass: 'booleanLiteral',
+    syntype: 'booleanLiteral',
     value: resultValue
   }
 }

@@ -14,7 +14,7 @@ export default (key: string, editorStateStore: reduxStore) => {
   editorStateStore.dispatch({
     type: 'REPLACE_FOCUSED_NODE',
     newSynoAttrs: {
-      klass: 'booleanLiteral',
+      syntype: 'booleanLiteral',
       value
     },
     newSynoId: `inputValue-${String(Math.random()).substring(2)}`,

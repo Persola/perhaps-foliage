@@ -1,7 +1,7 @@
 // @flow
 import resolveRef from './resolve-ref.js'
 import type { syno } from '../types/syno' // eslint-disable-line no-unused-vars
-import type { functionArgument } from '../types/syntactic-nodes/function-call/function-argument' // eslint-disable-line no-unused-vars
+import type { functionArgument } from '../types/syntactic-nodes/function-argument' // eslint-disable-line no-unused-vars
 
 export default (parentScope: {}, argumentz: {}, getSyno: Function): {} => {
   const resolvedArgs = {};
@@ -10,7 +10,7 @@ export default (parentScope: {}, argumentz: {}, getSyno: Function): {} => {
     const argRef = argumentz[slotName];
     const arg = getSyno(argRef);
     const resolvedArg = (
-      (arg.klass === 'variableRef') ?
+      (arg.syntype === 'variableRef') ?
       resolveRef(parentScope, arg.name) : // should check type
       arg
     );

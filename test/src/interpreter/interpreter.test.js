@@ -2,7 +2,7 @@ import interpreter from '../../../src/interpreter/interpreter.js';
 
 describe ('interpreter', () => {
   describe ('given a boolean literal', () => {
-    const graphToInterpret = { klass: 'booleanLiteral' };
+    const graphToInterpret = { syntype: 'booleanLiteral' };
     const graphCollection = {};
 
     it ('returns the value wrapped in a interpretation resolution', () => {

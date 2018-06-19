@@ -1,13 +1,12 @@
 {
-  "klass": "functionCall",
+  "syntype": "functionCall",
   "callee": {
-    "nor": false,
     "graphId": "mockGraphId",
     "nodePath": ["mock", "path2", "amiableFunction"]
   },
   "argumentz": {
     "mockArgSlotName": {
-      "klass": "booleanLiteral",
+      "syntype": "booleanLiteral",
       "value": false
     }
   }
