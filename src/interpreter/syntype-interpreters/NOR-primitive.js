@@ -27,6 +27,19 @@ export default (argumentz: {[string]: syno}): interpretationResolution => {
 
   const argValues = Object.values(argumentz);
 
+  const booleanLiteralAttrsType = (cand: any): boolean => {
+    return (
+      typeof cand === 'object'
+      && cand.syntype === 'booleanLiteral'
+      && typeof cand.value === 'boolean'
+    )
+  }
+
+  if (
+    !booleanLiteralAttrsType(argValues[0]) ||
+    !booleanLiteralAttrsType(argValues[1])
+  ) { throw new Error; }
+
   if (
     (!isBoolean(argValues[0])) ||
     (!isBoolean(argValues[1]))

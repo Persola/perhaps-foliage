@@ -1,5 +1,4 @@
 // @flow
-import presentSyno from './present-syno.js'
 import presentArguments from './present-arguments.js'
 
 import type { syno } from '../../types/syno.js' // eslint-disable-line no-unused-vars

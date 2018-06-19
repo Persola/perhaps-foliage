@@ -5,7 +5,7 @@ import type { presentationGraph } from '../../types/presentations/presentation-g
 import type { synoRef } from '../../types/syno-ref.js' // eslint-disable-line no-unused-vars
 
 export default (
-  argumentz:  {[slotName: string]: synoRef},
+  argumentz: {[slotName: string]: synoRef},
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)

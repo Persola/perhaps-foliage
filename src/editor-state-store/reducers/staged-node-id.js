@@ -1,7 +1,6 @@
 // @flow
 import type { stagedNodeId } from '../../types/editor-state/staged-node-id'
 import type { reduxAction } from '../../types/redux-action'
-import type { syno } from '../../types/syno'
 
 export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
   switch (action.type) {
