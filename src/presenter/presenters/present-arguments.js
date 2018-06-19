@@ -1,4 +1,4 @@
-// @flow
+// @noflow
 import presentSyno from './present-syno.js'
 
 import type { presentationGraph } from '../../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars

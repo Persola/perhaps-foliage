@@ -1,4 +1,4 @@
-// @flow
+// @noflow
 import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
@@ -24,7 +24,7 @@ export default (props: Props) => {
   const codePresentation: functionCallPres = props.codePresentation;
 
   const name = codePresentation.nor ? 'NOR' : codePresentation.name;
-  const argumentz = codePresentation.argumentz;
+  const argumentz: presentationGraph[] = codePresentation.argumentz;
   const classes = `same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (

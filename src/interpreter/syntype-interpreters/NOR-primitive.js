@@ -1,14 +1,15 @@
 // @flow
 import isBoolean from './is-boolean.js'
+import type { syno } from '../../types/syno' // eslint-disable-line no-unused-vars
 import type { synoRef } from '../../types/syno-ref' // eslint-disable-line no-unused-vars
-import type { booleanLiteral } from '../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
+import type { booleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
 import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 
 const nor = (
-  firstArg: booleanLiteral,
-  secondArg: booleanLiteral
-): booleanLiteral => {
-  const resultValue = (!firstArg.value && !secondArg.value) ? true : false
+  firstArg: booleanLiteralAttrs,
+  secondArg: booleanLiteralAttrs
+): booleanLiteralAttrs => {
+  const resultValue = (firstArg.value || secondArg.value) ? false : true
 
   return {
     syntype: 'booleanLiteral',
@@ -16,7 +17,7 @@ const nor = (
   }
 }
 
-export default (argumentz: {}): interpretationResolution => {
+export default (argumentz: {[string]: syno}): interpretationResolution => {
   if (Object.values(argumentz).length !== 2) {
     return {
       success: false,
@@ -25,6 +26,7 @@ export default (argumentz: {}): interpretationResolution => {
   }
 
   const argValues = Object.values(argumentz);
+
   if (
     (!isBoolean(argValues[0])) ||
     (!isBoolean(argValues[1]))

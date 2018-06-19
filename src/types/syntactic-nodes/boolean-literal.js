@@ -1,9 +1,5 @@
 // @flow
-import type { synoRef } from '../syno-ref'
+import type { coreSynoAttrs } from './core-syno-attrs'
+import type { booleanLiteralAttrs } from './syno-attrs/boolean-literal-attrs'
 
-export type booleanLiteral = {
-  id: string,
-  parent: synoRef,
-  syntype: 'booleanLiteral',
-  value: boolean
-}
+export type booleanLiteral = coreSynoAttrs & booleanLiteralAttrs

@@ -6,7 +6,7 @@ import type { syno } from '../../types/syno.js' // eslint-disable-line no-unused
 import type { presentationGraph } from '../../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
 
 export default (
-  node: syno,
+  node: (syno | false),
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
