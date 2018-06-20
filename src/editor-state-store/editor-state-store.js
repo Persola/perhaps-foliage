@@ -11,7 +11,7 @@ import type { reduxAction } from '../types/redux-action.js'
 import type { editorState } from '../types/editor-state.js'
 import type { synoMap } from '../types/editor-state/syno-map.js'
 
-const seedGraphs: synoMap = codeLoader('norCall');
+const seedGraphs: synoMap = codeLoader('falseLiteral');
 const defaultEditorState: editorState = {
   graphs: seedGraphs,
   stagedNodeId: Object.keys(seedGraphs)[0],

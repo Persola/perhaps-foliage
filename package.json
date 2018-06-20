@@ -11,7 +11,7 @@
     "start:electron": "electron electron-repl/",
     "redo": "npm run clean:dist; npm run build; npm run start:web",
     "test": "jest",
-    "type": "flow",
+    "type": "flow --show-all-errors",
     "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -x {'web-repl/server.js','src/types/**'} -o tmp/flow-coverage/",
     "lint": "eslint --ext js,jsx ."
   },
