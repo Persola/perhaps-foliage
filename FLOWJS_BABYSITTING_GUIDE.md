@@ -12,3 +12,5 @@ refining types is mandatory inside callbacks:
     })
   );
 } -->
+
+Flow's got whack types for some native functions

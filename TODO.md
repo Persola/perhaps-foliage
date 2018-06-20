@@ -1,15 +1,10 @@
 * maintainence
-  * fix various tests
-  * get back on the type train
-  * lint
   * extract Saliva-specific modules as local npm packages
-  * extract reducers from editorStateStore into inputResolver
-  * add inputResolver in between moustrap and inputResolver
-  * review directory structure
+  * separate command resolver from input resolver
+  * split types into functional directories
 * new functionality
   * add syno deletion and insertation
   * [?] add selection (in addition to focus)
-  * add function declarations and calls (identity)
   * add Nothing type
     * replace false flags in type data structures
 * rearchitecture
@@ -40,13 +35,13 @@
   * operationalize
   * release minimal viable project
 
-  I understand the importance of:
-  * the directional causal cycle, not mutating parameters, etc.
-  * actions as atomic changes which trigger rerendering
-  * dividing reducers by state slice
-    * though I don't see why it's more important than by action
-      * but I guess people do it both--hard _not_ to divide by action
+I understand the importance of:
+* the directional causal cycle, not mutating parameters, etc.
+* actions as atomic changes which trigger rerendering
+* dividing reducers by state slice
+  * though I don't see why it's more important than by action
+    * but I guess people do it both--hard _not_ to divide by action
 
 I don't understand:
-  * why components can get the whole state as props
+  * why components can't get the whole state as props
     * similar to presentation generation getting the whole syno tree

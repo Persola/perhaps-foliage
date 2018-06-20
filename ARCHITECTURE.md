@@ -1,8 +1,14 @@
 ### Language neutral modules
+* editor core
 * codeLoader
 * inputResolver (but not yet)
-* renderer
 
 ### Saliva specific modules
 * interpreter
-* presenter (basically empty still)
+* presenter
+* renderer
+
+[?] should try to extract language-specific elements into their own libs in:
+* presenter
+* renderer
+* input resolver/command resolver
