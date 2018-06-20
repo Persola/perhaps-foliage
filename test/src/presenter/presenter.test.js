@@ -3,14 +3,15 @@ import Presenter from '../../../src/presenter/presenter.js';
 describe ('presenter', () => {
   const focusedNode = {};
   const resultGraph = {};
+  const resultOutdated = false;
   const editorState = {
     graphs: {
-      journey: {'road': focusedNode},
+      trial: focusedNode,
       reward: resultGraph
     },
-    stagedGraphKey: 'journey',
+    stagedGraphKey: 'trial',
     resultGraphKey: 'reward',
-    focusedNodePath: ['road']
+    resultOutdated
   };
   let editorStateStore;
   let renderer = { render: jest.fn() };
@@ -44,7 +45,7 @@ describe ('presenter', () => {
     let presentation;
 
     beforeEach(() => {
-      presentation = {};
+      presentation = { mockPresentation: true };
       presenter.generatePresentation = jest.fn().mockReturnValue(presentation);
       presenter.present();
     })
@@ -57,8 +58,8 @@ describe ('presenter', () => {
       expect(presenter.generatePresentation).toHaveBeenCalledWith(editorState);
     })
 
-    it ('generates the presentation', () => {
-      expect(renderer.render).toHaveBeenCalledWith(presentation);
+    it ('renders the presentation', () => {
+      expect(renderer.render).toHaveBeenCalledWith(presentation, resultOutdated);
     })
   })
 

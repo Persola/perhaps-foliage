@@ -7,11 +7,14 @@ const norCall: functionCall = require('../static/nor-call.yml');
 
 export default (name: ?string): syno => {
   switch (name) {
-    case 'proxyNorCall':
+    case 'proxyNorCall': {
       return proxyNorCall;
-    case 'norCall':
+    }
+    case 'norCall': {
       return norCall;
-    default:
-      return defaultSeed;
+    }
+    default: {
+      throw new Error('no graph map specified');
+    }
   }
 };

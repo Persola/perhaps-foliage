@@ -1,7 +1,15 @@
 import codeLoader from '../../../src/code-loader/code-loader.js';
 
 describe ('codeLoader', () => {
-  it ('returns an object', () => {
-    expect(typeof codeLoader()).toBe('object');
+  it ('can respond with proxyNorCall', () => {
+    expect(typeof codeLoader('proxyNorCall')).toBe('object');
+  })
+
+  it ('can respond with proxyNorCall', () => {
+    expect(typeof codeLoader('proxyNorCall')).toBe('object');
+  })
+
+  it ('can respond with proxyNorCall', () => {
+    expect(() => { codeLoader() }).toThrow('no graph map specified');
   })
 })
