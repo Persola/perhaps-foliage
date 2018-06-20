@@ -30,7 +30,7 @@ const interpretFunction = (
   const resolvedArguments: {[string]: literalValue} = resolveAny(parentScope, argumentz, getSyno); // eslint-disable-line no-unused-vars
 
   if (graphToInterpret.callee.id === norPrimitiveId) {
-    typedValues(resolvedArguments).forEach((resArg) => {
+    typedValues(resolvedArguments).forEach(resArg => {
       if (resArg.syntype !== 'booleanLiteral') {
         throw new Error;
       }

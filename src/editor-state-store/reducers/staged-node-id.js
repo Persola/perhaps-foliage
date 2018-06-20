@@ -2,29 +2,32 @@
 import typedValues from '../../flow-pacifiers/typed-values'
 
 import type { stagedNodeId } from '../../types/editor-state/staged-node-id'
-import type { synoId } from '../../types/syno-id'
 import type { synoRef } from '../../types/syno-ref'
 import type { reduxAction } from '../../types/redux-action'
 
 export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
   switch (action.type) {
-    case 'INITIALIZE':
+    case 'INITIALIZE': {
       return oldState;
-    case 'REPLACE_FOCUSED_NODE':
+    }
+    case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;
-    case 'UPDATE_RESULT':
+    }
+    case 'UPDATE_RESULT': {
       return oldState;
-    case 'NAVIGATE':
+    }
+    case 'NAVIGATE': {
       // needs parent and self, or their children ids
       const { direction, oldFocusedNode, oldParent } = action;
       let newStagedNodeId;
 
       switch (direction) {
-        case 'out':
+        case 'out': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
           newStagedNodeId = oldParent.id;
           break;
-        case 'in':
+        }
+        case 'in': {
           if (
             oldFocusedNode.syntype === 'functionCall' &&
             Object.keys(oldFocusedNode.argumentz).length > 0
@@ -35,7 +38,8 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
             throw new Error('navigate failed; no argumentz!');
           }
           break;
-        case 'prev':
+        }
+        case 'prev': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
           if (
             oldParent.syntype === 'functionCall' &&
@@ -46,7 +50,8 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
             throw new Error('navigate failed; no argumentz!');
           }
           break;
-        case 'next':
+        }
+        case 'next': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
           if (
             oldParent.syntype === 'functionCall' &&
@@ -57,14 +62,19 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
             throw new Error('navigate failed; no second argument!');
           }
           break;
-        default:
+        }
+        default: {
           throw new Error('unrecognized navigation direction');
+        }
       }
 
       return newStagedNodeId;
-    case '@@redux/INIT':
+    }
+    case '@@redux/INIT': {
       return oldState;
-    default:
+    }
+    default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
+    }
   }
 }

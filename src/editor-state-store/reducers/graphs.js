@@ -9,9 +9,10 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
   const newSynoMap: synoMap = dupGraphs(oldState);
 
   switch (action.type) {
-    case 'INITIALIZE':
+    case 'INITIALIZE': {
       return oldState;
-    case 'REPLACE_FOCUSED_NODE':
+    }
+    case 'REPLACE_FOCUSED_NODE': {
       const { newSynoAttrs, newSynoId, stagedNodeId } = action;
       const newSyno = Object.assign({}, newSynoAttrs, { id: newSynoId });
 
@@ -22,10 +23,10 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
           parent.syntype === 'functionCall' &&
           typedKeys(parent.argumentz).length > 0
         ) {
-          const focusedNodeArgumentKey = typedKeys(parent.argumentz).find((argKey) => {
+          const focusedNodeArgumentKey = typedKeys(parent.argumentz).find(argKey => {
             return (parent.argumentz[argKey].id === stagedNodeId);
           });
-          if (!focusedNodeArgumentKey) { throw new Error; };
+          if (!focusedNodeArgumentKey) { throw new Error; }
           // should remove any uneeded (i.e., deleted) nodes from store
           const newParent = newSynoMap[parent.id];
           if (newParent.syntype !== 'functionCall') { throw new Error; }
@@ -46,7 +47,8 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
       newSynoMap[newSynoId] = newSyno;
 
       return newSynoMap;
-    case 'UPDATE_RESULT':
+    }
+    case 'UPDATE_RESULT': {
       const { result } = action;
       if (result.syntype !== 'booleanLiteral') {
         throw new Error('fuck, I cant update result unless its a single boolean literal, need to deconstruct refs');
@@ -54,11 +56,15 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
       newSynoMap[result.id] = result;
 
       return newSynoMap;
-    case 'NAVIGATE':
+    }
+    case 'NAVIGATE': {
       return oldState;
-    case '@@redux/INIT':
+    }
+    case '@@redux/INIT': {
       return oldState;
-    default:
+    }
+    default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
+    }
   }
 }
