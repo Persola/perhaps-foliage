@@ -7,9 +7,6 @@ import type { reduxAction } from '../../types/redux-action'
 
 export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
   switch (action.type) {
-    case 'INITIALIZE': {
-      return oldState;
-    }
     case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;
     }

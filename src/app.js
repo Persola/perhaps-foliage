@@ -1,6 +1,6 @@
 // @flow
 import Mousetrap from 'mousetrap';
-import presenter from './presenter/presenter.js';
+import Presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-state-store/editor-state-store.js';
 import createInterpretForStore from './interpreter/create-interpret-for-store.js'
@@ -12,7 +12,7 @@ require('./stylesheet.sass');
 
 const interpret: sideEffectFunction = createInterpretForStore(editorStateStore);
 const renderer = new Renderer(document, interpret);
-new presenter(editorStateStore, renderer);
+const presenter = new Presenter(editorStateStore, renderer);
 const inputResolver = createInputResolver(editorStateStore, interpret);
 
 const initializeMousetrap = () => {
@@ -26,9 +26,7 @@ const initializeMousetrap = () => {
   document.documentElement.click(); // bindings don't work before this (focus?)
 };
 
-const entry = () => {
-  editorStateStore.dispatch({ type: 'INITIALIZE' });
+window.addEventListener('load', () => {
   initializeMousetrap();
-};
-
-window.addEventListener('load', () => { entry(); });
+  presenter.present();
+});

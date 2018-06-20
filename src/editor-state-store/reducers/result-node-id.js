@@ -4,8 +4,6 @@ import type { reduxAction } from '../../types/redux-action'
 
 export default (oldState: resultNodeId, action: reduxAction): resultNodeId => {
   switch (action.type) {
-    case 'INITIALIZE':
-      return oldState;
     case 'REPLACE_FOCUSED_NODE':
       return oldState;
     case 'UPDATE_RESULT':

@@ -9,9 +9,6 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
   const newSynoMap: synoMap = dupGraphs(oldState);
 
   switch (action.type) {
-    case 'INITIALIZE': {
-      return oldState;
-    }
     case 'REPLACE_FOCUSED_NODE': {
       const { newSynoAttrs, newSynoId, stagedNodeId } = action;
       const newSyno = Object.assign({}, newSynoAttrs, { id: newSynoId });
