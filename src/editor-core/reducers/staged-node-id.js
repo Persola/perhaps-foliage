@@ -67,6 +67,10 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
 
       return newStagedNodeId;
     }
+    case 'SET_FOCUS_SYNO': {
+      const { synoId } = action;
+      return synoId;
+    }
     case '@@redux/INIT': {
       return oldState;
     }

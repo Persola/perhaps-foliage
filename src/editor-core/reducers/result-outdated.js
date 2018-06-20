@@ -4,15 +4,23 @@ import type { reduxAction } from '../../types/redux-action'
 
 export default (oldState: resultOutdated, action: reduxAction): resultOutdated => {
   switch (action.type) {
-    case 'REPLACE_FOCUSED_NODE':
+    case 'REPLACE_FOCUSED_NODE': {
       return true;
-    case 'UPDATE_RESULT':
+    }
+    case 'UPDATE_RESULT': {
       return false;
-    case 'NAVIGATE':
+    }
+    case 'NAVIGATE': {
       return oldState;
-    case '@@redux/INIT':
+    }
+    case 'SET_FOCUS_SYNO': {
       return oldState;
-    default:
+    }
+    case '@@redux/INIT': {
+      return oldState;
+    }
+    default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
+    }
   }
 }

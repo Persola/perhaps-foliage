@@ -10,6 +10,7 @@ export default (
   let focused = (leBooleanLiteral.id === focusNodeId)
   return {
     syntype: 'booleanLiteral',
+    synoId: leBooleanLiteral.id,
     value,
     focused
   }

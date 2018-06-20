@@ -57,6 +57,9 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
     case 'NAVIGATE': {
       return oldState;
     }
+    case 'SET_FOCUS_SYNO': {
+      return oldState;
+    }
     case '@@redux/INIT': {
       return oldState;
     }

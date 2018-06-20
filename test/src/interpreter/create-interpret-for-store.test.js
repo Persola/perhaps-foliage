@@ -1,5 +1,5 @@
 import createInterpretForStore from '../../../src/interpreter/create-interpret-for-store.js';
-import editorStateStore from '../../../src/editor-state-store/editor-state-store.js'
+import editorStateStore from '../../../src/editor-core/editor-state-store.js'
 
 describe ('interpretStage', () => {
   const mockResult = {};

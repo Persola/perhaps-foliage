@@ -12,10 +12,10 @@ export default (props: Props) => {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `same-line leaf bubble-even argument boolean-literal ${codePresentation.focused ? 'focused' : 'unfocused'}`
+  const classes = `syno same-line leaf bubble-even argument boolean-literal ${codePresentation.focused ? 'focused' : 'unfocused'}`
 
   return (
-    <div className={classes}>
+    <div className={classes} data-syno-id={codePresentation.synoId}>
       {String(codePresentation.value)}
     </div>
   );

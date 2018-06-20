@@ -27,10 +27,10 @@ export default (props: Props) => {
   const { name } = codePresentation;
 
   const argumentz: argumentz = codePresentation.argumentz;
-  const classes = `same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (
-    <div className={classes}>
+    <div className={classes} data-syno-id={codePresentation.synoId}>
       <NamePart namePart={name} />
       {
         argumentEls(argumentz)

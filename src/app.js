@@ -2,9 +2,10 @@
 import Mousetrap from 'mousetrap';
 import Presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
-import editorStateStore from './editor-state-store/editor-state-store.js';
+import editorStateStore from './editor-core/editor-state-store.js';
 import createInterpretForStore from './interpreter/create-interpret-for-store.js'
 import createInputResolver from './input-resolver/create-input-resolver.js'
+import createFocusSyno from './create-focus-syno.js'
 import type { sideEffectFunction } from './types/side-effect-function'
 
 // $FlowFixMe
@@ -24,6 +25,7 @@ const initializeMousetrap = () => {
 
   if (document.documentElement === null) { throw new Error('document missing') }
   document.documentElement.click(); // bindings don't work before this (focus?)
+  document.addEventListener('click', createFocusSyno(editorStateStore));
 };
 
 window.addEventListener('load', () => {

@@ -16,6 +16,7 @@ export default (
 
   return {
     syntype: 'functionCall',
+    synoId: funkshunCall.id,
     name: 'NOR',
     argumentz: presentArguments(funkshunCall.argumentz, scope, getSyno, focusNodeId),
     resolved: true,
