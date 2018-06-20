@@ -1,5 +1,7 @@
 // @flow
 import dupGraphs from '../../syntree-utils/dup-graphs.js'
+import typedKeys from '../../flow-pacifiers/typed-keys'
+
 import type { synoMap } from '../../types/editor-state/syno-map'
 import type { reduxAction } from '../../types/redux-action'
 
@@ -16,13 +18,17 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
       const parentRef = oldState[stagedNodeId].parent;
       if (parentRef) {
         const parent = oldState[parentRef.id];
-
-        if (parent.argumentz && Object.keys(parent.argumentz).length > 0) {
-          const focusedNodeArgumentKey = Object.keys(parent.argumentz).find(argKey => {
+        if (
+          parent.syntype === 'functionCall' &&
+          typedKeys(parent.argumentz).length > 0
+        ) {
+          const focusedNodeArgumentKey = typedKeys(parent.argumentz).find((argKey) => {
             return (parent.argumentz[argKey].id === stagedNodeId);
           });
+          if (!focusedNodeArgumentKey) { throw new Error; };
           // should remove any uneeded (i.e., deleted) nodes from store
           const newParent = newSynoMap[parent.id];
+          if (newParent.syntype !== 'functionCall') { throw new Error; }
           newParent.argumentz[focusedNodeArgumentKey] = {
             synoRef: true,
             id: newSynoId
@@ -41,11 +47,11 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
 
       return newSynoMap;
     case 'UPDATE_RESULT':
-      const { result, resultRootId } = action;
+      const { result } = action;
       if (result.syntype !== 'booleanLiteral') {
         throw new Error('fuck, I cant update result unless its a single boolean literal, need to deconstruct refs');
       }
-      newSynoMap[resultRootId] = result;
+      newSynoMap[result.id] = result;
 
       return newSynoMap;
     case 'NAVIGATE':

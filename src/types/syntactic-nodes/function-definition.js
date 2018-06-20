@@ -3,7 +3,7 @@ import type { synoRef } from '../syno-ref'
 
 export type functionDefinition = {
   id: string,
-  parent: synoRef,
+  parent: (synoRef | false),
   syntype: 'functionDefinition',
   name: string,
   body: synoRef,

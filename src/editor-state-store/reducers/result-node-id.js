@@ -9,7 +9,7 @@ export default (oldState: resultNodeId, action: reduxAction): resultNodeId => {
     case 'REPLACE_FOCUSED_NODE':
       return oldState;
     case 'UPDATE_RESULT':
-      return action.resultRootId;
+      return action.result.id;
     case 'NAVIGATE':
       return oldState;
     case '@@redux/INIT':

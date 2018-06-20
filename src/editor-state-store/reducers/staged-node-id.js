@@ -1,5 +1,9 @@
 // @flow
+import typedValues from '../../flow-pacifiers/typed-values'
+
 import type { stagedNodeId } from '../../types/editor-state/staged-node-id'
+import type { synoId } from '../../types/syno-id'
+import type { synoRef } from '../../types/syno-ref'
 import type { reduxAction } from '../../types/redux-action'
 
 export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
@@ -21,26 +25,36 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
           newStagedNodeId = oldParent.id;
           break;
         case 'in':
-          if (oldFocusedNode.argumentz && Object.keys(oldFocusedNode.argumentz).length > 0) {
-            newStagedNodeId = Object.values(oldFocusedNode.argumentz)[0].id
+          if (
+            oldFocusedNode.syntype === 'functionCall' &&
+            Object.keys(oldFocusedNode.argumentz).length > 0
+          ) {
+            const argumentRef: synoRef = typedValues(oldFocusedNode.argumentz)[0];
+            newStagedNodeId = argumentRef.id;
           } else {
             throw new Error('navigate failed; no argumentz!');
           }
           break;
         case 'prev':
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          if (oldParent.argumentz && Object.keys(oldParent.argumentz).length > 0) {
-            newStagedNodeId = Object.values(oldParent.argumentz)[0].id
+          if (
+            oldParent.syntype === 'functionCall' &&
+            Object.keys(oldParent.argumentz).length > 0
+          ) {
+            newStagedNodeId = typedValues(oldParent.argumentz)[0].id
           } else {
             throw new Error('navigate failed; no argumentz!');
           }
           break;
         case 'next':
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          if (oldParent.argumentz && Object.keys(oldParent.argumentz).length > 0) {
-            newStagedNodeId = Object.values(oldParent.argumentz)[1].id
+          if (
+            oldParent.syntype === 'functionCall' &&
+            Object.keys(oldParent.argumentz).length > 1
+          ) {
+            newStagedNodeId = typedValues(oldParent.argumentz)[1].id
           } else {
-            throw new Error('navigate failed; no argumentz!');
+            throw new Error('navigate failed; no second argument!');
           }
           break;
         default:

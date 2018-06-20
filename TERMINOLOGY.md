@@ -9,3 +9,5 @@
   * in - moving towards decendants
   * prev - moving to the previous ordered sibling
   * next - moving to the next ordered sibling
+"scion" - a syno or syntree without a parent (analogy from horticultural grafting)
+"stock"/"rootstock" -  a syno onto which a scion is grafted

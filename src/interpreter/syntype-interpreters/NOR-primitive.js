@@ -1,23 +1,28 @@
 // @flow
 import isBoolean from './is-boolean.js'
+import typedValues from '../../flow-pacifiers/typed-values'
+
 import type { syno } from '../../types/syno' // eslint-disable-line no-unused-vars
 import type { synoRef } from '../../types/syno-ref' // eslint-disable-line no-unused-vars
+import type { booleanLiteral } from '../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
 import type { booleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
 import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 
 const nor = (
-  firstArg: booleanLiteralAttrs,
-  secondArg: booleanLiteralAttrs
-): booleanLiteralAttrs => {
+  firstArg: (booleanLiteral | booleanLiteralAttrs),
+  secondArg: (booleanLiteral | booleanLiteralAttrs)
+): booleanLiteral => {
   const resultValue = (firstArg.value || secondArg.value) ? false : true
 
   return {
+    id: `interpResult-${String(Math.random()).substring(2)}`,
+    parent: false,
     syntype: 'booleanLiteral',
     value: resultValue
   }
 }
 
-export default (argumentz: {[string]: syno}): interpretationResolution => {
+export default (argumentz: any): interpretationResolution => {
   if (Object.values(argumentz).length !== 2) {
     return {
       success: false,
@@ -25,20 +30,7 @@ export default (argumentz: {[string]: syno}): interpretationResolution => {
     }
   }
 
-  const argValues = Object.values(argumentz);
-
-  const booleanLiteralAttrsType = (cand: any): boolean => {
-    return (
-      typeof cand === 'object'
-      && cand.syntype === 'booleanLiteral'
-      && typeof cand.value === 'boolean'
-    )
-  }
-
-  if (
-    !booleanLiteralAttrsType(argValues[0]) ||
-    !booleanLiteralAttrsType(argValues[1])
-  ) { throw new Error; }
+  const argValues = typedValues(argumentz);
 
   if (
     (!isBoolean(argValues[0])) ||

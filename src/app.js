@@ -22,6 +22,7 @@ const initializeMousetrap = () => {
     });
   });
 
+  if (document.documentElement === null) { throw new Error('document missing') }
   document.documentElement.click(); // bindings don't work before this (focus?)
 };
 

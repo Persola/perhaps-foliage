@@ -8,7 +8,7 @@ export default (key: string, editorStateStore: reduxStore) => {
   const oldFocusedNode: syno = editorState.graphs[editorState.stagedNodeId];
   const oldParentRef: parentSynoRef = oldFocusedNode.parent;
   const oldParent: (syno | false) = oldParentRef
-    ? editorState.graphs[oldFocusedNode.parent.id]
+    ? editorState.graphs[oldParentRef.id]
     : false;
   let direction;
   switch (key) {
