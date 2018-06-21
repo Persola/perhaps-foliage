@@ -63,6 +63,9 @@ export default (oldState: synoMap, action: reduxAction): synoMap => {
     case '@@redux/INIT': {
       return oldState;
     }
+    case '@@INIT': {
+      return oldState;
+    }
     default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
     }

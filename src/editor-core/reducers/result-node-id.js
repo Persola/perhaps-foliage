@@ -19,6 +19,9 @@ export default (oldState: resultNodeId, action: reduxAction): resultNodeId => {
     case '@@redux/INIT': {
       return oldState;
     }
+    case '@@INIT': {
+      return oldState;
+    }
     default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
     }

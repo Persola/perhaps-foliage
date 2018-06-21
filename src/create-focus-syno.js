@@ -1,10 +1,9 @@
 // @flow
 import type { reduxStore } from './types/redux-store'
-import type { htmlElement } from './types/html-element.js'
 
-const isSyno = (el) => {
-  if (!el) { return false };
-  return !!(el.className.split(' ').find((className) => {
+const isSyno = el => {
+  if (!el) { return false }
+  return !!(el.className.split(' ').find(className => {
     return (className === 'syno')
   }))
 };

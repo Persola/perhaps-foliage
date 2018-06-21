@@ -2,7 +2,6 @@
 import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
-import typedValues from '../../../flow-pacifiers/typed-values'
 
 import type { presentationGraph } from '../../../types/presentations/presentation-graph'
 import type { functionCallPres } from '../../../types/presentations/function-call'
@@ -26,14 +25,14 @@ export default (props: Props) => {
   const codePresentation: functionCallPres = props.codePresentation;
   const { name } = codePresentation;
 
-  const argumentz: argumentz = codePresentation.argumentz;
+  const argumentzz: argumentz = codePresentation.argumentz;
   const classes = `syno same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={codePresentation.synoId}>
       <NamePart namePart={name} />
       {
-        argumentEls(argumentz)
+        argumentEls(argumentzz)
       }
     </div>
   );

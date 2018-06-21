@@ -74,6 +74,9 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
     case '@@redux/INIT': {
       return oldState;
     }
+    case '@@INIT': {
+      return oldState;
+    }
     default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
     }

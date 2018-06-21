@@ -2,12 +2,17 @@
 import type { syno } from '../types/syno';
 import type { functionCall } from '../types/syntactic-nodes/function-call.js'
 
+const primitives: functionCall = require('../static/primitives.yml');
+const falseLiteral: functionCall = require('../static/false-literal.yml');
 const proxyNorCall: functionCall = require('../static/proxy-nor-call.yml');
 const norCall: functionCall = require('../static/nor-call.yml');
-const falseLiteral: functionCall = require('../static/false-literal.yml');
+const orCall: functionCall = require('../static/or-call.yml');
 
 export default (name: ?string): syno => {
   switch (name) {
+    case 'primitives': {
+      return primitives;
+    }
     case 'falseLiteral': {
       return falseLiteral;
     }
@@ -17,8 +22,11 @@ export default (name: ?string): syno => {
     case 'norCall': {
       return norCall;
     }
+    case 'orCall': {
+      return orCall;
+    }
     default: {
-      throw new Error('no graph map specified');
+      throw new Error('requested syntactic map does not exist');
     }
   }
 };

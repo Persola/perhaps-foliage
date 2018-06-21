@@ -1,12 +1,12 @@
 // @flow
 import isBoolean from './is-boolean.js'
-import typedValues from '../../flow-pacifiers/typed-values'
+import typedValues from '../../../flow-pacifiers/typed-values'
 
-import type { syno } from '../../types/syno' // eslint-disable-line no-unused-vars
-import type { synoRef } from '../../types/syno-ref' // eslint-disable-line no-unused-vars
-import type { booleanLiteral } from '../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
-import type { booleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
-import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
+import type { syno } from '../../../types/syno' // eslint-disable-line no-unused-vars
+import type { synoRef } from '../../../types/syno-ref' // eslint-disable-line no-unused-vars
+import type { booleanLiteral } from '../../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
+import type { booleanLiteralAttrs } from '../../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
+import type { interpretationResolution } from '../../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
 
 const nor = (
   firstArg: (booleanLiteral | booleanLiteralAttrs),

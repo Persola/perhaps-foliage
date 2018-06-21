@@ -11,9 +11,10 @@ import type { reduxAction } from '../types/redux-action.js'
 import type { editorState } from '../types/editor-state.js'
 import type { synoMap } from '../types/editor-state/syno-map.js'
 
-const seedGraphs: synoMap = codeLoader('norCall');
+const primitiveGraphs: synoMap = codeLoader('primitives');
+const seedGraphs: synoMap = codeLoader('orCall');
 const defaultEditorState: editorState = {
-  graphs: seedGraphs,
+  graphs: Object.assign({}, seedGraphs, primitiveGraphs),
   stagedNodeId: Object.keys(seedGraphs)[0],
   resultNodeId: false,
   resultOutdated: false
@@ -30,4 +31,7 @@ const editorstateReducer = (
   }
 }
 
-export default createStore(editorstateReducer);
+export default createStore(
+  editorstateReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);

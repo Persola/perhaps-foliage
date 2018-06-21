@@ -19,6 +19,9 @@ export default (oldState: resultOutdated, action: reduxAction): resultOutdated =
     case '@@redux/INIT': {
       return oldState;
     }
+    case '@@INIT': {
+      return oldState;
+    }
     default: {
       throw new Error(`Unrecognized action type: '${action.type}'`);
     }

@@ -10,6 +10,6 @@ describe ('codeLoader', () => {
   })
 
   it ('can respond with proxyNorCall', () => {
-    expect(() => { codeLoader() }).toThrow('no graph map specified');
+    expect(() => { codeLoader() }).toThrow('requested syntactic map does not exist');
   })
 })

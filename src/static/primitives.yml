@@ -1,0 +1,29 @@
+'primitives-nor':
+  id: 'primitives-nor'
+  parent: false
+  syntype: 'functionDefinition'
+  name: 'NOR'
+  parameterz:
+    first:
+      synoRef: true
+      id: 'primitives-nor-param-1'
+    second:
+      synoRef: true
+      id: 'primitives-nor-param-2'
+  body: false
+
+'primitives-nor-param-1':
+  id: 'primitives-nor-param-1'
+  parent:
+    synoRef: true
+    id: 'primitives-nor'
+  syntype: 'functionParameter'
+  valueKlass: 'booleanLiteral'
+
+'primitives-nor-param-2':
+  id: 'primitives-nor-param-2'
+  parent:
+    synoRef: true
+    id: 'primitives-nor'
+  syntype: 'functionParameter'
+  valueKlass: 'booleanLiteral'

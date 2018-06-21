@@ -1,10 +1,10 @@
 {
   "syntype": "functionCall",
   "name": "mockFunctionName",
-  "argumentz": {
-    "mockArgSlotName": {
+  "argumentz": [
+    {
       "syntype": "booleanLiteral",
       "value": false
     }
-  }
+  ]
 }
