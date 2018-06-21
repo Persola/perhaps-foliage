@@ -17,6 +17,24 @@ import type { booleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs
 import type { variableRef } from '../../types/syntactic-nodes/variable-ref' // eslint-disable-line no-unused-vars
 import type { graphId } from '../../types/graph-id' // eslint-disable-line no-unused-vars
 
+const throwIfParametersUnsatisfied = (functionDefParameters, resolvedArguments, resolvedCallee) => {
+  const paramSlots = Object.keys(functionDefParameters);
+  const argSlots = Object.keys(resolvedArguments);
+  const unsatisfiedParamSlots = paramSlots.filter((paramSlot: string) => {
+    return !argSlots.includes(paramSlot);
+  });
+  const extraArgSlots = argSlots.filter((argSlot: string) => {
+    return !paramSlots.includes(argSlot);
+  });
+
+  if (new Set(argSlots) !== new Set(paramSlots)) {
+    return {
+      success: false,
+      error: {message: `function "${resolvedCallee.name}" called with wrong parameters (unsatisfied: ${unsatisfiedParamSlots.join(', ')}; extra: ${extraArgSlots.join(', ')})`}
+    };
+  }
+};
+
 const interpretFunction = (
   interpreter: Function,
   parentScope: {},
@@ -50,17 +68,12 @@ const interpretFunction = (
     }
 
     const functionDefParameters = resolvedCallee.parameterz;
-    const paramCount = Object.keys(functionDefParameters).length;
-    const satisfiedParamCount = Object.keys(functionDefParameters).filter((paramSlotName: string) => {
-      return Object.keys(resolvedArguments).includes(paramSlotName);
-    }).length;
 
-    if (satisfiedParamCount !== paramCount) {
-      return {
-        success: false,
-        error: {message: `function "${resolvedCallee.name}" called with ${satisfiedParamCount} arguments (needs ${paramCount})`}
-      };
-    }
+    throwIfParametersUnsatisfied(
+      functionDefParameters,
+      resolvedArguments,
+      resolvedCallee
+    );
 
     Object.keys(functionDefParameters).forEach(slotName => {
       ownScope[slotName] = resolvedArguments[slotName];
