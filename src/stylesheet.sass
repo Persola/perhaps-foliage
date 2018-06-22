@@ -1,5 +1,12 @@
 $charcoal: #333
 $stage-background: #111
+$mid-grey: #666
+$near-white: #ffc
+$sea-blue: #045
+$verdant-green: #361
+$mustard-yellow: #d92
+$villian-laser-magenta: #d14
+$eyesore-yellow: #ff7
 
 body
   background-color: $charcoal
@@ -14,8 +21,8 @@ button
   border: none
   padding: 8px 12px
   margin: 8px
-  background-color: #666
-  color: #ffc
+  background-color: $mid-grey
+  color: $near-white
   font-size: 100%
   font-family: "Helvetica", Arial, sans-serif
 
@@ -36,7 +43,7 @@ button:active
   min-height: 27px
   margin: 8px
   background-color: $stage-background
-  color: #ddd
+  color: $near-white
   padding: 12px
   font-family: 'Courier New', monospace
   cursor: default
@@ -44,6 +51,7 @@ button:active
   .syno
     border-radius: 15px
     font-size: 16px
+    font-weight: bold
 
   .non-syntactic
     color: $charcoal
@@ -51,7 +59,6 @@ button:active
     font-weight: normal
 
   .leaf
-    font-weight: bold
     /* pad vertically to center font */
     padding-top: 6px
     padding-bottom: 3px
@@ -73,16 +80,26 @@ button:active
   .expression
     padding-right: 10px
     padding-left: 10px
-    background-color: #045
+    color: #111
+    background-color: $eyesore-yellow
 
   .argument
-    background-color: #361
+    background-color: $verdant-green
 
   .boolean-literal
-    color: #ea1
+    color: $mustard-yellow
 
   .function-call
-    color: #e18
+    background-color: $sea-blue
+    color: $villian-laser-magenta
+
+  .function-definition
+    background-color: $sea-blue
+    color: #aaa
+
+  .function-parameter
+    background-color: #841
+    color: #aaa
 
   .unresolved
     color: #ddd

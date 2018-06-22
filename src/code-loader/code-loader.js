@@ -6,6 +6,7 @@ const primitives: functionCall = require('../static/primitives.yml');
 const falseLiteral: functionCall = require('../static/false-literal.yml');
 const proxyNorCall: functionCall = require('../static/proxy-nor-call.yml');
 const norCall: functionCall = require('../static/nor-call.yml');
+const norDef: functionCall = require('../static/nor-def.yml');
 const orCall: functionCall = require('../static/or-call.yml');
 
 export default (name: ?string): syno => {
@@ -21,6 +22,9 @@ export default (name: ?string): syno => {
     }
     case 'norCall': {
       return norCall;
+    }
+    case 'norDef': {
+      return norDef;
     }
     case 'orCall': {
       return orCall;

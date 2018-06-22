@@ -22,6 +22,12 @@ const interpreter = (
     case 'functionCall': { // eslint-disable-line
       return interpretFunctionCall(interpreter, scope, stagedSyno, getSyno);
     }
+    case 'functionDefinition': {
+      return {
+        success: true,
+        result: stagedSyno
+      };
+    }
     case 'variableRef': {
       // should check type
       const value = resolveRef(scope, stagedSyno.name);

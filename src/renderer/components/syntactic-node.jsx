@@ -2,6 +2,8 @@
 import React from 'react';
 import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
+import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
+import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
 import type { presentationGraph } from '../../types/presentations/presentation-graph'
 
 type Props = {
@@ -16,15 +18,28 @@ export default (props: Props) => {
   }
 
   switch (codePresentation.syntype) {
-    case 'booleanLiteral':
+    case 'booleanLiteral': {
       return(
         <BooleanLiteral codePresentation={codePresentation} />
       )
-    case 'functionCall':
+    }
+    case 'functionCall': {
       return(
         <FunctionCall codePresentation={codePresentation} />
       )
-    default:
+    }
+    case 'functionDefinition': {
+      return(
+        <FunctionDefinition codePresentation={codePresentation} />
+      )
+    }
+    case 'functionParameter': {
+      return(
+        <FunctionParameter codePresentation={codePresentation} />
+      )
+    }
+    default: {
       throw new Error('no types yet');
+    }
   }
 };
