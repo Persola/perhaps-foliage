@@ -1,6 +1,6 @@
 // @flow
-import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
-import type { BooleanLiteralAttrs } from '../../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
+import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
+import type { BooleanLiteralAttrs } from '../../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs'
 
 // This should be caught by flow, but let's double check
 export default (booleanCandidate: (BooleanLiteral | BooleanLiteralAttrs)): boolean => {

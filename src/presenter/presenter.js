@@ -3,10 +3,10 @@ import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
 import presentFocusedSyno from './presenters/present-focused-syno.js'
 import presentSyno from './presenters/present-syno.js'
 
-import type { EditorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
-import type { EditorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
-import type { ReduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
-import type { Renderer } from '../types/renderer.js' // eslint-disable-line no-unused-vars
+import type { EditorState } from '../types/editor-state.js'
+import type { EditorPresentation } from '../types/presentations/editor-presentation.js'
+import type { ReduxStore } from '../types/redux-store.js'
+import type { Renderer } from '../types/renderer.js'
 
 export default class Presenter {
   editorStateStore: ReduxStore;

@@ -1,16 +1,16 @@
 // @flow
-import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
-import type { BooleanLiteralPres } from '../../types/presentations/boolean-literal.js' // eslint-disable-line no-unused-vars
+import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal.js'
+import type { BooleanLiteralPres } from '../../types/presentations/boolean-literal.js'
 
 export default (
-  leBooleanLiteral: BooleanLiteral,
+  booleanLiteral: BooleanLiteral,
   focusNodeId: (string | false)
 ): BooleanLiteralPres => {
-  const { value } = leBooleanLiteral
-  let focused = (leBooleanLiteral.id === focusNodeId)
+  const { value } = booleanLiteral
+  let focused = (booleanLiteral.id === focusNodeId)
   return {
     syntype: 'booleanLiteral',
-    synoId: leBooleanLiteral.id,
+    synoId: booleanLiteral.id,
     value,
     focused
   }

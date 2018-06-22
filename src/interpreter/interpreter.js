@@ -2,9 +2,8 @@
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js'
 import resolveRef from './resolve-ref.js'
 
-import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
-import type { Syno } from '../types/syno' // eslint-disable-line no-unused-vars
-import type { GraphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
+import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution'
+import type { Syno } from '../types/syno'
 
 const interpreter = (
   stagedSyno: Syno,
@@ -18,7 +17,7 @@ const interpreter = (
         result: stagedSyno
       };
     }
-    case 'functionCall': { // eslint-disable-line
+    case 'functionCall': {
       return interpretFunctionCall(interpreter, scope, stagedSyno, getSyno);
     }
     case 'functionDefinition': {

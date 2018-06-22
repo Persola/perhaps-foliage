@@ -5,7 +5,7 @@ describe ('interpretStage', () => {
   const mockResult = {};
   const interpreter = jest.fn();
   let currentEditorState;
-  let interpret; // eslint-disable-line no-unused-vars
+  let interpret;
 
   beforeEach(() => {
     editorStateStore.dispatch = jest.fn();

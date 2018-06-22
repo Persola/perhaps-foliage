@@ -4,7 +4,7 @@ import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
 import ascendToRoot from '../syntree-utils/ascend-to-root.js'
 import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution'
 import type { ReduxStore } from '../types/redux-store'
-import type { EditorState } from '../types/editor-state' // eslint-disable-line no-unused-vars
+import type { EditorState } from '../types/editor-state'
 
 export default (editorStateStore: ReduxStore) => {
   return () => {

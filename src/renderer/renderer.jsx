@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Editor from './components/editor.jsx';
-import type { EditorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
+import type { EditorPresentation } from '../types/presentations/editor-presentation.js'
 
 type element = Object;
 type document = any;

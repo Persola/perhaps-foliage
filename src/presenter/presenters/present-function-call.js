@@ -3,9 +3,9 @@ import presentNorCall from './present-nor-call.js'
 import presentArguments from './present-arguments.js'
 import NorPrimitiveId from '../../nor-primitive-id.js'
 
-import type { FunctionCall } from '../../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
-import type { FunctionDefinition } from '../../types/syntactic-nodes/function-definition.js' // eslint-disable-line no-unused-vars
-import type { FunctionCallPres } from '../../types/presentations/function-call.js' // eslint-disable-line no-unused-vars
+import type { FunctionCall } from '../../types/syntactic-nodes/function-call.js'
+import type { FunctionDefinition } from '../../types/syntactic-nodes/function-definition.js'
+import type { FunctionCallPres } from '../../types/presentations/function-call.js'
 
 export default (
   funkshunCall: FunctionCall,

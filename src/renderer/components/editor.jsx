@@ -2,7 +2,7 @@
 import React from 'react';
 import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
-import type { EditorPresentation } from '../../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
+import type { EditorPresentation } from '../../types/presentations/editor-presentation.js'
 
 type Props = {
   presentation: EditorPresentation,

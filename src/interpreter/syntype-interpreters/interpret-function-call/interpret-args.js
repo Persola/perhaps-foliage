@@ -1,6 +1,6 @@
 // @flow
-import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
-import type { SynoRef } from '../../../types/syno-ref' // eslint-disable-line no-unused-vars
+import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value'
+import type { SynoRef } from '../../../types/syno-ref'
 
 export default (
   interpreter: Function,

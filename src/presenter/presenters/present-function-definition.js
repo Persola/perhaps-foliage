@@ -1,8 +1,8 @@
 // @flow
 import presentParamters from './present-parameters.js'
 
-import type { FunctionDefinition } from '../../types/syntactic-nodes/function-definition.js' // eslint-disable-line no-unused-vars
-import type { FunctionDefPres } from '../../types/presentations/function-definition.js' // eslint-disable-line no-unused-vars
+import type { FunctionDefinition } from '../../types/syntactic-nodes/function-definition.js'
+import type { FunctionDefPres } from '../../types/presentations/function-definition.js'
 
 export default (
   funkshunDef: FunctionDefinition,

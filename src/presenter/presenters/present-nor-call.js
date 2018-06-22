@@ -1,8 +1,8 @@
 // @flow
 import presentArguments from './present-arguments.js'
 
-import type { FunctionCall } from '../../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
-import type { FunctionCallPres } from '../../types/presentations/function-call.js' // eslint-disable-line no-unused-vars
+import type { FunctionCall } from '../../types/syntactic-nodes/function-call.js'
+import type { FunctionCallPres } from '../../types/presentations/function-call.js'
 
 export default (
   funkshunCall: FunctionCall,

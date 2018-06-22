@@ -1,5 +1,5 @@
 // @flow
-import type { SynoRef } from '../types/syno-ref.js' // eslint-disable-line no-unused-vars
+import type { SynoRef } from '../types/syno-ref.js'
 
 export default (synoMap: {}) => {
   return  (ref: SynoRef) => {

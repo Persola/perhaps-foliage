@@ -4,8 +4,8 @@ import presentFunctionCall from './present-function-call.js'
 import presentFunctionDefinition from './present-function-definition.js'
 import presentFunctionParameter from './present-function-parameter.js'
 
-import type { Syno } from '../../types/syno.js' // eslint-disable-line no-unused-vars
-import type { PresentationGraph } from '../../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
+import type { Syno } from '../../types/syno.js'
+import type { PresentationGraph } from '../../types/presentations/presentation-graph.js'
 
 export default (
   node: (Syno | false),

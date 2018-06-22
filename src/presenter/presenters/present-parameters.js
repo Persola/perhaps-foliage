@@ -2,8 +2,8 @@
 import presentFunctionParameter from './present-function-parameter.js'
 import typedValues from '../../flow-pacifiers/typed-values'
 
-import type { FunctionParameterPres } from '../../types/presentations/function-parameter.js' // eslint-disable-line no-unused-vars
-import type { SynoRef } from '../../types/syno-ref.js' // eslint-disable-line no-unused-vars
+import type { FunctionParameterPres } from '../../types/presentations/function-parameter.js'
+import type { SynoRef } from '../../types/syno-ref.js'
 
 export default (
   parameterz: {[slotName: string]: SynoRef},

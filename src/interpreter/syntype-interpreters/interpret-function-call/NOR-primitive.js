@@ -2,9 +2,9 @@
 import isBoolean from './is-boolean.js'
 import typedValues from '../../../flow-pacifiers/typed-values'
 
-import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal' // eslint-disable-line no-unused-vars
-import type { BooleanLiteralAttrs } from '../../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs' // eslint-disable-line no-unused-vars
-import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
+import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
+import type { BooleanLiteralAttrs } from '../../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs'
+import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution'
 
 const nor = (
   firstArg: (BooleanLiteral | BooleanLiteralAttrs),

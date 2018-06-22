@@ -1,6 +1,6 @@
 // @flow
-import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition' // eslint-disable-line no-unused-vars
-import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
+import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition'
+import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value'
 
 export default (
   resolvedCallee: FunctionDefinition,
