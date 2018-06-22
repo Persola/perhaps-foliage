@@ -5,7 +5,7 @@ describe ('presenter', () => {
   const resultGraph = {};
   const resultOutdated = false;
   const editorState = {
-    graphs: {
+    synoMap: {
       trial: focusedNode,
       reward: resultGraph
     },

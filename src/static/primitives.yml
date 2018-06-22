@@ -3,7 +3,7 @@
   parent: false
   syntype: 'functionDefinition'
   name: 'NOR'
-  parameterz:
+  parameters:
     first:
       synoRef: true
       id: 'primitives-nor-param-1'
@@ -18,7 +18,7 @@
     synoRef: true
     id: 'primitives-nor'
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
 
 'primitives-nor-param-2':
   id: 'primitives-nor-param-2'
@@ -26,4 +26,4 @@
     synoRef: true
     id: 'primitives-nor'
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'

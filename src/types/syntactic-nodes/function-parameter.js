@@ -1,12 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
-import type { SynoRef } from '../syno-ref'
-import type { Syntype } from '../syntype.js'
+import type { CoreSynoAttrs } from './core-syno-attrs'
+import type { FunctionParameterAttrs } from './syno-attrs/function-parameter-attrs'
 
-export type FunctionParameter = {
-  id: SynoId,
-  parent: (SynoRef | false),
-  syntype: 'functionParameter',
-  name: string,
-  valueKlass: Syntype
-}
+export type FunctionParameter = CoreSynoAttrs & FunctionParameterAttrs

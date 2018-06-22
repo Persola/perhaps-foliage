@@ -6,10 +6,10 @@ import type { EditorState } from '../types/editor-state'
 
 export default (key: string, editorStateStore: ReduxStore) => {
   const editorState: EditorState = editorStateStore.getState();
-  const oldFocusedNode: Syno = editorState.graphs[editorState.stagedNodeId];
+  const oldFocusedNode: Syno = editorState.synoMap[editorState.stagedNodeId];
   const oldParentRef: ParentSynoRef = oldFocusedNode.parent;
   const oldParent: (Syno | false) = oldParentRef
-    ? editorState.graphs[oldParentRef.id]
+    ? editorState.synoMap[oldParentRef.id]
     : false;
   let direction;
   switch (key) {

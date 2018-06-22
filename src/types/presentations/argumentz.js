@@ -1,4 +1,4 @@
 // @flow
-import type { PresentationGraph } from './presentation-graph'
+import type { Presno } from './presno'
 
-export type Argumentz = {[slotName: string]: PresentationGraph}
+export type Argumentz = {[slotName: string]: Presno}

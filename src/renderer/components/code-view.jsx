@@ -2,10 +2,10 @@
 import React from 'react';
 import SyntacticNode from './syntactic-node.jsx';
 import OutdatedMessage from './outdated-message.jsx';
-import type { PresentationGraph } from '../../types/presentations/presentation-graph'
+import type { Presno } from '../../types/presentations/presno'
 
 type Props = {
-  codePresentation: PresentationGraph | false,
+  codePresentation: Presno | false,
   outdated: boolean
 }
 

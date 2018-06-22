@@ -1,12 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
-import type { SynoRef } from '../syno-ref'
+import type { CoreSynoAttrs } from './core-syno-attrs'
+import type { FunctionDefinitionAttrs } from './syno-attrs/function-definition-attrs'
 
-export type FunctionDefinition = {
-  id: SynoId,
-  parent: (SynoRef | false),
-  syntype: 'functionDefinition',
-  name: string,
-  body: SynoRef,
-  parameterz: { [slotName: string]: SynoRef }
-}
+export type FunctionDefinition = CoreSynoAttrs & FunctionDefinitionAttrs

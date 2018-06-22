@@ -6,12 +6,12 @@ import type { FunctionParameterPres } from '../../../types/presentations/functio
 import type { SynoRef } from '../../../types/syno-ref.js'
 
 export default (
-  parameterz: {[slotName: string]: SynoRef},
+  parameters: {[slotName: string]: SynoRef},
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
 ): FunctionParameterPres[] => {
-  return typedValues(parameterz).map((paramRef: SynoRef): FunctionParameterPres => {
+  return typedValues(parameters).map((paramRef: SynoRef): FunctionParameterPres => {
     return presentFunctionParameter(getSyno(paramRef), scope, getSyno, focusNodeId);
   });
 };

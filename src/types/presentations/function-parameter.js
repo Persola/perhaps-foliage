@@ -6,6 +6,6 @@ export type FunctionParameterPres = {
   syntype: 'functionParameter',
   synoId: SynoId,
   slot: string,
-  valueKlass: Syntype,
+  valueSyntype: Syntype,
   focused: boolean
 }

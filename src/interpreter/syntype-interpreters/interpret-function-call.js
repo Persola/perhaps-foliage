@@ -4,7 +4,7 @@ import NorPrimitiveId from '../../nor-primitive-id.js'
 import typedValues from '../../flow-pacifiers/typed-values'
 import throwIfParametersUnsatisfied from './interpret-function-call/throw-if-parameters-unsatisfied'
 import interpretArgs from './interpret-function-call/interpret-args'
-import NOR_Primitive from './interpret-function-call/NOR-primitive.js'
+import norPrimitive from './interpret-function-call/nor-primitive.js'
 
 import type { InterpretationResolution } from '../../types/interpreter/interpretation-resolution'
 import type { FunctionCall } from '../../types/syntactic-nodes/function-call'
@@ -12,11 +12,11 @@ import type { FunctionCall } from '../../types/syntactic-nodes/function-call'
 export default (
   interpreter: Function,
   parentScope: {},
-  graphToInterpret: FunctionCall,
+  interpretee: FunctionCall,
   getSyno: Function
 ): InterpretationResolution => {
   const ownScope = {};
-  const callee = getSyno(graphToInterpret.callee);
+  const callee = getSyno(interpretee.callee);
 
   let resolvedCallee;
   if (callee.syntype === 'variableRef') {
@@ -34,24 +34,24 @@ export default (
   const interpretedArgs = interpretArgs(
     interpreter,
     parentScope,
-    graphToInterpret.argumentz,
+    interpretee.argumentz,
     getSyno
   );
 
   throwIfParametersUnsatisfied(resolvedCallee, interpretedArgs);
 
-  Object.keys(resolvedCallee.parameterz).forEach(slotName => {
+  Object.keys(resolvedCallee.parameters).forEach(slotName => {
     ownScope[slotName] = interpretedArgs[slotName];
   });
 
   let functionResolution;
-  if (graphToInterpret.callee.id === NorPrimitiveId) {
+  if (interpretee.callee.id === NorPrimitiveId) {
     typedValues(interpretedArgs).forEach(resArg => {
       if (resArg.syntype !== 'booleanLiteral') {
         throw new Error;
       }
     })
-    functionResolution = NOR_Primitive(interpretedArgs);
+    functionResolution = norPrimitive(interpretedArgs);
   } else {
     functionResolution = interpreter(
       getSyno(resolvedCallee.body),

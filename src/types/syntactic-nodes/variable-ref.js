@@ -1,11 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
-import type { SynoRef } from '../syno-ref'
+import type { CoreSynoAttrs } from './core-syno-attrs'
+import type { VariableRefAttrs } from './syno-attrs/variable-ref-attrs'
 
-export type VariableRef = {
-  id: SynoId,
-  parent: (SynoRef | false),
-  syntype: 'variableRef',
-  valueKlass: 'booleanLiteral',
-  name: string
-}
+export type VariableRef = CoreSynoAttrs & VariableRefAttrs

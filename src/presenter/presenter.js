@@ -31,10 +31,10 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: EditorState): EditorPresentation {
-    const { graphs, stagedNodeId, resultNodeId } = editorState
-    const getSyno = createSynoFetcher(graphs);
-    const stagedSyno = stagedNodeId ? graphs[stagedNodeId] : false;
-    const resultSyno = resultNodeId ? graphs[resultNodeId] : false;
+    const { synoMap, stagedNodeId, resultNodeId } = editorState
+    const getSyno = createSynoFetcher(synoMap);
+    const stagedSyno = stagedNodeId ? synoMap[stagedNodeId] : false;
+    const resultSyno = resultNodeId ? synoMap[resultNodeId] : false;
 
     if (!stagedSyno) {
       throw new Error('focus node not found in editor state')

@@ -2,7 +2,7 @@
 import ascendToRoot from '../../syntree-utils/ascend-to-root.js'
 import presentSyno from './present-syno.js'
 
-import type { PresentationGraph } from '../../types/presentations/presentation-graph.js'
+import type { Presno } from '../../types/presentations/presno.js'
 import type { Syno } from '../../types/syno.js'
 
 export default (
@@ -10,7 +10,7 @@ export default (
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): PresentationGraph => {
+): Presno => {
   const renderingRoot = ascendToRoot(focusedSyno, getSyno);
   return presentSyno(renderingRoot, scope, getSyno, focusNodeId);
 }

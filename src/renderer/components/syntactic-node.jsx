@@ -5,10 +5,10 @@ import FunctionCall from './syntactic-nodes/function-call.jsx'
 import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
 import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
 import VariableRef from './syntactic-nodes/variable-ref.jsx'
-import type { PresentationGraph } from '../../types/presentations/presentation-graph'
+import type { Presno } from '../../types/presentations/presno'
 
 type Props = {
-  codePresentation: PresentationGraph
+  codePresentation: Presno
 }
 
 export default (props: Props) => {

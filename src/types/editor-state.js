@@ -5,7 +5,7 @@ import type { ResultNodeId } from './editor-state/result-node-id'
 import type { ResultOutdated } from './editor-state/result-outdated'
 
 export type EditorState = {
-  graphs: SynoMap,
+  synoMap: SynoMap,
   stagedNodeId: StagedNodeId,
   resultNodeId: ResultNodeId,
   resultOutdated: ResultOutdated

@@ -12,7 +12,7 @@ export default (
     syntype: 'functionParameter',
     synoId: parameter.id,
     slot: parameter.name,
-    valueKlass: parameter.valueKlass,
+    valueSyntype: parameter.valueSyntype,
     focused: (parameter.id === focusNodeId)
   }
 }

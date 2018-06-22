@@ -3,7 +3,7 @@
   parent: false
   syntype: 'functionDefinition'
   name: 'proxyNor'
-  parameterz:
+  parameters:
     first:
       synoRef: true
       id: '1-5'
@@ -20,7 +20,7 @@
     synoRef: true
     id: '1-4'
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: first
 
 '1-6':
@@ -29,7 +29,7 @@
     synoRef: true
     id: '1-4'
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: second
 
 '1-7':
@@ -55,7 +55,7 @@
     synoRef: true
     id: '1-7'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: first
 
 '1-9':
@@ -64,5 +64,5 @@
     synoRef: true
     id: '1-7'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: second

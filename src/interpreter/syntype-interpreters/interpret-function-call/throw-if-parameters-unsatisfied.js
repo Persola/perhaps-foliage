@@ -6,7 +6,7 @@ export default (
   resolvedCallee: FunctionDefinition,
   interpretedArgs: {[slot: string]: LiteralValue},
 ) => {
-  const paramSlots = Object.keys(resolvedCallee.parameterz);
+  const paramSlots = Object.keys(resolvedCallee.parameters);
   const argSlots = Object.keys(interpretedArgs);
   const unsatisfiedParamSlots = paramSlots.filter((paramSlot: string) => {
     return !argSlots.includes(paramSlot);

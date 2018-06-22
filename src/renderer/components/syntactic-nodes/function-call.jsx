@@ -4,7 +4,7 @@ import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
 import typedValues from '../../../flow-pacifiers/typed-values'
 
-import type { PresentationGraph } from '../../../types/presentations/presentation-graph'
+import type { Presno } from '../../../types/presentations/presno'
 import type { FunctionCallPres } from '../../../types/presentations/function-call'
 import type { Argumentz } from '../../../types/presentations/argumentz'
 
@@ -14,7 +14,7 @@ type Props = {
 
 const argumentEls = (argumentzz: Argumentz) => {
   return (
-    typedValues(argumentzz).map((arg: PresentationGraph, ind) => {
+    typedValues(argumentzz).map((arg: Presno, ind) => {
       return (
         <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
       )

@@ -36,7 +36,7 @@
     id: '1-1'
   syntype: 'functionDefinition'
   name: 'OR'
-  parameterz:
+  parameters:
     first:
       synoRef: true
       id: '1-5'
@@ -54,7 +54,7 @@
     id: '1-4'
   name: first
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
 
 '1-6':
   id: '1-6'
@@ -63,7 +63,7 @@
     id: '1-4'
   name: second
   syntype: 'functionParameter'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
 
 '1-7':
   id: '1-7'
@@ -105,7 +105,7 @@
     synoRef: true
     id: '1-8'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: first
 
 '1-10':
@@ -114,7 +114,7 @@
     synoRef: true
     id: '1-8'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: second
 
 '1-11':
@@ -140,7 +140,7 @@
     synoRef: true
     id: '1-11'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: first
 
 '1-13':
@@ -149,5 +149,5 @@
     synoRef: true
     id: '1-11'
   syntype: 'variableRef'
-  valueKlass: 'booleanLiteral'
+  valueSyntype: 'booleanLiteral'
   name: second

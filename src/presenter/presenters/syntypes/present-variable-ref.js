@@ -11,7 +11,7 @@ export default (
   return {
     synoId: variableRef.id,
     syntype: 'variableRef',
-    valueKlass: 'booleanLiteral',
+    valueSyntype: 'booleanLiteral',
     name: variableRef.name,
     focused: (variableRef.id === focusNodeId)
   }

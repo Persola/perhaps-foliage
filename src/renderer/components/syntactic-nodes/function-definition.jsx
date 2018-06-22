@@ -14,14 +14,14 @@ type Props = {
 export default (props: Props) => {
   const codePresentation: FunctionDefPres = props.codePresentation;
   const { name } = codePresentation;
-  const parameterz: FunctionParameterPres[] = codePresentation.parameterz;
+  const parameters: FunctionParameterPres[] = codePresentation.parameters;
   const classes = `syno same-line expression function-definition ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={codePresentation.synoId}>
       <NamePart namePart={name} />
       {
-        parameterz.map(param => {
+        parameters.map(param => {
           return(
             <FunctionParameter key={param.slot} codePresentation={param} />
           )

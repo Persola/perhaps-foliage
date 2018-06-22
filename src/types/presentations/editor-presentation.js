@@ -1,7 +1,7 @@
 // @flow
-import type { PresentationGraph } from './presentation-graph'
+import type { Presno } from './presno'
 
 export type EditorPresentation = {
-  stage: PresentationGraph,
-  result: PresentationGraph
+  stage: Presno,
+  result: Presno
 };

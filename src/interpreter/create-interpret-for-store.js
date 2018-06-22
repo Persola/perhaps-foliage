@@ -10,8 +10,8 @@ export default (editorStateStore: ReduxStore) => {
   return () => {
     const editorState: EditorState = editorStateStore.getState();
     try {
-      const getSyno = createSynoFetcher(editorState.graphs);
-      const stagedSyno = editorState.graphs[editorState.stagedNodeId];
+      const getSyno = createSynoFetcher(editorState.synoMap);
+      const stagedSyno = editorState.synoMap[editorState.stagedNodeId];
       const rootOfFocused = ascendToRoot(stagedSyno, getSyno);
       const resolution: InterpretationResolution = interpreter(rootOfFocused, {}, getSyno);
       if (resolution.success) {

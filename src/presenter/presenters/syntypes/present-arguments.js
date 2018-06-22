@@ -3,7 +3,6 @@ import typedKeys from '../../../flow-pacifiers/typed-keys'
 import presentSyno from '../present-syno.js'
 
 import type { Syno } from '../../../types/syno.js'
-import type { PresentationGraph } from '../../../types/presentations/presentation-graph.js'
 import type { SynoRef } from '../../../types/syno-ref.js'
 import type { Argumentz } from '../../../types/presentations/argumentz.js'
 

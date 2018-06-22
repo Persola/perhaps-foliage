@@ -1,11 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
-import type { SynoRef } from '../syno-ref'
+import type { CoreSynoAttrs } from './core-syno-attrs'
+import type { FunctionCallAttrs } from './syno-attrs/function-call-attrs'
 
-export type FunctionCall = {
-  id: SynoId,
-  parent: (SynoRef | false),
-  syntype: 'functionCall',
-  callee: SynoRef,
-  argumentz: {[string]: SynoRef}
-}
+export type FunctionCall = CoreSynoAttrs & FunctionCallAttrs

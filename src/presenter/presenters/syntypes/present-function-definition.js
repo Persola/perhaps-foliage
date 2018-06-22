@@ -17,7 +17,7 @@ export default (
     syntype: 'functionDefinition',
     synoId: funkshunDef.id,
     name: funkshunDef.name,
-    parameterz: presentParameters(funkshunDef.parameterz, scope, getSyno, focusNodeId),
+    parameters: presentParameters(funkshunDef.parameters, scope, getSyno, focusNodeId),
     focused: (funkshunDef.id === focusNodeId),
     body: presentFunctionCall(bodySyno, scope, getSyno, focusNodeId)
   }
