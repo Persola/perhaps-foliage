@@ -1,13 +1,13 @@
 // @flow
-import type { functionParameter } from '../../types/syntactic-nodes/function-parameter.js'
-import type { functionParameterPres } from '../../types/presentations/function-parameter.js'
+import type { FunctionParameter } from '../../types/syntactic-nodes/function-parameter.js'
+import type { FunctionParameterPres } from '../../types/presentations/function-parameter.js'
 
 export default (
-  parameter: functionParameter,
+  parameter: FunctionParameter,
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): functionParameterPres => {
+): FunctionParameterPres => {
   return {
     syntype: 'functionParameter',
     synoId: parameter.id,

@@ -1,14 +1,14 @@
 // @flow
-import type { booleanLiteralPres } from './boolean-literal'
-import type { functionCallPres } from './function-call'
-import type { functionDefPres } from './function-definition'
-import type { functionParameterPres } from './function-parameter'
+import type { BooleanLiteralPres } from './boolean-literal'
+import type { FunctionCallPres } from './function-call'
+import type { FunctionDefPres } from './function-definition'
+import type { FunctionParameterPres } from './function-parameter'
 
-export type presentationGraph = (
-  | booleanLiteralPres
-  | functionCallPres
-  | functionDefPres
-  | functionParameterPres
+export type PresentationGraph = (
+  | BooleanLiteralPres
+  | FunctionCallPres
+  | FunctionDefPres
+  | FunctionParameterPres
   | false
   // TODO: add variableRef
 )

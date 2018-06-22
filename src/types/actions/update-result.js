@@ -1,7 +1,7 @@
 // @flow
-import type { syno } from '../syno'
+import type { Syno } from '../syno'
 
-export type updateResult = {
+export type UpdateResult = {
   type: 'UPDATE_RESULT',
-  result: syno
+  result: Syno
 }

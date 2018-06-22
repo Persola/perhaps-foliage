@@ -1,2 +1,2 @@
 // @flow
-export type sideEffectFunction = () => void
+export type SideEffectFunction = () => void

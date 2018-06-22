@@ -1,8 +1,8 @@
 // @flow
-import type { synoMap } from '../types/editor-state/syno-map.js'
+import type { SynoMap } from '../types/editor-state/syno-map.js'
 
 // $FlowFixMe
-export default (value: synoMap): synoMap => {
+export default (value: SynoMap): SynoMap => {
   return JSON.parse(
     JSON.stringify(value)
   )

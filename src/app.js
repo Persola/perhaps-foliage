@@ -6,12 +6,12 @@ import editorStateStore from './editor-core/editor-state-store.js';
 import createInterpretForStore from './interpreter/create-interpret-for-store.js'
 import createInputResolver from './input-resolver/create-input-resolver.js'
 import createFocusSyno from './create-focus-syno.js'
-import type { sideEffectFunction } from './types/side-effect-function'
+import type { SideEffectFunction } from './types/side-effect-function'
 
 // $FlowFixMe
 require('./stylesheet.sass');
 
-const interpret: sideEffectFunction = createInterpretForStore(editorStateStore);
+const interpret: SideEffectFunction = createInterpretForStore(editorStateStore);
 const renderer = new Renderer(document, interpret);
 const presenter = new Presenter(editorStateStore, renderer);
 const inputResolver = createInputResolver(editorStateStore, interpret);

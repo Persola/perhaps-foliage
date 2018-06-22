@@ -2,16 +2,15 @@
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js'
 import resolveRef from './resolve-ref.js'
 
-import type { interpretationResolution } from '../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
-import type { syno } from '../types/syno' // eslint-disable-line no-unused-vars
-import type { synoMap } from '../types/editor-state/syno-map' // eslint-disable-line no-unused-vars
-import type { graphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
+import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
+import type { Syno } from '../types/syno' // eslint-disable-line no-unused-vars
+import type { GraphId } from '../types/graph-id' // eslint-disable-line no-unused-vars
 
 const interpreter = (
-  stagedSyno: syno,
+  stagedSyno: Syno,
   scope: {},
   getSyno: Function
-): interpretationResolution => {
+): InterpretationResolution => {
   switch (stagedSyno.syntype) {
     case 'booleanLiteral': {
       return {

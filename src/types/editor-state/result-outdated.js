@@ -1,2 +1,2 @@
 // @flow
-export type resultOutdated = boolean
+export type ResultOutdated = boolean

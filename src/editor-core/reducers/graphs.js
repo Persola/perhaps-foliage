@@ -2,11 +2,11 @@
 import dupGraphs from '../../syntree-utils/dup-graphs.js'
 import typedKeys from '../../flow-pacifiers/typed-keys'
 
-import type { synoMap } from '../../types/editor-state/syno-map'
-import type { reduxAction } from '../../types/redux-action'
+import type { SynoMap } from '../../types/editor-state/syno-map'
+import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: synoMap, action: reduxAction): synoMap => {
-  const newSynoMap: synoMap = dupGraphs(oldState);
+export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
+  const newSynoMap: SynoMap = dupGraphs(oldState);
 
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {

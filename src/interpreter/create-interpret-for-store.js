@@ -2,18 +2,18 @@
 import interpreter from './interpreter.js'
 import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
 import ascendToRoot from '../syntree-utils/ascend-to-root.js'
-import type { interpretationResolution } from '../types/interpreter/interpretation-resolution'
-import type { reduxStore } from '../types/redux-store'
-import type { editorState } from '../types/editor-state' // eslint-disable-line no-unused-vars
+import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution'
+import type { ReduxStore } from '../types/redux-store'
+import type { EditorState } from '../types/editor-state' // eslint-disable-line no-unused-vars
 
-export default (editorStateStore: reduxStore) => {
+export default (editorStateStore: ReduxStore) => {
   return () => {
-    const editorState: editorState = editorStateStore.getState();
+    const editorState: EditorState = editorStateStore.getState();
     try {
       const getSyno = createSynoFetcher(editorState.graphs);
       const stagedSyno = editorState.graphs[editorState.stagedNodeId];
       const rootOfFocused = ascendToRoot(stagedSyno, getSyno);
-      const resolution: interpretationResolution = interpreter(rootOfFocused, {}, getSyno);
+      const resolution: InterpretationResolution = interpreter(rootOfFocused, {}, getSyno);
       if (resolution.success) {
         editorStateStore.dispatch({
           type: 'UPDATE_RESULT',

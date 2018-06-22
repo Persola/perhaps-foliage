@@ -1,7 +1,7 @@
 // @flow
-import type { reduxStore } from '../types/redux-store'
+import type { ReduxStore } from '../types/redux-store'
 
-export default (key: string, editorStateStore: reduxStore) => {
+export default (key: string, editorStateStore: ReduxStore) => {
   const editorState = editorStateStore.getState();
   const value = (
     ['0', '1'].includes(key)

@@ -1,9 +1,9 @@
 // @flow
-import type { syno } from '../syno'
+import type { Syno } from '../syno'
 
-export type navigate = {
+export type Navigate = {
   type: 'NAVIGATE',
   direction: ('out' | 'in' | 'prev' | 'next'),
-  oldFocusedNode: syno,
-  oldParent: (syno | false)
+  oldFocusedNode: Syno,
+  oldParent: (Syno | false)
 }

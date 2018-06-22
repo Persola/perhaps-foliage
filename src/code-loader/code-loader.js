@@ -1,15 +1,15 @@
 // @noflow because requires don't fit their types
-import type { syno } from '../types/syno';
-import type { functionCall } from '../types/syntactic-nodes/function-call.js'
+import type { Syno } from '../types/syno';
+import type { FunctionCall } from '../types/syntactic-nodes/function-call.js'
 
-const primitives: functionCall = require('../static/primitives.yml');
-const falseLiteral: functionCall = require('../static/false-literal.yml');
-const proxyNorCall: functionCall = require('../static/proxy-nor-call.yml');
-const norCall: functionCall = require('../static/nor-call.yml');
-const norDef: functionCall = require('../static/nor-def.yml');
-const orCall: functionCall = require('../static/or-call.yml');
+const primitives: FunctionCall = require('../static/primitives.yml');
+const falseLiteral: FunctionCall = require('../static/false-literal.yml');
+const proxyNorCall: FunctionCall = require('../static/proxy-nor-call.yml');
+const norCall: FunctionCall = require('../static/nor-call.yml');
+const norDef: FunctionCall = require('../static/nor-def.yml');
+const orCall: FunctionCall = require('../static/or-call.yml');
 
-export default (name: ?string): syno => {
+export default (name: ?string): Syno => {
   switch (name) {
     case 'primitives': {
       return primitives;

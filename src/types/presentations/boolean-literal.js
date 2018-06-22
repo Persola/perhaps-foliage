@@ -1,9 +1,9 @@
 // @flow
-import type { synoId } from '../syno-id'
+import type { SynoId } from '../syno-id'
 
-export type booleanLiteralPres = {
+export type BooleanLiteralPres = {
   syntype: 'booleanLiteral',
-  synoId: synoId,
+  synoId: SynoId,
   value: boolean,
   focused: boolean
 }

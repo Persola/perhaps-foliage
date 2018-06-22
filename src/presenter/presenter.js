@@ -3,26 +3,17 @@ import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
 import presentFocusedSyno from './presenters/present-focused-syno.js'
 import presentSyno from './presenters/present-syno.js'
 
-import type { editorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
-
-import type { syno } from '../types/syno.js' // eslint-disable-line no-unused-vars
-import type { booleanLiteral } from '../types/syntactic-nodes/boolean-literal.js' // eslint-disable-line no-unused-vars
-import type { functionCall } from '../types/syntactic-nodes/function-call.js' // eslint-disable-line no-unused-vars
-
-import type { editorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
-import type { presentationGraph } from '../types/presentations/presentation-graph.js' // eslint-disable-line no-unused-vars
-import type { booleanLiteralPres } from '../types/presentations/boolean-literal.js' // eslint-disable-line no-unused-vars
-import type { functionCallPres } from '../types/presentations/function-call.js' // eslint-disable-line no-unused-vars
-
-import type { reduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
-import type { aRenderer } from '../types/renderer.js' // eslint-disable-line no-unused-vars
+import type { EditorState } from '../types/editor-state.js' // eslint-disable-line no-unused-vars
+import type { EditorPresentation } from '../types/presentations/editor-presentation.js' // eslint-disable-line no-unused-vars
+import type { ReduxStore } from '../types/redux-store.js' // eslint-disable-line no-unused-vars
+import type { Renderer } from '../types/renderer.js' // eslint-disable-line no-unused-vars
 
 export default class Presenter {
-  editorStateStore: reduxStore;
-  renderer: aRenderer;
+  editorStateStore: ReduxStore;
+  renderer: Renderer;
 
   constructor(
-    editorStateStore: reduxStore,
+    editorStateStore: ReduxStore,
     renderer: Object
   ) {
     this.editorStateStore = editorStateStore;
@@ -34,12 +25,12 @@ export default class Presenter {
   }
 
   present() {
-    const editorState: editorState = this.editorStateStore.getState();
+    const editorState: EditorState = this.editorStateStore.getState();
     const presentation = this.generatePresentation(editorState);
     this.renderer.render(presentation, editorState.resultOutdated);
   }
 
-  generatePresentation(editorState: editorState): editorPresentation {
+  generatePresentation(editorState: EditorState): EditorPresentation {
     const { graphs, stagedNodeId, resultNodeId } = editorState
     const getSyno = createSynoFetcher(graphs);
     const stagedSyno = stagedNodeId ? graphs[stagedNodeId] : false;

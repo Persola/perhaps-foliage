@@ -1,5 +1,5 @@
 // @flow
-export type syntype = (
+export type Syntype = (
   | 'booleanLiteral'
   | 'functionCall'
   | 'functionDefinition'

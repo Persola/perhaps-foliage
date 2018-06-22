@@ -1,7 +1,7 @@
 // @flow
-import type { interpretationResolutionFailure } from './interpretation-resolution-failure'
-import type { interpretationResolutionSuccess } from './interpretation-resolution-success'
+import type { InterpretationResolutionFailure } from './interpretation-resolution-failure'
+import type { InterpretationResolutionSuccess } from './interpretation-resolution-success'
 
-export type interpretationResolution = ( // "disjount union type"
-  interpretationResolutionFailure | interpretationResolutionSuccess
+export type InterpretationResolution = ( // "disjount union type"
+  InterpretationResolutionFailure | InterpretationResolutionSuccess
 )

@@ -1,8 +1,8 @@
 // @flow
-import type { resultNodeId } from '../../types/editor-state/result-node-id'
-import type { reduxAction } from '../../types/redux-action'
+import type { ResultNodeId } from '../../types/editor-state/result-node-id'
+import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: resultNodeId, action: reduxAction): resultNodeId => {
+export default (oldState: ResultNodeId, action: ReduxAction): ResultNodeId => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return oldState;

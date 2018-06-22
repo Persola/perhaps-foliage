@@ -1,6 +1,6 @@
 // @flow
-export type htmlElement = {
-  parentElement: htmlElement,
+export type HtmlElement = {
+  parentElement: HtmlElement,
   className: string,
   attributes: {
     'data-syno-id': string

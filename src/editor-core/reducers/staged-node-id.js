@@ -1,11 +1,11 @@
 // @flow
 import typedValues from '../../flow-pacifiers/typed-values'
 
-import type { stagedNodeId } from '../../types/editor-state/staged-node-id'
-import type { synoRef } from '../../types/syno-ref'
-import type { reduxAction } from '../../types/redux-action'
+import type { StagedNodeId } from '../../types/editor-state/staged-node-id'
+import type { SynoRef } from '../../types/syno-ref'
+import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
+export default (oldState: StagedNodeId, action: ReduxAction): StagedNodeId => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;
@@ -29,7 +29,7 @@ export default (oldState: stagedNodeId, action: reduxAction): stagedNodeId => {
             oldFocusedNode.syntype === 'functionCall' &&
             Object.keys(oldFocusedNode.argumentz).length > 0
           ) {
-            const argumentRef: synoRef = typedValues(oldFocusedNode.argumentz)[0];
+            const argumentRef: SynoRef = typedValues(oldFocusedNode.argumentz)[0];
             newStagedNodeId = argumentRef.id;
           } else {
             throw new Error('navigate failed; no argumentz!');

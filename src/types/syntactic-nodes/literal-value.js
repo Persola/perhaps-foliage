@@ -1,8 +1,8 @@
 // @flow
-import type { functionDefinition } from './function-definition'
-import type { booleanLiteral } from './boolean-literal'
+import type { FunctionDefinition } from './function-definition'
+import type { BooleanLiteral } from './boolean-literal'
 
-export type literalValue = (
-  | booleanLiteral
-  | functionDefinition
+export type LiteralValue = (
+  | BooleanLiteral
+  | FunctionDefinition
 )

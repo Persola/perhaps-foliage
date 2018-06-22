@@ -1,12 +1,12 @@
 // @flow
-import type { synoId } from '../syno-id'
-import type { synoRef } from '../syno-ref'
+import type { SynoId } from '../syno-id'
+import type { SynoRef } from '../syno-ref'
 
-export type functionDefinition = {
-  id: synoId,
-  parent: (synoRef | false),
+export type FunctionDefinition = {
+  id: SynoId,
+  parent: (SynoRef | false),
   syntype: 'functionDefinition',
   name: string,
-  body: synoRef,
-  parameterz: { [slotName: string]: synoRef }
+  body: SynoRef,
+  parameterz: { [slotName: string]: SynoRef }
 }

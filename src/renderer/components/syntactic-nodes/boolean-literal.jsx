@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import type { booleanLiteralPres } from '../../../types/presentations/boolean-literal'
+import type { BooleanLiteralPres } from '../../../types/presentations/boolean-literal'
 
 type Props = {
-  codePresentation: booleanLiteralPres
+  codePresentation: BooleanLiteralPres
 }
 
 export default (props: Props) => {

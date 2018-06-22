@@ -1,12 +1,12 @@
 // @flow
-import type { booleanLiteral } from './syntactic-nodes/boolean-literal'
-import type { functionCall } from './syntactic-nodes/function-call'
-import type { functionDefinition } from './syntactic-nodes/function-definition'
-import type { variableRef } from './syntactic-nodes/variable-ref'
+import type { BooleanLiteral } from './syntactic-nodes/boolean-literal'
+import type { FunctionCall } from './syntactic-nodes/function-call'
+import type { FunctionDefinition } from './syntactic-nodes/function-definition'
+import type { VariableRef } from './syntactic-nodes/variable-ref'
 
-export type valueSyno = (
-  | booleanLiteral
-  | functionCall
-  | functionDefinition
-  | variableRef
+export type ValueSyno = (
+  | BooleanLiteral
+  | FunctionCall
+  | FunctionDefinition
+  | VariableRef
 )

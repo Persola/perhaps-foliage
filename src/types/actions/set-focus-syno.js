@@ -1,7 +1,7 @@
 // @flow
-import type { synoId } from '../syno-id'
+import type { SynoId } from '../syno-id'
 
-export type setFocusSyno = {
+export type SetFocusSyno = {
   type: 'SET_FOCUS_SYNO',
-  synoId: synoId
+  synoId: SynoId
 }

@@ -1,10 +1,10 @@
 // @flow
-import type { functionDefinition } from '../../../types/syntactic-nodes/function-definition' // eslint-disable-line no-unused-vars
-import type { literalValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
+import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition' // eslint-disable-line no-unused-vars
+import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
 
 export default (
-  resolvedCallee: functionDefinition,
-  interpretedArgs: {[slot: string]: literalValue},
+  resolvedCallee: FunctionDefinition,
+  interpretedArgs: {[slot: string]: LiteralValue},
 ) => {
   const paramSlots = Object.keys(resolvedCallee.parameterz);
   const argSlots = Object.keys(interpretedArgs);

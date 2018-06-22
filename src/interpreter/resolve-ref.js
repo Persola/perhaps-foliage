@@ -1,7 +1,6 @@
 // @flow
-import type { variableRef } from '../types/syntactic-nodes/variable-ref' // eslint-disable-line no-unused-vars
-import type { literalValue } from '../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
+import type { LiteralValue } from '../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
 
-export default (parentScope: {}, slotName: string): literalValue => {
+export default (parentScope: {}, slotName: string): LiteralValue => {
   return parentScope[slotName];
 }

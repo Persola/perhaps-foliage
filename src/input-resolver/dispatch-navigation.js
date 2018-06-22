@@ -1,13 +1,14 @@
 // @flow
-import type { reduxStore } from '../types/redux-store'
-import type { parentSynoRef } from '../types/parent-syno-ref'
-import type { syno } from '../types/syno'
+import type { ReduxStore } from '../types/redux-store'
+import type { ParentSynoRef } from '../types/parent-syno-ref'
+import type { Syno } from '../types/syno'
+import type { EditorState } from '../types/editor-state'
 
-export default (key: string, editorStateStore: reduxStore) => {
-  const editorState: editorState = editorStateStore.getState();
-  const oldFocusedNode: syno = editorState.graphs[editorState.stagedNodeId];
-  const oldParentRef: parentSynoRef = oldFocusedNode.parent;
-  const oldParent: (syno | false) = oldParentRef
+export default (key: string, editorStateStore: ReduxStore) => {
+  const editorState: EditorState = editorStateStore.getState();
+  const oldFocusedNode: Syno = editorState.graphs[editorState.stagedNodeId];
+  const oldParentRef: ParentSynoRef = oldFocusedNode.parent;
+  const oldParent: (Syno | false) = oldParentRef
     ? editorState.graphs[oldParentRef.id]
     : false;
   let direction;

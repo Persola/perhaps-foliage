@@ -1,4 +1,4 @@
 // @flow
-import type { synoId } from './syno-id'
+import type { SynoId } from './syno-id'
 
-export type graphId = synoId
+export type GraphId = SynoId

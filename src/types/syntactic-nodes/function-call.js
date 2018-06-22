@@ -1,11 +1,11 @@
 // @flow
-import type { synoId } from '../syno-id'
-import type { synoRef } from '../syno-ref'
+import type { SynoId } from '../syno-id'
+import type { SynoRef } from '../syno-ref'
 
-export type functionCall = {
-  id: synoId,
-  parent: (synoRef | false),
+export type FunctionCall = {
+  id: SynoId,
+  parent: (SynoRef | false),
   syntype: 'functionCall',
-  callee: synoRef,
-  argumentz: {[string]: synoRef}
+  callee: SynoRef,
+  argumentz: {[string]: SynoRef}
 }

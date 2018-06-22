@@ -1,12 +1,12 @@
 // @flow
-import type { argumentz } from './argumentz'
-import type { synoId } from '../syno-id'
+import type { Argumentz } from './argumentz'
+import type { SynoId } from '../syno-id'
 
-export type functionCallPres = {
+export type FunctionCallPres = {
   syntype: 'functionCall',
-  synoId: synoId,
+  synoId: SynoId,
   name: string,
-  argumentz: argumentz,
+  argumentz: Argumentz,
   resolved: boolean,
   focused: boolean
 }

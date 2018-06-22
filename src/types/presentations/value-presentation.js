@@ -1,11 +1,11 @@
 // @flow
-import type { booleanLiteralPres } from './boolean-literal'
-import type { functionCallPres } from './function-call'
-import type { functionDefPres } from './function-definition'
+import type { BooleanLiteralPres } from './boolean-literal'
+import type { FunctionCallPres } from './function-call'
+import type { FunctionDefPres } from './function-definition'
 
 export type valuePresentation = (
-  | booleanLiteralPres
-  | functionCallPres
-  | functionDefPres
+  | BooleanLiteralPres
+  | FunctionCallPres
+  | FunctionDefPres
   | false
 )

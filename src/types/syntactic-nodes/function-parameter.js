@@ -1,12 +1,12 @@
 // @flow
-import type { synoId } from '../syno-id'
-import type { synoRef } from '../syno-ref'
-import type { syntype } from '../syntype.js'
+import type { SynoId } from '../syno-id'
+import type { SynoRef } from '../syno-ref'
+import type { Syntype } from '../syntype.js'
 
-export type functionParameter = {
-  id: synoId,
-  parent: (synoRef | false),
+export type FunctionParameter = {
+  id: SynoId,
+  parent: (SynoRef | false),
   syntype: 'functionParameter',
   name: string,
-  valueKlass: syntype
+  valueKlass: Syntype
 }

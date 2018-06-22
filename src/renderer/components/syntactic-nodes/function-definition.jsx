@@ -3,17 +3,17 @@ import React from 'react';
 import FunctionParameter from './function-parameter.jsx'
 import NamePart from './../vis/name-part.jsx'
 
-import type { functionDefPres } from '../../../types/presentations/function-definition'
-import type { functionParameterPres } from '../../../types/presentations/function-parameter'
+import type { FunctionDefPres } from '../../../types/presentations/function-definition'
+import type { FunctionParameterPres } from '../../../types/presentations/function-parameter'
 
 type Props = {
-  codePresentation: functionDefPres
+  codePresentation: FunctionDefPres
 }
 
 export default (props: Props) => {
-  const codePresentation: functionDefPres = props.codePresentation;
+  const codePresentation: FunctionDefPres = props.codePresentation;
   const { name } = codePresentation;
-  const parameterz: functionParameterPres[] = codePresentation.parameterz;
+  const parameterz: FunctionParameterPres[] = codePresentation.parameterz;
   const classes = `syno same-line expression function-definition ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (

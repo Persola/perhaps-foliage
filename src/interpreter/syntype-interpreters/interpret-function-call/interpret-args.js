@@ -1,14 +1,14 @@
 // @flow
-import type { literalValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
-import type { synoRef } from '../../../types/syno-ref' // eslint-disable-line no-unused-vars
+import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value' // eslint-disable-line no-unused-vars
+import type { SynoRef } from '../../../types/syno-ref' // eslint-disable-line no-unused-vars
 
 export default (
   interpreter: Function,
   parentScope: {},
-  argumentz: {[slot: string]: synoRef},
+  argumentz: {[slot: string]: SynoRef},
   getSyno: Function
 ) => {
-  const interpretedArgs: { [string]: literalValue } = {};
+  const interpretedArgs: { [string]: LiteralValue } = {};
 
   Object.keys(argumentz).forEach((slotName: string) => {
     const argRef = argumentz[slotName];

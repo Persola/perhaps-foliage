@@ -2,10 +2,10 @@
 import dispatchNodeReplacement from './dispatch-node-replacement.js'
 import dispatchNavigation from './dispatch-navigation.js'
 
-import type { reduxStore } from '../types/redux-store'
-import type { sideEffectFunction } from '../types/side-effect-function'
+import type { ReduxStore } from '../types/redux-store'
+import type { SideEffectFunction } from '../types/side-effect-function'
 
-export default (editorStateStore: reduxStore, interpret: sideEffectFunction) => {
+export default (editorStateStore: ReduxStore, interpret: SideEffectFunction) => {
   return (key: string) => {
     if(['0', '1', 'f', 't'].includes(key)) {
       dispatchNodeReplacement(key, editorStateStore);

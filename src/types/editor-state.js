@@ -1,12 +1,12 @@
 // @flow
-import type { synoMap } from './editor-state/syno-map'
-import type { stagedNodeId } from './editor-state/staged-node-id'
-import type { resultNodeId } from './editor-state/result-node-id'
-import type { resultOutdated } from './editor-state/result-outdated'
+import type { SynoMap } from './editor-state/syno-map'
+import type { StagedNodeId } from './editor-state/staged-node-id'
+import type { ResultNodeId } from './editor-state/result-node-id'
+import type { ResultOutdated } from './editor-state/result-outdated'
 
-export type editorState = {
-  graphs: synoMap,
-  stagedNodeId: stagedNodeId,
-  resultNodeId: resultNodeId,
-  resultOutdated: resultOutdated
+export type EditorState = {
+  graphs: SynoMap,
+  stagedNodeId: StagedNodeId,
+  resultNodeId: ResultNodeId,
+  resultOutdated: ResultOutdated
 }

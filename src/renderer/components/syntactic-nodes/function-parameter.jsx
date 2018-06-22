@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 
-import type { functionParameterPres } from '../../../types/presentations/function-parameter'
+import type { FunctionParameterPres } from '../../../types/presentations/function-parameter'
 
 type Props = {
-  codePresentation: functionParameterPres
+  codePresentation: FunctionParameterPres
 }
 
 export default (props: Props) => {
-  const codePresentation: functionParameterPres = props.codePresentation;
+  const codePresentation: FunctionParameterPres = props.codePresentation;
   const classes = `syno same-line leaf expression bubble-even function-parameter ${codePresentation.focused ? 'focused' : 'unfocused'}`;
 
   return (

@@ -1,20 +1,20 @@
 // @flow
 import resolveRef from '../resolve-ref.js'
-import norPrimitiveId from '../../nor-primitive-id.js'
+import NorPrimitiveId from '../../nor-primitive-id.js'
 import typedValues from '../../flow-pacifiers/typed-values'
 import throwIfParametersUnsatisfied from './interpret-function-call/throw-if-parameters-unsatisfied'
 import interpretArgs from './interpret-function-call/interpret-args'
 import NOR_Primitive from './interpret-function-call/NOR-primitive.js'
 
-import type { interpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
-import type { functionCall } from '../../types/syntactic-nodes/function-call' // eslint-disable-line no-unused-vars
+import type { InterpretationResolution } from '../../types/interpreter/interpretation-resolution' // eslint-disable-line no-unused-vars
+import type { FunctionCall } from '../../types/syntactic-nodes/function-call' // eslint-disable-line no-unused-vars
 
 export default (
   interpreter: Function,
   parentScope: {},
-  graphToInterpret: functionCall,
+  graphToInterpret: FunctionCall,
   getSyno: Function
-): interpretationResolution => {
+): InterpretationResolution => {
   const ownScope = {};
   const callee = getSyno(graphToInterpret.callee);
 
@@ -45,7 +45,7 @@ export default (
   });
 
   let functionResolution;
-  if (graphToInterpret.callee.id === norPrimitiveId) {
+  if (graphToInterpret.callee.id === NorPrimitiveId) {
     typedValues(interpretedArgs).forEach(resArg => {
       if (resArg.syntype !== 'booleanLiteral') {
         throw new Error;

@@ -1,9 +1,9 @@
 // @flow
-import type { editorState } from './editor-state'
-import type { reduxAction } from './redux-action'
+import type { EditorState } from './editor-state'
+import type { ReduxAction } from './redux-action'
 
-export type reduxStore = {
+export type ReduxStore = {
   subscribe: (Function) => void,
-  getState: () => editorState,
-  dispatch: (reduxAction) => any
+  getState: () => EditorState,
+  dispatch: (ReduxAction) => any
 }

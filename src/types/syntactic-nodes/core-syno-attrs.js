@@ -1,8 +1,8 @@
 // @flow
-import type { synoId } from '../syno-id'
-import type { synoRef } from '../syno-ref'
+import type { SynoId } from '../syno-id'
+import type { SynoRef } from '../syno-ref'
 
-export type coreSynoAttrs = {
-  id: synoId,
-  parent: (synoRef | false)
+export type CoreSynoAttrs = {
+  id: SynoId,
+  parent: (SynoRef | false)
 }

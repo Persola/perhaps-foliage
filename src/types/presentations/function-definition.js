@@ -1,11 +1,11 @@
 // @flow
-import type { synoId } from '../syno-id'
-import type { functionParameterPres } from './function-parameter'
+import type { SynoId } from '../syno-id'
+import type { FunctionParameterPres } from './function-parameter'
 
-export type functionDefPres = {
+export type FunctionDefPres = {
   syntype: 'functionDefinition',
-  synoId: synoId,
+  synoId: SynoId,
   name: string,
-  parameterz: functionParameterPres[],
+  parameterz: FunctionParameterPres[],
   focused: boolean
 }

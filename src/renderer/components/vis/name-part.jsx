@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import type { synoId } from '../../../types/syno-id'
+import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  namePart: synoId
+  namePart: SynoId
 }
 
 export default (props: Props) => {

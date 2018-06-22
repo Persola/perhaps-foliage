@@ -1,8 +1,8 @@
 // @flow
-import type { resultOutdated } from '../../types/editor-state/result-outdated'
-import type { reduxAction } from '../../types/redux-action'
+import type { ResultOutdated } from '../../types/editor-state/result-outdated'
+import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: resultOutdated, action: reduxAction): resultOutdated => {
+export default (oldState: ResultOutdated, action: ReduxAction): ResultOutdated => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return true;

@@ -1,4 +1,4 @@
 // @flow
-import type { synoRef } from './syno-ref'
+import type { SynoRef } from './syno-ref'
 
-export type parentSynoRef = (synoRef | false)
+export type ParentSynoRef = (SynoRef | false)

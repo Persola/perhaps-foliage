@@ -1,5 +1,5 @@
 // @flow
 
-export type init = {
+export type Init = {
   type: '@@redux/INIT'
 }

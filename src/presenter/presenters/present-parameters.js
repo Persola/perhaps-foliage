@@ -2,16 +2,16 @@
 import presentFunctionParameter from './present-function-parameter.js'
 import typedValues from '../../flow-pacifiers/typed-values'
 
-import type { functionParameterPres } from '../../types/presentations/function-parameter.js' // eslint-disable-line no-unused-vars
-import type { synoRef } from '../../types/syno-ref.js' // eslint-disable-line no-unused-vars
+import type { FunctionParameterPres } from '../../types/presentations/function-parameter.js' // eslint-disable-line no-unused-vars
+import type { SynoRef } from '../../types/syno-ref.js' // eslint-disable-line no-unused-vars
 
 export default (
-  parameterz: {[slotName: string]: synoRef},
+  parameterz: {[slotName: string]: SynoRef},
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): functionParameterPres[] => {
-  return typedValues(parameterz).map((paramRef: synoRef): functionParameterPres => {
+): FunctionParameterPres[] => {
+  return typedValues(parameterz).map((paramRef: SynoRef): FunctionParameterPres => {
     return presentFunctionParameter(getSyno(paramRef), scope, getSyno, focusNodeId);
   });
 };

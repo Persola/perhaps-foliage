@@ -4,10 +4,10 @@ import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
 import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
 import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
-import type { presentationGraph } from '../../types/presentations/presentation-graph'
+import type { PresentationGraph } from '../../types/presentations/presentation-graph'
 
 type Props = {
-  codePresentation: presentationGraph
+  codePresentation: PresentationGraph
 }
 
 export default (props: Props) => {

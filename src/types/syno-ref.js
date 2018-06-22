@@ -1,7 +1,7 @@
 // @flow
-import type { synoId } from './syno-id'
+import type { SynoId } from './syno-id'
 
-export type synoRef = {
+export type SynoRef = {
   synoRef: true,
-  id: synoId
+  id: SynoId
 }

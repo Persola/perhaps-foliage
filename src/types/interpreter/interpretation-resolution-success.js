@@ -1,7 +1,7 @@
 // @flow
-import type { syno } from '../syno'
+import type { Syno } from '../syno'
 
-export type interpretationResolutionSuccess = {
+export type InterpretationResolutionSuccess = {
   success: true,
-  result: syno
+  result: Syno
 }

@@ -1,5 +1,5 @@
 // @flow
 
-export type otherInit = {
+export type OtherInit = {
   type: '@@INIT'
 }

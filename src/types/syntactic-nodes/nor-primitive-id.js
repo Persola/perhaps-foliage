@@ -1,2 +1,2 @@
 // @flow
-export type norPrimitiveId = 'primitives-nor'
+export type NorPrimitiveId = 'primitives-nor'

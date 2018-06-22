@@ -1,5 +1,5 @@
 // @flow
-import type { reduxStore } from './types/redux-store'
+import type { ReduxStore } from './types/redux-store'
 
 const isSyno = el => {
   if (!el) { return false }
@@ -27,7 +27,7 @@ const containingSyno = (clickedEl: EventTarget) => {
   return (isSyno(currentEl) ? currentEl : false);
 };
 
-export default (editorStateStore: reduxStore) => {
+export default (editorStateStore: ReduxStore) => {
   return (event: Event) => {
     const syno = containingSyno(event.target);
 

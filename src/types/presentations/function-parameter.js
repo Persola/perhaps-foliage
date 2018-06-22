@@ -1,11 +1,11 @@
 // @flow
-import type { syntype } from '../syntype.js' // eslint-disable-line no-unused-vars
-import type { synoId } from '../syno-id.js' // eslint-disable-line no-unused-vars
+import type { Syntype } from '../syntype.js' // eslint-disable-line no-unused-vars
+import type { SynoId } from '../syno-id.js' // eslint-disable-line no-unused-vars
 
-export type functionParameterPres = {
+export type FunctionParameterPres = {
   syntype: 'functionParameter',
-  synoId: synoId,
+  synoId: SynoId,
   slot: string,
-  valueKlass: syntype,
+  valueKlass: Syntype,
   focused: boolean
 }

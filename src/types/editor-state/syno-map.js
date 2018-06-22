@@ -1,5 +1,5 @@
 // @flow
-import type { syno } from '../syno'
-import type { synoId } from '../syno-id'
+import type { Syno } from '../syno'
+import type { SynoId } from '../syno-id'
 
-export type synoMap = { [synoId]: syno }
+export type SynoMap = { [SynoId]: Syno }

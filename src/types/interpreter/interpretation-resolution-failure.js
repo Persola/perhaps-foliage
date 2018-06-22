@@ -1,7 +1,7 @@
 // @flow
-import type { interpretationError } from './interpretation-error'
+import type { InterpretationError } from './interpretation-error'
 
-export type interpretationResolutionFailure = {
+export type InterpretationResolutionFailure = {
   success: false,
-  error: interpretationError
+  error: InterpretationError
 }
