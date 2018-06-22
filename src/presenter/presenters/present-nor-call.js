@@ -1,5 +1,5 @@
 // @flow
-import presentArguments from './present-arguments.js'
+import presentArguments from './syntypes/present-arguments.js'
 
 import type { FunctionCall } from '../../types/syntactic-nodes/function-call.js'
 import type { FunctionCallPres } from '../../types/presentations/function-call.js'

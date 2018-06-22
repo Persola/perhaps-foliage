@@ -1,9 +1,9 @@
 // @flow
-import presentBooleanLiteral from './present-boolean-literal.js'
-import presentFunctionCall from './present-function-call.js'
-import presentFunctionDefinition from './present-function-definition.js'
-import presentFunctionParameter from './present-function-parameter.js'
-import presentVariableRef from './present-variable-ref.js'
+import presentBooleanLiteral from './syntypes/present-boolean-literal.js'
+import presentFunctionCall from './syntypes/present-function-call.js'
+import presentFunctionDefinition from './syntypes/present-function-definition.js'
+import presentFunctionParameter from './syntypes/present-function-parameter.js'
+import presentVariableRef from './syntypes/present-variable-ref.js'
 
 import type { Syno } from '../../types/syno.js'
 import type { PresentationGraph } from '../../types/presentations/presentation-graph.js'

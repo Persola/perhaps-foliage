@@ -1,6 +1,6 @@
 // @flow
-import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal.js'
-import type { BooleanLiteralPres } from '../../types/presentations/boolean-literal.js'
+import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal.js'
+import type { BooleanLiteralPres } from '../../../types/presentations/boolean-literal.js'
 
 export default (
   booleanLiteral: BooleanLiteral,

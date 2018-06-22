@@ -1,6 +1,6 @@
 // @flow
-import type { VariableRef } from '../../types/syntactic-nodes/variable-ref.js'
-import type { VariableRefPres } from '../../types/presentations/variable-ref.js'
+import type { VariableRef } from '../../../types/syntactic-nodes/variable-ref.js'
+import type { VariableRefPres } from '../../../types/presentations/variable-ref.js'
 
 export default (
   variableRef: VariableRef,

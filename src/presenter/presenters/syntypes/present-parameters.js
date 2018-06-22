@@ -1,9 +1,9 @@
 // @flow
-import presentFunctionParameter from './present-function-parameter.js'
-import typedValues from '../../flow-pacifiers/typed-values'
+import presentFunctionParameter from '../syntypes/present-function-parameter.js'
+import typedValues from '../../../flow-pacifiers/typed-values'
 
-import type { FunctionParameterPres } from '../../types/presentations/function-parameter.js'
-import type { SynoRef } from '../../types/syno-ref.js'
+import type { FunctionParameterPres } from '../../../types/presentations/function-parameter.js'
+import type { SynoRef } from '../../../types/syno-ref.js'
 
 export default (
   parameterz: {[slotName: string]: SynoRef},
