@@ -5,8 +5,11 @@ $near-white: #ffc
 $sea-blue: #045
 $verdant-green: #361
 $mustard-yellow: #d92
-$villian-laser-magenta: #d14
+$villian-laser-magenta: #e2a
 $eyesore-yellow: #ff7
+$teal: #38a
+$pumpkin: #841
+$royal-velvet: #a24
 
 body
   background-color: $charcoal
@@ -57,6 +60,7 @@ button:active
     color: $charcoal
     font-family: "Helvetica", Arial, sans-serif
     font-weight: normal
+    margin: 5px 0
 
   .leaf
     /* pad vertically to center font */
@@ -90,7 +94,7 @@ button:active
     color: $mustard-yellow
 
   .function-call
-    background-color: $sea-blue
+    background-color: $pumpkin
     color: $villian-laser-magenta
 
   .function-definition
@@ -98,8 +102,11 @@ button:active
     color: #aaa
 
   .function-parameter
-    background-color: #841
+    background-color: $royal-velvet
     color: #aaa
+
+  .variable-ref
+    color: $teal
 
   .unresolved
     color: #ddd
@@ -113,9 +120,9 @@ button:active
 
   @keyframes pulse
     0%
-      filter: brightness(116%)
+      filter: brightness(112%)
     100%
-      filter: brightness(92%)
+      filter: brightness(94%)
 
   .same-line
     display: inline-block

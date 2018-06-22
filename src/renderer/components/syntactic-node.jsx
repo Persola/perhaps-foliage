@@ -4,6 +4,7 @@ import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
 import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
 import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
+import VariableRef from './syntactic-nodes/variable-ref.jsx'
 import type { PresentationGraph } from '../../types/presentations/presentation-graph'
 
 type Props = {
@@ -38,8 +39,13 @@ export default (props: Props) => {
         <FunctionParameter codePresentation={codePresentation} />
       )
     }
+    case 'variableRef': {
+      return(
+        <VariableRef codePresentation={codePresentation} />
+      )
+    }
     default: {
-      throw new Error('no types yet');
+      throw new Error(`unrecognized type: ${codePresentation.syntype}`);
     }
   }
 };

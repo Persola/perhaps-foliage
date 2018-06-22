@@ -2,6 +2,7 @@
 import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
+import typedValues from '../../../flow-pacifiers/typed-values'
 
 import type { PresentationGraph } from '../../../types/presentations/presentation-graph'
 import type { FunctionCallPres } from '../../../types/presentations/function-call'
@@ -13,7 +14,7 @@ type Props = {
 
 const argumentEls = (argumentzz: Argumentz) => {
   return (
-    argumentzz.map((arg: PresentationGraph, ind) => {
+    typedValues(argumentzz).map((arg: PresentationGraph, ind) => {
       return (
         <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
       )

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import SyntacticNode from '../syntactic-node.jsx'
 import FunctionParameter from './function-parameter.jsx'
 import NamePart from './../vis/name-part.jsx'
 
@@ -26,6 +27,7 @@ export default (props: Props) => {
           )
         })
       }
+      <SyntacticNode codePresentation={codePresentation.body} />
     </div>
   );
 };

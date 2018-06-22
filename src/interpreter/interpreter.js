@@ -6,31 +6,31 @@ import type { InterpretationResolution } from '../types/interpreter/interpretati
 import type { Syno } from '../types/syno'
 
 const interpreter = (
-  stagedSyno: Syno,
+  syno: Syno,
   scope: {},
   getSyno: Function
 ): InterpretationResolution => {
-  switch (stagedSyno.syntype) {
+  switch (syno.syntype) {
     case 'booleanLiteral': {
       return {
         success: true,
-        result: stagedSyno
+        result: syno
       };
     }
     case 'functionCall': {
-      return interpretFunctionCall(interpreter, scope, stagedSyno, getSyno);
+      return interpretFunctionCall(interpreter, scope, syno, getSyno);
     }
     case 'functionDefinition': {
       return {
         success: true,
-        result: stagedSyno
+        result: syno
       };
     }
     case 'variableRef': {
       // should check type
-      const value = resolveRef(scope, stagedSyno.name);
+      const value = resolveRef(scope, syno.name);
       if ((typeof value) !== 'object') {
-        throw new Error(`variable '${stagedSyno.name}' resolved wrong`);
+        throw new Error(`variable '${syno.name}' resolved wrong`);
       }
       return {
         success: true,

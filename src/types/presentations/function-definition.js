@@ -1,4 +1,5 @@
 // @flow
+import type { Syno } from '../syno'
 import type { SynoId } from '../syno-id'
 import type { FunctionParameterPres } from './function-parameter'
 
@@ -7,5 +8,6 @@ export type FunctionDefPres = {
   synoId: SynoId,
   name: string,
   parameterz: FunctionParameterPres[],
-  focused: boolean
+  focused: boolean,
+  body: Syno
 }
