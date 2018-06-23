@@ -4,37 +4,38 @@ import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
 import typedValues from '../../../flow-pacifiers/typed-values'
 
-import type { Presno } from '../../../types/presentations/presno'
 import type { FunctionCallPres } from '../../../types/presentations/function-call'
 import type { Argumentz } from '../../../types/presentations/argumentz'
+import type { Presno } from '../../../types/presentations/presno'
+import type { PresnoRef } from '../../../types/presentations/presno-ref'
+import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  codePresentation: FunctionCallPres
+  getPresno: (SynoId) => Presno,
+  presno: FunctionCallPres
 }
 
-const argumentEls = (argumentzz: Argumentz) => {
+const argumentEls = (getPresno: (SynoId) => Presno, argumentzz: Argumentz) => {
   return (
-    typedValues(argumentzz).map((arg: Presno, ind) => {
+    typedValues(argumentzz).map((argRef: PresnoRef, ind) => {
       return (
-        <SyntacticNode key={`arg_${ind + 1}`} codePresentation={arg} />
+        <SyntacticNode key={`arg_${ind + 1}`} getPresno={getPresno} presnoId={argRef.id} />
       )
     })
   );
 }
 
 export default (props: Props) => {
-  const codePresentation: FunctionCallPres = props.codePresentation;
-  const { name } = codePresentation;
+  const { getPresno, presno } = props;
+  const { name } = presno;
 
-  const argumentzz: Argumentz = codePresentation.argumentz;
-  const classes = `syno same-line expression ${codePresentation.resolved ? 'function-call' : 'unresolved'} ${codePresentation.focused ? 'focused' : 'unfocused'}`;
+  const argumentzz = argumentEls(getPresno, presno.argumentz);
+  const classes = `syno same-line expression ${presno.resolved ? 'function-call' : 'unresolved'} ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (
-    <div className={classes} data-syno-id={codePresentation.synoId}>
+    <div className={classes} data-syno-id={presno.synoId}>
       <NamePart namePart={name} />
-      {
-        argumentEls(argumentzz)
-      }
+      { argumentzz }
     </div>
   );
 };

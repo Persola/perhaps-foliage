@@ -1,9 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
+import type { CorePresnoAttrs } from './core-presno-attrs'
+import type { BooleanLiteralPresAttrs } from './presno-attrs/boolean-literal-attrs'
 
-export type BooleanLiteralPres = {
-  syntype: 'booleanLiteral',
-  synoId: SynoId,
-  value: boolean,
-  focused: boolean
-}
+export type BooleanLiteralPres = BooleanLiteralPresAttrs & CorePresnoAttrs

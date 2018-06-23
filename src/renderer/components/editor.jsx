@@ -27,7 +27,7 @@ export default (props: Props) => {
       <InterpretButton interpret={interpret} />
       <CodeView
         key="result"
-        codePresentation={result || false}
+        codePresentation={result}
         outdated={resultOutdated}
       />
     </div>

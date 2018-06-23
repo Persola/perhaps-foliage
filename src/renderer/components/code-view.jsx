@@ -2,10 +2,12 @@
 import React from 'react';
 import SyntacticNode from './syntactic-node.jsx';
 import OutdatedMessage from './outdated-message.jsx';
-import type { Presno } from '../../types/presentations/presno'
+import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
+
+import type { Prestree } from '../../types/presentations/prestree'
 
 type Props = {
-  codePresentation: Presno | false,
+  codePresentation: Prestree | false,
   outdated: boolean
 }
 
@@ -24,8 +26,10 @@ export default (props: Props) => {
       </div>
     );
   } else {
+    const { presnos, rootId } = codePresentation;
+    const getPresno = createPresnoFetcher(presnos);
     content = (
-      <SyntacticNode codePresentation={codePresentation} />
+      <SyntacticNode getPresno={getPresno} presnoId={rootId} />
     );
   }
 

@@ -6,27 +6,49 @@ import presentFunctionParameter from './syntypes/present-function-parameter.js'
 import presentVariableRef from './syntypes/present-variable-ref.js'
 
 import type { Syno } from '../../types/syno.js'
-import type { Presno } from '../../types/presentations/presno.js'
+import type { SynoId } from '../../types/syno-id.js'
+import type { PresnoMap } from '../../types/presentations/presno-map.js'
 
 export default (
+  presnoMap: PresnoMap,
+  parentId: (SynoId | false),
   syno: (Syno | false),
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): Presno => {
+): SynoId => {
+  let presentationAttrs: {};
   if (syno === false) {
-    return false;
+    throw new Error('pressyno syno can be false?!');
   } else if (syno.syntype === 'booleanLiteral') {
-    return presentBooleanLiteral(syno, focusNodeId);
+    presentationAttrs = presentBooleanLiteral(presnoMap, syno, focusNodeId);
   } else if (syno.syntype === 'functionCall') {
-    return presentFunctionCall(syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionCall(presnoMap, syno, scope, getSyno, focusNodeId);
   } else if (syno.syntype === 'functionDefinition') {
-    return presentFunctionDefinition(syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionDefinition(presnoMap, syno, scope, getSyno, focusNodeId);
   } else if (syno.syntype === 'functionParameter') {
-    return presentFunctionParameter(syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionParameter(presnoMap, syno, scope, getSyno, focusNodeId);
   } else if (syno.syntype === 'variableRef') {
-    return presentVariableRef(syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentVariableRef(presnoMap, syno, scope, getSyno, focusNodeId);
   } else {
     throw new Error('should be unreachable (new type?)')
   }
+
+  const parent = !parentId ? false : {
+    presnoRef: true,
+    id: parentId
+  };
+
+  const presentation: any = Object.assign({}, presentationAttrs, {
+    synoId: syno.id,
+    parent
+  });
+
+  if ((typeof presnoMap[presentation.synoId]) !== 'undefined' ) {
+    throw new Error('attempted to overwrite presno!');
+  }
+
+  presnoMap[presentation.synoId] = presentation;
+
+  return presentation.synoId;
 }

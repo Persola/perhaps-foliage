@@ -1,4 +1,4 @@
 // @flow
-import type { Presno } from './presno'
+import type { PresnoRef } from './presno-ref'
 
-export type Argumentz = {[slotName: string]: Presno}
+export type Argumentz = {[slotName: string]: PresnoRef}

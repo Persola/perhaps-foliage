@@ -5,16 +5,18 @@ import presentNorCall from '../present-nor-call.js'
 
 import type { FunctionCall } from '../../../types/syntactic-nodes/function-call.js'
 import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition.js'
-import type { FunctionCallPres } from '../../../types/presentations/function-call.js'
+import type { FunctionCallPresAttrs } from '../../../types/presentations/presno-attrs/function-call-attrs.js'
+import type { PresnoMap } from '../../../types/presentations/presno-map.js'
 
 export default (
+  presnoMap: PresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): FunctionCallPres => {
+): FunctionCallPresAttrs => {
   if (funkshunCall.callee.id === NorPrimitiveId) {
-    return(presentNorCall(funkshunCall, scope, getSyno, focusNodeId));
+    return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focusNodeId));
   }
 
   const callee: FunctionDefinition = getSyno(funkshunCall.callee);
@@ -27,9 +29,8 @@ export default (
 
   return {
     syntype: 'functionCall',
-    synoId: funkshunCall.id,
     name: callee.name,
-    argumentz: presentArguments(funkshunCall.argumentz, scope, getSyno, focusNodeId),
+    argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focusNodeId),
     resolved,
     focused: (funkshunCall.id === focusNodeId)
   }

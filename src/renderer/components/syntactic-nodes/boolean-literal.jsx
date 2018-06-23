@@ -1,22 +1,25 @@
 // @flow
 import React from 'react';
 import type { BooleanLiteralPres } from '../../../types/presentations/boolean-literal'
+import type { Presno } from '../../../types/presentations/presno'
+import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  codePresentation: BooleanLiteralPres
+  getPresno: (SynoId) => Presno,
+  presno: BooleanLiteralPres
 }
 
 export default (props: Props) => {
-  const { codePresentation } = props;
-  if (codePresentation.syntype !== 'booleanLiteral') {
+  const { presno } = props;
+  if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `syno same-line leaf bubble-even argument boolean-literal ${codePresentation.focused ? 'focused' : 'unfocused'}`
+  const classes = `syno same-line leaf bubble-even argument boolean-literal ${presno.focused ? 'focused' : 'unfocused'}`
 
   return (
-    <div className={classes} data-syno-id={codePresentation.synoId}>
-      {String(codePresentation.value)}
+    <div className={classes} data-syno-id={presno.synoId}>
+      {String(presno.value)}
     </div>
   );
 };

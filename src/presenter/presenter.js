@@ -1,7 +1,7 @@
 // @flow
 import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js'
-import presentFocusedSyno from './presenters/present-focused-syno.js'
-import presentSyno from './presenters/present-syno.js'
+import presentFocusedSyntree from './presenters/present-focused-syntree.js'
+import presentSyntree from './presenters/present-syntree.js'
 
 import type { EditorState } from '../types/editor-state.js'
 import type { EditorPresentation } from '../types/presentations/editor-presentation.js'
@@ -41,8 +41,8 @@ export default class Presenter {
     }
 
     return {
-      stage: presentFocusedSyno(stagedSyno, {}, getSyno, stagedNodeId),
-      result: presentSyno(resultSyno, {}, getSyno, false)
+      stage: (!stagedSyno ? false : presentFocusedSyntree(stagedSyno, {}, getSyno, stagedNodeId)),
+      result: (!resultSyno ? false : presentSyntree(resultSyno, {}, getSyno, false))
     };
   }
 }

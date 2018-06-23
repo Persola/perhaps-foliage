@@ -1,10 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id.js'
+import type { CorePresnoAttrs } from './core-presno-attrs'
+import type { VariableRefPresAttrs } from './presno-attrs/variable-ref-attrs'
 
-export type VariableRefPres = {
-  synoId: SynoId,
-  syntype: 'variableRef',
-  valueSyntype: 'booleanLiteral',
-  name: string,
-  focused: boolean
-}
+export type VariableRefPres = VariableRefPresAttrs & CorePresnoAttrs

@@ -1,11 +1,5 @@
 // @flow
-import type { Syntype } from '../syntype.js'
-import type { SynoId } from '../syno-id.js'
+import type { CorePresnoAttrs } from './core-presno-attrs'
+import type { FunctionParameterPresAttrs } from './presno-attrs/function-parameter-attrs'
 
-export type FunctionParameterPres = {
-  syntype: 'functionParameter',
-  synoId: SynoId,
-  slot: string,
-  valueSyntype: Syntype,
-  focused: boolean
-}
+export type FunctionParameterPres = FunctionParameterPresAttrs & CorePresnoAttrs

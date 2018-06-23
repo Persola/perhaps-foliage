@@ -4,30 +4,34 @@ import SyntacticNode from '../syntactic-node.jsx'
 import FunctionParameter from './function-parameter.jsx'
 import NamePart from './../vis/name-part.jsx'
 
-import type { FunctionDefPres } from '../../../types/presentations/function-definition'
+import type { Presno } from '../../../types/presentations/presno'
+import type { SynoId } from '../../../types/syno-id'
+import type { PresnoRef } from '../../../types/presentations/presno-ref'
 import type { FunctionParameterPres } from '../../../types/presentations/function-parameter'
+import type { FunctionDefPres } from '../../../types/presentations/function-definition'
 
 type Props = {
-  codePresentation: FunctionDefPres
+  getPresno: (SynoId) => Presno,
+  presno: FunctionDefPres
 }
 
 export default (props: Props) => {
-  const codePresentation: FunctionDefPres = props.codePresentation;
-  const { name } = codePresentation;
-  const parameters: FunctionParameterPres[] = codePresentation.parameters;
-  const classes = `syno same-line expression function-definition ${codePresentation.focused ? 'focused' : 'unfocused'}`;
+  const { getPresno, presno } = props;
+  const { name } = presno;
+  const parameters: PresnoRef[] = presno.parameters;
+  const classes = `syno same-line expression function-definition ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (
-    <div className={classes} data-syno-id={codePresentation.synoId}>
+    <div className={classes} data-syno-id={presno.synoId}>
       <NamePart namePart={name} />
       {
-        parameters.map(param => {
+        parameters.map((paramRef, ind) => {
           return(
-            <FunctionParameter key={param.slot} codePresentation={param} />
+            <SyntacticNode key={ind} getPresno={getPresno} presnoId={paramRef.id} />
           )
         })
       }
-      <SyntacticNode codePresentation={codePresentation.body} />
+      <SyntacticNode getPresno={getPresno} presnoId={presno.body.id} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ describe ('CodeView', () => {
   describe ('with normal props', () => {
     it ('renders', () => {
       expectSnapshotMatch(
-        <CodeView codePresentation={codePresentation} />
+        <CodeView presnos={presnos} presnoId={presnoId} getPresno={getPresno} />
       );
     });
   });

@@ -1,16 +1,17 @@
 // @flow
 import type { FunctionParameter } from '../../../types/syntactic-nodes/function-parameter.js'
-import type { FunctionParameterPres } from '../../../types/presentations/function-parameter.js'
+import type { FunctionParameterPresAttrs } from '../../../types/presentations/presno-attrs/function-parameter-attrs.js'
+import type { PresnoMap } from '../../../types/presentations/presno-map.js'
 
 export default (
+  presnoMap: PresnoMap,
   parameter: FunctionParameter,
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): FunctionParameterPres => {
+): FunctionParameterPresAttrs => {
   return {
     syntype: 'functionParameter',
-    synoId: parameter.id,
     slot: parameter.name,
     valueSyntype: parameter.valueSyntype,
     focused: (parameter.id === focusNodeId)

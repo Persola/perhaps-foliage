@@ -11,5 +11,4 @@ export type Presno = (
   | FunctionDefPres
   | FunctionParameterPres
   | VariableRefPres
-  | false
 )

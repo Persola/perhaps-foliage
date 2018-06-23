@@ -1,12 +1,5 @@
 // @flow
-import type { Argumentz } from './argumentz'
-import type { SynoId } from '../syno-id'
+import type { CorePresnoAttrs } from './core-presno-attrs'
+import type { FunctionCallPresAttrs } from './presno-attrs/function-call-attrs'
 
-export type FunctionCallPres = {
-  syntype: 'functionCall',
-  synoId: SynoId,
-  name: string,
-  argumentz: Argumentz,
-  resolved: boolean,
-  focused: boolean
-}
+export type FunctionCallPres = FunctionCallPresAttrs & CorePresnoAttrs
