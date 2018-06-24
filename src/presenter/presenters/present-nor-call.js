@@ -18,6 +18,7 @@ export default (
     syntype: 'functionCall',
     name: 'NOR',
     argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focusNodeId),
+    bodyRef: false,
     resolved: true,
     focused
   }

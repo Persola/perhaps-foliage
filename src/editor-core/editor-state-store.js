@@ -9,10 +9,10 @@ import resultOutdatedReducer from './reducers/result-outdated.js'
 
 import type { ReduxAction } from '../types/redux-action.js'
 import type { EditorState } from '../types/editor-state.js'
-import type { SynoMap } from '../types/editor-state/syno-map.js'
+import type { SynoMap } from '../types/syno-map.js'
 
 const primitiveGraphs: SynoMap = codeLoader('primitives');
-const seedGraphs: SynoMap = codeLoader('norDef');
+const seedGraphs: SynoMap = codeLoader('proxyNorCall');
 const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
   focusedSynoId: Object.keys(seedGraphs)[0],
@@ -25,7 +25,7 @@ const editorstateReducer = (
 ): EditorState => {
   return {
     synoMap: graphsReducer(originalState.synoMap, action),
-    focusedSynoId: focusedSynoIdReducer(originalState.focusedSynoId, action),
+    focusedSynoId: focusedSynoIdReducer(originalState.focusedSynoId, action, originalState.synoMap),
     resultSyntreeRootId: resultSyntreeRootIdReducer(originalState.resultSyntreeRootId, action),
     resultOutdated: resultOutdatedReducer(originalState.resultOutdated, action)
   }

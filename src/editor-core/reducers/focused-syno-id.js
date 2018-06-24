@@ -4,12 +4,18 @@ import typedValues from '../../flow-pacifiers/typed-values'
 import type { FocusedSynoId } from '../../types/editor-state/focused-syno-id'
 import type { Syno } from '../../types/syno'
 import type { SynoRef } from '../../types/syno-ref'
+import type { SynoMap } from '../../types/syno-map'
 import type { ReduxAction } from '../../types/redux-action'
 
-const childRefs = (syno: Syno): SynoRef[] => {
+const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
   switch (syno.syntype) {
     case 'functionCall': {
-      return typedValues(syno.argumentz);
+      const childRefs = typedValues(syno.argumentz);
+      const calleeSyno = synoMap[syno.callee.id];
+      if (calleeSyno.syntype === 'functionDefinition') {
+        childRefs.push(syno.callee);
+      }
+      return childRefs;
     }
     case 'functionDefinition': {
       const childRefs = typedValues(syno.parameters);
@@ -22,7 +28,7 @@ const childRefs = (syno: Syno): SynoRef[] => {
   }
 };
 
-export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => {
+export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap): FocusedSynoId => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;
@@ -42,8 +48,8 @@ export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => 
           break;
         }
         case 'in': {
-          if (childRefs(oldFocusedSyno).length > 0) {
-            newStagedNodeId = childRefs(oldFocusedSyno)[0].id;
+          if (childRefs(oldFocusedSyno, synoMap).length > 0) {
+            newStagedNodeId = childRefs(oldFocusedSyno, synoMap)[0].id;
           } else {
             throw new Error('navigate failed; no children!');
           }
@@ -51,8 +57,9 @@ export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => 
         }
         case 'prev': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          if (childRefs(oldParent).length > 0) {
-            const oldFocusedSynoBirthOrder = childRefs(oldParent).findIndex((childRef) => {
+          const childRefz = childRefs(oldParent, synoMap);
+          if (childRefz.length > 0) {
+            const oldFocusedSynoBirthOrder = childRefz.findIndex(childRef => {
               return childRef.id === oldState;
             });
             if (oldFocusedSynoBirthOrder === -1) {
@@ -60,7 +67,7 @@ export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => 
             } else if (oldFocusedSynoBirthOrder === 0) {
               throw new Error('no previous sibling');
             } else {
-              newStagedNodeId = childRefs(oldParent)[oldFocusedSynoBirthOrder - 1].id;
+              newStagedNodeId = childRefz[oldFocusedSynoBirthOrder - 1].id;
             }
           } else {
             throw new Error('navigate failed; no argumentz!');
@@ -69,16 +76,17 @@ export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => 
         }
         case 'next': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          if (childRefs(oldParent).length > 0) {
-            const oldFocusedSynoBirthOrder = childRefs(oldParent).findIndex((childRef) => {
+          const childRefz = childRefs(oldParent, synoMap);
+          if (childRefz.length > 0) {
+            const oldFocusedSynoBirthOrder = childRefz.findIndex(childRef => {
               return childRef.id === oldState;
             });
             if (oldFocusedSynoBirthOrder === -1) {
               throw new Error("cannot find old focused syno ID among parent's children");
-            } else if (oldFocusedSynoBirthOrder >= (childRefs(oldParent).length - 1)) {
+            } else if (oldFocusedSynoBirthOrder >= (childRefz.length - 1)) {
               throw new Error('no next sibling');
             } else {
-              newStagedNodeId = childRefs(oldParent)[oldFocusedSynoBirthOrder + 1].id;
+              newStagedNodeId = childRefz[oldFocusedSynoBirthOrder + 1].id;
             }
           } else {
             throw new Error('navigate failed; no second argument!');

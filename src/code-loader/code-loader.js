@@ -30,7 +30,7 @@ export default (name: ?string): Syno => {
       return orCall;
     }
     default: {
-      throw new Error('requested syntactic map does not exist');
+      throw new Error('code load failed: requested syntactic map does not exist');
     }
   }
 };

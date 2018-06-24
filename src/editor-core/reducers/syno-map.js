@@ -2,7 +2,7 @@
 import dup from '../../syntree-utils/dup.js'
 import typedKeys from '../../flow-pacifiers/typed-keys'
 
-import type { SynoMap } from '../../types/editor-state/syno-map'
+import type { SynoMap } from '../../types/syno-map'
 import type { ReduxAction } from '../../types/redux-action'
 
 export default (oldState: SynoMap, action: ReduxAction): SynoMap => {

@@ -27,15 +27,20 @@ const argumentEls = (getPresno: (SynoId) => Presno, argumentzz: Argumentz) => {
 
 export default (props: Props) => {
   const { getPresno, presno } = props;
-  const { name } = presno;
+  const { name, bodyRef, resolved, focused } = presno;
 
   const argumentzz = argumentEls(getPresno, presno.argumentz);
-  const classes = `syno same-line expression ${presno.resolved ? 'function-call' : 'unresolved'} ${presno.focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno same-line expression ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
       <NamePart namePart={name} />
       { argumentzz }
+      {
+        bodyRef ?
+          <SyntacticNode getPresno={getPresno} presnoId={bodyRef.id} />
+          : ''
+      }
     </div>
   );
 };
