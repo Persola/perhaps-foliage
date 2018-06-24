@@ -12,7 +12,7 @@ import type { EditorState } from '../types/editor-state.js'
 import type { SynoMap } from '../types/editor-state/syno-map.js'
 
 const primitiveGraphs: SynoMap = codeLoader('primitives');
-const seedGraphs: SynoMap = codeLoader('orCall');
+const seedGraphs: SynoMap = codeLoader('norDef');
 const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
   focusedSynoId: Object.keys(seedGraphs)[0],

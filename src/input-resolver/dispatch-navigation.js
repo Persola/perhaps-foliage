@@ -6,8 +6,8 @@ import type { EditorState } from '../types/editor-state'
 
 export default (key: string, editorStateStore: ReduxStore) => {
   const editorState: EditorState = editorStateStore.getState();
-  const oldFocusedNode: Syno = editorState.synoMap[editorState.focusedSynoId];
-  const oldParentRef: ParentSynoRef = oldFocusedNode.parent;
+  const oldFocusedSyno: Syno = editorState.synoMap[editorState.focusedSynoId];
+  const oldParentRef: ParentSynoRef = oldFocusedSyno.parent;
   const oldParent: (Syno | false) = oldParentRef
     ? editorState.synoMap[oldParentRef.id]
     : false;
@@ -32,7 +32,7 @@ export default (key: string, editorStateStore: ReduxStore) => {
   editorStateStore.dispatch({
     type: 'NAVIGATE',
     direction,
-    oldFocusedNode,
+    oldFocusedSyno,
     oldParent
   });
 }
