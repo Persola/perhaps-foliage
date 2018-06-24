@@ -1,4 +1,4 @@
 // @flow
 import type { SynoId } from '../syno-id'
 
-export type StagedNodeId = SynoId
+export type ResultSyntreeRootId = (SynoId | false)

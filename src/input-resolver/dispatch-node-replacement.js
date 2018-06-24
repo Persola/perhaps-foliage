@@ -9,7 +9,7 @@ export default (key: string, editorStateStore: ReduxStore) => {
     : key === 'f' ? false : true
   )
 
-  const { stagedNodeId } = editorState;
+  const { focusedSynoId } = editorState;
 
   editorStateStore.dispatch({
     type: 'REPLACE_FOCUSED_NODE',
@@ -18,6 +18,6 @@ export default (key: string, editorStateStore: ReduxStore) => {
       value
     },
     newSynoId: `inputValue-${String(Math.random()).substring(2)}`,
-    stagedNodeId
+    focusedSynoId
   });
 }

@@ -6,12 +6,12 @@ import type { Presno } from '../../../types/presentations/presno'
 import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  getPresno: (SynoId) => Presno,
+  getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: FunctionParameterPres
 }
 
 export default (props: Props) => {
-  const { getPresno, presno } = props;
+  const { presno } = props;
   const classes = `syno same-line leaf expression bubble-even function-parameter ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (

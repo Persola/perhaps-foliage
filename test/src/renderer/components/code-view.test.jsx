@@ -8,7 +8,7 @@ describe ('CodeView', () => {
   describe ('with normal props', () => {
     it ('renders', () => {
       expectSnapshotMatch(
-        <CodeView presnos={presnos} presnoId={presnoId} getPresno={getPresno} />
+        <CodeView codePresentation={codePresentation} outdated={false} />
       );
     });
   });
@@ -16,7 +16,7 @@ describe ('CodeView', () => {
   describe ('when the stageful is false', () => {
     it ('renders', () => {
       expectSnapshotMatch(
-        <CodeView codePresentation={false} />
+        <CodeView codePresentation={false} outdated={false} />
       );
     });
   });

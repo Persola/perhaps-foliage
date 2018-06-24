@@ -3,8 +3,8 @@ import { createStore } from 'redux';
 import codeLoader from '../code-loader/code-loader.js'
 
 import graphsReducer from './reducers/syno-map.js'
-import stagedNodeIdReducer from './reducers/staged-node-id.js'
-import resultNodeIdReducer from './reducers/result-node-id.js'
+import focusedSynoIdReducer from './reducers/focused-syno-id.js'
+import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js'
 import resultOutdatedReducer from './reducers/result-outdated.js'
 
 import type { ReduxAction } from '../types/redux-action.js'
@@ -15,8 +15,8 @@ const primitiveGraphs: SynoMap = codeLoader('primitives');
 const seedGraphs: SynoMap = codeLoader('orCall');
 const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
-  stagedNodeId: Object.keys(seedGraphs)[0],
-  resultNodeId: false,
+  focusedSynoId: Object.keys(seedGraphs)[0],
+  resultSyntreeRootId: false,
   resultOutdated: false
 };
 const editorstateReducer = (
@@ -25,8 +25,8 @@ const editorstateReducer = (
 ): EditorState => {
   return {
     synoMap: graphsReducer(originalState.synoMap, action),
-    stagedNodeId: stagedNodeIdReducer(originalState.stagedNodeId, action),
-    resultNodeId: resultNodeIdReducer(originalState.resultNodeId, action),
+    focusedSynoId: focusedSynoIdReducer(originalState.focusedSynoId, action),
+    resultSyntreeRootId: resultSyntreeRootIdReducer(originalState.resultSyntreeRootId, action),
     resultOutdated: resultOutdatedReducer(originalState.resultOutdated, action)
   }
 }

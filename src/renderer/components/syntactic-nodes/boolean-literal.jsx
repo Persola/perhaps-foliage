@@ -5,7 +5,7 @@ import type { Presno } from '../../../types/presentations/presno'
 import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  getPresno: (SynoId) => Presno,
+  getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: BooleanLiteralPres
 }
 

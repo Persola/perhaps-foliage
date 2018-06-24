@@ -1,11 +1,11 @@
 // @flow
 import typedValues from '../../flow-pacifiers/typed-values'
 
-import type { StagedNodeId } from '../../types/editor-state/staged-node-id'
+import type { FocusedSynoId } from '../../types/editor-state/focused-syno-id'
 import type { SynoRef } from '../../types/syno-ref'
 import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: StagedNodeId, action: ReduxAction): StagedNodeId => {
+export default (oldState: FocusedSynoId, action: ReduxAction): FocusedSynoId => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;

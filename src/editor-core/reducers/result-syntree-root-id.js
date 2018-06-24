@@ -1,8 +1,8 @@
 // @flow
-import type { ResultNodeId } from '../../types/editor-state/result-node-id'
+import type { ResultSyntreeRootId } from '../../types/editor-state/result-syntree-root-id'
 import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: ResultNodeId, action: ReduxAction): ResultNodeId => {
+export default (oldState: ResultSyntreeRootId, action: ReduxAction): ResultSyntreeRootId => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       return oldState;

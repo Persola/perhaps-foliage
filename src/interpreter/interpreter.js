@@ -1,6 +1,7 @@
 // @flow
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js'
 import resolveRef from './resolve-ref.js'
+import dup from '../syntree-utils/dup.js'
 
 import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution'
 import type { Syno } from '../types/syno'
@@ -12,21 +13,24 @@ const interpreter = (
 ): InterpretationResolution => {
   switch (interpretee.syntype) {
     case 'booleanLiteral': {
+      // should dup?
       return {
         success: true,
-        result: interpretee
+        result: dup(interpretee)
       };
     }
     case 'functionCall': {
       return interpretFunctionCall(interpreter, scope, interpretee, getSyno);
     }
     case 'functionDefinition': {
+      // should dup?
       return {
         success: true,
-        result: interpretee
+        result: dup(interpretee)
       };
     }
     case 'variableRef': {
+      // should dup?
       // should check type
       const value = resolveRef(scope, interpretee.name);
       if ((typeof value) !== 'object') {

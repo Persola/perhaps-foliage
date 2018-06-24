@@ -5,6 +5,14 @@
 * new functionality
   * add syno deletion and insertation
   * [?] add selection (in addition to focus)
+  * enable interpretation->rendering of all existing values
+  * enable interpretation->rendering of all existing values
+  * render function signatures
+    * name part and argument order
+    * decide about universal single argument passing
+    * [later] optional arguments
+    * [later] ordered arguments
+    * [later] singular arguments
   * add Nothing type
     * replace false flags in type data structures
 * rearchitecture
@@ -45,3 +53,5 @@ I understand the importance of:
 I don't understand:
   * why components can't get the whole state as props
     * similar to presentation generation getting the whole syno tree
+    * oh, its not code design but library uasge--because then they would always rerender
+      * assuming the performance constraints emerge, my diffing logic will probably be different altogether (both presentation gen. and html gen.)
