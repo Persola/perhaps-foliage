@@ -4,7 +4,7 @@ import type { Argumentz } from '../argumentz'
 
 export type FunctionCallPresAttrs = {
   syntype: 'functionCall',
-  name: string,
+  name: (string | false),
   argumentz: Argumentz,
   bodyRef: (SynoRef | false),
   resolved: boolean,

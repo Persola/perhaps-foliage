@@ -67,7 +67,9 @@
 
 '1-7':
   id: '1-7'
-  parent: false
+  parent:
+    synoRef: true
+    id: '1-4'
   syntype: 'functionCall'
   callee:
     synoRef: true

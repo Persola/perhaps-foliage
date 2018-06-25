@@ -23,9 +23,11 @@ export default (
 
   const callee: FunctionDefinition = getSyno(funkshunCall.callee);
   let resolved: boolean;
+  let name: (string | false);
   let bodyRef: (SynoRef | false);
   if (callee.syntype === 'functionDefinition') {
     resolved = true;
+    name = false;
     presentSyno(
       presnoMap,
       funkshunCall.id,
@@ -37,12 +39,13 @@ export default (
     bodyRef = funkshunCall.callee;
   } else if (callee.syntype === 'variableRef') {
     resolved = Object.keys(scope).includes(callee.name);
+    name = callee.name;
     bodyRef = false;
   } else { throw new Error('new type?'); }
 
   return {
     syntype: 'functionCall',
-    name: callee.name,
+    name,
     argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focusNodeId),
     bodyRef,
     resolved,

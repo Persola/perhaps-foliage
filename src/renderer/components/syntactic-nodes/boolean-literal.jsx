@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import NamePart from './../vis/name-part.jsx'
+
 import type { BooleanLiteralPres } from '../../../types/presentations/boolean-literal'
 import type { Presno } from '../../../types/presentations/presno'
 import type { SynoId } from '../../../types/syno-id'
@@ -19,7 +21,7 @@ export default (props: Props) => {
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      {String(presno.value)}
+      <NamePart namePart={String(presno.value)} />
     </div>
   );
 };

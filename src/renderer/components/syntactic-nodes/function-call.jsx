@@ -30,11 +30,15 @@ export default (props: Props) => {
   const { name, bodyRef, resolved, focused } = presno;
 
   const argumentzz = argumentEls(getPresno, presno.argumentz);
-  const classes = `syno same-line expression ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={name} />
+      {
+        name ?
+          <NamePart namePart={name} />
+          : ''
+      }
       { argumentzz }
       {
         bodyRef ?

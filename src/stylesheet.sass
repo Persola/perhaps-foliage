@@ -5,11 +5,14 @@ $near-white: #ffc
 $sea-blue: #045
 $verdant-green: #361
 $mustard-yellow: #d92
-$villian-laser-magenta: #e2a
+$bubblegum: #d7a
+$villian-laser-magenta: #d14
 $eyesore-yellow: #ff7
 $teal: #39b
 $pumpkin: #841
 $royal-velvet: #a24
+$mint: #2a7
+$popsicle-orange: #e73
 
 body
   background-color: $charcoal
@@ -52,9 +55,14 @@ button:active
   cursor: default
 
   .syno
+    width: fit-content
+    padding: 0 7px
+    margin: 0 3px
     border-radius: 15px
     font-size: 16px
     font-weight: bold
+    color: #000
+    background-color: $eyesore-yellow
 
   .non-syntactic
     color: $charcoal
@@ -62,30 +70,12 @@ button:active
     font-weight: normal
     margin: 5px 0
 
+  .code-text
+    padding: 6px 8px 3px 8px
+
   .leaf
-    /* pad vertically to center font */
-    padding-top: 6px
-    padding-bottom: 3px
-
-  .bubble-even
-    padding-right: 10px
-    padding-left: 10px
-
-  .bubble-plus
-    /* pad horizontally to even bubble area on either side of text */
-    padding-right: 6px
-    padding-left: 14px
-
-  .bubble-minus
-    /* pad horizontally to even bubble area on either side of text */
-    padding-right: 14px
-    padding-left: 6px
-
-  .expression
-    padding-right: 10px
-    padding-left: 10px
-    color: #111
-    background-color: $eyesore-yellow
+    background-color: #0f0
+    padding: 0 4px
 
   .argument
     background-color: $verdant-green
@@ -95,15 +85,15 @@ button:active
 
   .function-call
     background-color: $pumpkin
-    color: $villian-laser-magenta
+    color: $bubblegum
 
   .function-definition
     background-color: $sea-blue
-    color: #aaa
+    color: $popsicle-orange
 
   .function-parameter
     background-color: $royal-velvet
-    color: #aaa
+    color: $mint
 
   .variable-ref
     color: $teal

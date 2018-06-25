@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import NamePart from './../vis/name-part.jsx'
 
 import type { FunctionParameterPres } from '../../../types/presentations/function-parameter'
 import type { Presno } from '../../../types/presentations/presno'
@@ -12,11 +13,11 @@ type Props = {
 
 export default (props: Props) => {
   const { presno } = props;
-  const classes = `syno same-line leaf expression bubble-even function-parameter ${presno.focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno same-line leaf bubble-even function-parameter ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      {String(presno.slot)}
+      <NamePart namePart={presno.slot} />
     </div>
   );
 };

@@ -1,16 +1,15 @@
 // @flow
 import React from 'react';
-import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
-  namePart: SynoId
+  namePart: string
 }
 
 export default (props: Props) => {
   const { namePart } = props
 
   return (
-    <div className="same-line leaf bubble-plus">
+    <div className="code-text same-line">
       {String(namePart)}
     </div>
   );
