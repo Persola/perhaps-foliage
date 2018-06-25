@@ -22,6 +22,9 @@ const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
       childRefs.push(syno.body);
       return childRefs;
     }
+    case 'argument': {
+      return [syno.value];
+    }
     default: {
       return [];
     }

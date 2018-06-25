@@ -24,7 +24,7 @@ export default (argumentz: any): InterpretationResolution => {
   if (Object.values(argumentz).length !== 2) {
     return {
       success: false,
-      error: {message: `NOR recieved wrong number of arguments (${typeof Object.values(argumentz).length} "${Object.values(argumentz).length}" instead of 2)`}
+      error: {message: `NOR recieved wrong number of arguments (${typedValues(argumentz).length} instead of 2)`}
     }
   }
 

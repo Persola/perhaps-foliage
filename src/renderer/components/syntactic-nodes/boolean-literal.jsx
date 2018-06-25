@@ -17,7 +17,7 @@ export default (props: Props) => {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `syno same-line leaf bubble-even argument boolean-literal ${presno.focused ? 'focused' : 'unfocused'}`
+  const classes = `syno same-line leaf bubble-even boolean-literal ${presno.focused ? 'focused' : 'unfocused'}`
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>

@@ -4,6 +4,7 @@ import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
 import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
 import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
+import Argument from './syntactic-nodes/argument.jsx'
 import VariableRef from './syntactic-nodes/variable-ref.jsx'
 import type { Presno } from '../../types/presentations/presno'
 import type { SynoId } from '../../types/syno-id'
@@ -36,6 +37,11 @@ export default (props: Props) => {
     case 'functionParameter': {
       return(
         <FunctionParameter getPresno={getPresno} presno={presno} />
+      )
+    }
+    case 'argument': {
+      return(
+        <Argument getPresno={getPresno} presno={presno} />
       )
     }
     case 'variableRef': {

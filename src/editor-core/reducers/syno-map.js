@@ -1,8 +1,11 @@
 // @flow
 import dup from '../../syntree-utils/dup.js'
-import typedKeys from '../../flow-pacifiers/typed-keys'
 
+import type { Syno } from '../../types/syno'
 import type { SynoMap } from '../../types/syno-map'
+import type { Argument } from '../../types/syntactic-nodes/argument'
+import type { BooleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs'
+import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 import type { ReduxAction } from '../../types/redux-action'
 
 export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
@@ -11,36 +14,35 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
       const { newSynoAttrs, newSynoId, focusedSynoId } = action;
-      const newSyno = Object.assign({}, newSynoAttrs, { id: newSynoId });
 
       const parentRef = oldState[focusedSynoId].parent;
+      let parentAttr;
       if (parentRef) {
-        const parent = oldState[parentRef.id];
-        if (
-          parent.syntype === 'functionCall' &&
-          typedKeys(parent.argumentz).length > 0
-        ) {
-          const focusedNodeArgumentKey = typedKeys(parent.argumentz).find(argKey => {
-            return (parent.argumentz[argKey].id === focusedSynoId);
-          });
-          if (!focusedNodeArgumentKey) { throw new Error; }
+        const parent: Syno = oldState[parentRef.id];
+        if (parent.syntype === 'argument') {
           // should remove any uneeded (i.e., deleted) nodes from store
           const newParent = newSynoMap[parent.id];
-          if (newParent.syntype !== 'functionCall') { throw new Error; }
-          newParent.argumentz[focusedNodeArgumentKey] = {
+          if (newParent.syntype !== 'argument') { throw new Error }
+          newParent.value = {
             synoRef: true,
             id: newSynoId
           }
+        } else {
+          throw new Error('cannot replace non-argument');
         }
 
-        newSyno.parent = {
+        parentAttr = {
           synoRef: true,
           id: parentRef.id
         }
       } else {
-        newSyno.parent = false;
+        parentAttr = false;
       }
 
+      const newSyno: BooleanLiteral = Object.assign({}, newSynoAttrs, {
+        id: newSynoId,
+        parent: parentAttr
+      });
       newSynoMap[newSynoId] = newSyno;
 
       return newSynoMap;

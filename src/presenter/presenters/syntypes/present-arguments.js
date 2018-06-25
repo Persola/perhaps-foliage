@@ -7,6 +7,7 @@ import type { SynoRef } from '../../../types/syno-ref.js'
 import type { SynoId } from '../../../types/syno-id.js'
 import type { Argumentz } from '../../../types/presentations/argumentz.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
+import type { Argument } from '../../../types/syntactic-nodes/argument'
 
 export default (
   presnoMap: PresnoMap,
