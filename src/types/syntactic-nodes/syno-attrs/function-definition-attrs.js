@@ -5,5 +5,5 @@ export type FunctionDefinitionAttrs = {
   syntype: 'functionDefinition',
   name: string,
   body: SynoRef,
-  parameters: { [slotName: string]: SynoRef }
+  parameters: SynoRef[]
 }

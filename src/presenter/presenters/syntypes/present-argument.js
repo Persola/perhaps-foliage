@@ -23,6 +23,7 @@ export default (
 
   return {
     syntype: 'argument',
+    name: argument.name,
     value: {
       presnoRef: true,
       id: valuePresnoId

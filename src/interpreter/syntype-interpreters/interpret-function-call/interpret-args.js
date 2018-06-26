@@ -1,18 +1,18 @@
 // @flow
-import type { LiteralValue } from '../../../types/syntactic-nodes/literal-value'
+import type { Argument } from '../../../types/syntactic-nodes/argument'
+import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
 import type { SynoRef } from '../../../types/syno-ref'
 import type { Syno } from '../../../types/syno'
 
 export default (
   interpreter: Function,
   parentScope: {},
-  argumentz: {[slot: string]: SynoRef},
+  argumentz: SynoRef[],
   getSyno: Function
-) => {
-  const interpretedArgs: { [string]: LiteralValue } = {};
+): [Argument, BooleanLiteral][] => {
+  const interpretedArgs: [Argument, BooleanLiteral][] = [];
 
-  Object.keys(argumentz).forEach((slotName: string) => {
-    const argRef: SynoRef = argumentz[slotName];
+  argumentz.forEach((argRef: SynoRef) => {
     const arg: Syno = getSyno(argRef);
     if (arg.syntype !== 'argument') {
       throw new Error(`expected argument, got ${arg.syntype}`)
@@ -24,7 +24,7 @@ export default (
     )
 
     if (argResolution.success) {
-      interpretedArgs[slotName] = argResolution.result;
+      interpretedArgs.push([arg, argResolution.result]);
     } else {
       throw new Error('arg interp failed');
     }

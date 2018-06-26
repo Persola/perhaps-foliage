@@ -10,12 +10,12 @@ import type { SynoId } from '../../../types/syno-id.js'
 export default (
   presnoMap: PresnoMap,
   parentId: SynoId,
-  parameters: {[slotName: string]: SynoRef},
+  parameters: SynoRef[],
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
 ): PresnoRef[] => {
-  return typedValues(parameters).map((paramRef: SynoRef): PresnoRef => {
+  return parameters.map((paramRef: SynoRef): PresnoRef => {
     const paramPresnoId: SynoId = presentSyno(presnoMap, parentId, getSyno(paramRef), scope, getSyno, focusNodeId);
     return {
       presnoRef: true,

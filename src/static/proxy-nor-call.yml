@@ -3,11 +3,9 @@
   syntype: 'functionCall'
   parent: false
   argumentz:
-    first:
-      synoRef: true
+    - synoRef: true
       id: '1-2a'
-    second:
-      synoRef: true
+    - synoRef: true
       id: '1-3a'
   callee:
     synoRef: true
@@ -19,6 +17,7 @@
     synoRef: true
     id: '1-1'
   syntype: 'argument'
+  name: first
   value:
     synoRef: true
     id: '1-2b'
@@ -29,6 +28,7 @@
     synoRef: true
     id: '1-1'
   syntype: 'argument'
+  name: second
   value:
     synoRef: true
     id: '1-3b'
@@ -57,11 +57,9 @@
   syntype: 'functionDefinition'
   name: 'proxyNor'
   parameters:
-    first:
-      synoRef: true
+    - synoRef: true
       id: '1-5'
-    second:
-      synoRef: true
+    - synoRef: true
       id: '1-6'
   body:
     synoRef: true
@@ -95,11 +93,9 @@
     synoRef: true
     id: primitives-nor
   argumentz:
-    first:
-      synoRef: true
+    - synoRef: true
       id: '1-8a'
-    second:
-      synoRef: true
+    - synoRef: true
       id: '1-9a'
 
 '1-8a':
@@ -108,6 +104,7 @@
     synoRef: true
     id: '1-7'
   syntype: 'argument'
+  name: '1'
   value:
     synoRef: true
     id: '1-8b'
@@ -118,6 +115,7 @@
     synoRef: true
     id: '1-7'
   syntype: 'argument'
+  name: '2'
   value:
     synoRef: true
     id: '1-9b'

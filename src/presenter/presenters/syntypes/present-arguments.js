@@ -1,33 +1,31 @@
 // @flow
-import typedKeys from '../../../flow-pacifiers/typed-keys'
 import presentSyno from '../present-syno.js'
 
 import type { Syno } from '../../../types/syno.js'
 import type { SynoRef } from '../../../types/syno-ref.js'
 import type { SynoId } from '../../../types/syno-id.js'
-import type { Argumentz } from '../../../types/presentations/argumentz.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { Argument } from '../../../types/syntactic-nodes/argument'
+import type { PresnoRef } from '../../../types/presentations/presno-ref.js'
 
 export default (
   presnoMap: PresnoMap,
   parentId: SynoId,
-  argumentz: {[slotName: string]: SynoRef},
+  argumentz: SynoRef[],
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
-): Argumentz => {
-  const argsPres = {};
-  typedKeys(argumentz).forEach((argKey: string) => {
-    const argSyno: Syno = getSyno(argumentz[argKey]);
-    if (argSyno.syntype === 'functionParameter') {
+): PresnoRef[] => {
+  const argsPres = [];
+  argumentz.forEach((argRef: SynoRef) => {
+    const arg: Syno = getSyno(argRef);
+    if (arg.syntype === 'functionParameter') {
       throw new Error('cannot present parameter as argument');
     } else {
-      const argPresnoId: SynoId = presentSyno(presnoMap, parentId, argSyno, scope, getSyno, focusNodeId);
-      argsPres[argKey] = {
+      const argPresnoId: SynoId = presentSyno(presnoMap, parentId, arg, scope, getSyno, focusNodeId);
+      argsPres.push({
         presnoRef: true,
         id: argPresnoId
-      }
+      })
     }
   });
 

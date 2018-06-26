@@ -1,13 +1,14 @@
 // @flow
 import resolveRef from '../resolve-ref.js'
 import NorPrimitiveId from '../../nor-primitive-id.js'
-import typedValues from '../../flow-pacifiers/typed-values'
 import throwIfParametersUnsatisfied from './interpret-function-call/throw-if-parameters-unsatisfied'
 import interpretArgs from './interpret-function-call/interpret-args'
 import norPrimitive from './interpret-function-call/nor-primitive.js'
 
 import type { InterpretationResolution } from '../../types/interpreter/interpretation-resolution'
 import type { FunctionCall } from '../../types/syntactic-nodes/function-call'
+import type { Argument } from '../../types/syntactic-nodes/argument'
+import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 
 export default (
   interpreter: Function,
@@ -15,7 +16,6 @@ export default (
   interpretee: FunctionCall,
   getSyno: Function
 ): InterpretationResolution => {
-  const ownScope = {};
   const callee = getSyno(interpretee.callee);
 
   let resolvedCallee;
@@ -31,27 +31,31 @@ export default (
     throw new Error(`invalid function ref (returned syno of wrong syntype)`);
   }
 
-  const interpretedArgs = interpretArgs(
+  const interpretedArgs: [Argument, BooleanLiteral][] = interpretArgs(
     interpreter,
     parentScope,
     interpretee.argumentz,
     getSyno
   );
 
-  throwIfParametersUnsatisfied(resolvedCallee, interpretedArgs);
+  throwIfParametersUnsatisfied(resolvedCallee, interpretedArgs, getSyno);
 
-  Object.keys(resolvedCallee.parameters).forEach(slotName => {
-    ownScope[slotName] = interpretedArgs[slotName];
+  const ownScope = {};
+  const paramNames = resolvedCallee.parameters.map(paramRef => getSyno(paramRef).name);
+  paramNames.forEach(paramName => {
+    const matchingPair = interpretedArgs.find(argRes => argRes[0].name === paramName);
+    if (matchingPair === undefined) { throw new Error };
+    ownScope[paramName] = matchingPair[1];
   });
 
   let functionResolution;
   if (interpretee.callee.id === NorPrimitiveId) {
-    typedValues(interpretedArgs).forEach(resArg => {
-      if (resArg.syntype !== 'booleanLiteral') {
+    interpretedArgs.forEach(argRes => {
+      if (argRes[1].syntype !== 'booleanLiteral') {
         throw new Error;
       }
     })
-    functionResolution = norPrimitive(interpretedArgs);
+    functionResolution = norPrimitive(interpretedArgs.map(argRes => argRes[1]));
   } else {
     functionResolution = interpreter(
       getSyno(resolvedCallee.body),

@@ -10,7 +10,7 @@ import type { ReduxAction } from '../../types/redux-action'
 const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
   switch (syno.syntype) {
     case 'functionCall': {
-      const childRefs = typedValues(syno.argumentz);
+      const childRefs: SynoRef[] = syno.argumentz.slice();
       const calleeSyno = synoMap[syno.callee.id];
       if (calleeSyno.syntype === 'functionDefinition') {
         childRefs.push(syno.callee);
@@ -18,7 +18,7 @@ const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
       return childRefs;
     }
     case 'functionDefinition': {
-      const childRefs = typedValues(syno.parameters);
+      const childRefs = syno.parameters.slice();
       childRefs.push(syno.body);
       return childRefs;
     }

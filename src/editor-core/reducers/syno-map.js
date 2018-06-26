@@ -3,8 +3,6 @@ import dup from '../../syntree-utils/dup.js'
 
 import type { Syno } from '../../types/syno'
 import type { SynoMap } from '../../types/syno-map'
-import type { Argument } from '../../types/syntactic-nodes/argument'
-import type { BooleanLiteralAttrs } from '../../types/syntactic-nodes/syno-attrs/boolean-literal-attrs'
 import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 import type { ReduxAction } from '../../types/redux-action'
 

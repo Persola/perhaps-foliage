@@ -1,11 +1,11 @@
 // @flow
 import type { SynoRef } from '../../syno-ref'
-import type { Argumentz } from '../argumentz'
+import type { PresnoRef } from '../presno-ref'
 
 export type FunctionCallPresAttrs = {
   syntype: 'functionCall',
   name: (string | false),
-  argumentz: Argumentz,
+  argumentz: PresnoRef[],
   bodyRef: (SynoRef | false),
   resolved: boolean,
   focused: boolean

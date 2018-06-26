@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
+import NamePart from './../vis/name-part.jsx'
 
 import type { ArgumentPres } from '../../../types/presentations/argument'
 import type { Presno } from '../../../types/presentations/presno'
@@ -17,7 +18,7 @@ export default (props: Props) => {
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      name
+      <NamePart namePart={presno.name} />
       <SyntacticNode getPresno={getPresno} presnoId={presno.value.id} />
     </div>
   );

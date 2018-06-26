@@ -11,3 +11,5 @@
   * next - moving to the next ordered sibling
 "scion" - a syno or syntree without a parent (analogy from horticultural grafting)
 "stock"/"rootstock" -  a syno onto which a scion is grafted
+
+note: the visual units which correlate to synos, the colored wurst-shaped things, should be named after twisting balloons (like the ones clowns make balloon animals out of). This is a powerful enough visual metaphor that it might be worth naming the editor after...
