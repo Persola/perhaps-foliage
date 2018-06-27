@@ -10,6 +10,18 @@ import type { FunctionCall } from '../../types/syntactic-nodes/function-call'
 import type { Argument } from '../../types/syntactic-nodes/argument'
 import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 
+const generateScope = (resolvedCallee, interpretedArgs, getSyno) => {
+  const interpreteeScope = {};
+  const params = resolvedCallee.parameters.map(paramRef => getSyno(paramRef));
+  params.forEach(param => {
+    const matchingPair = interpretedArgs.find(argRes => argRes[0].name === param.name);
+    if (matchingPair === undefined) { throw new Error };
+    interpreteeScope[param.name] = matchingPair[1];
+  });
+
+  return interpreteeScope;
+};
+
 export default (
   interpreter: Function,
   parentScope: {},
@@ -17,15 +29,11 @@ export default (
   getSyno: Function
 ): InterpretationResolution => {
   const callee = getSyno(interpretee.callee);
-
-  let resolvedCallee;
-  if (callee.syntype === 'variableRef') {
-    resolvedCallee = resolveRef(parentScope, callee.name);
-  } else if (callee.syntype === 'functionDefinition') {
-    resolvedCallee = callee;
-  } else {
-    throw new Error(`invalid function ref (returned syno of wrong syntype)`)
+  const calleeResolution = interpreter(callee);
+  if (!calleeResolution.success) {
+    throw new Error(`callee resolution failed for function call of ID '${interpretee.id}'`);
   }
+  const resolvedCallee = calleeResolution.result;
 
   if (resolvedCallee.syntype !== 'functionDefinition') { // remove when typesafe
     throw new Error(`invalid function ref (returned syno of wrong syntype)`);
@@ -40,13 +48,7 @@ export default (
 
   throwIfParametersUnsatisfied(resolvedCallee, interpretedArgs, getSyno);
 
-  const ownScope = {};
-  const paramNames = resolvedCallee.parameters.map(paramRef => getSyno(paramRef).name);
-  paramNames.forEach(paramName => {
-    const matchingPair = interpretedArgs.find(argRes => argRes[0].name === paramName);
-    if (matchingPair === undefined) { throw new Error };
-    ownScope[paramName] = matchingPair[1];
-  });
+  const interpreteeScope = generateScope(resolvedCallee, interpretedArgs, getSyno);
 
   let functionResolution;
   if (interpretee.callee.id === NorPrimitiveId) {
@@ -59,7 +61,7 @@ export default (
   } else {
     functionResolution = interpreter(
       getSyno(resolvedCallee.body),
-      ownScope,
+      interpreteeScope,
       getSyno
     );
   }
