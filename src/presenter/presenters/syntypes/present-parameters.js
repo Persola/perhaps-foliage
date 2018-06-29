@@ -1,6 +1,5 @@
 // @flow
 import presentSyno from '../present-syno.js'
-import typedValues from '../../../flow-pacifiers/typed-values'
 
 import type { SynoRef } from '../../../types/syno-ref.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'

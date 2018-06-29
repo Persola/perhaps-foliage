@@ -1,6 +1,4 @@
 // @flow
-import typedValues from '../../flow-pacifiers/typed-values'
-
 import type { FocusedSynoId } from '../../types/editor-state/focused-syno-id'
 import type { Syno } from '../../types/syno'
 import type { SynoRef } from '../../types/syno-ref'

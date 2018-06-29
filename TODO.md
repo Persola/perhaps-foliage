@@ -8,7 +8,7 @@
   * enable interpretation->rendering of all existing values
   * enable interpretation->rendering of all existing values
   * render function signatures
-    * name part and argument order
+    * name part and argument order, both in call and def
     * decide about universal single argument passing
     * [later] optional arguments
     * [later] ordered arguments
@@ -36,6 +36,17 @@
       * need bidirectional transformation between AST and text code
       * need to wrap some features (e.g., named parameters) in language (e.g., always pass a map or list)
       * how to deal with existing keywords and other shit that doesn't fit into bubble display? wrap with functions?
+* design
+  * is it OK to not have functionCall display its callee is a syno?
+    * necessary for natural language emulating call style
+      * maybe the editor defaults to rendering the tree directly
+      * but you can choose to override it at different levels based on type
+      * like I just fill in colors for most types, but Saliva cares about call expressivity, so it custom renders them
+    * well, actually 'name' isn't a syno, only funcdef is
+      * maybe weird that funcall displays primitive data stored in its child/referent
+      * not too bad though
+  * how to divise types:
+    * reference assignment (name, value), reference invocation, maps/objects
 * longview
   * pick license
   * package (some?) subprojects

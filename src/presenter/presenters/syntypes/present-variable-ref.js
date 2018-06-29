@@ -10,10 +10,12 @@ export default (
   getSyno: Function,
   focusNodeId: (string | false)
 ): VariableRefPresAttrs => {
+  const referent = getSyno(variableRef.referent);
+
   return {
     syntype: 'variableRef',
     valueSyntype: 'booleanLiteral',
-    name: variableRef.name,
+    name: referent.name,
     focused: (variableRef.id === focusNodeId)
   }
 }

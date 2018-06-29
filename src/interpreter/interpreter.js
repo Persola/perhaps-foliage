@@ -8,7 +8,7 @@ import type { Syno } from '../types/syno'
 
 const interpreter = (
   interpretee: Syno,
-  scope: {},
+  scope: [],
   getSyno: Function
 ): InterpretationResolution => {
   switch (interpretee.syntype) {
@@ -32,9 +32,9 @@ const interpreter = (
     case 'variableRef': {
       // should dup?
       // should check type
-      const value = resolveRef(scope, interpretee.name);
+      const value = resolveRef(scope, interpretee.referent);
       if ((typeof value) !== 'object') {
-        throw new Error(`variable '${interpretee.name}' resolved wrong`);
+        throw new Error(`variable at '${interpretee.id}' resolved wrong`);
       }
       return {
         success: true,

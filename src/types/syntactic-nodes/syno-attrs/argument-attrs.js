@@ -4,7 +4,7 @@ import type { Syntype } from '../../syntype'
 
 export type ArgumentAttrs = {
   syntype: 'argument',
-  name: string,
   valueSyntype: ?Syntype,
-  value: SynoRef
+  value: SynoRef,
+  parameter: SynoRef // ! this is not a child in the syntree, just a ref !
 }

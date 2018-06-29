@@ -1,5 +1,4 @@
 // @flow
-import resolveRef from '../resolve-ref.js'
 import NorPrimitiveId from '../../nor-primitive-id.js'
 import throwIfParametersUnsatisfied from './interpret-function-call/throw-if-parameters-unsatisfied'
 import interpretArgs from './interpret-function-call/interpret-args'
@@ -11,12 +10,12 @@ import type { Argument } from '../../types/syntactic-nodes/argument'
 import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 
 const generateScope = (resolvedCallee, interpretedArgs, getSyno) => {
-  const interpreteeScope = {};
+  const interpreteeScope = [];
   const params = resolvedCallee.parameters.map(paramRef => getSyno(paramRef));
   params.forEach(param => {
-    const matchingPair = interpretedArgs.find(argRes => argRes[0].name === param.name);
-    if (matchingPair === undefined) { throw new Error };
-    interpreteeScope[param.name] = matchingPair[1];
+    const matchingPair = interpretedArgs.find(argRes => argRes[0].parameter.id === param.id);
+    if (matchingPair === undefined) { throw new Error }
+    interpreteeScope.push([param, matchingPair[1]]);
   });
 
   return interpreteeScope;
@@ -24,12 +23,12 @@ const generateScope = (resolvedCallee, interpretedArgs, getSyno) => {
 
 export default (
   interpreter: Function,
-  parentScope: {},
+  parentScope: [],
   interpretee: FunctionCall,
   getSyno: Function
 ): InterpretationResolution => {
   const callee = getSyno(interpretee.callee);
-  const calleeResolution = interpreter(callee);
+  const calleeResolution = interpreter(callee, parentScope, getSyno);
   if (!calleeResolution.success) {
     throw new Error(`callee resolution failed for function call of ID '${interpretee.id}'`);
   }

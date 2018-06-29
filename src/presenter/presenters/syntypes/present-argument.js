@@ -12,6 +12,7 @@ export default (
   getSyno: Function,
   focusNodeId: (string | false)
 ): ArgumentPresAttrs => {
+  const name = getSyno(argument.parameter).name;
   const valuePresnoId: SynoId = presentSyno(
     presnoMap,
     argument.id,
@@ -23,7 +24,7 @@ export default (
 
   return {
     syntype: 'argument',
-    name: argument.name,
+    name,
     value: {
       presnoRef: true,
       id: valuePresnoId

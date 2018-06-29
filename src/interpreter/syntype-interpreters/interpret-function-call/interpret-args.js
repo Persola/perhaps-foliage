@@ -6,7 +6,7 @@ import type { Syno } from '../../../types/syno'
 
 export default (
   interpreter: Function,
-  parentScope: {},
+  parentScope: [],
   argumentz: SynoRef[],
   getSyno: Function
 ): [Argument, BooleanLiteral][] => {

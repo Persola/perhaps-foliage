@@ -1,4 +1,5 @@
 // @flow
+import type { SynoId } from '../../../types/syno-id'
 import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition'
 import type { Argument } from '../../../types/syntactic-nodes/argument'
 import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
@@ -8,31 +9,38 @@ export default (
   interpretedArgs: [Argument, BooleanLiteral][],
   getSyno: Function
 ) => {
-  const paramSlots = resolvedCallee.parameters.map(paramRef => getSyno(paramRef).name);
-  const argSlots = interpretedArgs.map(pair => pair[0].name);
+  const paramIds = resolvedCallee.parameters.map(paramRef => paramRef.id);
+  const argTargetIds = interpretedArgs.map(argRes => argRes[0].parameter.id);
 
-  const duplicatedParamSlots = paramSlots.filter((paramSlot: string) => {
-    return paramSlots.filter(compSlot => paramSlot === compSlot).length > 1;
+  const duplicatedParamIds = paramIds.filter((paramId: SynoId) => {
+    return paramIds.filter(compId => paramId === compId).length > 1;
   });
-  const duplicatedArgSlots = argSlots.filter((argSlot: string) => {
-    return paramSlots.filter(compSlot => argSlot === compSlot).length > 1;
+  const duplicatedArgTargetIds = argTargetIds.filter((argId: SynoId) => {
+    return paramIds.filter(compId => argId === compId).length > 1;
   });
 
-  if (duplicatedParamSlots.length > 0) {
-    throw new Error(`duplicate params: ${duplicatedParamSlots.join(', ')}`);
+  if (duplicatedParamIds.length > 0) {
+    throw new Error(`duplicate param IDs: ${duplicatedParamIds.join(', ')}`);
   }
-  if (duplicatedArgSlots.length > 0) {
-    throw new Error(`duplicate args: ${duplicatedArgSlots.join(', ')}`);
+  if (duplicatedArgTargetIds.length > 0) {
+    throw new Error(`duplicate arg target IDs: ${duplicatedArgTargetIds.join(', ')}`);
   }
 
-  const unsatisfiedParamSlots = paramSlots.filter((paramSlot: string) => {
-    return !argSlots.includes(paramSlot);
+  const unsatisfiedParamIds = paramIds.filter((paramId: string) => {
+    return !argTargetIds.includes(paramId);
   });
-  const extraArgSlots = argSlots.filter((argSlot: string) => {
-    return !paramSlots.includes(argSlot);
+  const extraArgTargetIds = argTargetIds.filter((argId: string) => {
+    return !paramIds.includes(argId);
   });
 
-  if ((unsatisfiedParamSlots.length > 0) || (extraArgSlots.length > 0)) {
-    throw new Error(`function "${resolvedCallee.name}" called with wrong parameters (unsatisfied: ${unsatisfiedParamSlots.join(', ')}; extra: ${extraArgSlots.join(', ')})`);
+  const unsatisfiedParamNames = unsatisfiedParamIds.map(paramId => {
+    return getSyno(paramId).name;
+  });
+  const extraArgTargetNames = extraArgTargetIds.map(argTargetId => {
+    return getSyno(argTargetId).name;
+  });
+
+  if ((unsatisfiedParamIds.length > 0) || (extraArgTargetIds.length > 0)) {
+    throw new Error(`function "${resolvedCallee.name}" called with wrong parameters (unsatisfied: ${unsatisfiedParamNames.join(', ')}; extra: ${extraArgTargetNames.join(', ')})`);
   }
 };

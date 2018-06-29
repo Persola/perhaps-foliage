@@ -17,7 +17,9 @@
     synoRef: true
     id: '1-1'
   syntype: 'argument'
-  name: first
+  parameter:
+    synoRef: true
+    id: '1-5'
   value:
     synoRef: true
     id: '1-2b'
@@ -28,7 +30,9 @@
     synoRef: true
     id: '1-1'
   syntype: 'argument'
-  name: second
+  parameter:
+    synoRef: true
+    id: '1-6'
   value:
     synoRef: true
     id: '1-3b'
@@ -104,7 +108,9 @@
     synoRef: true
     id: '1-7'
   syntype: 'argument'
-  name: '1'
+  parameter:
+    synoRef: true
+    id: 'primitives-nor-param-1'
   value:
     synoRef: true
     id: '1-8b'
@@ -115,7 +121,9 @@
     synoRef: true
     id: '1-7'
   syntype: 'argument'
-  name: '2'
+  parameter:
+    synoRef: true
+    id: 'primitives-nor-param-2'
   value:
     synoRef: true
     id: '1-9b'
@@ -127,7 +135,9 @@
     id: '1-8a'
   syntype: 'variableRef'
   valueSyntype: 'booleanLiteral'
-  name: first
+  referent:
+    synoRef: true
+    id: '1-5'
 
 '1-9b':
   id: '1-9b'
@@ -136,4 +146,6 @@
     id: '1-9a'
   syntype: 'variableRef'
   valueSyntype: 'booleanLiteral'
-  name: second
+  referent:
+    synoRef: true
+    id: '1-6'
