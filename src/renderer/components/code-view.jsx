@@ -8,7 +8,8 @@ import type { Prestree } from '../../types/presentations/prestree'
 
 type Props = {
   codePresentation: Prestree | false,
-  outdated: boolean
+  outdated: boolean,
+  interpreting: boolean
 }
 
 const outdatedMessage = (
@@ -16,7 +17,7 @@ const outdatedMessage = (
 );
 
 export default (props: Props) => {
-  const { codePresentation, outdated } = props;
+  const { codePresentation, outdated, interpreting } = props;
 
   let content;
   if (codePresentation === false) {
@@ -33,8 +34,10 @@ export default (props: Props) => {
     );
   }
 
+  const classes = `code-view ${interpreting ? 'interpreting' : ''}`;
+
   return (
-    <div className="code-view">
+    <div className={classes}>
       { outdated ? outdatedMessage : null }
       {content}
     </div>

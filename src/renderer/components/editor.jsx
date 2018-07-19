@@ -7,14 +7,16 @@ import type { EditorPresentation } from '../../types/presentations/editor-presen
 type Props = {
   presentation: EditorPresentation,
   interpret: Function,
-  resultOutdated: boolean
+  resultOutdated: boolean,
+  interpreting: boolean
 }
 
 export default (props: Props) => {
   const {
     interpret,
     presentation: { stage: stageful, result },
-    resultOutdated
+    resultOutdated,
+    interpreting
   } = props;
 
   return (
@@ -23,12 +25,14 @@ export default (props: Props) => {
         key="stage"
         codePresentation={stageful}
         outdated={false}
+        interpreting={interpreting}
       />
-      <InterpretButton interpret={interpret} />
+      <InterpretButton interpret={interpret} interpreting={interpreting} />
       <CodeView
         key="result"
         codePresentation={result}
         outdated={resultOutdated}
+        interpreting={false}
       />
     </div>
   );

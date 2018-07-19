@@ -2,14 +2,17 @@
 import React from 'react';
 
 type Props = {
-  interpret: Function
+  interpret: Function,
+  interpreting: boolean
 }
 
 export default (props: Props) => {
-  const { interpret } = props;
+  const { interpret, interpreting } = props;
+
+  const className = interpreting ? 'interpreting' : '';
 
   return (
-    <button onClick={interpret}>
+    <button onClick={interpret} className={className}>
       interpret
     </button>
   );

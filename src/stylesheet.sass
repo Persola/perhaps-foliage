@@ -16,6 +16,8 @@ $popsicle-orange: #e73
 $dream-violet: #803850
 $tomato: #b03820
 $pearl-shell: #c76
+$stasis-crystal: #8cc
+$interpreting: #844
 
 body
   background-color: $charcoal
@@ -39,7 +41,10 @@ button:hover
   background-color: #755
 
 button:active
-  background-color: #844
+  background-color: $interpreting
+
+button.interpreting
+  background-color: $interpreting
 
 ::selection
   background-color: #c88
@@ -133,3 +138,6 @@ button:active
     font-family: "Helvetica", Arial, sans-serif
     background-color: #282828
     color: #999
+
+.code-view.interpreting
+  background-color: $stasis-crystal

@@ -27,7 +27,8 @@ export default class Presenter {
   present() {
     const editorState: EditorState = this.editorStateStore.getState();
     const presentation = this.generatePresentation(editorState);
-    this.renderer.render(presentation, editorState.resultOutdated);
+    const { resultOutdated, interpreting } = editorState;
+    this.renderer.render(presentation, resultOutdated, interpreting);
   }
 
   generatePresentation(editorState: EditorState): EditorPresentation {

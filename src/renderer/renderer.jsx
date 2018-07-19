@@ -16,13 +16,18 @@ export default class {
     this.interpret = interpret;
   }
 
-  render(presentation: EditorPresentation, resultOutdated: boolean) {
+  render(
+    presentation: EditorPresentation,
+    resultOutdated: boolean,
+    interpreting: boolean
+  ) {
     ReactDOM.render(
       (
         <Editor
           presentation={presentation}
           interpret={this.interpret}
           resultOutdated={resultOutdated}
+          interpreting={interpreting}
         />
       ),
       this.editorEl

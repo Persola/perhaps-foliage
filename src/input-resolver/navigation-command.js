@@ -4,8 +4,7 @@ import type { ParentSynoRef } from '../types/parent-syno-ref'
 import type { Syno } from '../types/syno'
 import type { EditorState } from '../types/editor-state'
 
-export default (key: string, editorStateStore: ReduxStore) => {
-  const editorState: EditorState = editorStateStore.getState();
+export default (key: string, editorState: EditorState) => {
   const oldFocusedSyno: Syno = editorState.synoMap[editorState.focusedSynoId];
   const oldParentRef: ParentSynoRef = oldFocusedSyno.parent;
   const oldParent: (Syno | false) = oldParentRef
@@ -29,7 +28,7 @@ export default (key: string, editorStateStore: ReduxStore) => {
       throw new Error('should be unreachable');
   }
 
-  editorStateStore.dispatch({
+  return ({
     type: 'NAVIGATE',
     direction,
     oldFocusedSyno,

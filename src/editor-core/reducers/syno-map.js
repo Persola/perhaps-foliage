@@ -45,7 +45,7 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
 
       return newSynoMap;
     }
-    case 'UPDATE_RESULT': {
+    case 'END_INTERPRETATION': {
       const { result } = action;
       newSynoMap[result.id] = result;
 
@@ -55,6 +55,9 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
       return oldState;
     }
     case 'SET_FOCUS_SYNO': {
+      return oldState;
+    }
+    case 'START_INTERPRETATION': {
       return oldState;
     }
     case '@@redux/INIT': {

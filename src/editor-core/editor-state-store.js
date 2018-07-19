@@ -6,6 +6,7 @@ import graphsReducer from './reducers/syno-map.js'
 import focusedSynoIdReducer from './reducers/focused-syno-id.js'
 import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js'
 import resultOutdatedReducer from './reducers/result-outdated.js'
+import interpretingReducer from './reducers/interpreting.js'
 
 import type { ReduxAction } from '../types/redux-action.js'
 import type { EditorState } from '../types/editor-state.js'
@@ -17,7 +18,8 @@ const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
   focusedSynoId: Object.keys(seedGraphs)[0],
   resultSyntreeRootId: false,
-  resultOutdated: false
+  resultOutdated: false,
+  interpreting: false
 };
 const editorstateReducer = (
   originalState: EditorState = defaultEditorState,
@@ -27,7 +29,8 @@ const editorstateReducer = (
     synoMap: graphsReducer(originalState.synoMap, action),
     focusedSynoId: focusedSynoIdReducer(originalState.focusedSynoId, action, originalState.synoMap),
     resultSyntreeRootId: resultSyntreeRootIdReducer(originalState.resultSyntreeRootId, action),
-    resultOutdated: resultOutdatedReducer(originalState.resultOutdated, action)
+    resultOutdated: resultOutdatedReducer(originalState.resultOutdated, action),
+    interpreting: interpretingReducer(originalState.interpreting, action)
   }
 }
 

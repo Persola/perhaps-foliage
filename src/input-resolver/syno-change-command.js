@@ -1,8 +1,8 @@
 // @flow
 import type { ReduxStore } from '../types/redux-store'
+import type { EditorState } from '../types/editor-state'
 
-export default (key: string, editorStateStore: ReduxStore) => {
-  const editorState = editorStateStore.getState();
+export default (key: string, editorState: EditorState) => {
   const value = (
     ['0', '1'].includes(key)
     ? Boolean(Number(key))
@@ -11,7 +11,7 @@ export default (key: string, editorStateStore: ReduxStore) => {
 
   const { focusedSynoId } = editorState;
 
-  editorStateStore.dispatch({
+  return ({
     type: 'REPLACE_FOCUSED_NODE',
     newSynoAttrs: {
       syntype: 'booleanLiteral',

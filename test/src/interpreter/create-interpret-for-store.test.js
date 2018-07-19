@@ -18,9 +18,9 @@ describe ('interpretStage', () => {
     expect(interpreter).toHaveBeenCalledWith(currentEditorState.stageful);
   });
 
-  xit ('dispatches an UPDATE_RESULT action', () => {
+  xit ('dispatches an END_INTERPRETATION action', () => {
     expect(editorStateStore.dispatch).toHaveBeenCalledWith({
-      type: 'UPDATE_RESULT',
+      type: 'END_INTERPRETATION',
       result: mockResult
     });
   });

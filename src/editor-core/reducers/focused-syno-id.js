@@ -34,7 +34,7 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
     case 'REPLACE_FOCUSED_NODE': {
       return action.newSynoId;
     }
-    case 'UPDATE_RESULT': {
+    case 'END_INTERPRETATION': {
       return oldState;
     }
     case 'NAVIGATE': {
@@ -104,6 +104,9 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
     case 'SET_FOCUS_SYNO': {
       const { synoId } = action;
       return synoId;
+    }
+    case 'START_INTERPRETATION': {
+      return oldState;
     }
     case '@@redux/INIT': {
       return oldState;

@@ -9,6 +9,9 @@ import type { EditorState } from '../types/editor-state'
 export default (editorStateStore: ReduxStore) => {
   return () => {
     const editorState: EditorState = editorStateStore.getState();
+
+    editorStateStore.dispatch({ type: 'START_INTERPRETATION' });
+
     try {
       const getSyno = createSynoFetcher(editorState.synoMap);
       const stagedSyno = editorState.synoMap[editorState.focusedSynoId];
@@ -16,7 +19,7 @@ export default (editorStateStore: ReduxStore) => {
       const resolution: InterpretationResolution = interpreter(rootOfFocused, [], getSyno);
       if (resolution.success) {
         editorStateStore.dispatch({
-          type: 'UPDATE_RESULT',
+          type: 'END_INTERPRETATION',
           result: resolution.result
         });
       } else {

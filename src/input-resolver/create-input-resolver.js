@@ -1,20 +1,26 @@
 // @flow
-import dispatchNodeReplacement from './dispatch-node-replacement.js'
-import dispatchNavigation from './dispatch-navigation.js'
+import synoChangeCommand from './syno-change-command.js'
+import navigationCommand from './navigation-command.js'
 
 import type { ReduxStore } from '../types/redux-store'
 import type { SideEffectFunction } from '../types/side-effect-function'
 
 export default (editorStateStore: ReduxStore, interpret: SideEffectFunction) => {
   return (key: string) => {
+    const editorState = editorStateStore.getState();
+    let command;
     if(['0', '1', 'f', 't'].includes(key)) {
-      dispatchNodeReplacement(key, editorStateStore);
+      command = synoChangeCommand(key, editorState);
     } else if (['left', 'right', 'up', 'down'].includes(key)) {
-      dispatchNavigation(key, editorStateStore);
+      command = navigationCommand(key, editorState);
     } else if (key === 'enter') {
       interpret();
     } else {
       throw new Error('key bindings out of sync');
+    }
+
+    if (command !== undefined) {
+      editorStateStore.dispatch(command);
     }
   }
 }

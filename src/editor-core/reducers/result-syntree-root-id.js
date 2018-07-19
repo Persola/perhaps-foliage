@@ -7,13 +7,16 @@ export default (oldState: ResultSyntreeRootId, action: ReduxAction): ResultSyntr
     case 'REPLACE_FOCUSED_NODE': {
       return oldState;
     }
-    case 'UPDATE_RESULT': {
+    case 'END_INTERPRETATION': {
       return action.result.id;
     }
     case 'NAVIGATE': {
       return oldState;
     }
     case 'SET_FOCUS_SYNO': {
+      return oldState;
+    }
+    case 'START_INTERPRETATION': {
       return oldState;
     }
     case '@@redux/INIT': {
