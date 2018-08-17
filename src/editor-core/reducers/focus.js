@@ -1,5 +1,5 @@
 // @flow
-import type { FocusedSynoId } from '../../types/editor-state/focused-syno-id'
+import type { Focus } from '../../types/editor-state/focus'
 import type { Syno } from '../../types/syno'
 import type { SynoRef } from '../../types/syno-ref'
 import type { SynoMap } from '../../types/syno-map'
@@ -29,17 +29,21 @@ const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
   }
 };
 
-export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap): FocusedSynoId => {
+export default (oldState: Focus, action: ReduxAction, synoMap: SynoMap): Focus => {
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
-      return action.newSynoId;
+      return {
+        synoId: action.newSynoId,
+        presnoIndex: false,
+        charIndex: false
+      };
     }
     case 'END_INTERPRETATION': {
       return oldState;
     }
     case 'NAVIGATE': {
       // needs parent and self, or their children ids
-      const { direction, oldFocusedSyno, oldParent } = action;
+      const { direction, oldFocusedPresno, oldParent } = action;
       let newStagedNodeId;
 
       switch (direction) {
@@ -49,8 +53,8 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
           break;
         }
         case 'in': {
-          if (childRefs(oldFocusedSyno, synoMap).length > 0) {
-            newStagedNodeId = childRefs(oldFocusedSyno, synoMap)[0].id;
+          if (childRefs(oldFocusedPresno, synoMap).length > 0) {
+            newStagedNodeId = childRefs(oldFocusedPresno, synoMap)[0].id;
           } else {
             throw new Error('navigate failed; no children!');
           }
@@ -60,15 +64,15 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
           const childRefz = childRefs(oldParent, synoMap);
           if (childRefz.length > 0) {
-            const oldFocusedSynoBirthOrder = childRefz.findIndex(childRef => {
-              return childRef.id === oldState;
+            const oldFocusedPresnoBirthOrder = childRefz.findIndex(childRef => {
+              return childRef.id === oldState.synoId;
             });
-            if (oldFocusedSynoBirthOrder === -1) {
-              throw new Error("cannot find old focused syno ID among parent's children");
-            } else if (oldFocusedSynoBirthOrder === 0) {
+            if (oldFocusedPresnoBirthOrder === -1) {
+              throw new Error("cannot find old focused presno ID among parent's children");
+            } else if (oldFocusedPresnoBirthOrder === 0) {
               throw new Error('no previous sibling');
             } else {
-              newStagedNodeId = childRefz[oldFocusedSynoBirthOrder - 1].id;
+              newStagedNodeId = childRefz[oldFocusedPresnoBirthOrder - 1].id;
             }
           } else {
             throw new Error('navigate failed; no argumentz!');
@@ -79,15 +83,15 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
           const childRefz = childRefs(oldParent, synoMap);
           if (childRefz.length > 0) {
-            const oldFocusedSynoBirthOrder = childRefz.findIndex(childRef => {
-              return childRef.id === oldState;
+            const oldFocusedPresnoBirthOrder = childRefz.findIndex(childRef => {
+              return childRef.id === oldState.synoId;
             });
-            if (oldFocusedSynoBirthOrder === -1) {
-              throw new Error("cannot find old focused syno ID among parent's children");
-            } else if (oldFocusedSynoBirthOrder >= (childRefz.length - 1)) {
+            if (oldFocusedPresnoBirthOrder === -1) {
+              throw new Error("cannot find old focused presno ID among parent's children");
+            } else if (oldFocusedPresnoBirthOrder >= (childRefz.length - 1)) {
               throw new Error('no next sibling');
             } else {
-              newStagedNodeId = childRefz[oldFocusedSynoBirthOrder + 1].id;
+              newStagedNodeId = childRefz[oldFocusedPresnoBirthOrder + 1].id;
             }
           } else {
             throw new Error('navigate failed; no second argument!');
@@ -99,11 +103,19 @@ export default (oldState: FocusedSynoId, action: ReduxAction, synoMap: SynoMap):
         }
       }
 
-      return newStagedNodeId;
+      return {
+        synoId: newStagedNodeId,
+        presnoIndex: false,
+        charIndex: false
+      };
     }
     case 'SET_FOCUS_SYNO': {
       const { synoId } = action;
-      return synoId;
+      return {
+        synoId: synoId,
+        presnoIndex: false,
+        charIndex: false
+      };
     }
     case 'START_INTERPRETATION': {
       return oldState;

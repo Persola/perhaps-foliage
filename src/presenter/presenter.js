@@ -32,9 +32,9 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: EditorState): EditorPresentation {
-    const { synoMap, focusedSynoId, resultSyntreeRootId } = editorState
+    const { synoMap, focus: { synoId }, resultSyntreeRootId } = editorState
     const getSyno = createSynoFetcher(synoMap);
-    const stagedSyno = focusedSynoId ? synoMap[focusedSynoId] : false;
+    const stagedSyno = synoId ? synoMap[synoId] : false;
     const resultSyno = resultSyntreeRootId ? synoMap[resultSyntreeRootId] : false;
 
     if (!stagedSyno) {
@@ -42,7 +42,7 @@ export default class Presenter {
     }
 
     return {
-      stage: (!stagedSyno ? false : presentFocusedSyntree(stagedSyno, {}, getSyno, focusedSynoId)),
+      stage: (!stagedSyno ? false : presentFocusedSyntree(stagedSyno, {}, getSyno, synoId)),
       result: (!resultSyno ? false : presentSyntree(resultSyno, {}, getSyno, false))
     };
   }

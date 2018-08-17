@@ -30,7 +30,7 @@ export default (props: Props) => {
     const { presnos, rootId } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
     content = (
-      <SyntacticNode getPresno={getPresno} presnoId={rootId} />
+      <SyntacticNode getPresno={getPresno} synoId={rootId} />
     );
   }
 

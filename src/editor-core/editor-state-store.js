@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import codeLoader from '../code-loader/code-loader.js'
 
 import graphsReducer from './reducers/syno-map.js'
-import focusedSynoIdReducer from './reducers/focused-syno-id.js'
+import focusReducer from './reducers/focus.js'
 import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js'
 import resultOutdatedReducer from './reducers/result-outdated.js'
 import interpretingReducer from './reducers/interpreting.js'
@@ -16,7 +16,12 @@ const primitiveGraphs: SynoMap = codeLoader('primitives');
 const seedGraphs: SynoMap = codeLoader('proxyNorCall');
 const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
-  focusedSynoId: Object.keys(seedGraphs)[0],
+  focus: {
+    // add syntree ID
+    synoId: Object.keys(seedGraphs)[0],
+    presnoIndex: false,
+    charIndex: false
+  },
   resultSyntreeRootId: false,
   resultOutdated: false,
   interpreting: false
@@ -27,7 +32,7 @@ const editorstateReducer = (
 ): EditorState => {
   return {
     synoMap: graphsReducer(originalState.synoMap, action),
-    focusedSynoId: focusedSynoIdReducer(originalState.focusedSynoId, action, originalState.synoMap),
+    focus: focusReducer(originalState.focus, action, originalState.synoMap),
     resultSyntreeRootId: resultSyntreeRootIdReducer(originalState.resultSyntreeRootId, action),
     resultOutdated: resultOutdatedReducer(originalState.resultOutdated, action),
     interpreting: interpretingReducer(originalState.interpreting, action)

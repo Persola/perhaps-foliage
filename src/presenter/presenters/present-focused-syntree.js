@@ -6,11 +6,11 @@ import type { Prestree } from '../../types/presentations/prestree.js'
 import type { Syno } from '../../types/syno.js'
 
 export default (
-  focusedSyno: Syno,
+  focusedPresno: Syno,
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
 ): Prestree => {
-  const renderingRoot = ascendToRoot(focusedSyno, getSyno);
+  const renderingRoot = ascendToRoot(focusedPresno, getSyno);
   return presentSyntree(renderingRoot, scope, getSyno, focusNodeId);
 }

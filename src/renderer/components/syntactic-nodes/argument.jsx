@@ -19,7 +19,7 @@ export default (props: Props) => {
   return (
     <div className={classes} data-syno-id={presno.synoId}>
       <NamePart namePart={presno.name} />
-      <SyntacticNode getPresno={getPresno} presnoId={presno.value.id} />
+      <SyntacticNode getPresno={getPresno} synoId={presno.value.id} />
     </div>
   );
 };

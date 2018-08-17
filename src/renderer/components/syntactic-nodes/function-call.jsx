@@ -17,7 +17,7 @@ const argumentEls = (getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
   return (
     argumentz.map((argRef: PresnoRef, ind) => {
       return (
-        <SyntacticNode key={`arg_${ind + 1}`} getPresno={getPresno} presnoId={argRef.id} />
+        <SyntacticNode key={`arg_${ind + 1}`} getPresno={getPresno} synoId={argRef.id} />
       )
     })
   );
@@ -40,7 +40,7 @@ export default (props: Props) => {
       { argumentz }
       {
         bodyRef ?
-          <SyntacticNode getPresno={getPresno} presnoId={bodyRef.id} />
+          <SyntacticNode getPresno={getPresno} synoId={bodyRef.id} />
           : ''
       }
     </div>

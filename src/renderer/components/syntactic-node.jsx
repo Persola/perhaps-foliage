@@ -11,12 +11,12 @@ import type { SynoId } from '../../types/syno-id'
 
 type Props = {
   getPresno: (SynoId) => Presno,
-  presnoId: SynoId
+  synoId: SynoId
 }
 
 export default (props: Props) => {
-  const { presnoId, getPresno } = props;
-  const presno: Presno = getPresno(presnoId);
+  const { synoId, getPresno } = props;
+  const presno: Presno = getPresno(synoId);
 
   switch (presno.syntype) {
     case 'booleanLiteral': {

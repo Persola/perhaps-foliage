@@ -25,11 +25,11 @@ export default (props: Props) => {
       {
         parameters.map(paramRef => {
           return(
-            <SyntacticNode key={paramRef.id} getPresno={getPresno} presnoId={paramRef.id} />
+            <SyntacticNode key={paramRef.id} getPresno={getPresno} synoId={paramRef.id} />
           )
         })
       }
-      <SyntacticNode getPresno={getPresno} presnoId={presno.body.id} />
+      <SyntacticNode getPresno={getPresno} synoId={presno.body.id} />
     </div>
   );
 };

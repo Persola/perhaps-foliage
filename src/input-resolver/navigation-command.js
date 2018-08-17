@@ -1,12 +1,11 @@
 // @flow
-import type { ReduxStore } from '../types/redux-store'
 import type { ParentSynoRef } from '../types/parent-syno-ref'
 import type { Syno } from '../types/syno'
 import type { EditorState } from '../types/editor-state'
 
 export default (key: string, editorState: EditorState) => {
-  const oldFocusedSyno: Syno = editorState.synoMap[editorState.focusedSynoId];
-  const oldParentRef: ParentSynoRef = oldFocusedSyno.parent;
+  const oldFocusedPresno: Syno = editorState.synoMap[editorState.focus.synoId];
+  const oldParentRef: ParentSynoRef = oldFocusedPresno.parent;
   const oldParent: (Syno | false) = oldParentRef
     ? editorState.synoMap[oldParentRef.id]
     : false;
@@ -31,7 +30,7 @@ export default (key: string, editorState: EditorState) => {
   return ({
     type: 'NAVIGATE',
     direction,
-    oldFocusedSyno,
+    oldFocusedPresno,
     oldParent
   });
 }

@@ -11,9 +11,9 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
 
   switch (action.type) {
     case 'REPLACE_FOCUSED_NODE': {
-      const { newSynoAttrs, newSynoId, focusedSynoId } = action;
+      const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
 
-      const parentRef = oldState[focusedSynoId].parent;
+      const parentRef = oldState[focusedPresnoId].parent;
       let parentAttr;
       if (parentRef) {
         const parent: Syno = oldState[parentRef.id];

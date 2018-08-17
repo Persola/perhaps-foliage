@@ -8,5 +8,5 @@ export type ReplaceFocusedNode = {
     value: boolean
   },
   newSynoId: SynoId,
-  focusedSynoId: SynoId
+  focusedPresnoId: SynoId
 }
