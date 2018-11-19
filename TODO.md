@@ -2,6 +2,9 @@
   * extract Saliva-specific modules as local npm packages
   * separate command resolver from input resolver
   * split types into functional directories
+  * [?] add flow-runtime
+  * [?] add prettier
+    * also just look at prettier to get an idea of how to do formatting
 * new functionality
   * add syno deletion and insertation
   * [?] add selection (in addition to focus)
@@ -49,6 +52,7 @@
     * reference assignment (name, value), reference invocation, maps/objects
 * longview
   * pick license
+    * make sure contributors give up all copyright on offering contribution
   * package (some?) subprojects
   * [?] update babel es version
   * operationalize
@@ -66,3 +70,5 @@ I don't understand:
     * similar to presentation generation getting the whole syno tree
     * oh, its not code design but library uasge--because then they would always rerender
       * assuming the performance constraints emerge, my diffing logic will probably be different altogether (both presentation gen. and html gen.)
+
+We hold sets/types and operators/functions as two basic mutually independant categories that must be present in the correct arrangement (matching them appropriately or with the aid of a integration) for a mathematical/computation rule system. You could put types first and define operators on types (methods) or put functions first and define types through input and output typing. Holding them as equal may be a necessary knot of complexity, but it thankfully lies at the root of an entire language. But countercase: when combining a string and a regular expression, you don't want to have to name the operator, just provide the typed values and have it search the string using the regexp. But I suppose that's because the search operation is the one most frequently used with those types and, while not communicative, knows which typed vars are which parameters.
