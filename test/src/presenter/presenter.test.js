@@ -4,6 +4,7 @@ describe ('presenter', () => {
   const focusedNode = {};
   const resultGraph = {};
   const resultOutdated = false;
+  const interpreting = false;
   const editorState = {
     synoMap: {
       trial: focusedNode,
@@ -11,7 +12,8 @@ describe ('presenter', () => {
     },
     stagedGraphKey: 'trial',
     resultGraphKey: 'reward',
-    resultOutdated
+    resultOutdated,
+    interpreting
   };
   let editorStateStore;
   let renderer = { render: jest.fn() };
@@ -59,7 +61,7 @@ describe ('presenter', () => {
     })
 
     it ('renders the presentation', () => {
-      expect(renderer.render).toHaveBeenCalledWith(presentation, resultOutdated);
+      expect(renderer.render).toHaveBeenCalledWith(presentation, resultOutdated, interpreting);
     })
   })
 

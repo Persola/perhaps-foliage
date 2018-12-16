@@ -1,4 +1,5 @@
 // @flow
+import verifyActionType from './verify-action-type'
 import type { Focus } from '../../types/editor-state/focus'
 import type { Syno } from '../../types/syno'
 import type { SynoRef } from '../../types/syno-ref'
@@ -120,14 +121,9 @@ export default (oldState: Focus, action: ReduxAction, synoMap: SynoMap): Focus =
     case 'START_INTERPRETATION': {
       return oldState;
     }
-    case '@@redux/INIT': {
-      return oldState;
-    }
-    case '@@INIT': {
-      return oldState;
-    }
     default: {
-      throw new Error(`Unrecognized action type: '${action.type}'`);
+      verifyActionType(action.type);
+      return oldState;
     }
   }
 }

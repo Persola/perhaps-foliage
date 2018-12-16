@@ -1,4 +1,5 @@
 // @flow
+import verifyActionType from './verify-action-type'
 import type { ReduxAction } from '../../types/redux-action'
 
 export default (oldState: boolean, action: ReduxAction): boolean => {
@@ -26,14 +27,9 @@ export default (oldState: boolean, action: ReduxAction): boolean => {
     case 'SET_FOCUS_SYNO': {
       return oldState;
     }
-    case '@@redux/INIT': {
-      return oldState;
-    }
-    case '@@INIT': {
-      return oldState;
-    }
     default: {
-      throw new Error(`Unrecognized action type: '${action.type}'`);
+      verifyActionType(action.type);
+      return oldState;
     }
   }
 }

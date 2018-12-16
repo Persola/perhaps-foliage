@@ -1,6 +1,7 @@
-Syntactic graphs represent code.
-They have a tree structure.
+Syntactic graphs represent code. They have a tree structure.
 
-In context, they are named through IDs, which can be used to point to the root node in each tree. Their nodes have paths communicated through a key or array of the keys, in order, used to access a given node starting with a reference to the root node. An empty array points to the root node.
+Their nodes are called "syntactic nodes" or "synos". Synos have IDs. Syntactic graphs are identified (in part?) by their root syno's ID. Nodes within a graph/tree can be identified by the ID of the tree in conjunction with a path from that root to the child node expressed as a key or ordered array of the keys. An empty array points to the root node.
 
-Everything needed to execute a syntactic graph should be contained in the graph itself (in the root node or any child nodes) or should be referenced from a syntactic node reference (graph ID and path). Thus graphs can be incomplete because they have not resolved node references, but not for any other reason.
+Everything needed to execute a complete syntactic graph should be contained in the graph itself (in the root nodes and their children). However, a graph can be incomplete, and therefore unexecutable, iff it contains a reference to a subtree but does not have access to the referant.
+
+In Saliva REPL, syntactic trees are expressed as maps between syno IDs and synos. Synos contain references to child and parent synos. You have to know the root syno ID to efficiently traverse the tree. There is also the presentation tree, which has the same structure but represents code as it is being presented to a user. ("presno" := "presenation node".)

@@ -8,11 +8,14 @@ This is a scaffold for a programming interface which more richly integrates with
 * (some left unspecified)
 
 ### Setup
+* have installed:
+  * node.js (including npm)
+  * python2 (needed for some package)
+  * (probably some other common things)
 * `npm install`
-* (some left unspecified)
 
 ### Build
-```
+```shell
 npm run build
 ```
 
@@ -23,12 +26,12 @@ npm run build
 2. Navigate to `localhost:8000` in a browser
 
 ##### Electron
-```
+```shell
 npm run start:electron
 ```
 
 ### Test
-```
+```shell
 npm run test
 ```
 
@@ -36,16 +39,16 @@ npm run test
 Open `./tmp/coverage/index.html` in a browser. The interface refreshes when tests are run.
 
 ### Type Check
-```
+```shell
 npm run type
 ```
 
 ### Type Check Coverage Check
-```
+```shell
 npm run type-cov
 ```
 
 ### Lint
-```
+```shell
 npm run lint
 ```

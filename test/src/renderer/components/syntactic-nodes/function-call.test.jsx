@@ -4,14 +4,15 @@ import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
 
 const functionCallPres = require('../../../../data-mocks/presentations/function-call.json');
 
-describe ('BooleanLiteral', () => {
+describe ('functionCall', () => {
   const validProps = {
-    codePresentation: functionCallPres
+    getPresno: () => {},
+    presno: functionCallPres
   }
 
   it ('renders', () => {
     expectSnapshotMatch(
-      <FunctionCall codePresentation={validProps.codePresentation} />
+      <FunctionCall {...validProps} />
     );
   });
 })

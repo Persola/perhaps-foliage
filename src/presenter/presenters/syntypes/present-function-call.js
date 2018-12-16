@@ -7,6 +7,7 @@ import presentNorCall from '../present-nor-call.js'
 import type { SynoRef } from '../../../types/syno-ref.js'
 import type { FunctionCall } from '../../../types/syntactic-nodes/function-call.js'
 import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition.js'
+import type { VariableRef } from '../../../types/syntactic-nodes/variable-ref.js'
 import type { FunctionCallPresAttrs } from '../../../types/presentations/presno-attrs/function-call-attrs.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
 
@@ -21,7 +22,7 @@ export default (
     return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focusNodeId));
   }
 
-  const callee: FunctionDefinition = getSyno(funkshunCall.callee);
+  const callee: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
   let resolved: boolean;
   let name: (string | false);
   let bodyRef: (SynoRef | false);
@@ -37,9 +38,13 @@ export default (
       focusNodeId
     )
     bodyRef = funkshunCall.callee;
-  } else if (callee.syntype === 'variableRef') {
-    resolved = Object.keys(scope).includes(callee.name);
-    name = callee.name;
+  } else if (callee.syntype === 'variableRef') { // never been run
+    resolved = Object.keys(scope).includes(callee.referent.id);
+    if (resolved) {
+      name = getSyno(callee.referent.id).name
+    } else {
+      name = '(!)'
+    }
     bodyRef = false;
   } else { throw new Error('new type?'); }
 

@@ -50,7 +50,7 @@ export default (props: Props) => {
       )
     }
     default: {
-      throw new Error(`unrecognized type: ${presno.syntype}`);
+      throw new Error(`unrecognized type: '${presno.syntype}'`);
     }
   }
 };

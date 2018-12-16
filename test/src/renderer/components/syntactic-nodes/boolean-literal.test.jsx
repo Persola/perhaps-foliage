@@ -6,12 +6,13 @@ const booleanLiteralPres = require('../../../../data-mocks/presentations/boolean
 
 describe ('BooleanLiteral', () => {
   const validProps = {
-    codePresentation: booleanLiteralPres
+    getPresno: () => {}, // eslint-disable-line react/no-unused-prop-types
+    presno: booleanLiteralPres
   }
 
   it ('renders', () => {
     expectSnapshotMatch(
-      <BooleanLiteral codePresentation={validProps.codePresentation} />
+      <BooleanLiteral {...validProps} />
     );
   });
 })

@@ -3,26 +3,39 @@ import { shallow } from 'enzyme';
 import SyntacticNode from '../../../../src/renderer/components/syntactic-node.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
-const codePresentation = require('../../../data-mocks/presentations/boolean-literal.json');
+const presno = require('../../../data-mocks/presentations/boolean-literal.json');
 
 describe ('SyntacticNode', () => {
-  const validProps = { codePresentation }
+  const synoId = 'berry-ford'
+  const validProps = {
+    getPresno: synoIdArg => {
+      if (synoIdArg === synoId) { return presno }
+    },
+    synoId
+  }
 
   it ('renders', () => {
     expectSnapshotMatch(
-      <SyntacticNode codePresentation={validProps.codePresentation} />
+      <SyntacticNode {...validProps} />
     );
   });
 
-  it ('only works for booleanLiterals', () => {
-    const nonBooleanGraph = Object.assign({}, validProps.codePresentation, {
-      syntype: 'otherSyntype',
+  it ('errors on unrecognized syntypes', () => {
+    const badSyntype = 'badSyntype'
+    const badTypeSyno = Object.assign({}, validProps.codePresentation, {
+      syntype: badSyntype
     })
+    const badSyntypeProps = {
+      getPresno: synoIdArg => {
+        if (synoIdArg === synoId) { return badTypeSyno }
+      },
+      synoId
+    }
 
     expect( () => {
       shallow(
-        <SyntacticNode codePresentation={nonBooleanGraph} />
+        <SyntacticNode {...badSyntypeProps} />
       )
-    }).toThrow('unrecognized type: otherSyntype');
+    }).toThrow(`unrecognized type: '${badSyntype}'`);
   });
 })

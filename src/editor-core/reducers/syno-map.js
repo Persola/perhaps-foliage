@@ -1,4 +1,5 @@
 // @flow
+import verifyActionType from './verify-action-type'
 import dup from '../../syntree-utils/dup.js'
 
 import type { Syno } from '../../types/syno'
@@ -60,14 +61,9 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
     case 'START_INTERPRETATION': {
       return oldState;
     }
-    case '@@redux/INIT': {
-      return oldState;
-    }
-    case '@@INIT': {
-      return oldState;
-    }
     default: {
-      throw new Error(`Unrecognized action type: '${action.type}'`);
+      verifyActionType(action.type);
+      return oldState;
     }
   }
 }
