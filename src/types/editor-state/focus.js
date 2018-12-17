@@ -3,6 +3,6 @@ import type { FocusedPresnoId } from './focused-presno-id'
 
 export type Focus = {
   synoId: FocusedPresnoId,
-  presnoIndex: boolean,
-  charIndex: boolean
+  presnoIndex: (number | false),
+  charIndex: (number | false)
 }

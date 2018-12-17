@@ -5,6 +5,8 @@
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
+  * add synTree ID to focus
+  * make types synos (beneath default visiblity level)
 * new functionality
   * add syno deletion and insertation
   * [?] add selection (in addition to focus)

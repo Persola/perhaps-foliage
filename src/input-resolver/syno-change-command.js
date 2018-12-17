@@ -11,7 +11,7 @@ export default (key: string, editorState: EditorState) => {
   const { focus: { synoId } } = editorState;
 
   return ({
-    type: 'REPLACE_FOCUSED_NODE',
+    type: 'REPLACE_FOCUSED_SYNO',
     newSynoAttrs: {
       syntype: 'booleanLiteral',
       value

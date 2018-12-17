@@ -17,7 +17,6 @@ const seedGraphs: SynoMap = codeLoader('proxyNorCall');
 const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
   focus: {
-    // add syntree ID
     synoId: Object.keys(seedGraphs)[0],
     presnoIndex: false,
     charIndex: false

@@ -1,8 +1,8 @@
 // @flow
 import type { SynoId } from '../syno-id'
 
-export type ReplaceFocusedNode = {
-  type: 'REPLACE_FOCUSED_NODE',
+export type ReplaceFocusedSyno = {
+  type: 'REPLACE_FOCUSED_SYNO',
   newSynoAttrs: {
     syntype: 'booleanLiteral',
     value: boolean

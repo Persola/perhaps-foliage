@@ -3,14 +3,14 @@ import ascendToRoot from '../../syntree-utils/ascend-to-root.js'
 import presentSyntree from './present-syntree.js'
 
 import type { Prestree } from '../../types/presentations/prestree.js'
-import type { Syno } from '../../types/syno.js'
+import type { SynoId } from '../../types/syno-id.js'
 
 export default (
-  focusedPresno: Syno,
+  focusedPresnoId: SynoId,
   scope: {},
   getSyno: Function,
   focusNodeId: (string | false)
 ): Prestree => {
-  const renderingRoot = ascendToRoot(focusedPresno, getSyno);
-  return presentSyntree(renderingRoot, scope, getSyno, focusNodeId);
+  const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, getSyno).id;
+  return presentSyntree(renderingRootId, scope, getSyno, focusNodeId);
 }

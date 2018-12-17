@@ -14,8 +14,7 @@ export default (editorStateStore: ReduxStore) => {
 
     try {
       const getSyno = createSynoFetcher(editorState.synoMap);
-      const stagedSyno = editorState.synoMap[editorState.focus.synoId];
-      const rootOfFocused = ascendToRoot(stagedSyno, getSyno);
+      const rootOfFocused = ascendToRoot(editorState.focus.synoId, getSyno);
       const resolution: InterpretationResolution = interpreter(rootOfFocused, [], getSyno);
       if (resolution.success) {
         editorStateStore.dispatch({

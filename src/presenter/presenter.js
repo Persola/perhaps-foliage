@@ -32,18 +32,12 @@ export default class Presenter {
   }
 
   generatePresentation(editorState: EditorState): EditorPresentation {
-    const { synoMap, focus: { synoId }, resultSyntreeRootId } = editorState
+    const { synoMap, focus, resultSyntreeRootId } = editorState
     const getSyno = createSynoFetcher(synoMap);
-    const stagedSyno = synoId ? synoMap[synoId] : false;
-    const resultSyno = resultSyntreeRootId ? synoMap[resultSyntreeRootId] : false;
-
-    if (!stagedSyno) {
-      throw new Error('focus node not found in editor state')
-    }
 
     return {
-      stage: (!stagedSyno ? false : presentFocusedSyntree(stagedSyno, {}, getSyno, synoId)),
-      result: (!resultSyno ? false : presentSyntree(resultSyno, {}, getSyno, false))
+      stage: (!focus.synoId ? false : presentFocusedSyntree(focus.synoId, {}, getSyno, focus.synoId)),
+      result: (!resultSyntreeRootId ? false : presentSyntree(resultSyntreeRootId, {}, getSyno, false))
     };
   }
 }
