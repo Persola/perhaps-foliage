@@ -1,5 +1,5 @@
 // @flow
-import verifyActionType from './verify-action-type'
+import verifyActionType from './util/verify-action-type'
 import type { Focus } from '../../types/editor-state/focus'
 import type { Syno } from '../../types/syno'
 import type { SynoRef } from '../../types/syno-ref'
@@ -32,7 +32,7 @@ const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
 
 export default (oldState: Focus, action: ReduxAction, synoMap: SynoMap): Focus => {
   switch (action.type) {
-    case 'REPLACE_FOCUSED_NODE': {
+    case 'REPLACE_FOCUSED_SYNO': {
       return {
         synoId: action.newSynoId,
         presnoIndex: false,

@@ -1,5 +1,5 @@
 // @flow
-import verifyActionType from './verify-action-type'
+import verifyActionType from './util/verify-action-type'
 import dup from '../../syntree-utils/dup.js'
 
 import type { Syno } from '../../types/syno'
@@ -11,7 +11,7 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
   const newSynoMap: SynoMap = dup(oldState);
 
   switch (action.type) {
-    case 'REPLACE_FOCUSED_NODE': {
+    case 'REPLACE_FOCUSED_SYNO': {
       const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
 
       const parentRef = oldState[focusedPresnoId].parent;

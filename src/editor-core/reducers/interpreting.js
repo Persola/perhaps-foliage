@@ -1,5 +1,5 @@
 // @flow
-import verifyActionType from './verify-action-type'
+import verifyActionType from './util/verify-action-type'
 import type { ReduxAction } from '../../types/redux-action'
 
 export default (oldState: boolean, action: ReduxAction): boolean => {
@@ -11,7 +11,7 @@ export default (oldState: boolean, action: ReduxAction): boolean => {
 
       return true;
     }
-    case 'REPLACE_FOCUSED_NODE': {
+    case 'REPLACE_FOCUSED_SYNO': {
       return oldState;
     }
     case 'END_INTERPRETATION': {
