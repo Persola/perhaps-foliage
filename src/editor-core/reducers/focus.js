@@ -2,23 +2,33 @@
 import verifyActionType from './util/verify-action-type'
 import type { Focus } from '../../types/editor-state/focus'
 import type { Syno } from '../../types/syno'
-import type { SynoRef } from '../../types/syno-ref'
+import type { ChildPresnoRef } from '../../types/child-presno-ref'
 import type { SynoMap } from '../../types/syno-map'
 import type { ReduxAction } from '../../types/redux-action'
 
-const childRefs = (syno: Syno, synoMap: SynoMap): SynoRef[] => {
+const childRefs = (syno: Syno, synoMap: SynoMap): ChildPresnoRef[] => {
   switch (syno.syntype) {
     case 'functionCall': {
-      const childRefs: SynoRef[] = syno.argumentz.slice();
+      const childRefs: ChildPresnoRef[] = [...syno.argumentz];
       const calleeSyno = synoMap[syno.callee.id];
       if (calleeSyno.syntype === 'functionDefinition') {
         childRefs.push(syno.callee);
       }
-      return childRefs;
+      return childRefs
     }
     case 'functionDefinition': {
-      const childRefs = syno.parameters.slice();
-      childRefs.push(syno.body);
+      const childRefs: ChildPresnoRef[] = [
+        { // the name first
+          synoRef: false,
+          parent: {
+            synoRef: true,
+            id: syno.id
+          },
+          index: 0
+        },
+        ...syno.parameters,
+        syno.body
+      ];
       return childRefs;
     }
     case 'argument': {
@@ -44,71 +54,137 @@ export default (oldState: Focus, action: ReduxAction, synoMap: SynoMap): Focus =
     }
     case 'NAVIGATE': {
       // needs parent and self, or their children ids
-      const { direction, oldFocusedPresno, oldParent } = action;
-      let newStagedNodeId;
+      const { direction, oldFocusedPresnoRef } = action;
+
+      let oldParent;
+      if (oldFocusedPresnoRef.synoRef) {
+        const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
+        oldParent = oldFocusedPresno.parent && synoMap[oldFocusedPresno.parent.id];
+      } else {
+        oldParent = synoMap[oldFocusedPresnoRef.parent.id];
+      }
 
       switch (direction) {
         case 'out': {
-          if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          newStagedNodeId = oldParent.id;
-          break;
+          if (oldFocusedPresnoRef.synoRef) {
+            const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
+            if (oldFocusedPresno.parent === false) { throw new Error('navigate failed; no parent!'); }
+            return {
+              synoId: oldFocusedPresno.parent.id,
+              presnoIndex: false,
+              charIndex: false
+            };
+          } else {
+            return {
+              synoId: oldState.synoId,
+              presnoIndex: false,
+              charIndex: false
+            };
+          }
         }
         case 'in': {
+          if (!oldFocusedPresnoRef.synoRef) { throw new Error('tried to go inside name') }
+          const oldFocusedPresno: Syno = synoMap[oldFocusedPresnoRef.id];
           if (childRefs(oldFocusedPresno, synoMap).length > 0) {
-            newStagedNodeId = childRefs(oldFocusedPresno, synoMap)[0].id;
+            const newFocusPresnoRef: ChildPresnoRef = childRefs(oldFocusedPresno, synoMap)[0];
+
+            if (newFocusPresnoRef.synoRef) {
+              return {
+                synoId: newFocusPresnoRef.id,
+                presnoIndex: false,
+                charIndex: false
+              };
+            } else {
+              return {
+                synoId: oldFocusedPresno.id,
+                presnoIndex: 0,
+                charIndex: false
+              };
+            }
           } else {
             throw new Error('navigate failed; no children!');
           }
-          break;
         }
         case 'prev': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          const childRefz = childRefs(oldParent, synoMap);
-          if (childRefz.length > 0) {
-            const oldFocusedPresnoBirthOrder = childRefz.findIndex(childRef => {
-              return childRef.id === oldState.synoId;
+          const siblingRefz = childRefs(oldParent, synoMap);
+          if (siblingRefz.length > 0) {
+            const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
+              if (siblingRef.synoRef) {
+                // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+                return siblingRef.id === oldFocusedPresnoRef.id;
+              } else {
+                // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+                return siblingRef.index === oldFocusedPresnoRef.index;
+              }
             });
             if (oldFocusedPresnoBirthOrder === -1) {
               throw new Error("cannot find old focused presno ID among parent's children");
             } else if (oldFocusedPresnoBirthOrder === 0) {
               throw new Error('no previous sibling');
             } else {
-              newStagedNodeId = childRefz[oldFocusedPresnoBirthOrder - 1].id;
+              const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder - 1];
+
+              if (newFocusPresnoRef.synoRef) {
+                return {
+                  synoId: newFocusPresnoRef.id,
+                  presnoIndex: false,
+                  charIndex: false
+                };
+              } else {
+                return {
+                  synoId: oldParent.id,
+                  presnoIndex: 0,
+                  charIndex: false
+                };
+              }
             }
           } else {
-            throw new Error('navigate failed; no argumentz!');
+            throw new Error('navigate failed; parent has no children!?');
           }
-          break;
         }
         case 'next': {
           if (!oldParent) { throw new Error('navigate failed; no parent!'); }
-          const childRefz = childRefs(oldParent, synoMap);
-          if (childRefz.length > 0) {
-            const oldFocusedPresnoBirthOrder = childRefz.findIndex(childRef => {
-              return childRef.id === oldState.synoId;
+          const siblingRefz = childRefs(oldParent, synoMap);
+          if (siblingRefz.length > 0) {
+            const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
+              if (siblingRef.synoRef) {
+                // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+                return siblingRef.id === oldFocusedPresnoRef.id;
+              } else {
+                // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+                return siblingRef.index === oldFocusedPresnoRef.index;
+              }
             });
             if (oldFocusedPresnoBirthOrder === -1) {
               throw new Error("cannot find old focused presno ID among parent's children");
-            } else if (oldFocusedPresnoBirthOrder >= (childRefz.length - 1)) {
+            } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
               throw new Error('no next sibling');
             } else {
-              newStagedNodeId = childRefz[oldFocusedPresnoBirthOrder + 1].id;
+              const newFocusPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
+
+              if (newFocusPresnoRef.synoRef) {
+                return {
+                  synoId: newFocusPresnoRef.id,
+                  presnoIndex: false,
+                  charIndex: false
+                };
+              } else {
+                return {
+                  synoId: oldParent.id,
+                  presnoIndex: 0,
+                  charIndex: false
+                };
+              }
             }
           } else {
-            throw new Error('navigate failed; no second argument!');
+            throw new Error('navigate failed; parent has no children!?');
           }
-          break;
         }
         default: {
           throw new Error('unrecognized navigation direction');
         }
       }
-
-      return {
-        synoId: newStagedNodeId,
-        presnoIndex: false,
-        charIndex: false
-      };
     }
     case 'SET_FOCUS_SYNO': {
       const { synoId } = action;

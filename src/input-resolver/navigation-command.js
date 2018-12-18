@@ -1,14 +1,25 @@
 // @flow
-import type { ParentSynoRef } from '../types/parent-syno-ref'
-import type { Syno } from '../types/syno'
+import type { ChildPresnoRef } from '../types/child-presno-ref'
 import type { EditorState } from '../types/editor-state'
 
 export default (key: string, editorState: EditorState) => {
-  const oldFocusedPresno: Syno = editorState.synoMap[editorState.focus.synoId];
-  const oldParentRef: ParentSynoRef = oldFocusedPresno.parent;
-  const oldParent: (Syno | false) = oldParentRef
-    ? editorState.synoMap[oldParentRef.id]
-    : false;
+  let oldFocusedPresnoRef: ChildPresnoRef;
+  if (editorState.focus.presnoIndex === false) {
+    oldFocusedPresnoRef = {
+      synoRef: true,
+      id: editorState.focus.synoId
+    };
+  } else {
+    oldFocusedPresnoRef = {
+      synoRef: false,
+      parent: {
+        synoRef: true,
+        id: editorState.focus.synoId
+      },
+      index: 0
+    }
+  }
+
   let direction;
   switch (key) {
     case 'left':
@@ -29,8 +40,7 @@ export default (key: string, editorState: EditorState) => {
 
   return ({
     type: 'NAVIGATE',
-    direction,
-    oldFocusedPresno,
-    oldParent
+    oldFocusedPresnoRef,
+    direction
   });
 }

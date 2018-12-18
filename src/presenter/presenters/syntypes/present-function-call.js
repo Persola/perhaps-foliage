@@ -10,16 +10,17 @@ import type { FunctionDefinition } from '../../../types/syntactic-nodes/function
 import type { VariableRef } from '../../../types/syntactic-nodes/variable-ref.js'
 import type { FunctionCallPresAttrs } from '../../../types/presentations/presno-attrs/function-call-attrs.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
+import type { Focus } from '../../../types/editor-state/focus.js'
 
 export default (
   presnoMap: PresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
   getSyno: Function,
-  focusNodeId: (string | false)
+  focus: (Focus | false)
 ): FunctionCallPresAttrs => {
   if (funkshunCall.callee.id === NorPrimitiveId) {
-    return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focusNodeId));
+    return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focus));
   }
 
   const callee: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
@@ -35,7 +36,7 @@ export default (
       callee,
       scope,
       getSyno,
-      focusNodeId
+      focus
     )
     bodyRef = funkshunCall.callee;
   } else if (callee.syntype === 'variableRef') { // never been run
@@ -51,9 +52,9 @@ export default (
   return {
     syntype: 'functionCall',
     name,
-    argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focusNodeId),
+    argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focus),
     bodyRef,
     resolved,
-    focused: (funkshunCall.id === focusNodeId)
+    focused: focus && (funkshunCall.id === focus.synoId)
   }
 }

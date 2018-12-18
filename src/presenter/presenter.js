@@ -36,7 +36,7 @@ export default class Presenter {
     const getSyno = createSynoFetcher(synoMap);
 
     return {
-      stage: (!focus.synoId ? false : presentFocusedSyntree(focus.synoId, {}, getSyno, focus.synoId)),
+      stage: (!focus.synoId ? false : presentFocusedSyntree(focus.synoId, {}, getSyno, focus)),
       result: (!resultSyntreeRootId ? false : presentSyntree(resultSyntreeRootId, {}, getSyno, false))
     };
   }

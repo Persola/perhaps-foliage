@@ -34,7 +34,7 @@ export default (props: Props) => {
     <div className={classes} data-syno-id={presno.synoId}>
       {
         name ?
-          <NamePart namePart={name} />
+          <NamePart namePart={name} focused={false} />
           : ''
       }
       { argumentz }

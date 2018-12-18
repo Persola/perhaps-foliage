@@ -4,4 +4,6 @@ Their nodes are called "syntactic nodes" or "synos". Synos have IDs. Syntactic g
 
 Everything needed to execute a complete syntactic graph should be contained in the graph itself (in the root nodes and their children). However, a graph can be incomplete, and therefore unexecutable, iff it contains a reference to a subtree but does not have access to the referant.
 
-In Saliva REPL, syntactic trees are expressed as maps between syno IDs and synos. Synos contain references to child and parent synos. You have to know the root syno ID to efficiently traverse the tree. There is also the presentation tree, which has the same structure but represents code as it is being presented to a user. ("presno" := "presenation node".)
+In Saliva REPL, syntactic trees are expressed as maps between syno IDs and synos. Synos contain references to child and parent synos. You have to know the root syno ID to efficiently traverse the tree.
+
+In Saliva REPL, there is also the presentation tree, which contains presentation nodes ("presnos"). Each syno rendered in a given rendering will have a corresponding presno, but those not rendered will not. Some presnos do not have corresponding synos, specifically nameParts, which are selectable but not independant syntactic nodes.

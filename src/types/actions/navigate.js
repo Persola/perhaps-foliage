@@ -1,9 +1,8 @@
 // @flow
-import type { Syno } from '../syno'
+import type { ChildPresnoRef } from '../child-presno-ref'
 
 export type Navigate = {
   type: 'NAVIGATE',
   direction: ('out' | 'in' | 'prev' | 'next'),
-  oldFocusedPresno: Syno,
-  oldParent: (Syno | false)
+  oldFocusedPresnoRef: ChildPresnoRef
 }

@@ -9,7 +9,7 @@ describe ('BooleanLiteral', () => {
 
   it ('renders', () => {
     expectSnapshotMatch(
-      <NamePart namePart={validProps.namePart} />
+      <NamePart namePart={validProps.namePart} focused={false} />
     );
   });
 })

@@ -21,7 +21,7 @@ export default (props: Props) => {
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={String(presno.value)} />
+      <NamePart namePart={String(presno.value)} focused={false} />
     </div>
   );
 };

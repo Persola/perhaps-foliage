@@ -4,13 +4,14 @@ import type { Argument } from '../../../types/syntactic-nodes/argument.js'
 import type { ArgumentPresAttrs } from '../../../types/presentations/presno-attrs/argument-attrs.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
 import type { SynoId } from '../../../types/syno-id.js'
+import type { Focus } from '../../../types/editor-state/focus.js'
 
 export default (
   presnoMap: PresnoMap,
   argument: Argument,
   scope: {},
   getSyno: Function,
-  focusNodeId: (string | false)
+  focus: (Focus | false)
 ): ArgumentPresAttrs => {
   const name = getSyno(argument.parameter).name;
   const valuePresnoId: SynoId = presentSyno(
@@ -19,7 +20,7 @@ export default (
     getSyno(argument.value),
     scope,
     getSyno,
-    focusNodeId
+    focus
   );
 
   return {
@@ -29,6 +30,6 @@ export default (
       presnoRef: true,
       id: valuePresnoId
     },
-    focused: (argument.id === focusNodeId)
+    focused: focus && (argument.id === focus.synoId)
   }
 }

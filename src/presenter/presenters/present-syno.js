@@ -9,6 +9,7 @@ import presentVariableRef from './syntypes/present-variable-ref.js'
 import type { Syno } from '../../types/syno.js'
 import type { SynoId } from '../../types/syno-id.js'
 import type { PresnoMap } from '../../types/presentations/presno-map.js'
+import type { Focus } from '../../types/editor-state/focus.js'
 
 export default (
   presnoMap: PresnoMap,
@@ -16,23 +17,23 @@ export default (
   syno: (Syno | false),
   scope: {},
   getSyno: Function,
-  focusNodeId: (string | false)
+  focus: (Focus | false)
 ): SynoId => {
   let presentationAttrs: {};
   if (syno === false) {
     throw new Error('pressyno syno can be false?!');
   } else if (syno.syntype === 'booleanLiteral') {
-    presentationAttrs = presentBooleanLiteral(presnoMap, syno, focusNodeId);
+    presentationAttrs = presentBooleanLiteral(presnoMap, syno, focus);
   } else if (syno.syntype === 'functionCall') {
-    presentationAttrs = presentFunctionCall(presnoMap, syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionCall(presnoMap, syno, scope, getSyno, focus);
   } else if (syno.syntype === 'functionDefinition') {
-    presentationAttrs = presentFunctionDefinition(presnoMap, syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionDefinition(presnoMap, syno, scope, getSyno, focus);
   } else if (syno.syntype === 'functionParameter') {
-    presentationAttrs = presentFunctionParameter(presnoMap, syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentFunctionParameter(presnoMap, syno, scope, getSyno, focus);
   } else if (syno.syntype === 'argument') {
-    presentationAttrs = presentArgument(presnoMap, syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentArgument(presnoMap, syno, scope, getSyno, focus);
   } else if (syno.syntype === 'variableRef') {
-    presentationAttrs = presentVariableRef(presnoMap, syno, scope, getSyno, focusNodeId);
+    presentationAttrs = presentVariableRef(presnoMap, syno, scope, getSyno, focus);
   } else {
     throw new Error('should be unreachable (new type?)')
   }

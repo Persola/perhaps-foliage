@@ -6,22 +6,24 @@ import type { FunctionDefinition } from '../../../types/syntactic-nodes/function
 import type { FunctionDefPresAttrs } from '../../../types/presentations/presno-attrs/function-definition-attrs.js'
 import type { PresnoMap } from '../../../types/presentations/presno-map.js'
 import type { SynoId } from '../../../types/syno-id'
+import type { Focus } from '../../../types/editor-state/focus.js'
 
 export default (
   presnoMap: PresnoMap,
   funkshunDef: FunctionDefinition,
   scope: {},
   getSyno: Function,
-  focusNodeId: (string | false)
+  focus: (Focus | false)
 ): FunctionDefPresAttrs => {
   const bodySyno = getSyno(funkshunDef.body);
-  const bodyPresnoId: SynoId = presentSyno(presnoMap, funkshunDef.id, bodySyno, scope, getSyno, focusNodeId);
+  const bodyPresnoId: SynoId = presentSyno(presnoMap, funkshunDef.id, bodySyno, scope, getSyno, focus);
 
   return {
     syntype: 'functionDefinition',
     name: funkshunDef.name,
-    parameters: presentParameters(presnoMap, funkshunDef.id, funkshunDef.parameters, scope, getSyno, focusNodeId),
-    focused: (funkshunDef.id === focusNodeId),
+    parameters: presentParameters(presnoMap, funkshunDef.id, funkshunDef.parameters, scope, getSyno, focus),
+    focused: focus && (focus.presnoIndex === false) && (funkshunDef.id === focus.synoId),
+    presnoFocused: focus && focus.presnoIndex,
     body: {
       presnoRef: true,
       id: bodyPresnoId

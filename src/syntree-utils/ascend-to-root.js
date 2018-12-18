@@ -1,6 +1,5 @@
 // @flow
 import type { SynoId } from '../types/syno-id.js'
-import type { Syno } from '../types/syno.js'
 
 export default (startingSynoId: SynoId, getSyno: Function) => {
   let currentSyno = getSyno({
