@@ -11,7 +11,8 @@ export default (
   if (oldFocusedPresnoRef.synoRef) {
     const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
     if (oldFocusedPresno.parent === false) {
-      throw new Error('navigate failed; no parent!');
+      console.warn('ignoring navigation outwards: no parent');
+      return oldState;
     }
     return {
       synoId: oldFocusedPresno.parent.id,
@@ -19,11 +20,18 @@ export default (
       charIndex: false
     };
   } else {
-    // assumes presnos are one level deep
-    return {
-      synoId: oldState.synoId,
-      presnoIndex: false,
-      charIndex: false
-    };
+    if (oldState.charIndex ===  false) {
+      return {
+        synoId: oldState.synoId,
+        presnoIndex: false,
+        charIndex: false
+      };      
+    } else {
+      return {
+        synoId: oldState.synoId,
+        presnoIndex: oldState.presnoIndex,
+        charIndex: false
+      };
+    }
   }
 }

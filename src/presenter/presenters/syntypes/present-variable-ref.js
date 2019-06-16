@@ -17,6 +17,8 @@ export default (
     syntype: 'variableRef',
     valueSyntype: 'booleanLiteral',
     name: referent.name,
-    focused: focus && (variableRef.id === focus.synoId)
+    focused: focus && (variableRef.id === focus.synoId) && (focus.presnoIndex === false),
+    presnoFocused: focus && (variableRef.id === focus.synoId) && focus.presnoIndex,
+    charFocused: focus && (variableRef.id === focus.synoId) && focus.charIndex
   }
 }

@@ -55,6 +55,8 @@ export default (
     argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focus),
     bodyRef,
     resolved,
-    focused: focus && (funkshunCall.id === focus.synoId)
+    focused: focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false),
+    presnoFocused: focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex,
+    charFocused: focus && (funkshunCall.id === focus.synoId) && focus.charIndex
   }
 }

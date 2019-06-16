@@ -13,13 +13,13 @@ type Props = {
 }
 
 export default (props: Props) => {
-  const { getPresno, presno } = props;
-  const classes = `syno same-line bubble-even argument ${presno.focused ? 'focused' : 'unfocused'}`;
+  const { getPresno, presno: { focused, synoId, name, value, presnoFocused, charFocused } } = props;
+  const classes = `syno same-line bubble-even argument ${focused ? 'focused' : 'unfocused'}`;
 
   return (
-    <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={presno.name} focused={false} />
-      <SyntacticNode getPresno={getPresno} synoId={presno.value.id} />
+    <div className={classes} data-syno-id={synoId}>
+      <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
+      <SyntacticNode getPresno={getPresno} synoId={value.id} />
     </div>
   );
 };

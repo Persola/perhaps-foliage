@@ -13,6 +13,7 @@ type Props = {
 
 export default (props: Props) => {
   const { presno } = props;
+  const { presnoFocused, charFocused } = presno;
   if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
@@ -21,7 +22,7 @@ export default (props: Props) => {
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={String(presno.value)} focused={false} />
+      <NamePart namePart={String(presno.value)} focused={false} charFocused={false} />
     </div>
   );
 };

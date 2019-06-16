@@ -22,8 +22,9 @@ export default (
     syntype: 'functionDefinition',
     name: funkshunDef.name,
     parameters: presentParameters(presnoMap, funkshunDef.id, funkshunDef.parameters, scope, getSyno, focus),
-    focused: focus && (focus.presnoIndex === false) && (funkshunDef.id === focus.synoId),
-    presnoFocused: focus && focus.presnoIndex,
+    focused: focus && (funkshunDef.id === focus.synoId) && (focus.presnoIndex === false),
+    presnoFocused: focus && (funkshunDef.id === focus.synoId) && focus.presnoIndex,
+    charFocused: focus && (funkshunDef.id === focus.synoId) && focus.charIndex,
     body: {
       presnoRef: true,
       id: bodyPresnoId

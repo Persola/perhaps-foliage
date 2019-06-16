@@ -16,7 +16,14 @@ export default (
   focus: (Focus | false)
 ): PresnoRef[] => {
   return parameters.map((paramRef: SynoRef): PresnoRef => {
-    const paramPresnoId: SynoId = presentSyno(presnoMap, parentId, getSyno(paramRef), scope, getSyno, focus);
+    const paramPresnoId: SynoId = presentSyno(
+      presnoMap,
+      parentId,
+      getSyno(paramRef),
+      scope,
+      getSyno,
+      focus
+    );
     return {
       presnoRef: true,
       id: paramPresnoId

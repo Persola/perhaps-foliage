@@ -43,13 +43,13 @@ export default (
           return navOut(oldFocusedPresnoRef, synoMap, oldState);
         }
         case 'in': {
-          return navIn(oldFocusedPresnoRef, synoMap);
+          return navIn(oldFocusedPresnoRef, synoMap, oldState);
         }
         case 'prev': {
-          return navPrev(oldFocusedPresnoRef, synoMap, oldParent);
+          return navPrev(oldFocusedPresnoRef, synoMap, oldParent, oldState);
         }
         case 'next': {
-          return navNext(oldFocusedPresnoRef, synoMap, oldParent);
+          return navNext(oldFocusedPresnoRef, synoMap, oldParent, oldState);
         }
         default: {
           throw new Error('unrecognized navigation direction');

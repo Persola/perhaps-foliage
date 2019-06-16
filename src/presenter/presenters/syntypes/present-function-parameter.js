@@ -15,6 +15,8 @@ export default (
     syntype: 'functionParameter',
     slot: parameter.name,
     valueSyntype: parameter.valueSyntype,
-    focused: focus && (parameter.id === focus.synoId)
+    focused: focus && (parameter.id === focus.synoId) && (focus.presnoIndex === false),
+    presnoFocused: focus && (parameter.id === focus.synoId) && focus.presnoIndex,
+    charFocused: focus && (parameter.id === focus.synoId) && focus.charIndex
   }
 }

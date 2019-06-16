@@ -7,10 +7,23 @@ import type { Syno } from '../../../../types/syno'
 
 export default (
   oldFocusedPresnoRef: ChildPresnoRef,
-  synoMap: SynoMap
+  synoMap: SynoMap,
+  oldState: Focus
 ): Focus => {
-  if (!oldFocusedPresnoRef.synoRef) { throw new Error('tried to go inside name') }
+  if (!oldFocusedPresnoRef.synoRef) {
+    if (oldState.charIndex !== false) {
+      throw new Error('cannot navigate down: editing text');      
+    }
+
+    return {
+      synoId: oldState.synoId,
+      presnoIndex: oldState.presnoIndex,
+      charIndex: 0 // enter beginning of name
+    };
+  }
+
   const oldFocusedPresno: Syno = synoMap[oldFocusedPresnoRef.id];
+
   if (getChildPresnoRefs(oldFocusedPresno, synoMap).length > 0) {
     const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(oldFocusedPresno, synoMap)[0];
 
@@ -28,6 +41,7 @@ export default (
       };
     }
   } else {
-    throw new Error('navigate failed; no children!');
+    console.warn('ignoring navigation inwards: no children');
+    return oldState;
   }
 }

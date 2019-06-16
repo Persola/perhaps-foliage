@@ -13,6 +13,8 @@ export default (
   return {
     syntype: 'booleanLiteral',
     value,
-    focused: focus && (booleanLiteral.id === focus.synoId)
+    focused: focus && (booleanLiteral.id === focus.synoId),
+    presnoFocused: false, // can't edit name
+    charFocused: false // can't edit name
   }
 }

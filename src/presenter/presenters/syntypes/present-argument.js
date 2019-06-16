@@ -30,6 +30,8 @@ export default (
       presnoRef: true,
       id: valuePresnoId
     },
-    focused: focus && (argument.id === focus.synoId)
+    focused: focus && (argument.id === focus.synoId) && (focus.presnoIndex === false),
+    presnoFocused: focus && (argument.id === focus.synoId) && focus.presnoIndex,
+    charFocused: focus && (argument.id === focus.synoId) && focus.charIndex
   }
 }

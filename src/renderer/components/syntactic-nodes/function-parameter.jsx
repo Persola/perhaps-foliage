@@ -13,11 +13,12 @@ type Props = {
 
 export default (props: Props) => {
   const { presno } = props;
+  const { presnoFocused, charFocused } = presno;
   const classes = `syno same-line leaf bubble-even function-parameter ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={presno.slot} focused={false} />
+      <NamePart namePart={presno.slot} focused={presnoFocused === 0} charFocused={charFocused} />
     </div>
   );
 };

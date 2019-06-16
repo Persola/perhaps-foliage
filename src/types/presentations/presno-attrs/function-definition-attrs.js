@@ -7,5 +7,6 @@ export type FunctionDefPresAttrs = {
   parameters: PresnoRef[],
   focused: boolean,
   presnoFocused: (number | false),
+  charFocused: (number | false),
   body: PresnoRef
 }

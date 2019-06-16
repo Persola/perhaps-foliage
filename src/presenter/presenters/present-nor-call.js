@@ -13,14 +13,14 @@ export default (
   getSyno: Function,
   focus: (Focus | false)
 ): FunctionCallPresAttrs => {
-  let focused = focus && (funkshunCall.id === focus.synoId)
-
   return {
     syntype: 'functionCall',
     name: 'NOR',
     argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focus),
     bodyRef: false,
     resolved: true,
-    focused
+    focused: focus && (funkshunCall.id === focus.synoId),
+    presnoFocused: false, // can't edit name
+    charFocused: false // can't edit name
   }
 }

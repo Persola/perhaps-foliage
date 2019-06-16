@@ -15,13 +15,17 @@ type Props = {
 
 export default (props: Props) => {
   const { getPresno, presno } = props;
-  const { name, presnoFocused } = presno;
+  const { name, focused, presnoFocused, charFocused } = presno;
   const parameters: PresnoRef[] = presno.parameters;
   const classes = `syno function-definition ${presno.focused ? 'focused' : 'unfocused'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={name} focused={presnoFocused !== false} />
+      <NamePart
+        namePart={name}
+        focused={presnoFocused === 0}
+        charFocused={charFocused}
+      />
       {
         parameters.map(paramRef => {
           return(

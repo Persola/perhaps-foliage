@@ -25,6 +25,7 @@ const argumentEls = (getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
 
 export default (props: Props) => {
   const { getPresno, presno } = props;
+  const { presnoFocused, charFocused } = presno;
   const { name, bodyRef, resolved, focused } = presno;
 
   const argumentz = argumentEls(getPresno, presno.argumentz);
@@ -34,7 +35,7 @@ export default (props: Props) => {
     <div className={classes} data-syno-id={presno.synoId}>
       {
         name ?
-          <NamePart namePart={name} focused={false} />
+          <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
           : ''
       }
       { argumentz }

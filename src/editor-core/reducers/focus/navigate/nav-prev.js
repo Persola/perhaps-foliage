@@ -8,9 +8,24 @@ import type { Syno } from '../../../../types/syno'
 export default (
   oldFocusedPresnoRef: ChildPresnoRef,
   synoMap: SynoMap,
-  oldParent: (Syno | false)
+  oldParent: (Syno | false),
+  oldState: Focus
 ): Focus => {
   if (!oldParent) { throw new Error('navigate failed; no parent!'); }
+
+  if (oldState.charIndex !== false) {
+    if (oldState.charIndex === 0) {
+      console.warn('ignoring navigation to previous sibling: already on first character');
+      return oldState;
+    }
+
+    return {
+      synoId: oldState.synoId,
+      presnoIndex: oldState.presnoIndex,
+      charIndex: oldState.charIndex - 1
+    };
+  }
+
   const siblingRefz = getChildPresnoRefs(oldParent, synoMap);
   if (siblingRefz.length > 0) {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
@@ -25,7 +40,8 @@ export default (
     if (oldFocusedPresnoBirthOrder === -1) {
       throw new Error("cannot find old focused presno ID among parent's children");
     } else if (oldFocusedPresnoBirthOrder === 0) {
-      throw new Error('no previous sibling');
+      console.warn('ignoring navigation to previous sibling: already focused on first sibling');
+      return oldState;
     } else {
       const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder - 1];
 

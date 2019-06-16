@@ -1,4 +1,5 @@
 * maintainence
+  * [?] create presnoMap and with it replace some uses of synoMap
   * extract Saliva-specific modules as local npm packages
   * separate command resolver from input resolver
   * split types into functional directories
