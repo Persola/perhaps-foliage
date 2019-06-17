@@ -67,6 +67,16 @@ export default (
     case 'START_INTERPRETATION': {
       return oldState;
     }
+    case 'CHAR_BACKSPACE': {
+      if (oldState.charIndex === 0) {
+        return oldState;
+      }
+
+      return Object.assign({},
+        oldState,
+        { 'charIndex': oldState.charIndex - 1 }
+      );
+    }
     default: {
       verifyActionType(action.type);
       return oldState;

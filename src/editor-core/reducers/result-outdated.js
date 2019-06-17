@@ -20,6 +20,9 @@ export default (oldState: ResultOutdated, action: ReduxAction): ResultOutdated =
     case 'START_INTERPRETATION': {
       return oldState;
     }
+    case 'CHAR_BACKSPACE': {
+      return oldState;
+    }
     default: {
       verifyActionType(action.type);
       return oldState;

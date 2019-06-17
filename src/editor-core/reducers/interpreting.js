@@ -27,6 +27,9 @@ export default (oldState: boolean, action: ReduxAction): boolean => {
     case 'SET_FOCUS_SYNO': {
       return oldState;
     }
+    case 'CHAR_BACKSPACE': {
+      return oldState;
+    }
     default: {
       verifyActionType(action.type);
       return oldState;

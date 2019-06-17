@@ -61,6 +61,32 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
     case 'START_INTERPRETATION': {
       return oldState;
     }
+    case 'CHAR_BACKSPACE': {
+      if (action.focusCharIndex === false) {
+        console.warn('ignoring backspace command: not editing text');
+        return oldState;
+      }
+
+      const focusSyno: Syno = newSynoMap[action.focusSynoId];
+
+      let textHostSyno: Syno;
+      if (['functionParameter', 'functionDefinition'].includes(focusSyno.syntype)) {
+        textHostSyno = focusSyno;
+      } else if (focusSyno.syntype === 'variableRef') {
+        textHostSyno = newSynoMap[focusSyno.referent.id];
+      } else if (focusSyno.syntype === 'argument') {
+        textHostSyno = newSynoMap[focusSyno.parameter.id];
+      } else {
+        throw new Error('bad syntype in backspace');
+      }
+
+      textHostSyno.name = (
+        textHostSyno.name.slice(0, action.focusCharIndex - 1) +
+        textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)
+      );
+
+      return newSynoMap;
+    }
     default: {
       verifyActionType(action.type);
       return oldState;

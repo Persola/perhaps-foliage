@@ -12,7 +12,8 @@ export default (
 ): Focus => {
   if (!oldFocusedPresnoRef.synoRef) {
     if (oldState.charIndex !== false) {
-      throw new Error('cannot navigate down: editing text');      
+      console.warn('cannot navigate down: editing text');
+      return oldState;
     }
 
     return {

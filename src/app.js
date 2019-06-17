@@ -17,7 +17,18 @@ const presenter = new Presenter(editorStateStore, renderer);
 const inputResolver = createInputResolver(editorStateStore, interpret);
 
 const initializeMousetrap = () => {
-  ['0', '1', 't', 'f', 'enter', 'left', 'right', 'up', 'down'].forEach(key => {
+  [
+    '0',
+    '1',
+    't',
+    'f',
+    'enter',
+    'left',
+    'right',
+    'up',
+    'down',
+    'backspace'
+  ].forEach(key => {
     Mousetrap.bind(key, () => {
       inputResolver(key);
     });

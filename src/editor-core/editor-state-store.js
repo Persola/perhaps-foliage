@@ -18,8 +18,8 @@ const defaultEditorState: EditorState = {
   synoMap: Object.assign({}, seedGraphs, primitiveGraphs),
   focus: {
     synoId: '1-4',
-    presnoIndex: 0,
-    charIndex: 2
+    presnoIndex: false,
+    charIndex: false
     // synoId: Object.keys(seedGraphs)[0],
     // presnoIndex: false,
     // charIndex: false
