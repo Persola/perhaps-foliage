@@ -4,12 +4,14 @@ import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
 
 describe ('BooleanLiteral', () => {
   const validProps = {
-    namePart: "Blueberry"
+    namePart: "Blueberry",
+    focused: false,
+    charFocused: false
   }
 
   it ('renders', () => {
     expectSnapshotMatch(
-      <NamePart namePart={validProps.namePart} focused={false} />
+      <NamePart {...validProps} />
     );
   });
 })
