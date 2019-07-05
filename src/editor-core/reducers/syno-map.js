@@ -1,5 +1,6 @@
 // @flow
 import verifyActionType from './util/verify-action-type'
+import destroySyno from './syno-map/destroy-syno'
 import dup from '../../syntree-utils/dup.js'
 
 import type { Syno } from '../../types/syno'
@@ -7,7 +8,11 @@ import type { SynoMap } from '../../types/syno-map'
 import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
+export default (
+  oldState: SynoMap,
+  action: ReduxAction,
+  inverseReferenceMap: InverseReferenceMap
+): SynoMap => {
   const newSynoMap: SynoMap = dup(oldState);
 
   switch (action.type) {
@@ -85,6 +90,10 @@ export default (oldState: SynoMap, action: ReduxAction): SynoMap => {
         textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)
       );
 
+      return newSynoMap;
+    }
+    case 'DESTROY_FOCUSED_SYNO': {
+      destroySyno(action, newSynoMap, oldState, inverseReferenceMap); // modifies newSynoMap
       return newSynoMap;
     }
     default: {

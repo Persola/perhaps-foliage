@@ -1,4 +1,5 @@
 * maintainence
+  * add some god damn structure to input side (classes for synos/presnos with utility functions)
   * [?] create presnoMap and with it replace some uses of synoMap
   * extract Saliva-specific modules as local npm packages
   * separate command resolver from input resolver
@@ -9,18 +10,23 @@
   * add synTree ID to focus
   * make types synos (beneath default visiblity level)
 * new functionality
-  * add syno deletion and insertation
+  * complete syno deletion
+  * add syno insertation
   * [?] add selection (in addition to focus)
-  * enable interpretation->rendering of all existing values
   * enable interpretation->rendering of all existing values
   * render function signatures
     * name part and argument order, both in call and def
-    * decide about universal single argument passing
     * [later] optional arguments
     * [later] ordered arguments
     * [later] singular arguments
   * add Nothing type
     * replace false flags in type data structures
+  * possible alt keys:
+    * binary seek
+    * select span
+    * switch been on and between nodes ('insert mode')
+    * move/shift/reorder focused nodes
+    * traversing nav history or non-tree reference (how see references of current focus?)
 * rearchitecture
   * [?] use redux in presenter again?
     * presenters are like reducers, but probably not because:

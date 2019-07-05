@@ -15,6 +15,7 @@ export default (
   action: ReduxAction,
   synoMap: SynoMap
 ): Focus => {
+  const { direction, oldFocusedPresnoRef } = action;
   switch (action.type) {
     case 'REPLACE_FOCUSED_SYNO': {
       return {
@@ -26,10 +27,9 @@ export default (
     case 'END_INTERPRETATION': {
       return oldState;
     }
-    case 'NAVIGATE': {
+    case 'NAVIGATE':
+    case 'DESTROY_FOCUSED_SYNO': {
       // needs parent and self, or their children ids
-      const { direction, oldFocusedPresnoRef } = action;
-
       let oldParent: (Syno | false);
       if (oldFocusedPresnoRef.synoRef) {
         const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
@@ -38,7 +38,11 @@ export default (
         oldParent = synoMap[oldFocusedPresnoRef.parent.id];
       }
 
-      switch (direction) {
+      if (action.type === 'DESTROY_FOCUSED_SYNO') {
+        return navOut(oldFocusedPresnoRef, synoMap, oldState)
+      }
+
+      switch (direction) { // NAVIGATE
         case 'out': {
           return navOut(oldFocusedPresnoRef, synoMap, oldState);
         }

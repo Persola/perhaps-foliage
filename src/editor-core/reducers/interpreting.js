@@ -30,6 +30,9 @@ export default (oldState: boolean, action: ReduxAction): boolean => {
     case 'CHAR_BACKSPACE': {
       return oldState;
     }
+    case 'DESTROY_FOCUSED_SYNO': {
+      return oldState;
+    }
     default: {
       verifyActionType(action.type);
       return oldState;
