@@ -13,12 +13,15 @@ type Props = {
 
 export default (props: Props) => {
   const { presno } = props;
-  const { presnoFocused, charFocused } = presno;
-  const classes = `syno same-line leaf bubble-even variable-ref ${presno.focused ? 'focused' : 'unfocused'}`
+  const { presnoFocused, charFocused, valid } = presno;
+  const classes = `syno same-line leaf bubble-even variable-ref ${presno.focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
-      <NamePart namePart={presno.name} focused={presnoFocused === 0} charFocused={charFocused} />
+      {
+        presno.name &&
+          <NamePart namePart={presno.name} focused={presnoFocused === 0} charFocused={charFocused} />
+      }      
     </div>
   );
 };

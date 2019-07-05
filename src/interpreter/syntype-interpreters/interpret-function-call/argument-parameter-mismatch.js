@@ -6,11 +6,11 @@ import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-lite
 
 export default (
   resolvedCallee: FunctionDefinition,
-  interpretedArgs: [Argument, BooleanLiteral][],
+  argumentz: Argument[],
   getSyno: Function
-) => {
+): string => {
   const paramIds = resolvedCallee.parameters.map(paramRef => paramRef.id);
-  const argTargetIds = interpretedArgs.map(argRes => argRes[0].parameter.id);
+  const argTargetIds = argumentz.map(arg => arg.parameter.id);
 
   const duplicatedParamIds = paramIds.filter((paramId: SynoId) => {
     return paramIds.filter(compId => paramId === compId).length > 1;
@@ -20,10 +20,10 @@ export default (
   });
 
   if (duplicatedParamIds.length > 0) {
-    throw new Error(`duplicate param IDs: ${duplicatedParamIds.join(', ')}`);
+    return `duplicate param IDs: ${duplicatedParamIds.join(', ')}`;
   }
   if (duplicatedArgTargetIds.length > 0) {
-    throw new Error(`duplicate arg target IDs: ${duplicatedArgTargetIds.join(', ')}`);
+    return `duplicate arg target IDs: ${duplicatedArgTargetIds.join(', ')}`;
   }
 
   const unsatisfiedParamIds = paramIds.filter((paramId: string) => {
@@ -41,6 +41,6 @@ export default (
   });
 
   if ((unsatisfiedParamIds.length > 0) || (extraArgTargetIds.length > 0)) {
-    throw new Error(`function "${resolvedCallee.name}" called with wrong parameters (unsatisfied: ${unsatisfiedParamNames.join(', ')}; extra: ${extraArgTargetNames.join(', ')})`);
+    return `function "${resolvedCallee.name}" called with wrong parameters (unsatisfied: ${unsatisfiedParamNames.join(', ')}; extra: ${extraArgTargetNames.join(', ')})`;
   }
 };

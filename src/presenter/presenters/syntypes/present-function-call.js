@@ -19,44 +19,60 @@ export default (
   getSyno: Function,
   focus: (Focus | false)
 ): FunctionCallPresAttrs => {
-  if (funkshunCall.callee.id === NorPrimitiveId) {
-    return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focus));
+  let valid = true;
+  let name: (string | false) = false;
+  let bodyRef: (SynoRef | false) = false;
+  let resolved: boolean = false;
+
+  if (!funkshunCall.callee) {
+    valid = false; 
+  } else {
+    if (funkshunCall.callee.id === NorPrimitiveId) {
+      return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focus));
+    }
+
+    const callee: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
+    if (callee.syntype === 'functionDefinition') {
+      resolved = true;
+      name = false;
+      presentSyno(
+        presnoMap,
+        funkshunCall.id,
+        callee,
+        scope,
+        getSyno,
+        focus
+      )
+      bodyRef = funkshunCall.callee;
+    } else if (callee.syntype === 'variableRef') { // Never Been Run (1999)
+      // throw new Error("Function never did have they ever had a been having them a variableRef 'afore.");
+      // resolved = Object.keys(scope).includes(callee.referent.id);
+      // if (resolved) {
+      //   name = getSyno(callee.referent.id).name
+      // } else {
+      //   name = '(!)'
+      // }
+    } else { throw new Error('new type?'); }
   }
 
-  const callee: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
-  let resolved: boolean;
-  let name: (string | false);
-  let bodyRef: (SynoRef | false);
-  if (callee.syntype === 'functionDefinition') {
-    resolved = true;
-    name = false;
-    presentSyno(
-      presnoMap,
-      funkshunCall.id,
-      callee,
-      scope,
-      getSyno,
-      focus
-    )
-    bodyRef = funkshunCall.callee;
-  } else if (callee.syntype === 'variableRef') { // never been run
-    resolved = Object.keys(scope).includes(callee.referent.id);
-    if (resolved) {
-      name = getSyno(callee.referent.id).name
-    } else {
-      name = '(!)'
-    }
-    bodyRef = false;
-  } else { throw new Error('new type?'); }
+  // needs to check that arguments match func def, flag validity
 
   return {
     syntype: 'functionCall',
     name,
-    argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focus),
+    argumentz: presentArguments(
+      presnoMap,
+      funkshunCall.id,
+      funkshunCall.argumentz, 
+      scope,
+      getSyno,
+      focus
+    ),
     bodyRef,
     resolved,
     focused: focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (funkshunCall.id === focus.synoId) && focus.charIndex
+    charFocused: focus && (funkshunCall.id === focus.synoId) && focus.charIndex,
+    valid
   }
 }

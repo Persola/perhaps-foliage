@@ -15,6 +15,7 @@ export default (
     value,
     focused: focus && (booleanLiteral.id === focus.synoId),
     presnoFocused: false, // can't edit name
-    charFocused: false // can't edit name
+    charFocused: false, // can't edit name
+    valid: true
   }
 }

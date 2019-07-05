@@ -1,19 +1,17 @@
 // @flow
 import type { Argument } from '../../../types/syntactic-nodes/argument'
 import type { BooleanLiteral } from '../../../types/syntactic-nodes/boolean-literal'
-import type { SynoRef } from '../../../types/syno-ref'
 import type { Syno } from '../../../types/syno'
 
 export default (
   interpreter: Function,
   parentScope: [],
-  argumentz: SynoRef[],
+  argumentz: Argument[],
   getSyno: Function
 ): [Argument, BooleanLiteral][] => {
   const interpretedArgs: [Argument, BooleanLiteral][] = [];
 
-  argumentz.forEach((argRef: SynoRef) => {
-    const arg: Syno = getSyno(argRef);
+  argumentz.forEach((arg: Argument) => {
     if (arg.syntype !== 'argument') {
       throw new Error(`expected argument, got ${arg.syntype}`)
     }

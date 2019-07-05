@@ -15,9 +15,9 @@ type Props = {
 
 export default (props: Props) => {
   const { getPresno, presno } = props;
-  const { name, focused, presnoFocused, charFocused } = presno;
+  const { name, focused, presnoFocused, charFocused, valid } = presno;
   const parameters: PresnoRef[] = presno.parameters;
-  const classes = `syno function-definition ${presno.focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno function-definition ${presno.focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
@@ -33,7 +33,10 @@ export default (props: Props) => {
           )
         })
       }
-      <SyntacticNode getPresno={getPresno} synoId={presno.body.id} />
+      {
+        presno.body &&
+          <SyntacticNode getPresno={getPresno} synoId={presno.body.id} />
+      }
     </div>
   );
 };

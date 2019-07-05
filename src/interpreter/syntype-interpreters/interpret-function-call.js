@@ -1,6 +1,6 @@
 // @flow
 import NorPrimitiveId from '../../nor-primitive-id.js'
-import throwIfParametersUnsatisfied from './interpret-function-call/throw-if-parameters-unsatisfied'
+import argumentParameterMismatch from './interpret-function-call/argument-parameter-mismatch'
 import interpretArgs from './interpret-function-call/interpret-args'
 import norPrimitive from './interpret-function-call/nor-primitive.js'
 
@@ -27,6 +27,13 @@ export default (
   interpretee: FunctionCall,
   getSyno: Function
 ): InterpretationResolution => {
+  if (interpretee.callee === false) {
+    return {
+      success: false,
+      error: {message: `function call (ID ${interpretee.id}) has no function reference`}
+    }
+  }
+
   const callee = getSyno(interpretee.callee);
   const calleeResolution = interpreter(callee, parentScope, getSyno);
   if (!calleeResolution.success) {
@@ -38,14 +45,49 @@ export default (
     throw new Error(`invalid function ref (returned syno of wrong syntype)`);
   }
 
+  if (
+    resolvedCallee.body === false &&
+    resolvedCallee.id !== 'primitives-nor'
+  ) {
+    return {
+      success: false,
+      error: {message: `function definition (ID ${resolvedCallee.id}) has no body`}
+    }
+  }
+
+  const argumentz = interpretee.argumentz.map(arg => getSyno(arg));
+
+  const argsMissingValues = argumentz.filter((arg: Argument) => arg.value === false);
+  if (argsMissingValues.length > 0) {
+    return {
+      success: false,
+      error: {message: `arguments (IDs ${argsMissingValues.map(a => a.id).join(' ')}) ha(s/ve) no values`}
+    }
+  }
+
+  const argsMissingParameters = argumentz.filter((arg: Argument) => arg.parameter === false);
+  if (argsMissingParameters.length > 0) {
+    return {
+      success: false,
+      error: {message: `arguments (IDs ${argsMissingParameters.map(a => a.id).join(' ')}) ha(s/ve) no parameters`}
+    }
+  }
+
   const interpretedArgs: [Argument, BooleanLiteral][] = interpretArgs(
     interpreter,
     parentScope,
-    interpretee.argumentz,
+    argumentz,
     getSyno
   );
 
-  throwIfParametersUnsatisfied(resolvedCallee, interpretedArgs, getSyno);
+  const apm: (string | false) = argumentParameterMismatch(
+    resolvedCallee,
+    interpretedArgs.map(interpretedArg => interpretedArg[0]),
+    getSyno
+  );
+  if (apm) {
+    throw new Error(apm);
+  }
 
   const interpreteeScope = generateScope(resolvedCallee, interpretedArgs, getSyno);
 

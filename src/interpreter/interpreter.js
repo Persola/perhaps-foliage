@@ -32,6 +32,13 @@ const interpreter = (
     case 'variableRef': {
       // should dup?
       // should check type
+      if (interpretee.referent === false) {
+        return {
+          success: false,
+          error: {message: `variableRef (ID ${interpretee.id}) has no referent`}
+        }
+      }
+
       const value = resolveRef(scope, interpretee.referent);
       if ((typeof value) !== 'object') {
         throw new Error(`variable at '${interpretee.id}' resolved wrong`);

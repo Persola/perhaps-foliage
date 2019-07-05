@@ -2,6 +2,7 @@
 export type VariableRefPresAttrs = {
   syntype: 'variableRef',
   valueSyntype: 'booleanLiteral',
-  name: string,
-  focused: boolean
+  name: (string | false),
+  focused: boolean,
+  valid: boolean
 }

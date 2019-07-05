@@ -21,6 +21,7 @@ export default (
     resolved: true,
     focused: focus && (funkshunCall.id === focus.synoId),
     presnoFocused: false, // can't edit name
-    charFocused: false // can't edit name
+    charFocused: false, // can't edit name
+    valid: true
   }
 }

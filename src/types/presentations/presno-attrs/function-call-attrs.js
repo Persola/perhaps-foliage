@@ -8,5 +8,6 @@ export type FunctionCallPresAttrs = {
   argumentz: PresnoRef[],
   bodyRef: (SynoRef | false),
   resolved: boolean,
-  focused: boolean
+  focused: boolean,
+  valid: boolean
 }

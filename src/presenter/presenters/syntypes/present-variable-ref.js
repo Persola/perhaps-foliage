@@ -11,14 +11,21 @@ export default (
   getSyno: Function,
   focus: (Focus | false)
 ): VariableRefPresAttrs => {
-  const referent = getSyno(variableRef.referent);
+  let valid = true;
+  let name: (string | false) = false;
+  if (!variableRef.referent) {
+    valid = false;
+  } else {
+    name = getSyno(variableRef.referent).name;    
+  }
 
   return {
     syntype: 'variableRef',
     valueSyntype: 'booleanLiteral',
-    name: referent.name,
+    name,
     focused: focus && (variableRef.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (variableRef.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (variableRef.id === focus.synoId) && focus.charIndex
+    charFocused: focus && (variableRef.id === focus.synoId) && focus.charIndex,
+    valid
   }
 }

@@ -13,12 +13,12 @@ type Props = {
 
 export default (props: Props) => {
   const { presno } = props;
-  const { presnoFocused, charFocused } = presno;
+  const { presnoFocused, charFocused, valid } = presno;
   if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `syno same-line leaf bubble-even boolean-literal ${presno.focused ? 'focused' : 'unfocused'}`
+  const classes = `syno same-line leaf bubble-even boolean-literal ${presno.focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>

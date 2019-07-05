@@ -26,23 +26,21 @@ const argumentEls = (getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
 export default (props: Props) => {
   const { getPresno, presno } = props;
   const { presnoFocused, charFocused } = presno;
-  const { name, bodyRef, resolved, focused } = presno;
+  const { name, bodyRef, resolved, focused, valid } = presno;
 
   const argumentz = argumentEls(getPresno, presno.argumentz);
-  const classes = `syno ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'}`;
+  const classes = `syno ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
       {
-        name ?
+        name &&
           <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
-          : ''
       }
       { argumentz }
       {
-        bodyRef ?
+        bodyRef &&
           <SyntacticNode getPresno={getPresno} synoId={bodyRef.id} />
-          : ''
       }
     </div>
   );
