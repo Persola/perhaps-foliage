@@ -17,7 +17,7 @@ const presenter = new Presenter(editorStateStore, renderer);
 const inputResolver = createInputResolver(editorStateStore, interpret);
 
 const initializeMousetrap = () => {
-  [
+  Mousetrap.bind([
     '0',
     '1',
     't',
@@ -28,10 +28,15 @@ const initializeMousetrap = () => {
     'up',
     'down',
     'backspace'
-  ].forEach(key => {
-    Mousetrap.bind(key, () => {
-      inputResolver(key);
-    });
+  ], (e, key) => {
+    if ([
+      'backspace',
+      'up',
+      'down'
+    ].includes(key)) {
+      e.preventDefault();
+    }
+    inputResolver(key);
   });
 
   if (document.documentElement === null) { throw new Error('document missing') }
