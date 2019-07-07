@@ -1,5 +1,6 @@
 * maintainence
   * add some god damn structure to input side (classes for synos/presnos with utility functions)
+    * consider synoref vs presnoref
   * [?] create presnoMap and with it replace some uses of synoMap
   * extract Saliva-specific modules as local npm packages
   * separate command resolver from input resolver

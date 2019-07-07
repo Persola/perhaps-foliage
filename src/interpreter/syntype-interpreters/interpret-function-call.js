@@ -1,8 +1,8 @@
 // @flow
 import NorPrimitiveId from '../../nor-primitive-id.js'
-import argumentParameterMismatch from './interpret-function-call/argument-parameter-mismatch'
 import interpretArgs from './interpret-function-call/interpret-args'
 import norPrimitive from './interpret-function-call/nor-primitive.js'
+import argumentParameterMismatch from '../../syntree-utils/argument-parameter-mismatch'
 
 import type { InterpretationResolution } from '../../types/interpreter/interpretation-resolution'
 import type { FunctionCall } from '../../types/syntactic-nodes/function-call'

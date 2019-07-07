@@ -17,7 +17,7 @@ export default (key: string, editorState: EditorState) => {
         syntype: 'booleanLiteral',
         value
       },
-      newSynoId: `inputValue-${String(Math.random()).substring(2)}`,
+      newSynoId: `inputValue-${String(Math.random()).substring(2)}`, // TODO: systematic method to generate IDs
       focusedPresnoId: synoId
     });
   } else if (key === 'backspace') {

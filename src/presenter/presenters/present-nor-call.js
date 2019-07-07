@@ -17,7 +17,7 @@ export default (
     syntype: 'functionCall',
     name: 'NOR',
     argumentz: presentArguments(presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, getSyno, focus),
-    bodyRef: false,
+    callee: false,
     resolved: true,
     focused: focus && (funkshunCall.id === focus.synoId),
     presnoFocused: false, // can't edit name

@@ -73,6 +73,9 @@ export default (
         id: newSynoId,
         parent: parentAttr
       });
+      if (Object.keys(newSynoMap).includes(newSynoId)) {
+        throw new error('tried to create syno with in-use ID');
+      };
       newSynoMap[newSynoId] = newSyno;
 
       return newSynoMap;
