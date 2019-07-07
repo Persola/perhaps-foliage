@@ -12,6 +12,9 @@
 * new functionality
   * complete syno deletion
   * add syno insertation
+    * add holes for necessary missing synos
+    * create a ambiguity egg, then just move it into place using shift key combo
+      * has type on low level, but automatically changes type by copying the last syno it was shifted over or nesting in a hole
   * [?] add selection (in addition to focus)
   * enable interpretation->rendering of all existing values
   * render function signatures
@@ -50,13 +53,7 @@
       * how to deal with existing keywords and other shit that doesn't fit into bubble display? wrap with functions?
 * design
   * is it OK to not have functionCall display its callee is a syno?
-    * necessary for natural language emulating call style
-      * maybe the editor defaults to rendering the tree directly
-      * but you can choose to override it at different levels based on type
-      * like I just fill in colors for most types, but Saliva cares about call expressivity, so it custom renders them
-    * well, actually 'name' isn't a syno, only funcdef is
-      * maybe weird that funcall displays primitive data stored in its child/referent
-      * not too bad though
+    * yes--the callee is a separate node but it's a non-tree reference, which is now declared in the synoref. only children are displayed.
   * how to divise types:
     * reference assignment (name, value), reference invocation, maps/objects
 * longview
@@ -66,18 +63,3 @@
   * [?] update babel es version
   * operationalize
   * release minimal viable project
-
-I understand the importance of:
-* the directional causal cycle, not mutating parameters, etc.
-* actions as atomic changes which trigger rerendering
-* dividing reducers by state slice
-  * though I don't see why it's more important than by action
-    * but I guess people do it both--hard _not_ to divide by action
-
-I don't understand:
-  * why components can't get the whole state as props
-    * similar to presentation generation getting the whole syno tree
-    * oh, its not code design but library uasge--because then they would always rerender
-      * assuming the performance constraints emerge, my diffing logic will probably be different altogether (both presentation gen. and html gen.)
-
-We hold sets/types and operators/functions as two basic mutually independant categories that must be present in the correct arrangement (matching them appropriately or with the aid of a integration) for a mathematical/computation rule system. You could put types first and define operators on types (methods) or put functions first and define types through input and output typing. Holding them as equal may be a necessary knot of complexity, but it thankfully lies at the root of an entire language. But countercase: when combining a string and a regular expression, you don't want to have to name the operator, just provide the typed values and have it search the string using the regexp. But I suppose that's because the search operation is the one most frequently used with those types and, while not communicative, knows which typed vars are which parameters.
