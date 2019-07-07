@@ -25,7 +25,10 @@ export default (
 
   const oldFocusedPresno: Syno = synoMap[oldFocusedPresnoRef.id];
 
-  if (getChildPresnoRefs(oldFocusedPresno, synoMap).length > 0) {
+  if (getChildPresnoRefs(oldFocusedPresno, synoMap).length === 0) {
+    console.warn('ignoring navigation inwards: no children');
+    return oldState;
+  } else {
     const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(oldFocusedPresno, synoMap)[0];
 
     if (newFocusPresnoRef.synoRef) {
@@ -41,8 +44,5 @@ export default (
         charIndex: false
       };
     }
-  } else {
-    console.warn('ignoring navigation inwards: no children');
-    return oldState;
   }
 }

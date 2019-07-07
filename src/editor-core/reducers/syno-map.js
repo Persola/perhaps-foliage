@@ -42,7 +42,8 @@ export default (
           (parent.syntype === 'functionDefinition' && childKey === 'body') ||
           (parent.syntype === 'argument' && childKey === 'value')
         )) {
-          throw new Error('replacement disallowed for this syntactic context');
+          console.warn('replacement disallowed for this syntactic context');
+          return oldState;
         }
 
         if (childIndex !== undefined) {
@@ -122,6 +123,17 @@ export default (
       return newSynoMap;
     }
     case 'DESTROY_FOCUSED_SYNO': {
+      const { focusedPresnoId } = action;
+      if (
+        oldState[focusedPresnoId].parent === false ||
+        focusedPresnoId === 'primitives-nor' || (
+          oldState[focusedPresnoId].parent &&
+          oldState[focusedPresnoId].parent.id == 'primitives-nor'
+        )
+      ) {
+        console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
+        return oldState;
+      }
       destroySyno(action, newSynoMap, oldState, inverseReferenceMap); // modifies newSynoMap
       return newSynoMap;
     }

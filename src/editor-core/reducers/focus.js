@@ -39,6 +39,17 @@ export default (
       }
 
       if (action.type === 'DESTROY_FOCUSED_SYNO') {
+        const oldFocusedPresno = synoMap[action.oldFocusedPresnoRef.id]
+        if (
+          oldFocusedPresno.parent === false ||
+          oldFocusedPresno.id === 'primitives-nor' || (
+            oldFocusedPresno.parent &&
+            oldFocusedPresno.parent.id == 'primitives-nor'
+          )
+        ) {
+          console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
+          return oldState;
+        }
         return navOut(oldFocusedPresnoRef, synoMap, oldState)
       }
 

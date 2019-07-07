@@ -5,8 +5,10 @@
   name: 'NOR'
   parameters:
     - synoRef: true
+      relation: 'child'
       id: 'primitives-nor-param-1'
     - synoRef: true
+      relation: 'child'
       id: 'primitives-nor-param-2'
   body: false
 
@@ -14,6 +16,7 @@
   id: 'primitives-nor-param-1'
   parent:
     synoRef: true
+    relation: 'parent'
     id: 'primitives-nor'
   syntype: 'functionParameter'
   name: '1'
@@ -23,6 +26,7 @@
   id: 'primitives-nor-param-2'
   parent:
     synoRef: true
+    relation: 'parent'
     id: 'primitives-nor'
   syntype: 'functionParameter'
   name: '2'

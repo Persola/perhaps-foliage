@@ -1,4 +1,5 @@
 // @flow
+import NorPrimitiveId from '../../../nor-primitive-id.js'
 import presentParameters from './present-parameters.js'
 import presentSyno from '../present-syno.js'
 
@@ -19,7 +20,9 @@ export default (
   let valid = true;
   let body: (PresnoRef | false)  = false;
   if (!funkshunDef.body) {
-    valid = false;
+    if (funkshunDef.id !== NorPrimitiveId) {
+      valid = false;
+    }
   } else {
     body = {
       presnoRef: true,

@@ -11,7 +11,10 @@ export default (
   oldParent: (Syno | false),
   oldState: Focus
 ): Focus => {
-  if (!oldParent) { throw new Error('navigate failed; no parent!'); }
+  if (!oldParent) {
+    console.warn('ignoring navigation to next sibling: focus syno is root');
+    return oldState;
+  }
 
   if (oldState.charIndex !== false) {
     const oldSyno = synoMap[oldState.synoId];
