@@ -1,10 +1,12 @@
 // @flow
 import verifyActionType from './util/verify-action-type'
 import destroySyno from './syno-map/destroy-syno'
+import forChildSynoOf from '../../syntree-utils/for-child-syno-of.js'
 import dup from '../../syntree-utils/dup.js'
 
 import type { Syno } from '../../types/syno'
 import type { SynoMap } from '../../types/syno-map'
+import type { SynoRef } from '../../types/syno-ref'
 import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 import type { ReduxAction } from '../../types/redux-action'
 
@@ -18,29 +20,53 @@ export default (
   switch (action.type) {
     case 'REPLACE_FOCUSED_SYNO': {
       const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
-
       const parentRef = oldState[focusedPresnoId].parent;
-      let parentAttr;
-      if (parentRef) {
+
+      let parentAttr: SynoRef;
+      if (!parentRef) {
+        parentAttr = false;
+      } else {
         const parent: Syno = oldState[parentRef.id];
-        if (parent.syntype === 'argument') {
-          // should remove any uneeded (i.e., deleted) nodes from store
-          const newParent = newSynoMap[parent.id];
-          if (newParent.syntype !== 'argument') { throw new Error }
-          newParent.value = {
+        let childKey: string;
+        let childIndex: number;
+        forChildSynoOf(parent, (childRef, key, index) => {
+          if (childRef.id === focusedPresnoId) {
+            childKey = key;
+            childIndex = index;
+          }
+        });
+        // should remove any uneeded (i.e., deleted) nodes from store
+        const newParent = newSynoMap[parent.id];
+
+        if (!(
+          (parent.syntype === 'functionDefinition' && childKey === 'body') ||
+          (parent.syntype === 'argument' && childKey === 'value')
+        )) {
+          throw new Error('replacement disallowed for this syntactic context');
+        }
+
+        if (childIndex !== undefined) {
+          newParent[childKey].splice(
+            childIndex,
+            1,
+            {
+              synoRef: true,
+              relation: 'child',
+              id: newSynoId
+            }
+          );
+        } else {
+          newParent[childKey] = {
             synoRef: true,
+            relation: 'child',
             id: newSynoId
           }
-        } else {
-          throw new Error('cannot replace non-argument');
         }
 
         parentAttr = {
           synoRef: true,
           id: parentRef.id
         }
-      } else {
-        parentAttr = false;
       }
 
       const newSyno: BooleanLiteral = Object.assign({}, newSynoAttrs, {

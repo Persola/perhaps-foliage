@@ -8,16 +8,16 @@ export default (parentSyno: Syno, callback: (SynoRef) => void) => {
       parentSyno[key].synoRef &&
       parentSyno[key].relation === 'child'
     ) {
-      callback(parentSyno[key]);
+      callback(parentSyno[key], key);
     } else if (parentSyno[key] instanceof Array) { // nested children (arguments, parameters)
-      for (let el of parentSyno[key]) {
+      parentSyno[key].forEach((el, index) => {
         if (
           el.synoRef &&
           el.relation === 'child'
         ) {
-          callback(el);
+          callback(el, key, index);
         }
-      }
+      });
     }
   }
 }
