@@ -2,7 +2,6 @@
 import NorPrimitiveId from '../../../nor-primitive-id.js'
 import presentSyno from '../present-syno.js'
 import presentArguments from './present-arguments.js'
-import presentNorCall from '../present-nor-call.js'
 import argumentParameterMismatch from '../../../syntree-utils/argument-parameter-mismatch'
 
 import type { PresnoRef } from '../../../types/presentation/prseno-ref.js'
@@ -28,14 +27,12 @@ export default (
   if (!funkshunCall.callee) {
     valid = false; 
   } else {
-    if (funkshunCall.callee.id === NorPrimitiveId) {
-      return(presentNorCall(presnoMap, funkshunCall, scope, getSyno, focus));
-    }
-
     const calleeSyno: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
     if (calleeSyno.syntype === 'functionDefinition') {
       resolved = true;
-      name = false;
+      if (funkshunCall.callee.id === NorPrimitiveId) {
+        name = calleeSyno.name;
+      }
 
       if (argumentParameterMismatch(
           calleeSyno,
@@ -45,16 +42,18 @@ export default (
         valid = false; 
       }
 
-      callee = {
-        presnoRef: true,
-        id: presentSyno(
-          presnoMap,
-          funkshunCall.id,
-          calleeSyno,
-          scope,
-          getSyno,
-          focus
-        )
+      if (funkshunCall.callee.relation === 'child') {
+        callee = {
+          presnoRef: true,
+          id: presentSyno(
+            presnoMap,
+            funkshunCall.id,
+            calleeSyno,
+            scope,
+            getSyno,
+            focus
+          )
+        }
       }
     } else if (calleeSyno.syntype === 'variableRef') { // Never Been Run (1999)
       throw new Error("Function never did have they ever had a been having them a variableRef 'afore.");
@@ -67,6 +66,19 @@ export default (
     } else {
       throw new Error('new type?');
     }
+  }
+
+  let focused;
+  let presnoFocused;
+  let charFocused;
+  if (funkshunCall.callee.id === NorPrimitiveId) {
+    focused = focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false);
+    presnoFocused = focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex;
+    charFocused = focus && (funkshunCall.id === focus.synoId) && focus.charIndex;
+  } else {
+    focused = focus && (funkshunCall.id === focus.synoId);
+    presnoFocused = false;
+    charFocused = false;
   }
 
   return {
@@ -82,9 +94,9 @@ export default (
     ),
     callee,
     resolved,
-    focused: focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false),
-    presnoFocused: focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (funkshunCall.id === focus.synoId) && focus.charIndex,
+    focused,
+    presnoFocused,
+    charFocused,
     valid
   }
 }
