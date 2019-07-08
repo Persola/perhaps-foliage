@@ -22,7 +22,7 @@ const defaultEditorState: EditorState = {
   synoMap: defaultSynoMap,
   inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
   focus: {
-    synoId: 'primitives-nor',
+    synoId: '1-1',
     presnoIndex: false,
     charIndex: false
     // synoId: Object.keys(seedGraphs)[0],
