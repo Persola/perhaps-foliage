@@ -16,15 +16,15 @@ import type { ReduxAction } from '../types/redux-action.js'
 import type { EditorState } from '../types/editor-state.js'
 import type { SynoMap } from '../types/syno-map.js'
 
-const primitiveGraphs: SynoMap = codeLoader('primitives');
-const seedGraphs: SynoMap = codeLoader('proxyNorCall');
+const primitiveGraphs: SynoMap = codeLoader('salivaPrimitives');
+const seedGraphs: SynoMap = codeLoader('pantheon');
 const defaultSynoMap = Object.assign({}, seedGraphs, primitiveGraphs);
 const defaultEditorState: EditorState = {
   synoMap: defaultSynoMap,
   inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
-  grammar: 'saliva',
+  grammar: 'pantheon',
   focus: {
-    synoId: '1-1',
+    synoId: 'cronus',
     presnoIndex: false,
     charIndex: false
     // synoId: Object.keys(seedGraphs)[0],

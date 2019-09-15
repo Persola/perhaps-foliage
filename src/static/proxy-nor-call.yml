@@ -114,7 +114,7 @@
   callee:
     synoRef: true
     relation: 'non-tree'
-    id: primitives-nor
+    id: salivaPrimitives-nor
   argumentz:
     - synoRef: true
       relation: 'child'
@@ -133,7 +133,7 @@
   parameter:
     synoRef: true
     relation: 'non-tree'
-    id: 'primitives-nor-param-1'
+    id: 'salivaPrimitives-nor-param-1'
   value:
     synoRef: true
     relation: 'child'
@@ -149,7 +149,7 @@
   parameter:
     synoRef: true
     relation: 'non-tree'
-    id: 'primitives-nor-param-2'
+    id: 'salivaPrimitives-nor-param-2'
   value:
     synoRef: true
     relation: 'child'

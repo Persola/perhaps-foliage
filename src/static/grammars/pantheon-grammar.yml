@@ -1,0 +1,12 @@
+titan:
+  rootable: true
+  children:
+    children:
+      collection: true
+      syntype: olympian
+olympian:
+  rootable: false
+  children:
+    children:
+      collection: true
+      syntype: olympian

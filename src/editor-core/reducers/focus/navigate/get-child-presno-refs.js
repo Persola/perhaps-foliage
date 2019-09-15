@@ -26,7 +26,7 @@ export default (syno: Syno, synoMap: SynoMap): ChildPresnoRef[] => {
       const callee: FunctionDefinition = synoMap[syno.callee.id];
       if (
         syno.callee !== false &&
-        callee.id !== 'primitives-nor' &&
+        callee.id !== 'salivaPrimitives-nor' &&
         callee.syntype !== 'functionDefinition' // not used yet
       ) {
         addNamePresno(childPresnoRefs, syno);
@@ -36,22 +36,30 @@ export default (syno: Syno, synoMap: SynoMap): ChildPresnoRef[] => {
     case 'argument': {
       const functionCall: FunctionCall = synoMap[syno.parent.id];
       const callee: FunctionDefinition = synoMap[functionCall.callee.id];
-      if (callee.id !== 'primitives-nor') {
+      if (callee.id !== 'salivaPrimitives-nor') {
         addNamePresno(childPresnoRefs, syno);
       }
       break;
     }
     case 'functionDefinition': {
-      if (syno.id !== 'primitives-nor') {
+      if (syno.id !== 'salivaPrimitives-nor') {
         addNamePresno(childPresnoRefs, syno);
       }
       break;
     }
     case 'functionParameter': {
       const functionDefinition: FunctionDefinition = synoMap[syno.parent.id];
-      if (functionDefinition.id !== 'primitives-nor') {
+      if (functionDefinition.id !== 'salivaPrimitives-nor') {
         addNamePresno(childPresnoRefs, syno);
       }
+      break;
+    }
+    case 'titan': {
+      addNamePresno(childPresnoRefs, syno);
+      break;
+    }
+    case 'olympian': {
+      addNamePresno(childPresnoRefs, syno);
       break;
     }
   }

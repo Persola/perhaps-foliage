@@ -1,5 +1,6 @@
 // @flow
 import salivaPresenters from './syntypes/saliva/presenters.js'
+import pantheonPresenters from './syntypes/pantheon/presenters.js'
 
 import type { Syno } from '../../types/syno.js'
 import type { SynoId } from '../../types/syno-id.js'
@@ -8,7 +9,8 @@ import type { Focus } from '../../types/editor-state/focus.js'
 import type { Grammar } from '../../types/editor-state/grammar.js'
 
 const PRESENTERS_BY_GRAMMAR = {
-  'saliva': salivaPresenters
+  'saliva': salivaPresenters,
+  'pantheon': pantheonPresenters
 };
 
 export default (

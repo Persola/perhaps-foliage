@@ -42,9 +42,9 @@ export default (
         const oldFocusedPresno = synoMap[action.oldFocusedPresnoRef.id]
         if (
           oldFocusedPresno.parent === false ||
-          oldFocusedPresno.id === 'primitives-nor' || (
+          oldFocusedPresno.id === 'salivaPrimitives-nor' || (
             oldFocusedPresno.parent &&
-            oldFocusedPresno.parent.id == 'primitives-nor'
+            oldFocusedPresno.parent.id == 'salivaPrimitives-nor'
           )
         ) {
           console.warn("ignoring syno detruction: can't destroy NOR primitive or children");

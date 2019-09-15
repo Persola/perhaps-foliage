@@ -105,7 +105,12 @@ export default (
       const focusSyno: Syno = newSynoMap[action.focusSynoId];
 
       let textHostSyno: Syno;
-      if (['functionParameter', 'functionDefinition'].includes(focusSyno.syntype)) {
+      if ([
+        'functionParameter',
+        'functionDefinition',
+        'titan',
+        'olympian'
+      ].includes(focusSyno.syntype)) {
         textHostSyno = focusSyno;
       } else if (focusSyno.syntype === 'variableRef') {
         textHostSyno = newSynoMap[focusSyno.referent.id];
@@ -126,9 +131,9 @@ export default (
       const { focusedPresnoId } = action;
       if (
         oldState[focusedPresnoId].parent === false ||
-        focusedPresnoId === 'primitives-nor' || (
+        focusedPresnoId === 'salivaPrimitives-nor' || (
           oldState[focusedPresnoId].parent &&
-          oldState[focusedPresnoId].parent.id == 'primitives-nor'
+          oldState[focusedPresnoId].parent.id == 'salivaPrimitives-nor'
         )
       ) {
         console.warn("ignoring syno detruction: can't destroy NOR primitive or children");

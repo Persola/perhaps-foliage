@@ -1,5 +1,7 @@
 // @flow
 import React from 'react';
+import Titan from './syntactic-nodes/pantheon/titan.jsx'
+import Olympian from './syntactic-nodes/pantheon/olympian.jsx'
 import BooleanLiteral from './syntactic-nodes/boolean-literal.jsx'
 import FunctionCall from './syntactic-nodes/function-call.jsx'
 import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
@@ -17,43 +19,36 @@ type Props = {
   synoId: SynoId
 }
 
+const RENDERERS_BY_GRAMMAR = {
+  saliva: {
+    booleanLiteral: BooleanLiteral,
+    functionCall: FunctionCall,
+    functionDefinition: FunctionDefinition,
+    functionParameter: FunctionParameter,
+    argument: Argument,
+    variableRef: VariableRef
+  },
+  pantheon: {
+    titan: Titan,
+    olympian: Olympian    
+  }
+}
+
 export default (props: Props) => {
   const { grammar, synoId, getPresno } = props;
   const presno: Presno = getPresno(synoId);
 
-  switch (presno.syntype) {
-    case 'booleanLiteral': {
-      return(
-        <BooleanLiteral grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    case 'functionCall': {
-      return(
-        <FunctionCall grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    case 'functionDefinition': {
-      return(
-        <FunctionDefinition grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    case 'functionParameter': {
-      return(
-        <FunctionParameter grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    case 'argument': {
-      return(
-        <Argument grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    case 'variableRef': {
-      return(
-        <VariableRef grammar={grammar} getPresno={getPresno} presno={presno} />
-      )
-    }
-    default: {
-      throw new Error(`unrecognized type: '${presno.syntype}'`);
-    }
+  const grammarRenderer = RENDERERS_BY_GRAMMAR[grammar];
+  if (!grammarRenderer) {
+    throw new Error('unrecognized grammar');      
+  }
+
+  const Renderer = grammarRenderer[presno.syntype];
+  if (Renderer) {
+    return(
+      <Renderer grammar={grammar} getPresno={getPresno} presno={presno} />
+    )
+  } else {
+    throw new Error(`unrecognized type: '${presno.syntype}'`);      
   }
 };

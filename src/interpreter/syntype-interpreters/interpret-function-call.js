@@ -47,7 +47,7 @@ export default (
 
   if (
     resolvedCallee.body === false &&
-    resolvedCallee.id !== 'primitives-nor'
+    resolvedCallee.id !== 'salivaPrimitives-nor'
   ) {
     return {
       success: false,
