@@ -3,32 +3,34 @@ import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
 
+import type { Grammar } from '../../types/editor-state/grammar'
 import type { FunctionCallPres } from '../../../types/presentations/function-call'
 import type { Presno } from '../../../types/presentations/presno'
 import type { PresnoRef } from '../../../types/presentations/presno-ref'
 import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
+  grammar: Grammar,
   getPresno: (SynoId) => Presno,
   presno: FunctionCallPres
 }
 
-const argumentEls = (getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
+const argumentEls = (grammar: Grammar, getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
   return (
     argumentz.map((argRef: PresnoRef, ind) => {
       return (
-        <SyntacticNode key={`arg_${ind + 1}`} getPresno={getPresno} synoId={argRef.id} />
+        <SyntacticNode grammar={grammar} key={`arg_${ind + 1}`} getPresno={getPresno} synoId={argRef.id} />
       )
     })
   );
 }
 
 export default (props: Props) => {
-  const { getPresno, presno } = props;
+  const { grammar, getPresno, presno } = props;
   const { presnoFocused, charFocused } = presno;
   const { name, callee, resolved, focused, valid } = presno;
 
-  const argumentz = argumentEls(getPresno, presno.argumentz);
+  const argumentz = argumentEls(grammar, getPresno, presno.argumentz);
   const classes = `syno ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
 
   return (
@@ -40,7 +42,7 @@ export default (props: Props) => {
       { argumentz }
       {
         callee &&
-          <SyntacticNode getPresno={getPresno} synoId={callee.id} />
+          <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={callee.id} />
       }
     </div>
   );

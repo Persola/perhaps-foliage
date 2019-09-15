@@ -2,17 +2,19 @@
 import React from 'react';
 import NamePart from './../vis/name-part.jsx'
 
+import type { Grammar } from '../../types/editor-state/grammar'
 import type { BooleanLiteralPres } from '../../../types/presentations/boolean-literal'
 import type { Presno } from '../../../types/presentations/presno'
 import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
+  grammar: Grammar,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: BooleanLiteralPres
 }
 
 export default (props: Props) => {
-  const { presno } = props;
+  const { grammar, presno } = props;
   const { presnoFocused, charFocused, valid } = presno;
   if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');

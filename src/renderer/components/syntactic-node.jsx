@@ -6,47 +6,50 @@ import FunctionDefinition from './syntactic-nodes/function-definition.jsx'
 import FunctionParameter from './syntactic-nodes/function-parameter.jsx'
 import Argument from './syntactic-nodes/argument.jsx'
 import VariableRef from './syntactic-nodes/variable-ref.jsx'
+
+import type { Grammar } from '../../types/editor-state/grammar'
 import type { Presno } from '../../types/presentations/presno'
 import type { SynoId } from '../../types/syno-id'
 
 type Props = {
+  grammar: Grammar,
   getPresno: (SynoId) => Presno,
   synoId: SynoId
 }
 
 export default (props: Props) => {
-  const { synoId, getPresno } = props;
+  const { grammar, synoId, getPresno } = props;
   const presno: Presno = getPresno(synoId);
 
   switch (presno.syntype) {
     case 'booleanLiteral': {
       return(
-        <BooleanLiteral getPresno={getPresno} presno={presno} />
+        <BooleanLiteral grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     case 'functionCall': {
       return(
-        <FunctionCall getPresno={getPresno} presno={presno} />
+        <FunctionCall grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     case 'functionDefinition': {
       return(
-        <FunctionDefinition getPresno={getPresno} presno={presno} />
+        <FunctionDefinition grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     case 'functionParameter': {
       return(
-        <FunctionParameter getPresno={getPresno} presno={presno} />
+        <FunctionParameter grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     case 'argument': {
       return(
-        <Argument getPresno={getPresno} presno={presno} />
+        <Argument grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     case 'variableRef': {
       return(
-        <VariableRef getPresno={getPresno} presno={presno} />
+        <VariableRef grammar={grammar} getPresno={getPresno} presno={presno} />
       )
     }
     default: {

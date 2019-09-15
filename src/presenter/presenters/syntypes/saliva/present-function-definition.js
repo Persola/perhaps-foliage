@@ -1,16 +1,19 @@
 // @flow
-import NorPrimitiveId from '../../../nor-primitive-id.js'
-import presentParameters from './present-parameters.js'
-import presentSyno from '../present-syno.js'
+import presentSyno from '../../present-syno.js'
 
-import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition.js'
-import type { FunctionDefPresAttrs } from '../../../types/presentations/presno-attrs/function-definition-attrs.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { PresnoRef } from '../../../types/presentations/presno-ref.js'
-import type { SynoId } from '../../../types/syno-id'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import NorPrimitiveId from '../../../../nor-primitive-id.js'
+import presentParameters from './present-parameters.js'
+
+import type { FunctionDefinition } from '../../../../types/syntactic-nodes/function-definition.js'
+import type { FunctionDefPresAttrs } from '../../../../types/presentations/presno-attrs/function-definition-attrs.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { PresnoRef } from '../../../../types/presentations/presno-ref.js'
+import type { SynoId } from '../../../../types/syno-id'
+import type { Focus } from '../../../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   presnoMap: PresnoMap,
   funkshunDef: FunctionDefinition,
   scope: {},
@@ -27,6 +30,7 @@ export default (
     body = {
       presnoRef: true,
       id: presentSyno(
+        grammar,
         presnoMap,
         funkshunDef.id,
         getSyno(funkshunDef.body),
@@ -40,7 +44,15 @@ export default (
   return {
     syntype: 'functionDefinition',
     name: funkshunDef.name,
-    parameters: presentParameters(presnoMap, funkshunDef.id, funkshunDef.parameters, scope, getSyno, focus),
+    parameters: presentParameters(
+      grammar,
+      presnoMap,
+      funkshunDef.id,
+      funkshunDef.parameters,
+      scope,
+      getSyno,
+      focus
+    ),
     focused: focus && (funkshunDef.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (funkshunDef.id === focus.synoId) && focus.presnoIndex,
     charFocused: focus && (funkshunDef.id === focus.synoId) && focus.charIndex,

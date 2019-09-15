@@ -1,10 +1,12 @@
 // @flow
-import type { FunctionParameter } from '../../../types/syntactic-nodes/function-parameter.js'
-import type { FunctionParameterPresAttrs } from '../../../types/presentations/presno-attrs/function-parameter-attrs.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import type { FunctionParameter } from '../../../../types/syntactic-nodes/function-parameter.js'
+import type { FunctionParameterPresAttrs } from '../../../../types/presentations/presno-attrs/function-parameter-attrs.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { Focus } from '../../../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   presnoMap: PresnoMap,
   parameter: FunctionParameter,
   scope: {},

@@ -3,17 +3,20 @@ import React from 'react';
 import SyntacticNode from './../syntactic-node.jsx'
 import NamePart from './../vis/name-part.jsx'
 
+import type { Grammar } from '../../types/editor-state/grammar'
 import type { ArgumentPres } from '../../../types/presentations/argument'
 import type { Presno } from '../../../types/presentations/presno'
 import type { SynoId } from '../../../types/syno-id'
 
 type Props = {
+  grammar: Grammar,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: ArgumentPres
 }
 
 export default (props: Props) => {
   const {
+    grammar,
     getPresno,
     presno: {
       focused,
@@ -36,7 +39,7 @@ export default (props: Props) => {
       }
       {
         value &&
-          <SyntacticNode getPresno={getPresno} synoId={value.id} />
+          <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={value.id} />
       }
     </div>
   );

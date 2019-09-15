@@ -1,18 +1,21 @@
 // @flow
-import NorPrimitiveId from '../../../nor-primitive-id.js'
-import presentSyno from '../present-syno.js'
-import presentArguments from './present-arguments.js'
-import argumentParameterMismatch from '../../../syntree-utils/argument-parameter-mismatch'
+import presentSyno from '../../present-syno.js'
 
-import type { PresnoRef } from '../../../types/presentation/prseno-ref.js'
-import type { FunctionCall } from '../../../types/syntactic-nodes/function-call.js'
-import type { FunctionDefinition } from '../../../types/syntactic-nodes/function-definition.js'
-import type { VariableRef } from '../../../types/syntactic-nodes/variable-ref.js'
-import type { FunctionCallPresAttrs } from '../../../types/presentations/presno-attrs/function-call-attrs.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import presentArguments from './present-arguments.js'
+import NorPrimitiveId from '../../../../nor-primitive-id.js'
+import argumentParameterMismatch from '../../../../syntree-utils/argument-parameter-mismatch'
+
+import type { PresnoRef } from '../../../../types/presentation/prseno-ref.js'
+import type { FunctionCall } from '../../../../types/syntactic-nodes/function-call.js'
+import type { FunctionDefinition } from '../../../../types/syntactic-nodes/function-definition.js'
+import type { VariableRef } from '../../../../types/syntactic-nodes/variable-ref.js'
+import type { FunctionCallPresAttrs } from '../../../../types/presentations/presno-attrs/function-call-attrs.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { Focus } from '../../../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   presnoMap: PresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
@@ -46,6 +49,7 @@ export default (
         callee = {
           presnoRef: true,
           id: presentSyno(
+            grammar,
             presnoMap,
             funkshunCall.id,
             calleeSyno,
@@ -85,6 +89,7 @@ export default (
     syntype: 'functionCall',
     name,
     argumentz: presentArguments(
+      grammar,
       presnoMap,
       funkshunCall.id,
       funkshunCall.argumentz, 

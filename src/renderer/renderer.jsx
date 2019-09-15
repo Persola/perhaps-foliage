@@ -18,12 +18,14 @@ export default class {
 
   render(
     presentation: EditorPresentation,
+    grammar: grammar,
     resultOutdated: boolean,
     interpreting: boolean
   ) {
     ReactDOM.render(
       (
         <Editor
+          grammar={grammar}
           presentation={presentation}
           interpret={this.interpret}
           resultOutdated={resultOutdated}

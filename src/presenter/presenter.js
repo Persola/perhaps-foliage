@@ -27,17 +27,17 @@ export default class Presenter {
   present() {
     const editorState: EditorState = this.editorStateStore.getState();
     const presentation = this.generatePresentation(editorState);
-    const { resultOutdated, interpreting } = editorState;
-    this.renderer.render(presentation, resultOutdated, interpreting);
+    const { grammar, resultOutdated, interpreting } = editorState;
+    this.renderer.render(presentation, grammar, resultOutdated, interpreting);
   }
 
   generatePresentation(editorState: EditorState): EditorPresentation {
-    const { synoMap, focus, resultSyntreeRootId } = editorState
+    const { synoMap, grammar, focus, resultSyntreeRootId } = editorState
     const getSyno = createSynoFetcher(synoMap);
 
     return {
-      stage: (!focus.synoId ? false : presentFocusedSyntree(focus.synoId, {}, getSyno, focus)),
-      result: (!resultSyntreeRootId ? false : presentSyntree(resultSyntreeRootId, {}, getSyno, false))
+      stage: (!focus.synoId ? false : presentFocusedSyntree(grammar, focus.synoId, {}, getSyno, focus)),
+      result: (!resultSyntreeRootId ? false : presentSyntree(grammar, resultSyntreeRootId, {}, getSyno, false))
     };
   }
 }

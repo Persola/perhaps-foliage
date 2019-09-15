@@ -5,6 +5,7 @@ import InterpretButton from './interpret-button.jsx';
 import type { EditorPresentation } from '../../types/presentations/editor-presentation.js'
 
 type Props = {
+  grammar: Grammar,
   presentation: EditorPresentation,
   interpret: Function,
   resultOutdated: boolean,
@@ -13,8 +14,9 @@ type Props = {
 
 export default (props: Props) => {
   const {
-    interpret,
+    grammar,
     presentation: { stage: stageful, result },
+    interpret,
     resultOutdated,
     interpreting
   } = props;
@@ -23,6 +25,7 @@ export default (props: Props) => {
     <div className="editor mousetrap">
       <CodeView
         key="stage"
+        grammar={grammar}
         codePresentation={stageful}
         outdated={false}
         interpreting={interpreting}
@@ -30,6 +33,7 @@ export default (props: Props) => {
       <InterpretButton interpret={interpret} interpreting={interpreting} />
       <CodeView
         key="result"
+        grammar={grammar}
         codePresentation={result}
         outdated={resultOutdated}
         interpreting={false}

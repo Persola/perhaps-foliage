@@ -1,11 +1,11 @@
 // @flow
-import presentSyno from '../present-syno.js'
+import presentSyno from '../../present-syno.js'
 
-import type { SynoRef } from '../../../types/syno-ref.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { PresnoRef } from '../../../types/presentations/presno-ref.js'
-import type { SynoId } from '../../../types/syno-id.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import type { SynoRef } from '../../../../types/syno-ref.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { PresnoRef } from '../../../../types/presentations/presno-ref.js'
+import type { SynoId } from '../../../../types/syno-id.js'
+import type { Focus } from '../../../../types/editor-state/focus.js'
 
 export default (
   presnoMap: PresnoMap,

@@ -1,10 +1,12 @@
 // @flow
-import type { VariableRef } from '../../../types/syntactic-nodes/variable-ref.js'
-import type { VariableRefPresAttrs } from '../../../types/presentations/presno-attrs/variable-ref-attrs.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import type { VariableRef } from '../../../../types/syntactic-nodes/variable-ref.js'
+import type { VariableRefPresAttrs } from '../../../../types/presentations/presno-attrs/variable-ref-attrs.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { Focus } from '../../../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   presnoMap: PresnoMap,
   variableRef: VariableRef,
   scope: {},

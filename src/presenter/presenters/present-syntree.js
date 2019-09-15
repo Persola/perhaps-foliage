@@ -5,8 +5,10 @@ import type { SynoId } from '../../types/syno-id.js'
 import type { Prestree } from '../../types/presentations/prestree.js'
 import type { PresnoMap } from '../../types/presentations/presno-map.js'
 import type { Focus } from '../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   rootSynoId: SynoId,
   scope: {},
   getSyno: Function,
@@ -14,6 +16,7 @@ export default (
 ): Prestree => {
   const presnoMap: PresnoMap = {};
   presentSyno(
+    grammar,
     presnoMap,
     false,
     getSyno({

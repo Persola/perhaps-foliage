@@ -1,13 +1,16 @@
 // @flow
-import presentSyno from '../present-syno.js'
-import type { Argument } from '../../../types/syntactic-nodes/argument.js'
-import type { ArgumentPresAttrs } from '../../../types/presentations/presno-attrs/argument-attrs.js'
-import type { PresnoMap } from '../../../types/presentations/presno-map.js'
-import type { PresnoRef } from '../../../types/presentations/presno-ref.js'
-import type { SynoId } from '../../../types/syno-id.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
+import presentSyno from '../../present-syno.js'
+
+import type { Argument } from '../../../../types/syntactic-nodes/argument.js'
+import type { ArgumentPresAttrs } from '../../../../types/presentations/presno-attrs/argument-attrs.js'
+import type { PresnoMap } from '../../../../types/presentations/presno-map.js'
+import type { PresnoRef } from '../../../../types/presentations/presno-ref.js'
+import type { SynoId } from '../../../../types/syno-id.js'
+import type { Focus } from '../../../../types/editor-state/focus.js'
+import type { Grammar } from '../../types/editor-state/grammar.js'
 
 export default (
+  grammar: Grammar,
   presnoMap: PresnoMap,
   argument: Argument,
   scope: {},
@@ -28,6 +31,7 @@ export default (
     value = {
       presnoRef: true,
       id: presentSyno(
+        grammar,
         presnoMap,
         argument.id,
         getSyno(argument.value),

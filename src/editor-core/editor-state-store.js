@@ -6,6 +6,7 @@ import codeLoader from '../code-loader/code-loader.js'
 
 import synoMapReducer from './reducers/syno-map.js'
 import inverseReferenceMapReducer from './reducers/inverse-reference-map.js'
+import grammarReducer from './reducers/grammar.js'
 import focusReducer from './reducers/focus.js'
 import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js'
 import resultOutdatedReducer from './reducers/result-outdated.js'
@@ -21,6 +22,7 @@ const defaultSynoMap = Object.assign({}, seedGraphs, primitiveGraphs);
 const defaultEditorState: EditorState = {
   synoMap: defaultSynoMap,
   inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
+  grammar: 'saliva',
   focus: {
     synoId: '1-1',
     presnoIndex: false,
@@ -45,6 +47,11 @@ const editorstateReducer = (
     ),
     inverseReferenceMap: inverseReferenceMapReducer(
       originalState.inverseReferenceMap,
+      action,
+      originalState.synoMap
+    ),
+    grammar: grammarReducer(
+      originalState.grammar,
       action,
       originalState.synoMap
     ),
