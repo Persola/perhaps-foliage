@@ -4,7 +4,7 @@ import ascendToRoot from '../syntree-utils/ascend-to-root.js'
 
 import type { SynoId } from '../types/syno-id.js'
 import type { SynoMap } from '../types/syno-map.js'
-import type { InverseReferenceMap } from '../types/inverse-reference-map.js'
+import type { InverseReferenceMap } from '../types/editor-state/inverse-reference-map.js'
 
 const createOrAdd = (
   irm: InverseReferenceMap,

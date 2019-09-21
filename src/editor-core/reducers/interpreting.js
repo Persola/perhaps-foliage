@@ -2,7 +2,10 @@
 import verifyActionType from './util/verify-action-type'
 import type { ReduxAction } from '../../types/redux-action'
 
-export default (oldState: boolean, action: ReduxAction): boolean => {
+export default (
+  oldState: boolean,
+  action: ReduxAction
+): boolean => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
       if (oldState !== false) {

@@ -2,7 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Editor from './components/editor.jsx';
-import type { EditorPresentation } from '../types/presentations/editor-presentation.js'
+
+import type { EditorPresentation } from '../types/presenter/editor-presentation.js'
+import type { GrammarName } from '../types/editor-state/grammar-name.js'
 
 type element = Object;
 type document = any;
@@ -18,14 +20,14 @@ export default class {
 
   render(
     presentation: EditorPresentation,
-    grammar: grammar,
+    grammarName: GrammarName,
     resultOutdated: boolean,
     interpreting: boolean
   ) {
     ReactDOM.render(
       (
         <Editor
-          grammar={grammar}
+          grammarName={grammarName}
           presentation={presentation}
           interpret={this.interpret}
           resultOutdated={resultOutdated}

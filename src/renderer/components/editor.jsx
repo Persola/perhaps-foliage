@@ -2,10 +2,11 @@
 import React from 'react';
 import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
-import type { EditorPresentation } from '../../types/presentations/editor-presentation.js'
+import type { EditorPresentation } from '../../types/presenter/editor-presentation.js'
+import type { GrammarName } from '../../types/editor-state/grammar-name.js'
 
 type Props = {
-  grammar: Grammar,
+  grammarName: GrammarName,
   presentation: EditorPresentation,
   interpret: Function,
   resultOutdated: boolean,
@@ -14,7 +15,7 @@ type Props = {
 
 export default (props: Props) => {
   const {
-    grammar,
+    grammarName,
     presentation: { stage: stageful, result },
     interpret,
     resultOutdated,
@@ -25,7 +26,7 @@ export default (props: Props) => {
     <div className="editor mousetrap">
       <CodeView
         key="stage"
-        grammar={grammar}
+        grammarName={grammarName}
         codePresentation={stageful}
         outdated={false}
         interpreting={interpreting}
@@ -33,7 +34,7 @@ export default (props: Props) => {
       <InterpretButton interpret={interpret} interpreting={interpreting} />
       <CodeView
         key="result"
-        grammar={grammar}
+        grammarName={grammarName}
         codePresentation={result}
         outdated={resultOutdated}
         interpreting={false}

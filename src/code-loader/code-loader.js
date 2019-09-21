@@ -1,17 +1,17 @@
 // @noflow because requires don't fit their types
 import type { Syno } from '../types/syno';
-import type { FunctionCall } from '../types/syntactic-nodes/function-call.js'
+import type { FunctionCall } from '../types/synos/function-call.js'
 
 import graphValidator from './graph-validator.js'
 import grammarValidator from './grammar-validator.js'
 
-const salivaGrammar: FunctionCall = require('../static/grammars/saliva-grammar.yml');
-const pantheonGrammar: FunctionCall = require('../static/grammars/pantheon-grammar.yml');
+const salivaGrammar: FunctionCall = require('../extension-staging-area/saliva/grammar.yml');
+const salivaPrimitives: FunctionCall = require('../extension-staging-area/saliva/primitives.yml');
+const pantheonGrammar: FunctionCall = require('../extension-staging-area/pantheon/grammar.yml');
 
-const salivaPrimitives: FunctionCall = require('../static/primitives.yml');
-const falseLiteral: FunctionCall = require('../static/false-literal.yml');
-const proxyNorCall: FunctionCall = require('../static/proxy-nor-call.yml');
-const pantheon: FunctionCall = require('../static/pantheon.yml');
+const falseLiteral: FunctionCall = require('../extension-staging-area/saliva/static/false-literal.yml');
+const proxyNorCall: FunctionCall = require('../extension-staging-area/saliva/static/proxy-nor-call.yml');
+const pantheon: FunctionCall = require('../extension-staging-area/pantheon/static/pantheon.yml');
 
 const validateSyntax = (graphName, graph, grammarName, grammar) => {
   const grammarValidatorRez = grammarValidator(grammar);

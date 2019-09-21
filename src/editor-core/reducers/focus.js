@@ -4,16 +4,20 @@ import navIn from './focus/navigate/nav-in'
 import navPrev from './focus/navigate/nav-prev'
 import navNext from './focus/navigate/nav-next'
 import verifyActionType from './util/verify-action-type'
+import NorPrimitiveId from '../../extension-staging-area/saliva/nor-primitive-id.js'
+
 import type { Focus } from '../../types/editor-state/focus'
 import type { Syno } from '../../types/syno'
 import type { ChildPresnoRef } from '../../types/child-presno-ref'
 import type { SynoMap } from '../../types/syno-map'
 import type { ReduxAction } from '../../types/redux-action'
+import type { GrammarName } from '../../types/editor-state/grammar-name'
 
 export default (
   oldState: Focus,
   action: ReduxAction,
-  synoMap: SynoMap
+  synoMap: SynoMap,
+  grammarName: GrammarName
 ): Focus => {
   const { direction, oldFocusedPresnoRef } = action;
   switch (action.type) {
@@ -42,9 +46,9 @@ export default (
         const oldFocusedPresno = synoMap[action.oldFocusedPresnoRef.id]
         if (
           oldFocusedPresno.parent === false ||
-          oldFocusedPresno.id === 'salivaPrimitives-nor' || (
+          oldFocusedPresno.id === NorPrimitiveId || (
             oldFocusedPresno.parent &&
-            oldFocusedPresno.parent.id == 'salivaPrimitives-nor'
+            oldFocusedPresno.parent.id == NorPrimitiveId
           )
         ) {
           console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
@@ -58,13 +62,13 @@ export default (
           return navOut(oldFocusedPresnoRef, synoMap, oldState);
         }
         case 'in': {
-          return navIn(oldFocusedPresnoRef, synoMap, oldState);
+          return navIn(oldFocusedPresnoRef, synoMap, oldState, grammarName);
         }
         case 'prev': {
-          return navPrev(oldFocusedPresnoRef, synoMap, oldParent, oldState);
+          return navPrev(oldFocusedPresnoRef, synoMap, oldParent, oldState, grammarName);
         }
         case 'next': {
-          return navNext(oldFocusedPresnoRef, synoMap, oldParent, oldState);
+          return navNext(oldFocusedPresnoRef, synoMap, oldParent, oldState, grammarName);
         }
         default: {
           throw new Error('unrecognized navigation direction');

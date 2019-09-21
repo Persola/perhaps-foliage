@@ -1,7 +1,7 @@
 // @flow
 import type { SynoMap } from '../../../types/syno-map'
 import type { InverseReferenceMap } from '../../../types/editor-state/inverse-reference-map'
-import type { ReduxAction } from '../../types/redux-action'
+import type { ReduxAction } from '../../../types/redux-action'
 
 export default (
   action: ReduxAction,

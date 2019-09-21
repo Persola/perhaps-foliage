@@ -1,14 +1,14 @@
 // @flow
 import verifyActionType from './util/verify-action-type'
 import type { ReduxAction } from '../../types/redux-action'
-import type { InverseReferenceMap } from '../types/editor-state/inverse-reference-map'
-import type { SynoMap } from '../types/editor-state/syno-map'
+import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map'
+import type { SynoMap } from '../../types/syno-map'
 
 export default (
   oldState: InverseReferenceMap,
   action: ReduxAction,
   synoMap: SynoMap
-): boolean => {
+): InverseReferenceMap => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
       return oldState;

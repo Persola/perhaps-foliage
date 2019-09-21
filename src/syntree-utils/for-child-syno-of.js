@@ -2,7 +2,10 @@
 import type { Syno } from '../types/syno.js'
 import type { SynoRef } from '../types/syno-ref.js'
 
-export default (parentSyno: Syno, callback: (SynoRef) => void) => {
+export default (
+  parentSyno: Syno,
+  callback: (SynoRef, string, ?number) => void
+) => {
   for (let key in parentSyno) {
     if (
       parentSyno[key].synoRef &&

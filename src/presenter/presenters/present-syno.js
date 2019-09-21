@@ -1,12 +1,12 @@
 // @flow
-import salivaPresenters from './syntypes/saliva/presenters.js'
-import pantheonPresenters from './syntypes/pantheon/presenters.js'
+import salivaPresenters from '../../extension-staging-area/saliva/presenters/presenters.js'
+import pantheonPresenters from '../../extension-staging-area/pantheon/presenters/presenters.js'
 
 import type { Syno } from '../../types/syno.js'
 import type { SynoId } from '../../types/syno-id.js'
-import type { PresnoMap } from '../../types/presentations/presno-map.js'
+import type { PresnoMap } from '../../types/presenter/presno-map.js'
 import type { Focus } from '../../types/editor-state/focus.js'
-import type { Grammar } from '../../types/editor-state/grammar.js'
+import type { GrammarName } from '../../types/editor-state/grammar-name.js'
 
 const PRESENTERS_BY_GRAMMAR = {
   'saliva': salivaPresenters,
@@ -14,7 +14,7 @@ const PRESENTERS_BY_GRAMMAR = {
 };
 
 export default (
-  grammar: Grammar,
+  grammar: GrammarName,
   presnoMap: PresnoMap,
   parentId: (SynoId | false),
   syno: (Syno | false),

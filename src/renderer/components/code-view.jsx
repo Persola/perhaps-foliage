@@ -4,11 +4,11 @@ import SyntacticNode from './syntactic-node.jsx';
 import OutdatedMessage from './outdated-message.jsx';
 import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
 
-import type { Grammar } from '../../types/editor-state/grammar'
-import type { Prestree } from '../../types/presentations/prestree'
+import type { GrammarName } from '../../types/editor-state/grammar-name'
+import type { Prestree } from '../../types/presenter/prestree'
 
 type Props = {
-  grammar: Grammar,
+  grammarName: GrammarName,
   codePresentation: Prestree | false,
   outdated: boolean,
   interpreting: boolean
@@ -19,7 +19,7 @@ const outdatedMessage = (
 );
 
 export default (props: Props) => {
-  const { grammar, codePresentation, outdated, interpreting } = props;
+  const { grammarName, codePresentation, outdated, interpreting } = props;
 
   let content;
   if (codePresentation === false) {
@@ -32,7 +32,7 @@ export default (props: Props) => {
     const { presnos, rootId } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
     content = (
-      <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={rootId} />
+      <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={rootId} />
     );
   }
 

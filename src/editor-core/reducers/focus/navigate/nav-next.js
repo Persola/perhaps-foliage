@@ -4,12 +4,14 @@ import type { Focus } from '../../../../types/editor-state/focus'
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref'
 import type { SynoMap } from '../../../../types/syno-map'
 import type { Syno } from '../../../../types/syno'
+import type { GrammarName } from '../../../../types/editor-state/grammar-name'
 
 export default (
   oldFocusedPresnoRef: ChildPresnoRef,
   synoMap: SynoMap,
   oldParent: (Syno | false),
-  oldState: Focus
+  oldState: Focus,
+  grammarName: GrammarName
 ): Focus => {
   if (!oldParent) {
     console.warn('ignoring navigation to next sibling: focus syno is root');
@@ -36,7 +38,7 @@ export default (
     };
   }
 
-  const siblingRefz = getChildPresnoRefs(oldParent, synoMap);
+  const siblingRefz = getChildPresnoRefs(oldParent, synoMap, grammarName);
   if (siblingRefz.length > 0) {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
       if (siblingRef.synoRef) {

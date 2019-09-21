@@ -4,11 +4,13 @@ import type { Focus } from '../../../../types/editor-state/focus'
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref'
 import type { SynoMap } from '../../../../types/syno-map'
 import type { Syno } from '../../../../types/syno'
+import type { GrammarName } from '../../../../types/editor-state/grammar-name'
 
 export default (
   oldFocusedPresnoRef: ChildPresnoRef,
   synoMap: SynoMap,
-  oldState: Focus
+  oldState: Focus,
+  grammarName: GrammarName
 ): Focus => {
   if (!oldFocusedPresnoRef.synoRef) {
     if (oldState.charIndex !== false) {
@@ -25,11 +27,15 @@ export default (
 
   const oldFocusedPresno: Syno = synoMap[oldFocusedPresnoRef.id];
 
-  if (getChildPresnoRefs(oldFocusedPresno, synoMap).length === 0) {
+  if (getChildPresnoRefs(oldFocusedPresno, synoMap, grammarName).length === 0) {
     console.warn('ignoring navigation inwards: no children');
     return oldState;
   } else {
-    const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(oldFocusedPresno, synoMap)[0];
+    const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(
+      oldFocusedPresno,
+      synoMap,
+      grammarName
+    )[0];
 
     if (newFocusPresnoRef.synoRef) {
       return {

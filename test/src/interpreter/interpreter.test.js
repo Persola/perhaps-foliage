@@ -1,4 +1,4 @@
-import interpreter from '../../../src/interpreter/interpreter.js';
+import interpreter from '../../../src/extension-staging-area/saliva/interpreter/interpreter.js';
 
 describe ('interpreter', () => {
   describe ('given a boolean literal', () => {

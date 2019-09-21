@@ -3,13 +3,20 @@ import Mousetrap from 'mousetrap';
 import Presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-core/editor-state-store.js';
-import createInterpretForStore from './interpreter/create-interpret-for-store.js'
 import createInputResolver from './input-resolver/create-input-resolver.js'
 import createFocusSyno from './create-focus-syno.js'
+import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js'
+
 import type { SideEffectFunction } from './types/side-effect-function'
+
+import createInterpretForStore from './extension-staging-area/saliva/interpreter/create-interpret-for-store.js'
 
 // $FlowFixMe
 require('./stylesheet.sass');
+// $FlowFixMe
+require('./extension-staging-area/saliva/stylesheet.sass');
+// $FlowFixMe
+require('./extension-staging-area/pantheon/stylesheet.sass');
 
 const interpret: SideEffectFunction = createInterpretForStore(editorStateStore);
 const renderer = new Renderer(document, interpret);
@@ -18,17 +25,13 @@ const inputResolver = createInputResolver(editorStateStore, interpret);
 
 const initializeMousetrap = () => {
   Mousetrap.bind([
-    '0',
-    '1',
-    't',
-    'f',
     'enter',
     'left',
     'right',
     'up',
     'down',
     'backspace'
-  ], (e, key) => {
+  ].concat(Object.keys(salivaKeyToNewSynoAttrs)), (e, key) => {
     if ([
       'backspace',
       'up',

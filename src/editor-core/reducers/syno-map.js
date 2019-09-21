@@ -3,17 +3,20 @@ import verifyActionType from './util/verify-action-type'
 import destroySyno from './syno-map/destroy-syno'
 import forChildSynoOf from '../../syntree-utils/for-child-syno-of.js'
 import dup from '../../syntree-utils/dup.js'
+import NorPrimitiveId from '../../extension-staging-area/saliva/nor-primitive-id.js'
 
 import type { Syno } from '../../types/syno'
 import type { SynoMap } from '../../types/syno-map'
 import type { SynoRef } from '../../types/syno-ref'
-import type { BooleanLiteral } from '../../types/syntactic-nodes/boolean-literal'
 import type { ReduxAction } from '../../types/redux-action'
+import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map'
+import type { TextHostRefs } from '../../types/editor-state/text-host-refs'
 
 export default (
   oldState: SynoMap,
   action: ReduxAction,
-  inverseReferenceMap: InverseReferenceMap
+  inverseReferenceMap: InverseReferenceMap,
+  textHostRefs
 ): SynoMap => {
   const newSynoMap: SynoMap = dup(oldState);
 
@@ -37,14 +40,6 @@ export default (
         });
         // should remove any uneeded (i.e., deleted) nodes from store
         const newParent = newSynoMap[parent.id];
-
-        if (!(
-          (parent.syntype === 'functionDefinition' && childKey === 'body') ||
-          (parent.syntype === 'argument' && childKey === 'value')
-        )) {
-          console.warn('replacement disallowed for this syntactic context');
-          return oldState;
-        }
 
         if (childIndex !== undefined) {
           newParent[childKey].splice(
@@ -70,7 +65,7 @@ export default (
         }
       }
 
-      const newSyno: BooleanLiteral = Object.assign({}, newSynoAttrs, {
+      const newSyno = Object.assign({}, newSynoAttrs, {
         id: newSynoId,
         parent: parentAttr
       });
@@ -105,19 +100,11 @@ export default (
       const focusSyno: Syno = newSynoMap[action.focusSynoId];
 
       let textHostSyno: Syno;
-      if ([
-        'functionParameter',
-        'functionDefinition',
-        'titan',
-        'olympian'
-      ].includes(focusSyno.syntype)) {
+      if (textHostRefs[focusSyno.syntype] === false) {
         textHostSyno = focusSyno;
-      } else if (focusSyno.syntype === 'variableRef') {
-        textHostSyno = newSynoMap[focusSyno.referent.id];
-      } else if (focusSyno.syntype === 'argument') {
-        textHostSyno = newSynoMap[focusSyno.parameter.id];
       } else {
-        throw new Error('bad syntype in backspace');
+        const textHostSynoRef = textHostRefs[focusSyno.syntype];
+        textHostSyno = newSynoMap[focusSyno[textHostSynoRef].id];
       }
 
       textHostSyno.name = (
@@ -131,9 +118,9 @@ export default (
       const { focusedPresnoId } = action;
       if (
         oldState[focusedPresnoId].parent === false ||
-        focusedPresnoId === 'salivaPrimitives-nor' || (
+        focusedPresnoId === NorPrimitiveId || (
           oldState[focusedPresnoId].parent &&
-          oldState[focusedPresnoId].parent.id == 'salivaPrimitives-nor'
+          oldState[focusedPresnoId].parent.id == NorPrimitiveId
         )
       ) {
         console.warn("ignoring syno detruction: can't destroy NOR primitive or children");

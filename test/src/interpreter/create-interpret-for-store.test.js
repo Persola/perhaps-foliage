@@ -1,4 +1,4 @@
-import createInterpretForStore from '../../../src/interpreter/create-interpret-for-store.js';
+import createInterpretForStore from '../../../src/extension-staging-area/saliva/interpreter/create-interpret-for-store.js';
 import editorStateStore from '../../../src/editor-core/editor-state-store.js'
 
 describe ('interpretStage', () => {

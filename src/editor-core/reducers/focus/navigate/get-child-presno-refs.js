@@ -1,11 +1,18 @@
 // @flow
 import childSynos from '../../../../syntree-utils/child-synos'
 
+import salivaNamePresnoUnfocusable from '../../../../extension-staging-area/saliva/name-presno-focusable'
+import pantheonNamePresnoUnfocusable from '../../../../extension-staging-area/pantheon/name-presno-focusable'
+
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref'
 import type { SynoMap } from '../../../../types/syno-map'
 import type { Syno } from '../../../../types/syno'
-import type { FunctionDefinition } from '../../../../types/syntactic-nodes/function-definition'
-import type { FunctionCall } from '../../../../types/syntactic-nodes/function-call'
+import type { GrammarName } from '../../../../types/editor-state/grammar-name'
+
+const NAME_PRESNO_UNFOCUSABLES_BY_GRAMMAR = {
+  'saliva': salivaNamePresnoUnfocusable,
+  'pantheon': pantheonNamePresnoUnfocusable,
+};
 
 const addNamePresno = (childPresnoRefs: ChildPresnoRef[], syno: Syno) => {
   childPresnoRefs.unshift({ // the name first
@@ -18,50 +25,11 @@ const addNamePresno = (childPresnoRefs: ChildPresnoRef[], syno: Syno) => {
   });
 };
 
-export default (syno: Syno, synoMap: SynoMap): ChildPresnoRef[] => {
+export default (syno: Syno, synoMap: SynoMap, grammarName: GrammarName): ChildPresnoRef[] => {
   const childPresnoRefs: ChildPresnoRef[] = childSynos(syno);
 
-  switch (syno.syntype) {
-    case 'functionCall': {
-      const callee: FunctionDefinition = synoMap[syno.callee.id];
-      if (
-        syno.callee !== false &&
-        callee.id !== 'salivaPrimitives-nor' &&
-        callee.syntype !== 'functionDefinition' // not used yet
-      ) {
-        addNamePresno(childPresnoRefs, syno);
-      }
-      break;
-    }
-    case 'argument': {
-      const functionCall: FunctionCall = synoMap[syno.parent.id];
-      const callee: FunctionDefinition = synoMap[functionCall.callee.id];
-      if (callee.id !== 'salivaPrimitives-nor') {
-        addNamePresno(childPresnoRefs, syno);
-      }
-      break;
-    }
-    case 'functionDefinition': {
-      if (syno.id !== 'salivaPrimitives-nor') {
-        addNamePresno(childPresnoRefs, syno);
-      }
-      break;
-    }
-    case 'functionParameter': {
-      const functionDefinition: FunctionDefinition = synoMap[syno.parent.id];
-      if (functionDefinition.id !== 'salivaPrimitives-nor') {
-        addNamePresno(childPresnoRefs, syno);
-      }
-      break;
-    }
-    case 'titan': {
-      addNamePresno(childPresnoRefs, syno);
-      break;
-    }
-    case 'olympian': {
-      addNamePresno(childPresnoRefs, syno);
-      break;
-    }
+  if (NAME_PRESNO_UNFOCUSABLES_BY_GRAMMAR[grammarName][syno.syntype](syno, synoMap)) {
+    addNamePresno(childPresnoRefs, syno);    
   }
 
   return childPresnoRefs;

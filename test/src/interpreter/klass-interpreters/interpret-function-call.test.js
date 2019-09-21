@@ -1,4 +1,4 @@
-import interpretFunctionCall from '../../../../src/interpreter/syntype-interpreters/interpret-function-call.js';
+import interpretFunctionCall from '../../../../src/extension-staging-area/saliva/interpreter/syntype-interpreters/interpret-function-call.js';
 
 describe ('interpretFunctionCall', () => {
   const syno = require('../../../data-mocks/syntactic-nodes/function-call.json');

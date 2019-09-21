@@ -1,14 +1,12 @@
 // @flow
 import verifyActionType from './util/verify-action-type'
 import type { ReduxAction } from '../../types/redux-action'
-import type { Grammar } from '../types/editor-state/grammar'
-import type { SynoMap } from '../types/editor-state/syno-map'
+import type { Grammar } from '../../types/editor-state/grammar'
 
 export default (
   oldState: Grammar,
-  action: ReduxAction,
-  synoMap: SynoMap
-): boolean => {
+  action: ReduxAction
+): Grammar => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
       return oldState;

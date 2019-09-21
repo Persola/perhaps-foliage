@@ -1,22 +1,25 @@
 // @flow
+import salivaKeyToNewSynoAttrs from '../extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js'
+
 import type { EditorState } from '../types/editor-state'
+import type { ChildPresnoRef } from '../types/child-presno-ref'
 
 export default (key: string, editorState: EditorState) => {
   const { focus: { synoId } } = editorState;
 
-  if (['0', '1', 'f', 't'].includes(key)) {
-    const value = (
-      ['0', '1'].includes(key)
-      ? Boolean(Number(key))
-      : key === 'f' ? false : true
-    )
+  if (Object.keys(salivaKeyToNewSynoAttrs).includes(key)) {
+
+    // check type validity here
+    const focusSyno = editorState.synoMap[editorState.focus.synoId].parent;
+    const parent = parent && editorState.synoMap[focusSyno.parent.id];
+    if (parent && !Object.keys(editorState.grammar[parent.syntype].children).includes(salivaKeyToNewSynoAttrs[key].syntype)) {
+      console.warn('replacement disallowed for this syntactic context');
+      return ({ type: 'NO_OP' });
+    }
 
     return ({
       type: 'REPLACE_FOCUSED_SYNO',
-      newSynoAttrs: {
-        syntype: 'booleanLiteral',
-        value
-      },
+      newSynoAttrs: salivaKeyToNewSynoAttrs[key],
       newSynoId: `inputValue-${String(Math.random()).substring(2)}`, // TODO: systematic method to generate IDs
       focusedPresnoId: synoId
     });
