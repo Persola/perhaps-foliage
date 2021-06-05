@@ -31,9 +31,7 @@ npm run start:electron
 ```
 
 ### Test
-```shell
-npm run test
-```
+The test suite has been forsaken.
 
 ### Test Coverage Check
 Open `./tmp/coverage/index.html` in a browser. The interface refreshes when tests are run.

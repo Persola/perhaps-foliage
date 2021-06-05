@@ -25,12 +25,6 @@ rules:
 overrides:
   -
     files:
-      - "test/**"
-    rules:
-      "import/no-extraneous-dependencies":
-        - 0
-  -
-    files:
       - "web-repl/server.js"
     rules:
       "no-console":
