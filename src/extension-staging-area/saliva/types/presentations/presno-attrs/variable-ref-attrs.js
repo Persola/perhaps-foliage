@@ -1,8 +1,10 @@
 // @flow
 export type VariableRefPresAttrs = {
   syntype: 'variableRef',
-  valueSyntype: 'booleanLiteral',
-  name: (string | false),
   focused: boolean,
-  valid: boolean
+  presnoFocused: (number | false),
+  charFocused: (number | false),
+  valid: boolean,
+  valueSyntype: 'booleanLiteral',
+  name: (string | false)
 }

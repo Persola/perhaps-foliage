@@ -20,11 +20,26 @@ export default (
 
   if (oldState.charIndex !== false) {
     const oldSyno = synoMap[oldState.synoId];
-    const nameLength = (
-      (oldSyno.syntype === 'argument')
-      ? synoMap[oldSyno.parameter.id].name.length
-      : oldSyno.name.length
-    );
+    let oldName: string;
+    if (oldSyno.syntype === 'argument') {
+      if (oldSyno.parameter === false) {
+        throw new TypeError(`tried to navigate inside shouldn't-exist name of argument lacking parameter (flow)`);
+      }
+      const oldParameter = synoMap[oldSyno.parameter.id];
+      if (oldParameter.syntype !== 'functionParameter') {
+        throw new Error('wrong syntype from synomap (flow)');
+      }
+      oldName = oldParameter.name;
+    } else {
+      if (
+        oldSyno.syntype !== 'functionParameter' &&
+        oldSyno.syntype !== 'functionDefinition'
+      ) {
+        throw 'wrong syntype from synomap';
+      }
+      oldName = oldSyno.name;
+    }
+    const nameLength: number = oldName.length;
 
     if (oldState.charIndex > nameLength) {
       console.warn('ignoring navigation to previous sibling: already on last character');
@@ -42,10 +57,10 @@ export default (
   if (siblingRefz.length > 0) {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
       if (siblingRef.synoRef) {
-        // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
         return siblingRef.id === oldFocusedPresnoRef.id;
       } else {
-        // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
         return siblingRef.index === oldFocusedPresnoRef.index;
       }
     });

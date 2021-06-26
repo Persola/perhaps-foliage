@@ -11,11 +11,8 @@ import type { SideEffectFunction } from './types/side-effect-function'
 
 import createInterpretForStore from './extension-staging-area/saliva/interpreter/create-interpret-for-store.js'
 
-// $FlowFixMe
 require('./stylesheet.sass');
-// $FlowFixMe
 require('./extension-staging-area/saliva/stylesheet.sass');
-// $FlowFixMe
 require('./extension-staging-area/pantheon/stylesheet.sass');
 
 const interpret: SideEffectFunction = createInterpretForStore(editorStateStore);

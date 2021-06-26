@@ -1,15 +1,5 @@
 // @flow
-import type { SynoId } from '../../../../types/syno-id'
-import type { SynoRef } from '../../../../types/syno-ref'
-import type { Olympian } from './Olympian'
+import type { TitanPresAttrs } from './presno-attrs/titan-attrs'
+import type { CorePresnoAttrs } from './core-presno-attrs'
 
-export type Titan = {
-  syntype: 'titan',
-  name: string,
-  child: (Olympian | false),
-  synoId: string,
-  focused: boolean,
-  presnoFocused: (number | false),
-  charFocused: (number | false),
-  valid: boolean
-}
+export type TitanPres = TitanPresAttrs & CorePresnoAttrs

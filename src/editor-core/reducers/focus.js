@@ -13,13 +13,23 @@ import type { SynoMap } from '../../types/syno-map'
 import type { ReduxAction } from '../../types/redux-action'
 import type { GrammarName } from '../../types/editor-state/grammar-name'
 
+const getOldParent = (oldFocusedPresnoRef, synoMap) => {
+  let oldParent: (Syno | false);
+  if (oldFocusedPresnoRef.synoRef) {
+    const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
+    oldParent = oldFocusedPresno.parent && synoMap[oldFocusedPresno.parent.id];
+  } else {
+    oldParent = synoMap[oldFocusedPresnoRef.parent.id];
+  }
+  return oldParent;
+};
+
 export default (
   oldState: Focus,
   action: ReduxAction,
   synoMap: SynoMap,
   grammarName: GrammarName
 ): Focus => {
-  const { direction, oldFocusedPresnoRef } = action;
   switch (action.type) {
     case 'REPLACE_FOCUSED_SYNO': {
       return {
@@ -31,31 +41,10 @@ export default (
     case 'END_INTERPRETATION': {
       return oldState;
     }
-    case 'NAVIGATE':
-    case 'DESTROY_FOCUSED_SYNO': {
+    case 'NAVIGATE': {
+      const { direction, oldFocusedPresnoRef } = action;
       // needs parent and self, or their children ids
-      let oldParent: (Syno | false);
-      if (oldFocusedPresnoRef.synoRef) {
-        const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
-        oldParent = oldFocusedPresno.parent && synoMap[oldFocusedPresno.parent.id];
-      } else {
-        oldParent = synoMap[oldFocusedPresnoRef.parent.id];
-      }
-
-      if (action.type === 'DESTROY_FOCUSED_SYNO') {
-        const oldFocusedPresno = synoMap[action.oldFocusedPresnoRef.id]
-        if (
-          oldFocusedPresno.parent === false ||
-          oldFocusedPresno.id === NorPrimitiveId || (
-            oldFocusedPresno.parent &&
-            oldFocusedPresno.parent.id == NorPrimitiveId
-          )
-        ) {
-          console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
-          return oldState;
-        }
-        return navOut(oldFocusedPresnoRef, synoMap, oldState)
-      }
+      const oldParent = getOldParent(oldFocusedPresnoRef, synoMap);
 
       switch (direction) { // NAVIGATE
         case 'out': {
@@ -75,6 +64,28 @@ export default (
         }
       }
     }
+    case 'DESTROY_FOCUSED_SYNO': {
+      const { oldFocusedPresnoRef } = action;
+      // needs parent and self, or their children ids
+      const oldParent = getOldParent(oldFocusedPresnoRef, synoMap);
+
+      if (action.oldFocusedPresnoRef.synoRef !== true) {
+        throw new TypeError('DESTROY_FOCUSED_SYNO action recieved while not focused on syno level');
+      }
+
+      const oldFocusedPresno = synoMap[action.oldFocusedPresnoRef.id]
+      if (
+        oldFocusedPresno.parent === false ||
+        oldFocusedPresno.id === NorPrimitiveId || (
+          oldFocusedPresno.parent &&
+          oldFocusedPresno.parent.id == NorPrimitiveId
+        )
+      ) {
+        console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
+        return oldState;
+      }
+      return navOut(oldFocusedPresnoRef, synoMap, oldState)
+    }
     case 'SET_FOCUS_SYNO': {
       const { synoId } = action;
       return {
@@ -87,6 +98,10 @@ export default (
       return oldState;
     }
     case 'CHAR_BACKSPACE': {
+      if (oldState.charIndex === false) {
+        throw new TypeError('CHAR_BACKSPACE action recieved while not focused on text syno');
+      }
+      
       if (oldState.charIndex === 0) {
         return oldState;
       }

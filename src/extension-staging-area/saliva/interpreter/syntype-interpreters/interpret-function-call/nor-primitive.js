@@ -19,7 +19,7 @@ const nor = (
   }
 }
 
-export default (argumentz: any): InterpretationResolution => {
+export default (argumentz: BooleanLiteral[]): InterpretationResolution => {
   if (argumentz.length !== 2) {
     return {
       success: false,

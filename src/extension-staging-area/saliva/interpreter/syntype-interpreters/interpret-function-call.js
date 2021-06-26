@@ -13,7 +13,7 @@ const generateScope = (resolvedCallee, interpretedArgs, getSyno) => {
   const interpreteeScope = [];
   const params = resolvedCallee.parameters.map(paramRef => getSyno(paramRef));
   params.forEach(param => {
-    const matchingPair = interpretedArgs.find(argRes => argRes[0].parameter.id === param.id);
+    const matchingPair = interpretedArgs.find(argRes => argRes[0].parameter && (argRes[0].parameter.id === param.id));
     if (matchingPair === undefined) { throw new Error }
     interpreteeScope.push([param, matchingPair[1]]);
   });
@@ -98,7 +98,8 @@ export default (
         throw new Error;
       }
     })
-    functionResolution = norPrimitive(interpretedArgs.map(argRes => argRes[1]));
+    const argValues: BooleanLiteral[] = interpretedArgs.map(argRes => argRes[1]);
+    functionResolution = norPrimitive(argValues);
   } else {
     functionResolution = interpreter(
       getSyno(resolvedCallee.body),

@@ -6,6 +6,8 @@ import type { EndInterpretation } from './actions/end-interpretation'
 import type { Navigate } from './actions/navigate'
 import type { SetFocusSyno } from './actions/set-focus-syno'
 import type { StartInterpretation } from './actions/start-interpretation'
+import type { CharBackspace } from './actions/char-backspace'
+import type { DestroyFocusedSyno } from './actions/destroy-focused-syno'
 
 export type ReduxAction = (
   | Init
@@ -15,4 +17,6 @@ export type ReduxAction = (
   | Navigate
   | SetFocusSyno
   | StartInterpretation
+  | CharBackspace
+  | DestroyFocusedSyno
 )

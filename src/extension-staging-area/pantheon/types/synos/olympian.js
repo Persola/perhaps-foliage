@@ -5,5 +5,6 @@ import type { SynoRef } from '../../../../types/syno-ref'
 export type Olympian = {
   id: SynoId,
   parent: SynoRef,
+  child: SynoRef,
   name: string
 }

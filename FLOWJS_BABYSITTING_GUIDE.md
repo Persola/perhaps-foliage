@@ -14,3 +14,38 @@ refining types is mandatory inside callbacks:
 } -->
 
 Flow's got whack types for some native functions
+
+I turned:
+  if (![
+    'functionDefinition',
+    'functionParameter'
+  ].includes(textHostSyno.syntype)) {
+into:
+  if (
+    textHostSyno.syntype !== 'functionDefinition' &&
+    textHostSyno.syntype !== 'functionParameter'
+  ) {
+...and it worked. I guess because they're worried includes modifies? 
+
+
+to do:
+  * shrinkwrap to immutability among existing types
+    * exact object types
+      * Explicit inexact object types
+    * read-only object properties
+    * read-only collections (array, tuple)
+    * prefer map to object
+  * wall in synoMap and similar objects (when necessary after map and read-only conversions) using a predicate function helper
+  * remove unnecessary lingering type checks, after hardening types (search for '(flow)' in comments)
+  * NOTE: For new code prefer any or (...args: Array<any>) => any. Function has become an alias to any and will be deprecated and removed in a future version of Flow.
+  * NOTE: For new code, prefer any or { [key: string]: any}. Object is an alias to any and will be deprecated and removed in a future version of Flow.
+
+to understand:
+  * what is first curly brackets in this syntax from docs: function acceptsMaybeProp({ value }: { value: ?number }) {
+
+reminders:
+  * predicate functions
+    * 'You can fix this by making truthy a predicate function, by using the %checks annotation like so:''
+  * $ReadOnlyArray’s type parameter is covariant while Array’s type parameter is invariant
+  * known unsoundness:
+    * Array access is unsafe

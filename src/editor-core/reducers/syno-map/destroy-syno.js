@@ -1,10 +1,10 @@
 // @flow
 import type { SynoMap } from '../../../types/syno-map'
 import type { InverseReferenceMap } from '../../../types/editor-state/inverse-reference-map'
-import type { ReduxAction } from '../../../types/redux-action'
+import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno'
 
 export default (
-  action: ReduxAction,
+  action: DestroyFocusedSyno,
   newSynoMap: SynoMap,
   oldState: SynoMap,
   inverseReferenceMap: InverseReferenceMap
@@ -12,10 +12,16 @@ export default (
   // TODO: delete orphaned children from store
   // TODO: and references outside parent in general (need backwards reference reference?)
   const { focusedPresnoId } = action;
-
-  delete newSynoMap[focusedPresnoId];
+  
 
   const parentRef = oldState[focusedPresnoId].parent;
+  if (parentRef === false) {
+    console.warn('ignoring attempted deletion of root syno');
+    return oldState;
+  }
+  
+  delete newSynoMap[focusedPresnoId];
+
   // const newParent = newSynoMap[parentRef.id];
   const referrerIds = new Set([parentRef.id]);
   for (let referrerId of inverseReferenceMap[focusedPresnoId]) {

@@ -1,11 +1,11 @@
 // @flow
 
 export default {
-  0: {
+  '0': {
     syntype: 'booleanLiteral',
     value: false
   },
-  1: {
+  '1': {
     syntype: 'booleanLiteral',
     value: true
   },

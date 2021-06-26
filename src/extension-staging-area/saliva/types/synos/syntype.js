@@ -5,5 +5,5 @@ export type Syntype = (
   | 'functionDefinition'
   | 'variableRef'
   | 'functionParameter'
-  | 'functionArgument'
+  | 'argument'
 )

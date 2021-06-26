@@ -35,10 +35,10 @@ export default (
   if (siblingRefz.length > 0) {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
       if (siblingRef.synoRef) {
-        // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
         return siblingRef.id === oldFocusedPresnoRef.id;
       } else {
-        // $FlowFixMe (Flow's disjoint union refinement is like that of a little baby)
+        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
         return siblingRef.index === oldFocusedPresnoRef.index;
       }
     });

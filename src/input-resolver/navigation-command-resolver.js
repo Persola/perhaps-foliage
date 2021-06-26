@@ -7,14 +7,16 @@ export default (key: string, editorState: EditorState) => {
   if (editorState.focus.presnoIndex === false) {
     oldFocusedPresnoRef = {
       synoRef: true,
-      id: editorState.focus.synoId
+      id: editorState.focus.synoId,
+      relation: 'non-tree'
     };
   } else {
     oldFocusedPresnoRef = {
       synoRef: false,
       parent: {
         synoRef: true,
-        id: editorState.focus.synoId
+        id: editorState.focus.synoId,
+        relation: 'parent'
       },
       index: 0
     }

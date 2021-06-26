@@ -1,8 +1,6 @@
 // @flow
 
 export default <Type>(value: Type): Type => {
-  return JSON.parse(
-    // $FlowFixMe
-    JSON.stringify(value)
-  )
+  const jsond = JSON.stringify(value);
+  return (jsond === undefined ? jsond : JSON.parse(jsond));
 }

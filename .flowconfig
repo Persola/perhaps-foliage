@@ -6,5 +6,6 @@
 
 [options]
 module.name_mapper.extension='yml' -> '<PROJECT_ROOT>/stub.js.flow'
+module.name_mapper.extension='sass' -> '<PROJECT_ROOT>/stub.js.flow'
 
 [lints]

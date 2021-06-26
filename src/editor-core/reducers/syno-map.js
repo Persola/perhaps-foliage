@@ -16,7 +16,7 @@ export default (
   oldState: SynoMap,
   action: ReduxAction,
   inverseReferenceMap: InverseReferenceMap,
-  textHostRefs
+  textHostRefs: TextHostRefs
 ): SynoMap => {
   const newSynoMap: SynoMap = dup(oldState);
 
@@ -25,23 +25,26 @@ export default (
       const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
       const parentRef = oldState[focusedPresnoId].parent;
 
-      let parentAttr: SynoRef;
+      let parentAttr: (SynoRef | false);
       if (!parentRef) {
         parentAttr = false;
       } else {
         const parent: Syno = oldState[parentRef.id];
-        let childKey: string;
-        let childIndex: number;
-        forChildSynoOf(parent, (childRef, key, index) => {
+        let childKey: (string | false) = false;
+        let childIndex: (number | false) = false;
+        forChildSynoOf(parent, (childRef: SynoRef, key: string, index: ?number) => {
           if (childRef.id === focusedPresnoId) {
             childKey = key;
-            childIndex = index;
+            childIndex = index || false;
           }
         });
         // should remove any uneeded (i.e., deleted) nodes from store
         const newParent = newSynoMap[parent.id];
 
-        if (childIndex !== undefined) {
+        if (
+          typeof childIndex === 'number' &&
+          typeof childKey === 'string'
+        ) {
           newParent[childKey].splice(
             childIndex,
             1,
@@ -51,17 +54,20 @@ export default (
               id: newSynoId
             }
           );
-        } else {
+        } else if (typeof childKey === 'string') {
           newParent[childKey] = {
             synoRef: true,
             relation: 'child',
             id: newSynoId
           }
+        } else {
+          throw new Error(`syno had parent which did not have them as a child`);
         }
 
         parentAttr = {
           synoRef: true,
-          id: parentRef.id
+          id: parentRef.id,
+          relation: 'parent'
         }
       }
 
@@ -70,7 +76,7 @@ export default (
         parent: parentAttr
       });
       if (Object.keys(newSynoMap).includes(newSynoId)) {
-        throw new error('tried to create syno with in-use ID');
+        throw new Error('tried to create syno with in-use ID');
       };
       newSynoMap[newSynoId] = newSyno;
 
@@ -107,6 +113,12 @@ export default (
         textHostSyno = newSynoMap[focusSyno[textHostSynoRef].id];
       }
 
+      if (
+        textHostSyno.syntype !== 'functionDefinition' &&
+        textHostSyno.syntype !== 'functionParameter'
+      ) {
+        throw new Error('text hosts refs lead to syno of wrong type? (flow)');
+      }
       textHostSyno.name = (
         textHostSyno.name.slice(0, action.focusCharIndex - 1) +
         textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)

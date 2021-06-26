@@ -10,13 +10,13 @@ import type { PresnoRef } from '../../../types/presenter/presno-ref'
 import type { FunctionDefPres } from '../types/presentations/function-definition'
 
 type Props = {
-  grammar: GrammarName,
+  grammarName: GrammarName,
   getPresno: (SynoId) => Presno,
   presno: FunctionDefPres
 }
 
 export default (props: Props) => {
-  const { grammar, getPresno, presno } = props;
+  const { grammarName, getPresno, presno } = props;
   const { name, focused, presnoFocused, charFocused, valid } = presno;
   const parameters: PresnoRef[] = presno.parameters;
   const classes = `syno function-definition ${presno.focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
@@ -31,13 +31,13 @@ export default (props: Props) => {
       {
         parameters.map(paramRef => {
           return(
-            <SyntacticNode grammar={grammar} key={paramRef.id} getPresno={getPresno} synoId={paramRef.id} />
+            <SyntacticNode grammarName={grammarName} key={paramRef.id} getPresno={getPresno} synoId={paramRef.id} />
           )
         })
       }
       {
         presno.body &&
-          <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={presno.body.id} />
+          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={presno.body.id} />
       }
     </div>
   );

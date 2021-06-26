@@ -4,6 +4,7 @@ import pantheonPresenters from '../../extension-staging-area/pantheon/presenters
 
 import type { Syno } from '../../types/syno.js'
 import type { SynoId } from '../../types/syno-id.js'
+import type { Presno } from '../../types/presenter/presno.js'
 import type { PresnoMap } from '../../types/presenter/presno-map.js'
 import type { Focus } from '../../types/editor-state/focus.js'
 import type { GrammarName } from '../../types/editor-state/grammar-name.js'
@@ -17,7 +18,7 @@ export default (
   grammar: GrammarName,
   presnoMap: PresnoMap,
   parentId: (SynoId | false),
-  syno: (Syno | false),
+  syno: (Syno),
   scope: {},
   getSyno: Function,
   focus: (Focus | false)
@@ -40,7 +41,7 @@ export default (
     id: parentId
   };
 
-  const presentation: any = Object.assign({}, presentationAttrs, {
+  const presentation: Presno = Object.assign({}, presentationAttrs, {
     synoId: syno.id,
     parent
   });

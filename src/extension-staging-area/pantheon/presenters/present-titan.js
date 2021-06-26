@@ -7,7 +7,7 @@ import type { PresnoRef } from '../../../types/presenter/presno-ref.js'
 import type { Focus } from '../../../types/editor-state/focus.js'
 import type { GrammarName } from '../../../types/editor-state/grammar-name.js'
 import type { Titan } from '../types/synos/titan.js'
-import type { TitanPres } from '../types/presentations/titan'
+import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-attrs'
 
 export default (
   grammar: GrammarName,
@@ -16,7 +16,7 @@ export default (
   scope: Object,
   getSyno: Function,
   focus: (Focus | false)
-): TitanPres => {
+): TitanPresAttrs => {
   return {
     syntype: 'titan',
     name: titan.name,

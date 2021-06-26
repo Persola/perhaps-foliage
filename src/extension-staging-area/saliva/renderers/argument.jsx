@@ -9,14 +9,14 @@ import type { SynoId } from '../../../types/syno-id'
 import type { ArgumentPres } from '../types/presentations/argument'
 
 type Props = {
-  grammar: GrammarName,
+  grammarName: GrammarName,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: ArgumentPres
 }
 
 export default (props: Props) => {
   const {
-    grammar,
+    grammarName,
     getPresno,
     presno: {
       focused,
@@ -39,7 +39,7 @@ export default (props: Props) => {
       }
       {
         value &&
-          <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={value.id} />
+          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={value.id} />
       }
     </div>
   );

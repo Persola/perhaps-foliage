@@ -9,14 +9,14 @@ import type { SynoId } from '../../../types/syno-id'
 import type { TitanPres } from '../types/presentations/titan'
 
 type Props = {
-  grammar: GrammarName,
+  grammarName: GrammarName,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: TitanPres
 }
 
 export default (props: Props) => {
   const {
-    grammar,
+    grammarName,
     getPresno,
     presno: {
       syntype,
@@ -40,7 +40,7 @@ export default (props: Props) => {
       }
       {
         child &&
-          <SyntacticNode grammar={grammar} getPresno={getPresno} synoId={child.id} />
+          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={child.id} />
       }
     </div>
   );

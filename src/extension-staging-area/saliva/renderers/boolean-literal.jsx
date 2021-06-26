@@ -8,13 +8,13 @@ import type { Presno } from '../../../types/presenter/presno'
 import type { BooleanLiteralPres } from '../types/presentations/boolean-literal'
 
 type Props = {
-  grammar: GrammarName,
+  grammarName: GrammarName,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: BooleanLiteralPres
 }
 
 export default (props: Props) => {
-  const { grammar, presno } = props;
+  const { grammarName, presno } = props;
   const { presnoFocused, charFocused, valid } = presno;
   if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');

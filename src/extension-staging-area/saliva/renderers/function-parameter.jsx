@@ -8,13 +8,13 @@ import type { Presno } from '../../../types/presenter/presno'
 import type { FunctionParameterPres } from '../types/presentations/function-parameter'
 
 type Props = {
-  grammar: GrammarName,
+  grammarName: GrammarName,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: FunctionParameterPres
 }
 
 export default (props: Props) => {
-  const { grammar, presno } = props;
+  const { grammarName, presno } = props;
   const { presnoFocused, charFocused } = presno;
   const classes = `syno same-line leaf bubble-even function-parameter ${presno.focused ? 'focused' : 'unfocused'}`;
 
