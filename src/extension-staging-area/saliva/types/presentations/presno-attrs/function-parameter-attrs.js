@@ -1,5 +1,5 @@
 // @flow
-import type { Syntype } from '../../synos/syntype.js'
+import type { Syntype } from '../../synos/syntype.js';
 
 export type FunctionParameterPresAttrs = {
   syntype: 'functionParameter',

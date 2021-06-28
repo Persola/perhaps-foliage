@@ -1,11 +1,11 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import type { ReduxAction } from '../../types/redux-action'
-import type { GrammarName } from '../../types/editor-state/grammar-name'
+import verifyActionType from './util/verify-action-type';
+import type { ReduxAction } from '../../types/redux-action';
+import type { GrammarName } from '../../types/editor-state/grammar-name';
 
 export default (
   oldState: GrammarName,
-  action: ReduxAction
+  action: ReduxAction,
 ): GrammarName => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
@@ -34,4 +34,4 @@ export default (
       return oldState;
     }
   }
-}
+};

@@ -1,13 +1,10 @@
 // @flow
-import presentSyno from '../../../presenter/presenters/present-syno.js'
-
-import type { SynoId } from '../../../types/syno-id.js'
-import type { PresnoMap } from '../../../types/presenter/presno-map.js'
-import type { PresnoRef } from '../../../types/presenter/presno-ref.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js'
-import type { Olympian } from '../types/synos/olympian'
-import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs'
+import type { PresnoMap } from '../../../types/presenter/presno-map.js';
+import type { PresentSyno } from '../../../types/presenter/present-syno.js';
+import type { Focus } from '../../../types/editor-state/focus.js';
+import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
+import type { Olympian } from '../types/synos/olympian';
+import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';
 
 export default (
   grammar: GrammarName,
@@ -15,9 +12,10 @@ export default (
   olympian: Olympian,
   scope: Object,
   getSyno: Function,
-  focus: (Focus | false)
+  focus: (Focus | false),
+  presentSyno: PresentSyno,
 ): OlympianPresAttrs => {
-  let valid = true;
+  const valid = true;
   let child;
   if (olympian.child) {
     child = {
@@ -29,8 +27,9 @@ export default (
         getSyno(olympian.child),
         scope,
         getSyno,
-        focus
-      )
+        focus,
+        presentSyno,
+      ),
     };
   }
 
@@ -42,6 +41,6 @@ export default (
     focused: focus && (olympian.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (olympian.id === focus.synoId) && focus.presnoIndex,
     charFocused: focus && (olympian.id === focus.synoId) && focus.charIndex,
-    valid
-  }
-}
+    valid,
+  };
+};

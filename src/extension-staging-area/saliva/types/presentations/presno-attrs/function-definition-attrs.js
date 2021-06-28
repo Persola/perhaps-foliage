@@ -1,5 +1,5 @@
 // @flow
-import type { PresnoRef } from '../../../../../types/presenter/presno-ref'
+import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
 
 export type FunctionDefPresAttrs = {
   syntype: 'functionDefinition',

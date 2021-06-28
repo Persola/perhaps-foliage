@@ -1,16 +1,14 @@
 // @flow
-import presentSyno from '../../../presenter/presenters/present-syno.js'
+import NorPrimitiveId from '../nor-primitive-id.js';
+import presentParameters from './present-parameters.js';
 
-import NorPrimitiveId from '../nor-primitive-id.js'
-import presentParameters from './present-parameters.js'
-
-import type { SynoId } from '../../../types/syno-id'
-import type { PresnoMap } from '../../../types/presenter/presno-map.js'
-import type { PresnoRef } from '../../../types/presenter/presno-ref.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js'
-import type { FunctionDefinition } from '../types/synos/function-definition.js'
-import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs.js'
+import type { PresnoMap } from '../../../types/presenter/presno-map.js';
+import type { PresentSyno } from '../../../types/presenter/present-syno.js';
+import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
+import type { Focus } from '../../../types/editor-state/focus.js';
+import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
+import type { FunctionDefinition } from '../types/synos/function-definition.js';
+import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs.js';
 
 export default (
   grammar: GrammarName,
@@ -18,10 +16,11 @@ export default (
   funkshunDef: FunctionDefinition,
   scope: {},
   getSyno: Function,
-  focus: (Focus | false)
+  focus: (Focus | false),
+  presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
   let valid = true;
-  let body: (PresnoRef | false)  = false;
+  let body: (PresnoRef | false) = false;
   if (!funkshunDef.body) {
     if (funkshunDef.id !== NorPrimitiveId) {
       valid = false;
@@ -36,8 +35,9 @@ export default (
         getSyno(funkshunDef.body),
         scope,
         getSyno,
-        focus
-      )
+        focus,
+        presentSyno,
+      ),
     };
   }
 
@@ -51,12 +51,13 @@ export default (
       funkshunDef.parameters,
       scope,
       getSyno,
-      focus
+      focus,
+      presentSyno,
     ),
     focused: focus && (funkshunDef.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (funkshunDef.id === focus.synoId) && focus.presnoIndex,
     charFocused: focus && (funkshunDef.id === focus.synoId) && focus.charIndex,
     body,
-    valid
-  }
-}
+    valid,
+  };
+};

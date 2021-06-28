@@ -1,5 +1,5 @@
 // @flow
-import type { ChildPresnoRef } from '../child-presno-ref'
+import type { ChildPresnoRef } from '../child-presno-ref';
 
 export type Navigate = {
   type: 'NAVIGATE',

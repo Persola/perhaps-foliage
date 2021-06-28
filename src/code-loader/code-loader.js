@@ -1,9 +1,9 @@
-// @noflow because requires don't fit their types
-import type { Syno } from '../types/syno';
-import type { FunctionCall } from '../types/synos/function-call.js'
+// @flow
+import type { SynoMap } from '../types/syno-map';
+import type { FunctionCall } from '../extension-staging-area/saliva/types/synos/function-call';
 
-import graphValidator from './graph-validator.js'
-import grammarValidator from './grammar-validator.js'
+import graphValidator from './graph-validator.js';
+import grammarValidator from './grammar-validator.js';
 
 const salivaGrammar: FunctionCall = require('../extension-staging-area/saliva/grammar.yml');
 const salivaPrimitives: FunctionCall = require('../extension-staging-area/saliva/primitives.yml');
@@ -25,22 +25,26 @@ const validateSyntax = (graphName, graph, grammarName, grammar) => {
   }
 };
 
-export default (name: string): Syno => {
+export default (name: string): SynoMap => {
   switch (name) {
     case 'salivaPrimitives': {
       validateSyntax(name, salivaPrimitives, 'saliva', salivaGrammar);
+      // $FlowFixMe: syntax validation is not satisfying flow
       return salivaPrimitives;
     }
     case 'falseLiteral': {
       validateSyntax(name, falseLiteral, 'saliva', salivaGrammar);
+      // $FlowFixMe: syntax validation is not satisfying flow
       return falseLiteral;
     }
     case 'proxyNorCall': {
       validateSyntax(name, proxyNorCall, 'saliva', salivaGrammar);
+      // $FlowFixMe: syntax validation is not satisfying flow
       return proxyNorCall;
     }
     case 'pantheon': {
       validateSyntax(name, pantheon, 'pantheon', pantheonGrammar);
+      // $FlowFixMe: syntax validation is not satisfying flow
       return pantheon;
     }
     default: {

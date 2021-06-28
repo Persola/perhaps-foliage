@@ -1,5 +1,5 @@
 // @flow
-import type { SynoRef } from './syno-ref'
+import type { SynoRef } from './syno-ref';
 
 export type NamePartRef = {
   synoRef: false,

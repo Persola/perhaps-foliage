@@ -1,26 +1,25 @@
 // @flow
-import React from 'react';
-import NamePart from '../../../renderer/components/vis/name-part.jsx'
+import * as React from 'react';
+import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { SynoId } from '../../../types/syno-id'
-import type { GrammarName } from '../../../types/editor-state/grammar-name'
-import type { Presno } from '../../../types/presenter/presno'
-import type { BooleanLiteralPres } from '../types/presentations/boolean-literal'
+import type { BooleanLiteralRendererProps } from '../types/renderers/boolean-literal-props';
 
-type Props = {
-  grammarName: GrammarName,
-  getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
-  presno: BooleanLiteralPres
-}
-
-export default (props: Props) => {
-  const { grammarName, presno } = props;
-  const { presnoFocused, charFocused, valid } = presno;
+export default (props: BooleanLiteralRendererProps) => {
+  const { presno } = props;
+  const { valid } = presno;
   if (presno.syntype !== 'booleanLiteral') {
     throw new Error('non-boolean masquerading as boolean');
   }
 
-  const classes = `syno same-line leaf bubble-even boolean-literal ${presno.focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`
+  const classes = [
+    'syno',
+    'same-line',
+    'leaf',
+    'bubble-even',
+    'boolean-literal',
+    (presno.focused ? 'focused' : 'unfocused'),
+    (valid ? '' : 'invalid'),
+  ].join(' ');
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>

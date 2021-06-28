@@ -1,48 +1,63 @@
 // @flow
-import React from 'react';
-import SyntacticNode from '../../../renderer/components/syntactic-node.jsx'
-import NamePart from '../../../renderer/components/vis/name-part.jsx'
+import * as React from 'react';
+import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { SynoId } from '../../../types/syno-id'
-import type { GrammarName } from '../../../types/editor-state/grammar-name'
-import type { Presno } from '../../../types/presenter/presno'
-import type { PresnoRef } from '../../../types/presenter/presno-ref'
-import type { FunctionCallPres } from '../types/presentations/function-call'
+import type { FunctionCallRendererProps } from '../types/renderers/function-call-props';
+import type { SynoId } from '../../../types/syno-id';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { Presno } from '../../../types/presenter/presno';
+import type { PresnoRef } from '../../../types/presenter/presno-ref';
+import type { SynoRendererProps } from '../../../types/syno-renderer-props';
 
-type Props = {
+const argumentEls = (
   grammarName: GrammarName,
   getPresno: (SynoId) => Presno,
-  presno: FunctionCallPres
-}
+  argumentz: PresnoRef[],
+  SynoRenderer: (props: SynoRendererProps) => React.Node,
+) => (
+  argumentz.map((argRef: PresnoRef, ind) => (
+    <SynoRenderer
+      grammarName={grammarName}
+      key={`arg_${ind + 1}`}
+      getPresno={getPresno}
+      synoId={argRef.id}
+      SynoRenderer={SynoRenderer}
+    />
+  ))
+);
 
-const argumentEls = (grammarName: GrammarName, getPresno: (SynoId) => Presno, argumentz: PresnoRef[]) => {
-  return (
-    argumentz.map((argRef: PresnoRef, ind) => {
-      return (
-        <SyntacticNode grammarName={grammarName} key={`arg_${ind + 1}`} getPresno={getPresno} synoId={argRef.id} />
-      )
-    })
-  );
-}
-
-export default (props: Props) => {
-  const { grammarName, getPresno, presno } = props;
+export default (props: FunctionCallRendererProps) => {
+  const { grammarName, getPresno, presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
-  const { name, callee, resolved, focused, valid } = presno;
+  const {
+    name, callee, resolved, focused, valid,
+  } = presno;
 
-  const argumentz = argumentEls(grammarName, getPresno, presno.argumentz);
-  const classes = `syno ${resolved ? 'function-call' : 'unresolved'} ${focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
+  const argumentz = argumentEls(grammarName, getPresno, presno.argumentz, SynoRenderer);
+  const classes = [
+    'syno',
+    (resolved ? 'function-call' : 'unresolved'),
+    (focused ? 'focused' : 'unfocused'),
+    (valid ? '' : 'invalid'),
+  ].join(' ');
 
   return (
     <div className={classes} data-syno-id={presno.synoId}>
       {
-        name &&
-          <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
+        name
+          && <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
       }
       { argumentz }
       {
-        callee &&
-          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={callee.id} />
+        callee
+          && (
+            <SynoRenderer
+              grammarName={grammarName}
+              getPresno={getPresno}
+              synoId={callee.id}
+              SynoRenderer={SynoRenderer}
+            />
+          )
       }
     </div>
   );

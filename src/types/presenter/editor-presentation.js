@@ -1,5 +1,5 @@
 // @flow
-import type { Prestree } from './prestree'
+import type { Prestree } from './prestree';
 
 export type EditorPresentation = {
   stage: (Prestree | false),

@@ -1,10 +1,8 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-export default () => {
-  return (
-    <div className="outdated-message">
-      outdated
-    </div>
-  );
-};
+export default () => (
+  <div className="outdated-message">
+    outdated
+  </div>
+);

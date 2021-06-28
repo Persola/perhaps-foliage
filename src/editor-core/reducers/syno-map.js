@@ -1,22 +1,22 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import destroySyno from './syno-map/destroy-syno'
-import forChildSynoOf from '../../syntree-utils/for-child-syno-of.js'
-import dup from '../../syntree-utils/dup.js'
-import NorPrimitiveId from '../../extension-staging-area/saliva/nor-primitive-id.js'
+import verifyActionType from './util/verify-action-type';
+import destroySyno from './syno-map/destroy-syno';
+import forChildSynoOf from '../../syntree-utils/for-child-syno-of.js';
+import dup from '../../syntree-utils/dup.js';
+import NorPrimitiveId from '../../extension-staging-area/saliva/nor-primitive-id.js';
 
-import type { Syno } from '../../types/syno'
-import type { SynoMap } from '../../types/syno-map'
-import type { SynoRef } from '../../types/syno-ref'
-import type { ReduxAction } from '../../types/redux-action'
-import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map'
-import type { TextHostRefs } from '../../types/editor-state/text-host-refs'
+import type { Syno } from '../../types/syno';
+import type { SynoMap } from '../../types/syno-map';
+import type { SynoRef } from '../../types/syno-ref';
+import type { ReduxAction } from '../../types/redux-action';
+import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map';
+import type { TextHostRefs } from '../../types/editor-state/text-host-refs';
 
 export default (
   oldState: SynoMap,
   action: ReduxAction,
   inverseReferenceMap: InverseReferenceMap,
-  textHostRefs: TextHostRefs
+  textHostRefs: TextHostRefs,
 ): SynoMap => {
   const newSynoMap: SynoMap = dup(oldState);
 
@@ -42,8 +42,8 @@ export default (
         const newParent = newSynoMap[parent.id];
 
         if (
-          typeof childIndex === 'number' &&
-          typeof childKey === 'string'
+          typeof childIndex === 'number'
+          && typeof childKey === 'string'
         ) {
           newParent[childKey].splice(
             childIndex,
@@ -51,33 +51,34 @@ export default (
             {
               synoRef: true,
               relation: 'child',
-              id: newSynoId
-            }
+              id: newSynoId,
+            },
           );
         } else if (typeof childKey === 'string') {
           newParent[childKey] = {
             synoRef: true,
             relation: 'child',
-            id: newSynoId
-          }
+            id: newSynoId,
+          };
         } else {
-          throw new Error(`syno had parent which did not have them as a child`);
+          throw new Error('syno had parent which did not have them as a child');
         }
 
         parentAttr = {
           synoRef: true,
           id: parentRef.id,
-          relation: 'parent'
-        }
+          relation: 'parent',
+        };
       }
 
-      const newSyno = Object.assign({}, newSynoAttrs, {
+      const newSyno = {
+        ...newSynoAttrs,
         id: newSynoId,
-        parent: parentAttr
-      });
+        parent: parentAttr,
+      };
       if (Object.keys(newSynoMap).includes(newSynoId)) {
         throw new Error('tried to create syno with in-use ID');
-      };
+      }
       newSynoMap[newSynoId] = newSyno;
 
       return newSynoMap;
@@ -114,14 +115,14 @@ export default (
       }
 
       if (
-        textHostSyno.syntype !== 'functionDefinition' &&
-        textHostSyno.syntype !== 'functionParameter'
+        textHostSyno.syntype !== 'functionDefinition'
+        && textHostSyno.syntype !== 'functionParameter'
       ) {
         throw new Error('text hosts refs lead to syno of wrong type? (flow)');
       }
       textHostSyno.name = (
-        textHostSyno.name.slice(0, action.focusCharIndex - 1) +
-        textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)
+        textHostSyno.name.slice(0, action.focusCharIndex - 1)
+        + textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)
       );
 
       return newSynoMap;
@@ -129,10 +130,10 @@ export default (
     case 'DESTROY_FOCUSED_SYNO': {
       const { focusedPresnoId } = action;
       if (
-        oldState[focusedPresnoId].parent === false ||
-        focusedPresnoId === NorPrimitiveId || (
-          oldState[focusedPresnoId].parent &&
-          oldState[focusedPresnoId].parent.id == NorPrimitiveId
+        oldState[focusedPresnoId].parent === false
+        || focusedPresnoId === NorPrimitiveId || (
+          oldState[focusedPresnoId].parent
+          && oldState[focusedPresnoId].parent.id === NorPrimitiveId
         )
       ) {
         console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
@@ -146,4 +147,4 @@ export default (
       return oldState;
     }
   }
-}
+};

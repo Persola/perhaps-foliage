@@ -1,17 +1,17 @@
 // @flow
-import getChildPresnoRefs from './get-child-presno-refs'
-import type { Focus } from '../../../../types/editor-state/focus'
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref'
-import type { SynoMap } from '../../../../types/syno-map'
-import type { Syno } from '../../../../types/syno'
-import type { GrammarName } from '../../../../types/editor-state/grammar-name'
+import getChildPresnoRefs from './get-child-presno-refs';
+import type { Focus } from '../../../../types/editor-state/focus';
+import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
+import type { SynoMap } from '../../../../types/syno-map';
+import type { Syno } from '../../../../types/syno';
+import type { GrammarName } from '../../../../types/editor-state/grammar-name';
 
 export default (
   oldFocusedPresnoRef: ChildPresnoRef,
   synoMap: SynoMap,
   oldParent: (Syno | false),
   oldState: Focus,
-  grammarName: GrammarName
+  grammarName: GrammarName,
 ): Focus => {
   if (!oldParent) {
     console.warn('ignoring navigation to previous sibling: focus syno is root');
@@ -27,7 +27,7 @@ export default (
     return {
       synoId: oldState.synoId,
       presnoIndex: oldState.presnoIndex,
-      charIndex: oldState.charIndex - 1
+      charIndex: oldState.charIndex - 1,
     };
   }
 
@@ -37,10 +37,9 @@ export default (
       if (siblingRef.synoRef) {
         // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
         return siblingRef.id === oldFocusedPresnoRef.id;
-      } else {
-        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
-        return siblingRef.index === oldFocusedPresnoRef.index;
       }
+      // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
+      return siblingRef.index === oldFocusedPresnoRef.index;
     });
     if (oldFocusedPresnoBirthOrder === -1) {
       throw new Error("cannot find old focused presno ID among parent's children");
@@ -54,17 +53,16 @@ export default (
         return {
           synoId: newFocusPresnoRef.id,
           presnoIndex: false,
-          charIndex: false
-        };
-      } else {
-        return {
-          synoId: oldParent.id,
-          presnoIndex: 0,
-          charIndex: false
+          charIndex: false,
         };
       }
+      return {
+        synoId: oldParent.id,
+        presnoIndex: 0,
+        charIndex: false,
+      };
     }
   } else {
     throw new Error('navigate failed; parent has no children!?');
   }
-}
+};

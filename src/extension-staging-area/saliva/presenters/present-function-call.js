@@ -1,18 +1,17 @@
 // @flow
-import presentSyno from '../../../presenter/presenters/present-syno.js'
+import presentArguments from './present-arguments.js';
+import NorPrimitiveId from '../nor-primitive-id.js';
+import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
-import presentArguments from './present-arguments.js'
-import NorPrimitiveId from '../nor-primitive-id.js'
-import argumentParameterMismatch from '../utils/argument-parameter-mismatch'
-
-import type { PresnoRef } from '../../../types/presenter/presno-ref.js'
-import type { PresnoMap } from '../../../types/presenter/presno-map.js'
-import type { Focus } from '../../../types/editor-state/focus.js'
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js'
-import type { FunctionCall } from '../types/synos/function-call.js'
-import type { FunctionDefinition } from '../types/synos/function-definition.js'
-import type { VariableRef } from '../types/synos/variable-ref.js'
-import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs.js'
+import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
+import type { PresnoMap } from '../../../types/presenter/presno-map.js';
+import type { PresentSyno } from '../../../types/presenter/present-syno.js';
+import type { Focus } from '../../../types/editor-state/focus.js';
+import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
+import type { FunctionCall } from '../types/synos/function-call.js';
+import type { FunctionDefinition } from '../types/synos/function-definition.js';
+import type { VariableRef } from '../types/synos/variable-ref.js';
+import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs.js';
 
 export default (
   grammar: GrammarName,
@@ -20,7 +19,8 @@ export default (
   funkshunCall: FunctionCall,
   scope: {},
   getSyno: Function,
-  focus: (Focus | false)
+  focus: (Focus | false),
+  presentSyno: PresentSyno,
 ): FunctionCallPresAttrs => {
   let valid = true;
   let name: (string | false) = false;
@@ -28,7 +28,7 @@ export default (
   let resolved: boolean = false;
 
   if (!funkshunCall.callee) {
-    valid = false; 
+    valid = false;
   } else {
     const calleeSyno: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
     if (calleeSyno.syntype === 'functionDefinition') {
@@ -38,11 +38,11 @@ export default (
       }
 
       if (argumentParameterMismatch(
-          calleeSyno,
-          funkshunCall.argumentz.map(arg => getSyno(arg)),
-          getSyno
+        calleeSyno,
+        funkshunCall.argumentz.map(arg => getSyno(arg)),
+        getSyno,
       )) {
-        valid = false; 
+        valid = false;
       }
 
       if (funkshunCall.callee.relation === 'child') {
@@ -55,9 +55,10 @@ export default (
             calleeSyno,
             scope,
             getSyno,
-            focus
-          )
-        }
+            focus,
+            presentSyno,
+          ),
+        };
       }
     } else if (calleeSyno.syntype === 'variableRef') { // Never Been Run (1999)
       throw new Error("Function never did have they ever had a been having them a variableRef 'afore.");
@@ -92,16 +93,17 @@ export default (
       grammar,
       presnoMap,
       funkshunCall.id,
-      funkshunCall.argumentz, 
+      funkshunCall.argumentz,
       scope,
       getSyno,
-      focus
+      focus,
+      presentSyno,
     ),
     callee,
     resolved,
     focused,
     presnoFocused,
     charFocused,
-    valid
-  }
-}
+    valid,
+  };
+};

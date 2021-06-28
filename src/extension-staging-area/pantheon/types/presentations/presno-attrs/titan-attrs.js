@@ -1,7 +1,5 @@
 // @flow
-import type { SynoId } from '../../../../../types/syno-id'
-import type { SynoRef } from '../../../../../types/syno-ref'
-import type { PresnoRef } from '../../../../../types/presenter/presno-ref'
+import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
 
 export type TitanPresAttrs = {
   syntype: 'titan',

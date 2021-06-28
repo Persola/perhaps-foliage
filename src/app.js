@@ -3,13 +3,13 @@ import Mousetrap from 'mousetrap';
 import Presenter from './presenter/presenter.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-core/editor-state-store.js';
-import createInputResolver from './input-resolver/create-input-resolver.js'
-import createFocusSyno from './create-focus-syno.js'
-import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js'
+import createInputResolver from './input-resolver/create-input-resolver.js';
+import createFocusSyno from './create-focus-syno.js';
+import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js';
 
-import type { SideEffectFunction } from './types/side-effect-function'
+import type { SideEffectFunction } from './types/side-effect-function';
 
-import createInterpretForStore from './extension-staging-area/saliva/interpreter/create-interpret-for-store.js'
+import createInterpretForStore from './extension-staging-area/saliva/interpreter/create-interpret-for-store.js';
 
 require('./stylesheet.sass');
 require('./extension-staging-area/saliva/stylesheet.sass');
@@ -27,19 +27,19 @@ const initializeMousetrap = () => {
     'right',
     'up',
     'down',
-    'backspace'
+    'backspace',
   ].concat(Object.keys(salivaKeyToNewSynoAttrs)), (e, key) => {
     if ([
       'backspace',
       'up',
-      'down'
+      'down',
     ].includes(key)) {
       e.preventDefault();
     }
     inputResolver(key);
   });
 
-  if (document.documentElement === null) { throw new Error('document missing') }
+  if (document.documentElement === null) { throw new Error('document missing'); }
   document.documentElement.click(); // bindings don't work before this (focus?)
   document.addEventListener('click', createFocusSyno(editorStateStore));
 };

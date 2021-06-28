@@ -1,39 +1,36 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-import salivaPresenters from '../../extension-staging-area/saliva/renderers/renderers.js'
-import pantheonPresenters from '../../extension-staging-area/pantheon/renderers/renderers.js'
+import salivaPresenters from '../../extension-staging-area/saliva/renderers/renderers.js';
+import pantheonPresenters from '../../extension-staging-area/pantheon/renderers/renderers.js';
 
-import type { GrammarName } from '../../types/editor-state/grammar-name'
-import type { Presno } from '../../types/presenter/presno'
-import type { SynoId } from '../../types/syno-id'
-
-type Props = {
-  grammarName: GrammarName,
-  getPresno: (SynoId) => Presno,
-  synoId: SynoId
-}
+import type { SynoRendererProps } from '../../types/syno-renderer-props';
+import type { Presno } from '../../types/presenter/presno';
 
 const RENDERERS_BY_GRAMMAR = {
   saliva: salivaPresenters,
-  pantheon: pantheonPresenters
-}
+  pantheon: pantheonPresenters,
+};
 
-export default (props: Props) => {
-  const { grammarName, synoId, getPresno } = props;
+export default (props: SynoRendererProps) => {
+  const { grammarName, synoId, getPresno, SynoRenderer } = props;
   const presno: Presno = getPresno(synoId);
 
   const grammarRenderer = RENDERERS_BY_GRAMMAR[grammarName];
   if (!grammarRenderer) {
-    throw new Error('unrecognized grammar');      
+    throw new Error('unrecognized grammar');
   }
 
-  const SynoRenderer = grammarRenderer[presno.syntype];
-  if (SynoRenderer) {
-    return(
-      <SynoRenderer grammarName={grammarName} getPresno={getPresno} presno={presno} />
-    )
-  } else {
-    throw new Error(`unrecognized type: '${presno.syntype}'`);      
+  const SyntypeRenderer = grammarRenderer[presno.syntype];
+  if (SyntypeRenderer) {
+    return (
+      <SyntypeRenderer
+        grammarName={grammarName}
+        getPresno={getPresno}
+        presno={presno}
+        SynoRenderer={SynoRenderer}
+      />
+    );
   }
+  throw new Error(`unrecognized type: '${presno.syntype}'`);
 };

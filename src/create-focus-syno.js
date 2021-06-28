@@ -1,11 +1,9 @@
 // @flow
-import type { ReduxStore } from './types/redux-store'
+import type { ReduxStore } from './types/redux-store';
 
 const isSyno = el => {
-  if (!el) { return false }
-  return !!(el.className.split(' ').find(className => {
-    return (className === 'syno')
-  }))
+  if (!el) { return false; }
+  return !!(el.className.split(' ').find(className => (className === 'syno')));
 };
 
 const containingSyno = (clickedEl: EventTarget) => {
@@ -13,7 +11,7 @@ const containingSyno = (clickedEl: EventTarget) => {
     throw new Error('non-HTML element clicked');
   }
   let currentEl = clickedEl;
-  while(
+  while (
     currentEl
     && !isSyno(currentEl)
     && currentEl !== document.documentElement
@@ -27,15 +25,13 @@ const containingSyno = (clickedEl: EventTarget) => {
   return (isSyno(currentEl) ? currentEl : false);
 };
 
-export default (editorStateStore: ReduxStore) => {
-  return (event: Event) => {
-    const syno = containingSyno(event.target);
+export default (editorStateStore: ReduxStore) => (event: Event) => {
+  const syno = containingSyno(event.target);
 
-    if (syno) {
-      editorStateStore.dispatch({
-        type: 'SET_FOCUS_SYNO',
-        synoId: String(syno.attributes.getNamedItem('data-syno-id').nodeValue)
-      });
-    }
+  if (syno) {
+    editorStateStore.dispatch({
+      type: 'SET_FOCUS_SYNO',
+      synoId: String(syno.attributes.getNamedItem('data-syno-id').nodeValue),
+    });
   }
 };

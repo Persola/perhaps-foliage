@@ -1,5 +1,5 @@
 // @flow
-import type { SynoId } from '../syno-id'
+import type { SynoId } from '../syno-id';
 
 export type PresnoRef = {
   presnoRef: true,

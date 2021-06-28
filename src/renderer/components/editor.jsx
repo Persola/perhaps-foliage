@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
-import type { EditorPresentation } from '../../types/presenter/editor-presentation.js'
-import type { GrammarName } from '../../types/editor-state/grammar-name.js'
+import type { EditorPresentation } from '../../types/presenter/editor-presentation.js';
+import type { GrammarName } from '../../types/editor-state/grammar-name.js';
 
 type Props = {
   grammarName: GrammarName,
@@ -19,7 +19,7 @@ export default (props: Props) => {
     presentation: { stage: stageful, result },
     interpret,
     resultOutdated,
-    interpreting
+    interpreting,
   } = props;
 
   return (

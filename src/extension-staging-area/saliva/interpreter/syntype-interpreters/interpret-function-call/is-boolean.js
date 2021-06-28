@@ -1,6 +1,6 @@
 // @flow
-import type { BooleanLiteral } from '../../../types/synos/boolean-literal'
-import type { BooleanLiteralAttrs } from '../../../types/synos/syno-attrs/boolean-literal-attrs'
+import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
+import type { BooleanLiteralAttrs } from '../../../types/synos/syno-attrs/boolean-literal-attrs';
 
 // This should be caught by flow, but let's double check
 export default (booleanCandidate: (BooleanLiteral | BooleanLiteralAttrs)): boolean => {
@@ -13,4 +13,4 @@ export default (booleanCandidate: (BooleanLiteral | BooleanLiteralAttrs)): boole
   if (![true, false].includes(booleanCandidate.value)) { return false; }
 
   return true;
-}
+};

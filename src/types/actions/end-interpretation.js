@@ -1,5 +1,5 @@
 // @flow
-import type { Syno } from '../syno'
+import type { Syno } from '../syno';
 
 export type EndInterpretation = {
   type: 'END_INTERPRETATION',

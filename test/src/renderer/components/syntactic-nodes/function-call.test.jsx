@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FunctionCall from '../../../../../src/extension-staging-area/saliva/renderer/components/syntactic-nodes/function-call.jsx';
 import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
 

@@ -1,4 +1,5 @@
 * maintainence
+  * use for child syno of in inverse reference map and destroy syno (?)
   * add some god damn structure to input side (classes for synos/presnos with utility functions)
     * consider synoref vs presnoref
   * [?] create presnoMap and with it replace some uses of synoMap

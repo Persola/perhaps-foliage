@@ -1,23 +1,14 @@
 // @flow
-import React from 'react';
-import SyntacticNode from '../../../renderer/components/syntactic-node.jsx'
-import NamePart from '../../../renderer/components/vis/name-part.jsx'
+import * as React from 'react';
+import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { GrammarName } from '../../../types/editor-state/grammar-name'
-import type { Presno } from '../../../types/presenter/presno'
-import type { SynoId } from '../../../types/syno-id'
-import type { ArgumentPres } from '../types/presentations/argument'
+import type { ArgumentRendererProps } from '../types/renderers/argument-props';
 
-type Props = {
-  grammarName: GrammarName,
-  getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
-  presno: ArgumentPres
-}
-
-export default (props: Props) => {
+export default (props: ArgumentRendererProps) => {
   const {
     grammarName,
     getPresno,
+    SynoRenderer,
     presno: {
       focused,
       synoId,
@@ -25,21 +16,35 @@ export default (props: Props) => {
       value,
       presnoFocused,
       charFocused,
-      valid
-    }
+      valid,
+    },
   } = props;
 
-  const classes = `syno same-line bubble-even argument ${focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
+  const classes = [
+    'syno',
+    'same-line',
+    'bubble-even',
+    'argument',
+    (focused ? 'focused' : 'unfocused'),
+    (valid ? '' : 'invalid'),
+  ].join(' ');
 
   return (
     <div className={classes} data-syno-id={synoId}>
       {
-        name &&
-          <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
+        name
+          && <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
       }
       {
-        value &&
-          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={value.id} />
+        value
+          && (
+            <SynoRenderer
+              grammarName={grammarName}
+              getPresno={getPresno}
+              synoId={value.id}
+              SynoRenderer={SynoRenderer}
+            />
+          )
       }
     </div>
   );

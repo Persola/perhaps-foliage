@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import NamePart from '../../../../../src/renderer/components/vis/name-part.jsx';
 import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
 

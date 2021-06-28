@@ -1,5 +1,5 @@
 // @flow
-import type { SynoRef } from '../../../../../types/syno-ref'
+import type { SynoRef } from '../../../../../types/syno-ref';
 
 export type FunctionDefinitionAttrs = {
   syntype: 'functionDefinition',

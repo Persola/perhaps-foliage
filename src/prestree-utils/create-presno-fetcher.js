@@ -1,9 +1,5 @@
 // @flow
-import type { SynoId } from '../types/syno-id.js'
-import type { PresnoMap } from '../types/presenter/presno-map.js'
+import type { SynoId } from '../types/syno-id.js';
+import type { PresnoMap } from '../types/presenter/presno-map.js';
 
-export default (presnoMap: PresnoMap) => {
-  return  (synoId: SynoId) => {
-    return presnoMap[synoId];
-  }
-}
+export default (presnoMap: PresnoMap) => (synoId: SynoId) => presnoMap[synoId];

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import CodeView from '../../../../src/renderer/components/code-view.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 

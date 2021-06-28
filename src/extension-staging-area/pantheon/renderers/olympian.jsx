@@ -1,46 +1,62 @@
 // @flow
-import React from 'react';
-import SyntacticNode from '../../../renderer/components/syntactic-node.jsx'
-import NamePart from '../../../renderer/components/vis/name-part.jsx'
+import * as React from 'react';
+import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { GrammarName } from '../../../types/editor-state/grammar-name'
-import type { Presno } from '../../../types/presenter/presno'
-import type { SynoId } from '../../../types/syno-id'
-import type { OlympianPres } from '../types/presentations/olympian'
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { Presno } from '../../../types/presenter/presno';
+import type { SynoId } from '../../../types/syno-id';
+import type { SynoRendererProps } from '../../../types/syno-renderer-props';
+import type { OlympianPres } from '../types/presentations/olympian';
 
 type Props = {
   grammarName: GrammarName,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
-  presno: OlympianPres
+  presno: OlympianPres,
+  SynoRenderer: (props: SynoRendererProps) => React.Node
 }
 
 export default (props: Props) => {
   const {
     grammarName,
     getPresno,
+    SynoRenderer,
     presno: {
-      syntype,
       name,
       focused,
       presnoFocused,
       charFocused,
       valid,
       child,
-      synoId
-    }
+      synoId,
+    },
   } = props;
 
-  const classes = `syno same-line bubble-even olympian ${focused ? 'focused' : 'unfocused'} ${valid ? '' : 'invalid'}`;
+
+  const classes = [
+    'syno',
+    'same-line',
+    'bubble-even',
+    'olympian',
+    (focused ? 'focused' : 'unfocused'),
+    (valid ? '' : 'invalid'),
+  ].join(' ');
 
   return (
     <div className={classes} data-syno-id={synoId}>
       {
-        name &&
-          <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
+        name
+          && <NamePart namePart={name} focused={presnoFocused === 0} charFocused={charFocused} />
       }
       {
-        child &&
-          <SyntacticNode grammarName={grammarName} getPresno={getPresno} synoId={child.id} />
+        child
+          && (
+            <SynoRenderer
+              grammarName={grammarName}
+              getPresno={getPresno}
+              synoId={child.id}
+              SynoRenderer={SynoRenderer}
+            />
+          )
       }
     </div>
   );

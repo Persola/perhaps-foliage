@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
 type Props = {
   interpret: Function,
@@ -12,7 +12,7 @@ export default (props: Props) => {
   const className = interpreting ? 'interpreting' : '';
 
   return (
-    <button onClick={interpret} className={className}>
+    <button onClick={interpret} className={className} type="submit">
       interpret
     </button>
   );

@@ -1,15 +1,15 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import type { ReduxAction } from '../../types/redux-action'
+import verifyActionType from './util/verify-action-type';
+import type { ReduxAction } from '../../types/redux-action';
 
 export default (
   oldState: boolean,
-  action: ReduxAction
+  action: ReduxAction,
 ): boolean => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
       if (oldState !== false) {
-        throw new Error('attempted to interpret while already interpreting')
+        throw new Error('attempted to interpret while already interpreting');
       }
 
       return true;
@@ -19,7 +19,7 @@ export default (
     }
     case 'END_INTERPRETATION': {
       if (oldState !== true) {
-        throw new Error('attempted to stop interpreting while not interpreting')
+        throw new Error('attempted to stop interpreting while not interpreting');
       }
 
       return false;
@@ -41,4 +41,4 @@ export default (
       return oldState;
     }
   }
-}
+};

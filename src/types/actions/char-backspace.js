@@ -1,5 +1,5 @@
 // @flow
-import type { FocusedPresnoId } from '../editor-state/focused-presno-id'
+import type { FocusedPresnoId } from '../editor-state/focused-presno-id';
 
 export type CharBackspace = {
   type: 'CHAR_BACKSPACE',

@@ -13,7 +13,7 @@ env:
   jest: true
 rules:
   strict: 0
-  no-console: 1
+  no-console: 0
   arrow-parens:
     - 2
     - as-needed
@@ -22,6 +22,18 @@ rules:
   no-undef:
     # despite the flowtype plugin, this excepts various flowtyping
     - 0
+  no-plusplus:
+    - 0 # Airbnb's justification curiosly appears to only be applicable when you are not also
+        # requiring semicolons, even though they do
+  object-curly-newline:
+    - 2
+    - consistent: true # disagreeing with Airbnb
+  no-underscore-dangle:
+    - 0 # defaulting to opinionlessness
+  consistent-return:
+    - 0 # this rule insists, for example, that callbacks passed to forEach must 'return undefined'
+  no-param-reassign:
+    - 0 # we're currently using mutation in some places, but we could revise to avoid this
 overrides:
   -
     files:

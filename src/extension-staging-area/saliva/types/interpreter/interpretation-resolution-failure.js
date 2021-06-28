@@ -1,5 +1,5 @@
 // @flow
-import type { InterpretationError } from './interpretation-error'
+import type { InterpretationError } from './interpretation-error';
 
 export type InterpretationResolutionFailure = {
   success: false,

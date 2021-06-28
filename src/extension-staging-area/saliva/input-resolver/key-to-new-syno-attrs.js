@@ -1,20 +1,22 @@
 // @flow
 
 export default {
-  '0': {
+  // $FlowIssue: flow mistakes these keys for numbers
+  0: {
     syntype: 'booleanLiteral',
-    value: false
+    value: false,
   },
-  '1': {
+  // $FlowIssue: flow mistakes these keys for numbers
+  1: {
     syntype: 'booleanLiteral',
-    value: true
+    value: true,
   },
   f: {
     syntype: 'booleanLiteral',
-    value: false
+    value: false,
   },
   t: {
     syntype: 'booleanLiteral',
-    value: true
-  }
-}
+    value: true,
+  },
+};

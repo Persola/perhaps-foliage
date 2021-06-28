@@ -1,13 +1,11 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import type { ReduxAction } from '../../types/redux-action'
-import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map'
-import type { SynoMap } from '../../types/syno-map'
+import verifyActionType from './util/verify-action-type';
+import type { ReduxAction } from '../../types/redux-action';
+import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map';
 
 export default (
   oldState: InverseReferenceMap,
   action: ReduxAction,
-  synoMap: SynoMap
 ): InverseReferenceMap => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
@@ -36,4 +34,4 @@ export default (
       return oldState;
     }
   }
-}
+};

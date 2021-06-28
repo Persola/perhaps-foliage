@@ -1,11 +1,11 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import type { ReduxAction } from '../../types/redux-action'
-import type { TextHostRefs } from '../../types/editor-state/text-host-refs'
+import verifyActionType from './util/verify-action-type';
+import type { ReduxAction } from '../../types/redux-action';
+import type { TextHostRefs } from '../../types/editor-state/text-host-refs';
 
 export default (
   oldState: TextHostRefs,
-  action: ReduxAction
+  action: ReduxAction,
 ): TextHostRefs => {
   switch (action.type) {
     case 'START_INTERPRETATION': {
@@ -34,4 +34,4 @@ export default (
       return oldState;
     }
   }
-}
+};

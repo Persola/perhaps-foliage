@@ -1,21 +1,22 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import Editor from './components/editor.jsx';
 
-import type { EditorPresentation } from '../types/presenter/editor-presentation.js'
-import type { GrammarName } from '../types/editor-state/grammar-name.js'
+import type { EditorPresentation } from '../types/presenter/editor-presentation.js';
+import type { GrammarName } from '../types/editor-state/grammar-name.js';
 
-type element = Object;
-type document = {
+type Element = Object;
+type Document = {
   +getElementById: (string) => mixed
 };
 
 export default class {
-  editorEl: element
+  editorEl: Element
+
   interpret: Function
 
-  constructor(document: document, interpret: Function) {
+  constructor(document: Document, interpret: Function) {
     this.editorEl = document.getElementById('editor');
     this.interpret = interpret;
   }
@@ -24,7 +25,7 @@ export default class {
     presentation: EditorPresentation,
     grammarName: GrammarName,
     resultOutdated: boolean,
-    interpreting: boolean
+    interpreting: boolean,
   ) {
     ReactDOM.render(
       (
@@ -36,7 +37,7 @@ export default class {
           interpreting={interpreting}
         />
       ),
-      this.editorEl
+      this.editorEl,
     );
   }
 }

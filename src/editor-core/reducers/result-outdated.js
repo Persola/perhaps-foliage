@@ -1,7 +1,7 @@
 // @flow
-import verifyActionType from './util/verify-action-type'
-import type { ResultOutdated } from '../../types/editor-state/result-outdated'
-import type { ReduxAction } from '../../types/redux-action'
+import verifyActionType from './util/verify-action-type';
+import type { ResultOutdated } from '../../types/editor-state/result-outdated';
+import type { ReduxAction } from '../../types/redux-action';
 
 export default (oldState: ResultOutdated, action: ReduxAction): ResultOutdated => {
   switch (action.type) {
@@ -31,4 +31,4 @@ export default (oldState: ResultOutdated, action: ReduxAction): ResultOutdated =
       return oldState;
     }
   }
-}
+};

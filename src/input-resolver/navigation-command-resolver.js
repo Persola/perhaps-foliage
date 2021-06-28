@@ -1,6 +1,6 @@
 // @flow
-import type { ChildPresnoRef } from '../types/child-presno-ref'
-import type { EditorState } from '../types/editor-state'
+import type { ChildPresnoRef } from '../types/child-presno-ref';
+import type { EditorState } from '../types/editor-state';
 
 export default (key: string, editorState: EditorState) => {
   let oldFocusedPresnoRef: ChildPresnoRef;
@@ -8,7 +8,7 @@ export default (key: string, editorState: EditorState) => {
     oldFocusedPresnoRef = {
       synoRef: true,
       id: editorState.focus.synoId,
-      relation: 'non-tree'
+      relation: 'non-tree',
     };
   } else {
     oldFocusedPresnoRef = {
@@ -16,10 +16,10 @@ export default (key: string, editorState: EditorState) => {
       parent: {
         synoRef: true,
         id: editorState.focus.synoId,
-        relation: 'parent'
+        relation: 'parent',
       },
-      index: 0
-    }
+      index: 0,
+    };
   }
 
   let direction;
@@ -43,6 +43,6 @@ export default (key: string, editorState: EditorState) => {
   return ({
     type: 'NAVIGATE',
     oldFocusedPresnoRef,
-    direction
+    direction,
   });
-}
+};

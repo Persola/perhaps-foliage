@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Editor from '../../../../src/renderer/components/editor.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 

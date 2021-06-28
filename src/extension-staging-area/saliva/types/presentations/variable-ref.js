@@ -1,5 +1,5 @@
 // @flow
-import type { CorePresnoAttrs } from './core-presno-attrs'
-import type { VariableRefPresAttrs } from './presno-attrs/variable-ref-attrs'
+import type { CorePresnoAttrs } from './core-presno-attrs';
+import type { VariableRefPresAttrs } from './presno-attrs/variable-ref-attrs';
 
 export type VariableRefPres = VariableRefPresAttrs & CorePresnoAttrs
