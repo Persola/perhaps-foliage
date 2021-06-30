@@ -4,7 +4,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { ArgumentRendererProps } from '../types/renderers/argument-props';
 
-export default (props: ArgumentRendererProps) => {
+export default (props: ArgumentRendererProps): React.Node => {
   const {
     grammarName,
     getPresno,

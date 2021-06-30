@@ -4,7 +4,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { FunctionDefinitionRendererProps } from '../types/renderers/function-definition-props';
 
-export default (props: FunctionDefinitionRendererProps) => {
+export default (props: FunctionDefinitionRendererProps): React.Node => {
   const { grammarName, getPresno, presno, SynoRenderer } = props;
   const {
     name, presnoFocused, charFocused, valid,

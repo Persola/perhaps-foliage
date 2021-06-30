@@ -18,7 +18,7 @@ const outdatedMessage = (
   <OutdatedMessage />
 );
 
-export default (props: Props) => {
+export default (props: Props): React.Node => {
   const {
     grammarName, codePresentation, outdated, interpreting,
   } = props;

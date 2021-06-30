@@ -14,6 +14,7 @@ import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js';
 import resultOutdatedReducer from './reducers/result-outdated.js';
 import interpretingReducer from './reducers/interpreting.js';
 
+import type { ReduxStore } from '../types/redux-store.js';
 import type { ReduxAction } from '../types/redux-action.js';
 import type { EditorState } from '../types/editor-state.js';
 import type { SynoMap } from '../types/syno-map.js';
@@ -48,7 +49,7 @@ const defaultEditorState: EditorState = {
   resultOutdated: false,
   interpreting: false,
 };
-const editorstateReducer = (
+const editorStateReducer = (
   originalState: EditorState = defaultEditorState,
   action: ReduxAction,
 ): EditorState => ({
@@ -94,7 +95,9 @@ const editorstateReducer = (
   ),
 });
 
-export default createStore(
-  editorstateReducer,
+const editorStateStore = createStore(
+  editorStateReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
+
+export default (editorStateStore: ReduxStore);

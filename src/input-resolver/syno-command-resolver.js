@@ -2,10 +2,11 @@
 import salivaKeyToNewSynoAttrs from '../extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js';
 
 import type { EditorState } from '../types/editor-state';
+import type { ReduxAction } from '../types/redux-action';
 import type { ChildPresnoRef } from '../types/child-presno-ref';
 import type { Syntype } from '../extension-staging-area/saliva/types/synos/syntype';
 
-export default (key: string, editorState: EditorState) => {
+export default (key: string, editorState: EditorState): (ReduxAction | false) => {
   const { focus: { synoId } } = editorState;
 
   if (Object.keys(salivaKeyToNewSynoAttrs).includes(key)) {

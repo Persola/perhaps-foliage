@@ -26,7 +26,7 @@ const argumentEls = (
   ))
 );
 
-export default (props: FunctionCallRendererProps) => {
+export default (props: FunctionCallRendererProps): React.Node => {
   const { grammarName, getPresno, presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
   const {

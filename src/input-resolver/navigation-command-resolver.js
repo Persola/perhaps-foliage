@@ -1,8 +1,9 @@
 // @flow
 import type { ChildPresnoRef } from '../types/child-presno-ref';
 import type { EditorState } from '../types/editor-state';
+import type { ReduxAction } from '../types/redux-action';
 
-export default (key: string, editorState: EditorState) => {
+export default (key: string, editorState: EditorState): ReduxAction => {
   let oldFocusedPresnoRef: ChildPresnoRef;
   if (editorState.focus.presnoIndex === false) {
     oldFocusedPresnoRef = {

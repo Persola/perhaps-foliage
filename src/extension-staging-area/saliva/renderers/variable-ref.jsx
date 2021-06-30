@@ -4,7 +4,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { VariableRefRendererProps } from '../types/renderers/variable-ref-props';
 
-export default (props: VariableRefRendererProps) => {
+export default (props: VariableRefRendererProps): React.Node => {
   const { presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
   const classes = [

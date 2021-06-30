@@ -6,7 +6,7 @@ type Props = {
   interpreting: boolean
 }
 
-export default (props: Props) => {
+export default (props: Props): React.Node => {
   const { interpret, interpreting } = props;
 
   const className = interpreting ? 'interpreting' : '';

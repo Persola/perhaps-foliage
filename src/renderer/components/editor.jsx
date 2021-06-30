@@ -13,7 +13,7 @@ type Props = {
   interpreting: boolean
 }
 
-export default (props: Props) => {
+export default (props: Props): React.Node => {
   const {
     grammarName,
     presentation: { stage: stageful, result },

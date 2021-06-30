@@ -34,6 +34,8 @@ rules:
     - 0 # this rule insists, for example, that callbacks passed to forEach must 'return undefined'
   no-param-reassign:
     - 0 # we're currently using mutation in some places, but we could revise to avoid this
+  arrow-body-style:
+    - 0 # tries to ban multiline arrow functions
 overrides:
   -
     files:

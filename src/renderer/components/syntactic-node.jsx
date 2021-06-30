@@ -12,7 +12,7 @@ const RENDERERS_BY_GRAMMAR = {
   pantheon: pantheonPresenters,
 };
 
-export default (props: SynoRendererProps) => {
+export default (props: SynoRendererProps): React.Node => {
   const { grammarName, synoId, getPresno, SynoRenderer } = props;
   const presno: Presno = getPresno(synoId);
 

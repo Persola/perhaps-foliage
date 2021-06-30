@@ -4,7 +4,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { BooleanLiteralRendererProps } from '../types/renderers/boolean-literal-props';
 
-export default (props: BooleanLiteralRendererProps) => {
+export default (props: BooleanLiteralRendererProps): React.Node => {
   const { presno } = props;
   const { valid } = presno;
   if (presno.syntype !== 'booleanLiteral') {

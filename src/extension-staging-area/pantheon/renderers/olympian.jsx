@@ -15,7 +15,7 @@ type Props = {
   SynoRenderer: (props: SynoRendererProps) => React.Node
 }
 
-export default (props: Props) => {
+export default (props: Props): React.Node => {
   const {
     grammarName,
     getPresno,

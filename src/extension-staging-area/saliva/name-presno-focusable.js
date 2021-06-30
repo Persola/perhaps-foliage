@@ -3,8 +3,9 @@ import NorPrimitiveId from './nor-primitive-id';
 
 import type { SynoMap } from '../../types/syno-map';
 import type { Syno } from '../../types/syno';
+import type { NamePresnoFocusable } from '../../types/name-presno-focusable';
 
-export default {
+export default ({
   functionCall: (syno: Syno, synoMap: SynoMap): boolean => {
     if (syno.syntype !== 'functionCall') { throw new TypeError('ah!'); }
     if (syno.callee === false) { return false; }
@@ -31,6 +32,5 @@ export default {
     const functionDefinition = synoMap[syno.parent.id];
     return functionDefinition.id !== NorPrimitiveId;
   },
-  functionArgument: () => false,
   variableRef: () => false,
-};
+}: NamePresnoFocusable);

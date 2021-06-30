@@ -13,7 +13,7 @@ const namePartWithCursor = (namePart, charFocused) => (
     namePart.slice(charFocused, namePart.length)}`
 );
 
-export default (props: Props) => {
+export default (props: Props): React.Node => {
   const { namePart, focused, charFocused } = props;
   const classes = `code-text same-line ${focused ? 'focused' : 'unfocused'}`;
 

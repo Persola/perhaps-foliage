@@ -4,7 +4,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { FunctionParameterRendererProps } from '../types/renderers/function-parameter-props';
 
-export default (props: FunctionParameterRendererProps) => {
+export default (props: FunctionParameterRendererProps): React.Node => {
   const { presno } = props;
   const { presnoFocused, charFocused } = presno;
   const classes = [
