@@ -1,5 +1,4 @@
 // @flow
-import type { CoreSynoAttrs } from './core-syno-attrs';
-import type { FunctionCallAttrs } from './syno-attrs/function-call-attrs';
+import type { MutableFunctionCall } from './mutable-synos/function-call';
 
-export type FunctionCall = CoreSynoAttrs & FunctionCallAttrs
+export type FunctionCall = $ReadOnly<MutableFunctionCall>

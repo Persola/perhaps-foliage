@@ -1,2 +1,2 @@
 // @flow
-export type InterpretationError = { message: string }
+export type InterpretationError = {| +message: string |}

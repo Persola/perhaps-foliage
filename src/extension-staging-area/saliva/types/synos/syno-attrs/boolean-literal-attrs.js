@@ -1,5 +1,5 @@
 // @flow
-export type BooleanLiteralAttrs = {
+export type BooleanLiteralAttrs = {|
   syntype: 'booleanLiteral',
-  value: boolean
-}
+  value: boolean,
+|}

@@ -2,10 +2,11 @@
 import type { SynoMap } from '../../../types/syno-map';
 import type { InverseReferenceMap } from '../../../types/editor-state/inverse-reference-map';
 import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
+import type { MutableSynoMap } from '../../../types/mutable-syno-map';
 
 export default (
   action: DestroyFocusedSyno,
-  newSynoMap: SynoMap,
+  newSynoMap: MutableSynoMap,
   oldState: SynoMap,
   inverseReferenceMap: InverseReferenceMap,
 ): void => {

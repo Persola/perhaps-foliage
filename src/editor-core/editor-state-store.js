@@ -18,6 +18,7 @@ import type { ReduxStore } from '../types/redux-store.js';
 import type { ReduxAction } from '../types/redux-action.js';
 import type { EditorState } from '../types/editor-state.js';
 import type { SynoMap } from '../types/syno-map.js';
+import type { MutableSynoMap } from '../types/mutable-syno-map.js';
 
 const salivaGrammar = require('../extension-staging-area/saliva/grammar.yml');
 const salivaTextHostRefs = require('../extension-staging-area/saliva/textHostRefs.yml');
@@ -49,51 +50,57 @@ const defaultEditorState: EditorState = {
   resultOutdated: false,
   interpreting: false,
 };
+
 const editorStateReducer = (
   originalState: EditorState = defaultEditorState,
   action: ReduxAction,
-): EditorState => ({
-  synoMap: synoMapReducer(
+): EditorState => {
+  const mutableSynoMap: MutableSynoMap = synoMapReducer(
     originalState.synoMap,
     action,
     originalState.inverseReferenceMap,
     originalState.textHostRefs,
-  ),
-  inverseReferenceMap: inverseReferenceMapReducer(
-    originalState.inverseReferenceMap,
-    action,
-  ),
-  grammar: grammarReducer(
-    originalState.grammar,
-    action,
-  ),
-  grammarName: grammarNameReducer(
-    originalState.grammarName,
-    action,
-  ),
-  textHostRefs: textHostRefsReducer(
-    originalState.textHostRefs,
-    action,
-  ),
-  focus: focusReducer(
-    originalState.focus,
-    action,
-    originalState.synoMap,
-    originalState.grammarName,
-  ),
-  resultSyntreeRootId: resultSyntreeRootIdReducer(
-    originalState.resultSyntreeRootId,
-    action,
-  ),
-  resultOutdated: resultOutdatedReducer(
-    originalState.resultOutdated,
-    action,
-  ),
-  interpreting: interpretingReducer(
-    originalState.interpreting,
-    action,
-  ),
-});
+  );
+  const immutableSynoMap = ((mutableSynoMap: any): SynoMap);
+
+  return {
+    synoMap: immutableSynoMap,
+    inverseReferenceMap: inverseReferenceMapReducer(
+      originalState.inverseReferenceMap,
+      action,
+    ),
+    grammar: grammarReducer(
+      originalState.grammar,
+      action,
+    ),
+    grammarName: grammarNameReducer(
+      originalState.grammarName,
+      action,
+    ),
+    textHostRefs: textHostRefsReducer(
+      originalState.textHostRefs,
+      action,
+    ),
+    focus: focusReducer(
+      originalState.focus,
+      action,
+      originalState.synoMap,
+      originalState.grammarName,
+    ),
+    resultSyntreeRootId: resultSyntreeRootIdReducer(
+      originalState.resultSyntreeRootId,
+      action,
+    ),
+    resultOutdated: resultOutdatedReducer(
+      originalState.resultOutdated,
+      action,
+    ),
+    interpreting: interpretingReducer(
+      originalState.interpreting,
+      action,
+    ),
+  };
+};
 
 const editorStateStore = createStore(
   editorStateReducer,

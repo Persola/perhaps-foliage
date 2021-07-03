@@ -9,14 +9,14 @@ import type { ResultOutdated } from './editor-state/result-outdated';
 import type { Interpreting } from './editor-state/interpreting';
 import type { TextHostRefs } from './editor-state/text-host-refs';
 
-export type EditorState = {
-  synoMap: SynoMap,
-  inverseReferenceMap: InverseReferenceMap,
-  grammarName: GrammarName,
-  grammar: Grammar,
-  textHostRefs: TextHostRefs,
-  focus: Focus,
-  resultSyntreeRootId: ResultSyntreeRootId,
-  resultOutdated: ResultOutdated,
-  interpreting: Interpreting
-}
+export type EditorState = {|
+  +synoMap: SynoMap,
+  +inverseReferenceMap: InverseReferenceMap,
+  +grammarName: GrammarName,
+  +grammar: Grammar,
+  +textHostRefs: TextHostRefs,
+  +focus: Focus,
+  +resultSyntreeRootId: ResultSyntreeRootId,
+  +resultOutdated: ResultOutdated,
+  +interpreting: Interpreting,
+|}

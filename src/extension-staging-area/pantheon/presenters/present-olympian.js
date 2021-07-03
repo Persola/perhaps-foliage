@@ -1,5 +1,5 @@
 // @flow
-import type { PresnoMap } from '../../../types/presenter/presno-map.js';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../../types/presenter/present-syno.js';
 import type { Focus } from '../../../types/editor-state/focus.js';
 import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
@@ -8,7 +8,7 @@ import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olym
 
 export default (
   grammar: GrammarName,
-  presnoMap: PresnoMap,
+  presnoMap: MutablePresnoMap,
   olympian: Olympian,
   scope: Object,
   getSyno: Function,
@@ -37,7 +37,6 @@ export default (
     syntype: 'olympian',
     name: olympian.name,
     child: child || false,
-    synoId: olympian.id,
     focused: focus && (olympian.id === focus.synoId) && (focus.presnoIndex === false),
     presnoFocused: focus && (olympian.id === focus.synoId) && focus.presnoIndex,
     charFocused: focus && (olympian.id === focus.synoId) && focus.charIndex,

@@ -1,5 +1,4 @@
 // @flow
-import type { CoreSynoAttrs } from './core-syno-attrs';
-import type { VariableRefAttrs } from './syno-attrs/variable-ref-attrs';
+import type { MutableVariableRef } from './mutable-synos/variable-ref';
 
-export type VariableRef = CoreSynoAttrs & VariableRefAttrs
+export type VariableRef = $ReadOnly<MutableVariableRef>

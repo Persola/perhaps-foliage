@@ -5,6 +5,7 @@ import type { EditorState } from '../types/editor-state';
 import type { ReduxAction } from '../types/redux-action';
 import type { ChildPresnoRef } from '../types/child-presno-ref';
 import type { Syntype } from '../extension-staging-area/saliva/types/synos/syntype';
+import type { BooleanLiteralAttrs } from '../extension-staging-area/saliva/types/synos/syno-attrs/boolean-literal-attrs';
 
 export default (key: string, editorState: EditorState): (ReduxAction | false) => {
   const { focus: { synoId } } = editorState;
@@ -26,7 +27,7 @@ export default (key: string, editorState: EditorState): (ReduxAction | false) =>
 
     return ({
       type: 'REPLACE_FOCUSED_SYNO',
-      newSynoAttrs: salivaKeyToNewSynoAttrs[key],
+      newSynoAttrs: (salivaKeyToNewSynoAttrs[key]: BooleanLiteralAttrs),
       newSynoId: `inputValue-${String(Math.random()).substring(2)}`, // TODO: systematic method to generate IDs
       focusedPresnoId: synoId,
     });

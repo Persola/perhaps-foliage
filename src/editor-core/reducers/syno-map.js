@@ -6,19 +6,23 @@ import dup from '../../syntree-utils/dup.js';
 import NorPrimitiveId from '../../extension-staging-area/saliva/nor-primitive-id.js';
 
 import type { Syno } from '../../types/syno';
+import type { MutableSyno } from '../../types/mutable-syno';
 import type { SynoMap } from '../../types/syno-map';
+import type { MutableSynoMap } from '../../types/mutable-syno-map';
 import type { SynoRef } from '../../types/syno-ref';
 import type { ReduxAction } from '../../types/redux-action';
 import type { InverseReferenceMap } from '../../types/editor-state/inverse-reference-map';
 import type { TextHostRefs } from '../../types/editor-state/text-host-refs';
+import type { CoreSynoAttrs } from '../../extension-staging-area/saliva/types/synos/core-syno-attrs';
+import type { MutableBooleanLiteral } from '../../extension-staging-area/saliva/types/synos/mutable-synos/boolean-literal';
 
 export default (
   oldState: SynoMap,
   action: ReduxAction,
   inverseReferenceMap: InverseReferenceMap,
   textHostRefs: TextHostRefs,
-): SynoMap => {
-  const newSynoMap: SynoMap = dup(oldState);
+): MutableSynoMap => {
+  const newSynoMap: MutableSynoMap = dup(oldState);
 
   switch (action.type) {
     case 'REPLACE_FOCUSED_SYNO': {
@@ -71,10 +75,15 @@ export default (
         };
       }
 
-      const newSyno = {
-        ...newSynoAttrs,
+      const newSynoCoreAttrs: CoreSynoAttrs = {
         id: newSynoId,
         parent: parentAttr,
+      };
+      const newSyno: MutableBooleanLiteral = {
+        id: newSynoCoreAttrs.id,
+        parent: newSynoCoreAttrs.parent,
+        syntype: newSynoAttrs.syntype,
+        value: newSynoAttrs.value,
       };
       if (Object.keys(newSynoMap).includes(newSynoId)) {
         throw new Error('tried to create syno with in-use ID');
@@ -85,28 +94,30 @@ export default (
     }
     case 'END_INTERPRETATION': {
       const { result } = action;
-      newSynoMap[result.id] = result;
+      const mutableResult = ((result: any): MutableSyno);
+
+      newSynoMap[mutableResult.id] = mutableResult;
 
       return newSynoMap;
     }
     case 'NAVIGATE': {
-      return oldState;
+      return newSynoMap;
     }
     case 'SET_FOCUS_SYNO': {
-      return oldState;
+      return newSynoMap;
     }
     case 'START_INTERPRETATION': {
-      return oldState;
+      return newSynoMap;
     }
     case 'CHAR_BACKSPACE': {
       if (action.focusCharIndex === false) {
         console.warn('ignoring backspace command: not editing text');
-        return oldState;
+        return newSynoMap;
       }
 
-      const focusSyno: Syno = newSynoMap[action.focusSynoId];
+      const focusSyno: MutableSyno = newSynoMap[action.focusSynoId];
 
-      let textHostSyno: Syno;
+      let textHostSyno: MutableSyno;
       if (textHostRefs[focusSyno.syntype] === false) {
         textHostSyno = focusSyno;
       } else {
@@ -120,6 +131,7 @@ export default (
       ) {
         throw new Error('text hosts refs lead to syno of wrong type? (flow)');
       }
+
       textHostSyno.name = (
         textHostSyno.name.slice(0, action.focusCharIndex - 1)
         + textHostSyno.name.slice(action.focusCharIndex, textHostSyno.name.length)
@@ -131,20 +143,21 @@ export default (
       const { focusedPresnoId } = action;
       if (
         oldState[focusedPresnoId].parent === false
-        || focusedPresnoId === NorPrimitiveId || (
+        || focusedPresnoId === NorPrimitiveId
+        || (
           oldState[focusedPresnoId].parent
           && oldState[focusedPresnoId].parent.id === NorPrimitiveId
         )
       ) {
         console.warn("ignoring syno detruction: can't destroy NOR primitive or children");
-        return oldState;
+        return newSynoMap;
       }
       destroySyno(action, newSynoMap, oldState, inverseReferenceMap); // modifies newSynoMap
       return newSynoMap;
     }
     default: {
       verifyActionType(action.type);
-      return oldState;
+      return newSynoMap;
     }
   }
 };

@@ -1,4 +1,2 @@
 // @flow
-export type Renderer = {
-  render: Function
-}
+export type Renderer = {| +render: Function |}

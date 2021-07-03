@@ -3,6 +3,7 @@ import presentSyno from './present-syno.js';
 
 import type { SynoId } from '../../types/syno-id.js';
 import type { Prestree } from '../../types/presenter/prestree';
+import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map.js';
 import type { PresnoMap } from '../../types/presenter/presno-map.js';
 import type { Focus } from '../../types/editor-state/focus.js';
 import type { GrammarName } from '../../types/editor-state/grammar-name.js';
@@ -14,10 +15,10 @@ export default (
   getSyno: Function,
   focus: (Focus | false),
 ): Prestree => {
-  const presnoMap: PresnoMap = {};
+  const mutablePresnoMap: MutablePresnoMap = {};
   presentSyno(
     grammar,
-    presnoMap,
+    mutablePresnoMap,
     false,
     getSyno({
       synoRef: true,
@@ -29,8 +30,10 @@ export default (
     presentSyno,
   );
 
+  const immutablePresnoMap: PresnoMap = (mutablePresnoMap: any);
+
   return {
     rootId: rootSynoId,
-    presnos: presnoMap,
+    presnos: immutablePresnoMap,
   };
 };

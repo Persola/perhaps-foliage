@@ -1,18 +1,20 @@
-* maintainence
+* maintenance
   * ascend to root extract error message
-  * use for child syno of in inverse reference map and destroy syno (?)
+  * [?] use for child syno of in inverse reference map and destroy syno
   * add some god damn structure to input side (classes for synos/presnos with utility functions)
     * consider synoref vs presnoref
   * [?] create presnoMap and with it replace some uses of synoMap
   * extract Saliva-specific modules as local npm packages
   * separate command resolver from input resolver
-  * split types into functional directories
+  * [?] organize types
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
-  * add synTree ID to focus
+  * add synTree ID to focus and enable swapping... whatever's equivalent to 'file' as a unit of code (syntrees)
   * make types synos (beneath default visiblity level)
 * new functionality
+  * add ancestor context presenter API to support context-sensative grammars but make it explicit
+    * context would be provided in presentation, not done in renderer
   * complete syno deletion
   * add syno insertation
     * add holes for necessary missing synos
@@ -29,10 +31,16 @@
     * replace false flags in type data structures
   * possible alt keys:
     * binary seek
-    * select span
-    * switch been on and between nodes ('insert mode')
-    * move/shift/reorder focused nodes
-    * traversing nav history or non-tree reference (how see references of current focus?)
+    * select set
+    * switch been on and between nodes ('insert mode')--or should that be done through navigation as currently?
+    * move/shift/reorder selected nodes
+      * e.g. move up/down in list
+      * group selected nodes?
+    * traversing nav history
+    * navigating non-tree syno references (how see references of current focus?)
+  * write integration for a real, in-use language
+    * need bidirectional transformation between AST and text code
+  * wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 * rearchitecture
   * [?] use redux in presenter again?
     * presenters are like reducers, but probably not because:
@@ -50,10 +58,6 @@
         * wait, no, I don't think they need the whole state--after all the point of typing is that you can do it locally, right? ...not sure if feasible
         * can also use react and just pass all props, if necessary I don't think it's architecturally wrong
       * problem: react components decide what other nodes to generate by choosing who their children will be starting from some root node. The presentation is centered on a node but has to render in several directions: mostly towards decendants but also to siblings, towards ancestors, and possibly to arbitrary references.
-    * [?] replace interpreter with existing language interpreter (minus parsing?)
-      * need bidirectional transformation between AST and text code
-      * need to wrap some features (e.g., named parameters) in language (e.g., always pass a map or list)
-      * how to deal with existing keywords and other shit that doesn't fit into bubble display? wrap with functions?
 * design
   * is it OK to not have functionCall display its callee is a syno?
     * yes--the callee is a separate node but it's a non-tree reference, which is now declared in the synoref. only children are displayed.

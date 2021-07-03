@@ -1,5 +1,5 @@
 // @flow
-import type { PresnoMap } from '../../../types/presenter/presno-map.js';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { Focus } from '../../../types/editor-state/focus.js';
 import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
 import type { VariableRef } from '../types/synos/variable-ref.js';
@@ -7,7 +7,7 @@ import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/v
 
 export default (
   grammar: GrammarName,
-  presnoMap: PresnoMap,
+  presnoMap: MutablePresnoMap,
   variableRef: VariableRef,
   scope: {},
   getSyno: Function,

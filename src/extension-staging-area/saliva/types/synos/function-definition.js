@@ -1,5 +1,4 @@
 // @flow
-import type { CoreSynoAttrs } from './core-syno-attrs';
-import type { FunctionDefinitionAttrs } from './syno-attrs/function-definition-attrs';
+import type { MutableFunctionDefinition } from './mutable-synos/function-definition';
 
-export type FunctionDefinition = CoreSynoAttrs & FunctionDefinitionAttrs
+export type FunctionDefinition = $ReadOnly<MutableFunctionDefinition>

@@ -1,5 +1,4 @@
 // @flow
-import type { Syno } from './syno';
-import type { SynoId } from './syno-id';
+import type { MutableSynoMap } from './mutable-syno-map';
 
-export type SynoMap = { [SynoId]: Syno }
+export type SynoMap = $ReadOnly<MutableSynoMap>

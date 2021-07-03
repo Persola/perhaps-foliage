@@ -3,7 +3,7 @@ import NorPrimitiveId from './nor-primitive-id';
 
 import type { SynoMap } from '../../types/syno-map';
 import type { Syno } from '../../types/syno';
-import type { NamePresnoFocusable } from '../../types/name-presno-focusable';
+import type { NamePresnoFocusable } from './types/name-presno-focusable';
 
 export default ({
   functionCall: (syno: Syno, synoMap: SynoMap): boolean => {

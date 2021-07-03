@@ -1,5 +1,4 @@
 // @flow
-import type { CoreSynoAttrs } from './core-syno-attrs';
-import type { ArgumentAttrs } from './syno-attrs/argument-attrs';
+import type { MutableArgument } from './mutable-synos/argument';
 
-export type Argument = CoreSynoAttrs & ArgumentAttrs
+export type Argument = $ReadOnly<MutableArgument>

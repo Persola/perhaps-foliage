@@ -1,4 +1,4 @@
 // @flow
-import type { SynoId } from '../syno-id';
+import type { MutableInverseReferenceMap } from './mutable-inverse-reference-map';
 
-export type InverseReferenceMap = { [SynoId]: Set<SynoId> }
+export type InverseReferenceMap = $ReadOnly<MutableInverseReferenceMap>

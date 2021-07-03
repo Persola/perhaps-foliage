@@ -1,7 +1,4 @@
 // @flow
-import type { Presno } from './presno';
-import type { SynoId } from '../syno-id';
+import type { MutablePresnoMap } from './mutable-presno-map';
 
-export type PresnoMap = {
-  [SynoId]: Presno
-};
+export type PresnoMap = $ReadOnly<MutablePresnoMap>

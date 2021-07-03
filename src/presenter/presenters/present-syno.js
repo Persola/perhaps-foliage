@@ -5,7 +5,7 @@ import pantheonPresenters from '../../extension-staging-area/pantheon/presenters
 import type { Syno } from '../../types/syno.js';
 import type { SynoId } from '../../types/syno-id.js';
 import type { Presno } from '../../types/presenter/presno.js';
-import type { PresnoMap } from '../../types/presenter/presno-map.js';
+import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../types/presenter/present-syno.js';
 import type { Focus } from '../../types/editor-state/focus.js';
 import type { GrammarName } from '../../types/editor-state/grammar-name.js';
@@ -17,7 +17,7 @@ const PRESENTERS_BY_GRAMMAR = {
 
 export default (
   grammar: GrammarName,
-  presnoMap: PresnoMap,
+  presnoMap: MutablePresnoMap,
   parentId: (SynoId | false),
   syno: (Syno),
   scope: {},

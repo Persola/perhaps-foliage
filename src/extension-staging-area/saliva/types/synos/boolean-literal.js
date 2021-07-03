@@ -1,5 +1,4 @@
 // @flow
-import type { CoreSynoAttrs } from './core-syno-attrs';
-import type { BooleanLiteralAttrs } from './syno-attrs/boolean-literal-attrs';
+import type { MutableBooleanLiteral } from './mutable-synos/boolean-literal';
 
-export type BooleanLiteral = CoreSynoAttrs & BooleanLiteralAttrs
+export type BooleanLiteral = $ReadOnly<MutableBooleanLiteral>
