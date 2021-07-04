@@ -1,18 +1,23 @@
 * maintenance
   * tighten up babel target (can remove raf?)
+  * reorg
+    * presno and syno clarification
+    * break out reducers
+    * move command validity checks into reducers (concurrent redux commands)
+    * organize utilities/wrap some data in objects
   * ascend to root extract error message
-  * [?] use for child syno of in inverse reference map and destroy syno
-  * add some god damn structure to input side (classes for synos/presnos with utility functions)
-    * consider synoref vs presnoref
-  * [?] create presnoMap and with it replace some uses of synoMap
   * extract Saliva-specific modules as local npm packages
-  * separate command resolver from input resolver
+    * start loading language components dynamically
+      * security?
+    * centralize interface
+      * document it
+    * ability to export types to language libraries
+    * actually make libraries for saliva and pantheon
+  * [?] use for child syno of in inverse reference map and destroy syno
   * [?] organize types
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
-  * add synTree ID to focus and enable swapping... whatever's equivalent to 'file' as a unit of code (syntrees)
-  * make types synos (beneath default visiblity level)
 * new functionality
   * add ancestor context presenter API to support context-sensative grammars but make it explicit
     * context would be provided in presentation, not done in renderer
@@ -39,6 +44,7 @@
       * group selected nodes?
     * traversing nav history
     * navigating non-tree syno references (how see references of current focus?)
+  * make saliva types synos (beneath default visiblity level)
   * write integration for a real, in-use language
     * need bidirectional transformation between AST and text code
   * wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
