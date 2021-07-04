@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -39,7 +40,10 @@ module.exports = {
       },
     ],
   },
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [
+    HtmlWebpackPluginConfig,
+    new NodePolyfillPlugin(),
+  ],
   resolve: {
     alias: {
       // this worked, but flow didn't know about it so it would fail to find files

@@ -26,7 +26,7 @@ export default (editorStateStore: ReduxStore): ((void) => void) => (
       }
     } catch (error) {
       if (error.message === 'syntactic graph is incomplete') {
-        console.warn(`Interpretation failed with message: "${error.message}"`); // eslint-disable-line no-console
+        console.warn(`Interpretation failed with message: "${error.message}"`);
       } else {
         throw error;
       }

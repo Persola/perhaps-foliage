@@ -7,9 +7,6 @@ import type { EditorPresentation } from '../types/presenter/editor-presentation.
 import type { GrammarName } from '../types/editor-state/grammar-name.js';
 
 type Element = Object;
-type Document = {
-  +getElementById: (string) => mixed
-};
 
 export default class {
   editorEl: Element

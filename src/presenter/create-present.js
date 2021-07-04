@@ -31,27 +31,23 @@ const generatePresentation = (editorState: EditorState): EditorPresentation => {
   };
 };
 
-export default class Presenter {
-  editorStateStore: ReduxStore;
-
-  renderer: Renderer;
-
-  constructor(
-    editorStateStore: ReduxStore,
-    renderer: Object,
-  ) {
-    this.editorStateStore = editorStateStore;
-    this.renderer = renderer;
-
-    editorStateStore.subscribe(
-      this.present.bind(this),
-    );
-  }
-
-  present() {
-    const editorState: EditorState = this.editorStateStore.getState();
+export default (
+  editorStateStore: ReduxStore,
+  renderer: Renderer,
+): ((void) => void) => { // eslint-disable-line function-paren-newline
+  const present = () => {
+    const editorState: EditorState = editorStateStore.getState();
     const presentation = generatePresentation(editorState);
     const { grammarName, resultOutdated, interpreting } = editorState;
-    this.renderer.render(presentation, grammarName, resultOutdated, interpreting);
-  }
-}
+    renderer.render(
+      presentation,
+      grammarName,
+      resultOutdated,
+      interpreting,
+    );
+  };
+
+  editorStateStore.subscribe(present);
+
+  return present;
+};

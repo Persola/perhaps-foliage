@@ -44,7 +44,6 @@ export default (
     valid = false;
   }
 
-
   return {
     syntype: 'argument',
     name,

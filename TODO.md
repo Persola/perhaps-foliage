@@ -1,4 +1,5 @@
 * maintenance
+  * tighten up babel target (can remove raf?)
   * ascend to root extract error message
   * [?] use for child syno of in inverse reference map and destroy syno
   * add some god damn structure to input side (classes for synos/presnos with utility functions)

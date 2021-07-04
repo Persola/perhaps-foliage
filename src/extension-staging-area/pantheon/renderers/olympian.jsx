@@ -31,7 +31,6 @@ export default (props: Props): React.Node => {
     },
   } = props;
 
-
   const classes = [
     'syno',
     'same-line',

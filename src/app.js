@@ -1,6 +1,6 @@
 // @flow
 import Mousetrap from 'mousetrap';
-import Presenter from './presenter/presenter.js';
+import createPresent from './presenter/create-present.js';
 import Renderer from './renderer/renderer.jsx';
 import editorStateStore from './editor-core/editor-state-store.js';
 import createInputResolver from './input-resolver/create-input-resolver.js';
@@ -17,7 +17,7 @@ require('./extension-staging-area/pantheon/stylesheet.sass');
 
 const interpret: SideEffectFunction = createInterpretForStore(editorStateStore);
 const renderer = new Renderer(document, interpret);
-const presenter = new Presenter(editorStateStore, renderer);
+const present = createPresent(editorStateStore, renderer);
 const inputResolver = createInputResolver(editorStateStore, interpret);
 
 const initializeMousetrap = () => {
@@ -46,5 +46,5 @@ const initializeMousetrap = () => {
 
 window.addEventListener('load', () => {
   initializeMousetrap();
-  presenter.present();
+  present();
 });

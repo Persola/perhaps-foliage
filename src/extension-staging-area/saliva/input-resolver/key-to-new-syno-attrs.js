@@ -1,13 +1,11 @@
 // @flow
 
 export default {
-  // $FlowIssue: flow mistakes these keys for numbers
-  0: {
+  '0': { // eslint-disable-line quote-props
     syntype: 'booleanLiteral',
     value: false,
   },
-  // $FlowIssue: flow mistakes these keys for numbers
-  1: {
+  '1': { // eslint-disable-line quote-props
     syntype: 'booleanLiteral',
     value: true,
   },
