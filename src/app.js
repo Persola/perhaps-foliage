@@ -1,4 +1,5 @@
 // @flow
+import 'core-js';
 import Mousetrap from 'mousetrap';
 import createPresent from './presenter/create-present.js';
 import Renderer from './renderer/renderer.jsx';

@@ -1,5 +1,4 @@
 * maintenance
-  * tighten up babel target (can remove raf?)
   * reorg
     * presno and syno clarification
     * break out reducers

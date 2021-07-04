@@ -1,3 +1,4 @@
+// @flow
 import BooleanLiteral from './boolean-literal.jsx';
 import FunctionCall from './function-call.jsx';
 import FunctionDefinition from './function-definition.jsx';
