@@ -1,15 +1,15 @@
 // @flow
 import * as React from 'react';
 
-import salivaPresenters from '../../extension-staging-area/saliva/renderers/renderers.js';
-import pantheonPresenters from '../../extension-staging-area/pantheon/renderers/renderers.js';
+import salivaRenderers from '../../extension-staging-area/saliva/renderers/renderers.js';
+import pantheonRenderers from '../../extension-staging-area/pantheon/renderers/renderers.js';
 
 import type { SynoRendererProps } from '../../types/syno-renderer-props';
 import type { Presno } from '../../types/presenter/presno';
 
 const RENDERERS_BY_GRAMMAR = {
-  saliva: salivaPresenters,
-  pantheon: pantheonPresenters,
+  saliva: salivaRenderers,
+  pantheon: pantheonRenderers,
 };
 
 export default (props: SynoRendererProps): React.Node => {

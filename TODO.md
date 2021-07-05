@@ -1,4 +1,5 @@
 * maintenance
+  * move core syno attrs back to editor
   * reorg
     * presno and syno clarification
     * break out reducers
@@ -17,6 +18,7 @@
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
+  * make interpretation async
 * new functionality
   * add ancestor context presenter API to support context-sensative grammars but make it explicit
     * context would be provided in presentation, not done in renderer

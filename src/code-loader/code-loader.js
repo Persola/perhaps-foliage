@@ -1,17 +1,16 @@
 // @flow
 import type { SynoMap } from '../types/syno-map';
-import type { FunctionCall } from '../extension-staging-area/saliva/types/synos/function-call';
 
 import graphValidator from './graph-validator.js';
 import grammarValidator from './grammar-validator.js';
 
-const salivaGrammar: FunctionCall = require('../extension-staging-area/saliva/grammar.yml');
-const salivaPrimitives: FunctionCall = require('../extension-staging-area/saliva/primitives.yml');
-const pantheonGrammar: FunctionCall = require('../extension-staging-area/pantheon/grammar.yml');
+const salivaGrammar = require('../extension-staging-area/saliva/grammar.yml');
+const salivaPrimitives = require('../extension-staging-area/saliva/primitives.yml');
+const pantheonGrammar = require('../extension-staging-area/pantheon/grammar.yml');
 
-const falseLiteral: FunctionCall = require('../extension-staging-area/saliva/static/false-literal.yml');
-const proxyNorCall: FunctionCall = require('../extension-staging-area/saliva/static/proxy-nor-call.yml');
-const pantheon: FunctionCall = require('../extension-staging-area/pantheon/static/pantheon.yml');
+const falseLiteral = require('../extension-staging-area/saliva/static/false-literal.yml');
+const proxyNorCall = require('../extension-staging-area/saliva/static/proxy-nor-call.yml');
+const pantheon = require('../extension-staging-area/pantheon/static/pantheon.yml');
 
 const validateSyntax = (graphName, graph, grammarName, grammar) => {
   const grammarValidatorRez = grammarValidator(grammar);
