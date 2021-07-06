@@ -8,6 +8,8 @@ import type { SetFocusSyno } from './actions/set-focus-syno';
 import type { StartInterpretation } from './actions/start-interpretation';
 import type { CharBackspace } from './actions/char-backspace';
 import type { DestroyFocusedSyno } from './actions/destroy-focused-syno';
+import type { StartAsyncSyntreeLoad } from './actions/start-syntree-load';
+import type { EndAsyncSyntreeLoad } from './actions/end-syntree-load';
 
 export type ReduxAction = (
   | Init
@@ -19,4 +21,6 @@ export type ReduxAction = (
   | StartInterpretation
   | CharBackspace
   | DestroyFocusedSyno
+  | StartAsyncSyntreeLoad
+  | EndAsyncSyntreeLoad
 )

@@ -9,9 +9,11 @@
       * when a node is grafted, the editor can handle updating references
     * simplifies IDs and node ontology (as in identity, not structure)
   * ascend to root extract error message
+  * force actions to go through an interface (to become API) (by encapsulating store?)
+  * wrap syntrees in file with metadata (root ID)
   * extract Saliva-specific modules as local npm packages
     * start loading language components dynamically
-      * security?
+      * security? (isolate 3rd party code within electron renderer process?)
     * centralize interface
       * document it
     * ability to export types to language libraries
@@ -21,7 +23,6 @@
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
-  * make interpretation async
   * [?] reorg to extract visualization elements for possible sister projects like a console/editor vs repl/git diff
 * new functionality
   * add ancestor context presenter API to support context-sensative grammars but make it explicit

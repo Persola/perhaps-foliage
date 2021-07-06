@@ -31,6 +31,7 @@ export default (props: Props): React.Node => {
         codePresentation={stageful}
         outdated={false}
         interpreting={interpreting}
+        dragDrop
       />
       <InterpretButton
         editorStateStore={editorStateStore}
@@ -42,6 +43,7 @@ export default (props: Props): React.Node => {
         codePresentation={result}
         outdated={resultOutdated}
         interpreting={false}
+        dragDrop={false}
       />
     </div>
   );

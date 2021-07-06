@@ -9,13 +9,16 @@ import verifyActionType from './reducers/util/verify-action-type';
 
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer.js';
 import endInterpretationReducer from './reducers/end-interpretation-reducer.js';
+import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer.js';
 import navigateReducer from './reducers/navigate-reducer.js';
 import setFocusSynoReducer from './reducers/set-focus-syno-reducer.js';
 import startInterpretationReducer from './reducers/start-interpretation-reducer.js';
+import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer.js';
 import charBackspaceReducer from './reducers/char-backspace-reducer.js';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer.js';
 
 import interpretEpic from './epics/interpret';
+import loadSyntreeEpic from './epics/load-syntree';
 
 import type { ReduxStore } from '../types/redux-store.js';
 import type { ReduxAction } from '../types/redux-action.js';
@@ -27,10 +30,10 @@ import salivaTextHostRefs from '../extension-staging-area/saliva/textHostRefs.ym
 // import pantheonGrammar from '../extension-staging-area/pantheon/grammar.yml';
 // import pantheonTextHostRefs from '../extension-staging-area/pantheon/textHostRefs.yml';
 
-const primitiveGraphs: SynoMap = codeLoader('salivaPrimitives');
-const seedGraphs: SynoMap = codeLoader('proxyNorCall');
-// const seedGraphs: SynoMap = codeLoader('pantheon');
-const defaultSynoMap = { ...seedGraphs, ...primitiveGraphs };
+const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
+const testSyntree: SynoMap = codeLoader.loadSyntreeFromFileSystem('proxyNorCall');
+// const testSyntree: SynoMap = codeLoader('pantheon');
+const defaultSynoMap = { ...testSyntree, ...salivaPrimitives };
 const defaultEditorState: EditorState = {
   grammar: salivaGrammar,
   // grammar: pantheonGrammar,
@@ -41,7 +44,7 @@ const defaultEditorState: EditorState = {
   synoMap: defaultSynoMap,
   inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
   focus: {
-    synoId: Object.keys(seedGraphs)[0],
+    synoId: Object.keys(testSyntree)[0],
     presnoIndex: false,
     charIndex: false,
     // synoId: 'cronus',
@@ -51,6 +54,7 @@ const defaultEditorState: EditorState = {
   resultSyntreeRootId: false,
   interpreting: false,
   resultOutdated: false,
+  loadingSyntree: false,
 };
 
 const editorStateReducer = (
@@ -64,6 +68,9 @@ const editorStateReducer = (
     case 'END_INTERPRETATION': {
       return endInterpretationReducer(oldState, action);
     }
+    case 'END_SYNTREE_LOAD': {
+      return endSyntreeLoadReducer(oldState, action);
+    }
     case 'NAVIGATE': {
       return navigateReducer(oldState, action);
     }
@@ -72,6 +79,9 @@ const editorStateReducer = (
     }
     case 'START_INTERPRETATION': {
       return startInterpretationReducer(oldState);
+    }
+    case 'START_SYNTREE_LOAD': {
+      return startSyntreeLoadReducer(oldState);
     }
     case 'CHAR_BACKSPACE': {
       return charBackspaceReducer(oldState, action);
@@ -86,10 +96,6 @@ const editorStateReducer = (
   }
 };
 
-const rootEpic = (action$, state$) => merge(
-  interpretEpic(action$, state$),
-);
-
 const epicMiddleware = createEpicMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -99,6 +105,11 @@ const editorStateStore = createStore(
   composeEnhancers(
     applyMiddleware(epicMiddleware),
   ),
+);
+
+const rootEpic = (action$, state$) => merge(
+  interpretEpic(action$, state$),
+  loadSyntreeEpic(action$, state$),
 );
 
 epicMiddleware.run(rootEpic);
