@@ -4,13 +4,13 @@ import type { SynoMap } from '../types/syno-map';
 import graphValidator from './graph-validator.js';
 import grammarValidator from './grammar-validator.js';
 
-const salivaGrammar = require('../extension-staging-area/saliva/grammar.yml');
-const salivaPrimitives = require('../extension-staging-area/saliva/primitives.yml');
-const pantheonGrammar = require('../extension-staging-area/pantheon/grammar.yml');
+import salivaGrammar from '../extension-staging-area/saliva/grammar.yml';
+import salivaPrimitives from '../extension-staging-area/saliva/primitives.yml';
+import pantheonGrammar from '../extension-staging-area/pantheon/grammar.yml';
 
-const falseLiteral = require('../extension-staging-area/saliva/static/false-literal.yml');
-const proxyNorCall = require('../extension-staging-area/saliva/static/proxy-nor-call.yml');
-const pantheon = require('../extension-staging-area/pantheon/static/pantheon.yml');
+import falseLiteral from '../extension-staging-area/saliva/static/false-literal.yml';
+import proxyNorCall from '../extension-staging-area/saliva/static/proxy-nor-call.yml';
+import pantheon from '../extension-staging-area/pantheon/static/pantheon.yml';
 
 const validateSyntax = (graphName, graph, grammarName, grammar) => {
   const grammarValidatorRez = grammarValidator(grammar);

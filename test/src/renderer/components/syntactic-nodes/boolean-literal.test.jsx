@@ -2,7 +2,7 @@ import * as React from 'react';
 import BooleanLiteral from '../../../../../src/extension-staging-area/saliva/renderer/components/syntactic-nodes/boolean-literal.jsx';
 import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
 
-const booleanLiteralPres = require('../../../../data-mocks/presentations/boolean-literal.json');
+import booleanLiteralPres from '../../../../data-mocks/presentations/boolean-literal.json';
 
 describe ('BooleanLiteral', () => {
   const validProps = {

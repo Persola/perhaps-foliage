@@ -18,10 +18,10 @@ import type { ReduxAction } from '../types/redux-action.js';
 import type { EditorState } from '../types/editor-state.js';
 import type { SynoMap } from '../types/syno-map.js';
 
-const salivaGrammar = require('../extension-staging-area/saliva/grammar.yml');
-const salivaTextHostRefs = require('../extension-staging-area/saliva/textHostRefs.yml');
-// const pantheonGrammar = require('../extension-staging-area/pantheon/grammar.yml');
-// const pantheonTextHostRefs = require('../extension-staging-area/pantheon/textHostRefs.yml');
+import salivaGrammar from '../extension-staging-area/saliva/grammar.yml';
+import salivaTextHostRefs from '../extension-staging-area/saliva/textHostRefs.yml';
+// import pantheonGrammar from '../extension-staging-area/pantheon/grammar.yml';
+// import pantheonTextHostRefs from '../extension-staging-area/pantheon/textHostRefs.yml';
 
 const primitiveGraphs: SynoMap = codeLoader('salivaPrimitives');
 const seedGraphs: SynoMap = codeLoader('proxyNorCall');

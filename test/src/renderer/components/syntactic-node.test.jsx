@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import SyntacticNode from '../../../../src/renderer/components/syntactic-node.jsx';
 import expectSnapshotMatch from '../../../expect-snapshot-match.js';
 
-const presno = require('../../../data-mocks/presentations/boolean-literal.json');
+import presno from '../../../data-mocks/presentations/boolean-literal.json';
 
 describe ('SyntacticNode', () => {
   const synoId = 'berry-ford'
