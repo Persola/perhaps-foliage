@@ -2,9 +2,12 @@
   * move core syno attrs back to editor
   * reorg
     * presno and syno clarification
-    * break out reducers
     * move command validity checks into reducers (concurrent redux commands)
     * organize utilities/wrap some data in objects
+  * wait, should synos actually have IDs?
+    * that is to say, should unique IDs be replaced with ids based on the path from the root?
+      * when a node is grafted, the editor can handle updating references
+    * simplifies IDs and node ontology (as in identity, not structure)
   * ascend to root extract error message
   * extract Saliva-specific modules as local npm packages
     * start loading language components dynamically

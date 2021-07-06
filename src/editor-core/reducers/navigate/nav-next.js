@@ -1,25 +1,25 @@
 // @flow
 import getChildPresnoRefs from './get-child-presno-refs';
-import type { Focus } from '../../../../types/editor-state/focus';
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
-import type { SynoMap } from '../../../../types/syno-map';
-import type { Syno } from '../../../../types/syno';
-import type { GrammarName } from '../../../../types/editor-state/grammar-name';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { SynoMap } from '../../../types/syno-map';
+import type { ChildPresnoRef } from '../../../types/child-presno-ref';
+import type { Syno } from '../../../types/syno';
 
 export default (
-  oldFocusedPresnoRef: ChildPresnoRef,
-  synoMap: SynoMap,
-  oldParent: (Syno | false),
-  oldState: Focus,
+  oldFocus: Focus,
   grammarName: GrammarName,
+  synoMap: SynoMap,
+  oldFocusedPresnoRef: ChildPresnoRef,
+  oldParent: (Syno | false),
 ): Focus => {
   if (!oldParent) {
     console.warn('ignoring navigation to next sibling: focus syno is root');
-    return oldState;
+    return oldFocus;
   }
 
-  if (oldState.charIndex !== false) {
-    const oldSyno = synoMap[oldState.synoId];
+  if (oldFocus.charIndex !== false) {
+    const oldSyno = synoMap[oldFocus.synoId];
     let oldName: string;
     if (oldSyno.syntype === 'argument') {
       if (oldSyno.parameter === false) {
@@ -43,15 +43,15 @@ export default (
     }
     const nameLength: number = oldName.length;
 
-    if (oldState.charIndex > nameLength) {
+    if (oldFocus.charIndex > nameLength) {
       console.warn('ignoring navigation to previous sibling: already on last character');
-      return oldState;
+      return oldFocus;
     }
 
     return {
-      synoId: oldState.synoId,
-      presnoIndex: oldState.presnoIndex,
-      charIndex: oldState.charIndex + 1,
+      synoId: oldFocus.synoId,
+      presnoIndex: oldFocus.presnoIndex,
+      charIndex: oldFocus.charIndex + 1,
     };
   }
 
@@ -69,7 +69,7 @@ export default (
       throw new Error("cannot find old focused presno ID among parent's children");
     } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
       console.warn('ignoring navigation to previous sibling: already focused on last sibling');
-      return oldState;
+      return oldFocus;
     } else {
       const newFocusPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
 

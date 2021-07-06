@@ -1,26 +1,27 @@
 // @flow
 import getChildPresnoRefs from './get-child-presno-refs';
-import type { Focus } from '../../../../types/editor-state/focus';
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
-import type { SynoMap } from '../../../../types/syno-map';
-import type { Syno } from '../../../../types/syno';
-import type { GrammarName } from '../../../../types/editor-state/grammar-name';
+
+import type { Focus } from '../../../types/editor-state/focus';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { SynoMap } from '../../../types/syno-map';
+import type { ChildPresnoRef } from '../../../types/child-presno-ref';
+import type { Syno } from '../../../types/syno';
 
 export default (
-  oldFocusedPresnoRef: ChildPresnoRef,
-  synoMap: SynoMap,
-  oldState: Focus,
+  oldFocus: Focus,
   grammarName: GrammarName,
+  synoMap: SynoMap,
+  oldFocusedPresnoRef: ChildPresnoRef,
 ): Focus => {
   if (!oldFocusedPresnoRef.synoRef) {
-    if (oldState.charIndex !== false) {
+    if (oldFocus.charIndex !== false) {
       console.warn('cannot navigate down: editing text');
-      return oldState;
+      return oldFocus;
     }
 
     return {
-      synoId: oldState.synoId,
-      presnoIndex: oldState.presnoIndex,
+      synoId: oldFocus.synoId,
+      presnoIndex: oldFocus.presnoIndex,
       charIndex: 0, // enter beginning of name
     };
   }
@@ -29,7 +30,7 @@ export default (
 
   if (getChildPresnoRefs(oldFocusedPresno, synoMap, grammarName).length === 0) {
     console.warn('ignoring navigation inwards: no children');
-    return oldState;
+    return oldFocus;
   }
   const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(
     oldFocusedPresno,

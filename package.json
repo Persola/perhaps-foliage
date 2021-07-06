@@ -12,7 +12,8 @@
     "redo": "npm run clean:dist; npm run build; npm run start:web",
     "type": "flow --show-all-errors",
     "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -x {'web-repl/server.js','src/types/**'} -o tmp/flow-coverage/",
-    "lint": "eslint --ext js,jsx ."
+    "lint": "eslint --ext js,jsx .",
+    "lint-fix": "eslint --ext js,jsx --fix ."
   },
   "author": "Luke Persola",
   "engines": {

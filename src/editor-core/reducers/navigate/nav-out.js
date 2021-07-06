@@ -1,18 +1,18 @@
 // @flow
-import type { Focus } from '../../../../types/editor-state/focus';
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
-import type { SynoMap } from '../../../../types/syno-map';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { SynoMap } from '../../../types/syno-map';
+import type { ChildPresnoRef } from '../../../types/child-presno-ref';
 
 export default (
-  oldFocusedPresnoRef: ChildPresnoRef,
+  oldFocus: Focus,
   synoMap: SynoMap,
-  oldState: Focus,
+  oldFocusedPresnoRef: ChildPresnoRef,
 ): Focus => {
   if (oldFocusedPresnoRef.synoRef) {
     const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
     if (oldFocusedPresno.parent === false) {
       console.warn('ignoring navigation outwards: no parent');
-      return oldState;
+      return oldFocus;
     }
     return {
       synoId: oldFocusedPresno.parent.id,
@@ -20,16 +20,16 @@ export default (
       charIndex: false,
     };
   }
-  if (oldState.charIndex === false) {
+  if (oldFocus.charIndex === false) {
     return {
-      synoId: oldState.synoId,
+      synoId: oldFocus.synoId,
       presnoIndex: false,
       charIndex: false,
     };
   }
   return {
-    synoId: oldState.synoId,
-    presnoIndex: oldState.presnoIndex,
+    synoId: oldFocus.synoId,
+    presnoIndex: oldFocus.presnoIndex,
     charIndex: false,
   };
 };

@@ -3,22 +3,20 @@ import { createStore } from 'redux';
 
 import deriveInverseReferenceMap from './derive-inverse-reference-map.js';
 import codeLoader from '../code-loader/code-loader.js';
+import verifyActionType from './reducers/util/verify-action-type';
 
-import synoMapReducer from './reducers/syno-map.js';
-import inverseReferenceMapReducer from './reducers/inverse-reference-map.js';
-import grammarReducer from './reducers/grammar.js';
-import grammarNameReducer from './reducers/grammar-name.js';
-import textHostRefsReducer from './reducers/text-host-refs.js';
-import focusReducer from './reducers/focus.js';
-import resultSyntreeRootIdReducer from './reducers/result-syntree-root-id.js';
-import resultOutdatedReducer from './reducers/result-outdated.js';
-import interpretingReducer from './reducers/interpreting.js';
+import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer.js';
+import endInterpretationReducer from './reducers/end-interpretation-reducer.js';
+import navigateReducer from './reducers/navigate-reducer.js';
+import setFocusSynoReducer from './reducers/set-focus-syno-reducer.js';
+import startInterpretationReducer from './reducers/start-interpretation-reducer.js';
+import charBackspaceReducer from './reducers/char-backspace-reducer.js';
+import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer.js';
 
 import type { ReduxStore } from '../types/redux-store.js';
 import type { ReduxAction } from '../types/redux-action.js';
 import type { EditorState } from '../types/editor-state.js';
 import type { SynoMap } from '../types/syno-map.js';
-import type { MutableSynoMap } from '../types/mutable-syno-map.js';
 
 const salivaGrammar = require('../extension-staging-area/saliva/grammar.yml');
 const salivaTextHostRefs = require('../extension-staging-area/saliva/textHostRefs.yml');
@@ -30,14 +28,14 @@ const seedGraphs: SynoMap = codeLoader('proxyNorCall');
 // const seedGraphs: SynoMap = codeLoader('pantheon');
 const defaultSynoMap = { ...seedGraphs, ...primitiveGraphs };
 const defaultEditorState: EditorState = {
-  synoMap: defaultSynoMap,
-  inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
   grammar: salivaGrammar,
   // grammar: pantheonGrammar,
   grammarName: 'saliva',
   // grammarName: 'pantheon',
   textHostRefs: salivaTextHostRefs,
   // textHostRefs: pantheonTextHostRefs,
+  synoMap: defaultSynoMap,
+  inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap),
   focus: {
     synoId: Object.keys(seedGraphs)[0],
     presnoIndex: false,
@@ -47,59 +45,41 @@ const defaultEditorState: EditorState = {
     // charIndex: false,
   },
   resultSyntreeRootId: false,
-  resultOutdated: false,
   interpreting: false,
+  resultOutdated: false,
 };
 
 const editorStateReducer = (
-  originalState: EditorState = defaultEditorState,
+  oldState: EditorState = defaultEditorState,
   action: ReduxAction,
 ): EditorState => {
-  const mutableSynoMap: MutableSynoMap = synoMapReducer(
-    originalState.synoMap,
-    action,
-    originalState.inverseReferenceMap,
-    originalState.textHostRefs,
-  );
-  const immutableSynoMap = ((mutableSynoMap: any): SynoMap);
-
-  return {
-    synoMap: immutableSynoMap,
-    inverseReferenceMap: inverseReferenceMapReducer(
-      originalState.inverseReferenceMap,
-      action,
-    ),
-    grammar: grammarReducer(
-      originalState.grammar,
-      action,
-    ),
-    grammarName: grammarNameReducer(
-      originalState.grammarName,
-      action,
-    ),
-    textHostRefs: textHostRefsReducer(
-      originalState.textHostRefs,
-      action,
-    ),
-    focus: focusReducer(
-      originalState.focus,
-      action,
-      originalState.synoMap,
-      originalState.grammarName,
-    ),
-    resultSyntreeRootId: resultSyntreeRootIdReducer(
-      originalState.resultSyntreeRootId,
-      action,
-    ),
-    resultOutdated: resultOutdatedReducer(
-      originalState.resultOutdated,
-      action,
-    ),
-    interpreting: interpretingReducer(
-      originalState.interpreting,
-      action,
-    ),
-  };
+  switch (action.type) {
+    case 'REPLACE_FOCUSED_SYNO': {
+      return replaceFocusedSynoReducer(oldState, action);
+    }
+    case 'END_INTERPRETATION': {
+      return endInterpretationReducer(oldState, action);
+    }
+    case 'NAVIGATE': {
+      return navigateReducer(oldState, action);
+    }
+    case 'SET_FOCUS_SYNO': {
+      return setFocusSynoReducer(oldState, action);
+    }
+    case 'START_INTERPRETATION': {
+      return startInterpretationReducer(oldState);
+    }
+    case 'CHAR_BACKSPACE': {
+      return charBackspaceReducer(oldState, action);
+    }
+    case 'DESTROY_FOCUSED_SYNO': {
+      return destroyFocusedSynoReducer(oldState, action);
+    }
+    default: {
+      verifyActionType(action.type);
+      return oldState;
+    }
+  }
 };
 
 const editorStateStore = createStore(

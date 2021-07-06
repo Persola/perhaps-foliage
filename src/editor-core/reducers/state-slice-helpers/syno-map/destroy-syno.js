@@ -1,8 +1,8 @@
 // @flow
-import type { SynoMap } from '../../../types/syno-map';
-import type { InverseReferenceMap } from '../../../types/editor-state/inverse-reference-map';
-import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
-import type { MutableSynoMap } from '../../../types/mutable-syno-map';
+import type { DestroyFocusedSyno } from '../../../../types/actions/destroy-focused-syno';
+import type { MutableSynoMap } from '../../../../types/mutable-syno-map';
+import type { SynoMap } from '../../../../types/syno-map';
+import type { InverseReferenceMap } from '../../../../types/editor-state/inverse-reference-map';
 
 export default (
   action: DestroyFocusedSyno,
