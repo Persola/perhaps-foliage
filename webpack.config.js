@@ -1,3 +1,5 @@
+const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
@@ -7,13 +9,9 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 });
 
-module.exports = {
+const sharedConfig = {
   mode: 'none',
   entry: './src/app.js',
-  output: {
-    path: (`${__dirname}/dist`),
-    filename: 'app.js',
-  },
   module: {
     rules: [
       {
@@ -54,3 +52,23 @@ module.exports = {
   },
   devtool: 'source-map',
 };
+
+const webConfig = {
+  ...sharedConfig,
+  target: 'browserslist',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'web-app.js',
+  },
+};
+
+const electronConfig = {
+  ...sharedConfig,
+  target: 'electron13.1-main',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'electron-app.js',
+  },
+};
+
+module.exports = [webConfig, electronConfig];
