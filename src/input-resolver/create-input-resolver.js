@@ -4,24 +4,20 @@ import navigationCommandResolver from './navigation-command-resolver.js';
 import textCommandResolver from './text-command-resolver.js';
 
 import type { ReduxStore } from '../types/redux-store';
-import type { SideEffectFunction } from '../types/side-effect-function';
 
 export default (
   editorStateStore: ReduxStore,
-  interpret: SideEffectFunction,
   // eslint doesn't understand the parantheses around this type
   // eslint-disable-next-line function-paren-newline
 ): (string => void) => {
   return (
     (key: string): void => {
-      if (key === 'enter') {
-        interpret();
-        return;
-      }
-
       const editorState = editorStateStore.getState();
+
       let command = false;
-      if (['left', 'right', 'up', 'down'].includes(key)) {
+      if (key === 'enter') {
+        command = { type: 'START_INTERPRETATION' };
+      } else if (['left', 'right', 'up', 'down'].includes(key)) {
         command = navigationCommandResolver(key, editorState);
       } else if (editorState.focus.charIndex !== false) { // text commands
         command = textCommandResolver(key, editorState);
@@ -35,6 +31,8 @@ export default (
 
       if (command !== false) {
         editorStateStore.dispatch(command);
+      } else {
+        throw new Error('bad binding?');
       }
     }
   );

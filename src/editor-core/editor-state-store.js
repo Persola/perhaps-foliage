@@ -1,5 +1,7 @@
 // @flow
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { merge } from 'rxjs';
+import { createEpicMiddleware } from 'redux-observable';
 
 import deriveInverseReferenceMap from './derive-inverse-reference-map.js';
 import codeLoader from '../code-loader/code-loader.js';
@@ -12,6 +14,8 @@ import setFocusSynoReducer from './reducers/set-focus-syno-reducer.js';
 import startInterpretationReducer from './reducers/start-interpretation-reducer.js';
 import charBackspaceReducer from './reducers/char-backspace-reducer.js';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer.js';
+
+import interpretEpic from './epics/interpret';
 
 import type { ReduxStore } from '../types/redux-store.js';
 import type { ReduxAction } from '../types/redux-action.js';
@@ -82,9 +86,21 @@ const editorStateReducer = (
   }
 };
 
+const rootEpic = (action$, state$) => merge(
+  interpretEpic(action$, state$),
+);
+
+const epicMiddleware = createEpicMiddleware();
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const editorStateStore = createStore(
   editorStateReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  composeEnhancers(
+    applyMiddleware(epicMiddleware),
+  ),
 );
+
+epicMiddleware.run(rootEpic);
 
 export default (editorStateStore: ReduxStore);

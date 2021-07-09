@@ -8,18 +8,13 @@ import createInputResolver from './input-resolver/create-input-resolver.js';
 import createFocusSyno from './create-focus-syno.js';
 import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js';
 
-import type { SideEffectFunction } from './types/side-effect-function';
-
-import createInterpretForStore from './extension-staging-area/saliva/interpreter/create-interpret-for-store.js';
-
 require('./stylesheet.sass');
 require('./extension-staging-area/saliva/stylesheet.sass');
 require('./extension-staging-area/pantheon/stylesheet.sass');
 
-const interpret: SideEffectFunction = createInterpretForStore(editorStateStore);
-const renderer = new Renderer(document, interpret);
+const renderer = new Renderer(document);
 const present = createPresent(editorStateStore, renderer);
-const inputResolver = createInputResolver(editorStateStore, interpret);
+const inputResolver = createInputResolver(editorStateStore);
 
 const initializeMousetrap = () => {
   Mousetrap.bind([

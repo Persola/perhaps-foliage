@@ -2,22 +2,23 @@
 import * as React from 'react';
 import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
+import type { ReduxStore } from '../../types/redux-store';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation.js';
 import type { GrammarName } from '../../types/editor-state/grammar-name.js';
 
 type Props = {
+  editorStateStore: ReduxStore,
   grammarName: GrammarName,
   presentation: EditorPresentation,
-  interpret: Function,
   resultOutdated: boolean,
   interpreting: boolean
 }
 
 export default (props: Props): React.Node => {
   const {
+    editorStateStore,
     grammarName,
     presentation: { stage: stageful, result },
-    interpret,
     resultOutdated,
     interpreting,
   } = props;
@@ -31,7 +32,10 @@ export default (props: Props): React.Node => {
         outdated={false}
         interpreting={interpreting}
       />
-      <InterpretButton interpret={interpret} interpreting={interpreting} />
+      <InterpretButton
+        editorStateStore={editorStateStore}
+        interpreting={interpreting}
+      />
       <CodeView
         key="result"
         grammarName={grammarName}

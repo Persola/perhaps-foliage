@@ -1,18 +1,27 @@
 // @flow
 import * as React from 'react';
+import type { ReduxStore } from '../../types/redux-store';
 
 type Props = {
-  interpret: Function,
-  interpreting: boolean
+  editorStateStore: ReduxStore,
+  interpreting: boolean,
 }
 
+const dispatchStartInterpretation = editorStateStore => {
+  editorStateStore.dispatch({
+    type: 'START_INTERPRETATION',
+  });
+};
+
 export default (props: Props): React.Node => {
-  const { interpret, interpreting } = props;
+  const { editorStateStore, interpreting } = props;
 
   const className = interpreting ? 'interpreting' : '';
 
+  const startInterpretation = () => dispatchStartInterpretation(editorStateStore);
+
   return (
-    <button onClick={interpret} className={className} type="submit">
+    <button onClick={startInterpretation} className={className} type="submit">
       interpret
     </button>
   );

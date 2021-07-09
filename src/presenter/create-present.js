@@ -40,6 +40,7 @@ export default (
     const presentation = generatePresentation(editorState);
     const { grammarName, resultOutdated, interpreting } = editorState;
     renderer.render(
+      editorStateStore,
       presentation,
       grammarName,
       resultOutdated,

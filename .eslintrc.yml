@@ -4,7 +4,7 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
   - plugin:flowtype/recommended
-parser: babel-eslint
+parser: "@babel/eslint-parser"
 plugins:
   - flowtype
 env:

@@ -11,7 +11,6 @@
     "start:electron": "electron electron-repl/",
     "redo": "npm run clean:dist; npm run build; npm run start:web",
     "type": "flow --show-all-errors",
-    "type-cov": "flow-coverage-report -i 'src/**/*.js{'','x'}' -x {'web-repl/server.js','src/types/**'} -o tmp/flow-coverage/",
     "lint": "eslint --ext js,jsx .",
     "lint-fix": "eslint --ext js,jsx --fix ."
   },
@@ -27,6 +26,8 @@
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "redux": "~4.1.0",
+    "redux-observable": "~2.0.0",
+    "rxjs": "~7.2.0",
     "yaml-loader": "~0.6.0"
   },
   "devDependencies": {
@@ -49,7 +50,7 @@
     "eslint-plugin-jsx-a11y": "~6.4.1",
     "eslint-plugin-react": "~7.24.0",
     "flow-bin": "~0.154.0",
-    "flow-coverage-report": "~0.8.0",
+    "flow-typed": "^3.3.1",
     "html-webpack-plugin": "~5.3.2",
     "identity-obj-proxy": "~3.0.0",
     "jest": "~26.0.1",

@@ -22,6 +22,7 @@
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
   * make interpretation async
+  * [?] reorg to extract visualization elements for possible sister projects like a console/editor vs repl/git diff
 * new functionality
   * add ancestor context presenter API to support context-sensative grammars but make it explicit
     * context would be provided in presentation, not done in renderer
