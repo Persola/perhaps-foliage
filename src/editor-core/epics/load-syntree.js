@@ -15,7 +15,7 @@ export default action$ => action$.pipe(
   map(syntree => {
     return {
       type: 'END_SYNTREE_LOAD',
-      synoMap: syntree,
+      newSynoMap: syntree,
     };
   }),
 );

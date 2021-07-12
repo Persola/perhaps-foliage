@@ -9,6 +9,7 @@
     "build:noisily": "webpack --verbose",
     "start:web": "node --inspect ./web-repl/server.js",
     "start:electron": "electron electron-repl/",
+    "start:wds": "webpack serve",
     "redo": "npm run clean:dist; npm run build; npm run start:web",
     "type": "flow --show-all-errors",
     "lint": "eslint --ext js,jsx .",
@@ -59,7 +60,7 @@
     "react-test-renderer": "~16.13.1",
     "sass-loader": "~12.1.0",
     "style-loader": "~3.0.0",
-    "webpack": "~5.42.0",
+    "webpack": "~5.44.0",
     "webpack-cli": "~4.7.2",
     "webpack-dev-server": "~3.11.2"
   },

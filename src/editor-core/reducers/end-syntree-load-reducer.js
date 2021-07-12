@@ -13,7 +13,7 @@ export default (
   action: EndAsyncSyntreeLoad,
 ): EditorState => {
   const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
-  const newSyntree: SynoMap = action.synoMap;
+  const newSyntree: SynoMap = action.newSynoMap;
   const getSyno = createSynoFetcher(newSyntree);
   const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], getSyno);
   const newSyntreeWithPrimitives = { ...newSyntree, ...salivaPrimitives };
