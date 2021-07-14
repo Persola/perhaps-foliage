@@ -1,4 +1,5 @@
 // @flow
+import type { StateSelector } from '../../../../../types/state-selector';
 import type { Argument } from '../../../types/synos/argument';
 import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
 
@@ -6,7 +7,7 @@ export default (
   interpreter: Function,
   parentScope: [],
   argumentz: Argument[],
-  getSyno: Function,
+  state: StateSelector,
 ): [Argument, BooleanLiteral][] => {
   const interpretedArgs: [Argument, BooleanLiteral][] = [];
 
@@ -14,10 +15,13 @@ export default (
     if (arg.syntype !== 'argument') {
       throw new Error(`expected argument, got ${arg.syntype}`);
     }
+    if (arg.value === false) {
+      throw new Error(`unassigned argument of ID ${arg.id}`);
+    }
     const argResolution = interpreter(
-      getSyno(arg.value),
+      state.getSyno(arg.value.id),
       parentScope,
-      getSyno,
+      state,
     );
 
     if (argResolution.success) {

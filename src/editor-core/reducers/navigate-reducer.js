@@ -5,51 +5,48 @@ import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
 import getOldParent from './navigate/get-old-parent';
 
-import type { EditorState } from '../../types/editor-state';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
 import type { Navigate } from '../../types/actions/navigate';
+import type { StateSelector } from '../../types/state-selector';
 
 export default (
-  oldState: EditorState,
+  state: StateSelector,
   action: Navigate,
-): EditorState => {
+  draftState: MutableEditorState,
+): void => {
   const { direction, oldFocusedPresnoRef } = action;
   // needs parent and self, or their children ids
-  const oldParent = getOldParent(oldFocusedPresnoRef, oldState.synoMap);
+  const oldParent = getOldParent(oldFocusedPresnoRef, state.synoMap());
 
-  let newFocus;
   switch (direction) {
     case 'out': {
-      newFocus = navOut(
-        oldState.focus,
-        oldState.synoMap,
+      navOut(
+        state,
+        draftState.focus,
         oldFocusedPresnoRef,
       );
       break;
     }
     case 'in': {
-      newFocus = navIn(
-        oldState.focus,
-        oldState.grammarName,
-        oldState.synoMap,
-        oldFocusedPresnoRef,
+      navIn(
+        state,
+        draftState.focus,
       );
       break;
     }
     case 'prev': {
-      newFocus = navPrev(
-        oldState.focus,
-        oldState.grammarName,
-        oldState.synoMap,
+      navPrev(
+        state,
+        draftState.focus,
         oldFocusedPresnoRef,
         oldParent,
       );
       break;
     }
     case 'next': {
-      newFocus = navNext(
-        oldState.focus,
-        oldState.grammarName,
-        oldState.synoMap,
+      navNext(
+        state,
+        draftState.focus,
         oldFocusedPresnoRef,
         oldParent,
       );
@@ -59,10 +56,4 @@ export default (
       throw new Error('unrecognized navigation direction');
     }
   }
-
-  // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-  return {
-    ...oldState,
-    focus: newFocus,
-  };
 };

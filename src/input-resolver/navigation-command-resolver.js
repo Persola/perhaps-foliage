@@ -1,14 +1,14 @@
 // @flow
+import type { StateSelector } from '../types/state-selector';
 import type { ChildPresnoRef } from '../types/child-presno-ref';
-import type { EditorState } from '../types/editor-state';
 import type { ReduxAction } from '../types/redux-action';
 
-export default (key: string, editorState: EditorState): ReduxAction => {
+export default (key: string, state: StateSelector): ReduxAction => {
   let oldFocusedPresnoRef: ChildPresnoRef;
-  if (editorState.focus.presnoIndex === false) {
+  if (!state.inPresno()) {
     oldFocusedPresnoRef = {
       synoRef: true,
-      id: editorState.focus.synoId,
+      id: state.focusedSynoId(),
       relation: 'non-tree',
     };
   } else {
@@ -16,7 +16,7 @@ export default (key: string, editorState: EditorState): ReduxAction => {
       synoRef: false,
       parent: {
         synoRef: true,
-        id: editorState.focus.synoId,
+        id: state.focusedSynoId(),
         relation: 'parent',
       },
       index: 0,

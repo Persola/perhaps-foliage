@@ -1,16 +1,14 @@
 // @flow
-import type { EditorState } from '../../types/editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { StateSelector } from '../../types/state-selector';
 
 export default (
-  oldState: EditorState,
-): EditorState => {
-  if (oldState.interpreting !== false) {
+  state: StateSelector,
+  draftState: MutableEditorState,
+): void => {
+  if (state.interpreting()) {
     throw new Error('attempted to interpret while already interpreting');
   }
 
-  // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-  return {
-    ...oldState,
-    interpreting: true,
-  };
+  draftState.interpreting = true;
 };

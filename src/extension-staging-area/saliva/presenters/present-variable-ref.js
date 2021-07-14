@@ -1,4 +1,5 @@
 // @flow
+import type { StateSelector } from '../../../types/state-selector.js';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { Focus } from '../../../types/editor-state/focus.js';
 import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
@@ -6,11 +7,11 @@ import type { VariableRef } from '../types/synos/variable-ref.js';
 import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs.js';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   variableRef: VariableRef,
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
 ): VariableRefPresAttrs => {
   let valid = true;
@@ -18,7 +19,9 @@ export default (
   if (!variableRef.referent) {
     valid = false;
   } else {
-    name = getSyno(variableRef.referent).name;
+    const vr = state.getSyno(variableRef.referent.id);
+    if (vr.syntype !== 'functionParameter') throw new Error();
+    name = vr.name;
   }
 
   return {

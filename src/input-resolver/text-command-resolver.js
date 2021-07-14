@@ -1,15 +1,15 @@
 // @flow
-import type { EditorState } from '../types/editor-state';
+import type { StateSelector } from '../types/state-selector';
 import type { CharBackspace } from '../types/actions/char-backspace';
 
-export default (key: string, editorState: EditorState): (CharBackspace | false) => {
+export default (key: string, state: StateSelector): (CharBackspace | false) => {
   if (key === 'backspace') {
     return {
-      focusSynoId: editorState.focus.synoId,
+      focusSynoId: state.focusedSynoId(),
       // $FlowFixMe: need to type dependency between presnoIndex and charIndex
-      focusPresnoIndex: editorState.focus.presnoIndex,
+      focusPresnoIndex: state.focusedPresnoIndex(),
       // $FlowIssue: flow misses that charIndex is deterministically not false (module typing?)
-      focusCharIndex: editorState.focus.charIndex,
+      focusCharIndex: state.focusedCharIndex(),
       type: 'CHAR_BACKSPACE',
     };
   }

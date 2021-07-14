@@ -1,39 +1,37 @@
 // @flow
 import getChildPresnoRefs from './get-child-presno-refs';
 
-import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
-import type { SynoMap } from '../../../types/syno-map';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
 import type { Syno } from '../../../types/syno';
 
 export default (
-  oldFocus: Focus,
-  grammarName: GrammarName,
-  synoMap: SynoMap,
+  state: StateSelector,
+  draftState: MutableFocus,
   oldFocusedPresnoRef: ChildPresnoRef,
   oldParent: (Syno | false),
-): Focus => {
+): void => {
   if (!oldParent) {
     console.warn('ignoring navigation to previous sibling: focus syno is root');
-    return oldFocus;
+    return;
   }
 
-  if (oldFocus.charIndex !== false) {
-    if (oldFocus.charIndex === 0) {
-      console.warn('ignoring navigation to previous sibling: already on first character');
-      return oldFocus;
+  if (state.inText()) {
+    if (state.focusedCharIndex() === 0) {
+      console.warn('Ignoring navigation to previous sibling: already on first character');
+      return;
     }
 
-    return {
-      synoId: oldFocus.synoId,
-      presnoIndex: oldFocus.presnoIndex,
-      charIndex: oldFocus.charIndex - 1,
-    };
+    // $FlowFixMe: Flow doesn't look into selector interface
+    draftState.charIndex -= 1;
+    return;
   }
 
-  const siblingRefz = getChildPresnoRefs(oldParent, synoMap, grammarName);
-  if (siblingRefz.length > 0) {
+  const siblingRefz = getChildPresnoRefs(oldParent, state.synoMap(), state.grammarName());
+  if (siblingRefz.length <= 0) {
+    throw new Error('Navigate failed; parent has no children!?');
+  } else {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
       if (siblingRef.synoRef) {
         // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
@@ -43,27 +41,20 @@ export default (
       return siblingRef.index === oldFocusedPresnoRef.index;
     });
     if (oldFocusedPresnoBirthOrder === -1) {
-      throw new Error("cannot find old focused presno ID among parent's children");
+      throw new Error("Cannot find old focused presno ID among parent's children");
     } else if (oldFocusedPresnoBirthOrder === 0) {
-      console.warn('ignoring navigation to previous sibling: already focused on first sibling');
-      return oldFocus;
+      console.warn('Ignoring navigation to previous sibling: already focused on first sibling');
     } else {
       const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder - 1];
 
       if (newFocusPresnoRef.synoRef) {
-        return {
-          synoId: newFocusPresnoRef.id,
-          presnoIndex: false,
-          charIndex: false,
-        };
+        draftState.synoId = newFocusPresnoRef.id;
+        draftState.presnoIndex = false;
+        return;
       }
-      return {
-        synoId: oldParent.id,
-        presnoIndex: 0,
-        charIndex: false,
-      };
+
+      draftState.synoId = oldParent.id;
+      draftState.presnoIndex = 0;
     }
-  } else {
-    throw new Error('navigate failed; parent has no children!?');
   }
 };

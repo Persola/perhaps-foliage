@@ -1,43 +1,57 @@
 // @flow
-import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js';
 import presentFocusedSyntree from './presenters/present-focused-syntree.js';
 import presentSyntree from './presenters/present-syntree.js';
 
+import type { StateSelector } from '../types/state-selector.js';
 import type { EditorState } from '../types/editor-state.js';
 import type { EditorPresentation } from '../types/presenter/editor-presentation.js';
 import type { ReduxStore } from '../types/redux-store.js';
 import type { Renderer } from '../types/renderer.js';
 
-const generatePresentation = (editorState: EditorState): EditorPresentation => {
+const generatePresentation = (
+  state: StateSelector,
+  editorState: EditorState,
+): EditorPresentation => {
   const {
-    synoMap,
     grammarName,
     focus,
     resultSyntreeRootId,
   } = editorState;
-  const getSyno = createSynoFetcher(synoMap);
 
   return {
     stage: (
       !focus.synoId
         ? false
-        : presentFocusedSyntree(grammarName, focus.synoId, {}, getSyno, focus)
+        : presentFocusedSyntree(
+          state,
+          grammarName,
+          focus.synoId,
+          {},
+          focus,
+        )
     ),
     result: (
       !resultSyntreeRootId
         ? false
-        : presentSyntree(grammarName, resultSyntreeRootId, {}, getSyno, false)
+        : presentSyntree(
+          state,
+          grammarName,
+          resultSyntreeRootId,
+          {},
+          false,
+        )
     ),
   };
 };
 
 export default (
+  state: StateSelector,
   editorStateStore: ReduxStore,
   renderer: Renderer,
 ): ((void) => void) => { // eslint-disable-line function-paren-newline
-  const present = () => {
+  return () => {
     const editorState: EditorState = editorStateStore.getState();
-    const presentation = generatePresentation(editorState);
+    const presentation = generatePresentation(state, editorState);
     const { grammarName, resultOutdated, interpreting } = editorState;
     renderer.render(
       editorStateStore,
@@ -47,8 +61,4 @@ export default (
       interpreting,
     );
   };
-
-  editorStateStore.subscribe(present);
-
-  return present;
 };

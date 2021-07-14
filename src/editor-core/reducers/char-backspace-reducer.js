@@ -1,30 +1,28 @@
 // @flow
 import synoMapReducer from './char-backspace/syno-map';
 
-import type { EditorState } from '../../types/editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
 import type { CharBackspace } from '../../types/actions/char-backspace';
+import type { StateSelector } from '../../types/state-selector';
 
 export default (
-  oldState: EditorState,
+  state: StateSelector,
   action: CharBackspace,
-): EditorState => {
-  if (oldState.focus.charIndex === false) {
+  draftState: MutableEditorState,
+): void => {
+  if (!state.inText()) {
     throw new TypeError('CHAR_BACKSPACE action recieved while not focused on text syno');
   }
 
-  // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-  return {
-    ...oldState,
-    synoMap: synoMapReducer(
-      oldState.synoMap,
-      action,
-      oldState.textHostRefs,
-    ),
-    focus: (
-      oldState.focus.charIndex === 0
-        ? oldState.focus
-        : ({ ...oldState.focus, // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-          charIndex: oldState.focus.charIndex - 1 })
-    ),
-  };
+  synoMapReducer(
+    state,
+    action,
+    draftState.synoMap,
+  );
+  if (state.focusedCharIndex() === 0) {
+    console.warn('Ignoring backspace: at beginning of text');
+  } else {
+    // $FlowFixMe: Flow doesn't look into selector interface
+    draftState.focus.charIndex -= 1;
+  }
 };

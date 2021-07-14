@@ -1,7 +1,5 @@
-const path = require('path');
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -9,7 +7,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 });
 
-const sharedConfig = {
+module.exports = {
   mode: 'none',
   entry: './src/app.js',
   module: {
@@ -52,23 +50,3 @@ const sharedConfig = {
   },
   devtool: 'source-map',
 };
-
-const webConfig = {
-  ...sharedConfig,
-  target: 'browserslist',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'web-app.js',
-  },
-};
-
-const electronConfig = {
-  ...sharedConfig,
-  target: 'electron13.1-main',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'electron-app.js',
-  },
-};
-
-module.exports = [webConfig, electronConfig];

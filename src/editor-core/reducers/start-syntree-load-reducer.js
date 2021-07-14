@@ -1,11 +1,10 @@
 // @flow
-import type { EditorState } from '../../types/editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { StateSelector } from '../../types/state-selector';
 
 export default (
-  oldState: EditorState,
-): EditorState => {
-  return {
-    ...oldState,
-    loadingSyntree: true,
-  };
+  state: StateSelector,
+  draftState: MutableEditorState,
+): void => {
+  draftState.loadingSyntree = true;
 };

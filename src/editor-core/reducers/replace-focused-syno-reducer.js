@@ -1,22 +1,27 @@
 // @flow
 import synoMapReducer from './replace-focused-syno/syno-map';
 
-import type { EditorState } from '../../types/editor-state.js';
+import type { StateSelector } from '../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
 
 export default (
-  oldState: EditorState,
+  state: StateSelector,
   action: ReplaceFocusedSyno,
-): EditorState => {
-  // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-  return {
-    ...oldState,
-    synoMap: synoMapReducer(oldState.synoMap, action),
-    focus: {
-      synoId: action.newSynoId,
-      presnoIndex: false,
-      charIndex: false,
-    },
-    resultOutdated: true,
+  draftState: MutableEditorState,
+): void => {
+  synoMapReducer(
+    state,
+    state.synoMap(),
+    action,
+    draftState.synoMap,
+  );
+
+  draftState.focus = {
+    synoId: action.newSynoId,
+    presnoIndex: false,
+    charIndex: false,
   };
+
+  draftState.resultOutdated = true;
 };

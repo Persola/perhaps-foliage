@@ -2,6 +2,7 @@
 import NorPrimitiveId from '../nor-primitive-id.js';
 import presentParameters from './present-parameters.js';
 
+import type { StateSelector } from '../../../types/state-selector.js';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../../types/presenter/present-syno.js';
 import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
@@ -11,11 +12,11 @@ import type { FunctionDefinition } from '../types/synos/function-definition.js';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs.js';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   funkshunDef: FunctionDefinition,
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
@@ -29,12 +30,12 @@ export default (
     body = {
       presnoRef: true,
       id: presentSyno(
+        state,
         grammar,
         presnoMap,
         funkshunDef.id,
-        getSyno(funkshunDef.body),
+        state.getSyno(funkshunDef.body.id),
         scope,
-        getSyno,
         focus,
         presentSyno,
       ),
@@ -45,12 +46,12 @@ export default (
     syntype: 'functionDefinition',
     name: funkshunDef.name,
     parameters: presentParameters(
+      state,
       grammar,
       presnoMap,
       funkshunDef.id,
       funkshunDef.parameters,
       scope,
-      getSyno,
       focus,
       presentSyno,
     ),

@@ -3,22 +3,23 @@ import presentArguments from './present-arguments.js';
 import NorPrimitiveId from '../nor-primitive-id.js';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
+import type { StateSelector } from '../../../types/state-selector.js';
 import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../../types/presenter/present-syno.js';
 import type { Focus } from '../../../types/editor-state/focus.js';
 import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
+import type { Syno } from '../../../types/syno';
 import type { FunctionCall } from '../types/synos/function-call.js';
 import type { FunctionDefinition } from '../types/synos/function-definition.js';
-import type { VariableRef } from '../types/synos/variable-ref.js';
 import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs.js';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): FunctionCallPresAttrs => {
@@ -30,17 +31,19 @@ export default (
   if (!funkshunCall.callee) {
     valid = false;
   } else {
-    const calleeSyno: (VariableRef | FunctionDefinition) = getSyno(funkshunCall.callee);
+    const calleeSyno: Syno = state.getSyno(funkshunCall.callee.id);
+
     if (calleeSyno.syntype === 'functionDefinition') {
+      const calleeFuncDef: FunctionDefinition = calleeSyno;
       resolved = true;
       if (funkshunCall.callee.id === NorPrimitiveId) {
-        name = calleeSyno.name;
+        name = calleeFuncDef.name;
       }
 
       if (argumentParameterMismatch(
-        calleeSyno,
-        funkshunCall.argumentz.map(arg => getSyno(arg)),
-        getSyno,
+        calleeFuncDef,
+        funkshunCall.argumentz.map(argRef => state.getArgument(argRef.id)),
+        state,
       )) {
         valid = false;
       }
@@ -49,12 +52,12 @@ export default (
         callee = {
           presnoRef: true,
           id: presentSyno(
+            state,
             grammar,
             presnoMap,
             funkshunCall.id,
-            calleeSyno,
+            calleeFuncDef,
             scope,
-            getSyno,
             focus,
             presentSyno,
           ),
@@ -90,12 +93,12 @@ export default (
     syntype: 'functionCall',
     name,
     argumentz: presentArguments(
+      state,
       grammar,
       presnoMap,
       funkshunCall.id,
       funkshunCall.argumentz,
       scope,
-      getSyno,
       focus,
       presentSyno,
     ),

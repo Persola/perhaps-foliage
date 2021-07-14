@@ -3,12 +3,13 @@ import * as React from 'react';
 import SyntacticNode from './syntactic-node.jsx';
 import OutdatedMessage from './outdated-message.jsx';
 import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
-import editorStateStore from '../../editor-core/editor-state-store';
 
+import type { ReduxStore } from '../../types/redux-store';
 import type { GrammarName } from '../../types/editor-state/grammar-name';
 import type { Prestree } from '../../types/presenter/prestree';
 
 type Props = {
+  editorStateStore: ReduxStore,
   grammarName: GrammarName,
   codePresentation: Prestree | false,
   outdated: boolean,
@@ -37,7 +38,7 @@ const dragOverCodeView = e => {
   e.preventDefault();
 };
 
-const dropCodeView = e => {
+const dropCodeView = (editorStateStore, e) => {
   e.stopPropagation();
   e.preventDefault();
   e.target.classList.remove('hovering-file');
@@ -49,12 +50,15 @@ const dropCodeView = e => {
 
 export default (props: Props): React.Node => {
   const {
+    editorStateStore,
     grammarName,
     codePresentation,
     outdated,
     interpreting,
     dragDrop,
   } = props;
+
+  const boundDropCodeView = e => { dropCodeView(editorStateStore, e); };
 
   let content;
   if (codePresentation === false) {
@@ -84,7 +88,7 @@ export default (props: Props): React.Node => {
       onDragEnter={dragDrop ? dragEnterCodeView : null}
       onDragLeave={dragDrop ? dragLeaveCodeView : null}
       onDragOver={dragDrop ? dragOverCodeView : null}
-      onDrop={dragDrop ? dropCodeView : null}
+      onDrop={dragDrop ? boundDropCodeView : null}
     >
       { outdated ? outdatedMessage : null }
       {content}

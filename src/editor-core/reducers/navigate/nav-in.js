@@ -1,53 +1,40 @@
 // @flow
 import getChildPresnoRefs from './get-child-presno-refs';
 
-import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
-import type { SynoMap } from '../../../types/syno-map';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
 
 export default (
-  oldFocus: Focus,
-  grammarName: GrammarName,
-  synoMap: SynoMap,
-  oldFocusedPresnoRef: ChildPresnoRef,
-): Focus => {
-  if (!oldFocusedPresnoRef.synoRef) {
-    if (oldFocus.charIndex !== false) {
-      console.warn('cannot navigate down: editing text');
-      return oldFocus;
-    }
-
-    return {
-      synoId: oldFocus.synoId,
-      presnoIndex: oldFocus.presnoIndex,
-      charIndex: 0, // enter beginning of name
-    };
+  state: StateSelector,
+  draftState: MutableFocus,
+): void => {
+  if (state.inText()) {
+    console.warn('cannot navigate down: editing text');
+    return;
   }
 
-  const oldFocusedPresno: Syno = synoMap[oldFocusedPresnoRef.id];
+  if (state.inPresno()) {
+    draftState.charIndex = 0; // enter beginning of name
+    return;
+  }
 
-  if (getChildPresnoRefs(oldFocusedPresno, synoMap, grammarName).length === 0) {
+  const childPresnoRefs = getChildPresnoRefs(
+    state.focusedSyno(),
+    state.synoMap(),
+    state.grammarName(),
+  );
+
+  if (childPresnoRefs.length === 0) {
     console.warn('ignoring navigation inwards: no children');
-    return oldFocus;
+    return;
   }
-  const newFocusPresnoRef: ChildPresnoRef = getChildPresnoRefs(
-    oldFocusedPresno,
-    synoMap,
-    grammarName,
-  )[0];
+  const newFocusPresnoRef: ChildPresnoRef = childPresnoRefs[0];
 
   if (newFocusPresnoRef.synoRef) {
-    return {
-      synoId: newFocusPresnoRef.id,
-      presnoIndex: false,
-      charIndex: false,
-    };
+    draftState.synoId = newFocusPresnoRef.id;
+    return;
   }
-  return {
-    synoId: oldFocusedPresno.id,
-    presnoIndex: 0,
-    charIndex: false,
-  };
+
+  draftState.presnoIndex = 0;
 };

@@ -27,6 +27,7 @@ export default (props: Props): React.Node => {
     <div className="editor mousetrap">
       <CodeView
         key="stage"
+        editorStateStore={editorStateStore}
         grammarName={grammarName}
         codePresentation={stageful}
         outdated={false}
@@ -39,6 +40,7 @@ export default (props: Props): React.Node => {
       />
       <CodeView
         key="result"
+        editorStateStore={editorStateStore}
         grammarName={grammarName}
         codePresentation={result}
         outdated={resultOutdated}

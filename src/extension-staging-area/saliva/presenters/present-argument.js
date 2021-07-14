@@ -1,4 +1,5 @@
 // @flow
+import type { StateSelector } from '../../../types/state-selector.js';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../../types/presenter/present-syno.js';
 import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
@@ -8,11 +9,11 @@ import type { Argument } from '../types/synos/argument.js';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs.js';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   argument: Argument,
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): ArgumentPresAttrs => {
@@ -20,7 +21,7 @@ export default (
 
   let name = false;
   if (argument.parameter) {
-    name = getSyno(argument.parameter).name;
+    name = state.getFunctionParameter(argument.parameter.id).name;
   } else {
     valid = false;
   }
@@ -30,12 +31,12 @@ export default (
     value = {
       presnoRef: true,
       id: presentSyno(
+        state,
         grammar,
         presnoMap,
         argument.id,
-        getSyno(argument.value),
+        state.getSyno(argument.value.id),
         scope,
-        getSyno,
         focus,
         presentSyno,
       ),

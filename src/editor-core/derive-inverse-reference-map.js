@@ -1,10 +1,7 @@
 // @flow
-import createSynoFetcher from '../syntree-utils/create-syno-fetcher.js';
-import ascendToRoot from '../syntree-utils/ascend-to-root.js';
-
 import type { SynoId } from '../types/syno-id.js';
 import type { SynoMap } from '../types/syno-map.js';
-import type { MutableInverseReferenceMap } from '../types/editor-state/mutable-inverse-reference-map.js';
+import type { MutableInverseReferenceMap } from '../types/editor-state/mutable/mutable-inverse-reference-map.js';
 
 const createOrAdd = (
   irm: MutableInverseReferenceMap,
@@ -47,8 +44,6 @@ const depthFirstBuildInverseReferences = (
   return irm;
 };
 
-export default (synoMap: SynoMap): MutableInverseReferenceMap => {
-  const getSyno = createSynoFetcher(synoMap);
-  const root = ascendToRoot(Object.keys(synoMap)[0], getSyno);
-  return depthFirstBuildInverseReferences({}, synoMap, root.id);
+export default (synoMap: SynoMap, rootId: SynoId): MutableInverseReferenceMap => {
+  return depthFirstBuildInverseReferences({}, synoMap, rootId);
 };

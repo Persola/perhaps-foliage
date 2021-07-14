@@ -1,6 +1,7 @@
 // @flow
 import presentSyno from './present-syno.js';
 
+import type { StateSelector } from '../../types/state-selector.js';
 import type { SynoId } from '../../types/syno-id.js';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map.js';
@@ -9,23 +10,20 @@ import type { Focus } from '../../types/editor-state/focus.js';
 import type { GrammarName } from '../../types/editor-state/grammar-name.js';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   rootSynoId: SynoId,
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
   presentSyno(
+    state,
     grammar,
     mutablePresnoMap,
     false,
-    getSyno({
-      synoRef: true,
-      id: rootSynoId,
-    }),
+    state.getSyno(rootSynoId),
     scope,
-    getSyno,
     focus,
     presentSyno,
   );

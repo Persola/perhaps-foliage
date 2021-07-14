@@ -1,4 +1,5 @@
 // @flow
+import type { StateSelector } from '../../../types/state-selector.js';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
 import type { PresentSyno } from '../../../types/presenter/present-syno.js';
 import type { Focus } from '../../../types/editor-state/focus.js';
@@ -7,11 +8,11 @@ import type { Titan } from '../types/synos/titan.js';
 import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-attrs';
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   titan: Titan,
   scope: Object,
-  getSyno: Function,
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): TitanPresAttrs => ({
@@ -20,12 +21,12 @@ export default (
   child: {
     presnoRef: true,
     id: presentSyno(
+      state,
       grammar,
       presnoMap,
       titan.id,
-      getSyno(titan.child),
+      state.getSyno(titan.child.id),
       scope,
-      getSyno,
       focus,
       presentSyno,
     ),

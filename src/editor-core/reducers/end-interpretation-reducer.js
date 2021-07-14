@@ -1,23 +1,24 @@
 // @flow
-import synoMapReducer from './end-interpretation/syno-map';
+import dup from '../../syntree-utils/dup.js';
 
-import type { EditorState } from '../../types/editor-state.js';
+import type { StateSelector } from '../../types/state-selector';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
+import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableSyno } from '../../types/mutable-syno';
 
 export default (
-  oldState: EditorState,
+  state: StateSelector,
   action: EndInterpretation,
-): EditorState => {
-  if (oldState.interpreting !== true) {
+  draftState: MutableEditorState,
+): void => {
+  if (!state.interpreting()) {
     throw new Error('attempted to stop interpreting while not interpreting');
   }
 
-  // $FlowIssue: poorly typed ECMA built-in (Object.assign)
-  return {
-    ...oldState,
-    synoMap: synoMapReducer(oldState.synoMap, action),
-    resultSyntreeRootId: action.result.id,
-    interpreting: false,
-    resultOutdated: false,
-  };
+  const result: MutableSyno = dup(action.result);
+  draftState.synoMap[result.id] = result;
+
+  draftState.resultSyntreeRootId = action.result.id;
+  draftState.interpreting = false;
+  draftState.resultOutdated = false;
 };

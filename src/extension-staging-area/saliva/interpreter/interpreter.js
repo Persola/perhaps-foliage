@@ -2,13 +2,14 @@
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js';
 import resolveRef from './resolve-ref.js';
 
-import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';
+import type { StateSelector } from '../../../types/state-selector';
 import type { Syno } from '../../../types/syno';
+import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';
 
 const interpreter = (
   interpretee: Syno,
   scope: [],
-  getSyno: Function,
+  state: StateSelector,
 ): InterpretationResolution => {
   switch (interpretee.syntype) {
     case 'booleanLiteral': {
@@ -18,7 +19,7 @@ const interpreter = (
       };
     }
     case 'functionCall': {
-      return interpretFunctionCall(interpreter, scope, interpretee, getSyno);
+      return interpretFunctionCall(interpreter, scope, interpretee, state);
     }
     case 'functionDefinition': {
       return {

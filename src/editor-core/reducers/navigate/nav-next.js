@@ -1,35 +1,34 @@
 // @flow
 import getChildPresnoRefs from './get-child-presno-refs';
-import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
-import type { SynoMap } from '../../../types/syno-map';
+
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
 import type { Syno } from '../../../types/syno';
 
 export default (
-  oldFocus: Focus,
-  grammarName: GrammarName,
-  synoMap: SynoMap,
+  state: StateSelector,
+  draftState: MutableFocus,
   oldFocusedPresnoRef: ChildPresnoRef,
   oldParent: (Syno | false),
-): Focus => {
-  if (!oldParent) {
-    console.warn('ignoring navigation to next sibling: focus syno is root');
-    return oldFocus;
+): void => {
+  if (state.focusedSynoIsRoot()) {
+    console.warn('Ignoring navigation to next sibling: focus syno is root');
+    return;
   }
 
-  if (oldFocus.charIndex !== false) {
-    const oldSyno = synoMap[oldFocus.synoId];
+  if (state.inText()) {
+    const oldSyno = state.focusedSyno();
     let oldName: string;
     if (oldSyno.syntype === 'argument') {
       if (oldSyno.parameter === false) {
         throw new TypeError(
-          'tried to navigate inside shouldn\'t-exist name of argument lacking parameter (flow)',
+          'Tried to navigate inside shouldn\'t-exist name of argument lacking parameter (flow)',
         );
       }
-      const oldParameter = synoMap[oldSyno.parameter.id];
+      const oldParameter = state.getSyno(oldSyno.parameter.id);
       if (oldParameter.syntype !== 'functionParameter') {
-        throw new Error('wrong syntype from synomap (flow)');
+        throw new Error('Wrong syntype from synomap (flow)');
       }
       oldName = oldParameter.name;
     } else {
@@ -37,26 +36,27 @@ export default (
         oldSyno.syntype !== 'functionParameter'
         && oldSyno.syntype !== 'functionDefinition'
       ) {
-        throw new Error('wrong syntype from synomap');
+        throw new Error('Wrong syntype from synomap');
       }
       oldName = oldSyno.name;
     }
     const nameLength: number = oldName.length;
 
-    if (oldFocus.charIndex > nameLength) {
-      console.warn('ignoring navigation to previous sibling: already on last character');
-      return oldFocus;
+    // $FlowFixMe: Flow doesn't look into selector interface
+    if (state.focusedCharIndex() > nameLength) {
+      console.warn('Ignoring navigation to previous sibling: already on last character');
+      return;
     }
 
-    return {
-      synoId: oldFocus.synoId,
-      presnoIndex: oldFocus.presnoIndex,
-      charIndex: oldFocus.charIndex + 1,
-    };
+    draftState.charIndex += 1;
+    return;
   }
 
-  const siblingRefz = getChildPresnoRefs(oldParent, synoMap, grammarName);
-  if (siblingRefz.length > 0) {
+  // $FlowFixMe: Flow doesn't look into selector interface
+  const siblingRefz = getChildPresnoRefs(oldParent, state.synoMap(), state.grammarName());
+  if (siblingRefz.length <= 0) {
+    throw new Error('navigate failed; parent has no children!?');
+  } else {
     const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
       if (siblingRef.synoRef) {
         // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
@@ -65,28 +65,23 @@ export default (
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.index === oldFocusedPresnoRef.index;
     });
+
     if (oldFocusedPresnoBirthOrder === -1) {
-      throw new Error("cannot find old focused presno ID among parent's children");
+      throw new Error("Cannot find old focused presno ID among parent's children");
     } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
-      console.warn('ignoring navigation to previous sibling: already focused on last sibling');
-      return oldFocus;
+      console.warn('Ignoring navigation to previous sibling: already focused on last sibling');
     } else {
-      const newFocusPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
+      const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
 
       if (newFocusPresnoRef.synoRef) {
-        return {
-          synoId: newFocusPresnoRef.id,
-          presnoIndex: false,
-          charIndex: false,
-        };
+        draftState.synoId = newFocusPresnoRef.id;
+        draftState.presnoIndex = false;
+        return;
       }
-      return {
-        synoId: oldParent.id,
-        presnoIndex: 0,
-        charIndex: false,
-      };
+
+      // $FlowFixMe: Flow doesn't look into selector interface
+      draftState.synoId = oldParent.id;
+      draftState.presnoIndex = 0;
     }
-  } else {
-    throw new Error('navigate failed; parent has no children!?');
   }
 };

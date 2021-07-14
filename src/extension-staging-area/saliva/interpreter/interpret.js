@@ -1,16 +1,16 @@
 // @flow
 import interpreter from './interpreter.js';
-import createSynoFetcher from '../../../syntree-utils/create-syno-fetcher.js';
 import ascendToRoot from '../../../syntree-utils/ascend-to-root.js';
+
+import type { StateSelector } from '../../../types/state-selector';
 import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';
 import type { EditorState } from '../../../types/editor-state';
 
-export default (editorState: EditorState): InterpretationResolution => {
+export default (editorState: EditorState, state: StateSelector): InterpretationResolution => {
   let resolution: InterpretationResolution;
   try {
-    const getSyno = createSynoFetcher(editorState.synoMap);
-    const rootOfFocused = ascendToRoot(editorState.focus.synoId, getSyno);
-    resolution = interpreter(rootOfFocused, [], getSyno);
+    const rootOfFocused = ascendToRoot(editorState.focus.synoId, state);
+    resolution = interpreter(rootOfFocused, [], state);
   } catch (error) {
     throw new Error(`unexpected error during interpretation: "${error.message}"`);
   }

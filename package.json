@@ -5,12 +5,12 @@
   "scripts": {
     "clean": "rm -dr dist/* tmp/*",
     "clean:dist": "rm -dr dist/*",
-    "build": "webpack",
-    "build:noisily": "webpack --verbose",
+    "build:web": "webpack --config webpack.web.config.js",
+    "build:el": "webpack --config webpack.electron.config.js",
     "start:web": "node --inspect ./web-repl/server.js",
-    "start:electron": "electron electron-repl/",
-    "start:wds": "webpack serve",
-    "redo": "npm run clean:dist; npm run build; npm run start:web",
+    "start:el": "electron electron-repl/",
+    "start:wds": "webpack serve --target browserslist",
+    "redo": "npm run clean:dist; npm run build:web; npm run start:web",
     "type": "flow --show-all-errors",
     "lint": "eslint --ext js,jsx .",
     "lint-fix": "eslint --ext js,jsx --fix ."
@@ -22,6 +22,7 @@
   "dependencies": {
     "core-js": "3.15.2",
     "electron": "~13.1.5",
+    "immer": "^9.0.5",
     "json-loader": "~0.5.7",
     "mousetrap": "~1.6.5",
     "react": "~17.0.2",
@@ -73,7 +74,7 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!{test,node_modules,dist,tmp}/**",
-      "!webpack.config.js"
+      "!webpack*config.js"
     ],
     "coverageDirectory": "tmp/coverage",
     "coverageReporters": [

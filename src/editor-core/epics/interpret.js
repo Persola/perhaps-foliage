@@ -7,9 +7,9 @@ import { ofType } from 'redux-observable';
 
 import interpret from '../../extension-staging-area/saliva/interpreter/interpret';
 
-export default (action$, state$) => action$.pipe(
+export default (action$, state$, state) => action$.pipe(
   ofType('START_INTERPRETATION'),
-  map(() => interpret(state$.value)),
+  map(() => interpret(state$.value, state)),
   map(resolution => ({
     type: 'END_INTERPRETATION',
     result: resolution.result,

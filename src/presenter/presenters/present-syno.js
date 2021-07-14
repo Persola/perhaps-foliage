@@ -2,6 +2,7 @@
 import salivaPresenters from '../../extension-staging-area/saliva/presenters/presenters.js';
 import pantheonPresenters from '../../extension-staging-area/pantheon/presenters/presenters.js';
 
+import type { StateSelector } from '../../types/state-selector.js';
 import type { Syno } from '../../types/syno.js';
 import type { SynoId } from '../../types/syno-id.js';
 import type { Presno } from '../../types/presenter/presno.js';
@@ -16,12 +17,12 @@ const PRESENTERS_BY_GRAMMAR = {
 };
 
 export default (
+  state: StateSelector,
   grammar: GrammarName,
   presnoMap: MutablePresnoMap,
   parentId: (SynoId | false),
   syno: (Syno),
   scope: {},
-  getSyno: Function,
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): SynoId => {
@@ -36,11 +37,11 @@ export default (
   }
 
   const presentationAttrs = presenter(
+    state,
     grammar,
     presnoMap,
     syno,
     scope,
-    getSyno,
     focus,
     presentSyno,
   );

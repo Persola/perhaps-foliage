@@ -1,4 +1,5 @@
 // @flow
+import type { StateSelector } from '../../../types/state-selector';
 import type { SynoRef } from '../../../types/syno-ref';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { Argument } from '../types/synos/argument';
@@ -6,7 +7,7 @@ import type { Argument } from '../types/synos/argument';
 export default (
   functionDefinition: FunctionDefinition,
   argumentz: $ReadOnlyArray<Argument>,
-  getSyno: Function,
+  state: StateSelector,
 ): (false | string
 ) => {
   const argsWithoutParams = argumentz.filter(arg => arg.parameter === false);
@@ -45,7 +46,11 @@ export default (
     .includes(arg.parameter && arg.parameter.id));
 
   const unsatisfiedParamNames = (
-    unsatisfiedParamRefs.map(paramRef => getSyno(paramRef).name)
+    unsatisfiedParamRefs.map(paramRef => {
+      const param = state.getSyno(paramRef.id);
+      if (param.syntype !== 'functionParameter') throw new Error();
+      return param.name;
+    })
   );
 
   if ((unsatisfiedParamRefs.length !== 0) || (extraArgs.length !== 0)) {

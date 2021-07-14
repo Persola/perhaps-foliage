@@ -3,7 +3,6 @@
   * reorg
     * presno and syno clarification
     * move command validity checks into reducers (concurrent redux commands)
-    * organize utilities/wrap some data in objects
   * wait, should synos actually have IDs?
     * that is to say, should unique IDs be replaced with ids based on the path from the root?
       * when a node is grafted, the editor can handle updating references
@@ -19,6 +18,7 @@
     * ability to export types to language libraries
     * actually make libraries for saliva and pantheon
   * [?] use for child syno of in inverse reference map and destroy syno
+  * [?] use proxy-memoize or another selector memoizer
   * [?] organize types
   * [?] add flow-runtime
   * [?] add prettier

@@ -1,35 +1,27 @@
 // @flow
-import type { Focus } from '../../../types/editor-state/focus';
-import type { SynoMap } from '../../../types/syno-map';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
 
 export default (
-  oldFocus: Focus,
-  synoMap: SynoMap,
+  state: StateSelector,
+  draftState: MutableFocus,
   oldFocusedPresnoRef: ChildPresnoRef,
-): Focus => {
-  if (oldFocusedPresnoRef.synoRef) {
-    const oldFocusedPresno = synoMap[oldFocusedPresnoRef.id];
-    if (oldFocusedPresno.parent === false) {
-      console.warn('ignoring navigation outwards: no parent');
-      return oldFocus;
-    }
-    return {
-      synoId: oldFocusedPresno.parent.id,
-      presnoIndex: false,
-      charIndex: false,
-    };
+): void => {
+  if (state.inText()) {
+    draftState.charIndex = false;
+    return;
   }
-  if (oldFocus.charIndex === false) {
-    return {
-      synoId: oldFocus.synoId,
-      presnoIndex: false,
-      charIndex: false,
-    };
+  if (state.inPresno()) {
+    draftState.presnoIndex = false;
+    return;
   }
-  return {
-    synoId: oldFocus.synoId,
-    presnoIndex: oldFocus.presnoIndex,
-    charIndex: false,
-  };
+
+  // $FlowFixMe: Flow doesn't look into selector interface
+  const oldFocusedPresno = state.getSyno(oldFocusedPresnoRef.id);
+  if (oldFocusedPresno.parent === false) {
+    console.warn('Ignoring navigation outwards: no parent');
+    return;
+  }
+  draftState.synoId = oldFocusedPresno.parent.id;
 };
