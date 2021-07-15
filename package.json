@@ -42,9 +42,6 @@
     "babel-jest": "~27.0.6",
     "babel-loader": "~8.2.2",
     "css-loader": "~5.2.6",
-    "enzyme": "~3.11.0",
-    "enzyme-adapter-react-16": "~1.15.6",
-    "enzyme-to-json": "~3.4.4",
     "eslint": "~7.30.0",
     "eslint-config-airbnb": "~18.2.1",
     "eslint-plugin-flowtype": "~5.8.0",
@@ -52,10 +49,7 @@
     "eslint-plugin-jsx-a11y": "~6.4.1",
     "eslint-plugin-react": "~7.24.0",
     "flow-bin": "~0.154.0",
-    "flow-typed": "^3.3.1",
     "html-webpack-plugin": "~5.3.2",
-    "identity-obj-proxy": "~3.0.0",
-    "jest": "~26.0.1",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "node-sass": "~6.0.1",
     "react-test-renderer": "~16.13.1",
@@ -64,36 +58,5 @@
     "webpack": "~5.44.0",
     "webpack-cli": "~4.7.2",
     "webpack-dev-server": "~3.11.2"
-  },
-  "jest": {
-    "setupFiles": [
-      "raf/polyfill",
-      "./test/setup.js"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!{test,node_modules,dist,tmp}/**",
-      "!webpack*config.js"
-    ],
-    "coverageDirectory": "tmp/coverage",
-    "coverageReporters": [
-      "text-summary",
-      "html"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 5,
-        "functions": 20,
-        "lines": 10,
-        "statements": 10
-      }
-    },
-    "snapshotSerializers": [
-      "./node_modules/enzyme-to-json/serializer.js"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(css|scss|ya?ml)$": "identity-obj-proxy"
-    }
   }
 }
