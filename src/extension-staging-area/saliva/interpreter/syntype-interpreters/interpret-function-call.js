@@ -1,7 +1,7 @@
 // @flow
-import NorPrimitiveId from '../../nor-primitive-id.js';
+import NorPrimitiveId from '../../nor-primitive-id';
 import interpretArgs from './interpret-function-call/interpret-args';
-import norPrimitive from './interpret-function-call/nor-primitive.js';
+import norPrimitive from './interpret-function-call/nor-primitive';
 import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
 
 import type { StateSelector } from '../../../../types/state-selector';

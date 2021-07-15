@@ -1,5 +1,5 @@
-import createInterpretForStore from '../../../src/extension-staging-area/saliva/interpreter/create-interpret-for-store.js';
-import editorStateStore from '../../../src/editor-core/editor-state-store.js'
+import createInterpretForStore from '../../../src/extension-staging-area/saliva/interpreter/create-interpret-for-store';
+import editorStateStore from '../../../src/editor-core/editor-state-store'
 
 describe ('interpretStage', () => {
   const mockResult = {};

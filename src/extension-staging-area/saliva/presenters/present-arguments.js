@@ -1,13 +1,13 @@
 // @flow
-import type { StateSelector } from '../../../types/state-selector.js';
-import type { Syno } from '../../../types/syno.js';
-import type { SynoRef } from '../../../types/syno-ref.js';
-import type { SynoId } from '../../../types/syno-id.js';
-import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
-import type { PresentSyno } from '../../../types/presenter/present-syno.js';
-import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
-import type { Focus } from '../../../types/editor-state/focus.js';
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
+import type { StateSelector } from '../../../types/state-selector';
+import type { Syno } from '../../../types/syno';
+import type { SynoRef } from '../../../types/syno-ref';
+import type { SynoId } from '../../../types/syno-id';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
+import type { PresentSyno } from '../../../types/presenter/present-syno';
+import type { PresnoRef } from '../../../types/presenter/presno-ref';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
 
 export default (
   state: StateSelector,

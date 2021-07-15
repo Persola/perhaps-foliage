@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Editor from '../../../../src/renderer/components/editor.jsx';
-import expectSnapshotMatch from '../../../expect-snapshot-match.js';
+import Editor from '../../../../src/renderer/components/editorx';
+import expectSnapshotMatch from '../../../expect-snapshot-match';
 
-import stagePresentation from '../../../data-mocks/presentations/function-call.json';
-import resultPresentation from '../../../data-mocks/presentations/boolean-literal.json';
+import stagePresentation from '../../../data-mocks/presentations/function-callon';
+import resultPresentation from '../../../data-mocks/presentations/boolean-literalon';
 
 describe ('Editor', () => {
   const interpret = jest.fn()

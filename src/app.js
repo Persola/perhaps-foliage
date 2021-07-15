@@ -3,12 +3,12 @@ import 'core-js';
 import Mousetrap from 'mousetrap';
 import { enableMapSet } from 'immer';
 
-import createPresent from './presenter/create-present.js';
+import createPresent from './presenter/create-present';
 import Renderer from './renderer/renderer.jsx';
-import createEditorStateStore from './editor-core/create-editor-state-store.js';
-import createInputResolver from './input-resolver/create-input-resolver.js';
-import createFocusSyno from './create-focus-syno.js';
-import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js';
+import createEditorStateStore from './editor-core/create-editor-state-store';
+import createInputResolver from './input-resolver/create-input-resolver';
+import createFocusSyno from './create-focus-syno';
+import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
 
 require('./stylesheet.sass');
 require('./extension-staging-area/saliva/stylesheet.sass');

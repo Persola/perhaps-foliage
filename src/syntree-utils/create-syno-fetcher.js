@@ -1,6 +1,6 @@
 // @flow
-import type { SynoRef } from '../types/syno-ref.js';
-import type { Syno } from '../types/syno.js';
+import type { SynoRef } from '../types/syno-ref';
+import type { Syno } from '../types/syno';
 
 export default (synoMap: {}): ((SynoRef) => Syno) => {
   return (

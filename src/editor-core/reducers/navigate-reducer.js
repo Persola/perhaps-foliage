@@ -5,7 +5,7 @@ import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
 import getOldParent from './navigate/get-old-parent';
 
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { Navigate } from '../../types/actions/navigate';
 import type { StateSelector } from '../../types/state-selector';
 

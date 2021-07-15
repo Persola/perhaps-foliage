@@ -1,8 +1,8 @@
 import * as React from 'react';
-import BooleanLiteral from '../../../../../src/extension-staging-area/saliva/renderer/components/syntactic-nodes/boolean-literal.jsx';
-import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
+import BooleanLiteral from '../../../../../src/extension-staging-area/saliva/renderer/components/syntactic-nodes/boolean-literalx';
+import expectSnapshotMatch from '../../../../expect-snapshot-match';
 
-import booleanLiteralPres from '../../../../data-mocks/presentations/boolean-literal.json';
+import booleanLiteralPres from '../../../../data-mocks/presentations/boolean-literalon';
 
 describe ('BooleanLiteral', () => {
   const validProps = {

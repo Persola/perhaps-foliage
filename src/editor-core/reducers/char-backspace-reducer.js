@@ -1,7 +1,7 @@
 // @flow
 import synoMapReducer from './char-backspace/syno-map';
 
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { CharBackspace } from '../../types/actions/char-backspace';
 import type { StateSelector } from '../../types/state-selector';
 

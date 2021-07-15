@@ -1,6 +1,6 @@
 // @flow
-import interpreter from './interpreter.js';
-import ascendToRoot from '../../../syntree-utils/ascend-to-root.js';
+import interpreter from './interpreter';
+import ascendToRoot from '../../../syntree-utils/ascend-to-root';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';

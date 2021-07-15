@@ -1,9 +1,9 @@
 // @flow
-import dup from '../../syntree-utils/dup.js';
+import dup from '../../syntree-utils/dup';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { MutableSyno } from '../../types/mutable-syno';
 
 export default (

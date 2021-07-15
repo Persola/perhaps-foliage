@@ -1,7 +1,7 @@
 // @flow
-import type { SynoId } from '../types/syno-id.js';
-import type { SynoMap } from '../types/syno-map.js';
-import type { MutableInverseReferenceMap } from '../types/editor-state/mutable/mutable-inverse-reference-map.js';
+import type { SynoId } from '../types/syno-id';
+import type { SynoMap } from '../types/syno-map';
+import type { MutableInverseReferenceMap } from '../types/editor-state/mutable/mutable-inverse-reference-map';
 
 const createOrAdd = (
   irm: MutableInverseReferenceMap,

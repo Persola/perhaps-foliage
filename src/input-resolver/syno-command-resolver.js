@@ -1,5 +1,5 @@
 // @flow
-import salivaKeyToNewSynoAttrs from '../extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.js';
+import salivaKeyToNewSynoAttrs from '../extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
 
 import type { StateSelector } from '../types/state-selector';
 import type { ReduxAction } from '../types/redux-action';

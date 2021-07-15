@@ -1,12 +1,12 @@
 // @flow
-import type { StateSelector } from '../../../types/state-selector.js';
-import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
-import type { PresentSyno } from '../../../types/presenter/present-syno.js';
-import type { PresnoRef } from '../../../types/presenter/presno-ref.js';
-import type { Focus } from '../../../types/editor-state/focus.js';
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
-import type { Argument } from '../types/synos/argument.js';
-import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs.js';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
+import type { PresentSyno } from '../../../types/presenter/present-syno';
+import type { PresnoRef } from '../../../types/presenter/presno-ref';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { Argument } from '../types/synos/argument';
+import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
 
 export default (
   state: StateSelector,

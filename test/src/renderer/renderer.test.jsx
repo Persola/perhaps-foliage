@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import Renderer from '../../../src/renderer/renderer.jsx';
+import Renderer from '../../../src/renderer/rendererx';
 
 it ('renders', () => {
   const element = new Object;

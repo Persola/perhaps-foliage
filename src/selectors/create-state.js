@@ -4,7 +4,7 @@ import type { EditorState } from '../types/editor-state';
 import type { Syno } from '../types/syno';
 import type { SalivaSelectors } from '../extension-staging-area/saliva/types/selectors';
 import type { Syntype } from '../extension-staging-area/saliva/types/synos/syntype';
-import NorPrimitiveId from '../extension-staging-area/saliva/nor-primitive-id.js';
+import NorPrimitiveId from '../extension-staging-area/saliva/nor-primitive-id';
 
 export default (
   initialEditorState: EditorState,

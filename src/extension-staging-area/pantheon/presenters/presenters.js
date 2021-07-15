@@ -1,6 +1,6 @@
 // @flow
-import presentTitan from './present-titan.js';
-import presentOlympian from './present-olympian.js';
+import presentTitan from './present-titan';
+import presentOlympian from './present-olympian';
 
 export default {
   titan: presentTitan,

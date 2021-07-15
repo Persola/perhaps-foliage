@@ -2,7 +2,7 @@
 import navOut from './navigate/nav-out';
 import destroySyno from './state-slice-helpers/syno-map/destroy-syno';
 
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 import type { StateSelector } from '../../types/state-selector';
 

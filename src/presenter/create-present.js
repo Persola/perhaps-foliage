@@ -1,12 +1,12 @@
 // @flow
-import presentFocusedSyntree from './presenters/present-focused-syntree.js';
-import presentSyntree from './presenters/present-syntree.js';
+import presentFocusedSyntree from './presenters/present-focused-syntree';
+import presentSyntree from './presenters/present-syntree';
 
-import type { StateSelector } from '../types/state-selector.js';
-import type { EditorState } from '../types/editor-state.js';
-import type { EditorPresentation } from '../types/presenter/editor-presentation.js';
-import type { ReduxStore } from '../types/redux-store.js';
-import type { Renderer } from '../types/renderer.js';
+import type { StateSelector } from '../types/state-selector';
+import type { EditorState } from '../types/editor-state';
+import type { EditorPresentation } from '../types/presenter/editor-presentation';
+import type { ReduxStore } from '../types/redux-store';
+import type { Renderer } from '../types/renderer';
 
 const generatePresentation = (
   state: StateSelector,

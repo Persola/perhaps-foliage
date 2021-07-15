@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import Editor from './components/editor.jsx';
 
 import type { ReduxStore } from '../types/redux-store';
-import type { EditorPresentation } from '../types/presenter/editor-presentation.js';
-import type { GrammarName } from '../types/editor-state/grammar-name.js';
+import type { EditorPresentation } from '../types/presenter/editor-presentation';
+import type { GrammarName } from '../types/editor-state/grammar-name';
 
 type Element = Object;
 

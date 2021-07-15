@@ -1,4 +1,4 @@
-import codeLoader from '../../../src/code-loader/code-loader.js';
+import codeLoader from '../../../src/code-loader/code-loader';
 
 describe ('codeLoader', () => {
   it ('can respond with proxyNorCall', () => {

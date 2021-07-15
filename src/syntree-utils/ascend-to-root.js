@@ -1,7 +1,7 @@
 // @flow
 import type { StateSelector } from '../types/state-selector';
-import type { SynoId } from '../types/syno-id.js';
-import type { Syno } from '../types/syno.js';
+import type { SynoId } from '../types/syno-id';
+import type { Syno } from '../types/syno';
 
 export default (startingSynoId: SynoId, state: StateSelector): Syno => {
   let currentSyno = state.getSyno(startingSynoId);

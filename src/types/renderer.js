@@ -1,7 +1,7 @@
 // @flow
-import type { ReduxStore } from './redux-store.js';
-import type { EditorPresentation } from './presenter/editor-presentation.js';
-import type { GrammarName } from './editor-state/grammar-name.js';
+import type { ReduxStore } from './redux-store';
+import type { EditorPresentation } from './presenter/editor-presentation';
+import type { GrammarName } from './editor-state/grammar-name';
 
 export interface Renderer {
   render(

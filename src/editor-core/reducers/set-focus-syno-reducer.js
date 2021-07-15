@@ -1,5 +1,5 @@
 // @flow
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { SetFocusSyno } from '../../types/actions/set-focus-syno';
 import type { StateSelector } from '../../types/state-selector';
 

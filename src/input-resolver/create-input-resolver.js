@@ -1,7 +1,7 @@
 // @flow
-import synoCommandResolver from './syno-command-resolver.js';
-import navigationCommandResolver from './navigation-command-resolver.js';
-import textCommandResolver from './text-command-resolver.js';
+import synoCommandResolver from './syno-command-resolver';
+import navigationCommandResolver from './navigation-command-resolver';
+import textCommandResolver from './text-command-resolver';
 
 import type { StateSelector } from '../types/state-selector';
 import type { ReduxStore } from '../types/redux-store';

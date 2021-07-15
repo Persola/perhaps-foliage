@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import SyntacticNode from '../../../../src/renderer/components/syntactic-node.jsx';
-import expectSnapshotMatch from '../../../expect-snapshot-match.js';
+import SyntacticNode from '../../../../src/renderer/components/syntactic-nodex';
+import expectSnapshotMatch from '../../../expect-snapshot-match';
 
-import presno from '../../../data-mocks/presentations/boolean-literal.json';
+import presno from '../../../data-mocks/presentations/boolean-literalon';
 
 describe ('SyntacticNode', () => {
   const synoId = 'berry-ford'

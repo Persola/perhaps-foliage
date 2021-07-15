@@ -1,6 +1,6 @@
 // @flow
-import interpretFunctionCall from './syntype-interpreters/interpret-function-call.js';
-import resolveRef from './resolve-ref.js';
+import interpretFunctionCall from './syntype-interpreters/interpret-function-call';
+import resolveRef from './resolve-ref';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { Syno } from '../../../types/syno';

@@ -5,7 +5,7 @@
 import { map, mergeMap } from 'rxjs';
 import { ofType } from 'redux-observable';
 
-import loadSyntreeFromFileObject from '../../code-loader/load-syntree-from-file-object.js';
+import loadSyntreeFromFileObject from '../../code-loader/load-syntree-from-file-object';
 
 export default action$ => action$.pipe(
   ofType('START_SYNTREE_LOAD'),

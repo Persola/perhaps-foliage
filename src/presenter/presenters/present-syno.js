@@ -1,15 +1,15 @@
 // @flow
-import salivaPresenters from '../../extension-staging-area/saliva/presenters/presenters.js';
-import pantheonPresenters from '../../extension-staging-area/pantheon/presenters/presenters.js';
+import salivaPresenters from '../../extension-staging-area/saliva/presenters/presenters';
+import pantheonPresenters from '../../extension-staging-area/pantheon/presenters/presenters';
 
-import type { StateSelector } from '../../types/state-selector.js';
-import type { Syno } from '../../types/syno.js';
-import type { SynoId } from '../../types/syno-id.js';
-import type { Presno } from '../../types/presenter/presno.js';
-import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map.js';
-import type { PresentSyno } from '../../types/presenter/present-syno.js';
-import type { Focus } from '../../types/editor-state/focus.js';
-import type { GrammarName } from '../../types/editor-state/grammar-name.js';
+import type { StateSelector } from '../../types/state-selector';
+import type { Syno } from '../../types/syno';
+import type { SynoId } from '../../types/syno-id';
+import type { Presno } from '../../types/presenter/presno';
+import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
+import type { PresentSyno } from '../../types/presenter/present-syno';
+import type { Focus } from '../../types/editor-state/focus';
+import type { GrammarName } from '../../types/editor-state/grammar-name';
 
 const PRESENTERS_BY_GRAMMAR = {
   saliva: salivaPresenters,

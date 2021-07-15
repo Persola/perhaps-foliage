@@ -1,6 +1,6 @@
 import * as React from 'react';
-import NamePart from '../../../../../src/renderer/components/vis/name-part.jsx';
-import expectSnapshotMatch from '../../../../expect-snapshot-match.js';
+import NamePart from '../../../../../src/renderer/components/vis/name-partx';
+import expectSnapshotMatch from '../../../../expect-snapshot-match';
 
 describe ('BooleanLiteral', () => {
   const validProps = {

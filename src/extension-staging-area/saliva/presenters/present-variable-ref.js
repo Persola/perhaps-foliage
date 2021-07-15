@@ -1,10 +1,10 @@
 // @flow
-import type { StateSelector } from '../../../types/state-selector.js';
-import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map.js';
-import type { Focus } from '../../../types/editor-state/focus.js';
-import type { GrammarName } from '../../../types/editor-state/grammar-name.js';
-import type { VariableRef } from '../types/synos/variable-ref.js';
-import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs.js';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { VariableRef } from '../types/synos/variable-ref';
+import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs';
 
 export default (
   state: StateSelector,

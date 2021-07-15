@@ -1,8 +1,8 @@
 import * as React from 'react';
-import CodeView from '../../../../src/renderer/components/code-view.jsx';
-import expectSnapshotMatch from '../../../expect-snapshot-match.js';
+import CodeView from '../../../../src/renderer/components/code-viewx';
+import expectSnapshotMatch from '../../../expect-snapshot-match';
 
-import codePresentation from '../../../data-mocks/presentations/boolean-literal.json';
+import codePresentation from '../../../data-mocks/presentations/boolean-literalon';
 
 describe ('CodeView', () => {
   describe ('with normal props', () => {

@@ -6,29 +6,29 @@ import produce from 'immer';
 
 import createState from '../selectors/create-state';
 import salivaSelectors from '../extension-staging-area/saliva/selectors/selectors';
-import deriveInverseReferenceMap from './derive-inverse-reference-map.js';
-import codeLoader from '../code-loader/code-loader.js';
+import deriveInverseReferenceMap from './derive-inverse-reference-map';
+import codeLoader from '../code-loader/code-loader';
 
-import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer.js';
-import endInterpretationReducer from './reducers/end-interpretation-reducer.js';
-import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer.js';
-import navigateReducer from './reducers/navigate-reducer.js';
-import setFocusSynoReducer from './reducers/set-focus-syno-reducer.js';
-import startInterpretationReducer from './reducers/start-interpretation-reducer.js';
-import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer.js';
-import charBackspaceReducer from './reducers/char-backspace-reducer.js';
-import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer.js';
+import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
+import endInterpretationReducer from './reducers/end-interpretation-reducer';
+import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
+import navigateReducer from './reducers/navigate-reducer';
+import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
+import startInterpretationReducer from './reducers/start-interpretation-reducer';
+import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
+import charBackspaceReducer from './reducers/char-backspace-reducer';
+import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 import verifyActionType from './reducers/util/verify-action-type';
 
 import interpretEpic from './epics/interpret';
 import loadSyntreeEpic from './epics/load-syntree';
 
 import type { StateSelector } from '../types/state-selector';
-import type { ReduxStore } from '../types/redux-store.js';
-import type { ReduxAction } from '../types/redux-action.js';
-import type { EditorState } from '../types/editor-state.js';
-import type { MutableEditorState } from '../types/mutable-editor-state.js';
-import type { SynoMap } from '../types/syno-map.js';
+import type { ReduxStore } from '../types/redux-store';
+import type { ReduxAction } from '../types/redux-action';
+import type { EditorState } from '../types/editor-state';
+import type { MutableEditorState } from '../types/mutable-editor-state';
+import type { SynoMap } from '../types/syno-map';
 
 import salivaGrammar from '../extension-staging-area/saliva/grammar.yml';
 import salivaTextHostRefs from '../extension-staging-area/saliva/textHostRefs.yml';

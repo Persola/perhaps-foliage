@@ -1,6 +1,6 @@
 // @flow
-import type { Syno } from '../types/syno.js';
-import type { SynoRef } from '../types/syno-ref.js';
+import type { Syno } from '../types/syno';
+import type { SynoRef } from '../types/syno-ref';
 
 export default (
   parentSyno: Syno,

@@ -1,4 +1,4 @@
-import Presenter from '../../../src/presenter/presenter.js';
+import Presenter from '../../../src/presenter/presenter';
 
 describe ('presenter', () => {
   const focusedNode = {};

@@ -1,10 +1,10 @@
 // @flow
 import deriveInverseReferenceMap from '../derive-inverse-reference-map';
-import codeLoader from '../../code-loader/code-loader.js';
-import ascendToRoot from '../../syntree-utils/ascend-to-root.js';
+import codeLoader from '../../code-loader/code-loader';
+import ascendToRoot from '../../syntree-utils/ascend-to-root';
 
-import type { SynoMap } from '../../types/syno-map.js';
-import type { MutableEditorState } from '../../types/mutable-editor-state.js';
+import type { SynoMap } from '../../types/syno-map';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { StateSelector } from '../../types/state-selector';
 

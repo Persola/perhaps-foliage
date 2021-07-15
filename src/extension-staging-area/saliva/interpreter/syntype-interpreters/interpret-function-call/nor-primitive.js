@@ -1,5 +1,5 @@
 // @flow
-import isBoolean from './is-boolean.js';
+import isBoolean from './is-boolean';
 
 import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
 import type { BooleanLiteralAttrs } from '../../../types/synos/syno-attrs/boolean-literal-attrs';
