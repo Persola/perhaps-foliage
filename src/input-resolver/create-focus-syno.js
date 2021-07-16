@@ -1,5 +1,5 @@
 // @flow
-import type { ReduxStore } from './types/redux-store';
+import type { ReduxStore } from '../types/redux-store';
 
 const isSyno = el => {
   if (!el) { return false; }

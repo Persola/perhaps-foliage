@@ -3,12 +3,14 @@ import synoCommandResolver from './syno-command-resolver';
 import navigationCommandResolver from './navigation-command-resolver';
 import textCommandResolver from './text-command-resolver';
 
-import type { StateSelector } from '../types/state-selector';
 import type { ReduxStore } from '../types/redux-store';
+import type { StateSelector } from '../types/state-selector';
+import type { KeyToNewSynoAttrs } from '../types/language-integration/key-to-new-syno-attrs';
 
 export default (
   editorStateStore: ReduxStore,
   state: StateSelector,
+  salivaKeyToNewSynoAttrs: KeyToNewSynoAttrs,
   // eslint doesn't understand the parantheses around this type
   // eslint-disable-next-line function-paren-newline
 ): (string => void) => {
@@ -26,7 +28,7 @@ export default (
         // because if the focus has a presnoIndex there should also be a charIndex
         // to do: commands for non-text presnos
       } else {
-        command = synoCommandResolver(key, state);
+        command = synoCommandResolver(key, state, salivaKeyToNewSynoAttrs);
       }
 
       if (command !== false) {

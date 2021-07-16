@@ -1,13 +1,16 @@
 // @flow
-import salivaKeyToNewSynoAttrs from '../extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
-
 import type { StateSelector } from '../types/state-selector';
+import type { KeyToNewSynoAttrs } from '../types/language-integration/key-to-new-syno-attrs';
 import type { ReduxAction } from '../types/redux-action';
 import type { ChildPresnoRef } from '../types/child-presno-ref';
 import type { Syntype } from '../extension-staging-area/saliva/types/synos/syntype';
 import type { BooleanLiteralAttrs } from '../extension-staging-area/saliva/types/synos/syno-attrs/boolean-literal-attrs';
 
-export default (key: string, state: StateSelector): (ReduxAction | false) => {
+export default (
+  key: string,
+  state: StateSelector,
+  salivaKeyToNewSynoAttrs: KeyToNewSynoAttrs,
+): ReduxAction | false => {
   if (Object.keys(salivaKeyToNewSynoAttrs).includes(key)) {
     // check type validity here
     const focusSyno = state.focusedSyno();
@@ -25,6 +28,7 @@ export default (key: string, state: StateSelector): (ReduxAction | false) => {
 
     return ({
       type: 'REPLACE_FOCUSED_SYNO',
+      // $FlowFixMe: types from language integrations?
       newSynoAttrs: (salivaKeyToNewSynoAttrs[key]: BooleanLiteralAttrs),
       newSynoId: `inputValue-${String(Math.random()).substring(2)}`, // TODO: systematic method to generate IDs
       focusedPresnoId: state.focusedSynoId(),

@@ -1,14 +1,17 @@
 // @flow
 import 'core-js';
-import Mousetrap from 'mousetrap';
 import { enableMapSet } from 'immer';
 
-import createPresent from './presenter/create-present';
-import Renderer from './renderer/renderer.jsx';
 import createEditorStateStore from './editor-core/create-editor-state-store';
+import Renderer from './renderer/renderer.jsx';
+import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
-import createFocusSyno from './create-focus-syno';
+import bindInputs from './input-resolver/bind-inputs';
+
+import salivaGrammar from './extension-staging-area/saliva/grammar.yml';
 import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
+
+import type { LanguageIntegration } from './types/language-integration';
 
 require('./stylesheet.sass');
 require('./extension-staging-area/saliva/stylesheet.sass');
@@ -16,7 +19,12 @@ require('./extension-staging-area/pantheon/stylesheet.sass');
 
 enableMapSet();
 
-const { editorStateStore, stateSelector } = createEditorStateStore();
+const integration: LanguageIntegration = {
+  grammar: salivaGrammar,
+  keyToNewSynoAttrs: salivaKeyToNewSynoAttrs,
+};
+
+const { editorStateStore, stateSelector } = createEditorStateStore(integration);
 const renderer = new Renderer(document);
 const present = createPresent(stateSelector, editorStateStore, renderer);
 const editorStateSubscription = () => {
@@ -24,33 +32,9 @@ const editorStateSubscription = () => {
   present();
 };
 editorStateStore.subscribe(editorStateSubscription);
-const inputResolver = createInputResolver(editorStateStore, stateSelector);
-
-const initializeMousetrap = () => {
-  Mousetrap.bind([
-    'enter',
-    'left',
-    'right',
-    'up',
-    'down',
-    'backspace',
-  ].concat(Object.keys(salivaKeyToNewSynoAttrs)), (e, key) => {
-    if ([
-      'backspace',
-      'up',
-      'down',
-    ].includes(key)) {
-      e.preventDefault();
-    }
-    inputResolver(key);
-  });
-
-  if (document.documentElement === null) { throw new Error('document missing'); }
-  document.documentElement.click(); // bindings don't work before this (focus?)
-  document.addEventListener('click', createFocusSyno(editorStateStore));
-};
+const inputResolver = createInputResolver(editorStateStore, stateSelector, salivaKeyToNewSynoAttrs);
 
 window.addEventListener('load', () => {
-  initializeMousetrap();
+  bindInputs(editorStateStore, inputResolver, salivaKeyToNewSynoAttrs);
   editorStateSubscription();
 });

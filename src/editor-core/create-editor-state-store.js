@@ -23,17 +23,13 @@ import verifyActionType from './reducers/util/verify-action-type';
 import interpretEpic from './epics/interpret';
 import loadSyntreeEpic from './epics/load-syntree';
 
+import type { LanguageIntegration } from '../types/language-integration';
 import type { StateSelector } from '../types/state-selector';
 import type { ReduxStore } from '../types/redux-store';
 import type { ReduxAction } from '../types/redux-action';
 import type { EditorState } from '../types/editor-state';
 import type { MutableEditorState } from '../types/mutable-editor-state';
 import type { SynoMap } from '../types/syno-map';
-
-import salivaGrammar from '../extension-staging-area/saliva/grammar.yml';
-import salivaTextHostRefs from '../extension-staging-area/saliva/textHostRefs.yml';
-// import pantheonGrammar from '../extension-staging-area/pantheon/grammar.yml';
-// import pantheonTextHostRefs from '../extension-staging-area/pantheon/textHostRefs.yml';
 
 const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
 const testSyntree: SynoMap = codeLoader.loadSyntreeFromFileSystem('proxyNorCall');
@@ -45,14 +41,12 @@ type CreateStoreReturn = {
   stateSelector: StateSelector,
 };
 
-export default (): CreateStoreReturn => {
+export default (integration: LanguageIntegration): CreateStoreReturn => {
   const defaultEditorState: EditorState = {
-    grammar: salivaGrammar,
+    grammar: integration.grammar,
     // grammar: pantheonGrammar,
     grammarName: 'saliva',
     // grammarName: 'pantheon',
-    textHostRefs: salivaTextHostRefs,
-    // textHostRefs: pantheonTextHostRefs,
     synoMap: defaultSynoMap,
     inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap, '1-1'),
     focus: {

@@ -7,7 +7,6 @@ import type { Focus } from './editor-state/focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
 import type { ResultOutdated } from './editor-state/result-outdated';
 import type { Interpreting } from './editor-state/interpreting';
-import type { TextHostRefs } from './editor-state/text-host-refs';
 import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 export type EditorState = {|
@@ -15,7 +14,6 @@ export type EditorState = {|
   +inverseReferenceMap: InverseReferenceMap,
   +grammarName: GrammarName,
   +grammar: Grammar,
-  +textHostRefs: TextHostRefs,
   +focus: Focus,
   +resultSyntreeRootId: ResultSyntreeRootId,
   +resultOutdated: ResultOutdated,

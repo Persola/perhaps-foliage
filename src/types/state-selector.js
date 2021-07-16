@@ -3,7 +3,6 @@ import type { EditorState } from './editor-state';
 
 import type { Grammar } from './editor-state/grammar';
 import type { GrammarName } from './editor-state/grammar-name';
-import type { TextHostRefs } from './editor-state/text-host-refs';
 import type { SynoMap } from './syno-map';
 import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
 import type { Focus } from './editor-state/focus';
@@ -22,7 +21,6 @@ type BaseStateSelector = {
   // first-level accessors
   grammar: () => Grammar,
   grammarName: () => GrammarName,
-  textHostRefs: () => TextHostRefs,
   synoMap: () => SynoMap,
   inverseReferenceMap: () => InverseReferenceMap,
   focus: () => Focus,

@@ -16,7 +16,6 @@ export default (
     // first-level accessors
     grammar: function grammar() { return this.state.grammar; },
     grammarName: function grammarName() { return this.state.grammarName; },
-    textHostRefs: function textHostRefs() { return this.state.textHostRefs; },
     synoMap: function synoMap() { return this.state.synoMap; },
     inverseReferenceMap: function inverseReferenceMap() { return this.state.inverseReferenceMap; },
     focus: function focus() { return this.state.focus; },

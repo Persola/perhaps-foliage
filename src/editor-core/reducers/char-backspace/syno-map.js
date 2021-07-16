@@ -9,7 +9,7 @@ export default (
   action: CharBackspace,
   draftState: MutableSynoMap,
 ): void => {
-  const textHostRef = state.textHostRefs()[state.focusedSyno().syntype];
+  const { textHostRef } = state.grammar()[state.focusedSyno().syntype];
   let textHostSyno: Syno;
   if (textHostRef === false) {
     textHostSyno = state.focusedSyno();
