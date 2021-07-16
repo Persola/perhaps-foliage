@@ -19,11 +19,7 @@ export default (
     return;
   }
 
-  const childPresnoRefs = getChildPresnoRefs(
-    state.focusedSyno(),
-    state.synoMap(),
-    state.grammarName(),
-  );
+  const childPresnoRefs = getChildPresnoRefs(state.focusedSyno(), state);
 
   if (childPresnoRefs.length === 0) {
     console.warn('ignoring navigation inwards: no children');

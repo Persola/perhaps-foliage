@@ -53,7 +53,7 @@ export default (
   }
 
   // $FlowFixMe: Flow doesn't look into selector interface
-  const siblingRefz = getChildPresnoRefs(oldParent, state.synoMap(), state.grammarName());
+  const siblingRefz = getChildPresnoRefs(oldParent, state);
   if (siblingRefz.length <= 0) {
     throw new Error('navigate failed; parent has no children!?');
   } else {

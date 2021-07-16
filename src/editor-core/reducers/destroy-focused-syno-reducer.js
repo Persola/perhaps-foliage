@@ -29,6 +29,7 @@ export default (
     state,
     action,
     draftState.synoMap,
+    draftState,
   );
 
   const { oldFocusedPresnoRef } = action;

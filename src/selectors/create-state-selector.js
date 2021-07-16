@@ -3,7 +3,6 @@ import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { Syno } from '../types/syno';
 import type { SalivaSelectors } from '../extension-staging-area/saliva/types/selectors';
-import type { Syntype } from '../extension-staging-area/saliva/types/synos/syntype';
 import NorPrimitiveId from '../extension-staging-area/saliva/nor-primitive-id';
 
 export default (
@@ -16,6 +15,7 @@ export default (
     // first-level accessors
     grammar: function grammar() { return this.state.grammar; },
     grammarName: function grammarName() { return this.state.grammarName; },
+    primitives: function primitives() { return this.state.primitives; },
     synoMap: function synoMap() { return this.state.synoMap; },
     inverseReferenceMap: function inverseReferenceMap() { return this.state.inverseReferenceMap; },
     focus: function focus() { return this.state.focus; },
@@ -34,13 +34,17 @@ export default (
       return this.state.focus.charIndex;
     },
     // synos
-    getSyno: function getSyno(synoId: string, assertedSyntype: ?Syntype): Syno {
-      const maybeSyno = this.state.synoMap[synoId];
+    getSyno: function getSyno(synoId: string): Syno {
+      let maybeSyno;
+      maybeSyno = this.state.primitives[synoId];
       if (!maybeSyno) {
-        throw new TypeError('state selector was asked to fetch a syno with an unused ID');
+        maybeSyno = this.state.synoMap[synoId];
       }
-      if (assertedSyntype && (maybeSyno.syntype !== assertedSyntype)) {
-        throw new Error("fetched syno's syntype didn't match asserted syntype");
+      if (!maybeSyno) {
+        maybeSyno = this.state.resultTree[synoId];
+      }
+      if (!maybeSyno) {
+        throw new TypeError(`cannot find syno with ID '${synoId}'`);
       }
       return maybeSyno;
     },

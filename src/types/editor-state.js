@@ -10,13 +10,15 @@ import type { Interpreting } from './editor-state/interpreting';
 import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 export type EditorState = {|
-  +synoMap: SynoMap,
-  +inverseReferenceMap: InverseReferenceMap,
-  +grammarName: GrammarName,
   +grammar: Grammar,
+  +grammarName: GrammarName,
+  +primitives: SynoMap,
+  +synoMap: SynoMap,
+  +resultTree: SynoMap,
+  +inverseReferenceMap: InverseReferenceMap,
   +focus: Focus,
   +resultSyntreeRootId: ResultSyntreeRootId,
-  +resultOutdated: ResultOutdated,
   +interpreting: Interpreting,
+  +resultOutdated: ResultOutdated,
   +loadingSyntree: LoadingSyntree,
 |}

@@ -12,9 +12,9 @@ export default (
 ): void => {
   synoMapReducer(
     state,
-    state.synoMap(),
     action,
     draftState.synoMap,
+    draftState,
   );
 
   draftState.focus = {

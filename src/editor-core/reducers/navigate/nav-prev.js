@@ -28,7 +28,7 @@ export default (
     return;
   }
 
-  const siblingRefz = getChildPresnoRefs(oldParent, state.synoMap(), state.grammarName());
+  const siblingRefz = getChildPresnoRefs(oldParent, state);
   if (siblingRefz.length <= 0) {
     throw new Error('Navigate failed; parent has no children!?');
   } else {

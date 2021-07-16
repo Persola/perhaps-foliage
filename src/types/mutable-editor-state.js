@@ -10,10 +10,12 @@ import type { Interpreting } from './editor-state/interpreting';
 import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 export type MutableEditorState = {|
-  synoMap: MutableSynoMap,
-  inverseReferenceMap: MutableInverseReferenceMap,
-  grammarName: GrammarName,
   grammar: Grammar,
+  grammarName: GrammarName,
+  primitives: MutableSynoMap,
+  synoMap: MutableSynoMap,
+  resultTree: MutableSynoMap,
+  inverseReferenceMap: MutableInverseReferenceMap,
   focus: MutableFocus,
   resultSyntreeRootId: ResultSyntreeRootId,
   resultOutdated: ResultOutdated,

@@ -1,10 +1,11 @@
 // @flow
 import forChildSynoOf from '../../../syntree-utils/for-child-syno-of';
+import getDraftSyno from '../draft-utils/get-draft-syno';
 
 import type { StateSelector } from '../../../types/state-selector';
-import type { SynoMap } from '../../../types/syno-map';
 import type { ReplaceFocusedSyno } from '../../../types/actions/replace-focused-syno';
 import type { MutableSynoMap } from '../../../types/mutable-syno-map';
+import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { SynoRef } from '../../../types/syno-ref';
 import type { Syno } from '../../../types/syno';
 import type { CoreSynoAttrs } from '../../../extension-staging-area/saliva/types/synos/core-syno-attrs';
@@ -12,9 +13,9 @@ import type { MutableBooleanLiteral } from '../../../extension-staging-area/sali
 
 export default (
   state: StateSelector,
-  oldSynoMap: SynoMap,
   action: ReplaceFocusedSyno,
   draftState: MutableSynoMap,
+  draft: MutableEditorState,
 ): void => {
   const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
   const parentRef = state.focusedSyno().parent;
@@ -33,7 +34,7 @@ export default (
       }
     });
     // should remove any uneeded (i.e., deleted) nodes from store
-    const newParent = draftState[parent.id];
+    const newParent = getDraftSyno(parent.id, state, draft);
 
     if (
       typeof childIndex === 'number'

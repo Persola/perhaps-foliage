@@ -1,10 +1,7 @@
 // @flow
 import type { Syno } from './syno';
-import type { SynoMap } from './syno-map';
+import type { StateSelector } from './state-selector';
 
 export type NamePresnoFocusable = {
-  +[string]: (
-    syno: Syno,
-    synoMap: SynoMap
-  ) => boolean
+  +[string]: (Syno, StateSelector) => boolean
 }

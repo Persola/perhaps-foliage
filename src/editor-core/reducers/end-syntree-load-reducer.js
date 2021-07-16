@@ -13,12 +13,10 @@ export default (
   action: EndAsyncSyntreeLoad,
   draftState: MutableEditorState,
 ): void => {
-  const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
   const newSyntree: SynoMap = action.newSynoMap;
   const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], state);
-  const newSyntreeWithPrimitives = { ...newSyntree, ...salivaPrimitives };
 
-  draftState.synoMap = newSyntreeWithPrimitives;
+  draftState.synoMap = newSyntree;
   draftState.inverseReferenceMap = deriveInverseReferenceMap(newSyntreeWithPrimitives, rootSyno.id);
   draftState.focus = {
     synoId: rootSyno.id,

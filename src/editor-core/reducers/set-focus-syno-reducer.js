@@ -8,6 +8,11 @@ export default (
   action: SetFocusSyno,
   draftState: MutableEditorState,
 ): void => {
+  if (state.synoMap[action.synoId] === undefined) {
+    console.warn('Ignoring focus syno command: target syno not in input tree');
+    return;
+  }
+
   draftState.focus = {
     synoId: action.synoId,
     presnoIndex: false,

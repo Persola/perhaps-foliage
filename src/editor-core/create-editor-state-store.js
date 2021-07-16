@@ -4,7 +4,7 @@ import { merge } from 'rxjs';
 import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
 
-import createState from '../selectors/create-state';
+import createState from '../selectors/create-state-selector';
 import salivaSelectors from '../extension-staging-area/saliva/selectors/selectors';
 import deriveInverseReferenceMap from './derive-inverse-reference-map';
 import codeLoader from '../code-loader/code-loader';
@@ -34,7 +34,6 @@ import type { SynoMap } from '../types/syno-map';
 const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
 const testSyntree: SynoMap = codeLoader.loadSyntreeFromFileSystem('proxyNorCall');
 // const testSyntree: SynoMap = codeLoader('pantheon');
-const defaultSynoMap = { ...testSyntree, ...salivaPrimitives };
 
 type CreateStoreReturn = {
   editorStateStore: ReduxStore,
@@ -47,8 +46,10 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
     // grammar: pantheonGrammar,
     grammarName: 'saliva',
     // grammarName: 'pantheon',
-    synoMap: defaultSynoMap,
-    inverseReferenceMap: deriveInverseReferenceMap(defaultSynoMap, '1-1'),
+    primitives: salivaPrimitives,
+    synoMap: testSyntree,
+    resultTree: {},
+    inverseReferenceMap: deriveInverseReferenceMap(testSyntree, '1-1'),
     focus: {
       synoId: Object.keys(testSyntree)[0],
       presnoIndex: false,

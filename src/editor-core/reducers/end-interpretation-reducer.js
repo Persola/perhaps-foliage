@@ -16,7 +16,7 @@ export default (
   }
 
   const result: MutableSyno = dup(action.result);
-  draftState.synoMap[result.id] = result;
+  draftState.resultTree[result.id] = result;
 
   draftState.resultSyntreeRootId = action.result.id;
   draftState.interpreting = false;

@@ -21,6 +21,7 @@ type BaseStateSelector = {
   // first-level accessors
   grammar: () => Grammar,
   grammarName: () => GrammarName,
+  primitives: () => SynoMap,
   synoMap: () => SynoMap,
   inverseReferenceMap: () => InverseReferenceMap,
   focus: () => Focus,
