@@ -1,7 +1,7 @@
 // @flow
-import type { StateSelector } from '../types/state-selector';
-import type { ReduxAction } from '../types/redux-action';
-import type { KeyToNewSynoAttrs } from '../types/language-integration/key-to-new-syno-attrs';
+import type { StateSelector } from '../../types/state-selector';
+import type { ReduxAction } from '../../types/redux-action';
+import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 
 export default (
   key: string,

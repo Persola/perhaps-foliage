@@ -1,5 +1,5 @@
 // @flow
-import type { CharBackspace } from '../types/actions/char-backspace';
+import type { CharBackspace } from '../../types/actions/char-backspace';
 
 export default (key: string): (CharBackspace | false) => {
   if (key === 'backspace') {

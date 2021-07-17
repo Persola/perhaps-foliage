@@ -1,5 +1,5 @@
 // @flow
-import type { ReduxAction } from '../types/redux-action';
+import type { ReduxAction } from '../../types/redux-action';
 
 export default (key: string): ReduxAction => {
   let direction;
