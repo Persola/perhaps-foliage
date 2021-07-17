@@ -7,13 +7,14 @@ import type { EditorState } from '../types/editor-state';
 import type { EditorPresentation } from '../types/presenter/editor-presentation';
 import type { ReduxStore } from '../types/redux-store';
 import type { Renderer } from '../types/renderer';
+import type { LanguageIntegration } from '../types/language-integration';
 
 const generatePresentation = (
   state: StateSelector,
   editorState: EditorState,
+  integration: LanguageIntegration,
 ): EditorPresentation => {
   const {
-    grammarName,
     focus,
     resultSyntreeRootId,
   } = editorState;
@@ -24,7 +25,7 @@ const generatePresentation = (
         ? false
         : presentFocusedSyntree(
           state,
-          grammarName,
+          integration,
           focus.synoId,
           {},
           focus,
@@ -35,7 +36,7 @@ const generatePresentation = (
         ? false
         : presentSyntree(
           state,
-          grammarName,
+          integration,
           resultSyntreeRootId,
           {},
           false,
@@ -48,15 +49,16 @@ export default (
   state: StateSelector,
   editorStateStore: ReduxStore,
   renderer: Renderer,
+  integration: LanguageIntegration,
 ): ((void) => void) => { // eslint-disable-line function-paren-newline
   return () => {
     const editorState: EditorState = editorStateStore.getState();
-    const presentation = generatePresentation(state, editorState);
-    const { grammarName, resultOutdated, interpreting } = editorState;
+    const presentation = generatePresentation(state, editorState, integration);
+    const { resultOutdated, interpreting } = editorState;
     renderer.render(
       editorStateStore,
       presentation,
-      grammarName,
+      integration,
       resultOutdated,
       interpreting,
     );

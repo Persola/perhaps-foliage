@@ -5,7 +5,6 @@ import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
 
 import createState from '../selectors/create-state-selector';
-import salivaSelectors from '../extension-staging-area/saliva/selectors/selectors';
 import deriveInverseReferenceMap from './derive-inverse-reference-map';
 import codeLoader from '../code-loader/code-loader';
 
@@ -64,7 +63,7 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
     loadingSyntree: false,
   };
 
-  const stateSelector: StateSelector = createState(defaultEditorState, salivaSelectors);
+  const stateSelector: StateSelector = createState(defaultEditorState);
 
   const editorStateReducer = (
     oldState: EditorState = defaultEditorState,
@@ -135,7 +134,7 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
   );
 
   const rootEpic = (action$, state$) => merge(
-    interpretEpic(action$, state$, stateSelector),
+    interpretEpic(action$, state$, stateSelector, integration),
     loadSyntreeEpic(action$, state$),
   );
 

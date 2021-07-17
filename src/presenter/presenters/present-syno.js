@@ -1,7 +1,4 @@
 // @flow
-import salivaPresenters from '../../extension-staging-area/saliva/presenters/presenters';
-import pantheonPresenters from '../../extension-staging-area/pantheon/presenters/presenters';
-
 import type { StateSelector } from '../../types/state-selector';
 import type { Syno } from '../../types/syno';
 import type { SynoId } from '../../types/syno-id';
@@ -9,16 +6,11 @@ import type { Presno } from '../../types/presenter/presno';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../types/presenter/present-syno';
 import type { Focus } from '../../types/editor-state/focus';
-import type { GrammarName } from '../../types/editor-state/grammar-name';
-
-const PRESENTERS_BY_GRAMMAR = {
-  saliva: salivaPresenters,
-  pantheon: pantheonPresenters,
-};
+import type { LanguageIntegration } from '../../types/language-integration';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   presnoMap: MutablePresnoMap,
   parentId: (SynoId | false),
   syno: (Syno),
@@ -26,19 +18,14 @@ export default (
   focus: (Focus | false),
   presentSyno: PresentSyno,
 ): SynoId => {
-  const grammarPresenters = PRESENTERS_BY_GRAMMAR[grammar];
-  if (!(grammarPresenters instanceof Object)) {
-    throw new Error(`missing presenters for grammar '${grammar}'`);
-  }
-
-  const presenter = grammarPresenters[syno.syntype];
+  const presenter = integration.presenters[syno.syntype];
   if (!(presenter instanceof Function)) {
-    throw new Error('syno has unrecognized syntype (new type?)');
+    throw new Error(`language integration missing presenter for syntype '${syno.syntype}'`);
   }
 
   const presentationAttrs = presenter(
     state,
-    grammar,
+    integration,
     presnoMap,
     syno,
     scope,

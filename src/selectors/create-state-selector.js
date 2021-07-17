@@ -2,15 +2,17 @@
 import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { Syno } from '../types/syno';
-import type { SalivaSelectors } from '../extension-staging-area/saliva/types/selectors';
 
 export default (
   initialEditorState: EditorState,
-  salivaSelectors: SalivaSelectors,
 ): StateSelector => {
+  /*
+    The state selector is way most of the app accesses state. Its data should not be modified
+    anywhere except in app.js, which keeps it in sync on state update
+  */
   const languageNeutralSelectors = {
     // state
-    state: initialEditorState, // gets updated in app.js
+    state: initialEditorState,
     // first-level accessors
     grammar: function grammar() { return this.state.grammar; },
     grammarName: function grammarName() { return this.state.grammarName; },
@@ -66,7 +68,6 @@ export default (
   };
 
   return {
-    ...salivaSelectors,
     ...languageNeutralSelectors,
   };
 };

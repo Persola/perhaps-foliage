@@ -5,12 +5,12 @@ import OutdatedMessage from './outdated-message.jsx';
 import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
 
 import type { ReduxStore } from '../../types/redux-store';
-import type { GrammarName } from '../../types/editor-state/grammar-name';
 import type { Prestree } from '../../types/presenter/prestree';
+import type { LanguageIntegration } from '../../types/language-integration';
 
 type Props = {
   editorStateStore: ReduxStore,
-  grammarName: GrammarName,
+  integration: LanguageIntegration,
   codePresentation: Prestree | false,
   outdated: boolean,
   interpreting: boolean,
@@ -51,7 +51,7 @@ const dropCodeView = (editorStateStore, e) => {
 export default (props: Props): React.Node => {
   const {
     editorStateStore,
-    grammarName,
+    integration,
     codePresentation,
     outdated,
     interpreting,
@@ -72,7 +72,7 @@ export default (props: Props): React.Node => {
     const getPresno = createPresnoFetcher(presnos);
     content = (
       <SyntacticNode
-        grammarName={grammarName}
+        integration={integration}
         getPresno={getPresno}
         synoId={rootId}
         SynoRenderer={SyntacticNode}

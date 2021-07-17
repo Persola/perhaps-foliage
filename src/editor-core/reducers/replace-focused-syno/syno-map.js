@@ -9,8 +9,8 @@ import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { SynoRef } from '../../../types/syno-ref';
 import type { Syno } from '../../../types/syno';
 import type { SynoId } from '../../../types/syno-id';
+import type { CoreSynoAttrs } from '../../../types/core-syno-attrs';
 
-import type { CoreSynoAttrs } from '../../../extension-staging-area/saliva/types/synos/core-syno-attrs';
 import type { MutableBooleanLiteral } from '../../../extension-staging-area/saliva/types/synos/mutable-synos/boolean-literal';
 
 export default (

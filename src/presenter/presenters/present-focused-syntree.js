@@ -6,11 +6,11 @@ import type { StateSelector } from '../../types/state-selector';
 import type { SynoId } from '../../types/syno-id';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { Focus } from '../../types/editor-state/focus';
-import type { GrammarName } from '../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../types/language-integration';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   focusedPresnoId: SynoId,
   scope: {},
   focus: (Focus | false),
@@ -18,7 +18,7 @@ export default (
   const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, state).id;
   return presentSyntree(
     state,
-    grammar,
+    integration,
     renderingRootId,
     scope,
     focus,

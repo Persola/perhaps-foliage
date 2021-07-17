@@ -4,7 +4,7 @@ import resolveRef from './resolve-ref';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { Syno } from '../../../types/syno';
-import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';
+import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';
 
 const interpreter = (
   interpretee: Syno,

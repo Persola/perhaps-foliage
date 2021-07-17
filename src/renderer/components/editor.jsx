@@ -4,11 +4,11 @@ import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
 import type { ReduxStore } from '../../types/redux-store';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
-import type { GrammarName } from '../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../types/language-integration';
 
 type Props = {
   editorStateStore: ReduxStore,
-  grammarName: GrammarName,
+  integration: LanguageIntegration,
   presentation: EditorPresentation,
   resultOutdated: boolean,
   interpreting: boolean
@@ -17,7 +17,7 @@ type Props = {
 export default (props: Props): React.Node => {
   const {
     editorStateStore,
-    grammarName,
+    integration,
     presentation: { stage: stageful, result },
     resultOutdated,
     interpreting,
@@ -28,7 +28,7 @@ export default (props: Props): React.Node => {
       <CodeView
         key="stage"
         editorStateStore={editorStateStore}
-        grammarName={grammarName}
+        integration={integration}
         codePresentation={stageful}
         outdated={false}
         interpreting={interpreting}
@@ -41,7 +41,7 @@ export default (props: Props): React.Node => {
       <CodeView
         key="result"
         editorStateStore={editorStateStore}
-        grammarName={grammarName}
+        integration={integration}
         codePresentation={result}
         outdated={resultOutdated}
         interpreting={false}

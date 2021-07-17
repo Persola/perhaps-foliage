@@ -4,13 +4,13 @@ import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-m
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { Argument } from '../types/synos/argument';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   presnoMap: MutablePresnoMap,
   argument: Argument,
   scope: {},
@@ -21,7 +21,11 @@ export default (
 
   let name = false;
   if (argument.parameter) {
-    name = state.getFunctionParameter(argument.parameter.id).name;
+    const param = state.getSyno(argument.parameter.id);
+    if (param.syntype !== 'functionParameter') {
+      throw new Error('wrong type from synomap (flow)');
+    }
+    name = param.name;
   } else {
     valid = false;
   }
@@ -32,7 +36,7 @@ export default (
       presnoRef: true,
       id: presentSyno(
         state,
-        grammar,
+        integration,
         presnoMap,
         argument.id,
         state.getSyno(argument.value.id),

@@ -6,7 +6,7 @@ import type { ArgumentRendererProps } from '../types/renderers/argument-props';
 
 export default (props: ArgumentRendererProps): React.Node => {
   const {
-    grammarName,
+    integration,
     getPresno,
     SynoRenderer,
     presno: {
@@ -39,7 +39,7 @@ export default (props: ArgumentRendererProps): React.Node => {
         value
           && (
             <SynoRenderer
-              grammarName={grammarName}
+              integration={integration}
               getPresno={getPresno}
               synoId={value.id}
               SynoRenderer={SynoRenderer}

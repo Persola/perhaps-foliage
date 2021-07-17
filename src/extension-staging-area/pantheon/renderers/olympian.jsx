@@ -2,14 +2,14 @@
 import * as React from 'react';
 import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { Presno } from '../../../types/presenter/presno';
 import type { SynoId } from '../../../types/syno-id';
 import type { SynoRendererProps } from '../../../types/syno-renderer-props';
 import type { OlympianPres } from '../types/presentations/olympian';
 
 type Props = {
-  grammarName: GrammarName,
+  integration: LanguageIntegration,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: OlympianPres,
   SynoRenderer: (props: SynoRendererProps) => React.Node
@@ -17,7 +17,7 @@ type Props = {
 
 export default (props: Props): React.Node => {
   const {
-    grammarName,
+    integration,
     getPresno,
     SynoRenderer,
     presno: {
@@ -50,7 +50,7 @@ export default (props: Props): React.Node => {
         child
           && (
             <SynoRenderer
-              grammarName={grammarName}
+              integration={integration}
               getPresno={getPresno}
               synoId={child.id}
               SynoRenderer={SynoRenderer}

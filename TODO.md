@@ -1,4 +1,5 @@
 * maintenance
+  * have presenters only return one presno attrs (for typing/consistency)
   * why function calls validate against grammar saying no callee as child?
   * extract Saliva-specific modules as local npm packages
     * start loading language components dynamically
@@ -7,9 +8,12 @@
       * document it
     * ability to export types to language libraries
     * actually make libraries for saliva and pantheon
-  * move core syno attrs back to editor
-  * reorg
-    * presno and syno clarification
+  * presno and syno clarification
+  * extract visualization as package with editor as consumer
+    * compare editor (without REPL) vs. REPL/console
+    * at this point mostly just creating package boundary between code views
+      * need to pass TreeId with commands
+      * after store update decide which trees to present (even though react would handle it fine)
   * wait, should synos actually have IDs?
     * that is to say, should unique IDs be replaced with ids based on the path from the root?
       * when a node is grafted, the editor can handle updating references

@@ -13,9 +13,8 @@ import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 import type { Syno } from './syno';
 import type { SynoId } from './syno-id';
-import type { SalivaSelectors } from '../extension-staging-area/saliva/types/selectors';
 
-type BaseStateSelector = {
+export type StateSelector = {
   // state
   state: EditorState,
   // first-level accessors
@@ -42,5 +41,3 @@ type BaseStateSelector = {
   inText: () => boolean,
   focusedSynoIsRoot: () => boolean,
 }
-
-export type StateSelector = BaseStateSelector & SalivaSelectors

@@ -8,7 +8,7 @@ import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { Syno } from '../../../types/syno';
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
@@ -16,7 +16,7 @@ import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   presnoMap: MutablePresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
@@ -42,7 +42,13 @@ export default (
 
       if (argumentParameterMismatch(
         calleeFuncDef,
-        funkshunCall.argumentz.map(argRef => state.getArgument(argRef.id)),
+        funkshunCall.argumentz.map(argRef => {
+          const arg = state.getSyno(argRef.id);
+          if (arg.syntype !== 'argument') {
+            throw new Error('wrong type from synomap (flow)');
+          }
+          return arg;
+        }),
         state,
       )) {
         valid = false;
@@ -53,7 +59,7 @@ export default (
           presnoRef: true,
           id: presentSyno(
             state,
-            grammar,
+            integration,
             presnoMap,
             funkshunCall.id,
             calleeFuncDef,
@@ -94,7 +100,7 @@ export default (
     name,
     argumentz: presentArguments(
       state,
-      grammar,
+      integration,
       presnoMap,
       funkshunCall.id,
       funkshunCall.argumentz,

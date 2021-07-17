@@ -4,20 +4,20 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { FunctionCallRendererProps } from '../types/renderers/function-call-props';
 import type { SynoId } from '../../../types/syno-id';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { SynoRendererProps } from '../../../types/syno-renderer-props';
 
 const argumentEls = (
-  grammarName: GrammarName,
+  integration: LanguageIntegration,
   getPresno: (SynoId) => Presno,
   argumentz: PresnoRef[],
   SynoRenderer: (props: SynoRendererProps) => React.Node,
 ) => (
   argumentz.map((argRef: PresnoRef, ind) => (
     <SynoRenderer
-      grammarName={grammarName}
+      integration={integration}
       key={`arg_${ind + 1}`}
       getPresno={getPresno}
       synoId={argRef.id}
@@ -27,13 +27,13 @@ const argumentEls = (
 );
 
 export default (props: FunctionCallRendererProps): React.Node => {
-  const { grammarName, getPresno, presno, SynoRenderer } = props;
+  const { integration, getPresno, presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
   const {
     name, callee, resolved, focused, valid,
   } = presno;
 
-  const argumentz = argumentEls(grammarName, getPresno, presno.argumentz, SynoRenderer);
+  const argumentz = argumentEls(integration, getPresno, presno.argumentz, SynoRenderer);
   const classes = [
     'syno',
     (resolved ? 'function-call' : 'unresolved'),
@@ -52,7 +52,7 @@ export default (props: FunctionCallRendererProps): React.Node => {
         callee
           && (
             <SynoRenderer
-              grammarName={grammarName}
+              integration={integration}
               getPresno={getPresno}
               synoId={callee.id}
               SynoRenderer={SynoRenderer}

@@ -2,13 +2,13 @@
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { BooleanLiteral } from '../types/synos/boolean-literal';
 import type { BooleanLiteralPresAttrs } from '../types/presentations/presno-attrs/boolean-literal-attrs';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   presnoMap: MutablePresnoMap,
   booleanLiteral: BooleanLiteral,
   scope: {},

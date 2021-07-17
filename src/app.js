@@ -10,6 +10,12 @@ import bindInputs from './input-resolver/bind-inputs';
 
 import salivaGrammar from './extension-staging-area/saliva/grammar.yml';
 import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
+import salivaInterpret from './extension-staging-area/saliva/interpreter/interpret';
+import salivaPresenters from './extension-staging-area/saliva/presenters/presenters';
+import salivaRenderers from './extension-staging-area/saliva/renderers/renderers';
+
+// import pantheonPresenters from './extension-staging-area/pantheon/presenters/presenters';
+// import pantheonRenderers from './extension-staging-area/pantheon/renderers/renderers';
 
 import type { LanguageIntegration } from './types/language-integration';
 
@@ -19,14 +25,27 @@ require('./extension-staging-area/pantheon/stylesheet.sass');
 
 enableMapSet();
 
+/*
+  The integration is a mutable object storing unserializable 3rd party scripts and therefore has
+ state independant of the editor state. But it should be in sync with language loads (not yet
+ implemented).
+*/
 const integration: LanguageIntegration = {
   grammar: salivaGrammar,
   keyToNewSynoAttrs: salivaKeyToNewSynoAttrs,
+  interpret: salivaInterpret,
+  presenters: salivaPresenters,
+  renderers: salivaRenderers,
 };
 
 const { editorStateStore, stateSelector } = createEditorStateStore(integration);
 const renderer = new Renderer(document);
-const present = createPresent(stateSelector, editorStateStore, renderer);
+const present = createPresent(
+  stateSelector,
+  editorStateStore,
+  renderer,
+  integration,
+);
 const editorStateSubscription = () => {
   stateSelector.state = editorStateStore.getState();
   present();

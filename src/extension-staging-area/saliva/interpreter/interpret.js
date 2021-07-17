@@ -3,8 +3,8 @@ import interpreter from './interpreter';
 import ascendToRoot from '../../../syntree-utils/ascend-to-root';
 
 import type { StateSelector } from '../../../types/state-selector';
-import type { InterpretationResolution } from '../types/interpreter/interpretation-resolution';
 import type { EditorState } from '../../../types/editor-state';
+import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';
 
 export default (editorState: EditorState, state: StateSelector): InterpretationResolution => {
   let resolution: InterpretationResolution;

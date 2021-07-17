@@ -5,7 +5,7 @@ import Editor from './components/editor.jsx';
 
 import type { ReduxStore } from '../types/redux-store';
 import type { EditorPresentation } from '../types/presenter/editor-presentation';
-import type { GrammarName } from '../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../types/language-integration';
 
 type Element = Object;
 
@@ -19,7 +19,7 @@ export default class {
   render(
     editorStateStore: ReduxStore,
     presentation: EditorPresentation,
-    grammarName: GrammarName,
+    integration: LanguageIntegration,
     resultOutdated: boolean,
     interpreting: boolean,
   ) {
@@ -27,7 +27,7 @@ export default class {
       (
         <Editor
           editorStateStore={editorStateStore}
-          grammarName={grammarName}
+          integration={integration}
           presentation={presentation}
           resultOutdated={resultOutdated}
           interpreting={interpreting}

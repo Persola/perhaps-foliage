@@ -3,13 +3,13 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { GrammarName } from '../../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../../types/language-integration';
 import type { Olympian } from '../types/synos/olympian';
 import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   presnoMap: MutablePresnoMap,
   olympian: Olympian,
   scope: Object,
@@ -23,7 +23,7 @@ export default (
       presnoRef: true,
       id: presentSyno(
         state,
-        grammar,
+        integration,
         presnoMap,
         olympian.id,
         state.getSyno(olympian.child.id),

@@ -5,14 +5,21 @@ import norPrimitive from './interpret-function-call/nor-primitive';
 import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
 
 import type { StateSelector } from '../../../../types/state-selector';
-import type { InterpretationResolution } from '../../types/interpreter/interpretation-resolution';
+import type { InterpretationResolution } from '../../../../types/interpreter/interpretation-resolution';
 import type { FunctionCall } from '../../types/synos/function-call';
 import type { Argument } from '../../types/synos/argument';
 import type { BooleanLiteral } from '../../types/synos/boolean-literal';
 
 const generateScope = (resolvedCallee, interpretedArgs, state) => {
   const interpreteeScope = [];
-  const params = resolvedCallee.parameters.map(paramRef => state.getFunctionParameter(paramRef.id));
+  // $FlowFixMe: verify type
+  const params = resolvedCallee.parameters.map(paramRef => {
+    const param = state.getSyno(paramRef.id);
+    if (param.syntype !== 'functionParameter') {
+      throw new Error('wrong type from synomap (flow)');
+    }
+    return param;
+  });
   params.forEach(param => {
     const matchingPair = interpretedArgs.find(argRes => (
       argRes[0].parameter && (argRes[0].parameter.id === param.id)
@@ -58,7 +65,11 @@ export default (
     };
   }
 
-  const argumentz = interpretee.argumentz.map(arg => state.getArgument(arg.id));
+  const argumentz = interpretee.argumentz.map(argRef => {
+    const arg = state.getSyno(argRef.id);
+    if (arg.syntype !== 'argument') { throw new Error('wrong type from synomap (flow)'); }
+    return arg;
+  });
 
   const argsMissingValues = argumentz.filter((arg: Argument) => arg.value === false);
   if (argsMissingValues.length > 0) {

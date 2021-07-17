@@ -7,11 +7,11 @@ import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map';
 import type { Focus } from '../../types/editor-state/focus';
-import type { GrammarName } from '../../types/editor-state/grammar-name';
+import type { LanguageIntegration } from '../../types/language-integration';
 
 export default (
   state: StateSelector,
-  grammar: GrammarName,
+  integration: LanguageIntegration,
   rootSynoId: SynoId,
   scope: {},
   focus: (Focus | false),
@@ -19,7 +19,7 @@ export default (
   const mutablePresnoMap: MutablePresnoMap = {};
   presentSyno(
     state,
-    grammar,
+    integration,
     mutablePresnoMap,
     false,
     state.getSyno(rootSynoId),

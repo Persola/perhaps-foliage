@@ -5,7 +5,7 @@ import NamePart from '../../../renderer/components/vis/name-part.jsx';
 import type { FunctionDefinitionRendererProps } from '../types/renderers/function-definition-props';
 
 export default (props: FunctionDefinitionRendererProps): React.Node => {
-  const { grammarName, getPresno, presno, SynoRenderer } = props;
+  const { integration, getPresno, presno, SynoRenderer } = props;
   const {
     name, presnoFocused, charFocused, valid,
   } = presno;
@@ -27,7 +27,7 @@ export default (props: FunctionDefinitionRendererProps): React.Node => {
       {
         parameters.map(paramRef => (
           <SynoRenderer
-            grammarName={grammarName}
+            integration={integration}
             key={paramRef.id}
             getPresno={getPresno}
             synoId={paramRef.id}
@@ -39,7 +39,7 @@ export default (props: FunctionDefinitionRendererProps): React.Node => {
         presno.body
           && (
             <SynoRenderer
-              grammarName={grammarName}
+              integration={integration}
               getPresno={getPresno}
               synoId={presno.body.id}
               SynoRenderer={SynoRenderer}
