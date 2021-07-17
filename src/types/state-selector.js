@@ -36,11 +36,11 @@ type BaseStateSelector = {
   // synos
   getSyno: (synoId: SynoId) => Syno,
   focusedSyno: () => Syno,
+  isPrimitive: SynoId => boolean,
   // focus
   inPresno: () => boolean,
   inText: () => boolean,
   focusedSynoIsRoot: () => boolean,
-  focusedSynoIsPrimitive: () => boolean,
 }
 
 export type StateSelector = BaseStateSelector & SalivaSelectors

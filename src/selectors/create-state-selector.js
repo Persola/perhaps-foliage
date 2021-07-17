@@ -3,7 +3,6 @@ import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { Syno } from '../types/syno';
 import type { SalivaSelectors } from '../extension-staging-area/saliva/types/selectors';
-import NorPrimitiveId from '../extension-staging-area/saliva/nor-primitive-id';
 
 export default (
   initialEditorState: EditorState,
@@ -51,6 +50,9 @@ export default (
     focusedSyno: function focusedSyno() {
       return this.getSyno(this.focusedSynoId());
     },
+    isPrimitive: function isPrimitive(synoId) {
+      return Object.keys(this.state.primitives).includes(synoId);
+    },
     // focus
     inPresno: function inPresno() {
       return this.state.focus.presnoIndex !== false;
@@ -61,16 +63,6 @@ export default (
     focusedSynoIsRoot: function focusedSynoIsRoot() {
       return this.focusedSyno().parent === false;
     },
-    focusedSynoIsPrimitive: function focusedSynoIsPrimitive() {
-      return (
-        this.focusedSynoId() === NorPrimitiveId
-        || (
-          !this.focusedSynoIsRoot()
-          && this.focusedSyno().parent.id === NorPrimitiveId
-        )
-      );
-    },
-
   };
 
   return {

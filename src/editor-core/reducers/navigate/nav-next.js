@@ -17,27 +17,23 @@ export default (
 
   if (state.inText()) {
     const oldSyno = state.focusedSyno();
+    const nameHostRefName: (false | string) = state.grammar()[oldSyno.syntype].textHostRef;
+
     let oldName: string;
-    if (oldSyno.syntype === 'argument') {
-      if (oldSyno.parameter === false) {
-        throw new TypeError(
-          'Tried to navigate inside shouldn\'t-exist name of argument lacking parameter (flow)',
+    if (nameHostRefName === false) {
+      // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+      oldName = oldSyno.name;
+    } else {
+      if (!oldSyno[nameHostRefName]) {
+        throw new Error(
+          'We seem to be focused on a name presno that depends on an incomplete ref.'
+          + ' We shouldn\'t have been able to navigate here.',
         );
       }
-      const oldParameter = state.getSyno(oldSyno.parameter.id);
-      if (oldParameter.syntype !== 'functionParameter') {
-        throw new Error('Wrong syntype from synomap (flow)');
-      }
-      oldName = oldParameter.name;
-    } else {
-      if (
-        oldSyno.syntype !== 'functionParameter'
-        && oldSyno.syntype !== 'functionDefinition'
-      ) {
-        throw new Error('Wrong syntype from synomap');
-      }
-      oldName = oldSyno.name;
+      // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+      oldName = state.getSyno(oldSyno[nameHostRefName].id).name;
     }
+
     const nameLength: number = oldName.length;
 
     // $FlowFixMe: Flow doesn't look into selector interface

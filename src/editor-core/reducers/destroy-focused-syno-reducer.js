@@ -20,7 +20,7 @@ export default (
     return;
   }
 
-  if (state.focusedSynoIsPrimitive()) {
+  if (state.isPrimitive(state.focusedSynoId())) {
     console.warn("Ignoring syno destruction: can't destroy primitive or children");
     return;
   }

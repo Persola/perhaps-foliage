@@ -1,4 +1,5 @@
 * maintenance
+  * why function calls validate against grammar saying no callee as child?
   * extract Saliva-specific modules as local npm packages
     * start loading language components dynamically
       * security? (isolate 3rd party code within electron renderer process?)
