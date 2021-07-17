@@ -1,0 +1,83 @@
+:root {
+  --stage-background: #040404;
+  --charcoal: #111;
+  --sea-blue: #045;
+  --ever-green: #352;
+  --mustard-yellow: #da4;
+  --bubblegum: #e8a;
+  --villian-laser-magenta: #d14;
+  --teal: #2ad;
+  --pumpkin: #841;
+  --antique-velvet: #832;
+  --mint: #2a7;
+  --popsicle-orange: #e84;
+  --dream-violet: #803850;
+  --tomato: #b03820;
+  --pearl-shell: #e87;
+}
+
+.code-view .argument {
+  background-color: var(--ever-green);
+  color: var(--pearl-shell);
+}
+
+.code-view .invalid.argument {
+  background: repeating-linear-gradient(45deg, var(--ever-green), var(--ever-green) 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.code-view .boolean-literal {
+  background-color: var(--antique-velvet);
+  color: var(--mustard-yellow);
+}
+
+.code-view .invalid.boolean-literal {
+  background: repeating-linear-gradient(45deg, var(--antique-velvet), var(--antique-velvet) 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.code-view .function-call {
+  background-color: var(--pumpkin);
+  color: var(--bubblegum);
+}
+
+.code-view .invalid.function-call {
+  background: repeating-linear-gradient(45deg, var(--pumpkin), var(--pumpkin )3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.code-view .function-definition {
+  background-color: var(--sea-blue);
+  color: var(--popsicle-orange);
+}
+
+.code-view .invalid.function-definition {
+  background: repeating-linear-gradient(45deg, var(--sea-blue), var(--sea-blue) 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.code-view .function-parameter {
+  background-color: var(--tomato);
+  color: var(--mint);
+}
+
+.code-view .invalid.function-parameter {
+  background: repeating-linear-gradient(45deg, var(--tomato), var(--tomato )3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+.code-view .variable-ref {
+  background-color: var(--dream-violet);
+  color: var(--teal);
+}
+
+.code-view .invalid.variable-ref {
+  background: repeating-linear-gradient(45deg, var(--dream-violet), var(--dream-violet) 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}

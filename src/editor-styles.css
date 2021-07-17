@@ -1,0 +1,149 @@
+:root {
+  --charcoal: #111;
+  --stage-background: #040404;
+  --mid-grey: #333;
+  --near-white: #ffc;
+  --eyesore-yellow: #ff7;
+  --stasis-crystal: #8cc;
+  --interpreting: #844;
+}
+
+body {
+  background-color: var(--charcoal);
+  font-family: "Helvetica", Arial, sans-serif;
+  color: #fff;
+}
+
+a {
+  color: #05f;
+}
+
+
+button {
+  outline: none;
+  border: none;
+  padding: 8px 12px;
+  margin: 8px 24px;
+  background-color: var(--mid-grey);
+  color: var(--near-white);
+  font-size: 100%;
+  font-family: "Helvetica", Arial, sans-serif;
+}
+
+
+button:hover {
+  background-color: #755;
+}
+
+
+button:active {
+  background-color: var(--interpreting);
+}
+
+
+button.interpreting {
+  background-color: var(--interpreting);
+}
+
+
+::selection {
+  background-color: #c88;
+}
+
+
+.editor {
+  padding: 2px 0;
+}
+
+
+.code-view {
+  position: relative;
+  min-height: 27px;
+  margin: 8px;
+  background-color: var(--stage-background);
+  color: var(--near-white);
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  cursor: default;
+}
+
+.code-view .syno {
+  display: table;
+  padding: 0 7px;
+  min-height: 12px;
+  min-width: 4px;
+  margin: 0 3px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  box-shadow: inset 0 0 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: var(--eyesore-yellow);
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
+}
+
+.code-view .syno:hover {
+  filter: brightness(116%);
+}
+
+.code-view .non-syntactic {
+  color: var(--charcoal);
+  font-family: "Helvetica", Arial, sans-serif;
+  font-weight: normal;
+  margin: 5px 0;
+}
+
+.code-view .code-text {
+  padding: 6px 8px 3px 8px;
+}
+
+.code-view .leaf {
+  background-color: #0f0;
+  padding: 0 4px;
+}
+
+.code-view .invalid {
+  background: repeating-linear-gradient(45deg, #a11, #a11 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  color: #ddd;
+}
+
+.code-view .focused {
+  animation: pulse 0.2s infinite alternate;
+}
+
+.code-view .unfocused {
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    filter: brightness(112%);
+  }
+  100% {
+    filter: brightness(94%);
+  }
+}
+
+.code-view .same-line {
+  display: inline-block;
+}
+
+.code-view .outdated-message {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0 6px 2px 6px;
+  border-radius: 0;
+  font-size: 12px;
+  font-family: "Helvetica", Arial, sans-serif;
+  background-color: #282828;
+  color: #999;
+}
+
+.code-view.interpreting {
+  background-color: var(--stasis-crystal);
+}
+
+.code-view.hovering-file {
+  background-color: #444444;
+}

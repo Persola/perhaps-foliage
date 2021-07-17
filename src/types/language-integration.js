@@ -13,4 +13,8 @@ export type LanguageIntegration = {|
   interpret: (EditorState, StateSelector) => InterpretationResolution,
   presenters: { [Syntype]: Function },
   renderers: { [Syntype]: Function },
+  styles: {
+    use: () => void,
+    unuse: () => void,
+  },
 |}

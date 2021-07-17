@@ -4,8 +4,7 @@
   * extract Saliva-specific modules as local npm packages
     * start loading language components dynamically
       * security? (isolate 3rd party code within electron renderer process?)
-    * centralize interface
-      * document it
+    * document interface
     * ability to export types to language libraries
     * actually make libraries for saliva and pantheon
   * presno and syno clarification

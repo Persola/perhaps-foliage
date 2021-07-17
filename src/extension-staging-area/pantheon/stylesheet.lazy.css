@@ -1,0 +1,16 @@
+:root {
+  --villian-laser-magenta: #d14;
+  --mint: #2a7;
+  --pumpkin: #841;
+  --pearl-shell: #e87;
+}
+
+.code-view .titan {
+  background-color: var(--villian-laser-magenta);
+  color: var(--mint);
+}
+
+.code-view .olympian {
+  background-color: var(--pumpkin);
+  color: var(--pearl-shell);
+}

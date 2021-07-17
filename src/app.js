@@ -14,14 +14,18 @@ import salivaInterpret from './extension-staging-area/saliva/interpreter/interpr
 import salivaPresenters from './extension-staging-area/saliva/presenters/presenters';
 import salivaRenderers from './extension-staging-area/saliva/renderers/renderers';
 
+import editorStyles from './editor-styles.css'; // eslint-disable-line no-unused-vars
+
+// import pantheonGrammar from './extension-staging-area/pantheon/grammar.yml';
+// import pantheonKeyToNewSynoAttrs from
+// './extension-staging-area/pantheon/input-resolver/key-to-new-syno-attrs';
 // import pantheonPresenters from './extension-staging-area/pantheon/presenters/presenters';
 // import pantheonRenderers from './extension-staging-area/pantheon/renderers/renderers';
 
-import type { LanguageIntegration } from './types/language-integration';
+import salivaStyles from './extension-staging-area/saliva/stylesheet.lazy.css';
+// import pantheonStyles from './extension-staging-area/pantheon/stylesheet.lazy.css';
 
-require('./stylesheet.sass');
-require('./extension-staging-area/saliva/stylesheet.sass');
-require('./extension-staging-area/pantheon/stylesheet.sass');
+import type { LanguageIntegration } from './types/language-integration';
 
 enableMapSet();
 
@@ -36,7 +40,10 @@ const integration: LanguageIntegration = {
   interpret: salivaInterpret,
   presenters: salivaPresenters,
   renderers: salivaRenderers,
+  styles: salivaStyles,
 };
+
+integration.styles.use();
 
 const { editorStateStore, stateSelector } = createEditorStateStore(integration);
 const renderer = new Renderer(document);

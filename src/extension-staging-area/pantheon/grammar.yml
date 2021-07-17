@@ -4,9 +4,11 @@ titan:
     progeny:
       collection: true
       syntype: olympian
+  textHostRef: false
 olympian:
   rootable: false
   children:
     progeny:
       collection: true
       syntype: olympian
+  textHostRef: false

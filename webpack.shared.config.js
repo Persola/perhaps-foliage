@@ -20,11 +20,17 @@ module.exports = {
         ],
       },
       {
-        test: /\.sass$/,
+        test: /editor-styles\.css/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'sass-loader' },
+        ],
+      },
+      {
+        test: /\.lazy\.css/,
+        use: [
+          { loader: 'style-loader', options: { injectType: 'lazyStyleTag' } },
+          { loader: 'css-loader' },
         ],
       },
       {
