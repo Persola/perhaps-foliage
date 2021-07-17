@@ -18,13 +18,6 @@ export default (
     );
   }
 
-  if (
-    textHostSyno.syntype !== 'functionDefinition'
-    && textHostSyno.syntype !== 'functionParameter'
-  ) {
-    throw new Error('text hosts refs lead to syno of wrong type? (flow)');
-  }
-
   // $FlowFixMe: Flow doesn't know draft state matches old state
   draftSynoMap[textHostSyno.id].name = (
     // $FlowFixMe: Flow doesn't know draft state matches old state

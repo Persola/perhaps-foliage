@@ -15,7 +15,7 @@ export default (
     ) {
       // $FlowIssue: poorly typed ECMA built-in (Object.entries)
       callback(val, key);
-    } else if (val instanceof Array) { // nested children (arguments, parameters)
+    } else if (val instanceof Array) { // nested children
       val.forEach((el, index) => {
         if (
           el.synoRef

@@ -31,7 +31,7 @@ export default (
       // $FlowIssue: poorly typed ECMA built-in (Object.entries)
       if (attrVal.synoRef && attrVal.id === focusedPresnoId) {
         newExReferrer[key] = false;
-      } else if (attrVal instanceof Array) { // nested children (arguments, parameters)
+      } else if (attrVal instanceof Array) { // nested children
         attrVal.forEach((el, ind) => {
           if (el.synoRef && el.id === focusedPresnoId) {
             newExReferrer[key].splice(ind, 1);

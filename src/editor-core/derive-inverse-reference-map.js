@@ -29,7 +29,7 @@ const depthFirstBuildInverseReferences = (
         // $FlowIssue: poorly typed ECMA built-in (Object.entries)
         depthFirstBuildInverseReferences(irm, synoMap, attrVal.id);
       }
-    } else if (attrVal instanceof Array) { // nested children (arguments, parameters)
+    } else if (attrVal instanceof Array) { // nested children
       attrVal.forEach(el => {
         if (el.synoRef) {
           createOrAdd(irm, el.id, currentSyno.id);
