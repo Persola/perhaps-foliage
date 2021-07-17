@@ -2,12 +2,10 @@
 import synoMapReducer from './char-backspace/syno-map';
 
 import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { CharBackspace } from '../../types/actions/char-backspace';
 import type { StateSelector } from '../../types/state-selector';
 
 export default (
   state: StateSelector,
-  action: CharBackspace,
   draftState: MutableEditorState,
 ): void => {
   if (!state.inText()) {
@@ -16,9 +14,9 @@ export default (
 
   synoMapReducer(
     state,
-    action,
     draftState.synoMap,
   );
+
   if (state.focusedCharIndex() === 0) {
     console.warn('Ignoring backspace: at beginning of text');
   } else {

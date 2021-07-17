@@ -8,16 +8,19 @@ import type { MutableSynoMap } from '../../../types/mutable-syno-map';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { SynoRef } from '../../../types/syno-ref';
 import type { Syno } from '../../../types/syno';
+import type { SynoId } from '../../../types/syno-id';
+
 import type { CoreSynoAttrs } from '../../../extension-staging-area/saliva/types/synos/core-syno-attrs';
 import type { MutableBooleanLiteral } from '../../../extension-staging-area/saliva/types/synos/mutable-synos/boolean-literal';
 
 export default (
   state: StateSelector,
   action: ReplaceFocusedSyno,
-  draftState: MutableSynoMap,
+  draftSynoMap: MutableSynoMap,
   draft: MutableEditorState,
+  newSynoAttrs: {[string]: any},
+  newSynoId: SynoId,
 ): void => {
-  const { newSynoAttrs, newSynoId, focusedPresnoId } = action;
   const parentRef = state.focusedSyno().parent;
 
   let parentAttr: (SynoRef | false);
@@ -28,7 +31,7 @@ export default (
     let childKey: (string | false) = false;
     let childIndex: (number | false) = false;
     forChildSynoOf(parent, (childRef: SynoRef, key: string, index: ?number) => {
-      if (childRef.id === focusedPresnoId) {
+      if (childRef.id === state.focusedSynoId()) {
         childKey = key;
         childIndex = index || false;
       }
@@ -76,8 +79,8 @@ export default (
     syntype: newSynoAttrs.syntype,
     value: newSynoAttrs.value,
   };
-  if (Object.keys(draftState).includes(newSynoId)) {
+  if (Object.keys(draftSynoMap).includes(newSynoId)) {
     throw new Error('tried to create syno with in-use ID');
   }
-  draftState[newSynoId] = newSyno;
+  draftSynoMap[newSynoId] = newSyno;
 };

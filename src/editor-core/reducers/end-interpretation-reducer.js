@@ -18,7 +18,9 @@ export default (
   const result: MutableSyno = dup(action.result);
   draftState.resultTree[result.id] = result;
 
-  draftState.resultSyntreeRootId = action.result.id;
-  draftState.interpreting = false;
-  draftState.resultOutdated = false;
+  Object.assign(draftState, {
+    resultSyntreeRootId: action.result.id,
+    interpreting: false,
+    resultOutdated: false,
+  });
 };

@@ -1,13 +1,11 @@
 // @flow
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableSynoMap } from '../../../types/mutable-syno-map';
-import type { CharBackspace } from '../../../types/actions/char-backspace';
 import type { Syno } from '../../../types/syno';
 
 export default (
   state: StateSelector,
-  action: CharBackspace,
-  draftState: MutableSynoMap,
+  draftSynoMap: MutableSynoMap,
 ): void => {
   const { textHostRef } = state.grammar()[state.focusedSyno().syntype];
   let textHostSyno: Syno;
@@ -27,11 +25,11 @@ export default (
     throw new Error('text hosts refs lead to syno of wrong type? (flow)');
   }
 
-  // $FlowFixMe: Flow doesn't know draftState matches old state
-  draftState[textHostSyno.id].name = (
-    // $FlowFixMe: Flow doesn't know draftState matches old state
+  // $FlowFixMe: Flow doesn't know draft state matches old state
+  draftSynoMap[textHostSyno.id].name = (
+    // $FlowFixMe: Flow doesn't know draft state matches old state
     textHostSyno.name.slice(0, state.focusedCharIndex() - 1)
-    // $FlowFixMe: Flow doesn't know draftState matches old state
+    // $FlowFixMe: Flow doesn't know draft state matches old state
     + textHostSyno.name.slice(state.focusedCharIndex(), textHostSyno.name.length)
   );
 };

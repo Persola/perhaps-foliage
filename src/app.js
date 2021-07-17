@@ -32,7 +32,11 @@ const editorStateSubscription = () => {
   present();
 };
 editorStateStore.subscribe(editorStateSubscription);
-const inputResolver = createInputResolver(editorStateStore, stateSelector, salivaKeyToNewSynoAttrs);
+const inputResolver = createInputResolver(
+  editorStateStore,
+  stateSelector,
+  salivaKeyToNewSynoAttrs,
+);
 
 window.addEventListener('load', () => {
   bindInputs(editorStateStore, inputResolver, salivaKeyToNewSynoAttrs);

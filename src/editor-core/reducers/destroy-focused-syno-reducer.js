@@ -1,6 +1,6 @@
 // @flow
 import navOut from './navigate/nav-out';
-import destroySyno from './state-slice-helpers/syno-map/destroy-syno';
+import destroySyno from './destroy-focused-syno/destroy-syno';
 
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
@@ -28,15 +28,11 @@ export default (
   destroySyno(
     state,
     action,
-    draftState.synoMap,
     draftState,
   );
-
-  const { oldFocusedPresnoRef } = action;
 
   navOut(
     state,
     draftState.focus,
-    oldFocusedPresnoRef,
   );
 };

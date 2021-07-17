@@ -7,7 +7,7 @@ import type { ChildPresnoRef } from '../../../types/child-presno-ref';
 
 export default (
   state: StateSelector,
-  draftState: MutableFocus,
+  draftFocus: MutableFocus,
 ): void => {
   if (state.inText()) {
     console.warn('cannot navigate down: editing text');
@@ -15,7 +15,7 @@ export default (
   }
 
   if (state.inPresno()) {
-    draftState.charIndex = 0; // enter beginning of name
+    draftFocus.charIndex = 0; // enter beginning of name
     return;
   }
 
@@ -28,9 +28,9 @@ export default (
   const newFocusPresnoRef: ChildPresnoRef = childPresnoRefs[0];
 
   if (newFocusPresnoRef.synoRef) {
-    draftState.synoId = newFocusPresnoRef.id;
+    draftFocus.synoId = newFocusPresnoRef.id;
     return;
   }
 
-  draftState.presnoIndex = 0;
+  draftFocus.presnoIndex = 0;
 };

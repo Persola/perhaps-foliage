@@ -9,8 +9,6 @@ import type { Syno } from '../../../types/syno';
 export default (
   state: StateSelector,
   draftState: MutableFocus,
-  oldFocusedPresnoRef: ChildPresnoRef,
-  oldParent: (Syno | false),
 ): void => {
   if (state.focusedSynoIsRoot()) {
     console.warn('Ignoring navigation to next sibling: focus syno is root');
@@ -53,35 +51,42 @@ export default (
   }
 
   // $FlowFixMe: Flow doesn't look into selector interface
+  let oldParent: Syno;
+  if (state.inPresno()) {
+    oldParent = state.focusedSyno();
+  } else {
+    // $FlowFixMe: Flow doesn't look into selector interface
+    oldParent = state.getSyno(state.focusedSyno().parent.id);
+  }
+
   const siblingRefz = getChildPresnoRefs(oldParent, state);
+
   if (siblingRefz.length <= 0) {
     throw new Error('navigate failed; parent has no children!?');
-  } else {
-    const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
-      if (siblingRef.synoRef) {
-        // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
-        return siblingRef.id === oldFocusedPresnoRef.id;
-      }
+  }
+
+  const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
+    if (siblingRef.synoRef) {
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
-      return siblingRef.index === oldFocusedPresnoRef.index;
-    });
+      return siblingRef.id === state.focusedSynoId();
+    }
+    // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
+    return siblingRef.index === state.focusedPresnoIndex();
+  });
 
-    if (oldFocusedPresnoBirthOrder === -1) {
-      throw new Error("Cannot find old focused presno ID among parent's children");
-    } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
-      console.warn('Ignoring navigation to previous sibling: already focused on last sibling');
+  if (oldFocusedPresnoBirthOrder === -1) {
+    throw new Error("Cannot find old focused presno ID among parent's children");
+  } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
+    console.warn('Ignoring navigation to next sibling: already focused on last sibling');
+  } else {
+    const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
+
+    if (newFocusPresnoRef.synoRef) {
+      draftState.synoId = newFocusPresnoRef.id;
+      draftState.presnoIndex = false;
     } else {
-      const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
-
-      if (newFocusPresnoRef.synoRef) {
-        draftState.synoId = newFocusPresnoRef.id;
-        draftState.presnoIndex = false;
-        return;
-      }
-
-      // $FlowFixMe: Flow doesn't look into selector interface
       draftState.synoId = oldParent.id;
-      draftState.presnoIndex = 0;
+      draftState.presnoIndex = newFocusPresnoRef.index;
     }
   }
 };

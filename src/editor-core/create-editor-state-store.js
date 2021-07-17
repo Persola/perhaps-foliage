@@ -75,7 +75,12 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
 
       switch (action.type) {
         case 'REPLACE_FOCUSED_SYNO': {
-          replaceFocusedSynoReducer(stateSelector, action, draftState);
+          replaceFocusedSynoReducer(
+            stateSelector,
+            action,
+            draftState,
+            integration.keyToNewSynoAttrs,
+          );
           break;
         }
         case 'END_INTERPRETATION': {
@@ -103,7 +108,7 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
           break;
         }
         case 'CHAR_BACKSPACE': {
-          charBackspaceReducer(stateSelector, action, draftState);
+          charBackspaceReducer(stateSelector, draftState);
           break;
         }
         case 'DESTROY_FOCUSED_SYNO': {

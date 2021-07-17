@@ -20,9 +20,9 @@ export default (
       if (key === 'enter') {
         command = { type: 'START_INTERPRETATION' };
       } else if (['left', 'right', 'up', 'down'].includes(key)) {
-        command = navigationCommandResolver(key, state);
+        command = navigationCommandResolver(key);
       } else if (state.inText()) { // text commands
-        command = textCommandResolver(key, state);
+        command = textCommandResolver(key);
         // } else if (focus.presnoIndex !== false) {
         //   throw new Error('this should be unreachable still');
         // because if the focus has a presnoIndex there should also be a charIndex

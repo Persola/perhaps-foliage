@@ -1,16 +1,14 @@
 // @flow
-import getDraftSyno from '../../draft-utils/get-draft-syno';
+import getDraftSyno from '../draft-utils/get-draft-syno';
 
-import type { StateSelector } from '../../../../types/state-selector';
-import type { DestroyFocusedSyno } from '../../../../types/actions/destroy-focused-syno';
-import type { MutableSynoMap } from '../../../../types/mutable-syno-map';
-import type { MutableEditorState } from '../../../../types/mutable-editor-state';
+import type { StateSelector } from '../../../types/state-selector';
+import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
+import type { MutableEditorState } from '../../../types/mutable-editor-state';
 
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
-  draftState: MutableSynoMap,
-  draft: MutableEditorState,
+  draftState: MutableEditorState,
 ): void => {
   // TODO: delete orphaned children from store
   // TODO: and references outside parent in general (need backwards reference reference?)
@@ -21,14 +19,14 @@ export default (
     return;
   }
 
-  delete draftState[focusedPresnoId]; // cannot be primitive
+  delete draftState.synoMap[focusedPresnoId]; // cannot be primitive
 
   const parentRef = state.getSyno(focusedPresnoId).parent;
   // $FlowFixMe: Flow doesn't look into selector interface
   const referrerIds = new Set([parentRef.id, ...(state.inverseReferenceMap()[focusedPresnoId])]);
   referrerIds.forEach(referrerId => {
     const oldReferrer = state.synoMap()[referrerId];
-    const newExReferrer = getDraftSyno(referrerId, state, draft); // could be primitive
+    const newExReferrer = getDraftSyno(referrerId, state, draftState); // could be primitive
     Object.entries(oldReferrer).forEach(([key, attrVal]) => {
       // $FlowIssue: poorly typed ECMA built-in (Object.entries)
       if (attrVal.synoRef && attrVal.id === focusedPresnoId) {

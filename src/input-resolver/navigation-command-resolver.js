@@ -1,28 +1,7 @@
 // @flow
-import type { StateSelector } from '../types/state-selector';
-import type { ChildPresnoRef } from '../types/child-presno-ref';
 import type { ReduxAction } from '../types/redux-action';
 
-export default (key: string, state: StateSelector): ReduxAction => {
-  let oldFocusedPresnoRef: ChildPresnoRef;
-  if (!state.inPresno()) {
-    oldFocusedPresnoRef = {
-      synoRef: true,
-      id: state.focusedSynoId(),
-      relation: 'non-tree',
-    };
-  } else {
-    oldFocusedPresnoRef = {
-      synoRef: false,
-      parent: {
-        synoRef: true,
-        id: state.focusedSynoId(),
-        relation: 'parent',
-      },
-      index: 0,
-    };
-  }
-
+export default (key: string): ReduxAction => {
   let direction;
   switch (key) {
     case 'left':
@@ -43,7 +22,6 @@ export default (key: string, state: StateSelector): ReduxAction => {
 
   return ({
     type: 'NAVIGATE',
-    oldFocusedPresnoRef,
     direction,
   });
 };

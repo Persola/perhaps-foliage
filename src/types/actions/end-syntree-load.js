@@ -1,7 +1,7 @@
 // @flow
-import type { SynoMap } from '../syno-map';
+import type { MutableSynoMap } from '../mutable-syno-map';
 
 export type EndAsyncSyntreeLoad = {|
   +type: 'END_SYNTREE_LOAD',
-  +newSynoMap: SynoMap,
+  +newSynoMap: MutableSynoMap,
 |}
