@@ -1,5 +1,4 @@
 // @flow
-import 'core-js';
 import { enableMapSet } from 'immer';
 
 import createEditorStateStore from './editor-core/create-editor-state-store';
@@ -9,7 +8,7 @@ import createInputResolver from './input-resolver/create-input-resolver';
 import bindInputs from './input-resolver/bind-inputs';
 
 import salivaGrammar from './extension-staging-area/saliva/grammar.yml';
-import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs';
+import salivaKeyToNewSynoAttrs from './extension-staging-area/saliva/input-resolver/key-to-new-syno-attrs.yml';
 import salivaInterpret from './extension-staging-area/saliva/interpreter/interpret';
 import salivaPresenters from './extension-staging-area/saliva/presenters/presenters';
 import salivaRenderers from './extension-staging-area/saliva/renderers/renderers';
@@ -18,7 +17,7 @@ import editorStyles from './editor-styles.css'; // eslint-disable-line no-unused
 
 // import pantheonGrammar from './extension-staging-area/pantheon/grammar.yml';
 // import pantheonKeyToNewSynoAttrs from
-// './extension-staging-area/pantheon/input-resolver/key-to-new-syno-attrs';
+// './extension-staging-area/pantheon/input-resolver/key-to-new-syno-attrs.yml';
 // import pantheonPresenters from './extension-staging-area/pantheon/presenters/presenters';
 // import pantheonRenderers from './extension-staging-area/pantheon/renderers/renderers';
 
