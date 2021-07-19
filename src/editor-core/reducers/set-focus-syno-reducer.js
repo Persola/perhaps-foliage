@@ -8,8 +8,18 @@ export default (
   action: SetFocusSyno,
   draftState: MutableEditorState,
 ): void => {
+  if (state.integrationLoaded() === false) {
+    console.warn('Ignoring SET_FOCUS_SYNO action: no integration loaded');
+    return;
+  }
+
+  if (state.treeLoaded() === false) {
+    console.warn('Ignoring SET_FOCUS_SYNO action: no tree loaded');
+    return;
+  }
+
   if (state.synoMap()[action.synoId] === undefined) {
-    console.warn('Ignoring focus syno command: target syno not in input tree');
+    console.warn('Ignoring SET_FOCUS_SYNO action: target syno not in input tree');
     return;
   }
 

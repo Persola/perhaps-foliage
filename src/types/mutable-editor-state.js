@@ -1,7 +1,7 @@
 // @flow
 import type { MutableSynoMap } from './mutable-syno-map';
-import type { MutableInverseReferenceMap } from './editor-state/mutable/mutable-inverse-reference-map';
-import type { GrammarName } from './editor-state/grammar-name';
+import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
+import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
 import type { Grammar } from './editor-state/grammar';
 import type { MutableFocus } from './editor-state/mutable/mutable-focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
@@ -10,15 +10,18 @@ import type { Interpreting } from './editor-state/interpreting';
 import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 export type MutableEditorState = {|
-  grammar: Grammar,
-  grammarName: GrammarName,
-  primitives: MutableSynoMap,
-  synoMap: MutableSynoMap,
-  resultTree: MutableSynoMap,
-  inverseReferenceMap: MutableInverseReferenceMap,
-  focus: MutableFocus,
-  resultSyntreeRootId: ResultSyntreeRootId,
-  resultOutdated: ResultOutdated,
-  interpreting: Interpreting,
-  loadingSyntree: LoadingSyntree,
+  integrationId: (false | string),
+  grammar: (false | Grammar),
+  primitives: (false | MutableSynoMap),
+  keyToNewSynoAttrs: KeyToNewSynoAttrs,
+  lastIntegrationBindings: (false | string[]),
+  synoMap: (false | MutableSynoMap),
+  resultTree: (false | MutableSynoMap),
+  inverseReferenceMap: (false | InverseReferenceMap),
+  focus: (false | MutableFocus),
+  resultSyntreeRootId: (false | ResultSyntreeRootId),
+  interpreting: (false | Interpreting),
+  resultOutdated: (false | ResultOutdated),
+  loadingIntegration: boolean,
+  loadingSyntree: (false | LoadingSyntree),
 |}

@@ -4,12 +4,10 @@ import Mousetrap from 'mousetrap';
 import createFocusSyno from './create-focus-syno';
 
 import type { ReduxStore } from '../types/redux-store';
-import type { KeyToNewSynoAttrs } from '../types/language-integration/key-to-new-syno-attrs';
 
 export default (
   editorStateStore: ReduxStore,
   inputResolver: (string) => void,
-  salivaKeyToNewSynoAttrs: KeyToNewSynoAttrs,
 ) => {
   Mousetrap.bind(
     [
@@ -19,14 +17,12 @@ export default (
       'up',
       'down',
       'backspace',
-    ].concat(
-      Object.keys(salivaKeyToNewSynoAttrs),
-    ),
+    ],
     (e, key) => {
       if ([
-        'backspace',
         'up',
         'down',
+        'backspace',
       ].includes(key)) {
         e.preventDefault();
       }

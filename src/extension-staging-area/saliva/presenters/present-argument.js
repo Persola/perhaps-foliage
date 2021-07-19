@@ -4,13 +4,13 @@ import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-m
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { LanguageIntegration } from '../../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { Argument } from '../types/synos/argument';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
 
 export default (
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   argument: Argument,
   scope: {},

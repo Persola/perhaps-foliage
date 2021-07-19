@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { VariableRefRendererProps } from '../types/renderers/variable-ref-props';
 
 export default (props: VariableRefRendererProps): React.Node => {
-  const { presno, SynoRenderer } = props;
+  const { NamePart, presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
   const classes = [
     'syno',

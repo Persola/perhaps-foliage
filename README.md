@@ -15,8 +15,20 @@ This is a scaffold for a programming interface which more richly integrates with
 * `npm install`
 
 ### Build
+
+##### Web
 ```shell
-npm run build
+npm run build:web
+```
+
+##### Electron
+```shell
+npm run build:el
+```
+
+##### Saliva Integration
+```shell
+npm run build:saliva
 ```
 
 ### Run
@@ -27,23 +39,16 @@ npm run build
 
 ##### Electron
 ```shell
-npm run start:electron
+npm run start:el
 ```
 
-### Test
-The test suite has been forsaken.
-
-### Test Coverage Check
-Open `./tmp/coverage/index.html` in a browser. The interface refreshes when tests are run.
+### Use
+1. use the load file input to load the Saliva Integration (src/extension-staging-area/saliva/dist/salivaIntegration.js)
+2. drag saliva files into the top of the editor to edit, insofar is possible atm (sample code in src/extension-staging-area/saliva/static)
 
 ### Type Check
 ```shell
 npm run type
-```
-
-### Type Check Coverage Check
-```shell
-npm run type-cov
 ```
 
 ### Lint

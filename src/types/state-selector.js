@@ -2,8 +2,8 @@
 import type { EditorState } from './editor-state';
 
 import type { Grammar } from './editor-state/grammar';
-import type { GrammarName } from './editor-state/grammar-name';
 import type { SynoMap } from './syno-map';
+import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
 import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
 import type { Focus } from './editor-state/focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
@@ -18,20 +18,27 @@ export type StateSelector = {
   // state
   state: EditorState,
   // first-level accessors
+  integrationId: () => string,
   grammar: () => Grammar,
-  grammarName: () => GrammarName,
   primitives: () => SynoMap,
+  keyToNewSynoAttrs: () => KeyToNewSynoAttrs,
+  lastIntegrationBindings: () => string[],
   synoMap: () => SynoMap,
+  resultTree: () => SynoMap,
   inverseReferenceMap: () => InverseReferenceMap,
   focus: () => Focus,
   resultSyntreeRootId: () => ResultSyntreeRootId,
   interpreting: () => Interpreting,
   resultOutdated: () => ResultOutdated,
-  // deeper accessors
+  loadingIntegration: () => boolean,
   loadingSyntree: () => LoadingSyntree,
+  // deeper accessors
   focusedSynoId: () => SynoId,
   focusedPresnoIndex: () => number,
   focusedCharIndex: () => number,
+  // loaded
+  treeLoaded: () => boolean,
+  integrationLoaded: () => boolean,
   // synos
   getSyno: (synoId: SynoId) => Syno,
   focusedSyno: () => Syno,

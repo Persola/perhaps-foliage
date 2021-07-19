@@ -1,16 +1,15 @@
 // @flow
 import * as React from 'react';
-import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { FunctionCallRendererProps } from '../types/renderers/function-call-props';
 import type { SynoId } from '../../../types/syno-id';
-import type { LanguageIntegration } from '../../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
-import type { SynoRendererProps } from '../../../types/syno-renderer-props';
+import type { SynoRendererProps } from '../../../types/renderer/syno-renderer-props';
 
 const argumentEls = (
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   getPresno: (SynoId) => Presno,
   argumentz: PresnoRef[],
   SynoRenderer: (props: SynoRendererProps) => React.Node,
@@ -27,7 +26,7 @@ const argumentEls = (
 );
 
 export default (props: FunctionCallRendererProps): React.Node => {
-  const { integration, getPresno, presno, SynoRenderer } = props;
+  const { NamePart, integration, getPresno, presno, SynoRenderer } = props;
   const { presnoFocused, charFocused } = presno;
   const {
     name, callee, resolved, focused, valid,

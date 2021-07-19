@@ -8,7 +8,7 @@ import type { Syno } from '../../../types/syno';
 
 export default (
   state: StateSelector,
-  draftState: MutableFocus,
+  draftFocus: MutableFocus,
 ): void => {
   if (state.focusedSynoIsRoot()) {
     console.warn('ignoring navigation to previous sibling: focus syno is root');
@@ -22,7 +22,7 @@ export default (
     }
 
     // $FlowFixMe: Flow doesn't look into selector interface
-    draftState.charIndex -= 1;
+    draftFocus.charIndex -= 1;
     return;
   }
 
@@ -57,11 +57,11 @@ export default (
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedSynoBirthOrder - 1];
 
     if (newFocusPresnoRef.synoRef) {
-      draftState.synoId = newFocusPresnoRef.id;
-      draftState.presnoIndex = false;
+      draftFocus.synoId = newFocusPresnoRef.id;
+      draftFocus.presnoIndex = false;
     } else {
-      draftState.synoId = oldParent.id;
-      draftState.presnoIndex = newFocusPresnoRef.index;
+      draftFocus.synoId = oldParent.id;
+      draftFocus.presnoIndex = newFocusPresnoRef.index;
     }
   }
 };

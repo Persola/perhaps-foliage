@@ -1,9 +1,11 @@
 * maintenance
-  * have presenters only return one presno attrs (for typing/consistency)
+  * have presenters only return one presno attrs, never collections (for typing/consistency)
   * why function calls validate against grammar saying no callee as child?
   * extract Saliva-specific modules as local npm packages
-    * start loading language components dynamically
-      * security? (isolate 3rd party code within electron renderer process?)
+    * inject dependencies to prevent bundling duplicates
+    * integration security
+    * integration validation
+    * re-evaluate use of eval
     * document interface
     * ability to export types to language libraries
     * actually make libraries for saliva and pantheon
@@ -21,12 +23,15 @@
   * force actions to go through an interface (to become API) (by encapsulating store?)
   * wrap syntrees in file with metadata (root ID)
   *  systematic method to generate IDs
+  * adopt Typescript
+  * [?] adopt unist and its ecosystem
   * [?] use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
   * [?] use proxy-memoize or another selector memoizer
   * [?] organize types
   * [?] add flow-runtime
   * [?] add prettier
     * also just look at prettier to get an idea of how to do formatting
+  * [?] port to VSCode extension :(
 * new functionality
   * add ancestor context presenter API to support context-sensative grammars but make it explicit
     * context would be provided in presentation, not done in renderer

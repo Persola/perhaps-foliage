@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { FunctionDefinitionRendererProps } from '../types/renderers/function-definition-props';
 
 export default (props: FunctionDefinitionRendererProps): React.Node => {
-  const { integration, getPresno, presno, SynoRenderer } = props;
+  const { NamePart, integration, getPresno, presno, SynoRenderer } = props;
   const {
     name, presnoFocused, charFocused, valid,
   } = presno;

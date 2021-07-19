@@ -7,11 +7,11 @@ import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map';
 import type { Focus } from '../../types/editor-state/focus';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
 
 export default (
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   rootSynoId: SynoId,
   scope: {},
   focus: (Focus | false),

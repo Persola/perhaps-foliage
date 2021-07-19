@@ -2,6 +2,8 @@
 import * as React from 'react';
 import CodeView from './code-view.jsx';
 import InterpretButton from './interpret-button.jsx';
+import IntegrationLoadInput from './integration-load-input.jsx';
+
 import type { ReduxStore } from '../../types/redux-store';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
 import type { LanguageIntegration } from '../../types/language-integration';
@@ -25,6 +27,9 @@ export default (props: Props): React.Node => {
 
   return (
     <div className="editor mousetrap">
+      <IntegrationLoadInput
+        editorStateStore={editorStateStore}
+      />
       <CodeView
         key="stage"
         editorStateStore={editorStateStore}

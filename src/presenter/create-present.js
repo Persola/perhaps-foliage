@@ -8,6 +8,7 @@ import type { EditorPresentation } from '../types/presenter/editor-presentation'
 import type { ReduxStore } from '../types/redux-store';
 import type { Renderer } from '../types/renderer';
 import type { LanguageIntegration } from '../types/language-integration';
+import type { PresentLanguageIntegration } from '../types/language-integration/present-language-integration';
 
 const generatePresentation = (
   state: StateSelector,
@@ -19,30 +20,40 @@ const generatePresentation = (
     resultSyntreeRootId,
   } = editorState;
 
-  return {
-    stage: (
-      !focus.synoId
-        ? false
-        : presentFocusedSyntree(
-          state,
-          integration,
-          focus.synoId,
-          {},
-          focus,
-        )
-    ),
-    result: (
-      !resultSyntreeRootId
-        ? false
-        : presentSyntree(
-          state,
-          integration,
-          resultSyntreeRootId,
-          {},
-          false,
-        )
-    ),
-  };
+  let stage;
+  if (
+    !state.integrationLoaded()
+    || !state.synoMap()
+    || !state.focusedSynoId()
+  ) {
+    stage = false;
+  } else {
+    stage = presentFocusedSyntree(
+      state,
+      // $FlowFixMe: Flow doesn't look into selector interface
+      (integration: PresentLanguageIntegration),
+      // $FlowFixMe: Flow doesn't look into selector interface
+      focus.synoId,
+      {},
+      focus,
+    );
+  }
+
+  let result;
+  if (!resultSyntreeRootId) {
+    result = false;
+  } else {
+    result = presentSyntree(
+      state,
+      // $FlowFixMe: Flow doesn't look into selector interface
+      (integration: PresentLanguageIntegration),
+      resultSyntreeRootId,
+      {},
+      false,
+    );
+  }
+
+  return { stage, result };
 };
 
 export default (

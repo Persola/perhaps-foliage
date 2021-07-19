@@ -12,8 +12,13 @@ export default (
   action: EndAsyncSyntreeLoad,
   draftState: MutableEditorState,
 ): void => {
+  if (state.integrationLoaded() === false) {
+    console.warn('Ignoring END_SYNTREE_LOAD action: no integration loaded');
+    return;
+  }
+
   const newSyntree: MutableSynoMap = action.newSynoMap;
-  const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], state);
+  const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], newSyntree);
 
   Object.assign(draftState, {
     synoMap: newSyntree,

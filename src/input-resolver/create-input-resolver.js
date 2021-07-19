@@ -5,12 +5,12 @@ import textCommandResolver from './input-resolver/text-command-resolver';
 
 import type { ReduxStore } from '../types/redux-store';
 import type { StateSelector } from '../types/state-selector';
-import type { KeyToNewSynoAttrs } from '../types/language-integration/key-to-new-syno-attrs';
+import type { LanguageIntegration } from '../types/language-integration';
 
 export default (
   editorStateStore: ReduxStore,
   state: StateSelector,
-  salivaKeyToNewSynoAttrs: KeyToNewSynoAttrs,
+  integration: LanguageIntegration,
   // eslint doesn't understand the parantheses around this type
   // eslint-disable-next-line function-paren-newline
 ): (string => void) => {
@@ -28,7 +28,7 @@ export default (
         // because if the focus has a presnoIndex there should also be a charIndex
         // to do: commands for non-text presnos
       } else {
-        command = synoCommandResolver(key, state, salivaKeyToNewSynoAttrs);
+        command = synoCommandResolver(key, state, integration);
       }
 
       if (command !== false) {

@@ -7,13 +7,13 @@ import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-m
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { LanguageIntegration } from '../../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
 
 export default (
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   funkshunDef: FunctionDefinition,
   scope: {},

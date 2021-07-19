@@ -2,13 +2,14 @@
   no flow because there's no types for rxjs in flow-typed that the current version of flow digests,
   let alone ones for an updated version of rxjs
 */
-import { map, mergeMap } from 'rxjs';
-import { ofType } from 'redux-observable';
+import { filter, map, mergeMap } from 'rxjs';
 
 import loadSyntreeFromFileObject from '../../code-loader/load-syntree-from-file-object';
 
-export default action$ => action$.pipe(
-  ofType('START_SYNTREE_LOAD'),
+export default (action$, state$, state) => action$.pipe(
+  filter(action => {
+    return action.type === 'START_SYNTREE_LOAD' && state.integrationLoaded();
+  }),
   mergeMap(action => {
     return loadSyntreeFromFileObject(action.file);
   }),

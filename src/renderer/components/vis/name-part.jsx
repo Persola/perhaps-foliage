@@ -1,11 +1,7 @@
 // @flow
 import * as React from 'react';
 
-type Props = {
-  namePart: string,
-  focused: boolean,
-  charFocused: (number | false)
-}
+import type { NamePartProps } from '../../../types/renderer/name-part-props';
 
 const namePartWithCursor = (namePart, charFocused) => (
   `${namePart.slice(0, charFocused)
@@ -13,7 +9,7 @@ const namePartWithCursor = (namePart, charFocused) => (
     namePart.slice(charFocused, namePart.length)}`
 );
 
-export default (props: Props): React.Node => {
+export default (props: NamePartProps): React.Node => {
   const { namePart, focused, charFocused } = props;
   const classes = `code-text same-line ${focused ? 'focused' : 'unfocused'}`;
 

@@ -2,14 +2,14 @@
 import * as React from 'react';
 import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
-import type { LanguageIntegration } from '../../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { Presno } from '../../../types/presenter/presno';
 import type { SynoId } from '../../../types/syno-id';
-import type { SynoRendererProps } from '../../../types/syno-renderer-props';
+import type { SynoRendererProps } from '../../../types/renderer/syno-renderer-props';
 import type { OlympianPres } from '../types/presentations/olympian';
 
 type Props = {
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   getPresno: (SynoId) => Presno, // eslint-disable-line react/no-unused-prop-types
   presno: OlympianPres,
   SynoRenderer: (props: SynoRendererProps) => React.Node

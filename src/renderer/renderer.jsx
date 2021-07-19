@@ -35,5 +35,9 @@ export default class {
       ),
       this.editorEl,
     );
+
+    if (integration.styles) {
+      integration.styles.use();
+    }
   }
 }

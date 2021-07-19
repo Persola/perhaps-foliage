@@ -6,16 +6,16 @@ import type { StateSelector } from '../../types/state-selector';
 import type { SynoId } from '../../types/syno-id';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { Focus } from '../../types/editor-state/focus';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
 
 export default (
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   focusedPresnoId: SynoId,
   scope: {},
   focus: (Focus | false),
 ): Prestree => {
-  const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, state).id;
+  const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, state.synoMap()).id;
   return presentSyntree(
     state,
     integration,

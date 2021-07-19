@@ -1,5 +1,7 @@
 node_modules
 dist
+src/extension-staging-area/saliva/dist
+src/extension-staging-area/pantheon/dist
 test/**/__snapshots__
 tmp
 **/.DS_Store

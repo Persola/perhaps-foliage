@@ -5,33 +5,32 @@ import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
 
 import createState from '../selectors/create-state-selector';
-import deriveInverseReferenceMap from './derive-inverse-reference-map';
-import codeLoader from '../code-loader/code-loader';
 
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
+import endIntegrationLoadReducer from './reducers/end-integration-load-reducer';
 import navigateReducer from './reducers/navigate-reducer';
 import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
 import startInterpretationReducer from './reducers/start-interpretation-reducer';
+import startIntegrationLoadReducer from './reducers/start-integration-load-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 import charBackspaceReducer from './reducers/char-backspace-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 import verifyActionType from './reducers/util/verify-action-type';
 
-import interpretEpic from './epics/interpret';
+import loadIntegrationEpic from './epics/load-integration';
 import loadSyntreeEpic from './epics/load-syntree';
+import interpretEpic from './epics/interpret';
 
-import type { LanguageIntegration } from '../types/language-integration';
+import type { AbsentLanguageIntegration } from '../types/language-integration/absent-language-integration';
 import type { StateSelector } from '../types/state-selector';
 import type { ReduxStore } from '../types/redux-store';
 import type { ReduxAction } from '../types/redux-action';
 import type { EditorState } from '../types/editor-state';
+import type { EditorStateWithoutIntegration } from '../types/editor-state/editor-state-without-integration';
 import type { MutableEditorState } from '../types/mutable-editor-state';
-import type { SynoMap } from '../types/syno-map';
 
-const salivaPrimitives: SynoMap = codeLoader.loadSyntreeFromFileSystem('salivaPrimitives');
-const testSyntree: SynoMap = codeLoader.loadSyntreeFromFileSystem('proxyNorCall');
 // const testSyntree: SynoMap = codeLoader('pantheon');
 
 type CreateStoreReturn = {
@@ -39,27 +38,21 @@ type CreateStoreReturn = {
   stateSelector: StateSelector,
 };
 
-export default (integration: LanguageIntegration): CreateStoreReturn => {
-  const defaultEditorState: EditorState = {
-    grammar: integration.grammar,
-    // grammar: pantheonGrammar,
-    grammarName: 'saliva',
-    // grammarName: 'pantheon',
-    primitives: salivaPrimitives,
-    synoMap: testSyntree,
-    resultTree: {},
-    inverseReferenceMap: deriveInverseReferenceMap(testSyntree, '1-1'),
-    focus: {
-      synoId: Object.keys(testSyntree)[0],
-      presnoIndex: false,
-      charIndex: false,
-      // synoId: 'cronus',
-      // presnoIndex: false,
-      // charIndex: false,
-    },
+export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
+  const defaultEditorState: EditorStateWithoutIntegration = {
+    integrationId: false,
+    grammar: false,
+    primitives: false,
+    keyToNewSynoAttrs: false,
+    lastIntegrationBindings: false,
+    synoMap: false,
+    resultTree: false,
+    inverseReferenceMap: false,
+    focus: false,
     resultSyntreeRootId: false,
     interpreting: false,
     resultOutdated: false,
+    loadingIntegration: false,
     loadingSyntree: false,
   };
 
@@ -78,7 +71,7 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
             stateSelector,
             action,
             draftState,
-            integration.keyToNewSynoAttrs,
+            integration,
           );
           break;
         }
@@ -90,6 +83,10 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
           endSyntreeLoadReducer(stateSelector, action, draftState);
           break;
         }
+        case 'END_INTEGRATION_LOAD': {
+          endIntegrationLoadReducer(stateSelector, action, draftState, integration);
+          break;
+        }
         case 'NAVIGATE': {
           navigateReducer(stateSelector, action, draftState);
           break;
@@ -99,11 +96,15 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
           break;
         }
         case 'START_INTERPRETATION': {
-          startInterpretationReducer(stateSelector, draftState);
+          startInterpretationReducer(stateSelector, draftState, integration);
           break;
         }
         case 'START_SYNTREE_LOAD': {
           startSyntreeLoadReducer(stateSelector, draftState);
+          break;
+        }
+        case 'START_INTEGRATION_LOAD': {
+          startIntegrationLoadReducer(draftState);
           break;
         }
         case 'CHAR_BACKSPACE': {
@@ -134,8 +135,9 @@ export default (integration: LanguageIntegration): CreateStoreReturn => {
   );
 
   const rootEpic = (action$, state$) => merge(
+    loadIntegrationEpic(action$),
+    loadSyntreeEpic(action$, state$, stateSelector),
     interpretEpic(action$, state$, stateSelector, integration),
-    loadSyntreeEpic(action$, state$),
   );
 
   epicMiddleware.run(rootEpic);

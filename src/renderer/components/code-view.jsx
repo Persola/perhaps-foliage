@@ -7,6 +7,7 @@ import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
 import type { ReduxStore } from '../../types/redux-store';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { LanguageIntegration } from '../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
 
 type Props = {
   editorStateStore: ReduxStore,
@@ -72,7 +73,7 @@ export default (props: Props): React.Node => {
     const getPresno = createPresnoFetcher(presnos);
     content = (
       <SyntacticNode
-        integration={integration}
+        integration={((integration: any): PresentLanguageIntegration)}
         getPresno={getPresno}
         synoId={rootId}
         SynoRenderer={SyntacticNode}

@@ -4,14 +4,14 @@ import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-f
 
 export default (
   state: StateSelector,
-  draftState: MutableFocus,
+  draftFocus: MutableFocus,
 ): void => {
   if (state.inText()) {
-    draftState.charIndex = false;
+    draftFocus.charIndex = false;
     return;
   }
   if (state.inPresno()) {
-    draftState.presnoIndex = false;
+    draftFocus.presnoIndex = false;
     return;
   }
 
@@ -21,5 +21,5 @@ export default (
     return;
   }
   // $FlowFixMe: Flow doesn't look into selector interface
-  draftState.synoId = state.focusedSyno().parent.id;
+  draftFocus.synoId = state.focusedSyno().parent.id;
 };

@@ -7,6 +7,8 @@
     "clean:dist": "rm -dr dist/*",
     "build:web": "webpack --config webpack.web.config.js",
     "build:el": "webpack --config webpack.electron.config.js",
+    "build:saliva": "webpack --config webpack.saliva.config.js",
+    "build:pantheon": "webpack --config webpack.pantheon.config.js",
     "start:web": "node --inspect ./web-repl/server.js",
     "start:el": "electron electron-repl/",
     "start:wds": "webpack serve --target browserslist",

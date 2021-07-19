@@ -8,13 +8,8 @@ import type { Syno } from '../../../types/syno';
 
 export default (
   state: StateSelector,
-  draftState: MutableFocus,
+  draftFocus: MutableFocus,
 ): void => {
-  if (state.focusedSynoIsRoot()) {
-    console.warn('Ignoring navigation to next sibling: focus syno is root');
-    return;
-  }
-
   if (state.inText()) {
     const oldSyno = state.focusedSyno();
     const nameHostRefName: (false | string) = state.grammar()[oldSyno.syntype].textHostRef;
@@ -42,7 +37,12 @@ export default (
       return;
     }
 
-    draftState.charIndex += 1;
+    draftFocus.charIndex += 1;
+    return;
+  }
+
+  if (state.focusedSynoIsRoot() && !state.inPresno()) {
+    console.warn('Ignoring navigation to next sibling: focus syno is root');
     return;
   }
 
@@ -78,11 +78,11 @@ export default (
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
 
     if (newFocusPresnoRef.synoRef) {
-      draftState.synoId = newFocusPresnoRef.id;
-      draftState.presnoIndex = false;
+      draftFocus.synoId = newFocusPresnoRef.id;
+      draftFocus.presnoIndex = false;
     } else {
-      draftState.synoId = oldParent.id;
-      draftState.presnoIndex = newFocusPresnoRef.index;
+      draftFocus.synoId = oldParent.id;
+      draftFocus.presnoIndex = newFocusPresnoRef.index;
     }
   }
 };

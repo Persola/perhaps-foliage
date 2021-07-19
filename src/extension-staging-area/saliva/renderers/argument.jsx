@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react';
-import NamePart from '../../../renderer/components/vis/name-part.jsx';
 
 import type { ArgumentRendererProps } from '../types/renderers/argument-props';
 
 export default (props: ArgumentRendererProps): React.Node => {
   const {
+    NamePart,
     integration,
     getPresno,
     SynoRenderer,

@@ -10,6 +10,8 @@ import type { CharBackspace } from './actions/char-backspace';
 import type { DestroyFocusedSyno } from './actions/destroy-focused-syno';
 import type { StartAsyncSyntreeLoad } from './actions/start-syntree-load';
 import type { EndAsyncSyntreeLoad } from './actions/end-syntree-load';
+import type { StartIntegrationLoad } from './actions/start-integration-load';
+import type { EndIntegrationLoad } from './actions/end-integration-load';
 
 export type ReduxAction = (
   | Init
@@ -23,4 +25,6 @@ export type ReduxAction = (
   | DestroyFocusedSyno
   | StartAsyncSyntreeLoad
   | EndAsyncSyntreeLoad
+  | StartIntegrationLoad
+  | EndIntegrationLoad
 )

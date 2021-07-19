@@ -1,14 +1,14 @@
 // @flow
-import type { StateSelector } from '../types/state-selector';
+import type { SynoMap } from '../types/syno-map';
 import type { SynoId } from '../types/syno-id';
 import type { Syno } from '../types/syno';
 
-export default (startingSynoId: SynoId, state: StateSelector): Syno => {
-  let currentSyno = state.getSyno(startingSynoId);
+export default (startingSynoId: SynoId, tree: SynoMap): Syno => {
+  let currentSyno = tree[startingSynoId];
   let counter: number = 0;
   while (currentSyno.parent) {
     try {
-      currentSyno = state.getSyno(currentSyno.parent.id);
+      currentSyno = tree[currentSyno.parent.id];
     } catch (e) {
       if (e.name === 'getSyno recieved broken SynoRef for provided SynoMap') {
         throw new Error(`ascendToRoot hit broken parent reference ${counter} levels deep`);

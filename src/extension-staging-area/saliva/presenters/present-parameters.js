@@ -6,11 +6,11 @@ import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-m
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { LanguageIntegration } from '../../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 
 export default (
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   parentId: SynoId,
   parameters: SynoRef[],

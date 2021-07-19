@@ -1,6 +1,7 @@
 "code view" - a GUI pane displaying expressions in a programming language
 "stage" - the code view which contains the code currently being edited, as opposed to the execution result or other UI features
 "syntree" - a tree representing code; a syntax tree (~ AST)
+"tree" - the data structure being edited (adopt this b/c the editor doesn't just edit code?)
 "syno" - a syntactical node, i.e. a node in a syntree
 "presentation" - a tree representing information about code which is to be displayed to the user
 "presno" - a node in the presentation

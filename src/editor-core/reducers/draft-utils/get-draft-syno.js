@@ -9,6 +9,14 @@ export default (
   state: StateSelector,
   draft: MutableEditorState,
 ): MutableSyno => {
+  if (state.primitives() === false) {
+    throw new Error('Tried to fetch draft syno with no language loaded');
+  }
+
+  if (state.synoMap() === false) {
+    throw new Error('Tried to fetch draft syno with no tree loaded');
+  }
+
   let maybeSyno;
   let isPrimitive: (void | boolean);
   maybeSyno = state.synoMap()[synoId];
@@ -17,11 +25,12 @@ export default (
   } else {
     maybeSyno = state.primitives()[synoId];
     if (maybeSyno) {
-      isPrimitive = false;
+      isPrimitive = true;
     }
   }
   if (!maybeSyno) {
     throw new TypeError(`cannot find syno with ID '${synoId}'`);
   }
+  // $FlowFixMe: Flow doesn't look into selector interface
   return isPrimitive ? draft.primitives[synoId] : draft.synoMap[synoId];
 };

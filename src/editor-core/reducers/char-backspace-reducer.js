@@ -8,12 +8,24 @@ export default (
   state: StateSelector,
   draftState: MutableEditorState,
 ): void => {
+  if (state.integrationLoaded() === false) {
+    console.warn('Ignoring CHAR_BACKSPACE action: no integration loaded');
+    return;
+  }
+
+  if (state.treeLoaded() === false) {
+    console.warn('Ignoring CHAR_BACKSPACE action: no tree loaded');
+    return;
+  }
+
   if (!state.inText()) {
-    throw new TypeError('CHAR_BACKSPACE action recieved while not focused on text syno');
+    console.warn('Ignoring CHAR_BACKSPACE action: not focused on text');
+    return;
   }
 
   synoMapReducer(
     state,
+    // $FlowFixMe: Flow doesn't look into selector interface
     draftState.synoMap,
   );
 

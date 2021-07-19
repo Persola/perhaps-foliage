@@ -4,6 +4,7 @@ import getDraftSyno from '../draft-utils/get-draft-syno';
 import type { StateSelector } from '../../../types/state-selector';
 import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableSynoMap } from '../../../types/mutable-syno-map';
 
 export default (
   state: StateSelector,
@@ -14,12 +15,17 @@ export default (
   // TODO: and references outside parent in general (need backwards reference reference?)
   const { focusedPresnoId } = action;
 
+  if (state.treeLoaded() === false) {
+    return;
+  }
+  const draftSynoMap: MutableSynoMap = (draftState.synoMap: any);
+
   if (state.focusedSynoIsRoot()) {
     console.warn('ignoring attempted deletion of root syno');
     return;
   }
 
-  delete draftState.synoMap[focusedPresnoId]; // cannot be primitive
+  delete draftSynoMap[focusedPresnoId]; // cannot be primitive
 
   const parentRef = state.getSyno(focusedPresnoId).parent;
   // $FlowFixMe: Flow doesn't look into selector interface
