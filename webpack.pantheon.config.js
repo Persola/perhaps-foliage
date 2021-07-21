@@ -4,7 +4,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-di
 
 module.exports = {
   mode: 'none',
-  entry: './src/extension-staging-area/pantheon/integration.js',
+  entry: './src/extension-staging-area/pantheon/initialize-integration.js',
   module: {
     rules: [
       {
@@ -46,7 +46,7 @@ module.exports = {
     path: path.resolve(__dirname, 'src/extension-staging-area/pantheon/dist'),
     filename: 'pantheon-integration.js',
     library: {
-      name: 'newLanguageIntegration',
+      name: 'initializeIntegration',
       type: 'assign',
     },
   },

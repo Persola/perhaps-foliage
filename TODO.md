@@ -2,7 +2,6 @@
   * have presenters only return one presno attrs, never collections (for typing/consistency)
   * why function calls validate against grammar saying no callee as child?
   * extract Saliva-specific modules as local npm packages
-    * inject dependencies to prevent bundling duplicates
     * integration security
     * integration validation
     * re-evaluate use of eval

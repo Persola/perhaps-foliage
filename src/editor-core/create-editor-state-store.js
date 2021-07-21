@@ -3,6 +3,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { merge } from 'rxjs';
 import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
+import * as React from 'react';
 
 import createState from '../selectors/create-state-selector';
 
@@ -22,6 +23,8 @@ import verifyActionType from './reducers/util/verify-action-type';
 import loadIntegrationEpic from './epics/load-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
+
+import NamePart from '../renderer/components/vis/name-part.jsx';
 
 import type { AbsentLanguageIntegration } from '../types/language-integration/absent-language-integration';
 import type { StateSelector } from '../types/state-selector';
@@ -134,8 +137,15 @@ export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
     ),
   );
 
+  const integrationDependencies = {
+    React, // pass in our react instance so integrations don't need to bundle their own
+    components: {
+      NamePart,
+    },
+  };
+
   const rootEpic = (action$, state$) => merge(
-    loadIntegrationEpic(action$),
+    loadIntegrationEpic(action$, integrationDependencies),
     loadSyntreeEpic(action$, state$, stateSelector),
     interpretEpic(action$, state$, stateSelector, integration),
   );

@@ -4,7 +4,7 @@
 */
 import { filter, map, mergeMap } from 'rxjs';
 
-export default action$ => action$.pipe(
+export default (action$, integrationDependencies) => action$.pipe(
   filter(action => {
     return action.type === 'START_INTEGRATION_LOAD';
   }),
@@ -13,12 +13,12 @@ export default action$ => action$.pipe(
   }),
   map(integrationText => {
     // eval'd integration strings assign the integration object module to this variable name
-    let newLanguageIntegration;
+    let initializeIntegration;
     // eslint-disable-next-line no-eval
     eval(integrationText);
     return {
       type: 'END_INTEGRATION_LOAD',
-      newIntegrationAttrs: newLanguageIntegration.default,
+      newIntegrationAttrs: initializeIntegration.default(integrationDependencies),
     };
   }),
 );
