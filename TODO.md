@@ -1,5 +1,4 @@
 * maintenance
-  * have presenters only return one presno attrs, never collections (for typing/consistency)
   * extract Saliva-specific modules as local npm packages
     * integration security
     * integration validation

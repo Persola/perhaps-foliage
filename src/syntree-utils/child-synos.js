@@ -5,11 +5,11 @@ import type { Syno } from '../types/syno';
 import type { SynoRef } from '../types/syno-ref';
 
 export default (parentSyno: Syno): SynoRef[] => {
-  const childPresnoRefs: SynoRef[] = [];
+  const childSynoRefs: SynoRef[] = [];
 
   forChildSynoOf(parentSyno, childRef => {
-    childPresnoRefs.push(childRef);
+    childSynoRefs.push(childRef);
   });
 
-  return childPresnoRefs;
+  return childSynoRefs;
 };

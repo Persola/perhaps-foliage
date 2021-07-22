@@ -1,6 +1,6 @@
 // @flow
 import primitives from '../primitives';
-import presentParameters from './present-parameters';
+import presentParameters from './present-function-definition/present-parameters';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
