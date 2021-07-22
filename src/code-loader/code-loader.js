@@ -6,7 +6,7 @@ import grammarValidator from './grammar-validator';
 import type { SynoMap } from '../types/syno-map';
 
 import salivaGrammar from '../extension-staging-area/saliva/grammar.yml';
-import salivaPrimitives from '../extension-staging-area/saliva/primitives.yml';
+import salivaPrimitives from '../extension-staging-area/saliva/primitives';
 import pantheonGrammar from '../extension-staging-area/pantheon/grammar.yml';
 
 import falseLiteral from '../extension-staging-area/saliva/static/false-literal.yml';

@@ -1,6 +1,6 @@
 // @flow
 import presentArguments from './present-arguments';
-import NorPrimitiveId from '../nor-primitive-id';
+import primitives from '../primitives';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -13,6 +13,8 @@ import type { Syno } from '../../../types/syno';
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs';
+
+const primitiveIds = Object.keys(primitives);
 
 export default (
   state: StateSelector,
@@ -36,7 +38,8 @@ export default (
     if (calleeSyno.syntype === 'functionDefinition') {
       const calleeFuncDef: FunctionDefinition = calleeSyno;
       resolved = true;
-      if (funkshunCall.callee.id === NorPrimitiveId) {
+      // $FlowIssue: Flow doesn't recognize that callee is immutable?
+      if (primitiveIds.includes(funkshunCall.callee.id)) {
         name = calleeFuncDef.name;
       }
 
@@ -85,7 +88,7 @@ export default (
   let focused;
   let presnoFocused;
   let charFocused;
-  if (funkshunCall.callee.id === NorPrimitiveId) {
+  if (funkshunCall.callee && primitiveIds.includes(funkshunCall.callee.id)) {
     focused = focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false);
     presnoFocused = focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex;
     charFocused = focus && (funkshunCall.id === focus.synoId) && focus.charIndex;

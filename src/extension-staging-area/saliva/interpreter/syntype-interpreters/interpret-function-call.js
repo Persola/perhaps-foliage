@@ -1,5 +1,5 @@
 // @flow
-import NorPrimitiveId from '../../nor-primitive-id';
+import primitives from '../../primitives';
 import interpretArgs from './interpret-function-call/interpret-args';
 import norPrimitive from './interpret-function-call/nor-primitive';
 import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
@@ -9,6 +9,8 @@ import type { InterpretationResolution } from '../../../../types/interpreter/int
 import type { FunctionCall } from '../../types/synos/function-call';
 import type { Argument } from '../../types/synos/argument';
 import type { BooleanLiteral } from '../../types/synos/boolean-literal';
+
+const primitiveIds = Object.keys(primitives);
 
 const generateScope = (resolvedCallee, interpretedArgs, state) => {
   const interpreteeScope = [];
@@ -57,7 +59,7 @@ export default (
 
   if (
     resolvedCallee.body === false
-    && resolvedCallee.id !== NorPrimitiveId
+    && !primitiveIds.includes(resolvedCallee.id)
   ) {
     return {
       success: false,
@@ -111,7 +113,8 @@ export default (
   const interpreteeScope = generateScope(resolvedCallee, interpretedArgs, state);
 
   let functionResolution;
-  if (interpretee.callee.id === NorPrimitiveId) {
+  // $FlowIssue: Flow doesn't recognize that callee is immutable?
+  if (primitiveIds.includes(interpretee.callee.id)) {
     interpretedArgs.forEach(argRes => {
       if (argRes[1].syntype !== 'booleanLiteral') {
         throw new Error();

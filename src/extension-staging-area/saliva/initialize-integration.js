@@ -1,6 +1,6 @@
 // @flow
 import grammar from './grammar.yml';
-import primitives from './primitives.yml';
+import primitives from './primitives';
 import keyToNewSynoAttrs from './input-resolver/key-to-new-syno-attrs.yml';
 import interpret from './interpreter/interpret';
 import presenters from './presenters/presenters';

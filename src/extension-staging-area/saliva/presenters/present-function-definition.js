@@ -1,5 +1,5 @@
 // @flow
-import NorPrimitiveId from '../nor-primitive-id';
+import primitives from '../primitives';
 import presentParameters from './present-parameters';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -10,6 +10,8 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
+
+const primitiveIds = Object.keys(primitives);
 
 export default (
   state: StateSelector,
@@ -23,7 +25,7 @@ export default (
   let valid = true;
   let body: (PresnoRef | false) = false;
   if (!funkshunDef.body) {
-    if (funkshunDef.id !== NorPrimitiveId) {
+    if (!primitiveIds.includes(funkshunDef.id)) {
       valid = false;
     }
   } else {

@@ -1,6 +1,6 @@
 // @flow
-import graphValidator from './graph-validator';
-// import grammarValidator from './grammar-validator';
+// import graphValidator from './graph-validator';
+import grammarValidator from './grammar-validator';
 
 import type { SynoMap } from '../types/syno-map';
 
@@ -14,9 +14,10 @@ const validateSyntax = (graphName, graph, grammarName, grammar) => {
 
   // const graphValidationRez = graphValidator(graph, grammar, grammarName);
   // if (!graphValidationRez.valid) {
-    // throw new Error(
-    //   `Validation of graph '${graphName}' failed under grammar '${grammarName}': ${graphValidationRez.message}`
-    // );
+  //   throw new Error(
+  //     `Validation of graph '${graphName}' `
+  //     + `failed under grammar '${grammarName}': ${graphValidationRez.message}`
+  //   );
   // }
 };
 
