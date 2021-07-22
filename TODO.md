@@ -1,6 +1,5 @@
 * maintenance
   * have presenters only return one presno attrs, never collections (for typing/consistency)
-  * why function calls validate against grammar saying no callee as child?
   * extract Saliva-specific modules as local npm packages
     * integration security
     * integration validation
@@ -23,7 +22,8 @@
   * wrap syntrees in file with metadata (root ID)
   *  systematic method to generate IDs
   * adopt Typescript
-  * [?] adopt unist and its ecosystem
+  * adopt unist
+    * [?] and some utils from its ecosystem
   * [?] use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
   * [?] use proxy-memoize or another selector memoizer
   * [?] organize types

@@ -6,20 +6,19 @@ const UNIVERSAL_SYNO_ATTRS = [
 ];
 
 export default (graph, grammar) => {
+  let valid = true;
+  let message = '';
+
   Object.keys(graph).forEach(synoId => {
     const syno = graph[synoId];
     const syntype = grammar[syno.syntype];
     if (typeof syntype !== 'object') {
-      return {
-        valid: false,
-        message: `syntype of node (ID '${syno.id}') unrecognized`,
-      };
+      valid = false;
+      message += `Syntype of node (ID '${syno.id}') unrecognized. `;
     }
     if (syno.parent === false && !syntype.rootable) {
-      return {
-        valid: false,
-        message: 'Graph root is wrong type',
-      };
+      valid = false;
+      message += `Graph root cannot be root because of its type '${syno.syntype}'. `;
     }
     // check for multiple roots?
     Object.keys(syno).forEach(attr => {
@@ -28,29 +27,23 @@ export default (graph, grammar) => {
           syno[attr].forEach(maybeSynoRef => {
             if (maybeSynoRef.synoRef) {
               if (graph[maybeSynoRef.id].syntype !== syntype.children[attr].syntype) {
-                return {
-                  valid: false,
-                  message: `node (ID '${maybeSynoRef.id}') invalid child`,
-                };
+                valid = false;
+                message += `Node (ID '${maybeSynoRef.id}') invalid child. `;
               }
             }
           });
         } else if (syno[attr].synoRef) {
           if (graph[syno[attr].id].syntype !== syntype.children[attr].syntype) {
-            return {
-              valid: false,
-              message: `node (ID '${syno[attr].id}') invalid child`,
-            };
+            valid = false;
+            message += `Node (ID '${syno[attr].id}') invalid child. `;
           }
         }
       } else if (!UNIVERSAL_SYNO_ATTRS.includes(attr)) {
-        return {
-          valid: false,
-          message: `node (ID '${synoId}') has unrecognized attr '${attr}'`,
-        };
+        valid = false;
+        message += `Node (ID '${synoId}') has unrecognized attr '${attr}. '`;
       }
     });
   });
 
-  return { valid: true };
+  return { valid, message };
 };
