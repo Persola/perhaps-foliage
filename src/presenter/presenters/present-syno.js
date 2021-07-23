@@ -12,10 +12,10 @@ export default (
   state: StateSelector,
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
-  parentId: (SynoId | false),
-  syno: (Syno),
+  parentId: ?SynoId,
+  syno: Syno,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): SynoId => {
   const presenter = integration.presenters[syno.syntype];

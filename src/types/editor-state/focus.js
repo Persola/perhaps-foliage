@@ -5,14 +5,14 @@ export type Focus = $ReadOnly<MutableFocus>;
 
 // type FocusOnSyno = {
 //   synoId: FocusedPresnoId,
-//   presnoIndex: false,
-//   charIndex: false
+//   presnoIndex: null,
+//   charIndex: null
 // };
 //
 // type FocusOnPresno = {
 //   synoId: FocusedPresnoId,
 //   presnoIndex: number,
-//   charIndex: false
+//   charIndex: null
 // };
 //
 // type FocusInTextPresno = {

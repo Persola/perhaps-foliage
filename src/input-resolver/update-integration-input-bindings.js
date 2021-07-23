@@ -11,8 +11,10 @@ export default (
     state.lastIntegrationBindings().forEach(input => Mousetrap.unbind(input));
   }
 
-  Mousetrap.bind(
-    Object.keys(state.keyToNewSynoAttrs()),
-    (e, key) => inputResolver(key),
-  );
+  if (state.keyToNewSynoAttrs()) {
+    Mousetrap.bind(
+      Object.keys(state.keyToNewSynoAttrs()),
+      (e, key) => inputResolver(key),
+    );
+  }
 };

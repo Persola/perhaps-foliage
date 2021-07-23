@@ -30,7 +30,7 @@ export default (
     },
   );
 
-  if (document.documentElement === null) { throw new Error('document missing'); }
+  if (!document.documentElement) { throw new Error('document missing'); }
   document.documentElement.click(); // bindings don't work before this (focus?)
   document.addEventListener('click', createFocusSyno(editorStateStore));
 };

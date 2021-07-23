@@ -15,7 +15,7 @@ export default (
     if (arg.syntype !== 'argument') {
       throw new Error(`expected argument, got ${arg.syntype}`);
     }
-    if (arg.value === false) {
+    if (!arg.value) {
       throw new Error(`unassigned argument of ID ${arg.id}`);
     }
     const argResolution = interpreter(

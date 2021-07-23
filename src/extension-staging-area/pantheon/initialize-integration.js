@@ -12,9 +12,9 @@ export default (integrationDependencies: IntegrationDependencies): PresentLangua
   return {
     id: 'pantheon.0.0.1',
     grammar,
-    primitives: false,
+    primitives: null,
     keyToNewSynoAttrs,
-    interpret: false,
+    interpret: null,
     presenters,
     renderers: createRenderers(integrationDependencies),
     styles,

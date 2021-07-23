@@ -4,7 +4,7 @@ import type { SynoRef } from '../../../../types/syno-ref';
 
 export type Titan = {|
   +id: SynoId,
-  +parent: false,
+  +parent: null,
   +child: SynoRef,
   +name: string,
 |}

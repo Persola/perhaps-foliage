@@ -16,7 +16,7 @@ export default (
   parentId: SynoId,
   argumentRefs: SynoRef[],
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): PresnoRef[] => {
   return argumentRefs.map((argRef: SynoRef) => {

@@ -4,8 +4,8 @@ import type { Syntype } from '../../synos/syntype';
 export type FunctionParameterPresAttrs = {|
   +syntype: 'functionParameter',
   +focused: boolean,
-  +presnoFocused: (number | false),
-  +charFocused: (number | false),
+  +presnoFocused: ?number,
+  +charFocused: ?number,
   +slot: string,
   +valueSyntype: Syntype,
 |}

@@ -7,16 +7,15 @@ export default (
   draftFocus: MutableFocus,
 ): void => {
   if (state.inText()) {
-    draftFocus.charIndex = false;
+    draftFocus.charIndex = null;
     return;
   }
   if (state.inPresno()) {
-    draftFocus.presnoIndex = false;
+    draftFocus.presnoIndex = null;
     return;
   }
 
-  // $FlowFixMe: Flow doesn't look into selector interface
-  if (state.focusedSyno().parent === false) {
+  if (!state.focusedSyno().parent) {
     console.warn('Ignoring navigation outwards: no parent (tree root)');
     return;
   }

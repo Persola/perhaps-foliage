@@ -1,11 +1,11 @@
 // @flow
 export type AbsentLanguageIntegration = {|
-  id: false,
-  grammar: false,
-  primitives: false,
-  keyToNewSynoAttrs: false,
-  interpret: false,
-  presenters: false,
-  renderers: false,
-  styles: false,
+  id: null,
+  grammar: null,
+  primitives: null,
+  keyToNewSynoAttrs: null,
+  interpret: null,
+  presenters: null,
+  renderers: null,
+  styles: null,
 |}

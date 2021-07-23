@@ -4,7 +4,7 @@ import type { Syntype } from '../../extension-staging-area/saliva/types/synos/sy
 export type Grammar = {
   +[Syntype]: {
     +rootable: boolean,
-    +textHostRef: (false | string),
+    +textHostRef: ?string,
     +children: {
       +[string]: {
         +collection: boolean,

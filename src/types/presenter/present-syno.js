@@ -10,9 +10,9 @@ export type PresentSyno = (
   StateSelector,
   PresentLanguageIntegration,
   MutablePresnoMap,
-  (SynoId | false),
-  (Syno),
+  ?SynoId,
+  Syno,
   Object,
-  (Focus | false),
+  ?Focus,
   PresentSyno,
 ) => SynoId

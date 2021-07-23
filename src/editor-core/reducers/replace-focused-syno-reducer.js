@@ -60,8 +60,8 @@ export default (
 
   draftState.focus = {
     synoId: newSynoId,
-    presnoIndex: false,
-    charIndex: false,
+    presnoIndex: null,
+    charIndex: null,
   };
   draftState.resultOutdated = true;
 };

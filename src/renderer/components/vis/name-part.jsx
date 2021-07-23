@@ -16,7 +16,7 @@ export default (props: NamePartProps): React.Node => {
   return (
     <div className={classes}>
       {
-        charFocused === false
+        (charFocused === null)
           ? namePart
           : namePartWithCursor(namePart, charFocused)
       }

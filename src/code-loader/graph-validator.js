@@ -16,7 +16,7 @@ export default (graph, grammar) => {
       valid = false;
       message += `Syntype of node (ID '${syno.id}') unrecognized. `;
     }
-    if (syno.parent === false && !syntype.rootable) {
+    if (!syno.parent && !syntype.rootable) {
       valid = false;
       message += `Graph root cannot be root because of its type '${syno.syntype}'. `;
     }

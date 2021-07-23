@@ -58,7 +58,7 @@ export default (
 
     if (newFocusPresnoRef.synoRef) {
       draftFocus.synoId = newFocusPresnoRef.id;
-      draftFocus.presnoIndex = false;
+      draftFocus.presnoIndex = null;
     } else {
       draftFocus.synoId = oldParent.id;
       draftFocus.presnoIndex = newFocusPresnoRef.index;

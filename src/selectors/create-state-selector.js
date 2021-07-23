@@ -66,13 +66,13 @@ export default (
     },
     // focus
     inPresno: function inPresno() {
-      return this.state.focus.presnoIndex !== false;
+      return this.state.focus.presnoIndex !== null;
     },
     inText: function inText() {
-      return this.state.focus.charIndex !== false;
+      return this.state.focus.charIndex !== null;
     },
     focusedSynoIsRoot: function focusedSynoIsRoot() {
-      return this.focusedSyno().parent === false;
+      return !this.focusedSyno().parent;
     },
   };
 

@@ -1,4 +1,6 @@
 // @flow
+import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { Focus } from '../../../types/editor-state/focus';
@@ -12,15 +14,17 @@ export default (
   presnoMap: MutablePresnoMap,
   booleanLiteral: BooleanLiteral,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
 ): BooleanLiteralPresAttrs => {
   const { value } = booleanLiteral;
+  const { focused } = focuses(focus, booleanLiteral.id);
+
   return {
     syntype: 'booleanLiteral',
     value,
-    focused: focus && (booleanLiteral.id === focus.synoId),
-    presnoFocused: false, // can't edit name
-    charFocused: false, // can't edit name
+    focused,
+    presnoFocused: null, // can't edit name
+    charFocused: null, // can't edit name
     valid: true,
   };
 };

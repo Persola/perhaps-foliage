@@ -7,9 +7,6 @@ import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-a
 import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
 import type { Focus } from './editor-state/focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
-import type { Interpreting } from './editor-state/interpreting';
-import type { ResultOutdated } from './editor-state/result-outdated';
-import type { LoadingSyntree } from './editor-state/loading-syntree';
 
 import type { Syno } from './syno';
 import type { SynoId } from './syno-id';
@@ -28,10 +25,10 @@ export type StateSelector = {
   inverseReferenceMap: () => InverseReferenceMap,
   focus: () => Focus,
   resultSyntreeRootId: () => ResultSyntreeRootId,
-  interpreting: () => Interpreting,
-  resultOutdated: () => ResultOutdated,
+  interpreting: () => boolean,
+  resultOutdated: () => boolean,
   loadingIntegration: () => boolean,
-  loadingSyntree: () => LoadingSyntree,
+  loadingSyntree: () => boolean,
   // deeper accessors
   focusedSynoId: () => SynoId,
   focusedPresnoIndex: () => number,

@@ -1,4 +1,6 @@
 // @flow
+import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { Focus } from '../../../types/editor-state/focus';
@@ -12,10 +14,10 @@ export default (
   presnoMap: MutablePresnoMap,
   variableRef: VariableRef,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
 ): VariableRefPresAttrs => {
   let valid = true;
-  let name: (string | false) = false;
+  let name: ?string = null;
   if (!variableRef.referent) {
     valid = false;
   } else {
@@ -24,13 +26,15 @@ export default (
     name = vr.name;
   }
 
+  const { focused, presnoFocused, charFocused } = focuses(focus, variableRef.id);
+
   return {
     syntype: 'variableRef',
     valueSyntype: 'booleanLiteral',
     name,
-    focused: focus && (variableRef.id === focus.synoId) && (focus.presnoIndex === false),
-    presnoFocused: focus && (variableRef.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (variableRef.id === focus.synoId) && focus.charIndex,
+    focused,
+    presnoFocused,
+    charFocused,
     valid,
   };
 };

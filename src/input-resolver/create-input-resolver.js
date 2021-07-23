@@ -16,14 +16,14 @@ export default (
 ): (string => void) => {
   return (
     (key: string): void => {
-      let command = false;
+      let command = null;
       if (key === 'enter') {
         command = { type: 'START_INTERPRETATION' };
       } else if (['left', 'right', 'up', 'down'].includes(key)) {
         command = navigationCommandResolver(key);
       } else if (state.inText()) { // text commands
         command = textCommandResolver(key);
-        // } else if (focus.presnoIndex !== false) {
+        // } else if (focus.presnoIndex !== null) {
         //   throw new Error('this should be unreachable still');
         // because if the focus has a presnoIndex there should also be a charIndex
         // to do: commands for non-text presnos
@@ -31,7 +31,7 @@ export default (
         command = synoCommandResolver(key, state, integration);
       }
 
-      if (command !== false) {
+      if (command) {
         editorStateStore.dispatch(command);
       } else {
         throw new Error('bad binding?');

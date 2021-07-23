@@ -26,7 +26,7 @@ const generatePresentation = (
     || !state.synoMap()
     || !state.focusedSynoId()
   ) {
-    stage = false;
+    stage = null;
   } else {
     stage = presentFocusedSyntree(
       state,
@@ -41,7 +41,7 @@ const generatePresentation = (
 
   let result;
   if (!resultSyntreeRootId) {
-    result = false;
+    result = null;
   } else {
     result = presentSyntree(
       state,
@@ -49,7 +49,7 @@ const generatePresentation = (
       (integration: PresentLanguageIntegration),
       resultSyntreeRootId,
       {},
-      false,
+      null,
     );
   }
 

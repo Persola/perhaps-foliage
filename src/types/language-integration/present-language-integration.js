@@ -9,12 +9,9 @@ import type { InterpretationResolution } from '../interpreter/interpretation-res
 export type PresentLanguageIntegration = {|
   id: string,
   grammar: Grammar,
-  primitives: (false | SynoMap),
+  primitives: ?SynoMap,
   keyToNewSynoAttrs: KeyToNewSynoAttrs,
-  interpret: (
-    false
-    | (EditorStateWithIntegration, StateSelector) => InterpretationResolution
-  ),
+  interpret: ?((EditorStateWithIntegration, StateSelector) => InterpretationResolution),
   presenters: { +[string]: Function },
   renderers: { +[string]: Function },
   styles: {

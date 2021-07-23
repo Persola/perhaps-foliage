@@ -13,7 +13,7 @@ export default (
   integration: PresentLanguageIntegration,
   focusedPresnoId: SynoId,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
 ): Prestree => {
   const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, state.synoMap()).id;
   return presentSyntree(

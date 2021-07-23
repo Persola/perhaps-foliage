@@ -39,7 +39,7 @@ export default (
   interpretee: FunctionCall,
   state: StateSelector,
 ): InterpretationResolution => {
-  if (interpretee.callee === false) {
+  if (!interpretee.callee) {
     return {
       success: false,
       error: { message: `function call (ID ${interpretee.id}) has no function reference` },
@@ -58,7 +58,7 @@ export default (
   }
 
   if (
-    resolvedCallee.body === false
+    !resolvedCallee.body
     && !primitiveIds.includes(resolvedCallee.id)
   ) {
     return {
@@ -83,7 +83,7 @@ export default (
     };
   }
 
-  const argsMissingParameters = argumentz.filter((arg: Argument) => arg.parameter === false);
+  const argsMissingParameters = argumentz.filter((arg: Argument) => !arg.parameter);
   if (argsMissingParameters.length > 0) {
     return {
       success: false,
@@ -101,7 +101,7 @@ export default (
     state,
   );
 
-  const apm: (string | false) = argumentParameterMismatch(
+  const apm: (false | string) = argumentParameterMismatch(
     resolvedCallee,
     interpretedArgs.map(interpretedArg => interpretedArg[0]),
     state,

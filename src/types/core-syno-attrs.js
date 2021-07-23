@@ -4,5 +4,5 @@ import type { SynoRef } from './syno-ref';
 
 export type CoreSynoAttrs = {|
   +id: SynoId,
-  +parent: (SynoRef | false),
+  +parent: ?SynoRef,
 |}

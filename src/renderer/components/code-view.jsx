@@ -12,7 +12,7 @@ import type { PresentLanguageIntegration } from '../../types/language-integratio
 type Props = {
   editorStateStore: ReduxStore,
   integration: LanguageIntegration,
-  codePresentation: Prestree | false,
+  codePresentation: ?Prestree,
   outdated: boolean,
   interpreting: boolean,
   dragDrop: boolean,
@@ -62,7 +62,7 @@ export default (props: Props): React.Node => {
   const boundDropCodeView = e => { dropCodeView(editorStateStore, e); };
 
   let content;
-  if (codePresentation === false) {
+  if (!codePresentation) {
     content = (
       <div className="non-syntactic">
         (nothing to display)

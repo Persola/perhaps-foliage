@@ -13,6 +13,10 @@ http.createServer((request, response) => {
   let filePath = ROOT_PATH + request.url;
   if (request.url === '/') filePath = DEFAULT_PATH;
   else if (request.url === '/favicon.ico') filePath = FAVICON_PATH;
+  else if (request.url.match(/-integration.js.map/)) {
+    const integrationName = request.url.match(/([^/]+)-integration.js.map/)[1];
+    filePath = `./src/extension-staging-area/${integrationName}/dist/${integrationName}-integration.js.map`;
+  }
 
   const extname = String(path.extname(filePath)).toLowerCase();
   let contentType = 'text/html';

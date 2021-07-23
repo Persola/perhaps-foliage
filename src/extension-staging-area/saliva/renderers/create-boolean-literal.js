@@ -32,8 +32,8 @@ export default (integrationDependencies: IntegrationDependencies): any => {
         NamePart,
         {
           namePart: String(presno.value),
-          focused: false,
-          charFocused: false,
+          focused: null,
+          charFocused: null,
         },
       ),
     );

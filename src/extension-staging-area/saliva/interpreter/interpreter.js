@@ -28,7 +28,7 @@ const interpreter = (
       };
     }
     case 'variableRef': {
-      if (interpretee.referent === false) {
+      if (!interpretee.referent) {
         return {
           success: false,
           error: { message: `variableRef (ID ${interpretee.id}) has no referent` },

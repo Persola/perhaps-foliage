@@ -1,4 +1,6 @@
 // @flow
+import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
@@ -13,26 +15,30 @@ export default (
   presnoMap: MutablePresnoMap,
   titan: Titan,
   scope: Object,
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
-): TitanPresAttrs => ({
-  syntype: 'titan',
-  name: titan.name,
-  child: {
-    presnoRef: true,
-    id: presentSyno(
-      state,
-      integration,
-      presnoMap,
-      titan.id,
-      state.getSyno(titan.child.id),
-      scope,
-      focus,
-      presentSyno,
-    ),
-  },
-  focused: focus && (titan.id === focus.synoId) && (focus.presnoIndex === false),
-  presnoFocused: focus && (titan.id === focus.synoId) && focus.presnoIndex,
-  charFocused: focus && (titan.id === focus.synoId) && focus.charIndex,
-  valid: true,
-});
+): TitanPresAttrs => {
+  const { focused, presnoFocused, charFocused } = focuses(focus, titan.id);
+
+  return {
+    syntype: 'titan',
+    name: titan.name,
+    child: {
+      presnoRef: true,
+      id: presentSyno(
+        state,
+        integration,
+        presnoMap,
+        titan.id,
+        state.getSyno(titan.child.id),
+        scope,
+        focus,
+        presentSyno,
+      ),
+    },
+    focused,
+    presnoFocused,
+    charFocused,
+    valid: true,
+  };
+};

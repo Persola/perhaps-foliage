@@ -13,7 +13,7 @@ const nor = (
 
   return {
     id: `interpResult-${String(Math.random()).substring(2)}`,
-    parent: false,
+    parent: null,
     syntype: 'booleanLiteral',
     value: resultValue,
   };

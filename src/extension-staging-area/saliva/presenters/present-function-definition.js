@@ -1,5 +1,6 @@
 // @flow
 import primitives from '../primitives';
+import focuses from './helpers/focuses';
 import presentParameters from './present-function-definition/present-parameters';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -19,11 +20,11 @@ export default (
   presnoMap: MutablePresnoMap,
   funkshunDef: FunctionDefinition,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
   let valid = true;
-  let body: (PresnoRef | false) = false;
+  let body: ?PresnoRef = null;
   if (!funkshunDef.body) {
     if (!primitiveIds.includes(funkshunDef.id)) {
       valid = false;
@@ -44,6 +45,8 @@ export default (
     };
   }
 
+  const { focused, presnoFocused, charFocused } = focuses(focus, funkshunDef.id);
+
   return {
     syntype: 'functionDefinition',
     name: funkshunDef.name,
@@ -57,9 +60,9 @@ export default (
       focus,
       presentSyno,
     ),
-    focused: focus && (funkshunDef.id === focus.synoId) && (focus.presnoIndex === false),
-    presnoFocused: focus && (funkshunDef.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (funkshunDef.id === focus.synoId) && focus.charIndex,
+    focused,
+    presnoFocused,
+    charFocused,
     body,
     valid,
   };

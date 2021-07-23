@@ -1,4 +1,6 @@
 // @flow
+import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
@@ -13,11 +15,11 @@ export default (
   presnoMap: MutablePresnoMap,
   olympian: Olympian,
   scope: Object,
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): OlympianPresAttrs => {
   const valid = true;
-  let child;
+  let child = null;
   if (olympian.child) {
     child = {
       presnoRef: true,
@@ -34,13 +36,15 @@ export default (
     };
   }
 
+  const { focused, presnoFocused, charFocused } = focuses(focus, olympian.id);
+
   return {
     syntype: 'olympian',
     name: olympian.name,
-    child: child || false,
-    focused: focus && (olympian.id === focus.synoId) && (focus.presnoIndex === false),
-    presnoFocused: focus && (olympian.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (olympian.id === focus.synoId) && focus.charIndex,
+    child,
+    focused,
+    presnoFocused,
+    charFocused,
     valid,
   };
 };

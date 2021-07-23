@@ -31,7 +31,7 @@ export default grammar => {
       return validationFailure(`syntype '${syntype}' has invalid rootability: '${syntypeAttrs.rootable}'`);
     }
 
-    if (!(syntypeAttrs.textHostRef === false || typeof syntypeAttrs.textHostRef === 'string')) {
+    if (!(syntypeAttrs.textHostRef === null || typeof syntypeAttrs.textHostRef === 'string')) {
       return validationFailure(`syntype '${syntype}' has invalid textHostRef: '${syntypeAttrs.textHostRef}'`);
     }
 

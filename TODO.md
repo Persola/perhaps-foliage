@@ -1,8 +1,11 @@
 * maintenance
+  * adopt unist
+    * [?] and some utils from its ecosystem
   * extract Saliva-specific modules as local npm packages
     * integration security
     * integration validation
     * re-evaluate use of eval
+      * what does VSCode's web version do to load extensions?
     * document interface
     * ability to export types to language libraries
     * actually make libraries for saliva and pantheon
@@ -21,8 +24,6 @@
   * wrap syntrees in file with metadata (root ID)
   *  systematic method to generate IDs
   * adopt Typescript
-  * adopt unist
-    * [?] and some utils from its ecosystem
   * [?] use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
   * [?] use proxy-memoize or another selector memoizer
   * [?] organize types
@@ -46,7 +47,7 @@
     * [later] ordered arguments
     * [later] singular arguments
   * add Nothing type
-    * replace false flags in type data structures
+    * replace nulls in type data structures
   * alt keys:
     * binary seek
     * select set (focus nudges boundary to include focused node)

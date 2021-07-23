@@ -25,10 +25,10 @@ export default (
     inverseReferenceMap: deriveInverseReferenceMap(newSyntree, rootSyno.id),
     focus: {
       synoId: rootSyno.id,
-      presnoIndex: false,
-      charIndex: false,
+      presnoIndex: null,
+      charIndex: null,
     },
-    resultSyntreeRootId: false,
+    resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,
     loadingSyntree: false,

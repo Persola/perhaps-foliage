@@ -4,11 +4,11 @@ import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
 export type FunctionCallPresAttrs = {|
   +syntype: 'functionCall',
   +focused: boolean,
-  +presnoFocused: (number | false),
-  +charFocused: (number | false),
+  +presnoFocused: ?number,
+  +charFocused: ?number,
   +valid: boolean,
-  +name: (string | false),
+  +name: ?string,
   +argumentz: PresnoRef[],
-  +callee: (PresnoRef | false),
+  +callee: ?PresnoRef,
   +resolved: boolean,
 |}

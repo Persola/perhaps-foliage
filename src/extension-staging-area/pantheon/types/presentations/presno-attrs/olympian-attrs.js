@@ -4,9 +4,9 @@ import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
 export type OlympianPresAttrs = {|
   +syntype: 'olympian',
   +name: string,
-  +child: (PresnoRef | false),
+  +child: ?PresnoRef,
   +focused: boolean,
-  +presnoFocused: (number | false),
-  +charFocused: (number | false),
+  +presnoFocused: ?number,
+  +charFocused: ?number,
   +valid: boolean,
 |}

@@ -1,6 +1,7 @@
 // @flow
-import presentArguments from './present-function-call/present-arguments';
 import primitives from '../primitives';
+import focuses from './helpers/focuses';
+import presentArguments from './present-function-call/present-arguments';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -22,12 +23,12 @@ export default (
   presnoMap: MutablePresnoMap,
   funkshunCall: FunctionCall,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): FunctionCallPresAttrs => {
   let valid = true;
-  let name: (string | false) = false;
-  let callee: (PresnoRef | false) = false;
+  let name: ?string = null;
+  let callee: ?PresnoRef = null;
   let resolved: boolean = false;
 
   if (!funkshunCall.callee) {
@@ -57,6 +58,7 @@ export default (
         valid = false;
       }
 
+      // $FlowIssue: Flow doesn't respect ReadOnly<>?
       if (funkshunCall.callee.relation === 'child') {
         callee = {
           presnoRef: true,
@@ -85,18 +87,7 @@ export default (
     }
   }
 
-  let focused;
-  let presnoFocused;
-  let charFocused;
-  if (funkshunCall.callee && primitiveIds.includes(funkshunCall.callee.id)) {
-    focused = focus && (funkshunCall.id === focus.synoId) && (focus.presnoIndex === false);
-    presnoFocused = focus && (funkshunCall.id === focus.synoId) && focus.presnoIndex;
-    charFocused = focus && (funkshunCall.id === focus.synoId) && focus.charIndex;
-  } else {
-    focused = focus && (funkshunCall.id === focus.synoId);
-    presnoFocused = false;
-    charFocused = false;
-  }
+  const { focused, presnoFocused, charFocused } = focuses(focus, funkshunCall.id);
 
   return {
     syntype: 'functionCall',

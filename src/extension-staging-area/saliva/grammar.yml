@@ -7,18 +7,18 @@ functionDefinition:
     body:
       collection: false
       syntype: functionParameter
-  textHostRef: false
+  textHostRef: null
 functionParameter:
   rootable: false
   children: {}
-  textHostRef: false
+  textHostRef: null
 functionCall:
   rootable: true
   children:
     argumentz:
       collection: true
       syntype: argument
-  textHostRef: false
+  textHostRef: null
 argument:
   rootable: false
   children:
@@ -29,7 +29,7 @@ argument:
 booleanLiteral:
   rootable: true
   children: []
-  textHostRef: false
+  textHostRef: null
 variableRef:
   rootable: true
   children: []

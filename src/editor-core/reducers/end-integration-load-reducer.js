@@ -25,12 +25,16 @@ export default (
     grammar: action.newIntegrationAttrs.grammar,
     primitives,
     keyToNewSynoAttrs: action.newIntegrationAttrs.keyToNewSynoAttrs,
-    lastIntegrationBindings: Object.keys(state.keyToNewSynoAttrs()),
-    synoMap: false,
-    resultTree: false,
-    inverseReferenceMap: false,
-    focus: false,
-    resultSyntreeRootId: false,
+    lastIntegrationBindings: (
+      state.keyToNewSynoAttrs()
+        ? Object.keys(state.keyToNewSynoAttrs())
+        : []
+    ),
+    synoMap: null,
+    resultTree: null,
+    inverseReferenceMap: null,
+    focus: null,
+    resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,
     loadingIntegration: false,

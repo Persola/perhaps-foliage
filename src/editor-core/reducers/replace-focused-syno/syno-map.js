@@ -23,17 +23,17 @@ export default (
 ): void => {
   const parentRef = state.focusedSyno().parent;
 
-  let parentAttr: (SynoRef | false);
+  let parentAttr: ?SynoRef;
   if (!parentRef) {
-    parentAttr = false;
+    parentAttr = null;
   } else {
     const parent: Syno = state.getSyno(parentRef.id);
-    let childKey: (string | false) = false;
-    let childIndex: (number | false) = false;
+    let childKey: ?string = null;
+    let childIndex: ?number = null;
     forChildSynoOf(parent, (childRef: SynoRef, key: string, index: ?number) => {
       if (childRef.id === state.focusedSynoId()) {
         childKey = key;
-        childIndex = index || false;
+        childIndex = index || null;
       }
     });
     // should remove any uneeded (i.e., deleted) nodes from store

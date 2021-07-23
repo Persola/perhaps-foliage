@@ -8,9 +8,8 @@ export default (
   functionDefinition: FunctionDefinition,
   argumentz: $ReadOnlyArray<Argument>,
   state: StateSelector,
-): (false | string
-) => {
-  const argsWithoutParams = argumentz.filter(arg => arg.parameter === false);
+): (false | string) => { // eslint-disable-line function-paren-newline
+  const argsWithoutParams = argumentz.filter(arg => !arg.parameter);
   if (argsWithoutParams.length > 0) {
     return (
       `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `

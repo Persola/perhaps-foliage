@@ -9,11 +9,11 @@ export default (
   state: StateSelector,
   draft: MutableEditorState,
 ): MutableSyno => {
-  if (state.primitives() === false) {
+  if (!state.primitives()) {
     throw new Error('Tried to fetch draft syno with no language loaded');
   }
 
-  if (state.synoMap() === false) {
+  if (!state.synoMap()) {
     throw new Error('Tried to fetch draft syno with no tree loaded');
   }
 

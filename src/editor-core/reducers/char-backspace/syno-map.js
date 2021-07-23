@@ -9,7 +9,7 @@ export default (
 ): void => {
   const { textHostRef } = state.grammar()[state.focusedSyno().syntype];
   let textHostSyno: Syno;
-  if (textHostRef === false) {
+  if (!textHostRef) {
     textHostSyno = state.focusedSyno();
   } else {
     // $FlowFixMe: Flow doesn't look into selector interface

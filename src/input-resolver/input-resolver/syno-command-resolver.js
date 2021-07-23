@@ -7,9 +7,9 @@ export default (
   key: string,
   state: StateSelector,
   integration: LanguageIntegration,
-): ReduxAction | false => {
-  if (integration.keyToNewSynoAttrs === false) {
-    return false;
+): ?ReduxAction => {
+  if (!integration.keyToNewSynoAttrs) {
+    return null;
   }
 
   if (Object.keys(integration.keyToNewSynoAttrs).includes(key)) {
@@ -23,5 +23,5 @@ export default (
       focusedPresnoId: state.focusedSynoId(),
     });
   }
-  return false;
+  return null;
 };

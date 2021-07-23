@@ -14,14 +14,14 @@ export default (
   integration: PresentLanguageIntegration,
   rootSynoId: SynoId,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
   presentSyno(
     state,
     integration,
     mutablePresnoMap,
-    false,
+    null,
     state.getSyno(rootSynoId),
     scope,
     focus,

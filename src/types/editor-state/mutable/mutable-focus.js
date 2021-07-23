@@ -3,20 +3,20 @@ import type { FocusedPresnoId } from '../focused-presno-id';
 
 export type MutableFocus = {|
   synoId: FocusedPresnoId,
-  presnoIndex: (number | false),
-  charIndex: (number | false),
+  presnoIndex: ?number,
+  charIndex: ?number,
 |}
 
 // type FocusOnSyno = {
 //   synoId: FocusedPresnoId,
-//   presnoIndex: false,
-//   charIndex: false
+//   presnoIndex: null,
+//   charIndex: null
 // };
 //
 // type FocusOnPresno = {
 //   synoId: FocusedPresnoId,
 //   presnoIndex: number,
-//   charIndex: false
+//   charIndex: null
 // };
 //
 // type FocusInTextPresno = {

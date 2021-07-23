@@ -12,10 +12,10 @@ export default (
 ): void => {
   if (state.inText()) {
     const oldSyno = state.focusedSyno();
-    const nameHostRefName: (false | string) = state.grammar()[oldSyno.syntype].textHostRef;
+    const nameHostRefName: ?string = state.grammar()[oldSyno.syntype].textHostRef;
 
     let oldName: string;
-    if (nameHostRefName === false) {
+    if (!nameHostRefName) {
       // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
       oldName = oldSyno.name;
     } else {
@@ -37,6 +37,7 @@ export default (
       return;
     }
 
+    // $FlowFixMe: Flow doesn't look into selector interface
     draftFocus.charIndex += 1;
     return;
   }
@@ -79,7 +80,7 @@ export default (
 
     if (newFocusPresnoRef.synoRef) {
       draftFocus.synoId = newFocusPresnoRef.id;
-      draftFocus.presnoIndex = false;
+      draftFocus.presnoIndex = null;
     } else {
       draftFocus.synoId = oldParent.id;
       draftFocus.presnoIndex = newFocusPresnoRef.index;

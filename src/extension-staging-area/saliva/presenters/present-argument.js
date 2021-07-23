@@ -1,4 +1,6 @@
 // @flow
+import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
@@ -14,12 +16,12 @@ export default (
   presnoMap: MutablePresnoMap,
   argument: Argument,
   scope: {},
-  focus: (Focus | false),
+  focus: ?Focus,
   presentSyno: PresentSyno,
 ): ArgumentPresAttrs => {
   let valid = true;
 
-  let name = false;
+  let name = null;
   if (argument.parameter) {
     const param = state.getSyno(argument.parameter.id);
     if (param.syntype !== 'functionParameter') {
@@ -30,7 +32,7 @@ export default (
     valid = false;
   }
 
-  let value: (PresnoRef | false) = false;
+  let value: ?PresnoRef = null;
   if (argument.value) {
     value = {
       presnoRef: true,
@@ -49,13 +51,15 @@ export default (
     valid = false;
   }
 
+  const { focused, presnoFocused, charFocused } = focuses(focus, argument.id);
+
   return {
     syntype: 'argument',
     name,
     value,
-    focused: focus && (argument.id === focus.synoId) && (focus.presnoIndex === false),
-    presnoFocused: focus && (argument.id === focus.synoId) && focus.presnoIndex,
-    charFocused: focus && (argument.id === focus.synoId) && focus.charIndex,
+    focused,
+    presnoFocused,
+    charFocused,
     valid,
   };
 };

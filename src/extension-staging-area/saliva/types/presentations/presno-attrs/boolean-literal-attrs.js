@@ -2,8 +2,8 @@
 export type BooleanLiteralPresAttrs = {|
   +syntype: 'booleanLiteral',
   +focused: boolean,
-  +presnoFocused: (number | false),
-  +charFocused: (number | false),
+  +presnoFocused: ?number,
+  +charFocused: ?number,
   +valid: boolean,
   +value: boolean,
 |}

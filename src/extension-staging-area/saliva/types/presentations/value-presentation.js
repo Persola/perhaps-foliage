@@ -7,5 +7,5 @@ export type valuePresentation = (
   | BooleanLiteralPres
   | FunctionCallPres
   | FunctionDefPres
-  | false
+  | null
 )
