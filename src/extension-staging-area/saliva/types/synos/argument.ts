@@ -1,4 +1,2 @@
-// @flow
-import type { MutableArgument } from './mutable-synos/argument';
-
-export type Argument = $ReadOnly<MutableArgument>
+import type { MutableArgument } from "./mutable-synos/argument";
+export type Argument = Readonly<MutableArgument>;

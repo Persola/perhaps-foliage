@@ -1,5 +1,4 @@
-// @flow
-export type StartAsyncSyntreeLoad = {|
-  +type: 'START_SYNTREE_LOAD',
-  +file: File,
-|}
+export type StartAsyncSyntreeLoad = {
+  readonly type: "START_SYNTREE_LOAD";
+  readonly file: File;
+};

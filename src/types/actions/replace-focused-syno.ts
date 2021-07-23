@@ -1,5 +1,4 @@
-// @flow
-export type ReplaceFocusedSyno = {|
-  +type: 'REPLACE_FOCUSED_SYNO',
-  +input: string,
-|}
+export type ReplaceFocusedSyno = {
+  readonly type: "REPLACE_FOCUSED_SYNO";
+  readonly input: string;
+};

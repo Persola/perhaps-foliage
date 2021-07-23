@@ -1,7 +1,5 @@
-// @flow
-import type { Syno } from '../syno';
-
-export type EndInterpretation = {|
-  +type: 'END_INTERPRETATION',
-  +result: Syno,
-|}
+import type { Syno } from "../syno";
+export type EndInterpretation = {
+  readonly type: "END_INTERPRETATION";
+  readonly result: Syno;
+};

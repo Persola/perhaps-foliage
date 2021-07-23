@@ -1,26 +1,20 @@
-// @flow
-import * as React from 'react';
-import SyntacticNode from './syntactic-node.jsx';
-import OutdatedMessage from './outdated-message.jsx';
-import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
-
-import type { ReduxStore } from '../../types/redux-store';
-import type { Prestree } from '../../types/presenter/prestree';
-import type { LanguageIntegration } from '../../types/language-integration';
-import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
-
+import * as React from "react";
+import SyntacticNode from "./syntactic-node";
+import OutdatedMessage from "./outdated-message";
+import createPresnoFetcher from "../../prestree-utils/create-presno-fetcher";
+import type { ReduxStore } from "../../types/redux-store";
+import type { Prestree } from "../../types/presenter/prestree";
+import type { LanguageIntegration } from "../../types/language-integration";
+import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
 type Props = {
-  editorStateStore: ReduxStore,
-  integration: LanguageIntegration,
-  codePresentation: ?Prestree,
-  outdated: boolean,
-  interpreting: boolean,
-  dragDrop: boolean,
-}
-
-const outdatedMessage = (
-  <OutdatedMessage />
-);
+  editorStateStore: ReduxStore;
+  integration: LanguageIntegration;
+  codePresentation: Prestree | null | undefined;
+  outdated: boolean;
+  interpreting: boolean;
+  dragDrop: boolean;
+};
+const outdatedMessage = <OutdatedMessage />;
 
 const dragEnterCodeView = e => {
   e.stopPropagation();
@@ -45,54 +39,42 @@ const dropCodeView = (editorStateStore, e) => {
   e.target.classList.remove('hovering-file');
   editorStateStore.dispatch({
     type: 'START_SYNTREE_LOAD',
-    file: e.dataTransfer.files[0],
+    file: e.dataTransfer.files[0]
   });
 };
 
-export default (props: Props): React.Node => {
+export default ((props: Props) => {
   const {
     editorStateStore,
     integration,
     codePresentation,
     outdated,
     interpreting,
-    dragDrop,
+    dragDrop
   } = props;
 
-  const boundDropCodeView = e => { dropCodeView(editorStateStore, e); };
+  const boundDropCodeView = e => {
+    dropCodeView(editorStateStore, e);
+  };
 
   let content;
+
   if (!codePresentation) {
-    content = (
-      <div className="non-syntactic">
+    content = <div className="non-syntactic">
         (nothing to display)
-      </div>
-    );
+      </div>;
   } else {
-    const { presnos, rootId } = codePresentation;
+    const {
+      presnos,
+      rootId
+    } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
-    content = (
-      <SyntacticNode
-        integration={((integration: any): PresentLanguageIntegration)}
-        getPresno={getPresno}
-        synoId={rootId}
-        SynoRenderer={SyntacticNode}
-      />
-    );
+    content = <SyntacticNode integration={((integration as any) as PresentLanguageIntegration)} getPresno={getPresno} synoId={rootId} SynoRenderer={SyntacticNode} />;
   }
 
   const classes = `code-view ${interpreting ? 'interpreting' : ''}`;
-
-  return (
-    <div
-      className={classes}
-      onDragEnter={dragDrop ? dragEnterCodeView : null}
-      onDragLeave={dragDrop ? dragLeaveCodeView : null}
-      onDragOver={dragDrop ? dragOverCodeView : null}
-      onDrop={dragDrop ? boundDropCodeView : null}
-    >
-      { outdated ? outdatedMessage : null }
+  return <div className={classes} onDragEnter={dragDrop ? dragEnterCodeView : null} onDragLeave={dragDrop ? dragLeaveCodeView : null} onDragOver={dragDrop ? dragOverCodeView : null} onDrop={dragDrop ? boundDropCodeView : null}>
+      {outdated ? outdatedMessage : null}
       {content}
-    </div>
-  );
-};
+    </div>;
+});

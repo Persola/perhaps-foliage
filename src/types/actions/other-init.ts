@@ -1,5 +1,3 @@
-// @flow
-
-export type OtherInit = {|
-  +type: '@@INIT',
-|}
+export type OtherInit = {
+  readonly type: "@@INIT";
+};

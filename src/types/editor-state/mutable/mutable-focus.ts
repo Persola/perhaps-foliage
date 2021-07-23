@@ -1,13 +1,9 @@
-// @flow
-import type { FocusedPresnoId } from '../focused-presno-id';
-
-export type MutableFocus = {|
-  synoId: FocusedPresnoId,
-  presnoIndex: ?number,
-  charIndex: ?number,
-|}
-
-// type FocusOnSyno = {
+import type { FocusedPresnoId } from "../focused-presno-id";
+export type MutableFocus = {
+  synoId: FocusedPresnoId;
+  presnoIndex: number | null | undefined;
+  charIndex: number | null | undefined;
+}; // type FocusOnSyno = {
 //   synoId: FocusedPresnoId,
 //   presnoIndex: null,
 //   charIndex: null

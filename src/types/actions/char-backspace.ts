@@ -1,5 +1,3 @@
-// @flow
-
-export type CharBackspace = {|
-  +type: 'CHAR_BACKSPACE',
-|}
+export type CharBackspace = {
+  readonly type: "CHAR_BACKSPACE";
+};

@@ -1,17 +1,10 @@
-// @flow
-import navOut from './navigate/nav-out';
-import destroySyno from './destroy-focused-syno/destroy-syno';
-
-import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
-import type { StateSelector } from '../../types/state-selector';
-import type { MutableFocus } from '../../types/editor-state/mutable/mutable-focus';
-
-export default (
-  state: StateSelector,
-  action: DestroyFocusedSyno,
-  draftState: MutableEditorState,
-): void => {
+import navOut from "./navigate/nav-out";
+import destroySyno from "./destroy-focused-syno/destroy-syno";
+import type { MutableEditorState } from "../../types/mutable-editor-state";
+import type { DestroyFocusedSyno } from "../../types/actions/destroy-focused-syno";
+import type { StateSelector } from "../../types/state-selector";
+import type { MutableFocus } from "../../types/editor-state/mutable/mutable-focus";
+export default ((state: StateSelector, action: DestroyFocusedSyno, draftState: MutableEditorState): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring DESTROY_FOCUSED_SYNO action: no integration loaded');
     return;
@@ -21,7 +14,8 @@ export default (
     console.warn('Ignoring DESTROY_FOCUSED_SYNO action: no tree loaded');
     return;
   }
-  const focus: MutableFocus = (draftState.focus: any);
+
+  const focus: MutableFocus = (draftState.focus as any);
 
   if (state.inPresno()) {
     throw new TypeError('DESTROY_FOCUSED_SYNO action received while not focused on syno level');
@@ -37,14 +31,6 @@ export default (
     return;
   }
 
-  destroySyno(
-    state,
-    action,
-    draftState,
-  );
-
-  navOut(
-    state,
-    focus,
-  );
-};
+  destroySyno(state, action, draftState);
+  navOut(state, focus);
+});

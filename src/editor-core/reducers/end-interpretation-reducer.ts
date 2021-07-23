@@ -1,16 +1,9 @@
-// @flow
-import dup from '../../syntree-utils/dup';
-
-import type { StateSelector } from '../../types/state-selector';
-import type { EndInterpretation } from '../../types/actions/end-interpretation';
-import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { MutableSyno } from '../../types/mutable-syno';
-
-export default (
-  state: StateSelector,
-  action: EndInterpretation,
-  draftState: MutableEditorState,
-): void => {
+import dup from "../../syntree-utils/dup";
+import type { StateSelector } from "../../types/state-selector";
+import type { EndInterpretation } from "../../types/actions/end-interpretation";
+import type { MutableEditorState } from "../../types/mutable-editor-state";
+import type { MutableSyno } from "../../types/mutable-syno";
+export default ((state: StateSelector, action: EndInterpretation, draftState: MutableEditorState): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring END_INTERPRETATION action: no integration loaded');
     return;
@@ -26,13 +19,12 @@ export default (
   }
 
   const result: MutableSyno = dup(action.result);
-
   Object.assign(draftState, {
     resultTree: {
-      [result.id]: result,
+      [result.id]: result
     },
     resultSyntreeRootId: action.result.id,
     interpreting: false,
-    resultOutdated: false,
+    resultOutdated: false
   });
-};
+});

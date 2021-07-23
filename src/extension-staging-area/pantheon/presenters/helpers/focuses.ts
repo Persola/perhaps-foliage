@@ -1,15 +1,15 @@
-// @flow
-import type { Focus } from '../../../../types/editor-state/focus';
-import type { SynoId } from '../../../../types/syno-id';
-
-export default (
-  focus: ?Focus,
-  synoId: SynoId,
-): { focused: boolean, presnoFocused: ?number, charFocused: ?number } => {
+import type { Focus } from "../../../../types/editor-state/focus";
+import type { SynoId } from "../../../../types/syno-id";
+export default ((focus: Focus | null | undefined, synoId: SynoId): {
+  focused: boolean;
+  presnoFocused: number | null | undefined;
+  charFocused: number | null | undefined;
+} => {
   let focused;
   let presnoFocused;
   let charFocused;
-  if (!!focus && (synoId === focus.synoId)) {
+
+  if (!!focus && synoId === focus.synoId) {
     focused = focus.presnoIndex === null;
     presnoFocused = focus.presnoIndex;
     charFocused = focus.charIndex;
@@ -22,6 +22,6 @@ export default (
   return {
     focused,
     presnoFocused,
-    charFocused,
+    charFocused
   };
-};
+});

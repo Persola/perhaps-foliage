@@ -1,5 +1,4 @@
-// @flow
-export type StartIntegrationLoad = {|
-  +type: 'START_INTEGRATION_LOAD',
-  +file: File,
-|}
+export type StartIntegrationLoad = {
+  readonly type: "START_INTEGRATION_LOAD";
+  readonly file: File;
+};

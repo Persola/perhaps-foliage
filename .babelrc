@@ -11,7 +11,11 @@
       "@babel/preset-react",
     ],
     [
-      "@babel/preset-flow",
+      "@babel/typescript",
     ]
+  ],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    "@babel/proposal-object-rest-spread",
   ]
 }

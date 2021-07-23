@@ -1,15 +1,9 @@
-// @flow
-import getChildPresnoRefs from './get-child-presno-refs';
-
-import type { StateSelector } from '../../../types/state-selector';
-import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
-import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
-
-export default (
-  state: StateSelector,
-  draftFocus: MutableFocus,
-): void => {
+import getChildPresnoRefs from "./get-child-presno-refs";
+import type { StateSelector } from "../../../types/state-selector";
+import type { MutableFocus } from "../../../types/editor-state/mutable/mutable-focus";
+import type { ChildPresnoRef } from "../../../types/child-presno-ref";
+import type { Syno } from "../../../types/syno";
+export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.focusedSynoIsRoot()) {
     console.warn('ignoring navigation to previous sibling: focus syno is root');
     return;
@@ -27,6 +21,7 @@ export default (
   }
 
   let oldParent: Syno;
+
   if (state.inPresno()) {
     oldParent = state.focusedSyno();
   } else {
@@ -45,6 +40,7 @@ export default (
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
+
     // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
     return siblingRef.index === state.focusedPresnoIndex();
   });
@@ -64,4 +60,4 @@ export default (
       draftFocus.presnoIndex = newFocusPresnoRef.index;
     }
   }
-};
+});

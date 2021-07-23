@@ -1,4 +1,2 @@
-// @flow
-import type { SynoId } from '../syno-id';
-
-export type FocusedPresnoId = SynoId
+import type { SynoId } from "../syno-id";
+export type FocusedPresnoId = SynoId;

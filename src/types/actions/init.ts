@@ -1,5 +1,3 @@
-// @flow
-
-export type Init = {|
-  +type: '@@redux/INIT',
-|}
+export type Init = {
+  readonly type: "@@redux/INIT";
+};

@@ -1,5 +1,4 @@
-// @flow
-export type Navigate = {|
-  +type: 'NAVIGATE',
-  +direction: ('out' | 'in' | 'prev' | 'next'),
-|}
+export type Navigate = {
+  readonly type: "NAVIGATE";
+  readonly direction: "out" | "in" | "prev" | "next";
+};

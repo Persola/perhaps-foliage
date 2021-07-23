@@ -1,9 +1,5 @@
-// @flow
-import type { MutableFocus } from './mutable/mutable-focus';
-
-export type Focus = $ReadOnly<MutableFocus>;
-
-// type FocusOnSyno = {
+import type { MutableFocus } from "./mutable/mutable-focus";
+export type Focus = Readonly<MutableFocus>; // type FocusOnSyno = {
 //   synoId: FocusedPresnoId,
 //   presnoIndex: null,
 //   charIndex: null

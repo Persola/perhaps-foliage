@@ -1,10 +1,9 @@
-// @flow
-export type VariableRefPresAttrs = {|
-  +syntype: 'variableRef',
-  +focused: boolean,
-  +presnoFocused: ?number,
-  +charFocused: ?number,
-  +valid: boolean,
-  +valueSyntype: 'booleanLiteral',
-  +name: ?string,
-|}
+export type VariableRefPresAttrs = {
+  readonly syntype: "variableRef";
+  readonly focused: boolean;
+  readonly presnoFocused: number | null | undefined;
+  readonly charFocused: number | null | undefined;
+  readonly valid: boolean;
+  readonly valueSyntype: "booleanLiteral";
+  readonly name: string | null | undefined;
+};

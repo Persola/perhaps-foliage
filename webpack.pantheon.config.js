@@ -4,11 +4,11 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-di
 
 module.exports = {
   mode: 'none',
-  entry: './src/extension-staging-area/pantheon/initialize-integration.js',
+  entry: './src/extension-staging-area/pantheon/initialize-integration.ts',
   module: {
     rules: [
       {
-        test: /(\.js|\.jsx)$/,
+        test: /(\.ts|\.tsx)$/,
         exclude: /node_modules/,
         use: [
           { loader: 'babel-loader' },
@@ -36,6 +36,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
     new NodePolyfillPlugin(),

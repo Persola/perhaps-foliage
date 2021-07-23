@@ -1,30 +1,22 @@
-// @flow
-import getChildPresnoRefs from './get-child-presno-refs';
-
-import type { StateSelector } from '../../../types/state-selector';
-import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
-import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
-
-export default (
-  state: StateSelector,
-  draftFocus: MutableFocus,
-): void => {
+import getChildPresnoRefs from "./get-child-presno-refs";
+import type { StateSelector } from "../../../types/state-selector";
+import type { MutableFocus } from "../../../types/editor-state/mutable/mutable-focus";
+import type { ChildPresnoRef } from "../../../types/child-presno-ref";
+import type { Syno } from "../../../types/syno";
+export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.inText()) {
     const oldSyno = state.focusedSyno();
-    const nameHostRefName: ?string = state.grammar()[oldSyno.syntype].textHostRef;
-
+    const nameHostRefName: string | null | undefined = state.grammar()[oldSyno.syntype].textHostRef;
     let oldName: string;
+
     if (!nameHostRefName) {
       // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
       oldName = oldSyno.name;
     } else {
       if (!oldSyno[nameHostRefName]) {
-        throw new Error(
-          'We seem to be focused on a name presno that depends on an incomplete ref.'
-          + ' We shouldn\'t have been able to navigate here.',
-        );
+        throw new Error('We seem to be focused on a name presno that depends on an incomplete ref.' + ' We shouldn\'t have been able to navigate here.');
       }
+
       // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
       oldName = state.getSyno(oldSyno[nameHostRefName].id).name;
     }
@@ -49,6 +41,7 @@ export default (
 
   // $FlowFixMe: Flow doesn't look into selector interface
   let oldParent: Syno;
+
   if (state.inPresno()) {
     oldParent = state.focusedSyno();
   } else {
@@ -67,13 +60,14 @@ export default (
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
+
     // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
     return siblingRef.index === state.focusedPresnoIndex();
   });
 
   if (oldFocusedPresnoBirthOrder === -1) {
     throw new Error("Cannot find old focused presno ID among parent's children");
-  } else if (oldFocusedPresnoBirthOrder >= (siblingRefz.length - 1)) {
+  } else if (oldFocusedPresnoBirthOrder >= siblingRefz.length - 1) {
     console.warn('Ignoring navigation to next sibling: already focused on last sibling');
   } else {
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
@@ -86,4 +80,4 @@ export default (
       draftFocus.presnoIndex = newFocusPresnoRef.index;
     }
   }
-};
+});

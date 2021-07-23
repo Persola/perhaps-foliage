@@ -1,4 +1,2 @@
-// @flow
-import type { MutablePresnoMap } from './mutable-presno-map';
-
-export type PresnoMap = $ReadOnly<MutablePresnoMap>
+import type { MutablePresnoMap } from "./mutable-presno-map";
+export type PresnoMap = Readonly<MutablePresnoMap>;

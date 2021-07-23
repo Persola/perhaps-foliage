@@ -1,17 +1,16 @@
-// @flow
-export type EditorStateWithoutIntegration = {|
-  +integrationId: null,
-  +grammar: null,
-  +primitives: null,
-  +keyToNewSynoAttrs: null,
-  +lastIntegrationBindings: ?(string[]),
-  +synoMap: null,
-  +resultTree: null,
-  +inverseReferenceMap: null,
-  +focus: null,
-  +resultSyntreeRootId: null,
-  +interpreting: false,
-  +resultOutdated: false,
-  +loadingIntegration: boolean,
-  +loadingSyntree: false,
-|}
+export type EditorStateWithoutIntegration = {
+  readonly integrationId: null;
+  readonly grammar: null;
+  readonly primitives: null;
+  readonly keyToNewSynoAttrs: null;
+  readonly lastIntegrationBindings: string[] | null | undefined;
+  readonly synoMap: null;
+  readonly resultTree: null;
+  readonly inverseReferenceMap: null;
+  readonly focus: null;
+  readonly resultSyntreeRootId: null;
+  readonly interpreting: false;
+  readonly resultOutdated: false;
+  readonly loadingIntegration: boolean;
+  readonly loadingSyntree: false;
+};

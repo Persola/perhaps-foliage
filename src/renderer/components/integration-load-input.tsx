@@ -1,30 +1,22 @@
-// @flow
-import * as React from 'react';
-import type { ReduxStore } from '../../types/redux-store';
-
+import * as React from "react";
+import type { ReduxStore } from "../../types/redux-store";
 type Props = {
-  editorStateStore: ReduxStore,
-}
+  editorStateStore: ReduxStore;
+};
 
 const dispatchIntegrationLoad = (e, editorStateStore) => {
   editorStateStore.dispatch({
     type: 'START_INTEGRATION_LOAD',
-    file: e.target.files[0],
+    file: e.target.files[0]
   });
 };
 
-export default (props: Props): React.Node => {
-  const { editorStateStore } = props;
+export default ((props: Props) => {
+  const {
+    editorStateStore
+  } = props;
 
   const loadIntegration = e => dispatchIntegrationLoad(e, editorStateStore);
 
-  return (
-    <input
-      type="file"
-      id="integrationLoad"
-      name="integrationLoad"
-      accept="text/javascript"
-      onChange={loadIntegration}
-    />
-  );
-};
+  return <input type="file" id="integrationLoad" name="integrationLoad" accept="text/javascript" onChange={loadIntegration} />;
+});

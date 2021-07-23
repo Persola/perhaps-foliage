@@ -1,7 +1,5 @@
-// @flow
-import type { SynoId } from '../syno-id';
-
-export type PresnoRef = {|
-  +presnoRef: true,
-  +id: SynoId,
-|}
+import type { SynoId } from "../syno-id";
+export type PresnoRef = {
+  readonly presnoRef: true;
+  readonly id: SynoId;
+};

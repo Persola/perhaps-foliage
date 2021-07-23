@@ -1,5 +1,4 @@
-// @flow
-export type ReactType = {|
-  +Node: { [string]: any },
-  +createElement: any,
-|}
+export type ReactType = {
+  readonly Node: Record<string, any>;
+  readonly createElement: any;
+};

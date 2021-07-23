@@ -1,4 +1,3 @@
-// @flow
-export type StartInterpretation = {|
-  +type: 'START_INTERPRETATION'
-|}
+export type StartInterpretation = {
+  readonly type: "START_INTERPRETATION";
+};

@@ -1,8 +1,4 @@
-// @flow
-import * as React from 'react';
-
-export default (): React.Node => (
-  <div className="outdated-message">
+import * as React from "react";
+export default (() => <div className="outdated-message">
     outdated
-  </div>
-);
+  </div>);

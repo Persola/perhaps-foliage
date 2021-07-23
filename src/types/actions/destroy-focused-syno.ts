@@ -1,7 +1,5 @@
-// @flow
-import type { SynoId } from '../syno-id';
-
-export type DestroyFocusedSyno = {|
-  +type: 'DESTROY_FOCUSED_SYNO',
-  +focusedPresnoId: SynoId,
-|}
+import type { SynoId } from "../syno-id";
+export type DestroyFocusedSyno = {
+  readonly type: "DESTROY_FOCUSED_SYNO";
+  readonly focusedPresnoId: SynoId;
+};

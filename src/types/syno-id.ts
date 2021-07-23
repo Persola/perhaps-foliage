@@ -1,2 +1,1 @@
-// @flow
-export type SynoId = string
+export type SynoId = string;

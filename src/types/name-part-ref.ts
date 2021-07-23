@@ -1,8 +1,6 @@
-// @flow
-import type { SynoRef } from './syno-ref';
-
-export type NamePartRef = {|
-  +synoRef: false,
-  +parent: SynoRef,
-  +index: number,
-|}
+import type { SynoRef } from "./syno-ref";
+export type NamePartRef = {
+  readonly synoRef: false;
+  readonly parent: SynoRef;
+  readonly index: number;
+};

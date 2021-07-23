@@ -1,25 +1,19 @@
-// @flow
-import { enableMapSet } from 'immer';
-
-import createEditorStateStore from './editor-core/create-editor-state-store';
-import Renderer from './renderer/renderer.jsx';
-import createPresent from './presenter/create-present';
-import createInputResolver from './input-resolver/create-input-resolver';
-import bindEditorInputs from './input-resolver/bind-editor-inputs';
-import updateIntegrationInputBindings from './input-resolver/update-integration-input-bindings';
-
-import editorStyles from './editor-styles.css'; // eslint-disable-line no-unused-vars
+import { enableMapSet } from "immer";
+import createEditorStateStore from "./editor-core/create-editor-state-store";
+import Renderer from "./renderer/renderer";
+import createPresent from "./presenter/create-present";
+import createInputResolver from "./input-resolver/create-input-resolver";
+import bindEditorInputs from "./input-resolver/bind-editor-inputs";
+import updateIntegrationInputBindings from "./input-resolver/update-integration-input-bindings";
+import editorStyles from "./editor-styles.css"; // eslint-disable-line no-unused-vars
 
 // import pantheonGrammar from './extension-staging-area/pantheon/grammar.yml';
 // import pantheonKeyToNewSynoAttrs from
 // './extension-staging-area/pantheon/input-resolver/key-to-new-syno-attrs.yml';
 // import pantheonPresenters from './extension-staging-area/pantheon/presenters/presenters';
 // import pantheonRenderers from './extension-staging-area/pantheon/renderers/renderers';
-
 // import pantheonStyles from './extension-staging-area/pantheon/stylesheet.lazy.css';
-
-import type { AbsentLanguageIntegration } from './types/language-integration/absent-language-integration';
-
+import type { AbsentLanguageIntegration } from "./types/language-integration/absent-language-integration";
 enableMapSet();
 
 /*
@@ -35,29 +29,23 @@ const integration: AbsentLanguageIntegration = {
   interpret: null,
   presenters: null,
   renderers: null,
-  styles: null,
+  styles: null
 };
-
-const { editorStateStore, stateSelector } = createEditorStateStore(integration);
+const {
+  editorStateStore,
+  stateSelector
+} = createEditorStateStore(integration);
 const renderer = new Renderer(document);
-const present = createPresent(
-  stateSelector,
-  editorStateStore,
-  renderer,
-  integration,
-);
-const inputResolver = createInputResolver(
-  editorStateStore,
-  stateSelector,
-  integration,
-);
+const present = createPresent(stateSelector, editorStateStore, renderer, integration);
+const inputResolver = createInputResolver(editorStateStore, stateSelector, integration);
+
 const editorStateSubscription = () => {
   stateSelector.state = editorStateStore.getState();
   present();
   updateIntegrationInputBindings(stateSelector, inputResolver);
 };
-editorStateStore.subscribe(editorStateSubscription);
 
+editorStateStore.subscribe(editorStateSubscription);
 window.addEventListener('load', () => {
   bindEditorInputs(editorStateStore, inputResolver);
   editorStateSubscription();

@@ -1,28 +1,26 @@
-const SYNTYPE_ATTRS = [
-  'rootable',
-  'children',
-  'textHostRef',
-];
+const SYNTYPE_ATTRS = ['rootable', 'children', 'textHostRef'];
 
 const validationFailure = message => {
   return {
     valid: false,
-    message,
+    message
   };
 };
 
-export default grammar => {
+export default (grammar => {
   Object.entries(grammar).forEach(([syntype, syntypeAttrs]) => {
     if (typeof syntype !== 'string') {
       return validationFailure(`syntype '${syntype}' has invalid name`);
     }
 
     const invalidAttrs = Object.keys(syntypeAttrs).filter(attr => !SYNTYPE_ATTRS.includes(attr));
+
     if (invalidAttrs.length > 0) {
       return validationFailure(`syntype '${syntype}' has invalid attributes: ${invalidAttrs}`);
     }
 
     const missingAttrs = SYNTYPE_ATTRS.filter(attr => !Object.keys(syntypeAttrs).includes(attr));
+
     if (missingAttrs.length > 0) {
       return validationFailure(`syntype '${syntype}' is missing attributes: ${missingAttrs}`);
     }
@@ -49,6 +47,7 @@ export default grammar => {
       }
     });
   });
-
-  return { valid: true };
-};
+  return {
+    valid: true
+  };
+});

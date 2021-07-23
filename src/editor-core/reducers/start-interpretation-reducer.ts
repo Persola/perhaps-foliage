@@ -1,13 +1,7 @@
-// @flow
-import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { StateSelector } from '../../types/state-selector';
-import type { LanguageIntegration } from '../../types/language-integration';
-
-export default (
-  state: StateSelector,
-  draftState: MutableEditorState,
-  integration: LanguageIntegration,
-): void => {
+import type { MutableEditorState } from "../../types/mutable-editor-state";
+import type { StateSelector } from "../../types/state-selector";
+import type { LanguageIntegration } from "../../types/language-integration";
+export default ((state: StateSelector, draftState: MutableEditorState, integration: LanguageIntegration): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring START_INTEGRATION action: no integration loaded');
     return;
@@ -28,4 +22,4 @@ export default (
   }
 
   draftState.interpreting = true;
-};
+});

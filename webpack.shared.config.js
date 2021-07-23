@@ -9,14 +9,14 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   mode: 'none',
-  entry: './src/app.js',
+  entry: './src/app.ts',
   module: {
     rules: [
       {
-        test: /(\.js|\.jsx)$/,
+        test: /(\.ts|\.tsx)$/,
         exclude: /node_modules/,
         use: [
-          { loader: 'babel-loader' },
+          { loader: 'ts-loader' },
         ],
       },
       {
@@ -42,17 +42,12 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
   plugins: [
     HtmlWebpackPluginConfig,
     new NodePolyfillPlugin(),
   ],
-  resolve: {
-    alias: {
-      // this worked, but flow didn't know about it so it would fail to find files
-      // tried to use flow's module.name_mapper.extension option but it had no apparent effect
-      // so using relative paths for now
-      projectRoot: `${__dirname}/src`,
-    },
-  },
   devtool: 'source-map',
 };

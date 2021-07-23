@@ -1,4 +1,2 @@
-// @flow
-import type { MutableFunctionDefinition } from './mutable-synos/function-definition';
-
-export type FunctionDefinition = $ReadOnly<MutableFunctionDefinition>
+import type { MutableFunctionDefinition } from "./mutable-synos/function-definition";
+export type FunctionDefinition = Readonly<MutableFunctionDefinition>;

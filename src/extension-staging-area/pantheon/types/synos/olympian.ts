@@ -1,10 +1,8 @@
-// @flow
-import type { SynoId } from '../../../../types/syno-id';
-import type { SynoRef } from '../../../../types/syno-ref';
-
-export type Olympian = {|
-  +id: SynoId,
-  +parent: SynoRef,
-  +child: SynoRef,
-  +name: string,
-|}
+import type { SynoId } from "../../../../types/syno-id";
+import type { SynoRef } from "../../../../types/syno-ref";
+export type Olympian = {
+  readonly id: SynoId;
+  readonly parent: SynoRef;
+  readonly child: SynoRef;
+  readonly name: string;
+};

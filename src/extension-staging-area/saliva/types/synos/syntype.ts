@@ -1,9 +1,1 @@
-// @flow
-export type Syntype = (
-  | 'booleanLiteral'
-  | 'functionCall'
-  | 'functionDefinition'
-  | 'variableRef'
-  | 'functionParameter'
-  | 'argument'
-)
+export type Syntype = "booleanLiteral" | "functionCall" | "functionDefinition" | "variableRef" | "functionParameter" | "argument";

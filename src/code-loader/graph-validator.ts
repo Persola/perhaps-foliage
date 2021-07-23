@@ -1,25 +1,21 @@
-const UNIVERSAL_SYNO_ATTRS = [
-  'id',
-  'parent',
-  'syntype',
-  'name',
-];
-
-export default (graph, grammar) => {
+const UNIVERSAL_SYNO_ATTRS = ['id', 'parent', 'syntype', 'name'];
+export default ((graph, grammar) => {
   let valid = true;
   let message = '';
-
   Object.keys(graph).forEach(synoId => {
     const syno = graph[synoId];
     const syntype = grammar[syno.syntype];
+
     if (typeof syntype !== 'object') {
       valid = false;
       message += `Syntype of node (ID '${syno.id}') unrecognized. `;
     }
+
     if (!syno.parent && !syntype.rootable) {
       valid = false;
       message += `Graph root cannot be root because of its type '${syno.syntype}'. `;
     }
+
     // check for multiple roots?
     Object.keys(syno).forEach(attr => {
       if (Object.keys(syntype.children).includes(attr)) {
@@ -44,6 +40,8 @@ export default (graph, grammar) => {
       }
     });
   });
-
-  return { valid, message };
-};
+  return {
+    valid,
+    message
+  };
+});

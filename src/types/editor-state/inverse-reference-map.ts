@@ -1,4 +1,2 @@
-// @flow
-import type { MutableInverseReferenceMap } from './mutable/mutable-inverse-reference-map';
-
-export type InverseReferenceMap = $ReadOnly<MutableInverseReferenceMap>
+import type { MutableInverseReferenceMap } from "./mutable/mutable-inverse-reference-map";
+export type InverseReferenceMap = Readonly<MutableInverseReferenceMap>;

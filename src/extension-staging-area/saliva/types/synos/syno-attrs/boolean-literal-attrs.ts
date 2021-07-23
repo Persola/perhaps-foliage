@@ -1,5 +1,4 @@
-// @flow
-export type BooleanLiteralAttrs = {|
-  syntype: 'booleanLiteral',
-  value: boolean,
-|}
+export type BooleanLiteralAttrs = {
+  syntype: "booleanLiteral";
+  value: boolean;
+};

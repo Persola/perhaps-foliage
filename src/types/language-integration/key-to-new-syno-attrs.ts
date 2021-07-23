@@ -1,6 +1,1 @@
-// @flow
-export type KeyToNewSynoAttrs = {
-  +[string]: {
-    [string]: any
-  }
-}
+export type KeyToNewSynoAttrs = Readonly<Record<string, Record<string, any>>>;
