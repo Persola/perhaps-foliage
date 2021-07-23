@@ -3,10 +3,11 @@ extends:
   - eslint:recommended
   - plugin:import/errors
   - plugin:import/warnings
-  - plugin:flowtype/recommended
-parser: "@babel/eslint-parser"
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+parser: "@typescript-eslint/parser"
 plugins:
-  - flowtype
+  - @typescript-eslint
 env:
   browser: true
   # this can be removed after extracting renderer into another repo
@@ -18,9 +19,6 @@ rules:
     - 2
     - as-needed
   'import/extensions':
-    - 0
-  no-undef:
-    # despite the flowtype plugin, this excepts various flowtyping
     - 0
   no-plusplus:
     - 0 # Airbnb's justification curiosly appears to only be applicable when you are not also
