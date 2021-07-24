@@ -1,7 +1,7 @@
 export type Syntype =
-  | "booleanLiteral"
-  | "functionCall"
-  | "functionDefinition"
-  | "variableRef"
-  | "functionParameter"
-  | "argument";
+  | 'booleanLiteral'
+  | 'functionCall'
+  | 'functionDefinition'
+  | 'variableRef'
+  | 'functionParameter'
+  | 'argument';

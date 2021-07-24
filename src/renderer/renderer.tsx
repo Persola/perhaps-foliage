@@ -1,15 +1,16 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import Editor from "./components/editor";
-import type { ReduxStore } from "../types/redux-store";
-import type { EditorPresentation } from "../types/presenter/editor-presentation";
-import type { LanguageIntegration } from "../types/language-integration";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import Editor from './components/editor';
+import type { ReduxStore } from '../types/redux-store';
+import type { EditorPresentation } from '../types/presenter/editor-presentation';
+import type { LanguageIntegration } from '../types/language-integration';
+
 type Element = Record<string, any>;
 export default class {
   editorEl: Element;
 
   constructor(document: Document) {
-    this.editorEl = document.getElementById("editor");
+    this.editorEl = document.getElementById('editor');
   }
 
   render(
@@ -17,7 +18,7 @@ export default class {
     presentation: EditorPresentation,
     integration: LanguageIntegration,
     resultOutdated: boolean,
-    interpreting: boolean
+    interpreting: boolean,
   ) {
     ReactDOM.render(
       <Editor
@@ -27,7 +28,7 @@ export default class {
         resultOutdated={resultOutdated}
         interpreting={interpreting}
       />,
-      this.editorEl
+      this.editorEl,
     );
 
     if (integration.styles) {

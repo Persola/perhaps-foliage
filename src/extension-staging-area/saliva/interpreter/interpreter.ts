@@ -1,34 +1,34 @@
-import interpretFunctionCall from "./syntype-interpreters/interpret-function-call";
-import resolveRef from "./resolve-ref";
-import type { StateSelector } from "../../../types/state-selector";
-import type { Syno } from "../../../types/syno";
-import type { InterpretationResolution } from "../../../types/interpreter/interpretation-resolution";
+import interpretFunctionCall from './syntype-interpreters/interpret-function-call';
+import resolveRef from './resolve-ref';
+import type { StateSelector } from '../../../types/state-selector';
+import type { Syno } from '../../../types/syno';
+import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';
 
 const interpreter = (
   interpretee: Syno,
   scope: [],
-  state: StateSelector
+  state: StateSelector,
 ): InterpretationResolution => {
   switch (interpretee.syntype) {
-    case "booleanLiteral": {
+    case 'booleanLiteral': {
       return {
         success: true,
         result: interpretee,
       };
     }
 
-    case "functionCall": {
+    case 'functionCall': {
       return interpretFunctionCall(interpreter, scope, interpretee, state);
     }
 
-    case "functionDefinition": {
+    case 'functionDefinition': {
       return {
         success: true,
         result: interpretee,
       };
     }
 
-    case "variableRef": {
+    case 'variableRef': {
       if (!interpretee.referent) {
         return {
           success: false,
@@ -40,7 +40,7 @@ const interpreter = (
 
       const value = resolveRef(scope, interpretee.referent);
 
-      if (typeof value !== "object") {
+      if (typeof value !== 'object') {
         throw new Error(`variable at '${interpretee.id}' resolved wrong`);
       }
 
@@ -51,7 +51,7 @@ const interpreter = (
     }
 
     default: {
-      throw new Error("invalid syntactic node (unrecognized type)");
+      throw new Error('invalid syntactic node (unrecognized type)');
     }
   }
 };

@@ -1,12 +1,13 @@
-import focuses from "./helpers/focuses";
-import type { StateSelector } from "../../../types/state-selector";
-import type { MutablePresnoMap } from "../../../types/presenter/mutable-presno-map";
-import type { PresentSyno } from "../../../types/presenter/present-syno";
-import type { PresnoRef } from "../../../types/presenter/presno-ref";
-import type { Focus } from "../../../types/editor-state/focus";
-import type { PresentLanguageIntegration } from "../../../types/language-integration/present-language-integration";
-import type { Argument } from "../types/synos/argument";
-import type { ArgumentPresAttrs } from "../types/presentations/presno-attrs/argument-attrs";
+import focuses from './helpers/focuses';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
+import type { PresentSyno } from '../../../types/presenter/present-syno';
+import type { PresnoRef } from '../../../types/presenter/presno-ref';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
+import type { Argument } from '../types/synos/argument';
+import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
+
 export default (
   state: StateSelector,
   integration: PresentLanguageIntegration,
@@ -14,7 +15,7 @@ export default (
   argument: Argument,
   scope: {},
   focus: Focus | null | undefined,
-  presentSyno: PresentSyno
+  presentSyno: PresentSyno,
 ): ArgumentPresAttrs => {
   let valid = true;
   let name = null;
@@ -22,8 +23,8 @@ export default (
   if (argument.parameter) {
     const param = state.getSyno(argument.parameter.id);
 
-    if (param.syntype !== "functionParameter") {
-      throw new Error("wrong type from synomap (flow)");
+    if (param.syntype !== 'functionParameter') {
+      throw new Error('wrong type from synomap (flow)');
     }
 
     name = param.name;
@@ -44,7 +45,7 @@ export default (
         state.getSyno(argument.value.id),
         scope,
         focus,
-        presentSyno
+        presentSyno,
       ),
     };
   } else {
@@ -53,7 +54,7 @@ export default (
 
   const { focused, presnoFocused, charFocused } = focuses(focus, argument.id);
   return {
-    syntype: "argument",
+    syntype: 'argument',
     name,
     value,
     focused,

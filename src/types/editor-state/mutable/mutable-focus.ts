@@ -1,4 +1,5 @@
-import type { FocusedPresnoId } from "../focused-presno-id";
+import type { FocusedPresnoId } from '../focused-presno-id';
+
 export type MutableFocus = {
   synoId: FocusedPresnoId;
   presnoIndex: number | null | undefined;

@@ -1,14 +1,15 @@
-import primitives from "../primitives.yml";
-import focuses from "./helpers/focuses";
-import presentParameters from "./present-function-definition/present-parameters";
-import type { StateSelector } from "../../../types/state-selector";
-import type { MutablePresnoMap } from "../../../types/presenter/mutable-presno-map";
-import type { PresentSyno } from "../../../types/presenter/present-syno";
-import type { PresnoRef } from "../../../types/presenter/presno-ref";
-import type { Focus } from "../../../types/editor-state/focus";
-import type { PresentLanguageIntegration } from "../../../types/language-integration/present-language-integration";
-import type { FunctionDefinition } from "../types/synos/function-definition";
-import type { FunctionDefPresAttrs } from "../types/presentations/presno-attrs/function-definition-attrs";
+import primitives from '../primitives.yml';
+import focuses from './helpers/focuses';
+import presentParameters from './present-function-definition/present-parameters';
+import type { StateSelector } from '../../../types/state-selector';
+import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
+import type { PresentSyno } from '../../../types/presenter/present-syno';
+import type { PresnoRef } from '../../../types/presenter/presno-ref';
+import type { Focus } from '../../../types/editor-state/focus';
+import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
+import type { FunctionDefinition } from '../types/synos/function-definition';
+import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
+
 const primitiveIds = Object.keys(primitives);
 export default (
   state: StateSelector,
@@ -17,7 +18,7 @@ export default (
   funkshunDef: FunctionDefinition,
   scope: {},
   focus: Focus | null | undefined,
-  presentSyno: PresentSyno
+  presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
   let valid = true;
   let body: PresnoRef | null | undefined = null;
@@ -37,17 +38,17 @@ export default (
         state.getSyno(funkshunDef.body.id),
         scope,
         focus,
-        presentSyno
+        presentSyno,
       ),
     };
   }
 
   const { focused, presnoFocused, charFocused } = focuses(
     focus,
-    funkshunDef.id
+    funkshunDef.id,
   );
   return {
-    syntype: "functionDefinition",
+    syntype: 'functionDefinition',
     name: funkshunDef.name,
     parameters: presentParameters(
       state,
@@ -57,7 +58,7 @@ export default (
       funkshunDef.parameters,
       scope,
       focus,
-      presentSyno
+      presentSyno,
     ),
     focused,
     presnoFocused,

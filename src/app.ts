@@ -1,11 +1,11 @@
-import { enableMapSet } from "immer";
-import createEditorStateStore from "./editor-core/create-editor-state-store";
-import Renderer from "./renderer/renderer";
-import createPresent from "./presenter/create-present";
-import createInputResolver from "./input-resolver/create-input-resolver";
-import bindEditorInputs from "./input-resolver/bind-editor-inputs";
-import updateIntegrationInputBindings from "./input-resolver/update-integration-input-bindings";
-import "./editor-styles.css"; // eslint-disable-line no-unused-vars
+import { enableMapSet } from 'immer';
+import createEditorStateStore from './editor-core/create-editor-state-store';
+import Renderer from './renderer/renderer';
+import createPresent from './presenter/create-present';
+import createInputResolver from './input-resolver/create-input-resolver';
+import bindEditorInputs from './input-resolver/bind-editor-inputs';
+import updateIntegrationInputBindings from './input-resolver/update-integration-input-bindings';
+import './editor-styles.css'; // eslint-disable-line no-unused-vars
 
 // import pantheonGrammar from './extension-staging-area/pantheon/grammar.yml';
 // import pantheonKeyToNewSynoAttrs from
@@ -13,7 +13,8 @@ import "./editor-styles.css"; // eslint-disable-line no-unused-vars
 // import pantheonPresenters from './extension-staging-area/pantheon/presenters/presenters';
 // import pantheonRenderers from './extension-staging-area/pantheon/renderers/renderers';
 // import pantheonStyles from './extension-staging-area/pantheon/stylesheet.lazy.css';
-import type { AbsentLanguageIntegration } from "./types/language-integration/absent-language-integration";
+import type { AbsentLanguageIntegration } from './types/language-integration/absent-language-integration';
+
 enableMapSet();
 
 /*
@@ -37,12 +38,12 @@ const present = createPresent(
   stateSelector,
   editorStateStore,
   renderer,
-  integration
+  integration,
 );
 const inputResolver = createInputResolver(
   editorStateStore,
   stateSelector,
-  integration
+  integration,
 );
 
 const editorStateSubscription = () => {
@@ -52,7 +53,7 @@ const editorStateSubscription = () => {
 };
 
 editorStateStore.subscribe(editorStateSubscription);
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
   bindEditorInputs(editorStateStore, inputResolver);
   editorStateSubscription();
 });

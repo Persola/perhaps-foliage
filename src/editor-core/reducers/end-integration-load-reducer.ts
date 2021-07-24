@@ -1,23 +1,23 @@
-import type { MutableEditorState } from "../../types/mutable-editor-state";
-import type { EndIntegrationLoad } from "../../types/actions/end-integration-load";
-import type { StateSelector } from "../../types/state-selector";
-import type { LanguageIntegration } from "../../types/language-integration";
-import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
-import type { MutableSynoMap } from "../../types/mutable-syno-map";
+import type { MutableEditorState } from '../../types/mutable-editor-state';
+import type { EndIntegrationLoad } from '../../types/actions/end-integration-load';
+import type { StateSelector } from '../../types/state-selector';
+import type { LanguageIntegration } from '../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+import type { MutableSynoMap } from '../../types/mutable-syno-map';
+
 export default (
   state: StateSelector,
   action: EndIntegrationLoad,
   draftState: MutableEditorState,
-  mutateeIntegration: LanguageIntegration // the integration object used by dependants
+  mutateeIntegration: LanguageIntegration, // the integration object used by dependants
 ): void => {
   if (state.loadingIntegration() === false) {
     throw new Error(
-      "Tried to end integration load while there was no integration being loaded"
+      'Tried to end integration load while there was no integration being loaded',
     );
   }
 
-  const presentMutateeIntegration: PresentLanguageIntegration =
-    mutateeIntegration as any;
+  const presentMutateeIntegration: PresentLanguageIntegration = mutateeIntegration as any;
   Object.assign(presentMutateeIntegration, action.newIntegrationAttrs);
   const primitives: MutableSynoMap = action.newIntegrationAttrs
     .primitives as any;

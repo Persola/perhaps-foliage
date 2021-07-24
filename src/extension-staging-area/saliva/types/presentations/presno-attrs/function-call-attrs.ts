@@ -1,6 +1,7 @@
-import type { PresnoRef } from "../../../../../types/presenter/presno-ref";
+import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
+
 export type FunctionCallPresAttrs = {
-  readonly syntype: "functionCall";
+  readonly syntype: 'functionCall';
   readonly focused: boolean;
   readonly presnoFocused: number | null | undefined;
   readonly charFocused: number | null | undefined;

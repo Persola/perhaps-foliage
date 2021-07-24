@@ -1,1 +1,1 @@
-export default "salivaPrimitives-nor";
+export default 'salivaPrimitives-nor';

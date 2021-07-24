@@ -1,3 +1,3 @@
 export type Init = {
-  readonly type: "@@redux/INIT";
+  readonly type: '@@redux/INIT';
 };

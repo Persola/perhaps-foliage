@@ -1,23 +1,24 @@
-import synoCommandResolver from "./input-resolver/syno-command-resolver";
-import navigationCommandResolver from "./input-resolver/navigation-command-resolver";
-import textCommandResolver from "./input-resolver/text-command-resolver";
-import type { ReduxStore } from "../types/redux-store";
-import type { StateSelector } from "../types/state-selector";
-import type { LanguageIntegration } from "../types/language-integration";
+import synoCommandResolver from './input-resolver/syno-command-resolver';
+import navigationCommandResolver from './input-resolver/navigation-command-resolver';
+import textCommandResolver from './input-resolver/text-command-resolver';
+import type { ReduxStore } from '../types/redux-store';
+import type { StateSelector } from '../types/state-selector';
+import type { LanguageIntegration } from '../types/language-integration';
+
 export default (
   editorStateStore: ReduxStore,
   state: StateSelector,
-  integration: LanguageIntegration // eslint doesn't understand the parantheses around this type
+  integration: LanguageIntegration, // eslint doesn't understand the parantheses around this type
 ): // eslint-disable-next-line function-paren-newline
 ((arg0: string) => void) => {
   return (key: string): void => {
     let command = null;
 
-    if (key === "enter") {
+    if (key === 'enter') {
       command = {
-        type: "START_INTERPRETATION",
+        type: 'START_INTERPRETATION',
       };
-    } else if (["left", "right", "up", "down"].includes(key)) {
+    } else if (['left', 'right', 'up', 'down'].includes(key)) {
       command = navigationCommandResolver(key);
     } else if (state.inText()) {
       // text commands
@@ -32,7 +33,7 @@ export default (
     if (command) {
       editorStateStore.dispatch(command);
     } else {
-      throw new Error("bad binding?");
+      throw new Error('bad binding?');
     }
   };
 };

@@ -1,8 +1,8 @@
-import childSynos from "../../../syntree-utils/child-synos";
-import type { ChildPresnoRef } from "../../../types/child-presno-ref";
-import type { Syno } from "../../../types/syno";
-import type { StateSelector } from "../../../types/state-selector";
-import type { SynoRef } from "../../../types/syno-ref";
+import childSynos from '../../../syntree-utils/child-synos';
+import type { ChildPresnoRef } from '../../../types/child-presno-ref';
+import type { Syno } from '../../../types/syno';
+import type { StateSelector } from '../../../types/state-selector';
+import type { SynoRef } from '../../../types/syno-ref';
 
 const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
   {
@@ -10,7 +10,7 @@ const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
     parent: {
       synoRef: true,
       id: syno.id,
-      relation: "parent",
+      relation: 'parent',
     },
     index: 0, // once names are divided into parts, need to find all of them
   },
@@ -18,7 +18,7 @@ const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
 
 export default (
   syno: Syno,
-  state: StateSelector
+  state: StateSelector,
 ): ReadonlyArray<ChildPresnoRef> => {
   const { textHostRef } = state.grammar()[syno.syntype];
   let nameFocusable;
@@ -41,7 +41,7 @@ export default (
   }
 
   const childSynoRefs: ReadonlyArray<ChildPresnoRef> = childSynos(
-    syno
+    syno,
   ) as SynoRef[];
   return [
     ...namePresnos, // put all name parts first (for now)

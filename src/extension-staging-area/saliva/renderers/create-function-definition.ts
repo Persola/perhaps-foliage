@@ -1,5 +1,6 @@
-import type { IntegrationDependencies } from "../../../types/language-integration/integration-dependencies";
-import type { FunctionDefinitionRendererProps } from "../types/renderers/function-definition-props";
+import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
+import type { FunctionDefinitionRendererProps } from '../types/renderers/function-definition-props';
+
 export default (integrationDependencies: IntegrationDependencies) => {
   const {
     React,
@@ -10,23 +11,23 @@ export default (integrationDependencies: IntegrationDependencies) => {
     const { name, presnoFocused, charFocused, valid } = presno;
     const { parameters } = presno;
     const classes = [
-      "syno",
-      "function-definition",
-      presno.focused ? "focused" : "unfocused",
-      valid ? "" : "invalid",
-    ].join(" ");
+      'syno',
+      'function-definition',
+      presno.focused ? 'focused' : 'unfocused',
+      valid ? '' : 'invalid',
+    ].join(' ');
     return React.createElement(
-      "div",
+      'div',
       {
         className: classes,
-        "data-syno-id": presno.synoId,
+        'data-syno-id': presno.synoId,
       },
       React.createElement(NamePart, {
         namePart: name,
         focused: presnoFocused === 0,
         charFocused,
       }),
-      parameters.map((paramRef) => {
+      parameters.map(paramRef => {
         return React.createElement(SynoRenderer, {
           integration,
           key: paramRef.id,
@@ -35,13 +36,13 @@ export default (integrationDependencies: IntegrationDependencies) => {
           SynoRenderer,
         });
       }),
-      presno.body &&
-        React.createElement(SynoRenderer, {
+      presno.body
+        && React.createElement(SynoRenderer, {
           integration,
           getPresno,
           synoId: presno.body.id,
           SynoRenderer,
-        })
+        }),
     );
   };
 };

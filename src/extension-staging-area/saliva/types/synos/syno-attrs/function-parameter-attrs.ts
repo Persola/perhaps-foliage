@@ -1,6 +1,7 @@
-import type { Syntype } from "../syntype";
+import type { Syntype } from '../syntype';
+
 export type FunctionParameterAttrs = {
-  syntype: "functionParameter";
+  syntype: 'functionParameter';
   name: string;
   valueSyntype: Syntype;
 };

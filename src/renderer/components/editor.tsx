@@ -1,10 +1,11 @@
-import * as React from "react";
-import CodeView from "./code-view";
-import InterpretButton from "./interpret-button";
-import IntegrationLoadInput from "./integration-load-input";
-import type { ReduxStore } from "../../types/redux-store";
-import type { EditorPresentation } from "../../types/presenter/editor-presentation";
-import type { LanguageIntegration } from "../../types/language-integration";
+import * as React from 'react';
+import CodeView from './code-view';
+import InterpretButton from './interpret-button';
+import IntegrationLoadInput from './integration-load-input';
+import type { ReduxStore } from '../../types/redux-store';
+import type { EditorPresentation } from '../../types/presenter/editor-presentation';
+import type { LanguageIntegration } from '../../types/language-integration';
+
 type Props = {
   editorStateStore: ReduxStore;
   integration: LanguageIntegration;

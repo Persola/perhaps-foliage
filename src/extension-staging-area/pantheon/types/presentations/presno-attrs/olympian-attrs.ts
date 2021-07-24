@@ -1,6 +1,7 @@
-import type { PresnoRef } from "../../../../../types/presenter/presno-ref";
+import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
+
 export type OlympianPresAttrs = {
-  readonly syntype: "olympian";
+  readonly syntype: 'olympian';
   readonly name: string;
   readonly child: PresnoRef | null | undefined;
   readonly focused: boolean;

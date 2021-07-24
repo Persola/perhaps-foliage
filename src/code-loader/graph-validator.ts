@@ -1,12 +1,12 @@
-const UNIVERSAL_SYNO_ATTRS = ["id", "parent", "syntype", "name"];
+const UNIVERSAL_SYNO_ATTRS = ['id', 'parent', 'syntype', 'name'];
 export default (graph, grammar) => {
   let valid = true;
-  let message = "";
-  Object.keys(graph).forEach((synoId) => {
+  let message = '';
+  Object.keys(graph).forEach(synoId => {
     const syno = graph[synoId];
     const syntype = grammar[syno.syntype];
 
-    if (typeof syntype !== "object") {
+    if (typeof syntype !== 'object') {
       valid = false;
       message += `Syntype of node (ID '${syno.id}') unrecognized. `;
     }
@@ -17,14 +17,14 @@ export default (graph, grammar) => {
     }
 
     // check for multiple roots?
-    Object.keys(syno).forEach((attr) => {
+    Object.keys(syno).forEach(attr => {
       if (Object.keys(syntype.children).includes(attr)) {
         if (syntype.children[attr].collection) {
-          syno[attr].forEach((maybeSynoRef) => {
+          syno[attr].forEach(maybeSynoRef => {
             if (maybeSynoRef.synoRef === true) {
               if (
-                graph[maybeSynoRef.id].syntype !==
-                syntype.children[attr].syntype
+                graph[maybeSynoRef.id].syntype
+                !== syntype.children[attr].syntype
               ) {
                 valid = false;
                 message += `Node (ID '${maybeSynoRef.id}') invalid child. `;

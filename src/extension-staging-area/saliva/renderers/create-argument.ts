@@ -1,5 +1,6 @@
-import type { IntegrationDependencies } from "../../../types/language-integration/integration-dependencies";
-import type { ArgumentRendererProps } from "../types/renderers/argument-props";
+import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
+import type { ArgumentRendererProps } from '../types/renderers/argument-props';
+
 export default (integrationDependencies: IntegrationDependencies) => {
   const {
     React,
@@ -21,32 +22,32 @@ export default (integrationDependencies: IntegrationDependencies) => {
       },
     } = props;
     const classes = [
-      "syno",
-      "same-line",
-      "bubble-even",
-      "argument",
-      focused ? "focused" : "unfocused",
-      valid ? "" : "invalid",
-    ].join(" ");
+      'syno',
+      'same-line',
+      'bubble-even',
+      'argument',
+      focused ? 'focused' : 'unfocused',
+      valid ? '' : 'invalid',
+    ].join(' ');
     return React.createElement(
-      "div",
+      'div',
       {
         className: classes,
-        "data-syno-id": synoId,
+        'data-syno-id': synoId,
       },
-      name &&
-        React.createElement(NamePart, {
+      name
+        && React.createElement(NamePart, {
           namePart: name,
           focused: presnoFocused === 0,
           charFocused,
         }),
-      value &&
-        React.createElement(SynoRenderer, {
+      value
+        && React.createElement(SynoRenderer, {
           integration,
           getPresno,
           synoId: value.id,
           SynoRenderer,
-        })
+        }),
     );
   };
 };

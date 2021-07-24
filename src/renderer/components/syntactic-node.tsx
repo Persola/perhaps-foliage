@@ -1,7 +1,8 @@
-import * as React from "react";
-import NamePart from "./vis/name-part";
-import type { Presno } from "../../types/presenter/presno";
-import type { SynoRendererProps } from "../../types/renderer/syno-renderer-props";
+import * as React from 'react';
+import NamePart from './vis/name-part';
+import type { Presno } from '../../types/presenter/presno';
+import type { SynoRendererProps } from '../../types/renderer/syno-renderer-props';
+
 export default (props: SynoRendererProps) => {
   const { integration, synoId, getPresno, SynoRenderer } = props;
   const presno: Presno = getPresno(synoId);

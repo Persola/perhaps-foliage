@@ -1,3 +1,3 @@
 export type CharBackspace = {
-  readonly type: "CHAR_BACKSPACE";
+  readonly type: 'CHAR_BACKSPACE';
 };

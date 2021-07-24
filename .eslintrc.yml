@@ -7,7 +7,7 @@ extends:
   - plugin:@typescript-eslint/recommended
 parser: "@typescript-eslint/parser"
 plugins:
-  - @typescript-eslint
+  - '@typescript-eslint'
 env:
   browser: true
   # this can be removed after extracting renderer into another repo
@@ -41,3 +41,11 @@ overrides:
     rules:
       "no-console":
         - 0
+settings:
+  'import/resolver':
+    node:
+      extensions:
+        - '.js'
+        - '.jsx'
+        - '.ts'
+        - '.tsx'

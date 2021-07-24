@@ -1,12 +1,13 @@
-import getDraftSyno from "../draft-utils/get-draft-syno";
-import type { StateSelector } from "../../../types/state-selector";
-import type { DestroyFocusedSyno } from "../../../types/actions/destroy-focused-syno";
-import type { MutableEditorState } from "../../../types/mutable-editor-state";
-import type { MutableSynoMap } from "../../../types/mutable-syno-map";
+import getDraftSyno from '../draft-utils/get-draft-syno';
+import type { StateSelector } from '../../../types/state-selector';
+import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
+import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableSynoMap } from '../../../types/mutable-syno-map';
+
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
-  draftState: MutableEditorState
+  draftState: MutableEditorState,
 ): void => {
   // TODO: delete orphaned children from store
   // TODO: and references outside parent in general (need backwards reference reference?)
@@ -19,7 +20,7 @@ export default (
   const draftSynoMap: MutableSynoMap = draftState.synoMap as any;
 
   if (state.focusedSynoIsRoot()) {
-    console.warn("ignoring attempted deletion of root syno");
+    console.warn('ignoring attempted deletion of root syno');
     return;
   }
 
@@ -31,7 +32,7 @@ export default (
     parentRef.id,
     ...state.inverseReferenceMap()[focusedPresnoId],
   ]);
-  referrerIds.forEach((referrerId) => {
+  referrerIds.forEach(referrerId => {
     const oldReferrer = state.synoMap()[referrerId];
     const newExReferrer = getDraftSyno(referrerId, state, draftState); // could be primitive
 

@@ -1,4 +1,4 @@
 export type BooleanLiteralAttrs = {
-  syntype: "booleanLiteral";
+  syntype: 'booleanLiteral';
   value: boolean;
 };

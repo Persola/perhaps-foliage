@@ -1,6 +1,7 @@
-import type { SynoRef } from "../../../../../types/syno-ref";
+import type { SynoRef } from '../../../../../types/syno-ref';
+
 export type FunctionDefinitionAttrs = {
-  syntype: "functionDefinition";
+  syntype: 'functionDefinition';
   name: string;
   body: SynoRef | null | undefined;
   parameters: SynoRef[];

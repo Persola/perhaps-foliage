@@ -1,6 +1,7 @@
-import type { PresnoRef } from "../../../../../types/presenter/presno-ref";
+import type { PresnoRef } from '../../../../../types/presenter/presno-ref';
+
 export type TitanPresAttrs = {
-  readonly syntype: "titan";
+  readonly syntype: 'titan';
   readonly name: string;
   readonly child: PresnoRef | null | undefined;
   readonly focused: boolean;

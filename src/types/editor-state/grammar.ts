@@ -1,4 +1,5 @@
-import type { Syntype } from "../../extension-staging-area/saliva/types/synos/syntype";
+import type { Syntype } from '../../extension-staging-area/saliva/types/synos/syntype';
+
 export type Grammar = Readonly<
   Record<
     Syntype,

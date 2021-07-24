@@ -1,6 +1,7 @@
-import type { SynoRef } from "../../../../../types/syno-ref";
+import type { SynoRef } from '../../../../../types/syno-ref';
+
 export type VariableRefAttrs = {
-  syntype: "variableRef";
-  valueSyntype: "booleanLiteral";
+  syntype: 'variableRef';
+  valueSyntype: 'booleanLiteral';
   referent: SynoRef | null | undefined;
 };

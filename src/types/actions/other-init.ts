@@ -1,3 +1,3 @@
 export type OtherInit = {
-  readonly type: "@@INIT";
+  readonly type: '@@INIT';
 };

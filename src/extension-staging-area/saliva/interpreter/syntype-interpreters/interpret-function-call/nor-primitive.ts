@@ -1,17 +1,17 @@
-import isBoolean from "./is-boolean";
-import type { BooleanLiteral } from "../../../types/synos/boolean-literal";
-import type { BooleanLiteralAttrs } from "../../../types/synos/syno-attrs/boolean-literal-attrs";
-import type { InterpretationResolution } from "../../../../../types/interpreter/interpretation-resolution";
+import isBoolean from './is-boolean';
+import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
+import type { BooleanLiteralAttrs } from '../../../types/synos/syno-attrs/boolean-literal-attrs';
+import type { InterpretationResolution } from '../../../../../types/interpreter/interpretation-resolution';
 
 const nor = (
   firstArg: BooleanLiteral | BooleanLiteralAttrs,
-  secondArg: BooleanLiteral | BooleanLiteralAttrs
+  secondArg: BooleanLiteral | BooleanLiteralAttrs,
 ): BooleanLiteral => {
   const resultValue = !(firstArg.value || secondArg.value);
   return {
     id: `interpResult-${String(Math.random()).substring(2)}`,
     parent: null,
-    syntype: "booleanLiteral",
+    syntype: 'booleanLiteral',
     value: resultValue,
   };
 };
@@ -34,7 +34,7 @@ export default (argumentz: BooleanLiteral[]): InterpretationResolution => {
       success: false,
       error: {
         message: `NOR recieved non-boolean argument '${String(
-          badArg
+          badArg,
         )}' (${typeof badArg})`,
       },
     };

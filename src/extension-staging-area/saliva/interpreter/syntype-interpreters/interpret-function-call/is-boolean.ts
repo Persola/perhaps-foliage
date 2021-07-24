@@ -1,4 +1,4 @@
-import type { BooleanLiteral } from "../../../types/synos/boolean-literal";
+import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
 
 export default (booleanCandidate: BooleanLiteral): boolean => {
   const leKeys = Object.keys(booleanCandidate);
@@ -7,15 +7,15 @@ export default (booleanCandidate: BooleanLiteral): boolean => {
     return false;
   }
 
-  if (!leKeys.includes("syntype")) {
+  if (!leKeys.includes('syntype')) {
     return false;
   }
 
-  if (!leKeys.includes("value")) {
+  if (!leKeys.includes('value')) {
     return false;
   }
 
-  if (booleanCandidate.syntype !== "booleanLiteral") {
+  if (booleanCandidate.syntype !== 'booleanLiteral') {
     return false;
   }
 

@@ -1,29 +1,30 @@
-import primitives from "../../primitives.yml";
-import interpretArgs from "./interpret-function-call/interpret-args";
-import norPrimitive from "./interpret-function-call/nor-primitive";
-import argumentParameterMismatch from "../../utils/argument-parameter-mismatch";
-import type { StateSelector } from "../../../../types/state-selector";
-import type { InterpretationResolution } from "../../../../types/interpreter/interpretation-resolution";
-import type { FunctionCall } from "../../types/synos/function-call";
-import type { Argument } from "../../types/synos/argument";
-import type { BooleanLiteral } from "../../types/synos/boolean-literal";
+import primitives from '../../primitives.yml';
+import interpretArgs from './interpret-function-call/interpret-args';
+import norPrimitive from './interpret-function-call/nor-primitive';
+import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
+import type { StateSelector } from '../../../../types/state-selector';
+import type { InterpretationResolution } from '../../../../types/interpreter/interpretation-resolution';
+import type { FunctionCall } from '../../types/synos/function-call';
+import type { Argument } from '../../types/synos/argument';
+import type { BooleanLiteral } from '../../types/synos/boolean-literal';
+
 const primitiveIds = Object.keys(primitives);
 
 const generateScope = (resolvedCallee, interpretedArgs, state) => {
   const interpreteeScope = [];
   // $FlowFixMe: verify type
-  const params = resolvedCallee.parameters.map((paramRef) => {
+  const params = resolvedCallee.parameters.map(paramRef => {
     const param = state.getSyno(paramRef.id);
 
-    if (param.syntype !== "functionParameter") {
-      throw new Error("wrong type from synomap (flow)");
+    if (param.syntype !== 'functionParameter') {
+      throw new Error('wrong type from synomap (flow)');
     }
 
     return param;
   });
-  params.forEach((param) => {
+  params.forEach(param => {
     const matchingPair = interpretedArgs.find(
-      (argRes) => argRes[0].parameter && argRes[0].parameter.id === param.id
+      argRes => argRes[0].parameter && argRes[0].parameter.id === param.id,
     );
 
     if (matchingPair === undefined) {
@@ -39,7 +40,7 @@ export default (
   interpreter: (...args: Array<any>) => any,
   parentScope: [],
   interpretee: FunctionCall,
-  state: StateSelector
+  state: StateSelector,
 ): InterpretationResolution => {
   if (!interpretee.callee) {
     return {
@@ -55,15 +56,15 @@ export default (
 
   if (!calleeResolution.success) {
     throw new Error(
-      `callee resolution failed for function call of ID '${interpretee.id}'`
+      `callee resolution failed for function call of ID '${interpretee.id}'`,
     );
   }
 
   const resolvedCallee = calleeResolution.result;
 
-  if (resolvedCallee.syntype !== "functionDefinition") {
+  if (resolvedCallee.syntype !== 'functionDefinition') {
     // remove when typesafe
-    throw new Error("invalid function ref (returned syno of wrong syntype)");
+    throw new Error('invalid function ref (returned syno of wrong syntype)');
   }
 
   if (!resolvedCallee.body && !primitiveIds.includes(resolvedCallee.id)) {
@@ -75,17 +76,17 @@ export default (
     };
   }
 
-  const argumentz = interpretee.argumentz.map((argRef) => {
+  const argumentz = interpretee.argumentz.map(argRef => {
     const arg = state.getSyno(argRef.id);
 
-    if (arg.syntype !== "argument") {
-      throw new Error("wrong type from synomap (flow)");
+    if (arg.syntype !== 'argument') {
+      throw new Error('wrong type from synomap (flow)');
     }
 
     return arg;
   });
   const argsMissingValues = argumentz.filter(
-    (arg: Argument) => arg.value === null
+    (arg: Argument) => arg.value === null,
   );
 
   if (argsMissingValues.length > 0) {
@@ -93,14 +94,14 @@ export default (
       success: false,
       error: {
         message: `arguments (IDs ${argsMissingValues
-          .map((a) => a.id)
-          .join(" ")}) ha(s/ve) no values`,
+          .map(a => a.id)
+          .join(' ')}) ha(s/ve) no values`,
       },
     };
   }
 
   const argsMissingParameters = argumentz.filter(
-    (arg: Argument) => !arg.parameter
+    (arg: Argument) => !arg.parameter,
   );
 
   if (argsMissingParameters.length > 0) {
@@ -109,8 +110,8 @@ export default (
       error: {
         message:
           `arguments (IDs ${argsMissingParameters
-            .map((a) => a.id)
-            .join(" ")})` + "ha(s/ve) no parameters",
+            .map(a => a.id)
+            .join(' ')})` + 'ha(s/ve) no parameters',
       },
     };
   }
@@ -119,12 +120,12 @@ export default (
     interpreter,
     parentScope,
     argumentz,
-    state
+    state,
   );
   const apm: false | string = argumentParameterMismatch(
     resolvedCallee,
-    interpretedArgs.map((interpretedArg) => interpretedArg[0]),
-    state
+    interpretedArgs.map(interpretedArg => interpretedArg[0]),
+    state,
   );
 
   if (apm) {
@@ -134,26 +135,26 @@ export default (
   const interpreteeScope = generateScope(
     resolvedCallee,
     interpretedArgs,
-    state
+    state,
   );
   let functionResolution;
 
   // $FlowIssue: Flow doesn't recognize that callee is immutable?
   if (primitiveIds.includes(interpretee.callee.id)) {
-    interpretedArgs.forEach((argRes) => {
-      if (argRes[1].syntype !== "booleanLiteral") {
+    interpretedArgs.forEach(argRes => {
+      if (argRes[1].syntype !== 'booleanLiteral') {
         throw new Error();
       }
     });
     const argValues: BooleanLiteral[] = interpretedArgs.map(
-      (argRes) => argRes[1]
+      argRes => argRes[1],
     );
     functionResolution = norPrimitive(argValues);
   } else {
     functionResolution = interpreter(
       state.getSyno(resolvedCallee.body.id),
       interpreteeScope,
-      state
+      state,
     );
   }
 

@@ -1,6 +1,7 @@
-import type { StateSelector } from "../types/state-selector";
-import type { EditorState } from "../types/editor-state";
-import type { Syno } from "../types/syno";
+import type { StateSelector } from '../types/state-selector';
+import type { EditorState } from '../types/editor-state';
+import type { Syno } from '../types/syno';
+
 export default (initialEditorState: EditorState): StateSelector => {
   /*
     The state selector is way most of the app accesses state. Its data should not be modified

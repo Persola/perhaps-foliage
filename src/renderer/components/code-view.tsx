@@ -1,11 +1,12 @@
-import * as React from "react";
-import SyntacticNode from "./syntactic-node";
-import OutdatedMessage from "./outdated-message";
-import createPresnoFetcher from "../../prestree-utils/create-presno-fetcher";
-import type { ReduxStore } from "../../types/redux-store";
-import type { Prestree } from "../../types/presenter/prestree";
-import type { LanguageIntegration } from "../../types/language-integration";
-import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
+import * as React from 'react';
+import SyntacticNode from './syntactic-node';
+import OutdatedMessage from './outdated-message';
+import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
+import type { ReduxStore } from '../../types/redux-store';
+import type { Prestree } from '../../types/presenter/prestree';
+import type { LanguageIntegration } from '../../types/language-integration';
+import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+
 type Props = {
   editorStateStore: ReduxStore;
   integration: LanguageIntegration;
@@ -16,19 +17,19 @@ type Props = {
 };
 const outdatedMessage = <OutdatedMessage />;
 
-const dragEnterCodeView = (e) => {
+const dragEnterCodeView = e => {
   e.stopPropagation();
   e.preventDefault();
-  e.target.classList.add("hovering-file");
+  e.target.classList.add('hovering-file');
 };
 
-const dragLeaveCodeView = (e) => {
+const dragLeaveCodeView = e => {
   e.stopPropagation();
   e.preventDefault();
-  e.target.classList.remove("hovering-file");
+  e.target.classList.remove('hovering-file');
 };
 
-const dragOverCodeView = (e) => {
+const dragOverCodeView = e => {
   e.stopPropagation();
   e.preventDefault();
 };
@@ -36,9 +37,9 @@ const dragOverCodeView = (e) => {
 const dropCodeView = (editorStateStore, e) => {
   e.stopPropagation();
   e.preventDefault();
-  e.target.classList.remove("hovering-file");
+  e.target.classList.remove('hovering-file');
   editorStateStore.dispatch({
-    type: "START_SYNTREE_LOAD",
+    type: 'START_SYNTREE_LOAD',
     file: e.dataTransfer.files[0],
   });
 };
@@ -53,7 +54,7 @@ export default (props: Props) => {
     dragDrop,
   } = props;
 
-  const boundDropCodeView = (e) => {
+  const boundDropCodeView = e => {
     dropCodeView(editorStateStore, e);
   };
 
@@ -74,7 +75,7 @@ export default (props: Props) => {
     );
   }
 
-  const classes = `code-view ${interpreting ? "interpreting" : ""}`;
+  const classes = `code-view ${interpreting ? 'interpreting' : ''}`;
   return (
     <div
       className={classes}

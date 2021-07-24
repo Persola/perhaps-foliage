@@ -1,3 +1,3 @@
 export type StartInterpretation = {
-  readonly type: "START_INTERPRETATION";
+  readonly type: 'START_INTERPRETATION';
 };

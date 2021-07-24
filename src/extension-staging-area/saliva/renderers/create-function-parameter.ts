@@ -1,5 +1,6 @@
-import type { IntegrationDependencies } from "../../../types/language-integration/integration-dependencies";
-import type { FunctionParameterRendererProps } from "../types/renderers/function-parameter-props";
+import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
+import type { FunctionParameterRendererProps } from '../types/renderers/function-parameter-props';
+
 export default (integrationDependencies: IntegrationDependencies) => {
   const {
     React,
@@ -9,24 +10,24 @@ export default (integrationDependencies: IntegrationDependencies) => {
     const { presno } = props;
     const { presnoFocused, charFocused } = presno;
     const classes = [
-      "syno",
-      "same-line",
-      "leaf",
-      "bubble-even",
-      "function-parameter",
-      presno.focused ? "focused" : "unfocused",
-    ].join(" ");
+      'syno',
+      'same-line',
+      'leaf',
+      'bubble-even',
+      'function-parameter',
+      presno.focused ? 'focused' : 'unfocused',
+    ].join(' ');
     return React.createElement(
-      "div",
+      'div',
       {
         className: classes,
-        "data-syno-id": presno.synoId,
+        'data-syno-id': presno.synoId,
       },
       React.createElement(NamePart, {
         namePart: presno.slot,
         focused: presnoFocused === 0,
         charFocused,
-      })
+      }),
     );
   };
 };

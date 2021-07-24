@@ -1,4 +1,5 @@
-import type { MutableFocus } from "./mutable/mutable-focus";
+import type { MutableFocus } from './mutable/mutable-focus';
+
 export type Focus = Readonly<MutableFocus>; // type FocusOnSyno = {
 //   synoId: FocusedPresnoId,
 //   presnoIndex: null,
