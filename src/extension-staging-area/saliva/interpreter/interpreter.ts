@@ -1,12 +1,16 @@
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call';
 import resolveRef from './resolve-ref';
+
+import type { Syno } from '../../../types/syntactic/syno';
+import type { Scope } from '../types/interpreter/scope';
 import type { StateSelector } from '../../../types/state-selector';
-import type { Syno } from '../../../types/syno';
 import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';
+import type { FunctionCall } from '../types/synos/function-call';
+import type { VariableRef } from '../types/synos/variable-ref';
 
 const interpreter = (
   interpretee: Syno,
-  scope: [],
+  scope: Scope,
   state: StateSelector,
 ): InterpretationResolution => {
   switch (interpretee.syntype) {
@@ -18,7 +22,12 @@ const interpreter = (
     }
 
     case 'functionCall': {
-      return interpretFunctionCall(interpreter, scope, interpretee, state);
+      return interpretFunctionCall(
+        interpreter,
+        scope,
+        (interpretee as FunctionCall),
+        state,
+      );
     }
 
     case 'functionDefinition': {
@@ -38,10 +47,12 @@ const interpreter = (
         };
       }
 
-      const value = resolveRef(scope, interpretee.referent);
+      const value = resolveRef(scope, (interpretee as VariableRef).referent);
 
-      if (typeof value !== 'object') {
-        throw new Error(`variable at '${interpretee.id}' resolved wrong`);
+      if (typeof value !== 'object' || value.syntype !== 'booleanLiteral') {
+        throw new Error(
+          `Variable Reference with ID #'${interpretee.id}' resolved to an invalid value: ${value}`,
+        );
       }
 
       return {

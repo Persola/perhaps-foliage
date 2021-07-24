@@ -1,13 +1,13 @@
 import type { Focus } from '../../../../types/editor-state/focus';
-import type { SynoId } from '../../../../types/syno-id';
+import type { SynoId } from '../../../../types/syntactic/syno-id';
 
 export default (
-  focus: Focus | null | undefined,
+  focus: Focus | null,
   synoId: SynoId,
 ): {
   focused: boolean;
-  presnoFocused: number | null | undefined;
-  charFocused: number | null | undefined;
+  presnoFocused: number | null;
+  charFocused: number | null;
 } => {
   let focused;
   let presnoFocused;

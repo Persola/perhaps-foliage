@@ -1,7 +1,7 @@
-import type { SynoId } from '../../../types/syno-id';
+import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { MutableSyno } from '../../../types/mutable-syno';
+import type { MutableSyno } from '../../../types/syntactic/mutables/mutable-syno';
 
 export default (
   synoId: SynoId,
@@ -34,6 +34,5 @@ export default (
     throw new TypeError(`cannot find syno with ID '${synoId}'`);
   }
 
-  // $FlowFixMe: Flow doesn't look into selector interface
   return isPrimitive ? draft.primitives[synoId] : draft.synoMap[synoId];
 };

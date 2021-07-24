@@ -1,7 +1,11 @@
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { FunctionDefinitionRendererProps } from '../types/renderers/function-definition-props';
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: FunctionDefinitionRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },
@@ -37,12 +41,12 @@ export default (integrationDependencies: IntegrationDependencies) => {
         });
       }),
       presno.body
-        && React.createElement(SynoRenderer, {
-          integration,
-          getPresno,
-          synoId: presno.body.id,
-          SynoRenderer,
-        }),
+    && React.createElement(SynoRenderer, {
+      integration,
+      getPresno,
+      synoId: presno.body.id,
+      SynoRenderer,
+    }),
     );
   };
 };

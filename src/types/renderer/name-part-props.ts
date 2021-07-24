@@ -1,5 +1,5 @@
 export type NamePartProps = {
   namePart: string;
   focused: boolean;
-  charFocused: number | null | undefined;
+  charFocused: number | null;
 };

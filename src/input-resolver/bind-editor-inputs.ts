@@ -1,11 +1,11 @@
 import * as Mousetrap from 'mousetrap';
+import type { Store } from 'redux';
 import createFocusSyno from './create-focus-syno';
-import type { ReduxStore } from '../types/redux-store';
 
 export default (
-  editorStateStore: ReduxStore,
-  inputResolver: (arg0: string) => void,
-) => {
+  editorStateStore: Store,
+  inputResolver: (input: string) => void,
+): void => {
   Mousetrap.bind(
     ['enter', 'left', 'right', 'up', 'down', 'backspace'],
     (e, key) => {

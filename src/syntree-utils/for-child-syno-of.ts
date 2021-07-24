@@ -1,17 +1,17 @@
-import type { Syno } from '../types/syno';
-import type { SynoRef } from '../types/syno-ref';
+import type { Syno } from '../types/syntactic/syno';
+import type { SynoRef } from '../types/syntactic/syno-ref';
 
 export default (
   parentSyno: Syno,
-  callback: (arg0: SynoRef, arg1: string, arg2?: number) => void,
-) => {
+  callback: (synoRef: SynoRef, key: string, index?: number) => void,
+): void => {
   Object.entries(parentSyno).forEach(([key, val]) => {
     if (
-      // $FlowIssue: poorly typed ECMA built-in (Object.entries)
-      val.synoRef // $FlowIssue: poorly typed ECMA built-in (Object.entries)
+      // @ts-ignore: need to syno's children attrs better
+      val.synoRef // @ts-ignore: need to syno's children attrs better
       && val.relation === 'child'
     ) {
-      // $FlowIssue: poorly typed ECMA built-in (Object.entries)
+      // @ts-ignore: need to syno's children attrs better
       callback(val, key);
     } else if (val instanceof Array) {
       // nested children

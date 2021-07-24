@@ -1,13 +1,17 @@
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { VariableRefRendererProps } from '../types/renderers/variable-ref-props';
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: VariableRefRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },
   } = integrationDependencies;
   return (props: VariableRefRendererProps) => {
-    const { presno, SynoRenderer } = props;
+    const { presno } = props;
     const { presnoFocused, charFocused } = presno;
     const classes = [
       'syno',
@@ -24,12 +28,11 @@ export default (integrationDependencies: IntegrationDependencies) => {
         'data-syno-id': presno.synoId,
       },
       presno.name
-        && React.createElement(NamePart, {
-          namePart: presno.name,
-          focused: presnoFocused === 0,
-          charFocused,
-          SynoRenderer,
-        }),
+    && React.createElement(NamePart, {
+      namePart: presno.name,
+      focused: presnoFocused === 0,
+      charFocused,
+    }),
     );
   };
 };

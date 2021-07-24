@@ -1,15 +1,16 @@
-import type { ReactType } from '../../../types/react';
+import * as ReactForType from 'react';
+
 import type { FunctionCallRendererProps } from '../types/renderers/function-call-props';
-import type { SynoId } from '../../../types/syno-id';
+import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 
 const argumentEls = (
-  React: ReactType,
+  React: (typeof ReactForType),
   integration: PresentLanguageIntegration,
-  getPresno: (arg0: SynoId) => Presno,
+  getPresno: (synoId: SynoId) => Presno,
   argumentz: PresnoRef[],
   SynoRenderer,
 ) => argumentz.map((argRef: PresnoRef, ind) => {
@@ -22,7 +23,11 @@ const argumentEls = (
   });
 });
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: FunctionCallRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },
@@ -51,19 +56,19 @@ export default (integrationDependencies: IntegrationDependencies) => {
         'data-syno-id': presno.synoId,
       },
       name
-        && React.createElement(NamePart, {
-          namePart: name,
-          focused: presnoFocused === 0,
-          charFocused,
-        }),
+    && React.createElement(NamePart, {
+      namePart: name,
+      focused: presnoFocused === 0,
+      charFocused,
+    }),
       argumentz,
       callee
-        && React.createElement(SynoRenderer, {
-          integration,
-          getPresno,
-          synoId: callee.id,
-          SynoRenderer,
-        }),
+    && React.createElement(SynoRenderer, {
+      integration,
+      getPresno,
+      synoId: callee.id,
+      SynoRenderer,
+    }),
     );
   };
 };

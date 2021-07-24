@@ -1,13 +1,14 @@
 import getChildPresnoRefs from './get-child-presno-refs';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
+import type { Syno } from '../../../types/syntactic/syno';
 
 export default (state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.inText()) {
     const oldSyno = state.focusedSyno();
-    const nameHostRefName: string | null | undefined = state.grammar()[oldSyno.syntype].textHostRef;
+    const nameHostRefName: string | null = state.grammar()[oldSyno.syntype].textHostRef;
     let oldName: string;
 
     if (!nameHostRefName) {
@@ -17,7 +18,7 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
       if (!oldSyno[nameHostRefName]) {
         throw new Error(
           'We seem to be focused on a name presno that depends on an incomplete ref.'
-            + " We shouldn't have been able to navigate here.",
+      + " We shouldn't have been able to navigate here.",
         );
       }
 
@@ -27,7 +28,6 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
 
     const nameLength: number = oldName.length;
 
-    // $FlowFixMe: Flow doesn't look into selector interface
     if (state.focusedCharIndex() > nameLength) {
       console.warn(
         'Ignoring navigation to previous sibling: already on last character',
@@ -35,7 +35,6 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
       return;
     }
 
-    // $FlowFixMe: Flow doesn't look into selector interface
     draftFocus.charIndex += 1;
     return;
   }
@@ -45,13 +44,11 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
     return;
   }
 
-  // $FlowFixMe: Flow doesn't look into selector interface
   let oldParent: Syno;
 
   if (state.inPresno()) {
     oldParent = state.focusedSyno();
   } else {
-    // $FlowFixMe: Flow doesn't look into selector interface
     oldParent = state.getSyno(state.focusedSyno().parent.id);
   }
 
@@ -63,11 +60,9 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
 
   const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
     if (siblingRef.synoRef === true) {
-      // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
 
-    // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
     return siblingRef.index === state.focusedPresnoIndex();
   });
 

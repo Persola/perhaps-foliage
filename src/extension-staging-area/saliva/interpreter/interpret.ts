@@ -1,5 +1,6 @@
 import interpreter from './interpreter';
 import ascendToRoot from '../utils/ascend-to-root';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { EditorStateWithIntegration } from '../../../types/editor-state/editor-state-with-integration';
 import type { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';

@@ -1,6 +1,7 @@
 import primitives from '../primitives.yml';
 import focuses from './helpers/focuses';
 import presentParameters from './present-function-definition/present-parameters';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
@@ -16,12 +17,12 @@ export default (
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   funkshunDef: FunctionDefinition,
-  scope: {},
-  focus: Focus | null | undefined,
+  scope: Record<string, unknown>,
+  focus: Focus | null,
   presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
   let valid = true;
-  let body: PresnoRef | null | undefined = null;
+  let body: PresnoRef | null = null;
 
   if (!funkshunDef.body) {
     if (!primitiveIds.includes(funkshunDef.id)) {

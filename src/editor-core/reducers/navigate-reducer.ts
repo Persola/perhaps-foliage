@@ -2,6 +2,7 @@ import navOut from './navigate/nav-out';
 import navIn from './navigate/nav-in';
 import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
+
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { Navigate } from '../../types/actions/navigate';
 import type { StateSelector } from '../../types/state-selector';
@@ -22,7 +23,7 @@ export default (
     return;
   }
 
-  const focus = draftState.focus as any as MutableFocus;
+  const focus: MutableFocus = draftState.focus;
   const { direction } = action;
 
   switch (direction) {

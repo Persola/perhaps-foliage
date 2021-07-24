@@ -1,14 +1,22 @@
-/*
-  no flow because there's no types for rxjs in flow-typed that the current version of flow digests,
-  let alone ones for an updated version of rxjs
-*/
-import { filter, map, mergeMap } from 'rxjs';
-import type { ReduxAction } from '../../types/redux-action';
-import type { StartAsyncSyntreeLoad } from '../../types/actions/start-syntree-load';
+import { Observable, filter, map, mergeMap } from 'rxjs';
+
+import type { Action } from 'redux';
+import type { StateObservable } from 'redux-observable';
+
 import loadSyntreeFromFileObject from '../../code-loader/load-syntree-from-file-object';
 
-export default (action$, state$, state, integration) => action$.pipe(
-  filter((action: ReduxAction) => {
+import type { EditorState } from '../../types/editor-state';
+import type { StartAsyncSyntreeLoad } from '../../types/actions/start-syntree-load';
+import type { StateSelector } from '../../types/state-selector';
+import type { LanguageIntegration } from '../../types/language-integration';
+
+export default (
+  action$: Observable<Action>,
+  state$: StateObservable<EditorState>,
+  state: StateSelector,
+  integration: LanguageIntegration,
+) => action$.pipe(
+  filter((action: Action) => {
     return action.type === 'START_SYNTREE_LOAD' && state.integrationLoaded();
   }),
   mergeMap((action: StartAsyncSyntreeLoad) => {

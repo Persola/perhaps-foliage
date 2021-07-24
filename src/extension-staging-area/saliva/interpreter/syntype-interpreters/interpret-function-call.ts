@@ -2,17 +2,20 @@ import primitives from '../../primitives.yml';
 import interpretArgs from './interpret-function-call/interpret-args';
 import norPrimitive from './interpret-function-call/nor-primitive';
 import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
+
+import type { Interpreter } from '../../types/interpreter/interpreter';
+import type { Scope } from '../../types/interpreter/scope';
 import type { StateSelector } from '../../../../types/state-selector';
 import type { InterpretationResolution } from '../../../../types/interpreter/interpretation-resolution';
 import type { FunctionCall } from '../../types/synos/function-call';
 import type { Argument } from '../../types/synos/argument';
 import type { BooleanLiteral } from '../../types/synos/boolean-literal';
+import type { FunctionDefinition } from '../../types/synos/function-definition';
 
 const primitiveIds = Object.keys(primitives);
 
-const generateScope = (resolvedCallee, interpretedArgs, state) => {
+const generateScope = (resolvedCallee, interpretedArgs, state): Scope => {
   const interpreteeScope = [];
-  // $FlowFixMe: verify type
   const params = resolvedCallee.parameters.map(paramRef => {
     const param = state.getSyno(paramRef.id);
 
@@ -37,8 +40,8 @@ const generateScope = (resolvedCallee, interpretedArgs, state) => {
 };
 
 export default (
-  interpreter: (...args: Array<any>) => any,
-  parentScope: [],
+  interpreter: Interpreter,
+  parentScope: Scope,
   interpretee: FunctionCall,
   state: StateSelector,
 ): InterpretationResolution => {
@@ -52,7 +55,8 @@ export default (
   }
 
   const callee = state.getSyno(interpretee.callee.id);
-  const calleeResolution = interpreter(callee, parentScope, state);
+  // @ts-ignore: return type appears to be inferred incorrectly?
+  const calleeResolution: InterpretationResolution = interpreter(callee, parentScope, state);
 
   if (!calleeResolution.success) {
     throw new Error(
@@ -63,15 +67,16 @@ export default (
   const resolvedCallee = calleeResolution.result;
 
   if (resolvedCallee.syntype !== 'functionDefinition') {
-    // remove when typesafe
+  // remove when typesafe
     throw new Error('invalid function ref (returned syno of wrong syntype)');
   }
+  const functionDefinition = resolvedCallee as FunctionDefinition;
 
-  if (!resolvedCallee.body && !primitiveIds.includes(resolvedCallee.id)) {
+  if (!functionDefinition.body && !primitiveIds.includes(functionDefinition.id)) {
     return {
       success: false,
       error: {
-        message: `function definition (ID ${resolvedCallee.id}) has no body`,
+        message: `function definition (ID ${functionDefinition.id}) has no body`,
       },
     };
   }
@@ -83,7 +88,7 @@ export default (
       throw new Error('wrong type from synomap (flow)');
     }
 
-    return arg;
+    return arg as Argument;
   });
   const argsMissingValues = argumentz.filter(
     (arg: Argument) => arg.value === null,
@@ -109,9 +114,9 @@ export default (
       success: false,
       error: {
         message:
-          `arguments (IDs ${argsMissingParameters
-            .map(a => a.id)
-            .join(' ')})` + 'ha(s/ve) no parameters',
+     `arguments (IDs ${argsMissingParameters
+       .map(a => a.id)
+       .join(' ')}) ha(s/ve) no parameters`,
       },
     };
   }
@@ -123,7 +128,7 @@ export default (
     state,
   );
   const apm: false | string = argumentParameterMismatch(
-    resolvedCallee,
+    functionDefinition,
     interpretedArgs.map(interpretedArg => interpretedArg[0]),
     state,
   );
@@ -133,13 +138,12 @@ export default (
   }
 
   const interpreteeScope = generateScope(
-    resolvedCallee,
+    functionDefinition,
     interpretedArgs,
     state,
   );
   let functionResolution;
 
-  // $FlowIssue: Flow doesn't recognize that callee is immutable?
   if (primitiveIds.includes(interpretee.callee.id)) {
     interpretedArgs.forEach(argRes => {
       if (argRes[1].syntype !== 'booleanLiteral') {
@@ -152,7 +156,7 @@ export default (
     functionResolution = norPrimitive(argValues);
   } else {
     functionResolution = interpreter(
-      state.getSyno(resolvedCallee.body.id),
+      state.getSyno(functionDefinition.body.id),
       interpreteeScope,
       state,
     );
@@ -168,7 +172,7 @@ export default (
   return {
     success: false,
     error: {
-      message: `function '${resolvedCallee.name}' failed: \n${functionResolution.error.message}`,
+      message: `function '${functionDefinition.name}' failed: \n${functionResolution.error.message}`,
     },
   };
 };

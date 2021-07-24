@@ -3,7 +3,7 @@ import type { EndIntegrationLoad } from '../../types/actions/end-integration-loa
 import type { StateSelector } from '../../types/state-selector';
 import type { LanguageIntegration } from '../../types/language-integration';
 import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
-import type { MutableSynoMap } from '../../types/mutable-syno-map';
+import type { MutableSynoMap } from '../../types/syntactic/mutables/mutable-syno-map';
 
 export default (
   state: StateSelector,
@@ -17,10 +17,9 @@ export default (
     );
   }
 
-  const presentMutateeIntegration: PresentLanguageIntegration = mutateeIntegration as any;
+  const presentMutateeIntegration: PresentLanguageIntegration = mutateeIntegration;
   Object.assign(presentMutateeIntegration, action.newIntegrationAttrs);
-  const primitives: MutableSynoMap = action.newIntegrationAttrs
-    .primitives as any;
+  const primitives: MutableSynoMap = action.newIntegrationAttrs.primitives;
   Object.assign(draftState, {
     integrationId: action.newIntegrationAttrs.id,
     grammar: action.newIntegrationAttrs.grammar,

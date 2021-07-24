@@ -1,5 +1,6 @@
 import navOut from './navigate/nav-out';
 import destroySyno from './destroy-focused-syno/destroy-syno';
+
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 import type { StateSelector } from '../../types/state-selector';
@@ -20,7 +21,7 @@ export default (
     return;
   }
 
-  const focus: MutableFocus = draftState.focus as any;
+  const focus: MutableFocus = draftState.focus;
 
   if (state.inPresno()) {
     throw new TypeError(

@@ -1,10 +1,12 @@
+import type { Interpreter } from '../../../types/interpreter/interpreter';
+import type { Scope } from '../../../types/interpreter/scope';
 import type { StateSelector } from '../../../../../types/state-selector';
 import type { Argument } from '../../../types/synos/argument';
 import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
 
 export default (
-  interpreter: (...args: Array<any>) => any,
-  parentScope: [],
+  interpreter: Interpreter,
+  parentScope: Scope,
   argumentz: Argument[],
   state: StateSelector,
 ): [Argument, BooleanLiteral][] => {
@@ -25,10 +27,14 @@ export default (
     );
 
     if (argResolution.success) {
-      interpretedArgs.push([arg, argResolution.result]);
+      interpretedArgs.push([
+        arg,
+        argResolution.result as BooleanLiteral,
+      ]);
     } else {
       throw new Error('arg interp failed');
     }
   });
+
   return interpretedArgs;
 };

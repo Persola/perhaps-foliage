@@ -1,8 +1,9 @@
 import getChildPresnoRefs from './get-child-presno-refs';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
+import type { Syno } from '../../../types/syntactic/syno';
 
 export default (state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.focusedSynoIsRoot()) {
@@ -18,7 +19,6 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
       return;
     }
 
-    // $FlowFixMe: Flow doesn't look into selector interface
     draftFocus.charIndex -= 1;
     return;
   }
@@ -28,7 +28,6 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.inPresno()) {
     oldParent = state.focusedSyno();
   } else {
-    // $FlowFixMe: Flow doesn't look into selector interface
     oldParent = state.getSyno(state.focusedSyno().parent.id);
   }
 
@@ -40,11 +39,9 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
 
   const oldFocusedSynoBirthOrder = siblingRefz.findIndex(siblingRef => {
     if (siblingRef.synoRef === true) {
-      // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
 
-    // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
     return siblingRef.index === state.focusedPresnoIndex();
   });
 

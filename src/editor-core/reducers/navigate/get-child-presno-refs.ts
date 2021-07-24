@@ -1,8 +1,9 @@
 import childSynos from '../../../syntree-utils/child-synos';
+
 import type { ChildPresnoRef } from '../../../types/child-presno-ref';
-import type { Syno } from '../../../types/syno';
+import type { Syno } from '../../../types/syntactic/syno';
 import type { StateSelector } from '../../../types/state-selector';
-import type { SynoRef } from '../../../types/syno-ref';
+import type { SynoRef } from '../../../types/syntactic/syno-ref';
 
 const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
   {
@@ -24,11 +25,12 @@ export default (
   let nameFocusable;
 
   if (!textHostRef) {
-    // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
     nameFocusable = syno.name && !state.isPrimitive(syno.id);
   } else if (!syno[textHostRef]) {
     nameFocusable = false;
   } else {
+  // Raised because we don't validate that synos have textHostRef attrs matching their grammars
+  // @ts-ignore
     nameFocusable = !state.isPrimitive(syno[textHostRef].id);
   }
 

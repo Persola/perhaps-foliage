@@ -1,4 +1,4 @@
-import type { Syno } from '../syno';
+import type { Syno } from '../syntactic/syno';
 
 export type InterpretationResolutionSuccess = {
   readonly success: true;

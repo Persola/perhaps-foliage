@@ -1,8 +1,9 @@
 import dup from '../../syntree-utils/dup';
+
 import type { StateSelector } from '../../types/state-selector';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { MutableSyno } from '../../types/mutable-syno';
+import type { MutableSyno } from '../../types/syntactic/mutables/mutable-syno';
 
 export default (
   state: StateSelector,

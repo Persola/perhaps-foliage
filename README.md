@@ -9,9 +9,9 @@ This is a scaffold for a programming interface which more richly integrates with
 
 ### Setup
 * have installed:
-  * node.js (including npm)
-  * [? not actually necessary ?] python2 (needed for some package)
-  * (probably some other common things)
+ * node.js (including npm)
+ * [? not actually necessary ?] python2 (needed for some package)
+ * (probably some other common things)
 * `npm install`
 
 ### Build

@@ -1,35 +1,36 @@
 import forChildSynoOf from '../../../syntree-utils/for-child-syno-of';
 import getDraftSyno from '../draft-utils/get-draft-syno';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../../types/actions/replace-focused-syno';
-import type { MutableSynoMap } from '../../../types/mutable-syno-map';
+import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { SynoRef } from '../../../types/syno-ref';
-import type { Syno } from '../../../types/syno';
-import type { SynoId } from '../../../types/syno-id';
-import type { CoreSynoAttrs } from '../../../types/core-syno-attrs';
-import type { MutableBooleanLiteral } from '../../../extension-staging-area/saliva/types/synos/mutable-synos/boolean-literal';
+import type { SynoRef } from '../../../types/syntactic/syno-ref';
+import type { Syno } from '../../../types/syntactic/syno';
+import type { MutableSyntypeAttrs } from '../../../types/syntactic/mutables/mutable-syntype-attrs';
+import type { SynoId } from '../../../types/syntactic/syno-id';
+import type { CoreSynoAttrs } from '../../../types/syntactic/core-syno-attrs';
 
 export default (
   state: StateSelector,
   action: ReplaceFocusedSyno,
   draftSynoMap: MutableSynoMap,
   draft: MutableEditorState,
-  newSynoAttrs: Record<string, any>,
+  newSynoAttrs: MutableSyntypeAttrs,
   newSynoId: SynoId,
 ): void => {
   const parentRef = state.focusedSyno().parent;
-  let parentAttr: SynoRef | null | undefined;
+  let parentAttr: SynoRef | null;
 
   if (!parentRef) {
     parentAttr = null;
   } else {
     const parent: Syno = state.getSyno(parentRef.id);
-    let childKey: string | null | undefined = null;
-    let childIndex: number | null | undefined = null;
+    let childKey: string | null = null;
+    let childIndex: number | null = null;
     forChildSynoOf(
       parent,
-      (childRef: SynoRef, key: string, index: number | null | undefined) => {
+      (childRef: SynoRef, key: string, index: number | null) => {
         if (childRef.id === state.focusedSynoId()) {
           childKey = key;
           childIndex = index || null;
@@ -40,7 +41,7 @@ export default (
     const newParent = getDraftSyno(parent.id, state, draft);
 
     if (typeof childIndex === 'number' && typeof childKey === 'string') {
-      newParent[childKey].splice(childIndex, 1, {
+      (newParent[childKey] as Array<SynoRef>).splice(childIndex, 1, {
         synoRef: true,
         relation: 'child',
         id: newSynoId,
@@ -66,7 +67,7 @@ export default (
     id: newSynoId,
     parent: parentAttr,
   };
-  const newSyno: MutableBooleanLiteral = {
+  const newSyno: Syno = {
     id: newSynoCoreAttrs.id,
     parent: newSynoCoreAttrs.parent,
     syntype: newSynoAttrs.syntype,

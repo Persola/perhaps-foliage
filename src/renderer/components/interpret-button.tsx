@@ -1,8 +1,9 @@
 import * as React from 'react';
-import type { ReduxStore } from '../../types/redux-store';
+
+import type { Store } from 'redux';
 
 type Props = {
-  editorStateStore: ReduxStore;
+  editorStateStore: Store;
   interpreting: boolean;
 };
 
@@ -12,7 +13,7 @@ const dispatchStartInterpretation = editorStateStore => {
   });
 };
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
   const { editorStateStore, interpreting } = props;
   const className = interpreting ? 'interpreting' : '';
 

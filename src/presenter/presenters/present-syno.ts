@@ -1,6 +1,6 @@
 import type { StateSelector } from '../../types/state-selector';
-import type { Syno } from '../../types/syno';
-import type { SynoId } from '../../types/syno-id';
+import type { Syno } from '../../types/syntactic/syno';
+import type { SynoId } from '../../types/syntactic/syno-id';
 import type { Presno } from '../../types/presenter/presno';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../types/presenter/present-syno';
@@ -11,10 +11,10 @@ export default (
   state: StateSelector,
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
-  parentId: SynoId | null | undefined,
+  parentId: SynoId | null,
   syno: Syno,
-  scope: {},
-  focus: Focus | null | undefined,
+  scope: Record<string, unknown>,
+  focus: Focus | null,
   presentSyno: PresentSyno,
 ): SynoId => {
   const presenter = integration.presenters[syno.syntype];
@@ -34,12 +34,14 @@ export default (
     focus,
     presentSyno,
   );
+
   const parent = !parentId
-    ? false
+    ? null
     : {
       presnoRef: true,
       id: parentId,
     };
+
   const presentation: Presno = {
     ...presentationAttrs,
     synoId: syno.id,

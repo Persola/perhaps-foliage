@@ -40,7 +40,7 @@ export default (grammar: Grammar): grammarValidationResult => {
     if (
       !(
         syntypeAttrs.textHostRef === null
-        || typeof syntypeAttrs.textHostRef === 'string'
+       || typeof syntypeAttrs.textHostRef === 'string'
       )
     ) {
       valid = false;
@@ -62,7 +62,7 @@ export default (grammar: Grammar): grammarValidationResult => {
         if (
           !(
             childSyntypeAttrs.collection === false
-            || childSyntypeAttrs.collection === true
+      || childSyntypeAttrs.collection === true
           )
         ) {
           valid = false;

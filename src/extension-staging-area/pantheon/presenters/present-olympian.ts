@@ -1,4 +1,5 @@
 import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
@@ -12,8 +13,8 @@ export default (
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   olympian: Olympian,
-  scope: Record<string, any>,
-  focus: Focus | null | undefined,
+  scope: Record<string, unknown>,
+  focus: Focus | null,
   presentSyno: PresentSyno,
 ): OlympianPresAttrs => {
   const valid = true;

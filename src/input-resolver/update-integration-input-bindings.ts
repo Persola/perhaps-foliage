@@ -1,10 +1,11 @@
 import * as Mousetrap from 'mousetrap';
+
 import type { StateSelector } from '../types/state-selector';
 
 export default (
   state: StateSelector,
-  inputResolver: (arg0: string) => void,
-) => {
+  inputResolver: (input: string) => void,
+): void => {
   if (state.lastIntegrationBindings()) {
     state.lastIntegrationBindings().forEach(input => Mousetrap.unbind(input));
   }

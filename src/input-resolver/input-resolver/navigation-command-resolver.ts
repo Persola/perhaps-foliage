@@ -1,9 +1,9 @@
-import type { ReduxAction } from '../../types/redux-action';
+import type { Navigate } from '../../types/actions/navigate';
 
-export default (key: string): ReduxAction => {
+export default (input: string): Navigate => {
   let direction;
 
-  switch (key) {
+  switch (input) {
     case 'left':
       direction = 'out';
       break;

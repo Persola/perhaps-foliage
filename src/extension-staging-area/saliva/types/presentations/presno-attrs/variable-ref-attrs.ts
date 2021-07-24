@@ -1,9 +1,9 @@
 export type VariableRefPresAttrs = {
   readonly syntype: 'variableRef';
   readonly focused: boolean;
-  readonly presnoFocused: number | null | undefined;
-  readonly charFocused: number | null | undefined;
+  readonly presnoFocused: number | null;
+  readonly charFocused: number | null;
   readonly valid: boolean;
   readonly valueSyntype: 'booleanLiteral';
-  readonly name: string | null | undefined;
+  readonly name: string | null;
 };

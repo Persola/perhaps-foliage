@@ -2,28 +2,28 @@ import type { FocusedPresnoId } from '../focused-presno-id';
 
 export type MutableFocus = {
   synoId: FocusedPresnoId;
-  presnoIndex: number | null | undefined;
-  charIndex: number | null | undefined;
+  presnoIndex: number | null;
+  charIndex: number | null;
 }; // type FocusOnSyno = {
-//   synoId: FocusedPresnoId,
-//   presnoIndex: null,
-//   charIndex: null
+//  synoId: FocusedPresnoId,
+//  presnoIndex: null,
+//  charIndex: null
 // };
 //
 // type FocusOnPresno = {
-//   synoId: FocusedPresnoId,
-//   presnoIndex: number,
-//   charIndex: null
+//  synoId: FocusedPresnoId,
+//  presnoIndex: number,
+//  charIndex: null
 // };
 //
 // type FocusInTextPresno = {
-//   synoId: FocusedPresnoId,
-//   presnoIndex: number,
-//   charIndex: number
+//  synoId: FocusedPresnoId,
+//  presnoIndex: number,
+//  charIndex: number
 // };
 //
 // export type Focus = (
-//   | FocusOnSyno
-//   | FocusOnPresno
-//   | FocusInTextPresno
+//  | FocusOnSyno
+//  | FocusOnPresno
+//  | FocusInTextPresno
 // );

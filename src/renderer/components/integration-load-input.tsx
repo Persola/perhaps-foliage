@@ -1,8 +1,9 @@
 import * as React from 'react';
-import type { ReduxStore } from '../../types/redux-store';
+
+import type { Store } from 'redux';
 
 type Props = {
-  editorStateStore: ReduxStore;
+  editorStateStore: Store;
 };
 
 const dispatchIntegrationLoad = (e, editorStateStore) => {
@@ -12,7 +13,7 @@ const dispatchIntegrationLoad = (e, editorStateStore) => {
   });
 };
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
   const { editorStateStore } = props;
 
   const loadIntegration = e => dispatchIntegrationLoad(e, editorStateStore);

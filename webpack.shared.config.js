@@ -1,5 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',

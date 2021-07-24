@@ -1,4 +1,4 @@
-import type { ReduxStore } from '../types/redux-store';
+import type { Store } from 'redux';
 
 const isSyno = el => {
   if (!el) {
@@ -17,8 +17,8 @@ const containingSyno = (clickedEl: EventTarget) => {
 
   while (
     currentEl
-    && !isSyno(currentEl)
-    && currentEl !== document.documentElement
+  && !isSyno(currentEl)
+  && currentEl !== document.documentElement
   ) {
     if (!(currentEl instanceof HTMLElement)) {
       throw new Error('hit non-HTML element');
@@ -30,13 +30,15 @@ const containingSyno = (clickedEl: EventTarget) => {
   return isSyno(currentEl) ? currentEl : false;
 };
 
-export default (editorStateStore: ReduxStore): ((arg0: Event) => void) => (event: Event) => {
-  const syno = containingSyno(event.target);
+export default (editorStateStore: Store) => {
+  return (event: Event): void => {
+    const syno = containingSyno(event.target);
 
-  if (syno) {
-    editorStateStore.dispatch({
-      type: 'SET_FOCUS_SYNO',
-      synoId: String(syno.attributes.getNamedItem('data-syno-id').nodeValue),
-    });
-  }
+    if (syno) {
+      editorStateStore.dispatch({
+        type: 'SET_FOCUS_SYNO',
+        synoId: String(syno.attributes.getNamedItem('data-syno-id').nodeValue),
+      });
+    }
+  };
 };

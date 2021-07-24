@@ -1,3 +1,3 @@
-import type { SynoRef } from './syno-ref';
+import type { SynoRef } from './syntactic/syno-ref';
 
-export type ParentSynoRef = SynoRef | null | undefined;
+export type ParentSynoRef = SynoRef | null;

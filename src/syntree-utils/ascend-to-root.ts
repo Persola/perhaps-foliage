@@ -1,6 +1,6 @@
-import type { SynoMap } from '../types/syno-map';
-import type { SynoId } from '../types/syno-id';
-import type { Syno } from '../types/syno';
+import type { SynoMap } from '../types/syntactic/syno-map';
+import type { SynoId } from '../types/syntactic/syno-id';
+import type { Syno } from '../types/syntactic/syno';
 
 export default (startingSynoId: SynoId, tree: SynoMap): Syno => {
   let currentSyno = tree[startingSynoId];

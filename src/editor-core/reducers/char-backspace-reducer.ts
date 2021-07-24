@@ -1,4 +1,5 @@
 import synoMapReducer from './char-backspace/syno-map';
+
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { StateSelector } from '../../types/state-selector';
 
@@ -19,14 +20,13 @@ export default (state: StateSelector, draftState: MutableEditorState): void => {
   }
 
   synoMapReducer(
-    state, // $FlowFixMe: Flow doesn't look into selector interface
+    state,
     draftState.synoMap,
   );
 
   if (state.focusedCharIndex() === 0) {
     console.warn('Ignoring backspace: at beginning of text');
   } else {
-    // $FlowFixMe: Flow doesn't look into selector interface
     draftState.focus.charIndex -= 1;
   }
 };

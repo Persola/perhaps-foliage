@@ -1,6 +1,7 @@
 import presentSyno from './present-syno';
+
 import type { StateSelector } from '../../types/state-selector';
-import type { SynoId } from '../../types/syno-id';
+import type { SynoId } from '../../types/syntactic/syno-id';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map';
@@ -11,8 +12,8 @@ export default (
   state: StateSelector,
   integration: PresentLanguageIntegration,
   rootSynoId: SynoId,
-  scope: {},
-  focus: Focus | null | undefined,
+  scope = {},
+  focus: Focus | null,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
   presentSyno(
@@ -25,7 +26,7 @@ export default (
     focus,
     presentSyno,
   );
-  const immutablePresnoMap: PresnoMap = mutablePresnoMap as any;
+  const immutablePresnoMap = mutablePresnoMap as PresnoMap;
   return {
     rootId: rootSynoId,
     presnos: immutablePresnoMap,

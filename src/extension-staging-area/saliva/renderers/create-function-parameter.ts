@@ -1,7 +1,11 @@
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { FunctionParameterRendererProps } from '../types/renderers/function-parameter-props';
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: FunctionParameterRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },

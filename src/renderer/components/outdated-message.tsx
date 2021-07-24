@@ -1,3 +1,3 @@
 import * as React from 'react';
 
-export default () => <div className="outdated-message">outdated</div>;
+export default (): JSX.Element => <div className="outdated-message">outdated</div>;

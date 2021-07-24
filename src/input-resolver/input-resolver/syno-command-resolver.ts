@@ -1,24 +1,29 @@
 import type { StateSelector } from '../../types/state-selector';
-import type { ReduxAction } from '../../types/redux-action';
+import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
+import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 import type { LanguageIntegration } from '../../types/language-integration';
 
 export default (
-  key: string,
+  input: string,
   state: StateSelector,
   integration: LanguageIntegration,
-): ReduxAction | null | undefined => {
+): (
+  | ReplaceFocusedSyno
+  | DestroyFocusedSyno
+  | null
+) => {
   if (!integration.keyToNewSynoAttrs) {
     return null;
   }
 
-  if (Object.keys(integration.keyToNewSynoAttrs).includes(key)) {
+  if (Object.keys(integration.keyToNewSynoAttrs).includes(input)) {
     return {
       type: 'REPLACE_FOCUSED_SYNO',
-      input: key,
+      input,
     };
   }
 
-  if (key === 'backspace') {
+  if (input === 'backspace') {
     return {
       type: 'DESTROY_FOCUSED_SYNO',
       focusedPresnoId: state.focusedSynoId(),

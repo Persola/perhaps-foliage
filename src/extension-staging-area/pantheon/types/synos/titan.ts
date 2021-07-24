@@ -1,5 +1,5 @@
-import type { SynoId } from '../../../../types/syno-id';
-import type { SynoRef } from '../../../../types/syno-ref';
+import type { SynoId } from '../../../../types/syntactic/syno-id';
+import type { SynoRef } from '../../../../types/syntactic/syno-ref';
 
 export type Titan = {
   readonly id: SynoId;

@@ -1,26 +1,18 @@
-import * as React from 'react';
-
 import type { Grammar } from '../editor-state/grammar';
-import type { SynoMap } from '../syno-map';
+import type { SynoMap } from '../syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from './key-to-new-syno-attrs';
-import type { EditorStateWithIntegration } from '../editor-state/editor-state-with-integration';
-import type { StateSelector } from '../state-selector';
-import type { InterpretationResolution } from '../interpreter/interpretation-resolution';
+import type { Interpret } from './interpret';
+import type { Presenters } from './presenters';
+import type { Renderers } from './renderers';
 
 export type PresentLanguageIntegration = {
   id: string;
   grammar: Grammar;
-  primitives: SynoMap | null | undefined;
+  primitives: SynoMap | null;
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  interpret:
-    | ((
-        arg0: EditorStateWithIntegration,
-        arg1: StateSelector
-      ) => InterpretationResolution)
-    | null
-    | undefined;
-  presenters: Readonly<Record<string, (...args: Array<any>) => any>>;
-  renderers: Readonly<Record<string, React.ComponentType<Record<string, any>>>>;
+  interpret: Interpret | null;
+  presenters: Presenters;
+  renderers: Renderers;
   styles: {
     use: () => void;
     unuse: () => void;

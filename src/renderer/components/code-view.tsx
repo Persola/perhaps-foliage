@@ -1,16 +1,19 @@
 import * as React from 'react';
+
+import type { Store } from 'redux';
+
 import SyntacticNode from './syntactic-node';
 import OutdatedMessage from './outdated-message';
 import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
-import type { ReduxStore } from '../../types/redux-store';
+
 import type { Prestree } from '../../types/presenter/prestree';
 import type { LanguageIntegration } from '../../types/language-integration';
 import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
 
 type Props = {
-  editorStateStore: ReduxStore;
+  editorStateStore: Store;
   integration: LanguageIntegration;
-  codePresentation: Prestree | null | undefined;
+  codePresentation: Prestree | null;
   outdated: boolean;
   interpreting: boolean;
   dragDrop: boolean;
@@ -44,7 +47,7 @@ const dropCodeView = (editorStateStore, e) => {
   });
 };
 
-export default (props: Props) => {
+export default (props: Props): JSX.Element => {
   const {
     editorStateStore,
     integration,
@@ -67,7 +70,7 @@ export default (props: Props) => {
     const getPresno = createPresnoFetcher(presnos);
     content = (
       <SyntacticNode
-        integration={integration as any as PresentLanguageIntegration}
+        integration={integration as PresentLanguageIntegration}
         getPresno={getPresno}
         synoId={rootId}
         SynoRenderer={SyntacticNode}

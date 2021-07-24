@@ -1,1 +1,6 @@
-export type KeyToNewSynoAttrs = Readonly<Record<string, Record<string, any>>>;
+export type KeyToNewSynoAttrs = Readonly<{
+  [input: string]: {
+    syntype: string;
+    [typeSpecificSynoAttr: string]: unknown;
+  };
+}>;

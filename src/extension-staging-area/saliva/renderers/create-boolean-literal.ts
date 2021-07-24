@@ -1,7 +1,11 @@
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { BooleanLiteralRendererProps } from '../types/renderers/boolean-literal-props';
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: BooleanLiteralRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },

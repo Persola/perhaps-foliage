@@ -1,6 +1,6 @@
 import type { StateSelector } from '../../../../types/state-selector';
-import type { SynoRef } from '../../../../types/syno-ref';
-import type { SynoId } from '../../../../types/syno-id';
+import type { SynoRef } from '../../../../types/syntactic/syno-ref';
+import type { SynoId } from '../../../../types/syntactic/syno-id';
 import type { MutablePresnoMap } from '../../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../../types/presenter/present-syno';
 import type { PresnoRef } from '../../../../types/presenter/presno-ref';
@@ -13,8 +13,8 @@ export default (
   presnoMap: MutablePresnoMap,
   parentId: SynoId,
   parameterRefs: SynoRef[],
-  scope: {},
-  focus: Focus | null | undefined,
+  scope: Record<string, unknown>,
+  focus: Focus | null,
   presentSyno: PresentSyno,
 ): PresnoRef[] => {
   return parameterRefs.map(paramRef => {

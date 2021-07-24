@@ -1,13 +1,20 @@
-/*
-  no flow because there's no types for rxjs in flow-typed that the current version of flow digests,
-  let alone ones for an updated version of rxjs
-*/
-import { filter, map } from 'rxjs';
-import type { ReduxAction } from '../../types/redux-action';
-import { InterpretationResolutionSuccess } from '../../types/interpreter/interpretation-resolution-success';
+import { Observable, filter, map } from 'rxjs';
 
-export default (action$, state$, state, integration) => action$.pipe(
-  filter((action: ReduxAction) => {
+import type { Action } from 'redux';
+import type { StateObservable } from 'redux-observable';
+
+import type { EditorState } from '../../types/editor-state';
+import type { StateSelector } from '../../types/state-selector';
+import type { LanguageIntegration } from '../../types/language-integration';
+import type { InterpretationResolutionSuccess } from '../../types/interpreter/interpretation-resolution-success';
+
+export default (
+  action$: Observable<Action>,
+  state$: StateObservable<EditorState>,
+  state: StateSelector,
+  integration: LanguageIntegration,
+) => action$.pipe(
+  filter((action: Action) => {
     if (action.type !== 'START_INTERPRETATION') {
       return false;
     }

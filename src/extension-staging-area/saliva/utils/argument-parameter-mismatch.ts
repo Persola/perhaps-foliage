@@ -1,5 +1,5 @@
 import type { StateSelector } from '../../../types/state-selector';
-import type { SynoRef } from '../../../types/syno-ref';
+import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { Argument } from '../types/synos/argument';
 
@@ -14,14 +14,14 @@ export default (
   if (argsWithoutParams.length > 0) {
     return (
       `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-      + `arguments (IDs ${argsWithoutParams.map(arg => arg.id).join(', ')}) `
-      + 'lack parameters'
+   + `arguments (IDs ${argsWithoutParams.map(arg => arg.id).join(', ')}) `
+   + 'lack parameters'
     );
   }
 
   const argumentsWithSameParams = argumentz.filter(
     (
-      arg: Argument, // $FlowIssue: poorly typed ECMA built-in (filter) (or array length logic?)
+      arg: Argument,
     ) => argumentz.filter(otherArg => arg.parameter.id === otherArg.parameter.id)
       .length > 1,
   );
@@ -29,19 +29,19 @@ export default (
   if (argumentsWithSameParams.length > 0) {
     return (
       `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-      + `arguments (IDs ${argumentsWithSameParams
-        .map(arg => arg.id)
-        .join(', ')}) `
-      + 'refer to same parameter(s) ' // $FlowIssue: poorly typed ECMA built-in (filter) (or array length logic?)
-      + `(ID(s) ${[
-        ...new Set(argumentsWithSameParams.map(arg => arg.parameter.id)),
-      ].join(', ')})`
+   + `arguments (IDs ${argumentsWithSameParams
+     .map(arg => arg.id)
+     .join(', ')}) `
+   + 'refer to same parameter(s) '
+   + `(ID(s) ${[
+     ...new Set(argumentsWithSameParams.map(arg => arg.parameter.id)),
+   ].join(', ')})`
     );
   }
 
   const paramIdsRefdByArgs = argumentz
     .map(arg => arg.parameter)
-    .filter(x => x) // $FlowIssue: poorly typed ECMA built-in (filter) (or array length logic?)
+    .filter(x => x)
     .map(paramAttrs => paramAttrs.id);
   const unsatisfiedParamRefs = functionDefinition.parameters.filter(
     (paramRef: SynoRef) => !paramIdsRefdByArgs.includes(paramRef.id),
@@ -59,7 +59,7 @@ export default (
 
   if (unsatisfiedParamRefs.length !== 0 || extraArgs.length !== 0) {
     let errorMessage = `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-      + "arguments don't match callee parameters ";
+   + "arguments don't match callee parameters ";
 
     if (unsatisfiedParamNames.length !== 0) {
       errorMessage += `(unsatisfied parameters ${unsatisfiedParamNames.join(

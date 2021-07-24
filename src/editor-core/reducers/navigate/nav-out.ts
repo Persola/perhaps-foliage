@@ -17,6 +17,5 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
     return;
   }
 
-  // $FlowFixMe: Flow doesn't look into selector interface
   draftFocus.synoId = state.focusedSyno().parent.id;
 };

@@ -1,10 +1,9 @@
-import type { Argument } from '../types/synos/argument';
-import type { BooleanLiteral } from '../types/synos/boolean-literal';
-import type { SynoRef } from '../../../types/syno-ref';
+import type { Scope } from '../types/interpreter/scope';
+import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { LiteralValue } from '../types/synos/literal-value';
 
 export default (
-  parentScope: [Argument, BooleanLiteral][],
+  parentScope: Scope,
   ref: SynoRef,
 ): LiteralValue => {
   const matchingParamRes = parentScope.find(

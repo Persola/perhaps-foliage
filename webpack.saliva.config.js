@@ -1,6 +1,6 @@
-const path = require('path');
+const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line
 
 module.exports = {
   mode: 'none',
@@ -43,7 +43,7 @@ module.exports = {
   plugins: [
     new NodePolyfillPlugin(),
   ],
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
   target: 'browserslist',
   output: {
     path: path.resolve(__dirname, 'src/extension-staging-area/saliva/dist'),

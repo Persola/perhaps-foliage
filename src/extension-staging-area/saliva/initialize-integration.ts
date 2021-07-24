@@ -5,6 +5,7 @@ import interpret from './interpreter/interpret';
 import presenters from './presenters/presenters';
 import createRenderers from './renderers/create-renderers';
 import styles from './stylesheet.lazy.css';
+
 import type { IntegrationDependencies } from '../../types/language-integration/integration-dependencies';
 import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
 

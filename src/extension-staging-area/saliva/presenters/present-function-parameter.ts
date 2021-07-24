@@ -1,4 +1,5 @@
 import focuses from './helpers/focuses';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { Focus } from '../../../types/editor-state/focus';
@@ -11,8 +12,8 @@ export default (
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   parameter: FunctionParameter,
-  scope: {},
-  focus: Focus | null | undefined,
+  scope: Record<string, unknown>,
+  focus: Focus | null,
 ): FunctionParameterPresAttrs => {
   const { focused, presnoFocused, charFocused } = focuses(focus, parameter.id);
   return {

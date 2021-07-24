@@ -1,7 +1,7 @@
-import type { SynoRef } from '../../../../../types/syno-ref';
+import type { SynoRef } from '../../../../../types/syntactic/syno-ref';
 
 export type FunctionCallAttrs = {
   syntype: 'functionCall';
-  callee: SynoRef | null | undefined;
+  callee: SynoRef | null;
   argumentz: SynoRef[];
 };

@@ -2,15 +2,17 @@ import primitives from '../primitives.yml';
 import focuses from './helpers/focuses';
 import presentArguments from './present-function-call/present-arguments';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { PresentLanguageIntegration } from '../../../types/language-integration/present-language-integration';
-import type { Syno } from '../../../types/syno';
+import type { Syno } from '../../../types/syntactic/syno';
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
+import type { Argument } from '../types/synos/argument';
 import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs';
 
 const primitiveIds = Object.keys(primitives);
@@ -19,7 +21,7 @@ export default (
   integration: PresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   funkshunCall: FunctionCall,
-  scope: {},
+  scope: Record<string, unknown>,
   focus: Focus | null | undefined,
   presentSyno: PresentSyno,
 ): FunctionCallPresAttrs => {
@@ -34,10 +36,9 @@ export default (
     const calleeSyno: Syno = state.getSyno(funkshunCall.callee.id);
 
     if (calleeSyno.syntype === 'functionDefinition') {
-      const calleeFuncDef: FunctionDefinition = calleeSyno;
+      const calleeFuncDef = calleeSyno as FunctionDefinition;
       resolved = true;
 
-      // $FlowIssue: Flow doesn't recognize that callee is immutable?
       if (primitiveIds.includes(funkshunCall.callee.id)) {
         name = calleeFuncDef.name;
       }
@@ -52,7 +53,7 @@ export default (
               throw new Error('wrong type from synomap (flow)');
             }
 
-            return arg;
+            return (arg as Argument);
           }),
           state,
         )
@@ -60,7 +61,6 @@ export default (
         valid = false;
       }
 
-      // $FlowIssue: Flow doesn't respect ReadOnly<>?
       if (funkshunCall.callee.relation === 'child') {
         callee = {
           presnoRef: true,
@@ -82,9 +82,9 @@ export default (
         "Function never did have they ever had a been having them a variableRef 'afore.",
       ); // resolved = Object.keys(scope).includes(callee.referent.id);
       // if (resolved) {
-      //   name = getSyno(callee.referent.id).name
+      //  name = getSyno(callee.referent.id).name
       // } else {
-      //   name = '(!)'
+      //  name = '(!)'
       // }
     } else {
       throw new Error('new type?');

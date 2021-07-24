@@ -1,12 +1,12 @@
 import type { EditorState } from './editor-state';
 import type { Grammar } from './editor-state/grammar';
-import type { SynoMap } from './syno-map';
+import type { SynoMap } from './syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
 import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
 import type { Focus } from './editor-state/focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
-import type { Syno } from './syno';
-import type { SynoId } from './syno-id';
+import type { Syno } from './syntactic/syno';
+import type { SynoId } from './syntactic/syno-id';
 
 export type StateSelector = {
   // state
@@ -36,7 +36,7 @@ export type StateSelector = {
   // synos
   getSyno: (synoId: SynoId) => Syno;
   focusedSyno: () => Syno;
-  isPrimitive: (arg0: SynoId) => boolean;
+  isPrimitive: (synoId: SynoId) => boolean;
   // focus
   inPresno: () => boolean;
   inText: () => boolean;

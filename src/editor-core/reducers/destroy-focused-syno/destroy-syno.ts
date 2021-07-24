@@ -1,8 +1,9 @@
 import getDraftSyno from '../draft-utils/get-draft-syno';
+
 import type { StateSelector } from '../../../types/state-selector';
 import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { MutableSynoMap } from '../../../types/mutable-syno-map';
+import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 
 export default (
   state: StateSelector,
@@ -17,7 +18,7 @@ export default (
     return;
   }
 
-  const draftSynoMap: MutableSynoMap = draftState.synoMap as any;
+  const draftSynoMap: MutableSynoMap = draftState.synoMap;
 
   if (state.focusedSynoIsRoot()) {
     console.warn('ignoring attempted deletion of root syno');
@@ -27,7 +28,6 @@ export default (
   delete draftSynoMap[focusedPresnoId]; // cannot be primitive
 
   const parentRef = state.getSyno(focusedPresnoId).parent;
-  // $FlowFixMe: Flow doesn't look into selector interface
   const referrerIds = new Set([
     parentRef.id,
     ...state.inverseReferenceMap()[focusedPresnoId],
@@ -37,14 +37,14 @@ export default (
     const newExReferrer = getDraftSyno(referrerId, state, draftState); // could be primitive
 
     Object.entries(oldReferrer).forEach(([key, attrVal]) => {
-      // $FlowIssue: poorly typed ECMA built-in (Object.entries)
+      // @ts-ignore: hm, how do we test otherwise? could type syno attrs as not being null, etc.
       if (attrVal.synoRef && attrVal.id === focusedPresnoId) {
-        newExReferrer[key] = false;
+        newExReferrer[key] = null;
       } else if (attrVal instanceof Array) {
         // nested children
         attrVal.forEach((el, ind) => {
           if (el.synoRef && el.id === focusedPresnoId) {
-            newExReferrer[key].splice(ind, 1);
+            attrVal.splice(ind, 1);
           }
         });
       }

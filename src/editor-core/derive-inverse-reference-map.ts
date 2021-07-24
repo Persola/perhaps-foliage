@@ -1,5 +1,6 @@
-import type { SynoId } from '../types/syno-id';
-import type { SynoMap } from '../types/syno-map';
+import type { SynoId } from '../types/syntactic/syno-id';
+import type { SynoMap } from '../types/syntactic/syno-map';
+import type { SynoRef } from '../types/syntactic/syno-ref';
 import type { MutableInverseReferenceMap } from '../types/editor-state/mutable/mutable-inverse-reference-map';
 
 const createOrAdd = (
@@ -18,15 +19,12 @@ const depthFirstBuildInverseReferences = (
 ) => {
   const currentSyno = synoMap[currentId];
   Object.values(currentSyno).forEach(attrVal => {
-    // $FlowIssue: poorly typed ECMA built-in (Object.entries)
+    // @ts-ignore: hm, how do we test otherwise? could type syno attrs as not being null, etc.
     if (attrVal.synoRef === true) {
-      // $FlowIssue: poorly typed ECMA built-in (Object.entries)
-      createOrAdd(irm, attrVal.id, currentSyno.id);
+      createOrAdd(irm, (attrVal as SynoRef).id, currentSyno.id);
 
-      // $FlowIssue: poorly typed ECMA built-in (Object.entries)
-      if (attrVal.relation === 'child') {
-        // $FlowIssue: poorly typed ECMA built-in (Object.entries)
-        depthFirstBuildInverseReferences(irm, synoMap, attrVal.id);
+      if ((attrVal as SynoRef).relation === 'child') {
+        depthFirstBuildInverseReferences(irm, synoMap, (attrVal as SynoRef).id);
       }
     } else if (attrVal instanceof Array) {
       // nested children

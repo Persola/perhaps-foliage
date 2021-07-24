@@ -1,11 +1,11 @@
 import * as React from 'react';
 import type { PresentLanguageIntegration } from '../language-integration/present-language-integration';
-import type { SynoId } from '../syno-id';
-import type { Presno } from '../presenter/presno';
+import type { SynoId } from '../syntactic/syno-id';
+import type { GetPresno } from './get-presno';
 
 export type SynoRendererProps = {
   readonly integration: PresentLanguageIntegration;
-  readonly getPresno: (arg0: SynoId) => Presno;
+  readonly getPresno: GetPresno;
   readonly synoId: SynoId;
-  readonly SynoRenderer: (props: SynoRendererProps) => React.ReactNode;
+  readonly SynoRenderer: (props: SynoRendererProps) => React.ReactElement;
 };

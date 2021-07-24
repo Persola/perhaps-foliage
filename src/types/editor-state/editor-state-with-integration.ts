@@ -1,4 +1,4 @@
-import type { SynoMap } from '../syno-map';
+import type { SynoMap } from '../syntactic/syno-map';
 import type { InverseReferenceMap } from './inverse-reference-map';
 import type { KeyToNewSynoAttrs } from '../language-integration/key-to-new-syno-attrs';
 import type { Grammar } from './grammar';
@@ -10,7 +10,7 @@ export type EditorStateWithIntegration = {
   readonly grammar: Grammar;
   readonly primitives: SynoMap;
   readonly keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  readonly lastIntegrationBindings: string[] | null | undefined;
+  readonly lastIntegrationBindings: string[] | null;
   readonly synoMap: SynoMap;
   readonly resultTree: SynoMap;
   readonly inverseReferenceMap: InverseReferenceMap;

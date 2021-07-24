@@ -1,7 +1,11 @@
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { ArgumentRendererProps } from '../types/renderers/argument-props';
 
-export default (integrationDependencies: IntegrationDependencies) => {
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: ArgumentRendererProps) => JSX.Element
+) => {
   const {
     React,
     components: { NamePart },
@@ -36,18 +40,18 @@ export default (integrationDependencies: IntegrationDependencies) => {
         'data-syno-id': synoId,
       },
       name
-        && React.createElement(NamePart, {
-          namePart: name,
-          focused: presnoFocused === 0,
-          charFocused,
-        }),
+    && React.createElement(NamePart, {
+      namePart: name,
+      focused: presnoFocused === 0,
+      charFocused,
+    }),
       value
-        && React.createElement(SynoRenderer, {
-          integration,
-          getPresno,
-          synoId: value.id,
-          SynoRenderer,
-        }),
+    && React.createElement(SynoRenderer, {
+      integration,
+      getPresno,
+      synoId: value.id,
+      SynoRenderer,
+    }),
     );
   };
 };

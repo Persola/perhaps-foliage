@@ -3,7 +3,7 @@ export type EditorStateWithoutIntegration = {
   readonly grammar: null;
   readonly primitives: null;
   readonly keyToNewSynoAttrs: null;
-  readonly lastIntegrationBindings: string[] | null | undefined;
+  readonly lastIntegrationBindings: string[] | null;
   readonly synoMap: null;
   readonly resultTree: null;
   readonly inverseReferenceMap: null;
