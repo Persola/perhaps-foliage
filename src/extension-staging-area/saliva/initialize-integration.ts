@@ -7,15 +7,17 @@ import createRenderers from "./renderers/create-renderers";
 import styles from "./stylesheet.lazy.css";
 import type { IntegrationDependencies } from "../../types/language-integration/integration-dependencies";
 import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
-export default ((integrationDependencies: IntegrationDependencies): PresentLanguageIntegration => {
+export default (
+  integrationDependencies: IntegrationDependencies
+): PresentLanguageIntegration => {
   return {
-    id: 'saliva.saliva-repl-alpha.0.0.1',
+    id: "saliva.saliva-repl-alpha.0.0.1",
     grammar,
     primitives,
     keyToNewSynoAttrs,
     interpret,
     presenters,
     renderers: createRenderers(integrationDependencies),
-    styles
+    styles,
   };
-});
+};

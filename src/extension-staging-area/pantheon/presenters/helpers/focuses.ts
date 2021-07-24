@@ -1,6 +1,9 @@
 import type { Focus } from "../../../../types/editor-state/focus";
 import type { SynoId } from "../../../../types/syno-id";
-export default ((focus: Focus | null | undefined, synoId: SynoId): {
+export default (
+  focus: Focus | null | undefined,
+  synoId: SynoId
+): {
   focused: boolean;
   presnoFocused: number | null | undefined;
   charFocused: number | null | undefined;
@@ -22,6 +25,6 @@ export default ((focus: Focus | null | undefined, synoId: SynoId): {
   return {
     focused,
     presnoFocused,
-    charFocused
+    charFocused,
   };
-});
+};

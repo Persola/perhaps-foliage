@@ -11,12 +11,10 @@ type Props = {
   presno: OlympianPres;
   SynoRenderer: (props: SynoRendererProps) => any;
 };
-export default ((integrationDependencies: IntegrationDependencies): any => {
+export default (integrationDependencies: IntegrationDependencies): any => {
   const {
     React,
-    components: {
-      NamePart
-    }
+    components: { NamePart },
   } = integrationDependencies;
   return (props: Props) => {
     const {
@@ -30,22 +28,36 @@ export default ((integrationDependencies: IntegrationDependencies): any => {
         charFocused,
         valid,
         child,
-        synoId
-      }
+        synoId,
+      },
     } = props;
-    const classes = ['syno', 'same-line', 'bubble-even', 'olympian', focused ? 'focused' : 'unfocused', valid ? '' : 'invalid'].join(' ');
-    return React.createElement('div', {
-      className: classes,
-      'data-syno-id': synoId
-    }, name && React.createElement(NamePart, {
-      namePart: name,
-      focused: presnoFocused === 0,
-      charFocused
-    }), child && React.createElement(SynoRenderer, {
-      integration,
-      getPresno,
-      synoId: child.id,
-      SynoRenderer
-    }));
+    const classes = [
+      "syno",
+      "same-line",
+      "bubble-even",
+      "olympian",
+      focused ? "focused" : "unfocused",
+      valid ? "" : "invalid",
+    ].join(" ");
+    return React.createElement(
+      "div",
+      {
+        className: classes,
+        "data-syno-id": synoId,
+      },
+      name &&
+        React.createElement(NamePart, {
+          namePart: name,
+          focused: presnoFocused === 0,
+          charFocused,
+        }),
+      child &&
+        React.createElement(SynoRenderer, {
+          integration,
+          getPresno,
+          synoId: child.id,
+          SynoRenderer,
+        })
+    );
   };
-});
+};

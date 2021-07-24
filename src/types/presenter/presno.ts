@@ -4,4 +4,10 @@ import type { FunctionDefPres } from "../../extension-staging-area/saliva/types/
 import type { FunctionParameterPres } from "../../extension-staging-area/saliva/types/presentations/function-parameter";
 import type { ArgumentPres } from "../../extension-staging-area/saliva/types/presentations/argument";
 import type { VariableRefPres } from "../../extension-staging-area/saliva/types/presentations/variable-ref";
-export type Presno = BooleanLiteralPres | FunctionCallPres | FunctionDefPres | FunctionParameterPres | ArgumentPres | VariableRefPres;
+export type Presno =
+  | BooleanLiteralPres
+  | FunctionCallPres
+  | FunctionDefPres
+  | FunctionParameterPres
+  | ArgumentPres
+  | VariableRefPres;

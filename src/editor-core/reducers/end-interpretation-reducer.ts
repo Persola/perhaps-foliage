@@ -3,28 +3,32 @@ import type { StateSelector } from "../../types/state-selector";
 import type { EndInterpretation } from "../../types/actions/end-interpretation";
 import type { MutableEditorState } from "../../types/mutable-editor-state";
 import type { MutableSyno } from "../../types/mutable-syno";
-export default ((state: StateSelector, action: EndInterpretation, draftState: MutableEditorState): void => {
+export default (
+  state: StateSelector,
+  action: EndInterpretation,
+  draftState: MutableEditorState
+): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring END_INTERPRETATION action: no integration loaded');
+    console.warn("Ignoring END_INTERPRETATION action: no integration loaded");
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring END_INTERPRETATION action: no tree loaded');
+    console.warn("Ignoring END_INTERPRETATION action: no tree loaded");
     return;
   }
 
   if (!state.interpreting()) {
-    throw new Error('Attempted to stop interpreting while not interpreting');
+    throw new Error("Attempted to stop interpreting while not interpreting");
   }
 
   const result: MutableSyno = dup(action.result);
   Object.assign(draftState, {
     resultTree: {
-      [result.id]: result
+      [result.id]: result,
     },
     resultSyntreeRootId: action.result.id,
     interpreting: false,
-    resultOutdated: false
+    resultOutdated: false,
   });
-});
+};

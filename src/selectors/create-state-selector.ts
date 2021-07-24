@@ -1,7 +1,7 @@
 import type { StateSelector } from "../types/state-selector";
 import type { EditorState } from "../types/editor-state";
 import type { Syno } from "../types/syno";
-export default ((initialEditorState: EditorState): StateSelector => {
+export default (initialEditorState: EditorState): StateSelector => {
   /*
     The state selector is way most of the app accesses state. Its data should not be modified
     anywhere except in app.js, which keeps it in sync on state update
@@ -103,8 +103,7 @@ export default ((initialEditorState: EditorState): StateSelector => {
     },
     focusedSynoIsRoot: function focusedSynoIsRoot() {
       return !this.focusedSyno().parent;
-    }
+    },
   };
-  return { ...languageNeutralSelectors
-  };
-});
+  return { ...languageNeutralSelectors };
+};

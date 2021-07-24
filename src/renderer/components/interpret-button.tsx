@@ -5,22 +5,22 @@ type Props = {
   interpreting: boolean;
 };
 
-const dispatchStartInterpretation = editorStateStore => {
+const dispatchStartInterpretation = (editorStateStore) => {
   editorStateStore.dispatch({
-    type: 'START_INTERPRETATION'
+    type: "START_INTERPRETATION",
   });
 };
 
-export default ((props: Props) => {
-  const {
-    editorStateStore,
-    interpreting
-  } = props;
-  const className = interpreting ? 'interpreting' : '';
+export default (props: Props) => {
+  const { editorStateStore, interpreting } = props;
+  const className = interpreting ? "interpreting" : "";
 
-  const startInterpretation = () => dispatchStartInterpretation(editorStateStore);
+  const startInterpretation = () =>
+    dispatchStartInterpretation(editorStateStore);
 
-  return <button onClick={startInterpretation} className={className} type="submit">
+  return (
+    <button onClick={startInterpretation} className={className} type="submit">
       interpret
-    </button>;
-});
+    </button>
+  );
+};

@@ -10,5 +10,5 @@ export default {
   functionDefinition: presentFunctionDefinition,
   functionParameter: presentFunctionParameter,
   argument: presentArgument,
-  variableRef: presentVariableRef
+  variableRef: presentVariableRef,
 };

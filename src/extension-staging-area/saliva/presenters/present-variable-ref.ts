@@ -5,7 +5,14 @@ import type { Focus } from "../../../types/editor-state/focus";
 import type { PresentLanguageIntegration } from "../../../types/language-integration/present-language-integration";
 import type { VariableRef } from "../types/synos/variable-ref";
 import type { VariableRefPresAttrs } from "../types/presentations/presno-attrs/variable-ref-attrs";
-export default ((state: StateSelector, integration: PresentLanguageIntegration, presnoMap: MutablePresnoMap, variableRef: VariableRef, scope: {}, focus: Focus | null | undefined): VariableRefPresAttrs => {
+export default (
+  state: StateSelector,
+  integration: PresentLanguageIntegration,
+  presnoMap: MutablePresnoMap,
+  variableRef: VariableRef,
+  scope: {},
+  focus: Focus | null | undefined
+): VariableRefPresAttrs => {
   let valid = true;
   let name: string | null | undefined = null;
 
@@ -13,22 +20,21 @@ export default ((state: StateSelector, integration: PresentLanguageIntegration, 
     valid = false;
   } else {
     const vr = state.getSyno(variableRef.referent.id);
-    if (vr.syntype !== 'functionParameter') throw new Error();
+    if (vr.syntype !== "functionParameter") throw new Error();
     name = vr.name;
   }
 
-  const {
-    focused,
-    presnoFocused,
-    charFocused
-  } = focuses(focus, variableRef.id);
+  const { focused, presnoFocused, charFocused } = focuses(
+    focus,
+    variableRef.id
+  );
   return {
-    syntype: 'variableRef',
-    valueSyntype: 'booleanLiteral',
+    syntype: "variableRef",
+    valueSyntype: "booleanLiteral",
     name,
     focused,
     presnoFocused,
     charFocused,
-    valid
+    valid,
   };
-});
+};

@@ -13,7 +13,15 @@ import type { FunctionCall } from "../types/synos/function-call";
 import type { FunctionDefinition } from "../types/synos/function-definition";
 import type { FunctionCallPresAttrs } from "../types/presentations/presno-attrs/function-call-attrs";
 const primitiveIds = Object.keys(primitives);
-export default ((state: StateSelector, integration: PresentLanguageIntegration, presnoMap: MutablePresnoMap, funkshunCall: FunctionCall, scope: {}, focus: Focus | null | undefined, presentSyno: PresentSyno): FunctionCallPresAttrs => {
+export default (
+  state: StateSelector,
+  integration: PresentLanguageIntegration,
+  presnoMap: MutablePresnoMap,
+  funkshunCall: FunctionCall,
+  scope: {},
+  focus: Focus | null | undefined,
+  presentSyno: PresentSyno
+): FunctionCallPresAttrs => {
   let valid = true;
   let name: string | null | undefined = null;
   let callee: PresnoRef | null | undefined = null;
@@ -24,7 +32,7 @@ export default ((state: StateSelector, integration: PresentLanguageIntegration, 
   } else {
     const calleeSyno: Syno = state.getSyno(funkshunCall.callee.id);
 
-    if (calleeSyno.syntype === 'functionDefinition') {
+    if (calleeSyno.syntype === "functionDefinition") {
       const calleeFuncDef: FunctionDefinition = calleeSyno;
       resolved = true;
 
@@ -33,52 +41,77 @@ export default ((state: StateSelector, integration: PresentLanguageIntegration, 
         name = calleeFuncDef.name;
       }
 
-      if (argumentParameterMismatch(calleeFuncDef, funkshunCall.argumentz.map(argRef => {
-        const arg = state.getSyno(argRef.id);
+      if (
+        argumentParameterMismatch(
+          calleeFuncDef,
+          funkshunCall.argumentz.map((argRef) => {
+            const arg = state.getSyno(argRef.id);
 
-        if (arg.syntype !== 'argument') {
-          throw new Error('wrong type from synomap (flow)');
-        }
+            if (arg.syntype !== "argument") {
+              throw new Error("wrong type from synomap (flow)");
+            }
 
-        return arg;
-      }), state)) {
+            return arg;
+          }),
+          state
+        )
+      ) {
         valid = false;
       }
 
       // $FlowIssue: Flow doesn't respect ReadOnly<>?
-      if (funkshunCall.callee.relation === 'child') {
+      if (funkshunCall.callee.relation === "child") {
         callee = {
           presnoRef: true,
-          id: presentSyno(state, integration, presnoMap, funkshunCall.id, calleeFuncDef, scope, focus, presentSyno)
+          id: presentSyno(
+            state,
+            integration,
+            presnoMap,
+            funkshunCall.id,
+            calleeFuncDef,
+            scope,
+            focus,
+            presentSyno
+          ),
         };
       }
-    } else if (calleeSyno.syntype === 'variableRef') {
+    } else if (calleeSyno.syntype === "variableRef") {
       // Never Been Run (1999)
-      throw new Error("Function never did have they ever had a been having them a variableRef 'afore."); // resolved = Object.keys(scope).includes(callee.referent.id);
+      throw new Error(
+        "Function never did have they ever had a been having them a variableRef 'afore."
+      ); // resolved = Object.keys(scope).includes(callee.referent.id);
       // if (resolved) {
       //   name = getSyno(callee.referent.id).name
       // } else {
       //   name = '(!)'
       // }
     } else {
-      throw new Error('new type?');
+      throw new Error("new type?");
     }
   }
 
-  const {
-    focused,
-    presnoFocused,
-    charFocused
-  } = focuses(focus, funkshunCall.id);
+  const { focused, presnoFocused, charFocused } = focuses(
+    focus,
+    funkshunCall.id
+  );
   return {
-    syntype: 'functionCall',
+    syntype: "functionCall",
     name,
-    argumentz: presentArguments(state, integration, presnoMap, funkshunCall.id, funkshunCall.argumentz, scope, focus, presentSyno),
+    argumentz: presentArguments(
+      state,
+      integration,
+      presnoMap,
+      funkshunCall.id,
+      funkshunCall.argumentz,
+      scope,
+      focus,
+      presentSyno
+    ),
     callee,
     resolved,
     focused,
     presnoFocused,
     charFocused,
-    valid
+    valid,
   };
-});
+};

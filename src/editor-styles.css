@@ -18,7 +18,6 @@ a {
   color: #05f;
 }
 
-
 button {
   outline: none;
   border: none;
@@ -30,31 +29,25 @@ button {
   font-family: "Helvetica", Arial, sans-serif;
 }
 
-
 button:hover {
   background-color: #755;
 }
-
 
 button:active {
   background-color: var(--interpreting);
 }
 
-
 button.interpreting {
   background-color: var(--interpreting);
 }
-
 
 ::selection {
   background-color: #c88;
 }
 
-
 .editor {
   padding: 2px 0;
 }
-
 
 .code-view {
   position: relative;
@@ -63,7 +56,7 @@ button.interpreting {
   background-color: var(--stage-background);
   color: var(--near-white);
   padding: 12px;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   cursor: default;
 }
 
@@ -103,7 +96,13 @@ button.interpreting {
 }
 
 .code-view .invalid {
-  background: repeating-linear-gradient(45deg, #a11, #a11 3px, var(--stage-background) 3px, var(--stage-background) 6px);
+  background: repeating-linear-gradient(
+    45deg,
+    #a11,
+    #a11 3px,
+    var(--stage-background) 3px,
+    var(--stage-background) 6px
+  );
   color: #ddd;
 }
 

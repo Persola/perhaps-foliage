@@ -4,21 +4,23 @@ import type { Syno } from "../../../types/syno";
 import type { StateSelector } from "../../../types/state-selector";
 import type { SynoRef } from "../../../types/syno-ref";
 
-const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [{
-  synoRef: false,
-  parent: {
-    synoRef: true,
-    id: syno.id,
-    relation: 'parent'
+const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
+  {
+    synoRef: false,
+    parent: {
+      synoRef: true,
+      id: syno.id,
+      relation: "parent",
+    },
+    index: 0, // once names are divided into parts, need to find all of them
   },
-  index: 0 // once names are divided into parts, need to find all of them
+];
 
-}];
-
-export default ((syno: Syno, state: StateSelector): ReadonlyArray<ChildPresnoRef> => {
-  const {
-    textHostRef
-  } = state.grammar()[syno.syntype];
+export default (
+  syno: Syno,
+  state: StateSelector
+): ReadonlyArray<ChildPresnoRef> => {
+  const { textHostRef } = state.grammar()[syno.syntype];
   let nameFocusable;
 
   if (!textHostRef) {
@@ -38,7 +40,11 @@ export default ((syno: Syno, state: StateSelector): ReadonlyArray<ChildPresnoRef
     namePresnos = [];
   }
 
-  const childSynoRefs: ReadonlyArray<ChildPresnoRef> = (childSynos(syno) as SynoRef[]);
-  return [...namePresnos, // put all name parts first (for now)
-  ...childSynoRefs];
-});
+  const childSynoRefs: ReadonlyArray<ChildPresnoRef> = childSynos(
+    syno
+  ) as SynoRef[];
+  return [
+    ...namePresnos, // put all name parts first (for now)
+    ...childSynoRefs,
+  ];
+};

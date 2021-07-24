@@ -4,4 +4,10 @@ import type { FunctionDefinition } from "../extension-staging-area/saliva/types/
 import type { FunctionParameter } from "../extension-staging-area/saliva/types/synos/function-parameter";
 import type { Argument } from "../extension-staging-area/saliva/types/synos/argument";
 import type { VariableRef } from "../extension-staging-area/saliva/types/synos/variable-ref";
-export type Syno = BooleanLiteral | FunctionCall | FunctionDefinition | FunctionParameter | Argument | VariableRef;
+export type Syno =
+  | BooleanLiteral
+  | FunctionCall
+  | FunctionDefinition
+  | FunctionParameter
+  | Argument
+  | VariableRef;

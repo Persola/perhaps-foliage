@@ -5,7 +5,16 @@ import type { SynoId } from "../../types/syno-id";
 import type { Prestree } from "../../types/presenter/prestree";
 import type { Focus } from "../../types/editor-state/focus";
 import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
-export default ((state: StateSelector, integration: PresentLanguageIntegration, focusedPresnoId: SynoId, scope: {}, focus: Focus | null | undefined): Prestree => {
-  const renderingRootId: SynoId = ascendToRoot(focusedPresnoId, state.synoMap()).id;
+export default (
+  state: StateSelector,
+  integration: PresentLanguageIntegration,
+  focusedPresnoId: SynoId,
+  scope: {},
+  focus: Focus | null | undefined
+): Prestree => {
+  const renderingRootId: SynoId = ascendToRoot(
+    focusedPresnoId,
+    state.synoMap()
+  ).id;
   return presentSyntree(state, integration, renderingRootId, scope, focus);
-});
+};

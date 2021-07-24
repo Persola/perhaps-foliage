@@ -6,50 +6,47 @@ import type { MutableEditorState } from "../../types/mutable-editor-state";
 import type { Navigate } from "../../types/actions/navigate";
 import type { StateSelector } from "../../types/state-selector";
 import type { MutableFocus } from "../../types/editor-state/mutable/mutable-focus";
-export default ((state: StateSelector, action: Navigate, draftState: MutableEditorState): void => {
+export default (
+  state: StateSelector,
+  action: Navigate,
+  draftState: MutableEditorState
+): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring NAVIGATE action: no integration loaded');
+    console.warn("Ignoring NAVIGATE action: no integration loaded");
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring NAVIGATE action: no tree loaded');
+    console.warn("Ignoring NAVIGATE action: no tree loaded");
     return;
   }
 
-  const focus = ((draftState.focus as any) as MutableFocus);
-  const {
-    direction
-  } = action;
+  const focus = draftState.focus as any as MutableFocus;
+  const { direction } = action;
 
   switch (direction) {
-    case 'out':
-      {
-        navOut(state, focus);
-        break;
-      }
+    case "out": {
+      navOut(state, focus);
+      break;
+    }
 
-    case 'in':
-      {
-        navIn(state, focus);
-        break;
-      }
+    case "in": {
+      navIn(state, focus);
+      break;
+    }
 
-    case 'prev':
-      {
-        navPrev(state, focus);
-        break;
-      }
+    case "prev": {
+      navPrev(state, focus);
+      break;
+    }
 
-    case 'next':
-      {
-        navNext(state, focus);
-        break;
-      }
+    case "next": {
+      navNext(state, focus);
+      break;
+    }
 
-    default:
-      {
-        throw new Error('unrecognized navigation direction');
-      }
+    default: {
+      throw new Error("unrecognized navigation direction");
+    }
   }
-});
+};

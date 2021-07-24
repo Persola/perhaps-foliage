@@ -1,33 +1,31 @@
-'salivaPrimitives-nor':
-  id: 'salivaPrimitives-nor'
+"salivaPrimitives-nor":
+  id: "salivaPrimitives-nor"
   parent: false
   syntype: functionDefinition
   name: NOR
   parameters:
-    -
-      synoRef: true
+    - synoRef: true
       relation: child
-      id: 'salivaPrimitives-nor-param-1'
-    -
-      synoRef: true
+      id: "salivaPrimitives-nor-param-1"
+    - synoRef: true
       relation: child
-      id: 'salivaPrimitives-nor-param-2'
+      id: "salivaPrimitives-nor-param-2"
   body: false
-'salivaPrimitives-nor-param-1':
-  id: 'salivaPrimitives-nor-param-1'
+"salivaPrimitives-nor-param-1":
+  id: "salivaPrimitives-nor-param-1"
   parent:
     synoRef: true
     relation: parent
     id: salivaPrimitives-nor
   syntype: functionParameter
-  name: '1'
+  name: "1"
   valueSyntype: booleanLiteral
-'salivaPrimitives-nor-param-2':
-  id: 'salivaPrimitives-nor-param-2'
+"salivaPrimitives-nor-param-2":
+  id: "salivaPrimitives-nor-param-2"
   parent:
     synoRef: true
     relation: parent
-    id: 'salivaPrimitives-nor'
+    id: "salivaPrimitives-nor"
   syntype: functionParameter
-  name: '2'
+  name: "2"
   valueSyntype: booleanLiteral

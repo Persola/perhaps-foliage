@@ -7,15 +7,23 @@ import type { Focus } from "../../../types/editor-state/focus";
 import type { PresentLanguageIntegration } from "../../../types/language-integration/present-language-integration";
 import type { Argument } from "../types/synos/argument";
 import type { ArgumentPresAttrs } from "../types/presentations/presno-attrs/argument-attrs";
-export default ((state: StateSelector, integration: PresentLanguageIntegration, presnoMap: MutablePresnoMap, argument: Argument, scope: {}, focus: Focus | null | undefined, presentSyno: PresentSyno): ArgumentPresAttrs => {
+export default (
+  state: StateSelector,
+  integration: PresentLanguageIntegration,
+  presnoMap: MutablePresnoMap,
+  argument: Argument,
+  scope: {},
+  focus: Focus | null | undefined,
+  presentSyno: PresentSyno
+): ArgumentPresAttrs => {
   let valid = true;
   let name = null;
 
   if (argument.parameter) {
     const param = state.getSyno(argument.parameter.id);
 
-    if (param.syntype !== 'functionParameter') {
-      throw new Error('wrong type from synomap (flow)');
+    if (param.syntype !== "functionParameter") {
+      throw new Error("wrong type from synomap (flow)");
     }
 
     name = param.name;
@@ -28,24 +36,29 @@ export default ((state: StateSelector, integration: PresentLanguageIntegration, 
   if (argument.value) {
     value = {
       presnoRef: true,
-      id: presentSyno(state, integration, presnoMap, argument.id, state.getSyno(argument.value.id), scope, focus, presentSyno)
+      id: presentSyno(
+        state,
+        integration,
+        presnoMap,
+        argument.id,
+        state.getSyno(argument.value.id),
+        scope,
+        focus,
+        presentSyno
+      ),
     };
   } else {
     valid = false;
   }
 
-  const {
-    focused,
-    presnoFocused,
-    charFocused
-  } = focuses(focus, argument.id);
+  const { focused, presnoFocused, charFocused } = focuses(focus, argument.id);
   return {
-    syntype: 'argument',
+    syntype: "argument",
     name,
     value,
     focused,
     presnoFocused,
     charFocused,
-    valid
+    valid,
   };
-});
+};

@@ -2,12 +2,17 @@ import type { Argument } from "../types/synos/argument";
 import type { BooleanLiteral } from "../types/synos/boolean-literal";
 import type { SynoRef } from "../../../types/syno-ref";
 import type { LiteralValue } from "../types/synos/literal-value";
-export default ((parentScope: [Argument, BooleanLiteral][], ref: SynoRef): LiteralValue => {
-  const matchingParamRes = parentScope.find(paramRes => paramRes[0].id === ref.id);
+export default (
+  parentScope: [Argument, BooleanLiteral][],
+  ref: SynoRef
+): LiteralValue => {
+  const matchingParamRes = parentScope.find(
+    (paramRes) => paramRes[0].id === ref.id
+  );
 
   if (!matchingParamRes) {
-    throw new Error('no matching parameter');
+    throw new Error("no matching parameter");
   }
 
   return matchingParamRes[1];
-});
+};

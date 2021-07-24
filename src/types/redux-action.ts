@@ -11,4 +11,17 @@ import type { StartAsyncSyntreeLoad } from "./actions/start-syntree-load";
 import type { EndAsyncSyntreeLoad } from "./actions/end-syntree-load";
 import type { StartIntegrationLoad } from "./actions/start-integration-load";
 import type { EndIntegrationLoad } from "./actions/end-integration-load";
-export type ReduxAction = Init | OtherInit | ReplaceFocusedSyno | EndInterpretation | Navigate | SetFocusSyno | StartInterpretation | CharBackspace | DestroyFocusedSyno | StartAsyncSyntreeLoad | EndAsyncSyntreeLoad | StartIntegrationLoad | EndIntegrationLoad;
+export type ReduxAction =
+  | Init
+  | OtherInit
+  | ReplaceFocusedSyno
+  | EndInterpretation
+  | Navigate
+  | SetFocusSyno
+  | StartInterpretation
+  | CharBackspace
+  | DestroyFocusedSyno
+  | StartAsyncSyntreeLoad
+  | EndAsyncSyntreeLoad
+  | StartIntegrationLoad
+  | EndIntegrationLoad;

@@ -29,15 +29,21 @@ const integration: AbsentLanguageIntegration = {
   interpret: null,
   presenters: null,
   renderers: null,
-  styles: null
+  styles: null,
 };
-const {
-  editorStateStore,
-  stateSelector
-} = createEditorStateStore(integration);
+const { editorStateStore, stateSelector } = createEditorStateStore(integration);
 const renderer = new Renderer(document);
-const present = createPresent(stateSelector, editorStateStore, renderer, integration);
-const inputResolver = createInputResolver(editorStateStore, stateSelector, integration);
+const present = createPresent(
+  stateSelector,
+  editorStateStore,
+  renderer,
+  integration
+);
+const inputResolver = createInputResolver(
+  editorStateStore,
+  stateSelector,
+  integration
+);
 
 const editorStateSubscription = () => {
   stateSelector.state = editorStateStore.getState();
@@ -46,7 +52,7 @@ const editorStateSubscription = () => {
 };
 
 editorStateStore.subscribe(editorStateSubscription);
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
   bindEditorInputs(editorStateStore, inputResolver);
   editorStateSubscription();
 });

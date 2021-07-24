@@ -4,9 +4,13 @@ import type { MutableSynoMap } from "../../types/mutable-syno-map";
 import type { MutableEditorState } from "../../types/mutable-editor-state";
 import type { EndAsyncSyntreeLoad } from "../../types/actions/end-syntree-load";
 import type { StateSelector } from "../../types/state-selector";
-export default ((state: StateSelector, action: EndAsyncSyntreeLoad, draftState: MutableEditorState): void => {
+export default (
+  state: StateSelector,
+  action: EndAsyncSyntreeLoad,
+  draftState: MutableEditorState
+): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring END_SYNTREE_LOAD action: no integration loaded');
+    console.warn("Ignoring END_SYNTREE_LOAD action: no integration loaded");
     return;
   }
 
@@ -18,11 +22,11 @@ export default ((state: StateSelector, action: EndAsyncSyntreeLoad, draftState: 
     focus: {
       synoId: rootSyno.id,
       presnoIndex: null,
-      charIndex: null
+      charIndex: null,
     },
     resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,
-    loadingSyntree: false
+    loadingSyntree: false,
   });
-});
+};

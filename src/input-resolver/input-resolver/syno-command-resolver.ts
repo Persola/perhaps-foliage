@@ -1,24 +1,28 @@
 import type { StateSelector } from "../../types/state-selector";
 import type { ReduxAction } from "../../types/redux-action";
 import type { LanguageIntegration } from "../../types/language-integration";
-export default ((key: string, state: StateSelector, integration: LanguageIntegration): ReduxAction | null | undefined => {
+export default (
+  key: string,
+  state: StateSelector,
+  integration: LanguageIntegration
+): ReduxAction | null | undefined => {
   if (!integration.keyToNewSynoAttrs) {
     return null;
   }
 
   if (Object.keys(integration.keyToNewSynoAttrs).includes(key)) {
     return {
-      type: 'REPLACE_FOCUSED_SYNO',
-      input: key
+      type: "REPLACE_FOCUSED_SYNO",
+      input: key,
     };
   }
 
-  if (key === 'backspace') {
+  if (key === "backspace") {
     return {
-      type: 'DESTROY_FOCUSED_SYNO',
-      focusedPresnoId: state.focusedSynoId()
+      type: "DESTROY_FOCUSED_SYNO",
+      focusedPresnoId: state.focusedSynoId(),
     };
   }
 
   return null;
-});
+};

@@ -6,7 +6,9 @@ import createArgument from "./create-argument";
 import createVariableRef from "./create-variable-ref";
 import type { IntegrationDependencies } from "../../../types/language-integration/integration-dependencies";
 import type { Renderers } from "../../../types/language-integration/renderers";
-export default ((integrationDependencies: IntegrationDependencies): Renderers => {
+export default (
+  integrationDependencies: IntegrationDependencies
+): Renderers => {
   return {
     // $FlowFixMe: editor vs. integration type specificy mismatch
     booleanLiteral: createBooleanLiteral(integrationDependencies),
@@ -19,6 +21,6 @@ export default ((integrationDependencies: IntegrationDependencies): Renderers =>
     // $FlowFixMe: editor vs. integration type specificy mismatch
     argument: createArgument(integrationDependencies),
     // $FlowFixMe: editor vs. integration type specificy mismatch
-    variableRef: createVariableRef(integrationDependencies)
+    variableRef: createVariableRef(integrationDependencies),
   };
-});
+};

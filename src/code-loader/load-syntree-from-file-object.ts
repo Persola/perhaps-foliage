@@ -7,7 +7,9 @@ const validateSyntax = (graphName, graph, grammarName, grammar) => {
 
   if (!grammarValidatorRez.valid) {
     // @ts-ignore: why can't ts narrow this properly?
-    throw new Error(`Validation of graph '${graphName}' failed under grammar '${grammarName}': ${grammarValidatorRez.message}`);
+    throw new Error(
+      `Validation of graph '${graphName}' failed under grammar '${grammarName}': ${grammarValidatorRez.message}`
+    );
   } // const graphValidationRez = graphValidator(graph, grammar, grammarName);
   // if (!graphValidationRez.valid) {
   //   throw new Error(
@@ -15,13 +17,12 @@ const validateSyntax = (graphName, graph, grammarName, grammar) => {
   //     + `failed under grammar '${grammarName}': ${graphValidationRez.message}`
   //   );
   // }
-
 };
 
-export default ((file: File, integration): Promise<SynoMap> => {
-  return file.text().then(fileText => {
+export default (file: File, integration): Promise<SynoMap> => {
+  return file.text().then((fileText) => {
     const newSyntree = JSON.parse(fileText);
-    validateSyntax('loaded_file', newSyntree, 'saliva', integration.grammar);
+    validateSyntax("loaded_file", newSyntree, "saliva", integration.grammar);
     return newSyntree;
   });
-});
+};

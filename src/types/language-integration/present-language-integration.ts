@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import type { Grammar } from "../editor-state/grammar";
 import type { SynoMap } from "../syno-map";
@@ -11,7 +11,13 @@ export type PresentLanguageIntegration = {
   grammar: Grammar;
   primitives: SynoMap | null | undefined;
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  interpret: ((arg0: EditorStateWithIntegration, arg1: StateSelector) => InterpretationResolution) | null | undefined;
+  interpret:
+    | ((
+        arg0: EditorStateWithIntegration,
+        arg1: StateSelector
+      ) => InterpretationResolution)
+    | null
+    | undefined;
   presenters: Readonly<Record<string, (...args: Array<any>) => any>>;
   renderers: Readonly<Record<string, React.ComponentType<Record<string, any>>>>;
   styles: {

@@ -3,15 +3,17 @@ import type { StateSelector } from "../../../types/state-selector";
 import type { MutableFocus } from "../../../types/editor-state/mutable/mutable-focus";
 import type { ChildPresnoRef } from "../../../types/child-presno-ref";
 import type { Syno } from "../../../types/syno";
-export default ((state: StateSelector, draftFocus: MutableFocus): void => {
+export default (state: StateSelector, draftFocus: MutableFocus): void => {
   if (state.focusedSynoIsRoot()) {
-    console.warn('ignoring navigation to previous sibling: focus syno is root');
+    console.warn("ignoring navigation to previous sibling: focus syno is root");
     return;
   }
 
   if (state.inText()) {
     if (state.focusedCharIndex() === 0) {
-      console.warn('Ignoring navigation to previous sibling: already on first character');
+      console.warn(
+        "Ignoring navigation to previous sibling: already on first character"
+      );
       return;
     }
 
@@ -32,10 +34,10 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   const siblingRefz = getChildPresnoRefs(oldParent, state);
 
   if (siblingRefz.length <= 0) {
-    throw new Error('Navigate failed; parent has no children!?');
+    throw new Error("Navigate failed; parent has no children!?");
   }
 
-  const oldFocusedSynoBirthOrder = siblingRefz.findIndex(siblingRef => {
+  const oldFocusedSynoBirthOrder = siblingRefz.findIndex((siblingRef) => {
     if (siblingRef.synoRef === true) {
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
@@ -46,11 +48,16 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   });
 
   if (oldFocusedSynoBirthOrder === -1) {
-    throw new Error("Cannot find old focused presno ID among parent's children");
+    throw new Error(
+      "Cannot find old focused presno ID among parent's children"
+    );
   } else if (oldFocusedSynoBirthOrder === 0) {
-    console.warn('Ignoring navigation to previous sibling: already focused on first sibling');
+    console.warn(
+      "Ignoring navigation to previous sibling: already focused on first sibling"
+    );
   } else {
-    const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedSynoBirthOrder - 1];
+    const newFocusPresnoRef: ChildPresnoRef =
+      siblingRefz[oldFocusedSynoBirthOrder - 1];
 
     if (newFocusPresnoRef.synoRef === true) {
       draftFocus.synoId = newFocusPresnoRef.id;
@@ -60,4 +67,4 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
       draftFocus.presnoIndex = newFocusPresnoRef.index;
     }
   }
-});
+};

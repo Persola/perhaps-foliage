@@ -12,21 +12,39 @@ type Props = {
   resultOutdated: boolean;
   interpreting: boolean;
 };
-export default ((props: Props) => {
+export default (props: Props) => {
   const {
     editorStateStore,
     integration,
-    presentation: {
-      stage: stageful,
-      result
-    },
+    presentation: { stage: stageful, result },
     resultOutdated,
-    interpreting
+    interpreting,
   } = props;
-  return <div className="editor mousetrap">
+  return (
+    <div className="editor mousetrap">
       <IntegrationLoadInput editorStateStore={editorStateStore} />
-      <CodeView key="stage" editorStateStore={editorStateStore} integration={integration} codePresentation={stageful} outdated={false} interpreting={interpreting} dragDrop />
-      <InterpretButton editorStateStore={editorStateStore} interpreting={interpreting} />
-      <CodeView key="result" editorStateStore={editorStateStore} integration={integration} codePresentation={result} outdated={resultOutdated} interpreting={false} dragDrop={false} />
-    </div>;
-});
+      <CodeView
+        key="stage"
+        editorStateStore={editorStateStore}
+        integration={integration}
+        codePresentation={stageful}
+        outdated={false}
+        interpreting={interpreting}
+        dragDrop
+      />
+      <InterpretButton
+        editorStateStore={editorStateStore}
+        interpreting={interpreting}
+      />
+      <CodeView
+        key="result"
+        editorStateStore={editorStateStore}
+        integration={integration}
+        codePresentation={result}
+        outdated={resultOutdated}
+        interpreting={false}
+        dragDrop={false}
+      />
+    </div>
+  );
+};

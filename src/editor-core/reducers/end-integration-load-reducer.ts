@@ -4,21 +4,31 @@ import type { StateSelector } from "../../types/state-selector";
 import type { LanguageIntegration } from "../../types/language-integration";
 import type { PresentLanguageIntegration } from "../../types/language-integration/present-language-integration";
 import type { MutableSynoMap } from "../../types/mutable-syno-map";
-export default ((state: StateSelector, action: EndIntegrationLoad, draftState: MutableEditorState, mutateeIntegration: LanguageIntegration) // the integration object used by dependants
-: void => {
+export default (
+  state: StateSelector,
+  action: EndIntegrationLoad,
+  draftState: MutableEditorState,
+  mutateeIntegration: LanguageIntegration // the integration object used by dependants
+): void => {
   if (state.loadingIntegration() === false) {
-    throw new Error('Tried to end integration load while there was no integration being loaded');
+    throw new Error(
+      "Tried to end integration load while there was no integration being loaded"
+    );
   }
 
-  const presentMutateeIntegration: PresentLanguageIntegration = (mutateeIntegration as any);
+  const presentMutateeIntegration: PresentLanguageIntegration =
+    mutateeIntegration as any;
   Object.assign(presentMutateeIntegration, action.newIntegrationAttrs);
-  const primitives: MutableSynoMap = (action.newIntegrationAttrs.primitives as any);
+  const primitives: MutableSynoMap = action.newIntegrationAttrs
+    .primitives as any;
   Object.assign(draftState, {
     integrationId: action.newIntegrationAttrs.id,
     grammar: action.newIntegrationAttrs.grammar,
     primitives,
     keyToNewSynoAttrs: action.newIntegrationAttrs.keyToNewSynoAttrs,
-    lastIntegrationBindings: state.keyToNewSynoAttrs() ? Object.keys(state.keyToNewSynoAttrs()) : [],
+    lastIntegrationBindings: state.keyToNewSynoAttrs()
+      ? Object.keys(state.keyToNewSynoAttrs())
+      : [],
     synoMap: null,
     resultTree: null,
     inverseReferenceMap: null,
@@ -27,6 +37,6 @@ export default ((state: StateSelector, action: EndIntegrationLoad, draftState: M
     interpreting: false,
     resultOutdated: false,
     loadingIntegration: false,
-    loadingSyntree: false
+    loadingSyntree: false,
   });
-});
+};

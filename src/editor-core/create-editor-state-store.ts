@@ -32,7 +32,7 @@ type CreateStoreReturn = {
   editorStateStore: ReduxStore;
   stateSelector: StateSelector;
 };
-export default ((integration: AbsentLanguageIntegration): CreateStoreReturn => {
+export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
   const defaultEditorState: EditorStateWithoutIntegration = {
     integrationId: null,
     grammar: null,
@@ -47,113 +47,119 @@ export default ((integration: AbsentLanguageIntegration): CreateStoreReturn => {
     interpreting: false,
     resultOutdated: false,
     loadingIntegration: false,
-    loadingSyntree: false
+    loadingSyntree: false,
   };
   const stateSelector: StateSelector = createState(defaultEditorState);
 
-  const editorStateReducer = (oldState: EditorState = defaultEditorState, action: ReduxAction): EditorState => {
-    return produce(oldState, untypedDraftState => {
-      const draftState = ((untypedDraftState as any) as MutableEditorState);
+  const editorStateReducer = (
+    oldState: EditorState = defaultEditorState,
+    action: ReduxAction
+  ): EditorState => {
+    return produce(oldState, (untypedDraftState) => {
+      const draftState = untypedDraftState as any as MutableEditorState;
 
       switch (action.type) {
-        case 'REPLACE_FOCUSED_SYNO':
-          {
-            replaceFocusedSynoReducer(stateSelector, action, draftState, integration);
-            break;
-          }
+        case "REPLACE_FOCUSED_SYNO": {
+          replaceFocusedSynoReducer(
+            stateSelector,
+            action,
+            draftState,
+            integration
+          );
+          break;
+        }
 
-        case 'END_INTERPRETATION':
-          {
-            endInterpretationReducer(stateSelector, action, draftState);
-            break;
-          }
+        case "END_INTERPRETATION": {
+          endInterpretationReducer(stateSelector, action, draftState);
+          break;
+        }
 
-        case 'END_SYNTREE_LOAD':
-          {
-            endSyntreeLoadReducer(stateSelector, action, draftState);
-            break;
-          }
+        case "END_SYNTREE_LOAD": {
+          endSyntreeLoadReducer(stateSelector, action, draftState);
+          break;
+        }
 
-        case 'END_INTEGRATION_LOAD':
-          {
-            endIntegrationLoadReducer(stateSelector, action, draftState, integration);
-            break;
-          }
+        case "END_INTEGRATION_LOAD": {
+          endIntegrationLoadReducer(
+            stateSelector,
+            action,
+            draftState,
+            integration
+          );
+          break;
+        }
 
-        case 'NAVIGATE':
-          {
-            navigateReducer(stateSelector, action, draftState);
-            break;
-          }
+        case "NAVIGATE": {
+          navigateReducer(stateSelector, action, draftState);
+          break;
+        }
 
-        case 'SET_FOCUS_SYNO':
-          {
-            setFocusSynoReducer(stateSelector, action, draftState);
-            break;
-          }
+        case "SET_FOCUS_SYNO": {
+          setFocusSynoReducer(stateSelector, action, draftState);
+          break;
+        }
 
-        case 'START_INTERPRETATION':
-          {
-            startInterpretationReducer(stateSelector, draftState, integration);
-            break;
-          }
+        case "START_INTERPRETATION": {
+          startInterpretationReducer(stateSelector, draftState, integration);
+          break;
+        }
 
-        case 'START_SYNTREE_LOAD':
-          {
-            startSyntreeLoadReducer(stateSelector, draftState);
-            break;
-          }
+        case "START_SYNTREE_LOAD": {
+          startSyntreeLoadReducer(stateSelector, draftState);
+          break;
+        }
 
-        case 'START_INTEGRATION_LOAD':
-          {
-            startIntegrationLoadReducer(draftState);
-            break;
-          }
+        case "START_INTEGRATION_LOAD": {
+          startIntegrationLoadReducer(draftState);
+          break;
+        }
 
-        case 'CHAR_BACKSPACE':
-          {
-            charBackspaceReducer(stateSelector, draftState);
-            break;
-          }
+        case "CHAR_BACKSPACE": {
+          charBackspaceReducer(stateSelector, draftState);
+          break;
+        }
 
-        case 'DESTROY_FOCUSED_SYNO':
-          {
-            destroyFocusedSynoReducer(stateSelector, action, draftState);
-            break;
-          }
+        case "DESTROY_FOCUSED_SYNO": {
+          destroyFocusedSynoReducer(stateSelector, action, draftState);
+          break;
+        }
 
-        default:
-          {
-            verifyActionType(action.type);
-            break;
-          }
+        default: {
+          verifyActionType(action.type);
+          break;
+        }
       }
     });
   };
 
   const epicMiddleware = createEpicMiddleware();
-// @ts-ignore: how do I let ts know it's OK to get undefined?
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const editorStateStore = createStore(editorStateReducer, composeEnhancers(applyMiddleware(epicMiddleware)));
+  // @ts-ignore: how do I let ts know it's OK to get undefined?
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const editorStateStore = createStore(
+    editorStateReducer,
+    composeEnhancers(applyMiddleware(epicMiddleware))
+  );
   const integrationDependencies = {
     React,
     // pass in our react instance so integrations don't need to bundle their own
     components: {
-      NamePart
-    }
+      NamePart,
+    },
   };
 
   // const rootEpic = (action$, state$) => merge(loadIntegrationEpic(action$, integrationDependencies), loadSyntreeEpic(action$, state$, stateSelector, integration), interpretEpic(action$, state$, stateSelector, integration));
-  const rootEpic = (action$, state$) => merge(
-    loadIntegrationEpic(action$, integrationDependencies),
-    loadSyntreeEpic(action$, state$, stateSelector, integration),
-    interpretEpic(action$, state$, stateSelector, integration)
-  );
+  const rootEpic = (action$, state$) =>
+    merge(
+      loadIntegrationEpic(action$, integrationDependencies),
+      loadSyntreeEpic(action$, state$, stateSelector, integration),
+      interpretEpic(action$, state$, stateSelector, integration)
+    );
 
-// @ts-ignore: is this a conflict in redux-observables types?
-epicMiddleware.run(rootEpic);
+  // @ts-ignore: is this a conflict in redux-observables types?
+  epicMiddleware.run(rootEpic);
   return {
     editorStateStore,
-    stateSelector
+    stateSelector,
   };
-});
+};
