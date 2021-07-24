@@ -1,4 +1,4 @@
-import primitives from "../../primitives";
+import primitives from "../../primitives.yml";
 import interpretArgs from "./interpret-function-call/interpret-args";
 import norPrimitive from "./interpret-function-call/nor-primitive";
 import argumentParameterMismatch from "../../utils/argument-parameter-mismatch";
@@ -75,7 +75,7 @@ export default ((interpreter: (...args: Array<any>) => any, parentScope: [], int
 
     return arg;
   });
-  const argsMissingValues = argumentz.filter((arg: Argument) => arg.value === false);
+  const argsMissingValues = argumentz.filter((arg: Argument) => arg.value === null);
 
   if (argsMissingValues.length > 0) {
     return {

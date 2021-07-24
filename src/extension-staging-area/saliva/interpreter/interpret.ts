@@ -13,7 +13,7 @@ export default ((editorState: EditorStateWithIntegration, state: StateSelector):
     throw new Error(`unexpected error during interpretation: "${error.message}"`);
   }
 
-  if (resolution.success) {
+  if (resolution.success === true) {
     return resolution;
   }
 

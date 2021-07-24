@@ -132,7 +132,8 @@ export default ((integration: AbsentLanguageIntegration): CreateStoreReturn => {
   };
 
   const epicMiddleware = createEpicMiddleware();
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// @ts-ignore: how do I let ts know it's OK to get undefined?
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const editorStateStore = createStore(editorStateReducer, composeEnhancers(applyMiddleware(epicMiddleware)));
   const integrationDependencies = {
     React,
@@ -142,9 +143,15 @@ export default ((integration: AbsentLanguageIntegration): CreateStoreReturn => {
     }
   };
 
-  const rootEpic = (action$, state$) => merge(loadIntegrationEpic(action$, integrationDependencies), loadSyntreeEpic(action$, state$, stateSelector), interpretEpic(action$, state$, stateSelector, integration));
+  // const rootEpic = (action$, state$) => merge(loadIntegrationEpic(action$, integrationDependencies), loadSyntreeEpic(action$, state$, stateSelector, integration), interpretEpic(action$, state$, stateSelector, integration));
+  const rootEpic = (action$, state$) => merge(
+    loadIntegrationEpic(action$, integrationDependencies),
+    loadSyntreeEpic(action$, state$, stateSelector, integration),
+    interpretEpic(action$, state$, stateSelector, integration)
+  );
 
-  epicMiddleware.run(rootEpic);
+// @ts-ignore: is this a conflict in redux-observables types?
+epicMiddleware.run(rootEpic);
   return {
     editorStateStore,
     stateSelector

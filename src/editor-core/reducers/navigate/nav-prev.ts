@@ -36,7 +36,7 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   }
 
   const oldFocusedSynoBirthOrder = siblingRefz.findIndex(siblingRef => {
-    if (siblingRef.synoRef) {
+    if (siblingRef.synoRef === true) {
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
@@ -52,7 +52,7 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   } else {
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedSynoBirthOrder - 1];
 
-    if (newFocusPresnoRef.synoRef) {
+    if (newFocusPresnoRef.synoRef === true) {
       draftFocus.synoId = newFocusPresnoRef.id;
       draftFocus.presnoIndex = null;
     } else {

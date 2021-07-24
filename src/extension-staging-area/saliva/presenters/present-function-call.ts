@@ -1,4 +1,4 @@
-import primitives from "../primitives";
+import primitives from "../primitives.yml";
 import focuses from "./helpers/focuses";
 import presentArguments from "./present-function-call/present-arguments";
 import argumentParameterMismatch from "../utils/argument-parameter-mismatch";

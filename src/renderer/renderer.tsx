@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 import Editor from "./components/editor";
 import type { ReduxStore } from "../types/redux-store";
 import type { EditorPresentation } from "../types/presenter/editor-presentation";

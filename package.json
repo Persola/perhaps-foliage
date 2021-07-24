@@ -14,7 +14,7 @@
     "start:wds": "webpack serve --target browserslist",
     "reweb": "npm run clean:dist; npm run build:web; npm run start:web",
     "rel": "npm run clean:dist; npm run build:el; npm run start:el",
-    "type": "tsc",
+    "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx .",
     "lint-fix": "eslint --ext ts,tsx --fix ."
   },
@@ -23,7 +23,6 @@
     "node": "14.17.1"
   },
   "dependencies": {
-    "@khanacademy/flow-to-ts": "^0.5.2",
     "core-js": "3.15.2",
     "electron": "~13.1.5",
     "immer": "^9.0.5",

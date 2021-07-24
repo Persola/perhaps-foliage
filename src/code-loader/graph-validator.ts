@@ -21,14 +21,14 @@ export default ((graph, grammar) => {
       if (Object.keys(syntype.children).includes(attr)) {
         if (syntype.children[attr].collection) {
           syno[attr].forEach(maybeSynoRef => {
-            if (maybeSynoRef.synoRef) {
+            if (maybeSynoRef.synoRef === true) {
               if (graph[maybeSynoRef.id].syntype !== syntype.children[attr].syntype) {
                 valid = false;
                 message += `Node (ID '${maybeSynoRef.id}') invalid child. `;
               }
             }
           });
-        } else if (syno[attr].synoRef) {
+        } else if (syno[attr].synoRef === true) {
           if (graph[syno[attr].id].syntype !== syntype.children[attr].syntype) {
             valid = false;
             message += `Node (ID '${syno[attr].id}') invalid child. `;

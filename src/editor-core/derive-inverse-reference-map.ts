@@ -11,7 +11,7 @@ const depthFirstBuildInverseReferences = (irm: MutableInverseReferenceMap, synoM
   const currentSyno = synoMap[currentId];
   Object.values(currentSyno).forEach(attrVal => {
     // $FlowIssue: poorly typed ECMA built-in (Object.entries)
-    if (attrVal.synoRef) {
+    if (attrVal.synoRef === true) {
       // $FlowIssue: poorly typed ECMA built-in (Object.entries)
       createOrAdd(irm, attrVal.id, currentSyno.id);
 
@@ -23,7 +23,7 @@ const depthFirstBuildInverseReferences = (irm: MutableInverseReferenceMap, synoM
     } else if (attrVal instanceof Array) {
       // nested children
       attrVal.forEach(el => {
-        if (el.synoRef) {
+        if (el.synoRef === true) {
           createOrAdd(irm, el.id, currentSyno.id);
 
           if (el.relation === 'child') {

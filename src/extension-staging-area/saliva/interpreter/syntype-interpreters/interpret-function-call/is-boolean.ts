@@ -1,10 +1,9 @@
 import type { BooleanLiteral } from "../../../types/synos/boolean-literal";
-import type { BooleanLiteralAttrs } from "../../../types/synos/syno-attrs/boolean-literal-attrs"; // This should be caught by flow, but let's double check
 
-export default ((booleanCandidate: BooleanLiteral | BooleanLiteralAttrs): boolean => {
+export default ((booleanCandidate: BooleanLiteral): boolean => {
   const leKeys = Object.keys(booleanCandidate);
 
-  if (!leKeys.length === 2) {
+  if (!(leKeys.length === 4)) {
     return false;
   }
 

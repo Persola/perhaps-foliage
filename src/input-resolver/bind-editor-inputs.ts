@@ -1,4 +1,4 @@
-import Mousetrap from "mousetrap";
+import * as Mousetrap from "mousetrap";
 import createFocusSyno from "./create-focus-syno";
 import type { ReduxStore } from "../types/redux-store";
 export default ((editorStateStore: ReduxStore, inputResolver: (arg0: string) => void) => {

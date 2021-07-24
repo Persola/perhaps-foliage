@@ -16,7 +16,7 @@ const argumentEls = (React: ReactType, integration: PresentLanguageIntegration, 
   });
 });
 
-export default ((integrationDependencies: IntegrationDependencies): any => {
+export default ((integrationDependencies: IntegrationDependencies) => {
   const {
     React,
     components: {

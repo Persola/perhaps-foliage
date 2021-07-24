@@ -1,4 +1,4 @@
-import primitives from "../primitives";
+import primitives from "../primitives.yml";
 import focuses from "./helpers/focuses";
 import presentParameters from "./present-function-definition/present-parameters";
 import type { StateSelector } from "../../../types/state-selector";

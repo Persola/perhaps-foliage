@@ -5,7 +5,7 @@ import createPresent from "./presenter/create-present";
 import createInputResolver from "./input-resolver/create-input-resolver";
 import bindEditorInputs from "./input-resolver/bind-editor-inputs";
 import updateIntegrationInputBindings from "./input-resolver/update-integration-input-bindings";
-import editorStyles from "./editor-styles.css"; // eslint-disable-line no-unused-vars
+import "./editor-styles.css"; // eslint-disable-line no-unused-vars
 
 // import pantheonGrammar from './extension-staging-area/pantheon/grammar.yml';
 // import pantheonKeyToNewSynoAttrs from

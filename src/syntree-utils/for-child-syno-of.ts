@@ -1,6 +1,6 @@
 import type { Syno } from "../types/syno";
 import type { SynoRef } from "../types/syno-ref";
-export default ((parentSyno: Syno, callback: (arg0: SynoRef, arg1: string, arg2: number | null | undefined) => void) => {
+export default ((parentSyno: Syno, callback: (arg0: SynoRef, arg1: string, arg2?: number) => void) => {
   Object.entries(parentSyno).forEach(([key, val]) => {
     if ( // $FlowIssue: poorly typed ECMA built-in (Object.entries)
     val.synoRef // $FlowIssue: poorly typed ECMA built-in (Object.entries)

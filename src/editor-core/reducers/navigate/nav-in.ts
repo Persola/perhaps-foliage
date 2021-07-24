@@ -23,7 +23,7 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
 
   const newFocusPresnoRef: ChildPresnoRef = childPresnoRefs[0];
 
-  if (newFocusPresnoRef.synoRef) {
+  if (newFocusPresnoRef.synoRef === true) {
     draftFocus.synoId = newFocusPresnoRef.id;
     return;
   }

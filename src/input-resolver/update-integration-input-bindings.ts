@@ -1,4 +1,4 @@
-import Mousetrap from "mousetrap";
+import * as Mousetrap from "mousetrap";
 import type { StateSelector } from "../types/state-selector";
 export default ((state: StateSelector, inputResolver: (arg0: string) => void) => {
   if (state.lastIntegrationBindings()) {

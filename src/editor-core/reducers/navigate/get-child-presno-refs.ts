@@ -22,6 +22,7 @@ export default ((syno: Syno, state: StateSelector): ReadonlyArray<ChildPresnoRef
   let nameFocusable;
 
   if (!textHostRef) {
+    // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
     nameFocusable = syno.name && !state.isPrimitive(syno.id);
   } else if (!syno[textHostRef]) {
     nameFocusable = false;

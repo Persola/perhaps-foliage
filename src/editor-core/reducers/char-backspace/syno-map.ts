@@ -14,8 +14,10 @@ export default ((state: StateSelector, draftSynoMap: MutableSynoMap): void => {
     textHostSyno = state.getSyno(state.focusedSyno()[textHostRef].id);
   }
 
-  // $FlowFixMe: Flow doesn't know draft state matches old state
-  draftSynoMap[textHostSyno.id].name = // $FlowFixMe: Flow doesn't know draft state matches old state
-  textHostSyno.name.slice(0, state.focusedCharIndex() - 1) // $FlowFixMe: Flow doesn't know draft state matches old state
-  + textHostSyno.name.slice(state.focusedCharIndex(), textHostSyno.name.length);
+  // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+  draftSynoMap[textHostSyno.id].name =
+    // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+    textHostSyno.name.slice(0, state.focusedCharIndex() - 1)
+    // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+    + textHostSyno.name.slice(state.focusedCharIndex(), textHostSyno.name.length);
 });

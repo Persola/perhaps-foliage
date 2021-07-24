@@ -10,14 +10,14 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
     let oldName: string;
 
     if (!nameHostRefName) {
-      // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+      // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
       oldName = oldSyno.name;
     } else {
       if (!oldSyno[nameHostRefName]) {
         throw new Error('We seem to be focused on a name presno that depends on an incomplete ref.' + ' We shouldn\'t have been able to navigate here.');
       }
 
-      // $FlowFixMe: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+      // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
       oldName = state.getSyno(oldSyno[nameHostRefName].id).name;
     }
 
@@ -56,7 +56,7 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   }
 
   const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
-    if (siblingRef.synoRef) {
+    if (siblingRef.synoRef === true) {
       // $FlowIssue: Flow's disjoint union refinement is like that of a little baby
       return siblingRef.id === state.focusedSynoId();
     }
@@ -72,7 +72,7 @@ export default ((state: StateSelector, draftFocus: MutableFocus): void => {
   } else {
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
 
-    if (newFocusPresnoRef.synoRef) {
+    if (newFocusPresnoRef.synoRef === true) {
       draftFocus.synoId = newFocusPresnoRef.id;
       draftFocus.presnoIndex = null;
     } else {

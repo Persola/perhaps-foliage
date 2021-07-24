@@ -3,7 +3,9 @@
   let alone ones for an updated version of rxjs
 */
 import { filter, map } from "rxjs";
-export default ((action$, state$, state, integration) => action$.pipe(filter(action => {
+import type { ReduxAction } from '../../types/redux-action'
+import { InterpretationResolutionSuccess } from "../../types/interpreter/interpretation-resolution-success";
+export default ((action$, state$, state, integration) => action$.pipe(filter((action: ReduxAction) => {
   if (action.type !== 'START_INTERPRETATION') {
     return false;
   }
@@ -19,7 +21,7 @@ export default ((action$, state$, state, integration) => action$.pipe(filter(act
   }
 
   return true;
-}), map(() => integration.interpret(state$.value, state)), map(resolution => ({
+}), map(() => integration.interpret(state$.value, state)), map((resolution: InterpretationResolutionSuccess) => ({
   type: 'END_INTERPRETATION',
   result: resolution.result
 }))));

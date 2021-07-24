@@ -72,10 +72,10 @@ export default ((initialEditorState: EditorState): StateSelector => {
     // synos
     getSyno: function getSyno(synoId: string): Syno {
       let maybeSyno;
-      maybeSyno = this.state.primitives[synoId];
+      maybeSyno = this.state.synoMap[synoId];
 
-      if (!maybeSyno) {
-        maybeSyno = this.state.synoMap[synoId];
+      if (!maybeSyno && this.state.primitives) {
+        maybeSyno = this.state.primitives[synoId];
       }
 
       if (!maybeSyno) {

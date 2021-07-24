@@ -1,6 +1,6 @@
 import type { IntegrationDependencies } from "../../../types/language-integration/integration-dependencies";
 import type { VariableRefRendererProps } from "../types/renderers/variable-ref-props";
-export default ((integrationDependencies: IntegrationDependencies): any => {
+export default ((integrationDependencies: IntegrationDependencies) => {
   const {
     React,
     components: {
