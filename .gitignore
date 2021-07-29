@@ -1,7 +1,7 @@
 node_modules
-dist
+web/built
+electron/built
 src/extension-staging-area/saliva/dist
 src/extension-staging-area/pantheon/dist
 tmp
 **/.DS_Store
-saliva-repl.code-workspace

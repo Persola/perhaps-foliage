@@ -1,23 +1,28 @@
 import * as React from 'react';
 
-import type { Store } from 'redux';
+import type { CrossContextMessageSender } from '../../types/cross-context/cross-context-messaging';
 
 type Props = {
-  editorStateStore: Store;
+  sendCrossContextMessage: CrossContextMessageSender;
   interpreting: boolean;
 };
 
-const dispatchStartInterpretation = editorStateStore => {
-  editorStateStore.dispatch({
-    type: 'START_INTERPRETATION',
-  });
+const dispatchStartInterpretation = sendCrossContextMessage => {
+  sendCrossContextMessage(
+    'dispatchAction',
+    {
+      action: {
+        type: 'START_INTERPRETATION',
+      },
+    },
+  );
 };
 
 export default (props: Props): JSX.Element => {
-  const { editorStateStore, interpreting } = props;
+  const { sendCrossContextMessage, interpreting } = props;
   const className = interpreting ? 'interpreting' : '';
 
-  const startInterpretation = () => dispatchStartInterpretation(editorStateStore);
+  const startInterpretation = () => dispatchStartInterpretation(sendCrossContextMessage);
 
   return (
     <button onClick={startInterpretation} className={className} type="submit">

@@ -39,5 +39,14 @@ Project Name
    * "gelcap"
   * the idea of "directly seeing" "the data itself", directly seeing the structure
    * structure/shape/form
+   * x-ray/ultraviolet/blacklight/
   * jelly beans or gummies?
   * snakes inside snakes?
+  * colorful trees
+    * Eucalyptus deglupta
+    * chlorophyll/autumn/foliage
+  * something related to relevant visual art
+    * fauvism
+      * "signac"?
+    * color theory
+    * color and meaning

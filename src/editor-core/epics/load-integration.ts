@@ -1,4 +1,4 @@
-import { Observable, filter, map, mergeMap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 import type { Action } from 'redux';
 
@@ -12,14 +12,11 @@ export default (
   filter((action: Action) => {
     return action.type === 'START_INTEGRATION_LOAD';
   }),
-  mergeMap((action: StartIntegrationLoad) => {
-    return action.file.text();
-  }),
-  map((integrationText: string) => {
+  map((action: StartIntegrationLoad) => {
   // eval'd integration strings assign the integration object module to this variable name
     let initializeIntegration;
     // eslint-disable-next-line no-eval
-    eval(integrationText);
+    eval(action.fileText);
     return {
       type: 'END_INTEGRATION_LOAD',
       newIntegrationAttrs: initializeIntegration.default(

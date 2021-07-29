@@ -1,9 +1,9 @@
-import { Observable, filter, map, mergeMap } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 import type { Action } from 'redux';
 import type { StateObservable } from 'redux-observable';
 
-import loadSyntreeFromFileObject from '../../code-loader/load-syntree-from-file-object';
+import loadSyntreeFromString from '../../code-loader/load-syntree-from-string';
 
 import type { EditorState } from '../../types/editor-state';
 import type { StartAsyncSyntreeLoad } from '../../types/actions/start-syntree-load';
@@ -19,13 +19,10 @@ export default (
   filter((action: Action) => {
     return action.type === 'START_SYNTREE_LOAD' && state.integrationLoaded();
   }),
-  mergeMap((action: StartAsyncSyntreeLoad) => {
-    return loadSyntreeFromFileObject(action.file, integration);
-  }),
-  map(syntree => {
+  map((action: StartAsyncSyntreeLoad) => {
     return {
       type: 'END_SYNTREE_LOAD',
-      newSynoMap: syntree,
+      newSynoMap: loadSyntreeFromString(action.fileText, integration),
     };
   }),
 );

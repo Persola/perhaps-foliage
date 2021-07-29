@@ -51,7 +51,7 @@ rules:
 overrides:
   -
     files:
-      - 'web-repl/server.js'
+      - 'web/server.js'
     rules:
       'no-console':
        - 0

@@ -1,18 +1,17 @@
 import * as React from 'react';
 
-import type { Store } from 'redux';
-
 import SyntacticNode from './syntactic-node';
 import OutdatedMessage from './outdated-message';
 import createPresnoFetcher from '../../prestree-utils/create-presno-fetcher';
 
+import type { CrossContextMessageSender } from '../../types/cross-context/cross-context-messaging';
 import type { Prestree } from '../../types/presenter/prestree';
-import type { LanguageIntegration } from '../../types/language-integration';
-import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+import type { RendersideLanguageIntegration } from '../../types/language-integration/renderside-language-integration';
+import type { RendersidePresentLanguageIntegration } from '../../types/language-integration/renderside-present-language-integration';
 
 type Props = {
-  editorStateStore: Store;
-  integration: LanguageIntegration;
+  sendCrossContextMessage: CrossContextMessageSender;
+  integration: RendersideLanguageIntegration;
   codePresentation: Prestree | null;
   outdated: boolean;
   interpreting: boolean;
@@ -37,19 +36,26 @@ const dragOverCodeView = e => {
   e.preventDefault();
 };
 
-const dropCodeView = (editorStateStore, e) => {
+const dropCodeView = (sendCrossContextMessage, e) => {
   e.stopPropagation();
   e.preventDefault();
   e.target.classList.remove('hovering-file');
-  editorStateStore.dispatch({
-    type: 'START_SYNTREE_LOAD',
-    file: e.dataTransfer.files[0],
+  e.dataTransfer.files[0].text().then(fileText => {
+    sendCrossContextMessage(
+      'dispatchAction',
+      {
+        action: {
+          type: 'START_SYNTREE_LOAD',
+          fileText,
+        },
+      },
+    );
   });
 };
 
 export default (props: Props): JSX.Element => {
   const {
-    editorStateStore,
+    sendCrossContextMessage,
     integration,
     codePresentation,
     outdated,
@@ -58,7 +64,7 @@ export default (props: Props): JSX.Element => {
   } = props;
 
   const boundDropCodeView = e => {
-    dropCodeView(editorStateStore, e);
+    dropCodeView(sendCrossContextMessage, e);
   };
 
   let content;
@@ -66,11 +72,12 @@ export default (props: Props): JSX.Element => {
   if (!codePresentation) {
     content = <div className="non-syntactic">(nothing to display)</div>;
   } else {
+    const presentIntegration = integration as RendersidePresentLanguageIntegration;
     const { presnos, rootId } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
     content = (
       <SyntacticNode
-        integration={integration as PresentLanguageIntegration}
+        integration={presentIntegration}
         getPresno={getPresno}
         synoId={rootId}
         SynoRenderer={SyntacticNode}

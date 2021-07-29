@@ -24,7 +24,6 @@ module.exports = {
       {
         test: /\.lazy\.css/,
         use: [
-          { loader: 'style-loader', options: { injectType: 'lazyStyleTag' } },
           { loader: 'css-loader' },
         ],
       },

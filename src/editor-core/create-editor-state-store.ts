@@ -74,6 +74,10 @@ export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
       const draftState = untypedDraftState as MutableEditorState;
 
       switch (action.type) {
+        case 'INITIALIZE': {
+          break;
+        }
+
         case 'REPLACE_FOCUSED_SYNO': {
           replaceFocusedSynoReducer(
             stateSelector,
@@ -173,7 +177,9 @@ export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
 
   const epicMiddleware = createEpicMiddleware();
   // @ts-ignore: how do I let ts know it's OK to get undefined?
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers = (WEB_VERSION === true)// @ts-ignore: we know because of WEB_VERSION
+    ? (self.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) // eslint-disable-line
+    : compose;
   const editorStateStore = createStore(
     editorStateReducer,
     composeEnhancers(applyMiddleware(epicMiddleware)),

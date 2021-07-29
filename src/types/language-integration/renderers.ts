@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-export type Renderers = Readonly<
-  Record<
-    string,
-    React.ComponentType<Record<string, unknown>>
-  >
->;
+export type Renderers = Readonly<{
+  [syntype: string]: React.ComponentType<{
+    [propName: string]: unknown;
+  }>;
+}>;

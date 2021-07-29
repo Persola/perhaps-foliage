@@ -1,24 +1,23 @@
 import * as React from 'react';
 
-import type { Store } from 'redux';
-
 import CodeView from './code-view';
 import InterpretButton from './interpret-button';
 import IntegrationLoadInput from './integration-load-input';
 
+import type { CrossContextMessageSender } from '../../types/cross-context/cross-context-messaging';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { RendersideLanguageIntegration } from '../../types/language-integration/renderside-language-integration';
 
 type Props = {
-  editorStateStore: Store;
-  integration: LanguageIntegration;
+  sendCrossContextMessage: CrossContextMessageSender;
+  integration: RendersideLanguageIntegration;
   presentation: EditorPresentation;
   resultOutdated: boolean;
   interpreting: boolean;
 };
 export default (props: Props): JSX.Element => {
   const {
-    editorStateStore,
+    sendCrossContextMessage,
     integration,
     presentation: { stage: stageful, result },
     resultOutdated,
@@ -26,10 +25,13 @@ export default (props: Props): JSX.Element => {
   } = props;
   return (
     <div className="editor mousetrap">
-      <IntegrationLoadInput editorStateStore={editorStateStore} />
+      <IntegrationLoadInput
+        sendCrossContextMessage={sendCrossContextMessage}
+        integration={integration}
+      />
       <CodeView
         key="stage"
-        editorStateStore={editorStateStore}
+        sendCrossContextMessage={sendCrossContextMessage}
         integration={integration}
         codePresentation={stageful}
         outdated={false}
@@ -37,12 +39,12 @@ export default (props: Props): JSX.Element => {
         dragDrop
       />
       <InterpretButton
-        editorStateStore={editorStateStore}
+        sendCrossContextMessage={sendCrossContextMessage}
         interpreting={interpreting}
       />
       <CodeView
         key="result"
-        editorStateStore={editorStateStore}
+        sendCrossContextMessage={sendCrossContextMessage}
         integration={integration}
         codePresentation={result}
         outdated={resultOutdated}

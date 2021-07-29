@@ -1,15 +1,5 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line
-
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
-  filename: 'index.html',
-  inject: 'body',
-});
-
 module.exports = {
-  mode: 'none',
-  entry: './src/app.ts',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -40,14 +30,14 @@ module.exports = {
           { loader: 'yaml-loader' },
         ],
       },
+      {
+        test: /\.handlebars$/,
+        loader: 'handlebars-loader',
+      },
     ],
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-  plugins: [
-    HtmlWebpackPluginConfig,
-    new NodePolyfillPlugin(),
-  ],
   devtool: 'source-map',
 };

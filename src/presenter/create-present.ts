@@ -6,7 +6,6 @@ import presentSyntree from './presenters/present-syntree';
 import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { EditorPresentation } from '../types/presenter/editor-presentation';
-import type { Renderer } from '../types/renderer';
 import type { LanguageIntegration } from '../types/language-integration';
 import type { PresentLanguageIntegration } from '../types/language-integration/present-language-integration';
 
@@ -57,22 +56,13 @@ const generatePresentation = (
 export default (
   state: StateSelector,
   editorStateStore: Store,
-  renderer: Renderer,
   integration: LanguageIntegration,
 ): (
-  () => void
+  () => EditorPresentation
 ) => {
   // eslint-disable-line function-paren-newline
   return () => {
     const editorState: EditorState = editorStateStore.getState();
-    const presentation = generatePresentation(state, editorState, integration);
-    const { resultOutdated, interpreting } = editorState;
-    renderer.render(
-      editorStateStore,
-      presentation,
-      integration,
-      resultOutdated,
-      interpreting,
-    );
+    return generatePresentation(state, editorState, integration);
   };
 };

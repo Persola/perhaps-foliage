@@ -1,40 +1,42 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import type { Store } from 'redux';
-
 import Editor from './components/editor';
 
+import type { CrossContextMessageSender } from '../types/cross-context/cross-context-messaging';
 import type { EditorPresentation } from '../types/presenter/editor-presentation';
-import type { LanguageIntegration } from '../types/language-integration';
+import type { RendersideLanguageIntegration } from '../types/language-integration/renderside-language-integration';
 
 export default class {
- editorEl;
+  editorEl;
 
- constructor(document: Document) {
-   this.editorEl = document.getElementById('editor');
- }
+  constructor(document: Document) {
+    this.editorEl = document.getElementById('editor');
+  }
 
- render(
-   editorStateStore: Store,
-   presentation: EditorPresentation,
-   integration: LanguageIntegration,
-   resultOutdated: boolean,
-   interpreting: boolean,
- ): void {
-   ReactDOM.render(
-     <Editor
-       editorStateStore={editorStateStore}
-       integration={integration}
-       presentation={presentation}
-       resultOutdated={resultOutdated}
-       interpreting={interpreting}
-     />,
-     this.editorEl,
-   );
+  render(
+    sendCrossContextMessage: CrossContextMessageSender,
+    presentation: EditorPresentation,
+    resultOutdated: boolean,
+    interpreting: boolean,
+    integration: RendersideLanguageIntegration,
+  ): void {
+    ReactDOM.render(
+      <Editor
+        sendCrossContextMessage={sendCrossContextMessage}
+        integration={integration}
+        presentation={presentation}
+        resultOutdated={resultOutdated}
+        interpreting={interpreting}
+      />,
+      this.editorEl,
+    );
 
-   if (integration.styles) {
-     integration.styles.use();
-   }
- }
+    if (integration.styles) {
+      const head = document.head || document.getElementsByTagName('head')[0];
+      const style = document.createElement('style');
+      style.appendChild(document.createTextNode(integration.styles));
+      head.appendChild(style);
+    }
+  }
 }
