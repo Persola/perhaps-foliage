@@ -21,18 +21,18 @@ export default (
       'variable-ref',
       presno.focused ? 'focused' : 'unfocused',
     ].join(' ');
+
     return React.createElement(
       'div',
       {
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      presno.name
-    && React.createElement(NamePart, {
-      namePart: presno.name,
-      focused: presnoFocused === 0,
-      charFocused,
-    }),
+      presno.name && React.createElement(NamePart, {
+        namePart: presno.name,
+        focused: presnoFocused === 0,
+        charFocused,
+      }),
     );
   };
 };

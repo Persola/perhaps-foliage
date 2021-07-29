@@ -20,6 +20,7 @@ export default (
       presno.focused ? 'focused' : 'unfocused',
       valid ? '' : 'invalid',
     ].join(' ');
+
     return React.createElement(
       'div',
       {
@@ -40,13 +41,12 @@ export default (
           SynoRenderer,
         });
       }),
-      presno.body
-    && React.createElement(SynoRenderer, {
-      integration,
-      getPresno,
-      synoId: presno.body.id,
-      SynoRenderer,
-    }),
+      presno.body && React.createElement(SynoRenderer, {
+        integration,
+        getPresno,
+        synoId: presno.body.id,
+        SynoRenderer,
+      }),
     );
   };
 };

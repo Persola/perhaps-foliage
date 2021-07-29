@@ -21,6 +21,7 @@ export default (
       'function-parameter',
       presno.focused ? 'focused' : 'unfocused',
     ].join(' ');
+
     return React.createElement(
       'div',
       {

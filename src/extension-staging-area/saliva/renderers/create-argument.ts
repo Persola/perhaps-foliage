@@ -33,25 +33,24 @@ export default (
       focused ? 'focused' : 'unfocused',
       valid ? '' : 'invalid',
     ].join(' ');
+
     return React.createElement(
       'div',
       {
         className: classes,
         'data-syno-id': synoId,
       },
-      name
-    && React.createElement(NamePart, {
-      namePart: name,
-      focused: presnoFocused === 0,
-      charFocused,
-    }),
-      value
-    && React.createElement(SynoRenderer, {
-      integration,
-      getPresno,
-      synoId: value.id,
-      SynoRenderer,
-    }),
+      name && React.createElement(NamePart, {
+        namePart: name,
+        focused: presnoFocused === 0,
+        charFocused,
+      }),
+      value && React.createElement(SynoRenderer, {
+        integration,
+        getPresno,
+        synoId: value.id,
+        SynoRenderer,
+      }),
     );
   };
 };
