@@ -1,27 +1,57 @@
 {
  "name": "saliva-repl",
+ "displayName": "Saliva REPL",
  "version": "0.0.1",
  "description": "Larva of an experimental data structure editing interface",
+ "author": "Luke Persola",
+ "main": "./vscode/built/extension.js",
+ "engines": {
+  "node": "14.17.1",
+  "vscode": "^1.58.0"
+ },
+ "activationEvents": [
+  "onCommand:saliva-repl.helloWorld",
+  "onCustomEditor:saliva-repl.saliva-repl-custom-editor"
+ ],
+ "contributes": {
+  "commands": [
+   {
+    "command": "saliva-repl.helloWorld",
+    "title": "Hello World"
+   }
+  ],
+  "customEditors": [
+   {
+    "viewType": "saliva-repl.saliva-repl-custom-editor",
+    "displayName": "Perhaps Foliage",
+    "selector": [
+     {
+      "filenamePattern": "*.foli.json"
+     }
+    ],
+    "priority": "default"
+   }
+  ]
+ },
  "scripts": {
   "clean:web": "mkdir -p web/built; rm -dr web/built/*",
   "clean:el": "mkdir -p electron/built; rm -dr electron/built/*",
-  "clean:saliva": "mkdir -p src/extension-staging-area/saliva/built; rm -dr src/xtension-staging-area/saliva/built",
+  "clean:vsc": "mkdir -p vscode/built; rm -dr vscode/built/*",
+  "clean:saliva": "mkdir -p src/extension-staging-area/saliva/built; rm -dr src/extension-staging-area/saliva/built",
   "clean:pantheon": "mkdir -p src/extension-staging-area/pantheon/built; rm -dr src/extension-staging-area/pantheon/built",
   "build:web": "webpack --config webpack.web.config.js; cp ./web/src/server.js ./web/built/",
   "build:el": "webpack --config webpack.electron.config.js; cp ./electron/src/core-wrapper.js ./electron/built/; cp ./electron/src/renderer-preload.js ./electron/built/",
+  "build:vsc": "webpack --config webpack.vscode.config.js",
   "build:saliva": "webpack --config webpack.saliva.config.js",
   "build:pantheon": "webpack --config webpack.pantheon.config.js",
   "start:web": "node --inspect ./web/built/server.js",
   "start:el": "electron electron/built/core-wrapper.js",
+  "start:vsc": "code --extensionDevelopmentPath=.",
   "reweb": "npm run clean:web; npm run build:web; npm run start:web",
   "rel": "npm run clean:el; npm run build:el; npm run start:el",
   "type": "tsc --noEmit",
   "lint": "eslint --ext ts,tsx .",
   "lint-fix": "eslint --ext ts,tsx --fix ."
- },
- "author": "Luke Persola",
- "engines": {
-  "node": "14.17.1"
  },
  "dependencies": {
   "core-js": "3.15.2",
@@ -40,20 +70,13 @@
   "yaml-loader": "~0.6.0"
  },
  "devDependencies": {
-  "@babel/cli": "~7.14.5",
-  "@babel/core": "~7.14.6",
-  "@babel/eslint-parser": "~7.14.7",
-  "@babel/plugin-proposal-class-properties": "^7.14.5",
-  "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
-  "@babel/preset-env": "~7.14.7",
-  "@babel/preset-react": "~7.14.5",
-  "@babel/preset-typescript": "^7.14.5",
+  "@electron/typescript-definitions": "^8.9.5",
+  "@types/node": "14.17.1",
   "@types/react": "^17.0.14",
   "@types/redux": "^3.6.0",
+  "@types/vscode": "^1.58.0",
   "@typescript-eslint/eslint-plugin": "^4.28.4",
   "@typescript-eslint/parser": "^4.28.4",
-  "babel-jest": "~27.0.6",
-  "babel-loader": "~8.2.2",
   "css-loader": "~5.2.6",
   "eslint": "~7.30.0",
   "eslint-config-airbnb": "~18.2.1",

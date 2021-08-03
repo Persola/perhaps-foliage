@@ -9,7 +9,7 @@ if (typeof window !== 'undefined') {
   throw new Error('This script must be run in the main process, not the renderer');
 }
 
-export default (electron): void => {
+export default (electron: Electron): void => {
   const { app, BrowserWindow, ipcMain } = electron;
 
   app.on('ready', () => {

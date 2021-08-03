@@ -1,7 +1,9 @@
 node_modules
 web/built
 electron/built
+vscode/built
 src/extension-staging-area/saliva/dist
 src/extension-staging-area/pantheon/dist
 tmp
 **/.DS_Store
+*.code-workspace

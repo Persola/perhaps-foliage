@@ -9,6 +9,7 @@ module.exports = [
     ...allBuildsConfig,
     entry: './electron/src/core.ts',
     target: 'electron13.1-main',
+    mode: 'development',
     output: {
       path: path.resolve(__dirname, 'electron/built'),
       filename: 'core.js',
@@ -21,11 +22,13 @@ module.exports = [
         WEB_VERSION: false,
       }),
     ],
+    devtool: 'source-map',
   },
   { // renderer process
     ...allBuildsConfig,
     entry: './electron/src/renderer.ts',
     target: 'electron13.1-renderer',
+    mode: 'development',
     output: {
       path: path.resolve(__dirname, 'electron/built'),
       filename: 'renderer.js',
@@ -37,5 +40,6 @@ module.exports = [
         scriptSrc: './renderer.js',
       }),
     ],
+    devtool: 'source-map',
   },
 ];

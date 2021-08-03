@@ -10,6 +10,11 @@
   * [?] ability to export types to language libraries
   * actually make libraries for saliva and pantheon
  * presno and syno clarification
+ * VSCode
+  * use relevant API stuff (see docs)
+    * when activated from file extesnion, actually load that file
+    * document update sync
+    * saving files
  * extract visualization as package with editor as consumer
   * compare editor (without REPL) vs. REPL/console
   * at this point mostly just creating package boundary between code views
@@ -28,7 +33,6 @@
  * [?] add flow-runtime
  * [?] add prettier
   * also just look at prettier to get an idea of how to do formatting
- * [?] port to VSCode extension :(
 * new functionality
  * add ancestor context presenter API to support context-sensative grammars but make it explicit
   * context would be provided in presentation, not done in renderer
@@ -76,6 +80,5 @@
  * pick license
   * make sure contributors give up all copyright on offering contribution
  * package (some?) subprojects
- * [?] update babel es version
  * operationalize
  * release minimal viable project

@@ -33,7 +33,7 @@ export default class {
     );
 
     if (integration.styles) {
-      const head = document.head || document.getElementsByTagName('head')[0];
+      const head = document.getElementsByTagName('head')[0];
       const style = document.createElement('style');
       style.appendChild(document.createTextNode(integration.styles));
       head.appendChild(style);

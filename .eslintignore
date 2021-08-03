@@ -1,3 +1,5 @@
-dist/
+src/web/built/
+src/electron/built/
+src/vscode/built/
 tmp/
 test/

@@ -5,34 +5,32 @@ import type {
   CrossContextMessageSender,
 } from '../../src/types/cross-context/cross-context-messaging';
 
-if (typeof window === 'undefined') {
-  throw new Error('This script must be run in the main thread, not a web worker');
-}
-
-const core = new SharedWorker('./core.js', 'saliva-repl-core');
+console.log('in WEBVIEW FILE');
 
 let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
 (() => {
   const handlers = {};
-
-  registerCrossContextMessageHandler = (type, callback) => {
-    handlers[type] = callback;
+  registerCrossContextMessageHandler = (
+    messageType,
+    callback,
+  ) => {
+    handlers[messageType] = callback;
   };
 
-  core.port.onmessage = (ev: MessageEvent) => {
-    const handler = handlers[ev.data.type];
+  window.addEventListener('message', e => {
+    const { type, data } = e.data;
+    const handler = handlers[type];
     if (typeof handler !== 'function') {
-      throw new Error(`Received message of invalid type '${ev.data.type}' from core`);
+      throw new Error(`Received message of invalid type '${type}' from renderer`);
     }
-    handler(ev.data.data);
-  };
+    handler(data);
+  });
 })();
 
+const vscode = acquireVsCodeApi();
+
 const sendCrossContextMessage: CrossContextMessageSender = (type, data) => {
-  core.port.postMessage({
-    type,
-    data,
-  });
+  vscode.postMessage({ type, data });
 };
 
 initializeRendererWorker(registerCrossContextMessageHandler, sendCrossContextMessage);

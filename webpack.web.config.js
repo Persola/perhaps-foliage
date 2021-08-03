@@ -12,6 +12,7 @@ module.exports = {
     renderer: './web/src/renderer.ts',
   },
   target: 'browserslist',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'web/built'),
   },
@@ -26,4 +27,5 @@ module.exports = {
       scriptSrc: './renderer.js',
     }),
   ],
+  devtool: 'source-map',
 };

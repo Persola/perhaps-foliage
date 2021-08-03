@@ -1,5 +1,4 @@
 module.exports = {
-  mode: 'development',
   module: {
     rules: [
       {
@@ -39,5 +38,4 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-  devtool: 'source-map',
 };

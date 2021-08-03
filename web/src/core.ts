@@ -22,7 +22,11 @@ onconnect = connectEvent => {
     };
 
     port.onmessage = (ev: MessageEvent) => {
-      handlers[ev.data.type](ev.data.data);
+      const handler = handlers[ev.data.type];
+      if (typeof handler !== 'function') {
+        throw new Error(`Received message of invalid type '${ev.data.type}' from renderer`);
+      }
+      handler(ev.data.data);
     };
   })();
 
