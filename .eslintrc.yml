@@ -47,6 +47,8 @@ rules:
     - 0 # there exist non-trivial typing errors
   'prefer-destructuring':
     - 0 # sometimes impossible because of typing
+  'no-useless-constructor':
+    - 0 # eslint complains about constructors that contain property definitions, which when removed can cause an error
 overrides:
   -
     files:

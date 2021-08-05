@@ -1,5 +1,8 @@
-src/web/built/
-src/electron/built/
-src/vscode/built/
+web/built/
+electron/built/
+vscode/built/
+vscode-saliva/built/
+saliva/dist/
+pantheon/dist/
 tmp/
 test/

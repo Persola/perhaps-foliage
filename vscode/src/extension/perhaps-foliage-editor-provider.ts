@@ -11,7 +11,6 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
   public static register(
     context: vscode.ExtensionContext,
   ): vscode.Disposable {
-    console.log('SPACE DOGS in register');
     const provider = new PerhapsFoliageEditorProvider(context);
     const providerRegistration = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
@@ -25,15 +24,12 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
 
   constructor(
     private readonly context: vscode.ExtensionContext,
-  ) {
-    console.log('SPACE DOGS in constuctor');
-  }
+  ) { }
 
   public async resolveCustomTextEditor(
     document: vscode.TextDocument,
     webviewPanel: vscode.WebviewPanel,
   ): Promise<void> {
-    console.log('SPACE DOGS in resolve');
     let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
     (() => {
       const handlers = {};
@@ -57,7 +53,11 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
       webviewPanel.webview.postMessage({ type, data });
     };
 
-    initializeCoreWorker(registerCrossContextMessageHandler, sendCrossContextMessage);
+    initializeCoreWorker(
+      registerCrossContextMessageHandler,
+      sendCrossContextMessage,
+      // JSON.parse(document.getText()),
+    );
 
     webviewPanel.webview.options = {
       enableScripts: true,
@@ -71,6 +71,8 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
     webviewPanel.onDidDispose(() => {
       changeDocumentSubscription.dispose();
     });
+
+    // need to listen to onDidChangeTextDocument to update view
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {

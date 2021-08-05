@@ -1,0 +1,68 @@
+import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
+import type { Presno } from '../../src/types/presenter/presno';
+import type { SynoId } from '../../src/types/syntactic/syno-id';
+import type { SynoRendererProps } from '../../src/types/renderer/syno-renderer-props';
+import type { IntegrationDependencies } from '../../src/types/language-integration/integration-dependencies';
+import type { TitanPres } from '../types/presentations/titan';
+
+type Props = {
+  integration: PresentLanguageIntegration;
+  getPresno: (synoId: SynoId) => Presno;
+  // eslint-disable-line react/no-unused-prop-types
+  presno: TitanPres;
+  SynoRenderer: (props: SynoRendererProps) => JSX.Element;
+};
+export default (
+  integrationDependencies: IntegrationDependencies,
+): (
+  (props: Props) => JSX.Element
+) => {
+  const {
+    React,
+    components: { NamePart },
+  } = integrationDependencies;
+  return (props: Props) => {
+    const {
+      integration,
+      getPresno,
+      SynoRenderer,
+      presno: {
+        name,
+        focused,
+        presnoFocused,
+        charFocused,
+        valid,
+        child,
+        synoId,
+      },
+    } = props;
+    const classes = [
+      'syno',
+      'same-line',
+      'bubble-even',
+      'titan',
+      focused ? 'focused' : 'unfocused',
+      valid ? '' : 'invalid',
+    ].join(' ');
+    return React.createElement(
+      'div',
+      {
+        className: classes,
+        'data-syno-id': synoId,
+      },
+      name
+    && React.createElement(NamePart, {
+      namePart: name,
+      focused: presnoFocused === 0,
+      charFocused,
+    }),
+      child
+    && React.createElement(SynoRenderer, {
+      integration,
+      getPresno,
+      synoId: child.id,
+      SynoRenderer,
+    }),
+    );
+  };
+};

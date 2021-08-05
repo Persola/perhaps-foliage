@@ -11,11 +11,10 @@
     * [?] ability to export types to language libraries
   * presno and syno clarification
   * VSCode
-    * use relevant API stuff (see docs)
-       * when activated from file extesnion, actually load that file
-       * document update sync
-       * saving files
-  * extract visualization as package with editor as consumer
+    * make language-specific extesnions that use main extension
+      * when activated from file extesnion, actually load that file
+    * document update sync
+  * extract visualization as package with editors as consumers
     * compare editor (without REPL) vs. REPL/console
     * at this point mostly just creating package boundary between code views
       * need to pass TreeId with commands
@@ -24,6 +23,7 @@
     * that is to say, should unique IDs be replaced with ids based on the path from the root?
       * when a node is grafted, the editor can handle updating references
     * simplifies IDs and node ontology (as in identity, not structure)
+    * but are there times when references need to be hard? say across package boundaries
   * ascend to root extract error message
   * force actions to go through an interface (to become API) (by encapsulating store?)
   * wrap syntrees in file with metadata (root ID)
@@ -32,7 +32,6 @@
   * [?] use proxy-memoize or another selector memoizer
   * [?] add flow-runtime
   * [?] add prettier
-    * also just look at prettier to get an idea of how to do formatting
 * **new functionality**
   * complete syno deletion
   * add syno insertation

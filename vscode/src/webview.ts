@@ -5,8 +5,6 @@ import type {
   CrossContextMessageSender,
 } from '../../src/types/cross-context/cross-context-messaging';
 
-console.log('in WEBVIEW FILE');
-
 let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
 (() => {
   const handlers = {};
