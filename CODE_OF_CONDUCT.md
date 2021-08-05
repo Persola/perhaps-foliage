@@ -1,1 +1,1 @@
-Try to avoid personal conflict.
+Try to avoid interpersonal conflict.
