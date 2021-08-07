@@ -1,10 +1,11 @@
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-presno-map';
+import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+
 import focuses from './helpers/focuses';
 
-import type { StateSelector } from '../../src/types/state-selector';
-import type { MutablePresnoMap } from '../../src/types/presenter/mutable-presno-map';
-import type { Focus } from '../../src/types/editor-state/focus';
-import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
-import type { Syno } from '../../src/types/syntactic/syno';
 import type { VariableRef } from '../types/synos/variable-ref';
 import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs';
 import type { FunctionParameter } from '../types/synos/function-parameter';

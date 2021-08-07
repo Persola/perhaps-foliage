@@ -1,9 +1,9 @@
-import initializeRendererWorker from '../../src/initialize-renderer-worker';
+import initializeRendererWorker from 'saliva-repl/dist/initialize-renderer-worker';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from '../../src/types/cross-context/cross-context-messaging';
+} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
 
 let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
 (() => {
@@ -25,6 +25,7 @@ let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
   });
 })();
 
+// @ts-ignore this is available because we are in a VSCode webview
 const vscode = acquireVsCodeApi();
 
 const sendCrossContextMessage: CrossContextMessageSender = (type, data) => {

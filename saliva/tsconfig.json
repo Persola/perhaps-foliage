@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es6",
+		"lib": [
+      "es6",
+      "dom"
+    ],
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    // "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    // "strictNullChecks": true,
+    "noUnusedLocals": true,
+		"noFallthroughCasesInSwitch": true,
+		// "noUnusedParameters": true
+  },
+  "include": [
+    "input-resolver",
+    "interpreter",
+    "presenters",
+    "renderers",
+    "utils",
+    "initialize-integration",
+    "nor-primitive-id"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

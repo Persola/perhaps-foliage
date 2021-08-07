@@ -1,3 +1,7 @@
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+
+// @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../../primitives.yml';
 import interpretArgs from './interpret-function-call/interpret-args';
 import norPrimitive from './interpret-function-call/nor-primitive';
@@ -5,8 +9,6 @@ import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
 
 import type { Interpreter } from '../../types/interpreter/interpreter';
 import type { Scope } from '../../types/interpreter/scope';
-import type { StateSelector } from '../../../src/types/state-selector';
-import type { InterpretationResolution } from '../../../src/types/interpreter/interpretation-resolution';
 import type { FunctionCall } from '../../types/synos/function-call';
 import type { Argument } from '../../types/synos/argument';
 import type { BooleanLiteral } from '../../types/synos/boolean-literal';

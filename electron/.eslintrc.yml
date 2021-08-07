@@ -8,9 +8,6 @@ extends:
 parser: "@typescript-eslint/parser"
 plugins:
   - '@typescript-eslint'
-env:
-  browser: true
-  # this can be removed after extracting renderer into another repo
 rules:
   no-console: 0
   arrow-parens:
@@ -49,19 +46,6 @@ rules:
     - 0 # sometimes impossible because of typing
   'no-useless-constructor':
     - 0 # eslint complains about constructors that contain property definitions, which when removed can cause an error
-overrides:
-  -
-    files:
-      - 'web/server.js'
-    rules:
-      'no-console':
-       - 0
-  -
-    files:
-      - 'src/editor-core/epics/**'
-    rules:
-      '@typescript-eslint/explicit-module-boundary-types':
-        - 0 # better to just infer these
 settings:
   'import/resolver':
     node:

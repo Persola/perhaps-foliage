@@ -3,9 +3,9 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 8000;
-const ROOT_PATH = './web/built';
+const ROOT_PATH = './built';
 const DEFAULT_PATH = `${ROOT_PATH}/index.html`;
-const FAVICON_PATH = './web/favicon.ico';
+const FAVICON_PATH = './favicon.ico';
 
 http.createServer((request, response) => {
   console.log('request ', request.url);

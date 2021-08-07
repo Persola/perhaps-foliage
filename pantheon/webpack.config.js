@@ -1,25 +1,21 @@
 const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin'); // eslint-disable-line
-
 module.exports = {
   mode: 'none',
-  entry: './pantheon/initialize-integration.ts',
+  entry: './initialize-integration.ts',
   module: {
     rules: [
       {
-        test: /(\.ts|\.tsx)$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: [
           { loader: 'ts-loader' },
         ],
       },
       {
-        test: /editor-styles\.css/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         test: /\.lazy\.css/,
@@ -37,15 +33,12 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['.ts', '.js'],
   },
-  plugins: [
-    new NodePolyfillPlugin(),
-  ],
   devtool: 'eval-source-map',
   target: 'browserslist',
   output: {
-    path: path.resolve(__dirname, 'pantheon/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'pantheon-integration.js',
     library: {
       name: 'initializeIntegration',

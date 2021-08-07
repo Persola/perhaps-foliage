@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 contextBridge.exposeInMainWorld(
   'bridged',

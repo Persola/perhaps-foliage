@@ -1,7 +1,8 @@
-import type { Syno } from '../../../src/types/syntactic/syno';
+import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+
 import type { Scope } from './scope';
-import type { StateSelector } from '../../../src/types/state-selector';
-import type { InterpretationResolution } from '../../../src/types/interpreter/interpretation-resolution';
 
 export type Interpreter = (
   interpretee: Syno,

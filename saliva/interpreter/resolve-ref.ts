@@ -1,5 +1,6 @@
+import type { SynoRef } from 'saliva-repl/dist/types/syntactic/syno-ref';
+
 import type { Scope } from '../types/interpreter/scope';
-import type { SynoRef } from '../../src/types/syntactic/syno-ref';
 import type { LiteralValue } from '../types/synos/literal-value';
 
 export default (

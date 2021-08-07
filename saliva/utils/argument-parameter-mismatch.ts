@@ -1,5 +1,5 @@
-import type { StateSelector } from '../../src/types/state-selector';
-import type { SynoRef } from '../../src/types/syntactic/syno-ref';
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { SynoRef } from 'saliva-repl/dist/types/syntactic/syno-ref';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { Argument } from '../types/synos/argument';
 

@@ -1,0 +1,36 @@
+{
+  "name": "saliva-repl",
+  "displayName": "Saliva REPL",
+  "version": "0.0.2",
+  "description": "Larva of an experimental data structure editing interface",
+  "author": "Luke Persola",
+  "files": [
+    "package.json",
+    "dist/**"
+  ],
+  "scripts": {
+    "clean": "mkdir -p ./dist; rm -dr ./dist/*",
+    "build": "npm run clean; cp ./src/editor-styles.css ./src/index.html ./dist/; tsc",
+    "type": "tsc --noEmit",
+    "lint": "eslint --ext ts,tsx ."
+  },
+  "dependencies": {
+    "immer": "^9.0.5",
+    "mousetrap": "~1.6.5",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
+    "redux": "~4.1.0",
+    "redux-observable": "~2.0.0",
+    "rxjs": "~7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "14.17.1",
+    "@types/react": "^17.0.14",
+    "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "~7.30.0",
+    "eslint-config-airbnb": "~18.2.1",
+    "typescript": "^4.3.5"
+  }
+}

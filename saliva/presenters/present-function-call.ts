@@ -1,15 +1,17 @@
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
+import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-presno-map';
+import type { PresentSyno } from 'saliva-repl/dist/types/presenter/present-syno';
+import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+
+// @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../primitives.yml';
 import focuses from './helpers/focuses';
 import presentArguments from './present-function-call/present-arguments';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
-import type { StateSelector } from '../../src/types/state-selector';
-import type { PresnoRef } from '../../src/types/presenter/presno-ref';
-import type { MutablePresnoMap } from '../../src/types/presenter/mutable-presno-map';
-import type { PresentSyno } from '../../src/types/presenter/present-syno';
-import type { Focus } from '../../src/types/editor-state/focus';
-import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
-import type { Syno } from '../../src/types/syntactic/syno';
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { Argument } from '../types/synos/argument';

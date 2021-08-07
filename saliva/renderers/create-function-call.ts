@@ -1,14 +1,13 @@
-import * as ReactForType from 'react';
+import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { Presno } from 'saliva-repl/dist/types/presenter/presno';
+import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
+import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
 
 import type { FunctionCallRendererProps } from '../types/renderers/function-call-props';
-import type { SynoId } from '../../src/types/syntactic/syno-id';
-import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
-import type { Presno } from '../../src/types/presenter/presno';
-import type { PresnoRef } from '../../src/types/presenter/presno-ref';
-import type { IntegrationDependencies } from '../../src/types/language-integration/integration-dependencies';
 
 const argumentEls = (
-  React: (typeof ReactForType),
+  React,
   integration: PresentLanguageIntegration,
   getPresno: (synoId: SynoId) => Presno,
   argumentz: PresnoRef[],

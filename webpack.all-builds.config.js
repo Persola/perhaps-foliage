@@ -4,9 +4,12 @@ module.exports = {
       {
         test: /(\.ts|\.tsx)$/,
         exclude: /node_modules/,
-        use: [
-          { loader: 'ts-loader' },
-        ],
+        use: ['ts-loader'],
+      },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         test: /editor-styles\.css/,
@@ -16,22 +19,11 @@ module.exports = {
         ],
       },
       {
-        test: /\.lazy\.css/,
-        use: [
-          { loader: 'style-loader', options: { injectType: 'lazyStyleTag' } },
-          { loader: 'css-loader' },
-        ],
-      },
-      {
         test: /\.ya?ml$/,
         use: [
           { loader: 'json-loader' },
           { loader: 'yaml-loader' },
         ],
-      },
-      {
-        test: /\.handlebars$/,
-        loader: 'handlebars-loader',
       },
     ],
   },

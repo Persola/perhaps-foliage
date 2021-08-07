@@ -1,11 +1,11 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
 
-import initializeCoreWorker from '../../../src/initialize-core-worker';
+import initializeCoreWorker from 'saliva-repl/dist/initialize-core-worker';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from '../../../src/types/cross-context/cross-context-messaging';
+} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
 
 export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEditorProvider {
   public static register(
@@ -65,7 +65,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
     webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
     const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(e => {
-      console.log(`The doc has changed! would update view (unimplemented!) ${e.document.slice(0, 9)}`);
+      console.log(`The doc has changed! would update view (unimplemented!) \n${e}`);
     });
 
     webviewPanel.onDidDispose(() => {
@@ -80,7 +80,6 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(
         this.context.extensionUri,
-        'vscode',
         'built',
         'webview.js',
       ),

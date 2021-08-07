@@ -2,6 +2,10 @@
   * adopt unist
     * [?] and some utils from its ecosystem
   * break out packages
+    * remaining filepath dependencies:
+      * tsconfig's '..'
+      * webpack configs' HTMLplugin index path (el)
+  * redo tree validations using json-schema
   * integrations
     * keep hot loading?
       * if not hot loading in non-vsc builds, what? compare to vsc itself

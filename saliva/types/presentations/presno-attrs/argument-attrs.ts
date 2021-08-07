@@ -1,4 +1,4 @@
-import type { PresnoRef } from '../../../../src/types/presenter/presno-ref';
+import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 
 export type ArgumentPresAttrs = {
   readonly syntype: 'argument';

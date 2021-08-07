@@ -6,75 +6,55 @@
 
 ⏱️ *Note: The author plans on splitting this repo up into several new repos before too long.*
 
-[[repo](https://gitlab.com/Persola/saliva-repl)]
+[repo](https://gitlab.com/Persola/saliva-repl)
 
 ### About
-This repo contains a as-of-yet unentitled visual interface for writing and editing tree-based data structures (a structure editor). The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
+This repo contains an as-of-yet unentitled visual interface for writing and editing tree-based data structures (a structure editor). The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
 
-There are three builds:
-1. web (`./web/`)
-2. Electron (`./electron/`)
-3. a VSCode extension (`./vscode/`)
+##### Project Structure
 
-Actually editing also requires a language integration, which are included for two (so-called) languages:
+The repo contains seven NPM packages:
 
-1. Pantheon, a toy data spec used for testing (`./pantheon`)
-2. Saliva, a rudimentary programming language implemented as part of this project in order to demonstrate the capabilities of the editor (`./saliva`)
+* `./shared` contains the core of the editor
+* there are three build targets:
+  * a web app (`./web/`)
+  * a Electron app (`./electron/`)
+  * a VSCode extension (`./vscode/`)
+* To actually use the editor you also need an integration for the laguage you are editing, which are included for two (so-called) languages:
+  * Pantheon, a toy data spec used for testing (`./pantheon/`)
+  * Saliva, a rudimentary programming language implemented as part of this project in order to demonstrate the capabilities of the editor (`./saliva/`)
+* If you're using the VSCode build, you actually need an extension to knit together the editor extension and the language integration. This will soon exist for Saliva in `./vscode-saliva/`
 
+### How To Use
 
-### Setup
-I'm not going to be specific until I break up the repo because it'll differ by build. But I imagine it's not much beyond installing node and `npm install`.
+#### (1) Set up
+Leaving this vague for now, but if you have Node and a package manager, probably just `npm install` each package.
 
-### Build (editor)
+#### (2) Build the editor
 
-##### Web
-```shell
-npm run build:web
-```
+Choose one of the editor builds above, then `npm run build` there.
 
-##### Electron
-```shell
-npm run build:el
-```
+#### (4) Build a language integration
 
-##### VSCode
-```shell
-npm run build:vsc
-```
-### Build (language integration)
+As before, choose and language build and `npm run build` inside it. (If using `vscode-saliva`, build that, too.)
 
-##### Pantheon integration
-```shell
-npm run build:pantheon
-```
-
-##### Saliva integration
-```shell
-npm run build:saliva
-```
-
-### Run
+#### (5) Run
 
 ##### Web
-1. `npm run start:web`
+1. `npm run start`
 2. Navigate to `localhost:8000` in a browser
 
 ##### Electron
 ```shell
-npm run start:el
+npm run start
 ```
 An electron window should appear.
 
 ##### VSCode
 I haven't published the extension, but you can do a test run using the [VSCode's extension testing capabilities ](https://code.visualstudio.com/api/working-with-extensions/testing-extension) (basically: open the source in VSCode and press `F5`).
 
-### Use
-1. Download it, then as described above:
-    * setup
-    * build the editor in at least one way
-    * build at least one language integration
-    * run it
-1. Use the `load file` input to load the Pantheon or Saliva integration you built (should appear at `./saliva/dist/`(`saliva` or `pantheon`)`Integration.js)`
+#### (6) Use
+1. Use the `load file` input to load the Pantheon or Saliva integration you built (should appear at `./`(`saliva` or `pantheon`)`/dist/`(`saliva` or `pantheon`)`Integration.js`).
 2. Drag-n-drop a file in the corresponding language into the top part of the editor. Samples are found in `./`(`pantheon` or `saliva`)`/static/`.
 
 ### Type Check

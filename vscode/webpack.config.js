@@ -1,8 +1,9 @@
 const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
+
 const webpack = require('webpack'); // eslint-disable-line
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line
 
-const allBuildsConfig = require('./webpack.all-builds.config.js'); // eslint-disable-line @typescript-eslint/no-var-requires
+const allBuildsConfig = require('../webpack.all-builds.config.js'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -13,11 +14,11 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = [
   { // main extension process
     ...allBuildsConfig,
-    entry: './vscode/src/extension.ts',
+    entry: './src/extension.ts',
     target: 'node',
     mode: 'none',
     output: {
-      path: path.resolve(__dirname, 'vscode/built'),
+      path: path.resolve(__dirname, 'built'),
       filename: 'extension.js',
       libraryTarget: 'commonjs2',
     },
@@ -33,11 +34,11 @@ module.exports = [
   },
   { // webview process
     ...allBuildsConfig,
-    entry: './vscode/src/webview.ts',
+    entry: './src/webview.ts',
     target: 'electron13.1-renderer', // I don't think VSCode specifies, but presumably it's inside an electron renderer?
     mode: 'development',
     output: {
-      path: path.resolve(__dirname, 'vscode/built'),
+      path: path.resolve(__dirname, 'built'),
       filename: 'webview.js',
     },
     devtool: 'eval-source-map', //  https://github.com/microsoft/vscode/issues/125802

@@ -1,0 +1,62 @@
+{
+  "name": "saliva-repl-vscode-saliva",
+  "displayName": "Saliva REPL VSCode-Saliva",
+  "version": "0.0.2",
+  "description": "Saliva language extension for VSCode build of Saliva REPL",
+  "author": "Luke Persola",
+  "main": "./built/extension.js",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "activationEvents": [
+    "onCommand:saliva-repl.helloWorld",
+    "onCustomEditor:saliva-repl.saliva-repl-custom-editor"
+  ],
+  "contributes": {
+    "commands": [
+   {
+    "command": "saliva-repl.helloWorld",
+    "title": "Hello World"
+   }
+    ],
+    "customEditors": [
+   {
+    "viewType": "saliva-repl.saliva-repl-custom-editor",
+    "displayName": "Perhaps Foliage",
+    "selector": [
+     {
+      "filenamePattern": "*.foli.json"
+     }
+    ],
+    "priority": "default"
+   }
+    ]
+  },
+  "scripts": {
+    "clean": "mkdir -p ./built; rm -dr ./built/*",
+    "build": "webpack --config ./webpack.config.js",
+    "start": "code --extensionDevelopmentPath=.",
+    "type": "tsc --noEmit",
+    "lint": "eslint --ext ts,tsx ."
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "14.17.1",
+    "@types/vscode": "^1.58.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "css-loader": "~5.2.6",
+    "eslint": "~7.30.0",
+    "eslint-config-airbnb": "~18.2.1",
+    "html-webpack-plugin": "~5.3.2",
+    "json-loader": "~0.5.7",
+    "source-map-loader": "^3.0.0",
+    "style-loader": "~3.0.0",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.5",
+    "webpack": "~5.44.0",
+    "webpack-cli": "~4.7.2",
+    "yaml-loader": "~0.6.0"
+  }
+}

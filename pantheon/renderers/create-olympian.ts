@@ -1,8 +1,8 @@
-import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
-import type { Presno } from '../../src/types/presenter/presno';
-import type { SynoId } from '../../src/types/syntactic/syno-id';
-import type { SynoRendererProps } from '../../src/types/renderer/syno-renderer-props';
-import type { IntegrationDependencies } from '../../src/types/language-integration/integration-dependencies';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { Presno } from 'saliva-repl/dist/types/presenter/presno';
+import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
+import type { SynoRendererProps } from 'saliva-repl/dist/types/renderer/syno-renderer-props';
+import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
 import type { OlympianPres } from '../types/presentations/olympian';
 
 type Props = {

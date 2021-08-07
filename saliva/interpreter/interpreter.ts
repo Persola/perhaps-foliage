@@ -1,10 +1,11 @@
+import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call';
 import resolveRef from './resolve-ref';
 
-import type { Syno } from '../../src/types/syntactic/syno';
 import type { Scope } from '../types/interpreter/scope';
-import type { StateSelector } from '../../src/types/state-selector';
-import type { InterpretationResolution } from '../../src/types/interpreter/interpretation-resolution';
 import type { FunctionCall } from '../types/synos/function-call';
 import type { VariableRef } from '../types/synos/variable-ref';
 

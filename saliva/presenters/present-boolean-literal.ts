@@ -1,9 +1,10 @@
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-presno-map';
+import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+
 import focuses from './helpers/focuses';
 
-import type { StateSelector } from '../../src/types/state-selector';
-import type { MutablePresnoMap } from '../../src/types/presenter/mutable-presno-map';
-import type { Focus } from '../../src/types/editor-state/focus';
-import type { PresentLanguageIntegration } from '../../src/types/language-integration/present-language-integration';
 import type { BooleanLiteral } from '../types/synos/boolean-literal';
 import type { BooleanLiteralPresAttrs } from '../types/presentations/presno-attrs/boolean-literal-attrs';
 

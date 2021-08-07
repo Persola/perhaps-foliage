@@ -1,9 +1,9 @@
-import initializeRendererWorker from '../../src/initialize-renderer-worker';
+import initializeRendererWorker from 'saliva-repl/dist/initialize-renderer-worker';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from '../../src/types/cross-context/cross-context-messaging';
+} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
 
 if (typeof window === 'undefined') {
   throw new Error('This script must be run in the main thread, not a web worker');

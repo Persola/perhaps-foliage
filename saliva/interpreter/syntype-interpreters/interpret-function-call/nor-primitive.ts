@@ -1,8 +1,9 @@
+import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+
 import isBoolean from './is-boolean';
 
 import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
 import type { BooleanLiteralAttrs } from '../../../types/synos/syno-attrs/boolean-literal-attrs';
-import type { InterpretationResolution } from '../../../../src/types/interpreter/interpretation-resolution';
 
 const nor = (
   firstArg: BooleanLiteral | BooleanLiteralAttrs,

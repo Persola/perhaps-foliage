@@ -1,4 +1,4 @@
-import type { IntegrationDependencies } from '../../src/types/language-integration/integration-dependencies';
+import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
 import type { FunctionParameterRendererProps } from '../types/renderers/function-parameter-props';
 
 export default (
