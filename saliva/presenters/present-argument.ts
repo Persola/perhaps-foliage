@@ -3,7 +3,7 @@ import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-
 import type { PresentSyno } from 'saliva-repl/dist/types/presenter/present-syno';
 import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
 import focuses from './helpers/focuses';
 
@@ -12,7 +12,7 @@ import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argu
 
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   argument: Argument,
   scope: Record<string, unknown>,

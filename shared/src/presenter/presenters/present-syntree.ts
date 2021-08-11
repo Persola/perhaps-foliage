@@ -6,11 +6,11 @@ import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map';
 import type { Focus } from '../../types/editor-state/focus';
-import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from '../../types/language-integration/coreside-present-language-integration';
 
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   rootSynoId: SynoId,
   scope = {},
   focus: Focus | null,

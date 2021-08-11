@@ -5,14 +5,14 @@ import type { StateObservable } from 'redux-observable';
 
 import type { EditorState } from '../../types/editor-state';
 import type { StateSelector } from '../../types/state-selector';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { InterpretationResolutionSuccess } from '../../types/interpreter/interpretation-resolution-success';
 
 export default (
   action$: Observable<Action>,
   state$: StateObservable<EditorState>,
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: CoresideLanguageIntegration,
 ) => action$.pipe(
   filter((action: Action) => {
     if (action.type !== 'START_INTERPRETATION') {

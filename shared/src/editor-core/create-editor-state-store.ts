@@ -8,6 +8,8 @@ import type { Store, Action } from 'redux';
 
 import createState from '../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
+import deriveInverseReferenceMap from './derive-inverse-reference-map';
+import ascendToRoot from '../syntree-utils/ascend-to-root';
 
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 import endInterpretationReducer from './reducers/end-interpretation-reducer';
@@ -35,28 +37,51 @@ import { Navigate } from '../types/actions/navigate';
 import { SetFocusSyno } from '../types/actions/set-focus-syno';
 import { DestroyFocusedSyno } from '../types/actions/destroy-focused-syno';
 
-import type { AbsentLanguageIntegration } from '../types/language-integration/absent-language-integration';
+import type { CoresideLanguageIntegration } from '../types/language-integration/coreside-language-integration';
 import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
-import type { EditorStateWithoutIntegration } from '../types/editor-state/editor-state-without-integration';
 import type { MutableEditorState } from '../types/mutable-editor-state';
+import type { SynoMap } from '../types/syntactic/syno-map';
 
 type CreateStoreReturn = {
   editorStateStore: Store;
   stateSelector: StateSelector;
 };
 
-export default (integration: AbsentLanguageIntegration): CreateStoreReturn => {
-  const defaultEditorState: EditorStateWithoutIntegration = {
-    integrationId: null,
-    grammar: null,
-    primitives: null,
-    keyToNewSynoAttrs: null,
+export default (
+  integration: CoresideLanguageIntegration,
+  initialDocument: SynoMap,
+): CreateStoreReturn => {
+  let focus;
+  let synoMap;
+  let inverseReferenceMap;
+  if (initialDocument) {
+    const rootSyno = ascendToRoot(Object.keys(initialDocument)[0], initialDocument);
+    focus = {
+      synoId: rootSyno.id,
+      presnoIndex: null,
+      charIndex: null,
+    };
+    synoMap = initialDocument;
+    inverseReferenceMap = deriveInverseReferenceMap(
+      initialDocument,
+      rootSyno.id,
+    );
+  } else {
+    focus = null;
+    synoMap = null;
+    inverseReferenceMap = null;
+  }
+  const defaultEditorState: EditorState = {
+    integrationId: integration.id,
+    grammar: integration.grammar,
+    primitives: integration.primitives,
+    keyToNewSynoAttrs: integration.keyToNewSynoAttrs,
     lastIntegrationBindings: null,
-    synoMap: null,
+    synoMap,
     resultTree: null,
-    inverseReferenceMap: null,
-    focus: null,
+    inverseReferenceMap,
+    focus,
     resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,

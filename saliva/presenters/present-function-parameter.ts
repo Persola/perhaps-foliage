@@ -1,7 +1,7 @@
 import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
 import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-presno-map';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
 import focuses from './helpers/focuses';
 
@@ -10,7 +10,7 @@ import type { FunctionParameterPresAttrs } from '../types/presentations/presno-a
 
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   parameter: FunctionParameter,
   scope: Record<string, unknown>,

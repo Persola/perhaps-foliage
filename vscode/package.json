@@ -4,30 +4,14 @@
   "version": "0.0.2",
   "description": "VSCode extension build of Saliva REPL",
   "author": "Luke Persola",
-  "main": "./built/extension.js",
+  "publisher": "persola",
+  "main": "./dist/extension.js",
   "engines": {
     "vscode": "^1.58.0"
   },
-  "activationEvents": [
-    "onCustomEditor:saliva-repl.saliva-repl-custom-editor"
-  ],
-  "contributes": {
-    "customEditors": [
-   {
-    "viewType": "saliva-repl.saliva-repl-custom-editor",
-    "displayName": "Perhaps Foliage",
-    "selector": [
-     {
-      "filenamePattern": "*.foli.json"
-     }
-    ],
-    "priority": "default"
-   }
-    ]
-  },
   "scripts": {
-    "clean": "mkdir -p ./built; rm -dr ./built/*",
-    "build": "webpack --config ./webpack.config.js",
+    "clean": "mkdir -p ./dist; rm -dr ./dist/*",
+    "build": "npm run clean; tsc",
     "start": "code --extensionDevelopmentPath=$(pwd)",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."

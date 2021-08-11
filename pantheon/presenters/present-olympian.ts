@@ -2,7 +2,7 @@ import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
 import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-presno-map';
 import type { PresentSyno } from 'saliva-repl/dist/types/presenter/present-syno';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
 import focuses from './helpers/focuses';
 
@@ -11,7 +11,7 @@ import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olym
 
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   olympian: Olympian,
   scope: Record<string, unknown>,

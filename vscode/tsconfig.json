@@ -4,11 +4,13 @@
     "module": "es6",
     "moduleResolution": "node",
     "target": "es6",
+    "outDir": "dist",
 		"lib": [
       "es6",
       "dom"
     ],
     "sourceMap": true,
+    "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     // "noImplicitAny": true,
@@ -24,6 +26,6 @@
   ],
   "exclude": [
     "node_modules",
-    "built"
+    "dist"
   ]
 }

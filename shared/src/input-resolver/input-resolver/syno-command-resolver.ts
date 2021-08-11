@@ -1,12 +1,12 @@
 import type { StateSelector } from '../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 
 export default (
   input: string,
   state: StateSelector,
-  integration: LanguageIntegration,
+  integration: CoresideLanguageIntegration,
 ): (
   | ReplaceFocusedSyno
   | DestroyFocusedSyno

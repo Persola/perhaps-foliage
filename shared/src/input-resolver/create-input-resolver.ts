@@ -4,12 +4,12 @@ import synoCommandResolver from './input-resolver/syno-command-resolver';
 import navigationCommandResolver from './input-resolver/navigation-command-resolver';
 import textCommandResolver from './input-resolver/text-command-resolver';
 import type { StateSelector } from '../types/state-selector';
-import type { LanguageIntegration } from '../types/language-integration';
+import type { CoresideLanguageIntegration } from '../types/language-integration/coreside-language-integration';
 
 export default (
   editorStateStore: Store,
   state: StateSelector,
-  integration: LanguageIntegration, // eslint doesn't understand the parantheses around this type
+  integration: CoresideLanguageIntegration,
 ): // eslint-disable-next-line function-paren-newline
 ((input: string) => void) => {
   return (input: string): void => {

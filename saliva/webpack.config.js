@@ -1,8 +1,7 @@
 const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-module.exports = {
+const commonConfig = {
   mode: 'none',
-  entry: './initialize-integration.ts',
   module: {
     rules: [
       {
@@ -35,14 +34,45 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  devtool: 'eval-source-map',
   target: 'browserslist',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'saliva-integration.js',
-    library: {
-      name: 'initializeIntegration',
-      type: 'assign',
+};
+
+module.exports = [
+  { // hot loadable integration
+    ...commonConfig,
+    entry: './initialize-integration.ts',
+    devtool: 'eval-source-map',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'saliva-integration.js',
+      library: {
+        name: 'initializeIntegration',
+        type: 'assign',
+      },
     },
   },
-};
+  { // builtin integration: for core context
+    ...commonConfig,
+    entry: './core-integration.ts',
+    devtool: 'source-map',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'core-integration.js',
+      library: {
+        type: 'commonjs2',
+      },
+    },
+  },
+  { // builtin integration: for renderer context
+    ...commonConfig,
+    entry: './renderer-integration.ts',
+    devtool: 'source-map',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'renderer-integration.js',
+      library: {
+        type: 'commonjs2',
+      },
+    },
+  },
+];

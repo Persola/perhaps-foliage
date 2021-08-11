@@ -5,11 +5,11 @@ import type { Presno } from '../../types/presenter/presno';
 import type { MutablePresnoMap } from '../../types/presenter/mutable-presno-map';
 import type { PresentSyno } from '../../types/presenter/present-syno';
 import type { Focus } from '../../types/editor-state/focus';
-import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from '../../types/language-integration/coreside-present-language-integration';
 
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   parentId: SynoId | null,
   syno: Syno,

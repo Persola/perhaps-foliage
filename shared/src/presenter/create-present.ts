@@ -6,13 +6,13 @@ import presentSyntree from './presenters/present-syntree';
 import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { EditorPresentation } from '../types/presenter/editor-presentation';
-import type { LanguageIntegration } from '../types/language-integration';
-import type { PresentLanguageIntegration } from '../types/language-integration/present-language-integration';
+import type { CoresideLanguageIntegration } from '../types/language-integration/coreside-language-integration';
+import type { CoresidePresentLanguageIntegration } from '../types/language-integration/coreside-present-language-integration';
 
 const generatePresentation = (
   state: StateSelector,
   editorState: EditorState,
-  integration: LanguageIntegration,
+  integration: CoresideLanguageIntegration,
 ): EditorPresentation => {
   const { focus, resultSyntreeRootId } = editorState;
   let stage;
@@ -26,7 +26,7 @@ const generatePresentation = (
   } else {
     stage = presentFocusedSyntree(
       state,
-   integration as PresentLanguageIntegration,
+   integration as CoresidePresentLanguageIntegration,
    focus.synoId,
    {},
    focus,
@@ -40,7 +40,7 @@ const generatePresentation = (
   } else {
     result = presentSyntree(
       state,
-      integration as PresentLanguageIntegration,
+      integration as CoresidePresentLanguageIntegration,
       resultSyntreeRootId,
       {},
       null,
@@ -56,7 +56,7 @@ const generatePresentation = (
 export default (
   state: StateSelector,
   editorStateStore: Store,
-  integration: LanguageIntegration,
+  integration: CoresideLanguageIntegration,
 ): (
   () => EditorPresentation
 ) => {

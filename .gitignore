@@ -6,7 +6,7 @@ saliva/dist/
 saliva/node_modules/
 shared/dist/
 shared/node_modules/
-vscode/built/
+vscode/dist/
 vscode/node_modules/
 vscode-saliva/built/
 vscode-saliva/node_modules/

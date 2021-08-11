@@ -37,7 +37,12 @@ export default (electronFromWrapper: (typeof electron)): void => {
       renderer.webContents.send(type, data);
     };
 
-    initializeCoreWorker(registerCrossContextMessageHandler, sendCrossContextMessage);
+    initializeCoreWorker(
+      registerCrossContextMessageHandler,
+      sendCrossContextMessage,
+      null,
+      null,
+    );
 
     renderer.loadURL(`file://${__dirname}/index.html`);
   });

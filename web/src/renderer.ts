@@ -35,4 +35,8 @@ const sendCrossContextMessage: CrossContextMessageSender = (type, data) => {
   });
 };
 
-initializeRendererWorker(registerCrossContextMessageHandler, sendCrossContextMessage);
+initializeRendererWorker(
+  registerCrossContextMessageHandler,
+  sendCrossContextMessage,
+  null,
+);

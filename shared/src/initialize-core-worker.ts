@@ -4,17 +4,21 @@ import createEditorStateStore from './editor-core/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
 
-import type { AbsentLanguageIntegration } from './types/language-integration/absent-language-integration';
+import type { CoresideLanguageIntegration } from './types/language-integration/coreside-language-integration';
+import type { CoresidePresentLanguageIntegration } from './types/language-integration/coreside-present-language-integration';
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from './types/cross-context/cross-context-messaging';
 import type { DispatchAction } from './types/cross-context/messages-from-renderer/dispatch-action';
 import type { ResolveInput } from './types/cross-context/messages-from-renderer/resolve-input';
+import type { SynoMap } from './types/syntactic/syno-map';
 
 export default (
   registerCrossContextMessageHandler: CrossContextMessageHandlerRegister,
   sendCrossContextMessage: CrossContextMessageSender,
+  initialLanguageIntegration: (CoresidePresentLanguageIntegration | null),
+  initialDocument: (SynoMap | null),
 ): void => {
   enableMapSet();
 
@@ -23,22 +27,20 @@ export default (
     state independant of the editor state. It is kept in sync with language loads in
     editorStateSubscription below.
   */
-  const integration: AbsentLanguageIntegration = {
+  const integration: CoresideLanguageIntegration = initialLanguageIntegration || {
     id: null,
     grammar: null,
     primitives: null,
     keyToNewSynoAttrs: null,
     interpret: null,
     presenters: null,
-    renderers: null,
-    styles: null,
   };
 
   /*
     The state selector generated here abstracts access to the editor's Redux state. Its reference to
     the most recent version of the state is update below in editorStateSubscription.
   */
-  const { editorStateStore, stateSelector } = createEditorStateStore(integration);
+  const { editorStateStore, stateSelector } = createEditorStateStore(integration, initialDocument);
   const present = createPresent(
     stateSelector,
     editorStateStore,

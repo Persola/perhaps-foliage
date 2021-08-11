@@ -37,5 +37,10 @@ onconnect = connectEvent => {
     });
   };
 
-  initializeCoreWorker(registerCrossContextMessageHandler, sendCrossContextMessage);
+  initializeCoreWorker(
+    registerCrossContextMessageHandler,
+    sendCrossContextMessage,
+    null,
+    null,
+  );
 };

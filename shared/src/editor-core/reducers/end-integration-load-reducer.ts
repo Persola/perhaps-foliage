@@ -1,15 +1,15 @@
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { EndIntegrationLoad } from '../../types/actions/end-integration-load';
 import type { StateSelector } from '../../types/state-selector';
-import type { LanguageIntegration } from '../../types/language-integration';
-import type { PresentLanguageIntegration } from '../../types/language-integration/present-language-integration';
+import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
+import type { CoresidePresentLanguageIntegration } from '../../types/language-integration/coreside-present-language-integration';
 import type { MutableSynoMap } from '../../types/syntactic/mutables/mutable-syno-map';
 
 export default (
   state: StateSelector,
   action: EndIntegrationLoad,
   draftState: MutableEditorState,
-  mutateeIntegration: LanguageIntegration, // the integration object used by dependants
+  mutateeIntegration: CoresideLanguageIntegration, // the integration object used by dependants
 ): void => {
   if (state.loadingIntegration() === false) {
     throw new Error(
@@ -17,7 +17,7 @@ export default (
     );
   }
 
-  const presentMutateeIntegration: PresentLanguageIntegration = mutateeIntegration;
+  const presentMutateeIntegration: CoresidePresentLanguageIntegration = mutateeIntegration;
   Object.assign(presentMutateeIntegration, action.newIntegrationAttrs);
   const primitives: MutableSynoMap = action.newIntegrationAttrs.primitives;
   Object.assign(draftState, {

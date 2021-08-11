@@ -3,7 +3,7 @@ import synoMapReducer from './replace-focused-syno/syno-map';
 import type { StateSelector } from '../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
 import type { MutableEditorState } from '../../types/mutable-editor-state';
-import type { LanguageIntegration } from '../../types/language-integration';
+import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 import type { MutableSynoMap } from '../../types/syntactic/mutables/mutable-syno-map';
 
@@ -11,7 +11,7 @@ export default (
   state: StateSelector,
   action: ReplaceFocusedSyno,
   draftState: MutableEditorState,
-  integration: LanguageIntegration,
+  integration: CoresideLanguageIntegration,
 ): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring REPLACE_FOCUSED_SYNO action: no integration loaded');

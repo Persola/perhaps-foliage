@@ -6,24 +6,26 @@ import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
+import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
 
 export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
-  ): vscode.Disposable {
-    const provider = new PerhapsFoliageEditorProvider(context);
-    const providerRegistration = vscode.window.registerCustomEditorProvider(
+    integrationCore: PresentLanguageIntegration,
+  ): void {
+    const provider = new PerhapsFoliageEditorProvider(context, integrationCore);
+    const providerRegistration: vscode.Disposable = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
       provider,
     );
-
-    return providerRegistration;
+    context.subscriptions.push(providerRegistration);
   }
 
   private static readonly viewType = 'saliva-repl.saliva-repl-custom-editor';
 
   constructor(
     private readonly context: vscode.ExtensionContext,
+    private integrationCore: PresentLanguageIntegration,
   ) { }
 
   public async resolveCustomTextEditor(
@@ -56,7 +58,8 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
     initializeCoreWorker(
       registerCrossContextMessageHandler,
       sendCrossContextMessage,
-      // JSON.parse(document.getText()),
+      this.integrationCore,
+      JSON.parse(document.getText()),
     );
 
     webviewPanel.webview.options = {
@@ -81,22 +84,22 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
       vscode.Uri.joinPath(
         this.context.extensionUri,
         'built',
-        'webview.js',
+        'webview-with-renderers.js',
       ),
     );
 
     return /* html */`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <title>Saliva REPL</title>
-      </head>
-      <body>
-        <div id="editor" />
-        <script defer src="${scriptUri}"></script>
-      </body>
-    </html>
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8" />
+          <title>Saliva REPL</title>
+        </head>
+        <body>
+          <div id="editor" />
+          <script defer src="${scriptUri}"></script>
+        </body>
+      </html>
     `;
   }
 }

@@ -23,4 +23,5 @@ initializeRendererWorker(
   registerCrossContextMessageHandler,
   // @ts-ignore: bridged is provided by the preload
   (window.bridged.sendCrossContextMessage as CrossContextMessageSender),
+  null,
 );

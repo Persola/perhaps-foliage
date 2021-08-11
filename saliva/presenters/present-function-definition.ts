@@ -3,7 +3,7 @@ import type { MutablePresnoMap } from 'saliva-repl/dist/types/presenter/mutable-
 import type { PresentSyno } from 'saliva-repl/dist/types/presenter/present-syno';
 import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../primitives.yml';
@@ -16,7 +16,7 @@ import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/f
 const primitiveIds = Object.keys(primitives);
 export default (
   state: StateSelector,
-  integration: PresentLanguageIntegration,
+  integration: CoresidePresentLanguageIntegration,
   presnoMap: MutablePresnoMap,
   funkshunDef: FunctionDefinition,
   scope: Record<string, unknown>,
