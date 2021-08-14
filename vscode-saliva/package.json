@@ -28,7 +28,7 @@
   },
   "scripts": {
     "clean": "mkdir -p ./built; rm -dr ./built/*",
-    "build": "webpack --config ./webpack.config.js",
+    "build": "npm run clean; webpack --config ./webpack.config.js",
     "start": "code --extensionDevelopmentPath=$(pwd)",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."

@@ -11,9 +11,9 @@ import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language
 export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
-    integrationCore: PresentLanguageIntegration,
+    coreIntegration: PresentLanguageIntegration,
   ): void {
-    const provider = new PerhapsFoliageEditorProvider(context, integrationCore);
+    const provider = new PerhapsFoliageEditorProvider(context, coreIntegration);
     const providerRegistration: vscode.Disposable = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
       provider,

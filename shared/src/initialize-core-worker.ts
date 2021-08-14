@@ -22,6 +22,10 @@ export default (
 ): void => {
   enableMapSet();
 
+  if (initialLanguageIntegration === null && initialDocument !== null) {
+    throw new Error('Cannot initialize editor with a document but without a language integration.');
+  }
+
   /*
     The integration is a mutable object storing unserializable 3rd party scripts and therefore has
     state independant of the editor state. It is kept in sync with language loads in

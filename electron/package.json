@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "mkdir -p built; rm -dr built/*",
-    "build": "webpack --config ./webpack.config.js; cp ./src/core-wrapper.js ./built/; cp ./src/renderer-preload.js ./built/",
+    "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/core-wrapper.js ./built/; cp ./src/renderer-preload.js ./built/",
     "start": "electron ./built/core-wrapper.js",
     "redo": "npm run clean; npm run build; npm run start",
     "type": "tsc --noEmit",
