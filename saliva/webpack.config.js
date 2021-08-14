@@ -40,7 +40,7 @@ const commonConfig = {
 module.exports = [
   { // hot loadable integration
     ...commonConfig,
-    entry: './initialize-integration.ts',
+    entry: './src/initialize-integration.ts',
     devtool: 'eval-source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -53,7 +53,7 @@ module.exports = [
   },
   { // builtin integration: for core context
     ...commonConfig,
-    entry: './core-integration.ts',
+    entry: './src/core-integration.ts',
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -65,7 +65,7 @@ module.exports = [
   },
   { // builtin integration: for renderer context
     ...commonConfig,
-    entry: './renderer-integration.ts',
+    entry: './src/renderer-integration.ts',
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'dist'),

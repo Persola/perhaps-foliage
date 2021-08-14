@@ -2,7 +2,7 @@ const path = require('path'); // eslint-disable-line @typescript-eslint/no-var-r
 
 module.exports = {
   mode: 'none',
-  entry: './initialize-integration.ts',
+  entry: './src/initialize-integration.ts',
   module: {
     rules: [
       {

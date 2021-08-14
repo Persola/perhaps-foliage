@@ -20,16 +20,6 @@
 		// "noUnusedParameters": true
   },
   "include": [
-    "input-resolver",
-    "interpreter",
-    "presenters",
-    "renderers",
-    "utils",
-    "initialize-integration",
-    "nor-primitive-id"
+    "src"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
 }

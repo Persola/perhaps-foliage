@@ -1,4 +1,5 @@
 import version from './version';
+// @ts-ignore how do I configure TS to ignore webpacked imports?
 import keyToNewSynoAttrs from './input-resolver/key-to-new-syno-attrs.yml';
 import createRenderers from './renderers/create-renderers';
 // @ts-ignore how do I configure TS to ignore webpacked imports?

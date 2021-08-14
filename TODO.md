@@ -2,6 +2,7 @@
   * adopt unist
     * [?] and some utils from its ecosystem
   * break out packages
+    * create language-integration base project
     * remaining filepath dependencies:
       * tsconfig's '..'
       * webpack configs' HTMLplugin index path (el)
