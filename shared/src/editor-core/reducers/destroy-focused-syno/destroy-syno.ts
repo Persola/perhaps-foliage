@@ -4,11 +4,13 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
+import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
   draftState: MutableEditorState,
+  latestEdit: UnistlikeEdit[],
 ): void => {
   // TODO: delete orphaned children from store
   // TODO: and references outside parent in general (need backwards reference reference?)
@@ -24,6 +26,13 @@ export default (
     console.warn('ignoring attempted deletion of root syno');
     return;
   }
+
+  latestEdit.push({
+    type: 'delete_syno',
+    data: {
+      notEnuf: true,
+    },
+  });
 
   delete draftSynoMap[focusedPresnoId]; // cannot be primitive
 

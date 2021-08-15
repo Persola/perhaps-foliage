@@ -10,6 +10,7 @@ import type { Syno } from '../../../types/syntactic/syno';
 import type { MutableSyntypeAttrs } from '../../../types/syntactic/mutables/mutable-syntype-attrs';
 import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { CoreSynoAttrs } from '../../../types/syntactic/core-syno-attrs';
+import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 
 export default (
   state: StateSelector,
@@ -18,6 +19,7 @@ export default (
   draft: MutableEditorState,
   newSynoAttrs: MutableSyntypeAttrs,
   newSynoId: SynoId,
+  latestEdit: UnistlikeEdit[],
 ): void => {
   const parentRef = state.focusedSyno().parent;
   let parentAttr: SynoRef | null;
@@ -77,6 +79,13 @@ export default (
   if (Object.keys(draftSynoMap).includes(newSynoId)) {
     throw new Error('tried to create syno with in-use ID');
   }
+
+  latestEdit.push({
+    type: 'replace_syno',
+    data: {
+      notEnuf: true,
+    },
+  });
 
   draftSynoMap[newSynoId] = newSyno;
 };

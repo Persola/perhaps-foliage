@@ -13,10 +13,16 @@ import type {
 import type { DispatchAction } from './types/cross-context/messages-from-renderer/dispatch-action';
 import type { ResolveInput } from './types/cross-context/messages-from-renderer/resolve-input';
 import type { SynoMap } from './types/syntactic/syno-map';
+import type { UnistlikeEdit } from './types/unistlike/unistlike-edit';
+import type { DocumentStateTrackerInterface } from './types/document-state-tracker';
+
+const lastestEdit: UnistlikeEdit[] = [];
 
 export default (
   registerCrossContextMessageHandler: CrossContextMessageHandlerRegister,
   sendCrossContextMessage: CrossContextMessageSender,
+  emitDocumentChange: (edit: UnistlikeEdit) => void,
+  documentStateTracker: DocumentStateTrackerInterface,
   initialLanguageIntegration: (CoresidePresentLanguageIntegration | null),
   initialDocument: (SynoMap | null),
 ): void => {
@@ -44,7 +50,19 @@ export default (
     The state selector generated here abstracts access to the editor's Redux state. Its reference to
     the most recent version of the state is update below in editorStateSubscription.
   */
-  const { editorStateStore, stateSelector } = createEditorStateStore(integration, initialDocument);
+  const {
+    editorStateStore,
+    stateSelector,
+  } = createEditorStateStore(
+    integration,
+    initialDocument,
+    lastestEdit,
+  );
+
+  if (documentStateTracker) {
+    documentStateTracker.setStateSelector(stateSelector);
+  }
+
   const present = createPresent(
     stateSelector,
     editorStateStore,
@@ -66,6 +84,16 @@ export default (
 
   editorStateStore.subscribe(() => {
     stateSelector.state = editorStateStore.getState();
+
+    if (emitDocumentChange && lastestEdit.length !== 0) {
+      if (lastestEdit.length !== 1) {
+        throw new Error('getting multiple latest edits');
+      }
+      emitDocumentChange(lastestEdit.pop());
+    } else {
+      lastestEdit.length = 0;
+    }
+
     const { resultOutdated, interpreting } = editorStateStore.getState();
     sendCrossContextMessage(
       'render',

@@ -23,14 +23,9 @@ not really used yet:
     * "twister", but shouldn't that be the name for a user? tornados -> mixed metaphor?
     * there's "model", a word also user by balloon twister/balloon modeler
       * not great ratio between innate attractiveness and potential confusion with other software terms
-    * "balloon knot"
-      * just kidding
     * something related to knot theory?
       * "unknot", since twist balloons all technically unknots in that they can be tied (?)
       * plus progressive connotation of "unknotting" code
-    * clown stuff
-      * "clown gloves", but come on
-      * using this one for now to force myself to replace it later
     * "tie" or "ty", etc.
       * if "tier" is the user...
     * "knotworks"
@@ -43,13 +38,13 @@ not really used yet:
     * the idea of "directly seeing" "the data itself", directly seeing the structure
       * structure/shape/form
       * x-ray/ultraviolet/blacklight/
+      * the idea of removing an intermediary
+        * 'scales fell from eyes' is inadequate, but something like that
+        * myth or story trickster figure whose trick is mucking around as an intermediary?
     * jelly beans or gummies?
-    * snakes inside snakes?
     * colorful trees
       * Eucalyptus deglupta
       * chlorophyll/autumn/**foliage**
-    * something related to relevant visual art
-      * fauvism
-        * "signac"?
-      * color theory
-      * color and meaning
+    * primates
+      * a trichromat?
+      * a brachiator? (gibbons, siamangs)

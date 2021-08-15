@@ -10,14 +10,10 @@
   * integrations
     * keep hot loading?
       * if not hot loading in non-vsc builds, what? compare to vsc itself
-    * for vscode, users will download language ext
-      * editor core is dependency
     * document language integration interface
     * [?] ability to export types to language libraries
   * presno and syno clarification
   * VSCode
-    * make language-specific extesnions that use main extension
-      * when activated from file extesnion, actually load that file
     * document update sync
   * extract visualization as package with editors as consumers
     * compare editor (without REPL) vs. REPL/console

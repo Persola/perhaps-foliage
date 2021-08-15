@@ -6,12 +6,14 @@ import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 import type { MutableSynoMap } from '../../types/syntactic/mutables/mutable-syno-map';
+import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 
 export default (
   state: StateSelector,
   action: ReplaceFocusedSyno,
   draftState: MutableEditorState,
   integration: CoresideLanguageIntegration,
+  latestEdit: UnistlikeEdit[],
 ): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring REPLACE_FOCUSED_SYNO action: no integration loaded');
@@ -53,6 +55,7 @@ export default (
     draftState,
     newSynoAttrs,
     newSynoId,
+    latestEdit,
   );
   draftState.focus = {
     synoId: newSynoId,

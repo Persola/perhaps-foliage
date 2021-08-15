@@ -12,50 +12,54 @@ env:
   browser: true
   # this can be removed after extracting renderer into another repo
 rules:
-  no-console: 0
+  no-console: 'off'
   arrow-parens:
-    - 2
+    - 'error'
     - as-needed
   'import/extensions':
-    - 0
+    - 'off'
   no-plusplus:
-    - 0 # Airbnb's justification curiosly appears to only be applicable when you are not also
+    - 'off' # Airbnb's justification curiosly appears to only be applicable when you are not also
         # requiring semicolons, even though they do
   object-curly-newline:
-    - 2
+    - 'error'
     - consistent: true # disagreeing with Airbnb
   no-underscore-dangle:
-    - 0 # defaulting to opinionlessness
+    - 'off' # defaulting to opinionlessness
   consistent-return:
-    - 0 # this rule insists, for example, that callbacks passed to forEach must 'return undefined'
+    - 'off' # this rule insists, for example, that callbacks passed to forEach must 'return undefined'
   no-param-reassign:
-    - 0 # we're currently using mutation in some places, but we could revise to avoid this
+    - 'off' # we're currently using mutation in some places, but we could revise to avoid this
   arrow-body-style:
-    - 0 # tries to ban multiline arrow functions
+    - 'off' # tries to ban multiline arrow functions
   'react/jsx-filename-extension':
-    - 2
+    - 'error'
     - extensions:
       - '.js'
       - '.jsx'
       - '.ts'
       - '.tsx'
-  'no-use-before-define':
-    - 0 # yields error about React being imported too late in .tsx files
+  no-use-before-define:
+    - 'off' # yields error about React being imported too late in .tsx files
   '@typescript-eslint/no-use-before-define':
-    - 2
+    - 'error'
   '@typescript-eslint/ban-ts-comment':
-    - 0 # there exist non-trivial typing errors
-  'prefer-destructuring':
-    - 0 # sometimes impossible because of typing
-  'no-useless-constructor':
-    - 0 # eslint complains about constructors that contain property definitions, which when removed can cause an error
+    - 'off' # there exist non-trivial typing errors
+  prefer-destructuring:
+    - 'off' # sometimes impossible because of typing
+  no-useless-constructor:
+    - 'off' # eslint complains about constructors that contain property definitions, which when removed can cause an error
+  lines-between-class-members:
+    - 'error'
+    - 'always'
+    - 'exceptAfterSingleLine': true
 overrides:
   -
     files:
       - 'web/server.js'
     rules:
       'no-console':
-       - 0
+       - 'off'
 settings:
   'import/resolver':
     node:

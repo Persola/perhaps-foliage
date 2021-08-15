@@ -42,5 +42,7 @@ onconnect = connectEvent => {
     sendCrossContextMessage,
     null,
     null,
+    null,
+    null,
   );
 };

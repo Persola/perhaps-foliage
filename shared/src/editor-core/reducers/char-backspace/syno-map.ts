@@ -2,8 +2,13 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 import type { Syno } from '../../../types/syntactic/syno';
 import type { SynoRef } from '../../../types/syntactic/syno-ref';
+import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 
-export default (state: StateSelector, draftSynoMap: MutableSynoMap): void => {
+export default (
+  state: StateSelector,
+  draftSynoMap: MutableSynoMap,
+  latestEdit: UnistlikeEdit[],
+): void => {
   const { textHostRef } = state.grammar()[state.focusedSyno().syntype];
   let textHostSyno: Syno;
 
@@ -14,11 +19,21 @@ export default (state: StateSelector, draftSynoMap: MutableSynoMap): void => {
     textHostSyno = state.getSyno(ref.id);
   }
 
-  // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
-  draftSynoMap[textHostSyno.id].name = (
+  const newName = (
     // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
     textHostSyno.name.slice(0, state.focusedCharIndex() - 1)
     // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
     + textHostSyno.name.slice(state.focusedCharIndex(), textHostSyno.name.length)
   );
+
+  latestEdit.push({
+    type: 'character_deletion',
+    data: {
+      oldName: state.getSyno(textHostSyno.id).name,
+      newName,
+    },
+  });
+
+  // @ts-ignore: This isn't guaranteed because we don't validate nameHostRef vs. name in grammar
+  draftSynoMap[textHostSyno.id].name = newName;
 };

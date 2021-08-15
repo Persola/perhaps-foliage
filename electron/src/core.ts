@@ -42,6 +42,8 @@ export default (electronFromWrapper: (typeof electron)): void => {
       sendCrossContextMessage,
       null,
       null,
+      null,
+      null,
     );
 
     renderer.loadURL(`file://${__dirname}/index.html`);

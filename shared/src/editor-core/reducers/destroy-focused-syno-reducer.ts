@@ -5,11 +5,13 @@ import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 import type { StateSelector } from '../../types/state-selector';
 import type { MutableFocus } from '../../types/editor-state/mutable/mutable-focus';
+import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
   draftState: MutableEditorState,
+  latestEdit: UnistlikeEdit[],
 ): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring DESTROY_FOCUSED_SYNO action: no integration loaded');
@@ -41,6 +43,6 @@ export default (
     return;
   }
 
-  destroySyno(state, action, draftState);
+  destroySyno(state, action, draftState, latestEdit);
   navOut(state, focus);
 };

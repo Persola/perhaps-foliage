@@ -2,8 +2,13 @@ import synoMapReducer from './char-backspace/syno-map';
 
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { StateSelector } from '../../types/state-selector';
+import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 
-export default (state: StateSelector, draftState: MutableEditorState): void => {
+export default (
+  state: StateSelector,
+  draftState: MutableEditorState,
+  latestEdit: UnistlikeEdit[],
+): void => {
   if (state.integrationLoaded() === false) {
     console.warn('Ignoring CHAR_BACKSPACE action: no integration loaded');
     return;
@@ -22,6 +27,7 @@ export default (state: StateSelector, draftState: MutableEditorState): void => {
   synoMapReducer(
     state,
     draftState.synoMap,
+    latestEdit,
   );
 
   if (state.focusedCharIndex() === 0) {

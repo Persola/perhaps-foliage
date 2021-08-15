@@ -42,6 +42,7 @@ import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { MutableEditorState } from '../types/mutable-editor-state';
 import type { SynoMap } from '../types/syntactic/syno-map';
+import type { UnistlikeEdit } from '../types/unistlike/unistlike-edit';
 
 type CreateStoreReturn = {
   editorStateStore: Store;
@@ -51,6 +52,7 @@ type CreateStoreReturn = {
 export default (
   integration: CoresideLanguageIntegration,
   initialDocument: SynoMap,
+  latestEdit: UnistlikeEdit[],
 ): CreateStoreReturn => {
   let focus;
   let synoMap;
@@ -109,6 +111,7 @@ export default (
             (action as ReplaceFocusedSyno),
             draftState,
             integration,
+            latestEdit,
           );
           break;
         }
@@ -179,7 +182,11 @@ export default (
         }
 
         case 'CHAR_BACKSPACE': {
-          charBackspaceReducer(stateSelector, draftState);
+          charBackspaceReducer(
+            stateSelector,
+            draftState,
+            latestEdit,
+          );
           break;
         }
 
@@ -188,6 +195,7 @@ export default (
             stateSelector,
             (action as DestroyFocusedSyno),
             draftState,
+            latestEdit,
           );
           break;
         }

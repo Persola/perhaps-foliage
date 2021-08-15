@@ -8,7 +8,11 @@ import type {
 } from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
 import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
 
-export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEditorProvider {
+import UnistlikeDocument from './unistlike-document';
+import WebviewCollection from './webview-collection';
+import { disposeAll } from './dispose';
+
+export default class PerhapsFoliageEditorProvider implements vscode.CustomEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
     coreIntegration: PresentLanguageIntegration,
@@ -23,14 +27,46 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
 
   private static readonly viewType = 'saliva-repl.saliva-repl-custom-editor';
 
+  private readonly webviews = new WebviewCollection();
+
   constructor(
     private readonly context: vscode.ExtensionContext,
     private integrationCore: PresentLanguageIntegration,
   ) { }
 
-  public async resolveCustomTextEditor(
-    document: vscode.TextDocument,
+  async openCustomDocument(
+    uri: vscode.Uri,
+    openContext: { backupId?: string },
+    // ignore cancellation token because its use cannot be properly typed (must return document)
+  ): Promise<UnistlikeDocument> {
+    const document: UnistlikeDocument = await UnistlikeDocument.create(
+      uri,
+      openContext.backupId,
+    );
+
+    const listeners: vscode.Disposable[] = [];
+
+    listeners.push(document.onDidChange(e => {
+      // Tell VS Code that the document has been edited by the use.
+      this._onDidChangeCustomDocument.fire({
+        document,
+        ...e,
+      });
+    }));
+
+    listeners.push(document.onVscodeDidChangeDoc(e => {
+      throw new Error(`unimlemented: present and render all webviews ${e.toString().slice(0, 10)}`);
+    }));
+
+    document.onDidDispose(() => disposeAll(listeners));
+
+    return document;
+  }
+
+  public async resolveCustomEditor(
+    document: UnistlikeDocument,
     webviewPanel: vscode.WebviewPanel,
+    // ignore cancellation token because we're not using async yet
   ): Promise<void> {
     let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
     (() => {
@@ -41,6 +77,12 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
       ) => {
         handlers[messageType] = callback;
       };
+
+      registerCrossContextMessageHandler('ready', () => {
+        if (document.uri.scheme === 'untitled') {
+          throw new Error('unimplemented: if doc is fresh?');
+        }
+      });
 
       webviewPanel.webview.onDidReceiveMessage(e => {
         const handler = handlers[e.type];
@@ -55,27 +97,69 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomTextEd
       webviewPanel.webview.postMessage({ type, data });
     };
 
+    if (this.webviews.count() !== 0) {
+      throw new Error('unimplemented: opening second document for editor provider: need doc state');
+    }
+
     initializeCoreWorker(
       registerCrossContextMessageHandler,
       sendCrossContextMessage,
+      edit => document.makeEdit(edit),
+      document.documentStateTracker,
       this.integrationCore,
-      JSON.parse(document.getText()),
+      document.initialDocumentState,
     );
+
+    this.webviews.add(document.uri, webviewPanel, sendCrossContextMessage);
 
     webviewPanel.webview.options = {
       enableScripts: true,
     };
     webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
-    const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(e => {
-      console.log(`The doc has changed! would update view (unimplemented!) \n${e}`);
-    });
+    // const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(e => {
+    //   console.log(`The doc has changed! would update view (unimplemented!) \n${e}`);
+    // });
 
-    webviewPanel.onDidDispose(() => {
-      changeDocumentSubscription.dispose();
-    });
+    // webviewPanel.onDidDispose(() => {
+    //   changeDocumentSubscription.dispose();
+    // });
+  }
 
-    // need to listen to onDidChangeTextDocument to update view
+  private readonly _onDidChangeCustomDocument = new vscode.EventEmitter<
+    vscode.CustomDocumentEditEvent<UnistlikeDocument>
+  >();
+
+  public readonly onDidChangeCustomDocument = this._onDidChangeCustomDocument.event;
+
+  public saveCustomDocument( // eslint-disable-line
+    document: UnistlikeDocument,
+    cancellation: vscode.CancellationToken,
+  ): Thenable<void> {
+    return document.save(cancellation);
+  }
+
+  public saveCustomDocumentAs( // eslint-disable-line
+    document: UnistlikeDocument,
+    destination: vscode.Uri,
+    cancellation: vscode.CancellationToken,
+  ): Thenable<void> {
+    return document.saveAs(destination, cancellation);
+  }
+
+  public revertCustomDocument( // eslint-disable-line
+    document: UnistlikeDocument,
+    cancellation: vscode.CancellationToken,
+  ): Thenable<void> {
+    return document.revert(cancellation);
+  }
+
+  public backupCustomDocument( // eslint-disable-line
+    document: UnistlikeDocument,
+    context: vscode.CustomDocumentBackupContext,
+    cancellation: vscode.CancellationToken,
+  ): Thenable<vscode.CustomDocumentBackup> {
+    return document.backup(context.destination, cancellation);
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {
