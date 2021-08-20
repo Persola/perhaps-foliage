@@ -1,11 +1,11 @@
 import synoMapReducer from './replace-focused-syno/syno-map';
+import verifyReplacementAgainstGrammar from './replace-focused-syno/verify-replacement-against-grammar';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
 import type { MutableEditorState } from '../../types/mutable-editor-state';
 import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
-import type { MutableSynoMap } from '../../types/syntactic/mutables/mutable-syno-map';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 
 export default (
@@ -20,38 +20,25 @@ export default (
     return;
   }
 
-  const keyToNewSynoAttrs: KeyToNewSynoAttrs = integration.keyToNewSynoAttrs;
-
   if (state.treeLoaded() === false) {
     console.warn('Ignoring REPLACE_FOCUSED_SYNO action: no tree loaded');
     return;
   }
 
-  const draftSynoMap: MutableSynoMap = draftState.synoMap;
-  const { input } = action;
-  const focusSyno = state.focusedSyno();
+  const keyToNewSynoAttrs: KeyToNewSynoAttrs = integration.keyToNewSynoAttrs;
 
-  if (focusSyno.parent) {
-    const parent = state.getSyno(focusSyno.parent.id);
-    const newSynoType: string = keyToNewSynoAttrs[input].syntype;
-    const grammar = state.grammar();
-    const typesAllowedUnderParent: string[] = Object.values(
-      grammar[parent.syntype].children,
-    ).map(childGrammar => childGrammar.syntype);
+  verifyReplacementAgainstGrammar(
+    state,
+    action.input,
+    keyToNewSynoAttrs,
+  );
 
-    if (!typesAllowedUnderParent.includes(newSynoType)) {
-      throw new TypeError(
-        `Can't add syno of type '${newSynoType}' under parent of type '${parent.syntype}'`,
-      );
-    }
-  }
-
-  const newSynoAttrs = keyToNewSynoAttrs[input];
+  const newSynoAttrs = keyToNewSynoAttrs[action.input];
   const newSynoId = `inputValue-${String(Math.random()).substring(2)}`;
   synoMapReducer(
     state,
     action,
-    draftSynoMap,
+    draftState.synoMap,
     draftState,
     newSynoAttrs,
     newSynoId,

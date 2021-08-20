@@ -27,10 +27,13 @@ export default (
   );
 
   latestEdit.push({
-    type: 'character_deletion',
-    data: {
-      oldName: state.getSyno(textHostSyno.id).name,
-      newName,
+    undo: {
+      type: 'UPDATE_NAME',
+      // newName: textHostSyno.name,
+    },
+    redo: {
+      type: 'UPDATE_NAME',
+      // newName,
     },
   });
 

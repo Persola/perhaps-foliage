@@ -9,7 +9,6 @@ import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { Syno } from '../../../types/syntactic/syno';
 import type { MutableSyntypeAttrs } from '../../../types/syntactic/mutables/mutable-syntype-attrs';
 import type { SynoId } from '../../../types/syntactic/syno-id';
-import type { CoreSynoAttrs } from '../../../types/syntactic/core-syno-attrs';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 
 export default (
@@ -65,13 +64,9 @@ export default (
     };
   }
 
-  const newSynoCoreAttrs: CoreSynoAttrs = {
+  const newSyno: Syno = {
     id: newSynoId,
     parent: parentAttr,
-  };
-  const newSyno: Syno = {
-    id: newSynoCoreAttrs.id,
-    parent: newSynoCoreAttrs.parent,
     syntype: newSynoAttrs.syntype,
     value: newSynoAttrs.value,
   };
@@ -81,9 +76,11 @@ export default (
   }
 
   latestEdit.push({
-    type: 'replace_syno',
-    data: {
-      notEnuf: true,
+    undo: {
+      type: 'REPLACE_SYNO',
+    },
+    redo: {
+      type: 'REPLACE_SYNO',
     },
   });
 

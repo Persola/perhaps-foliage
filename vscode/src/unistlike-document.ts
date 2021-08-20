@@ -68,9 +68,9 @@ export default class UnistlikeDocument extends Disposable implements vscode.Cust
 
   makeEdit(edit: UnistlikeEdit): void {
     this._onWebviewDidChangeDoc.fire({
-      label: edit.type,
+      label: edit.redo.type,
       undo: async () => {
-        throw new Error('unimplemented: undo generic edit');
+        throw new Error('unimplemented: redo generic edit');
       },
       redo: async () => {
         throw new Error('unimplemented: redo generic edit');

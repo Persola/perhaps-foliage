@@ -23,8 +23,6 @@ export default (
     return;
   }
 
-  const focus: MutableFocus = draftState.focus;
-
   if (state.inPresno()) {
     throw new TypeError(
       'DESTROY_FOCUSED_SYNO action received while not focused on syno level',
@@ -43,6 +41,7 @@ export default (
     return;
   }
 
+  const focus: MutableFocus = draftState.focus;
   destroySyno(state, action, draftState, latestEdit);
   navOut(state, focus);
 };

@@ -24,15 +24,15 @@ export default (
     return;
   }
 
+  if (state.focusedCharIndex() === 0) {
+    console.warn('Ignoring backspace: at beginning of text');
+    return;
+  }
+
+  draftState.focus.charIndex -= 1;
   synoMapReducer(
     state,
     draftState.synoMap,
     latestEdit,
   );
-
-  if (state.focusedCharIndex() === 0) {
-    console.warn('Ignoring backspace: at beginning of text');
-  } else {
-    draftState.focus.charIndex -= 1;
-  }
 };

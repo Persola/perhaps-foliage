@@ -47,4 +47,20 @@ not really used yet:
       * chlorophyll/autumn/**foliage**
     * primates
       * a trichromat?
+        * gibbons are also trichromats [1]
       * a brachiator? (gibbons, siamangs)
+        * there are some cool looking species, but names are iffy
+        * I really like brachiation as analogy, though
+        * "**ulna**"
+          * because the freeing of the ulna was important for the development of brachiation [2]
+          * Latin for "elbow"
+          * not memorable enough?
+          * shit, it's really close to "Luna"
+            * cool, Luna already changed their name to "Enso" lol
+        * silhouette of a gibbon during the flight phase of ricochetal brachiation
+        * "swing"
+        * just "gib"?
+
+[1] Deegan JF, Jacobs GH. 2001. Spectral sensitivity of gibbons: implications for photopigments and color vision. Folia Primatologica 72:26-29.
+
+[2] Pennock, Emma ET, "From Gibbons to Gymnasts: A Look at the Biomechanics and Neurophysiology of Brachiation in Gibbons and its Human Rediscovery" (2013). Student Works. 2.

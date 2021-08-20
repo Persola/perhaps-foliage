@@ -12,15 +12,11 @@ export default (
   draftState: MutableEditorState,
   latestEdit: UnistlikeEdit[],
 ): void => {
-  // TODO: delete orphaned children from store
-  // TODO: and references outside parent in general (need backwards reference reference?)
   const { focusedPresnoId } = action;
 
   if (state.treeLoaded() === false) {
     return;
   }
-
-  const draftSynoMap: MutableSynoMap = draftState.synoMap;
 
   if (state.focusedSynoIsRoot()) {
     console.warn('ignoring attempted deletion of root syno');
@@ -28,13 +24,22 @@ export default (
   }
 
   latestEdit.push({
-    type: 'delete_syno',
-    data: {
-      notEnuf: true,
+    undo: {
+      type: 'CREATE_SYNO',
+    },
+    redo: {
+      type: 'DELETE_SYNO',
     },
   });
 
-  delete draftSynoMap[focusedPresnoId]; // cannot be primitive
+  const draftSynoMap: MutableSynoMap = draftState.synoMap;
+
+  if (!(focusedPresnoId in draftSynoMap)) {
+    throw new TypeError('Focused syno is not in editee syno map!?');
+  }
+
+  delete draftSynoMap[focusedPresnoId];
+  // TODO: recursively delete orphaned descendants
 
   const parentRef = state.getSyno(focusedPresnoId).parent;
   const referrerIds = new Set([
