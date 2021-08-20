@@ -23,6 +23,7 @@ export default (
   const parentRef = state.focusedSyno().parent;
   let parentAttr: SynoRef | null;
 
+  let oldChildId: string | null = null;
   if (!parentRef) {
     parentAttr = null;
   } else {
@@ -31,28 +32,26 @@ export default (
     let childIndex: number | null = null;
     forChildSynoOf(
       parent,
-      (childRef: SynoRef, key: string, index: number | null) => {
-        if (childRef.id === state.focusedSynoId()) {
+      (oldChildRef: SynoRef, key: string, index: number | null) => {
+        if (oldChildRef.id === state.focusedSynoId()) {
           childKey = key;
           childIndex = index || null;
+          oldChildId = oldChildRef.id;
         }
       },
     );
-    // should remove any uneeded (i.e., deleted) nodes from store
+
     const newParent = getDraftSyno(parent.id, state, draft);
+    const newChildRef: SynoRef = {
+      synoRef: true,
+      relation: 'child',
+      id: newSynoId,
+    };
 
     if (typeof childIndex === 'number' && typeof childKey === 'string') {
-      (newParent[childKey] as Array<SynoRef>).splice(childIndex, 1, {
-        synoRef: true,
-        relation: 'child',
-        id: newSynoId,
-      });
+      (newParent[childKey] as Array<SynoRef>).splice(childIndex, 1, newChildRef);
     } else if (typeof childKey === 'string') {
-      newParent[childKey] = {
-        synoRef: true,
-        relation: 'child',
-        id: newSynoId,
-      };
+      newParent[childKey] = newChildRef;
     } else {
       throw new Error('syno had parent which did not have them as a child');
     }
@@ -84,5 +83,9 @@ export default (
     },
   });
 
+  if (parentAttr) {
+    delete draftSynoMap[oldChildId];
+    // TODO: recursively delete orphaned descendants
+  }
   draftSynoMap[newSynoId] = newSyno;
 };
