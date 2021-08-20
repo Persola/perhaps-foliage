@@ -104,10 +104,12 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
     initializeCoreWorker(
       registerCrossContextMessageHandler,
       sendCrossContextMessage,
-      edit => document.makeEdit(edit),
-      document.documentStateTracker,
-      this.integrationCore,
-      document.initialDocumentState,
+      {
+        emitDocumentChange: edit => document.makeEdit(edit),
+        documentStateTracker: document.documentStateTracker,
+        initialLanguageIntegration: this.integrationCore,
+        initialDocument: document.initialDocumentState,
+      },
     );
 
     this.webviews.add(document.uri, webviewPanel, sendCrossContextMessage);

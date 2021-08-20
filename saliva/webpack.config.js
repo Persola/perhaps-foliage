@@ -43,7 +43,7 @@ module.exports = [
     entry: './src/initialize-integration.ts',
     devtool: 'eval-source-map',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'built'),
       filename: 'saliva-hotloadable-integration.js',
       library: {
         name: 'initializeIntegration',
@@ -56,7 +56,7 @@ module.exports = [
     entry: './src/core-integration.ts',
     devtool: 'source-map',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'built'),
       filename: 'saliva-core-integration.js',
       library: {
         type: 'commonjs2',
@@ -68,7 +68,7 @@ module.exports = [
     entry: './src/renderer-integration.ts',
     devtool: 'source-map',
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'built'),
       filename: 'saliva-renderer-integration.js',
       library: {
         type: 'commonjs2',

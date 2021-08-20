@@ -12,6 +12,7 @@ updateproject shared
 (updateproject web) &
 (updateproject saliva) &
 (updateproject pantheon) &
-(updateproject vscode-saliva) &
 
 wait
+
+updateproject vscode-saliva

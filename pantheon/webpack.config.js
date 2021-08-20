@@ -38,7 +38,7 @@ module.exports = {
   devtool: 'eval-source-map',
   target: 'browserslist',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'built'),
     filename: 'pantheon-integration.js',
     library: {
       name: 'initializeIntegration',

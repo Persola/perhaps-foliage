@@ -1,8 +1,8 @@
 electron/built/
 electron/node_modules/
-pantheon/dist/
+pantheon/built/
 pantheon/node_modules/
-saliva/dist/
+saliva/built/
 saliva/node_modules/
 shared/dist/
 shared/node_modules/

@@ -10,7 +10,7 @@ if (typeof window !== 'undefined') {
   throw new Error('This script must be run in the main process, not the renderer');
 }
 
-export default (electronFromWrapper: (typeof electron)): void => {
+export default (electronFromWrapper: (typeof Electron)): void => {
   const { app, BrowserWindow, ipcMain } = electronFromWrapper;
 
   app.on('ready', () => {
@@ -40,9 +40,6 @@ export default (electronFromWrapper: (typeof electron)): void => {
     initializeCoreWorker(
       registerCrossContextMessageHandler,
       sendCrossContextMessage,
-      null,
-      null,
-      null,
       null,
     );
 
