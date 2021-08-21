@@ -1,4 +1,4 @@
-import type { Grammar } from '../editor-state/grammar';
+import type { Grammar } from '../grammar/grammar';
 import type { SynoMap } from '../syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from '../language-integration/key-to-new-syno-attrs';
 

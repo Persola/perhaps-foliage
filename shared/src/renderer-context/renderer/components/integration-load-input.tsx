@@ -30,7 +30,7 @@ const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => 
       'dispatchAction',
       {
         action: {
-          type: 'START_INTEGRATION_LOAD',
+          type: 'START_INTEGRATION_HOTLOAD',
           fileText,
         },
       },

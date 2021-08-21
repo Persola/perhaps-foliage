@@ -4,16 +4,17 @@ import type { Action } from 'redux';
 
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { CoresideLanguageIntegration } from '../../../types/language-integration/coreside-language-integration';
-import type { StartIntegrationLoad } from '../../../types/actions/start-integration-load';
+import type { StartIntegrationHotload } from '../../../types/actions/start-integration-hotload';
+import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';
 
 export default (
   action$: Observable<Action>,
   integrationDependencies: IntegrationDependencies,
-) => action$.pipe(
+): Observable<EndIntegrationHotload> => action$.pipe(
   filter((action: Action) => {
-    return action.type === 'START_INTEGRATION_LOAD';
+    return action.type === 'START_INTEGRATION_HOTLOAD';
   }),
-  map((action: StartIntegrationLoad) => {
+  map((action: StartIntegrationHotload) => {
   // eval'd integration strings assign the integration object module to this variable name
     let initializeIntegration: {
       default: (id: IntegrationDependencies) => CoresideLanguageIntegration

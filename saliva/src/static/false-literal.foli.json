@@ -1,7 +1,7 @@
 {
   "1-1": {
     "id": "1-1",
-    "parent": false,
+    "parent": null,
     "syntype": "booleanLiteral",
     "value": false
   }

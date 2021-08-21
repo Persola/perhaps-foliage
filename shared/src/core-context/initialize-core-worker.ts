@@ -3,6 +3,7 @@ import { enableMapSet } from 'immer';
 import createEditorStateStore from './editor-core/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
+import validateGrammar from './code-loader/validate-grammar';
 
 import type { CoresideLanguageIntegration } from '../types/language-integration/coreside-language-integration';
 import type {
@@ -37,17 +38,23 @@ export default (
     state independant of the editor state. It is kept in sync with language loads in
     editorStateSubscription below.
   */
-  const integration: CoresideLanguageIntegration = (
-    (vscodeParams && vscodeParams.initialLanguageIntegration)
-    || {
+  let integration: CoresideLanguageIntegration;
+  if (vscodeParams) {
+    validateGrammar(
+      vscodeParams.initialLanguageIntegration.grammar,
+      vscodeParams.initialLanguageIntegration.id,
+    );
+    integration = vscodeParams.initialLanguageIntegration;
+  } else {
+    integration = {
       id: null,
       grammar: null,
       primitives: null,
       keyToNewSynoAttrs: null,
       interpret: null,
       presenters: null,
-    }
-  );
+    };
+  }
 
   const warnUser: Warn = (warning: string) => {
     sendCrossContextMessage('warn', {

@@ -46,6 +46,12 @@ rules:
     - 'error'
     - 'always'
     - 'exceptAfterSingleLine': true
+  quotes:
+    - 'error'
+    - 'single'
+    - 'avoidEscape': true
+  'prefer-template':
+    - 'off' # there's no good way to do multiline strings without concatenation, which this bans
 settings:
   'import/resolver':
     node:

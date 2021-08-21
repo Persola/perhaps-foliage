@@ -49,6 +49,7 @@ not really used yet:
       * a trichromat?
         * gibbons are also trichromats [1]
       * a brachiator? (gibbons, siamangs)
+        * "gibbon" taken by open source edu project
         * there are some cool looking species, but names are iffy
         * I really like brachiation as analogy, though
         * "**ulna**"
@@ -58,8 +59,32 @@ not really used yet:
           * shit, it's really close to "Luna"
             * cool, Luna already changed their name to "Enso" lol
         * silhouette of a gibbon during the flight phase of ricochetal brachiation
-        * "swing"
         * just "gib"?
+        * other interpretations of brachiation?
+          * "swing"
+          * "lope"
+          * "reach"
+          * "armstep"
+          * "hometree" or "treehome" or "treenest"
+      * other forms of arboreal locomotion
+        * the tree pangolin
+  * if I pick something totally non-analagous, what do I want?
+    * obviously homologous variants
+      * variant: project name
+      * prefix form
+        * one syllable
+        * maximum three letters, prefereably two
+      * verb form
+      * word for a user
+        * not as important
+    * singular visual symbol
+      * standard enough
+      * minimum two color areas
+      * minimum one decently chromatic color
+    * relatively easy for non-English speakers
+    * phonetic spelling
+    * spellable pronunciation
+    * simple spelling
 
 [1] Deegan JF, Jacobs GH. 2001. Spectral sensitivity of gibbons: implications for photopigments and color vision. Folia Primatologica 72:26-29.
 

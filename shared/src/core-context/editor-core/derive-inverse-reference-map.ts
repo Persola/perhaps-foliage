@@ -1,9 +1,11 @@
+import forSynoRefIn from '../../syntree-utils/for-syno-ref-in';
+import forChildSynoOf from '../../syntree-utils/for-child-syno-of';
+
 import type { SynoId } from '../../types/syntactic/syno-id';
 import type { SynoMap } from '../../types/syntactic/syno-map';
-import type { SynoRef } from '../../types/syntactic/syno-ref';
 import type { MutableInverseReferenceMap } from '../../types/editor-state/mutable/mutable-inverse-reference-map';
 
-const createOrAdd = (
+const addInverseRef = (
   irm: MutableInverseReferenceMap,
   referantId: SynoId,
   referrerId: SynoId,
@@ -16,35 +18,26 @@ const depthFirstBuildInverseReferences = (
   irm: MutableInverseReferenceMap,
   synoMap: SynoMap,
   currentId: SynoId,
-) => {
+  primitives: SynoMap,
+): void => {
   const currentSyno = synoMap[currentId];
-  Object.values(currentSyno).forEach(attrVal => {
-    // @ts-ignore: hm, how do we test otherwise? could type syno attrs as not being null, etc.
-    if (attrVal.synoRef === true) {
-      createOrAdd(irm, (attrVal as SynoRef).id, currentSyno.id);
-
-      if ((attrVal as SynoRef).relation === 'child') {
-        depthFirstBuildInverseReferences(irm, synoMap, (attrVal as SynoRef).id);
-      }
-    } else if (attrVal instanceof Array) {
-      // nested children
-      attrVal.forEach(el => {
-        if (el.synoRef === true) {
-          createOrAdd(irm, el.id, currentSyno.id);
-
-          if (el.relation === 'child') {
-            depthFirstBuildInverseReferences(irm, synoMap, el.id);
-          }
-        }
-      });
+  forSynoRefIn(currentSyno, synoRef => {
+    addInverseRef(irm, synoRef.id, currentSyno.id);
+  });
+  forChildSynoOf(currentSyno, childRef => {
+    // b/c for the moment in saliva primitives are funcall children (TODO: make into non-tree)
+    if (!Object.keys(primitives).includes(childRef.id)) {
+      depthFirstBuildInverseReferences(irm, synoMap, childRef.id, primitives);
     }
   });
-  return irm;
 };
 
 export default (
   synoMap: SynoMap,
   rootId: SynoId,
+  primitives: SynoMap,
 ): MutableInverseReferenceMap => {
-  return depthFirstBuildInverseReferences({}, synoMap, rootId);
+  const inverseReferenceMap = {};
+  depthFirstBuildInverseReferences(inverseReferenceMap, synoMap, rootId, primitives);
+  return inverseReferenceMap;
 };

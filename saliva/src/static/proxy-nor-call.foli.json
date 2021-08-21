@@ -2,7 +2,7 @@
   "1-1": {
     "id": "1-1",
     "syntype": "functionCall",
-    "parent": false,
+    "parent": null,
     "argumentz": [
       {
         "synoRef": true,
@@ -23,12 +23,12 @@
   },
   "1-2a": {
     "id": "1-2a",
+    "syntype": "argument",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-1"
     },
-    "syntype": "argument",
     "parameter": {
       "synoRef": true,
       "relation": "non-tree",
@@ -42,12 +42,12 @@
   },
   "1-3a": {
     "id": "1-3a",
+    "syntype": "argument",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-1"
     },
-    "syntype": "argument",
     "parameter": {
       "synoRef": true,
       "relation": "non-tree",
@@ -61,32 +61,32 @@
   },
   "1-2b": {
     "id": "1-2b",
+    "syntype": "booleanLiteral",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-2a"
     },
-    "syntype": "booleanLiteral",
     "value": true
   },
   "1-3b": {
     "id": "1-3b",
+    "syntype": "booleanLiteral",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-3a"
     },
-    "syntype": "booleanLiteral",
     "value": false
   },
   "1-4": {
     "id": "1-4",
+    "syntype": "functionDefinition",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-1"
     },
-    "syntype": "functionDefinition",
     "name": "proxyNor",
     "parameters": [
       {
@@ -108,37 +108,37 @@
   },
   "1-5": {
     "id": "1-5",
+    "syntype": "functionParameter",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-4"
     },
-    "syntype": "functionParameter",
     "valueSyntype": "booleanLiteral",
     "name": "first"
   },
   "1-6": {
     "id": "1-6",
+    "syntype": "functionParameter",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-4"
     },
-    "syntype": "functionParameter",
     "valueSyntype": "booleanLiteral",
     "name": "second"
   },
   "1-7": {
     "id": "1-7",
+    "syntype": "functionCall",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-4"
     },
-    "syntype": "functionCall",
     "callee": {
       "synoRef": true,
-      "relation": "non-tree",
+      "relation": "child",
       "id": "salivaPrimitives-nor"
     },
     "argumentz": [
@@ -156,12 +156,12 @@
   },
   "1-8a": {
     "id": "1-8a",
+    "syntype": "argument",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-7"
     },
-    "syntype": "argument",
     "parameter": {
       "synoRef": true,
       "relation": "non-tree",
@@ -175,12 +175,12 @@
   },
   "1-9a": {
     "id": "1-9a",
+    "syntype": "argument",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-7"
     },
-    "syntype": "argument",
     "parameter": {
       "synoRef": true,
       "relation": "non-tree",
@@ -194,12 +194,12 @@
   },
   "1-8b": {
     "id": "1-8b",
+    "syntype": "variableRef",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-8a"
     },
-    "syntype": "variableRef",
     "valueSyntype": "booleanLiteral",
     "referent": {
       "synoRef": true,
@@ -209,12 +209,12 @@
   },
   "1-9b": {
     "id": "1-9b",
+    "syntype": "variableRef",
     "parent": {
       "synoRef": true,
       "relation": "parent",
       "id": "1-9a"
     },
-    "syntype": "variableRef",
     "valueSyntype": "booleanLiteral",
     "referent": {
       "synoRef": true,

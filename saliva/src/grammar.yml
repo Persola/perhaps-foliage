@@ -1,36 +1,60 @@
 functionDefinition:
   rootable: true
+  textHostRef: null
   children:
     parameters:
       collection: true
       syntype: functionParameter
     body:
       collection: false
-      syntype: functionParameter
-  textHostRef: null
+      syntype: functionCall
+  nonTreeRefs: []
+  properties:
+    name: string
 functionParameter:
   rootable: false
-  children: {}
   textHostRef: null
+  children: {}
+  nonTreeRefs: []
+  properties:
+    name: string
+    valueSyntype: string
 functionCall:
   rootable: true
+  textHostRef: null
   children:
     argumentz:
       collection: true
       syntype: argument
-  textHostRef: null
+    callee:
+      collection: false
+      syntype: functionDefinition
+  nonTreeRefs: []
+  properties: {}
 argument:
   rootable: false
+  textHostRef: parameter
   children:
     value:
       collection: false
-      syntype: booleanLiteral
-  textHostRef: parameter
+      syntype:
+        - variableRef
+        - booleanLiteral
+  nonTreeRefs:
+    - parameter
+  properties: {}
 booleanLiteral:
   rootable: true
-  children: []
   textHostRef: null
+  children: {}
+  nonTreeRefs: []
+  properties:
+    value: boolean
 variableRef:
   rootable: true
-  children: []
   textHostRef: referent
+  children: {}
+  nonTreeRefs:
+    - referent
+  properties:
+    valueSyntype: string

@@ -48,6 +48,12 @@ rules:
     - 'off' # eslint complains about constructors that contain property definitions, which when removed can cause an error
   lines-between-class-members:
     - 'off'
+  quotes:
+    - 'error'
+    - 'single'
+    - 'avoidEscape': true
+  'prefer-template':
+    - 'off' # there's no good way to do multiline strings without concatenation, which this bans
 settings:
   'import/resolver':
     node:

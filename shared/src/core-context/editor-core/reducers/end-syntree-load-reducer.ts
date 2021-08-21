@@ -18,11 +18,21 @@ export default (
     return;
   }
 
+  if (action.newSynoMap === null) {
+    // load failed, just stop loading
+    draftState.loadingSyntree = false;
+    return;
+  }
+
   const newSyntree: MutableSynoMap = action.newSynoMap;
   const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], newSyntree);
   Object.assign(draftState, {
     synoMap: newSyntree,
-    inverseReferenceMap: deriveInverseReferenceMap(newSyntree, rootSyno.id),
+    inverseReferenceMap: deriveInverseReferenceMap(
+      newSyntree,
+      rootSyno.id,
+      state.primitives(),
+    ),
     focus: {
       synoId: rootSyno.id,
       presnoIndex: null,

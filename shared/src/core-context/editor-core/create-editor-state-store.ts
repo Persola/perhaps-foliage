@@ -14,11 +14,11 @@ import ascendToRoot from '../../syntree-utils/ascend-to-root';
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
-import endIntegrationLoadReducer from './reducers/end-integration-load-reducer';
+import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
 import navigateReducer from './reducers/navigate-reducer';
 import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
 import startInterpretationReducer from './reducers/start-interpretation-reducer';
-import startIntegrationLoadReducer from './reducers/start-integration-load-reducer';
+import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 import charBackspaceReducer from './reducers/char-backspace-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
@@ -29,13 +29,13 @@ import interpretEpic from './epics/interpret';
 
 import NamePart from '../../renderer-context/renderer/components/vis/name-part';
 
-import { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
-import { EndInterpretation } from '../../types/actions/end-interpretation';
-import { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
-import { EndIntegrationLoad } from '../../types/actions/end-integration-load';
-import { Navigate } from '../../types/actions/navigate';
-import { SetFocusSyno } from '../../types/actions/set-focus-syno';
-import { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
+import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
+import type { EndInterpretation } from '../../types/actions/end-interpretation';
+import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
+import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
+import type { Navigate } from '../../types/actions/navigate';
+import type { SetFocusSyno } from '../../types/actions/set-focus-syno';
+import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
@@ -70,6 +70,7 @@ export default (
     inverseReferenceMap = deriveInverseReferenceMap(
       initialDocument,
       rootSyno.id,
+      integration.primitives,
     );
   } else {
     focus = null;
@@ -140,9 +141,9 @@ export default (
         }
 
         case 'END_INTEGRATION_LOAD': {
-          endIntegrationLoadReducer(
+          endIntegrationHotloadReducer(
             stateSelector,
-            (action as EndIntegrationLoad),
+            (action as EndIntegrationHotload),
             draftState,
             integration,
           );
@@ -188,8 +189,8 @@ export default (
           break;
         }
 
-        case 'START_INTEGRATION_LOAD': {
-          startIntegrationLoadReducer(draftState);
+        case 'START_INTEGRATION_HOTLOAD': {
+          startIntegrationHotloadReducer(draftState);
           break;
         }
 
