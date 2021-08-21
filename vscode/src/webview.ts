@@ -1,4 +1,4 @@
-import initializeRendererWorker from 'saliva-repl/dist/initialize-renderer-worker';
+import initializeRendererWorker from 'saliva-repl/dist/renderer-context/initialize-renderer-worker';
 
 import type {
   CrossContextMessageHandlerRegister,

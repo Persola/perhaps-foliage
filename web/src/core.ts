@@ -1,4 +1,4 @@
-import initializeCoreWorker from 'saliva-repl/dist/initialize-core-worker';
+import initializeCoreWorker from 'saliva-repl/dist/core-context/initialize-core-worker';
 
 import type {
   CrossContextMessageHandlerRegister,
