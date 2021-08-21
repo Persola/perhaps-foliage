@@ -9,6 +9,7 @@ import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from '../types/cross-context/cross-context-messaging';
+import type { Warn } from '../types/cross-context/warn';
 import type { DispatchAction } from '../types/cross-context/messages-from-renderer/dispatch-action';
 import type { ResolveInput } from '../types/cross-context/messages-from-renderer/resolve-input';
 import type { UnistlikeEdit } from '../types/unistlike/unistlike-edit';
@@ -48,6 +49,12 @@ export default (
     }
   );
 
+  const warnUser: Warn = (warning: string) => {
+    sendCrossContextMessage('warn', {
+      warning,
+    });
+  };
+
   /*
     The state selector generated here abstracts access to the editor's Redux state. Its reference to
     the most recent version of the state is update below in editorStateSubscription.
@@ -59,6 +66,7 @@ export default (
     integration,
     vscodeParams && vscodeParams.initialDocument,
     lastestEdit,
+    warnUser,
   );
 
   if (vscodeParams) {

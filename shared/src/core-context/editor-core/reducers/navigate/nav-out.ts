@@ -1,7 +1,12 @@
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
+import type { Warn } from '../../../../types/cross-context/warn';
 
-export default (state: StateSelector, draftFocus: MutableFocus): void => {
+export default (
+  state: StateSelector,
+  draftFocus: MutableFocus,
+  warnUser: Warn,
+): void => {
   if (state.inText()) {
     draftFocus.charIndex = null;
     return;
@@ -13,7 +18,7 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
   }
 
   if (!state.focusedSyno().parent) {
-    console.warn('Ignoring navigation outwards: no parent (tree root)');
+    warnUser('Ignoring navigation outwards: no parent (tree root)');
     return;
   }
 

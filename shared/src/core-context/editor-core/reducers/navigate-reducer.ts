@@ -3,23 +3,25 @@ import navIn from './navigate/nav-in';
 import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
 
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { Navigate } from '../../../types/actions/navigate';
 import type { StateSelector } from '../../../types/state-selector';
+import type { Navigate } from '../../../types/actions/navigate';
+import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { Warn } from '../../../types/cross-context/warn';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 
 export default (
   state: StateSelector,
   action: Navigate,
   draftState: MutableEditorState,
+  warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring NAVIGATE action: no integration loaded');
+    warnUser('Ignoring NAVIGATE action: no integration loaded');
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring NAVIGATE action: no tree loaded');
+    warnUser('Ignoring NAVIGATE action: no tree loaded');
     return;
   }
 
@@ -28,22 +30,22 @@ export default (
 
   switch (direction) {
     case 'out': {
-      navOut(state, focus);
+      navOut(state, focus, warnUser);
       break;
     }
 
     case 'in': {
-      navIn(state, focus);
+      navIn(state, focus, warnUser);
       break;
     }
 
     case 'prev': {
-      navPrev(state, focus);
+      navPrev(state, focus, warnUser);
       break;
     }
 
     case 'next': {
-      navNext(state, focus);
+      navNext(state, focus, warnUser);
       break;
     }
 

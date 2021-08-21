@@ -37,12 +37,13 @@ import { Navigate } from '../../types/actions/navigate';
 import { SetFocusSyno } from '../../types/actions/set-focus-syno';
 import { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 
-import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { StateSelector } from '../../types/state-selector';
-import type { EditorState } from '../../types/editor-state';
-import type { MutableEditorState } from '../../types/mutable-editor-state';
+import type { CoresideLanguageIntegration } from '../../types/language-integration/coreside-language-integration';
 import type { SynoMap } from '../../types/syntactic/syno-map';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
+import type { Warn } from '../../types/cross-context/warn';
+import type { EditorState } from '../../types/editor-state';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 
 type CreateStoreReturn = {
   editorStateStore: Store;
@@ -53,6 +54,7 @@ export default (
   integration: CoresideLanguageIntegration,
   initialDocument: SynoMap,
   latestEdit: UnistlikeEdit[],
+  warnUser: Warn,
 ): CreateStoreReturn => {
   let focus;
   let synoMap;
@@ -112,6 +114,7 @@ export default (
             draftState,
             integration,
             latestEdit,
+            warnUser,
           );
           break;
         }
@@ -121,6 +124,7 @@ export default (
             stateSelector,
             (action as EndInterpretation),
             draftState,
+            warnUser,
           );
           break;
         }
@@ -130,6 +134,7 @@ export default (
             stateSelector,
             (action as EndAsyncSyntreeLoad),
             draftState,
+            warnUser,
           );
           break;
         }
@@ -149,6 +154,7 @@ export default (
             stateSelector,
             (action as Navigate),
             draftState,
+            warnUser,
           );
           break;
         }
@@ -158,6 +164,7 @@ export default (
             stateSelector,
             (action as SetFocusSyno),
             draftState,
+            warnUser,
           );
           break;
         }
@@ -167,12 +174,17 @@ export default (
             stateSelector,
             draftState,
             integration,
+            warnUser,
           );
           break;
         }
 
         case 'START_SYNTREE_LOAD': {
-          startSyntreeLoadReducer(stateSelector, draftState);
+          startSyntreeLoadReducer(
+            stateSelector,
+            draftState,
+            warnUser,
+          );
           break;
         }
 
@@ -186,6 +198,7 @@ export default (
             stateSelector,
             draftState,
             latestEdit,
+            warnUser,
           );
           break;
         }
@@ -196,6 +209,7 @@ export default (
             (action as DestroyFocusedSyno),
             draftState,
             latestEdit,
+            warnUser,
           );
           break;
         }
@@ -227,7 +241,7 @@ export default (
   const rootEpic = (action$, state$) => merge(
     loadIntegrationEpic(action$, integrationDependencies),
     loadSyntreeEpic(action$, state$, stateSelector, integration),
-    interpretEpic(action$, state$, stateSelector, integration),
+    interpretEpic(action$, state$, stateSelector, integration, warnUser),
   );
 
   epicMiddleware.run(rootEpic);

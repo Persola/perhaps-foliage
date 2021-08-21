@@ -3,29 +3,31 @@ import synoMapReducer from './char-backspace/syno-map';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { StateSelector } from '../../../types/state-selector';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
+import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
   draftState: MutableEditorState,
   latestEdit: UnistlikeEdit[],
+  warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring CHAR_BACKSPACE action: no integration loaded');
+    warnUser('Ignoring CHAR_BACKSPACE action: no integration loaded');
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring CHAR_BACKSPACE action: no tree loaded');
+    warnUser('Ignoring CHAR_BACKSPACE action: no tree loaded');
     return;
   }
 
   if (!state.inText()) {
-    console.warn('Ignoring CHAR_BACKSPACE action: not focused on text');
+    warnUser('Ignoring CHAR_BACKSPACE action: not focused on text');
     return;
   }
 
   if (state.focusedCharIndex() === 0) {
-    console.warn('Ignoring backspace: at beginning of text');
+    warnUser('Ignoring backspace: at beginning of text');
     return;
   }
 

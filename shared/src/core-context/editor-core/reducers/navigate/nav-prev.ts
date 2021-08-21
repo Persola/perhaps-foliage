@@ -4,18 +4,21 @@ import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
 import type { Syno } from '../../../../types/syntactic/syno';
+import type { Warn } from '../../../../types/cross-context/warn';
 
-export default (state: StateSelector, draftFocus: MutableFocus): void => {
+export default (
+  state: StateSelector,
+  draftFocus: MutableFocus,
+  warnUser: Warn,
+): void => {
   if (state.focusedSynoIsRoot()) {
-    console.warn('ignoring navigation to previous sibling: focus syno is root');
+    warnUser('ignoring navigation to previous sibling: focus syno is root');
     return;
   }
 
   if (state.inText()) {
     if (state.focusedCharIndex() === 0) {
-      console.warn(
-        'Ignoring navigation to previous sibling: already on first character',
-      );
+      warnUser('Ignoring navigation to previous sibling: already on first character');
       return;
     }
 
@@ -50,9 +53,7 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
       "Cannot find old focused presno ID among parent's children",
     );
   } else if (oldFocusedSynoBirthOrder === 0) {
-    console.warn(
-      'Ignoring navigation to previous sibling: already focused on first sibling',
-    );
+    warnUser('Ignoring navigation to previous sibling: already focused on first sibling');
   } else {
     const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedSynoBirthOrder - 1];
 

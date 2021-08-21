@@ -6,20 +6,22 @@ import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
+import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
   draftState: MutableEditorState,
   latestEdit: UnistlikeEdit[],
+  warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring DESTROY_FOCUSED_SYNO action: no integration loaded');
+    warnUser('Ignoring DESTROY_FOCUSED_SYNO action: no integration loaded');
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring DESTROY_FOCUSED_SYNO action: no tree loaded');
+    warnUser('Ignoring DESTROY_FOCUSED_SYNO action: no tree loaded');
     return;
   }
 
@@ -30,18 +32,16 @@ export default (
   }
 
   if (state.focusedSynoIsRoot()) {
-    console.warn("Ignoring syno destruction: can't destroy root syno");
+    warnUser('Ignoring syno destruction: can\'t destroy root syno');
     return;
   }
 
   if (state.isPrimitive(state.focusedSynoId())) {
-    console.warn(
-      "Ignoring syno destruction: can't destroy primitive or children",
-    );
+    warnUser('Ignoring syno destruction: can\'t destroy primitive or children');
     return;
   }
 
   const focus: MutableFocus = draftState.focus;
-  destroySyno(state, action, draftState, latestEdit);
-  navOut(state, focus);
+  destroySyno(state, action, draftState, latestEdit, warnUser);
+  navOut(state, focus, warnUser);
 };

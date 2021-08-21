@@ -5,12 +5,14 @@ import type { DestroyFocusedSyno } from '../../../../types/actions/destroy-focus
 import type { MutableEditorState } from '../../../../types/mutable-editor-state';
 import type { MutableSynoMap } from '../../../../types/syntactic/mutables/mutable-syno-map';
 import type { UnistlikeEdit } from '../../../../types/unistlike/unistlike-edit';
+import type { Warn } from '../../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
   action: DestroyFocusedSyno,
   draftState: MutableEditorState,
   latestEdit: UnistlikeEdit[],
+  warnUser: Warn,
 ): void => {
   const { focusedPresnoId } = action;
 
@@ -19,7 +21,7 @@ export default (
   }
 
   if (state.focusedSynoIsRoot()) {
-    console.warn('ignoring attempted deletion of root syno');
+    warnUser('ignoring attempted deletion of root syno');
     return;
   }
 

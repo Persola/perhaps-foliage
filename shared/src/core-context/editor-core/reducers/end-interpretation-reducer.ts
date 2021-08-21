@@ -4,19 +4,21 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { EndInterpretation } from '../../../types/actions/end-interpretation';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { MutableSyno } from '../../../types/syntactic/mutables/mutable-syno';
+import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
   action: EndInterpretation,
   draftState: MutableEditorState,
+  warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring END_INTERPRETATION action: no integration loaded');
+    warnUser('Ignoring END_INTERPRETATION action: no integration loaded');
     return;
   }
 
   if (state.treeLoaded() === false) {
-    console.warn('Ignoring END_INTERPRETATION action: no tree loaded');
+    warnUser('Ignoring END_INTERPRETATION action: no tree loaded');
     return;
   }
 

@@ -3,10 +3,15 @@ import getChildPresnoRefs from './get-child-presno-refs';
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
+import type { Warn } from '../../../../types/cross-context/warn';
 
-export default (state: StateSelector, draftFocus: MutableFocus): void => {
+export default (
+  state: StateSelector,
+  draftFocus: MutableFocus,
+  warnUser: Warn,
+): void => {
   if (state.inText()) {
-    console.warn('cannot navigate down: editing text');
+    warnUser('cannot navigate down: editing text');
     return;
   }
 
@@ -19,7 +24,7 @@ export default (state: StateSelector, draftFocus: MutableFocus): void => {
   const childPresnoRefs = getChildPresnoRefs(state.focusedSyno(), state);
 
   if (childPresnoRefs.length === 0) {
-    console.warn('ignoring navigation inwards: no children');
+    warnUser('ignoring navigation inwards: no children');
     return;
   }
 

@@ -3,6 +3,7 @@ import ascendToRoot from '../../../syntree-utils/ascend-to-root';
 
 import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { Warn } from '../../../types/cross-context/warn';
 import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
 import type { StateSelector } from '../../../types/state-selector';
 
@@ -10,9 +11,10 @@ export default (
   state: StateSelector,
   action: EndAsyncSyntreeLoad,
   draftState: MutableEditorState,
+  warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
-    console.warn('Ignoring END_SYNTREE_LOAD action: no integration loaded');
+    warnUser('Ignoring END_SYNTREE_LOAD action: no integration loaded');
     return;
   }
 

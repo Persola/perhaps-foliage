@@ -10,6 +10,7 @@ import type {
 } from '../types/cross-context/cross-context-messaging';
 import type { RendersideLanguageIntegration } from '../types/language-integration/renderside-language-integration';
 import type { Render } from '../types/cross-context/messages-from-core/render';
+import type { Warn } from '../types/cross-context/messages-from-core/warn';
 import type { IntegrationDependencies } from '../types/language-integration/integration-dependencies';
 import type { RendersideUninitializedPresentLanguageIntegration } from '../types/language-integration/renderside-uninitialized-present-language-integration';
 
@@ -54,6 +55,10 @@ export default (
       integration.keyToNewSynoAttrs ? Object.keys(integration.keyToNewSynoAttrs) : [],
       data.inputsToUnbind || [],
     );
+  });
+
+  registerCrossContextMessageHandler('warn', (data: Warn) => {
+    console.warn(data.warning);
   });
 
   window.addEventListener('load', () => {
