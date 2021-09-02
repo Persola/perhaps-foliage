@@ -5,8 +5,8 @@
     "moduleResolution": "node",
     "target": "es6",
 		"lib": [
-      "es6",
-      "dom"
+      "ES2020",
+      "DOM",
     ],
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,

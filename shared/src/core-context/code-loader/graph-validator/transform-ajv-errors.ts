@@ -1,6 +1,7 @@
 import * as Ajv from 'ajv';
 
 import type { JSONSchema7Definition } from 'json-schema';
+import type { Grammar } from '../../../types/grammar/grammar';
 
 function uniq<Type>(arr: Type[]): Type[] { return [...new Set(arr)]; }
 const range = max => [...Array(max).keys()];

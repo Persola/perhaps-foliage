@@ -11,14 +11,9 @@ export default (
     const newSynoType: string = keyToNewSynoAttrs[input].syntype;
     const grammar = state.grammar();
 
-    const typesAllowedUnderParent: string[] = [];
-    Object.values(grammar[parent.syntype].children).forEach(childEntry => {
-      if (childEntry.syntype instanceof Array) {
-        typesAllowedUnderParent.concat(childEntry.syntype);
-      } else {
-        typesAllowedUnderParent.push(childEntry.syntype);
-      }
-    });
+    const typesAllowedUnderParent = (
+      Object.values(grammar[parent.syntype].children).flat().map(childEntry => childEntry.syntype)
+    );
 
     if (!typesAllowedUnderParent.includes(newSynoType)) {
       throw new TypeError(

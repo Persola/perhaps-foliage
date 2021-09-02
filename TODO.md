@@ -1,11 +1,14 @@
 **currently**
+* extract base presenter (need to move back to shared!)
+* extract base renderer (need to move back to shared!)
 * presno vs. syno clarification
   * consider forChildSynoOf/forSynoRefIn vs. getChildpresnos
     * the presentation only contains synos, presnos are implicit inside syno presentations
   * left field: perpetuate presno tree?
+* editing
+  * complete syno deletion
 
 **maintenance**
-* Try changing the 'lib' compiler option to 'es2019' or later, flatten in veryifyReplacement...
 * why is integration passed to presenters?
 * make Saliva function call optionally non-tree instead of child (notably for primitives)
 * make textHostRef a kind of synoRef (to simplify grammar)
@@ -50,15 +53,15 @@
 * navigation
   * enter eigensyno
   * alt keys:
-    * binary seek
-    * select set (focus nudges boundary to include focused node)
-    * move/shift/reorder selected nodes
+    * binary seek [command/whatever key]
+    * select set (focus nudges boundary to include focused node) [shift key]
+    * move/shift/reorder selected nodes [option key]
       * e.g. move up/down in list
       * group selected nodes?
     * **?** switch been on and between nodes ('insert mode')--or should that be done through navigation as currently?
-    * can we do without given the shift? I don't think so, b/c copy/paste needs to be in between nodes
-      * can holes be used for what insert mode would be?
-  * **?** add selection (in addition to focus)
+      * can we do without given the shift? I don't think so, b/c copy/paste needs to be in between nodes
+        * can holes be used for what insert mode would be?
+  * add selection (in addition to focus)
   * **?** traversing nav history
   * **?** navigating non-tree syno references (how see references of current focus?)
 * function signatures

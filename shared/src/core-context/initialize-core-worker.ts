@@ -4,6 +4,7 @@ import createEditorStateStore from './editor-core/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
 import validateGrammar from './code-loader/validate-grammar';
+import validateGraph from './code-loader/validate-graph';
 
 import type { CoresideLanguageIntegration } from '../types/language-integration/coreside-language-integration';
 import type {
@@ -62,6 +63,18 @@ export default (
     });
   };
 
+  let initialDocument = null;
+  if (vscodeParams) {
+    validateGraph(
+      'document loaded through VSCode',
+      vscodeParams.initialDocument,
+      integration.id,
+      integration.grammar,
+      integration.primitives,
+    );
+    initialDocument = vscodeParams.initialDocument;
+  }
+
   /*
     The state selector generated here abstracts access to the editor's Redux state. Its reference to
     the most recent version of the state is update below in editorStateSubscription.
@@ -71,7 +84,7 @@ export default (
     stateSelector,
   } = createEditorStateStore(
     integration,
-    vscodeParams && vscodeParams.initialDocument,
+    initialDocument,
     lastestEdit,
     warnUser,
   );
