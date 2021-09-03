@@ -1,4 +1,5 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { merge } from 'rxjs';
 import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
@@ -67,11 +68,7 @@ export default (
       charIndex: null,
     };
     synoMap = initialDocument;
-    inverseReferenceMap = deriveInverseReferenceMap(
-      initialDocument,
-      rootSyno.id,
-      integration.primitives,
-    );
+    inverseReferenceMap = deriveInverseReferenceMap(initialDocument);
   } else {
     focus = null;
     synoMap = null;
@@ -224,10 +221,11 @@ export default (
   };
 
   const epicMiddleware = createEpicMiddleware();
-  // @ts-ignore: how do I let ts know it's OK to get undefined?
-  const composeEnhancers = (WEB_VERSION === true)// @ts-ignore: we know because of WEB_VERSION
-    ? (self.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) // eslint-disable-line
-    : compose;
+  const composeEnhancers = composeWithDevTools({
+    realtime: true,
+    port: 8001,
+    suppressConnectErrors: false,
+  });
   const editorStateStore = createStore(
     editorStateReducer,
     composeEnhancers(applyMiddleware(epicMiddleware)),

@@ -28,11 +28,7 @@ export default (
   const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], newSyntree);
   Object.assign(draftState, {
     synoMap: newSyntree,
-    inverseReferenceMap: deriveInverseReferenceMap(
-      newSyntree,
-      rootSyno.id,
-      state.primitives(),
-    ),
+    inverseReferenceMap: deriveInverseReferenceMap(newSyntree),
     focus: {
       synoId: rootSyno.id,
       presnoIndex: null,

@@ -42,6 +42,7 @@ export default (
   delete draftSynoMap[focusedPresnoId];
   // TODO: recursively delete orphaned descendants
 
+  // empty references to
   const referrerIds = state.inverseReferenceMap()[focusedPresnoId];
 
   referrerIds.forEach(referrerId => {
@@ -50,12 +51,19 @@ export default (
 
     forSynoRefIn(oldReferrer, (synoRef, key, index) => {
       if (synoRef.id === focusedPresnoId) {
-        if (index) { // ref in array
+        if (typeof index !== 'undefined') { // ref in array
           (newExReferrer[key] as SynoRef[]).splice(index, 1);
         } else {
           newExReferrer[key] = null;
         }
       }
     });
+  });
+
+  // forget references from
+  forSynoRefIn(state.getSyno(focusedPresnoId), synoRef => {
+    if (state.synoMap()[synoRef.id]) { // referent is in this tree
+      draftState.inverseReferenceMap[synoRef.id].delete(focusedPresnoId);
+    }
   });
 };

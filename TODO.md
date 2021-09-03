@@ -1,16 +1,22 @@
 **currently**
+* make Saliva function call optionally non-tree instead of child (notably for primitives)
 * extract base presenter (need to move back to shared!)
 * extract base renderer (need to move back to shared!)
-* presno vs. syno clarification
-  * consider forChildSynoOf/forSynoRefIn vs. getChildpresnos
-    * the presentation only contains synos, presnos are implicit inside syno presentations
-  * left field: perpetuate presno tree?
-* editing
-  * complete syno deletion
+* present per presno
+  * presentation infastructure
+  * render per presno
+* choose AST format
+  * (see 'research notes')
+  * still considering Unist
+  * ANTLR?
+  * throwing out a few lines...
 
 **maintenance**
-* why is integration passed to presenters?
 * make Saliva function call optionally non-tree instead of child (notably for primitives)
+* extract validity as service
+  * LSP? or similar pattern at least
+  * also move it out of presentation into syntaxland (a data structure on top of the tree)
+  * just one kind of AST-derived data among many, so develop pattern for any such thing
 * make textHostRef a kind of synoRef (to simplify grammar)
 * break out packages
   * clean up
@@ -36,6 +42,9 @@
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** use proxy-memoize or another selector memoizer
+* **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
+  * What I really need is what children each type is allowed
+    * BNF doesn't seem like a stright-forward expression of that
 
 **new functionality**
 * VSCode extension
@@ -45,11 +54,10 @@
   * render all existing values
     * first just test what's missing?
 * editing
-  * complete syno deletion
-  * add syno insertation
-    * add holes for necessary missing synos
-    * create a ambiguity egg, then just move it into place using shift key combo
-      * has type on low level, but automatically changes type by copying the last syno it was shifted over or nesting in a hole
+  * add buds
+    * they form holes (related to syno deletion)
+    * they can be placed and moved arbitarily to create synos
+      * they could autocomplete come info based on context
 * navigation
   * enter eigensyno
   * alt keys:
@@ -82,6 +90,9 @@
   * first just profile it a bit
 
 **design**
+* wait, so if call graph mode is supposed to be as native as lexical mode, doesn't it have to handle graphs generally?
+  * yes, but call graphs are still directed, so aiming for some kind of directed graph
+    * there are two implicit directions: tree parent ~ caller ~ referencer, tree child ~ callee ~ referent
 * wait, should synos actually have IDs?
   * that is to say, should unique IDs be replaced with IDs based on the path from the root?
     * when a node is grafted, the editor can handle updating references

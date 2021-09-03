@@ -1,11 +1,29 @@
 * The [Language Server Protocol](https://github.com/microsoft/language-server-protocol) is clearly designed for *text* editors, but is a good role model. We can also piggyback on the actualy protocol, but need to hack in our commands by using the other
-* parsing tools and parser generators -> universal AST interfce spec
-  * [unist](https://github.com/syntax-tree/unist) (AST format) from uifiedjs
-  * some more leads: https://tomassetti.me/parsing-in-javascript/
-* [Toward an engineering discipline for GRAMMARWARE](https://www.cs.vu.nl/grammarware/agenda/paper.pdf)
-* other structure editors
-  * Andrew Blinn's Fructure has a very similar visual expression!
-https://github.com/disconcision/fructure
+* I need an AST interface specifcation (currently custom)
+  * maybe a custom one is fine? b/c it's so minimal it's easy to transform other formats
+  * find one from a parser generator
+    * [unist](https://github.com/syntax-tree/unist) (AST format) from uifiedjs
+    * some more leads: https://tomassetti.me/parsing-in-javascript/
+    * [ANTLR's AST interface](https://www.antlr2.org/javadoc/antlr/collections/AST.html)
+      * http://www.springframework.net/docs/1.3.0-RC1/api/net-2.0/html/Spring.Core~Spring.Expressions.Parser.antlr.collections.AST.html
+      * **?** https://github.com/datacamp/antlr-ast
+    * Babelfish's UAST (dead)
+    * Jison seems dead
+    * GDK focused on Cobol family (probably too narrow)
+    * UniCC
+      * produces some kind of parse tree
+      * also has 'Abstract Syntax Tree Notations' (see manual) which construct ASTs, but in beta so probably not
+    * waxeye outputs parse trees as strings
+      * format appears to be
+        * newlines and intentation for nesting
+        * "->" for non-leaf children, "|" for leaf children
+    * OMeta seems like it probably has no format?
+    * tree sitter
+      * https://tree-sitter.github.io/tree-sitter/using-parsers#syntax-nodes
+      * https://github.com/tree-sitter/tree-sitter/blob/aea35461b1c5c1d47615759080aac1168ce03ec0/lib/include/tree_sitter/api.h
+    * not language independant (JS) but kind of cool https://github.com/benjamn/ast-types
+  * https://webia.lip6.fr/~phw//aGrUM/docs/last/doxygen/d5/dd1/using_graphs.html
+  * [Toward an engineering discipline for GRAMMARWARE](https://www.cs.vu.nl/grammarware/agenda/paper.pdf)
 * (incremental syntax specification) specifications
   * do they exist?
   * leads:
@@ -21,3 +39,11 @@ https://github.com/disconcision/fructure
       * Joao Saraiva and Doaitse Swierstra. Generic Attribute Grammars. In D. Parigot and M. Mernik, editors, Second Workshop on Attribute Grammars and their Applications, WAGA’99, pages 185–204, Amsterdam, The Netherlands, 1999. INRIA rocquencourt. 128
       * T. Teitelbaum and R. Chapman. Higher-order attribute grammars and editing environments. In ACM Sigplan ’90 Conference on Programming Languages Design and Implementation, pages 197–208, 1990.
       * H. Vogt, S. D. Swierstra, and M. F. Kuiper. Higher-order attribute grammars. In Conference on Programming Languages Design and Implementation, pages 131–145, 1990. Published as ACM SIGPLAN Notices, 24(7).
+  * "Modular Grammars"?
+* how to express language's AST structures (grammars)?
+  * currently have custom version
+  * is the grammar iself a good expression or too indirect?
+    * someone argues that here
+      * https://www.antlr3.org/pipermail/antlr-interest/2004-November/010165.html
+    * Backaus-Naur form for tree grammars?
+* https://ieeexplore.ieee.org/document/4656419?arnumber=4656419

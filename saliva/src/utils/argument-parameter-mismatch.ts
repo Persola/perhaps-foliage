@@ -58,22 +58,23 @@ export default (
   });
 
   if (unsatisfiedParamRefs.length !== 0 || extraArgs.length !== 0) {
-    let errorMessage = `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-   + "arguments don't match callee parameters ";
+    let errorMessage = (
+      `Failed to interpret function '${functionDefinition.name}' (ID ${functionDefinition.id}):`
+      + " arguments don't match parameters"
+    );
 
     if (unsatisfiedParamNames.length !== 0) {
-      errorMessage += `(unsatisfied parameters ${unsatisfiedParamNames.join(
-        ', ',
-      )}`;
-      errorMessage += `(IDs ${unsatisfiedParamRefs
-        .map(argRef => argRef.id)
-        .join(', ')}))`;
+      errorMessage += '\n  unsatisfied parameters: ';
+      unsatisfiedParamRefs.forEach(unsatisfiedParamRef => {
+        const param = state.getSyno(unsatisfiedParamRef.id);
+        errorMessage += `'${param.name}' (ID '${unsatisfiedParamRef.id}'), `;
+      });
     }
 
     if (extraArgs.length !== 0) {
-      errorMessage += `(extra arguments (IDs ${extraArgs
-        .map(arg => arg.id)
-        .join(', ')}))`;
+      errorMessage += `\n  extra arguments IDs: ${
+        extraArgs.map(arg => `'${arg.id}'`).join(', ')
+      })`;
     }
 
     return errorMessage;

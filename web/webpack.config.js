@@ -19,6 +19,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       WEB_VERSION: true,
+      'process.env.NODE_ENV': JSON.stringify('development'),
     }),
     new HtmlWebpackPlugin({
       inject: false,
