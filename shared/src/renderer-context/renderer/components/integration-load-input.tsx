@@ -11,31 +11,33 @@ type Props = {
 };
 
 const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => {
-  e.target.files[0].text().then(fileText => {
-    let initializeIntegration;
-    eval(fileText); // eslint-disable-line no-eval
-    const integrationDependencies = {
-      React, // pass in our react instance so integrations don't need to bundle their own
-      components: {
-        NamePart,
-      },
-    };
-    const newIntegration = initializeIntegration.default(integrationDependencies);
-    Object.assign(oldIntegration, {
-      keyToNewSynoAttrs: newIntegration.keyToNewSynoAttrs,
-      renderers: newIntegration.renderers,
-      styles: newIntegration.styles,
-    });
-    sendCrossContextMessage(
-      'dispatchAction',
-      {
-        action: {
-          type: 'START_INTEGRATION_HOTLOAD',
-          fileText,
+  if (e.target.files.length === 1) { // ignore on cancel
+    e.target.files[0].text().then(fileText => {
+      let initializeIntegration;
+      eval(fileText); // eslint-disable-line no-eval
+      const integrationDependencies = {
+        React, // pass in our react instance so integrations don't need to bundle their own
+        components: {
+          NamePart,
         },
-      },
-    );
-  });
+      };
+      const newIntegration = initializeIntegration.default(integrationDependencies);
+      Object.assign(oldIntegration, {
+        keyToNewSynoAttrs: newIntegration.keyToNewSynoAttrs,
+        renderers: newIntegration.renderers,
+        styles: newIntegration.styles,
+      });
+      sendCrossContextMessage(
+        'dispatchAction',
+        {
+          action: {
+            type: 'START_INTEGRATION_HOTLOAD',
+            fileText,
+          },
+        },
+      );
+    });
+  }
 };
 
 export default (props: Props): JSX.Element => {

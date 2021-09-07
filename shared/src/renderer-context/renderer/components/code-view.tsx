@@ -51,6 +51,9 @@ const dropCodeView = (sendCrossContextMessage, e) => {
       },
     );
   });
+  if (document.activeElement instanceof HTMLElement) {
+    (document.activeElement as HTMLElement).blur();
+  }
 };
 
 export default (props: Props): JSX.Element => {
