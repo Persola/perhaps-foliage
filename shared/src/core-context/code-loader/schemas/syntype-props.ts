@@ -20,7 +20,7 @@ export default (syntypeGrammarEntry: GrammarSyntypeEntry): Record<string, JSONSc
     },
   );
 
-  syntypeGrammarEntry.nonTreeRefs.forEach(nonTreeRefName => {
+  Object.keys(syntypeGrammarEntry.nonTreeRefs).forEach(nonTreeRefName => {
     props[nonTreeRefName] = synoRef('non-tree');
   });
 

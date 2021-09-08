@@ -34,6 +34,11 @@
       "relation": "non-tree",
       "id": "1-5"
     },
+    "textHost": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "1-5"
+    },
     "value": {
       "synoRef": true,
       "relation": "child",
@@ -49,6 +54,11 @@
       "id": "1-1"
     },
     "parameter": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "1-6"
+    },
+    "textHost": {
       "synoRef": true,
       "relation": "non-tree",
       "id": "1-6"
@@ -167,6 +177,11 @@
       "relation": "non-tree",
       "id": "salivaPrimitives-nor-param-1"
     },
+    "textHost": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "salivaPrimitives-nor-param-1"
+    },
     "value": {
       "synoRef": true,
       "relation": "child",
@@ -182,6 +197,11 @@
       "id": "1-7"
     },
     "parameter": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "salivaPrimitives-nor-param-2"
+    },
+    "textHost": {
       "synoRef": true,
       "relation": "non-tree",
       "id": "salivaPrimitives-nor-param-2"
@@ -205,6 +225,11 @@
       "synoRef": true,
       "relation": "non-tree",
       "id": "1-5"
+    },
+    "textHost": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "1-5"
     }
   },
   "1-9b": {
@@ -217,6 +242,11 @@
     },
     "valueSyntype": "booleanLiteral",
     "referent": {
+      "synoRef": true,
+      "relation": "non-tree",
+      "id": "1-6"
+    },
+    "textHost": {
       "synoRef": true,
       "relation": "non-tree",
       "id": "1-6"

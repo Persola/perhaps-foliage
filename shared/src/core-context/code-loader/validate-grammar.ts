@@ -22,24 +22,28 @@ const grammarValidator = (grammar: Grammar): GraphValidationResult => {
   const valid = validateGrammar(grammar);
 
   if (!valid) {
-    invalidate(result, ajv.errorsText(validateGrammar.errors));
+    invalidate(result, validateGrammar.errors.map(e => `${e.dataPath} ${e.message}`));
     return result;
   }
 
-  // TODO: validate textHostRef by name property
-  // requires grammar specifying syntype for textHostRef
-
-  // Object.entries(grammar).forEach(([syntypeName, syntypeEntry]): void => {
-  //   if (typeof syntypeEntry.textHostRef === 'string') {
-  //     const hostSyntypeEntry = grammar[need text host syntype];
-  //     if (!Object.values(hostSyntypeEntry.properties).includes('name')) {
-  //       invalidate(result, (
-  //         `Syntype '${syntypeName}' has textHostRef syntype '${syntypeEntry.textHostRef}'`
-  //         + ` but ${syntypeEntry.textHostRef} has no property named 'name'`
-  //       ));
-  //     }
-  //   }
-  // });
+  // validate texthost refs have names to read
+  Object.entries(grammar).forEach(([syntypeName, syntypeEntry]): void => {
+    const textHostSyntype = syntypeEntry.nonTreeRefs.textHost;
+    if (typeof textHostSyntype === 'string') {
+      const hostSyntypeEntry = grammar[textHostSyntype];
+      if (!Object.keys(hostSyntypeEntry.properties).includes('name')) {
+        invalidate(result, (
+          `Syntype '${syntypeName}' has textHost ref of syntype '${textHostSyntype}'`
+          + ` but ${textHostSyntype} has no property named 'name'`
+        ));
+      } else if (hostSyntypeEntry.properties.name !== 'string') {
+        invalidate(result, (
+          `Syntype '${syntypeName}' has textHost ref syntype '${textHostSyntype}'`
+          + ` but ${textHostSyntype}'s 'name' property is not typed as string`
+        ));
+      }
+    }
+  });
 
   return result;
 };

@@ -1,6 +1,5 @@
 functionDefinition:
   rootable: true
-  textHostRef: null
   children:
     parameters:
       collection: true
@@ -8,20 +7,18 @@ functionDefinition:
     body:
       collection: false
       syntype: functionCall
-  nonTreeRefs: []
+  nonTreeRefs: {}
   properties:
     name: string
 functionParameter:
   rootable: false
-  textHostRef: null
   children: {}
-  nonTreeRefs: []
+  nonTreeRefs: {}
   properties:
     name: string
     valueSyntype: string
 functionCall:
   rootable: true
-  textHostRef: null
   children:
     argumentz:
       collection: true
@@ -29,11 +26,10 @@ functionCall:
     callee:
       collection: false
       syntype: functionDefinition
-  nonTreeRefs: []
+  nonTreeRefs: {}
   properties: {}
 argument:
   rootable: false
-  textHostRef: parameter
   children:
     value:
       collection: false
@@ -41,20 +37,20 @@ argument:
         - variableRef
         - booleanLiteral
   nonTreeRefs:
-    - parameter
+    parameter: functionParameter
+    textHost: functionParameter
   properties: {}
 booleanLiteral:
   rootable: true
-  textHostRef: null
   children: {}
-  nonTreeRefs: []
+  nonTreeRefs: {}
   properties:
     value: boolean
 variableRef:
   rootable: true
-  textHostRef: referent
   children: {}
   nonTreeRefs:
-    - referent
+    referent: functionParameter
+    textHost: functionParameter
   properties:
     valueSyntype: string

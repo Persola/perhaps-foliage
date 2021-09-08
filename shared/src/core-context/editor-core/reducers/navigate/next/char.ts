@@ -8,7 +8,7 @@ export default (
   warnUser: Warn,
 ): void => {
   const oldSyno = state.focusedSyno();
-  const nameHostRefName: string | null = state.grammar()[oldSyno.syntype].textHostRef;
+  const nameHostRefName: string | null = state.grammar()[oldSyno.syntype].nonTreeRefs.textHostRef;
   let oldName: string;
 
   if (!nameHostRefName) {

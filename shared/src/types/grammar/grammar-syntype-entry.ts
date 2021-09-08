@@ -1,6 +1,5 @@
 export type GrammarSyntypeEntry = Readonly<{
   readonly rootable: boolean;
-  readonly textHostRef: string | null;
   readonly children: Readonly<
     Record<
       string,
@@ -10,7 +9,9 @@ export type GrammarSyntypeEntry = Readonly<{
       }
     >
   >;
-  readonly nonTreeRefs: Readonly<string[]>;
+  readonly nonTreeRefs: Readonly<
+    Record<string, string>
+  >;
   readonly properties: Readonly<
     Record<string, string>
   >;

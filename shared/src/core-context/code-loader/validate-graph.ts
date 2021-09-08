@@ -63,7 +63,7 @@ const graphValidator = (
   );
   updateResult(
     result,
-    validateNonTreeDependencies(contextlesslyValidGraph, primitives),
+    validateNonTreeDependencies(contextlesslyValidGraph, grammar, primitives),
   );
 
   return result;

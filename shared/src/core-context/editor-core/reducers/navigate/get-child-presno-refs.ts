@@ -21,7 +21,7 @@ export default (
   syno: Syno,
   state: StateSelector,
 ): ReadonlyArray<ChildPresnoRef> => {
-  const { textHostRef } = state.grammar()[syno.syntype];
+  const { textHostRef } = state.grammar()[syno.syntype].nonTreeRefs;
   let nameFocusable;
 
   if (!textHostRef) {

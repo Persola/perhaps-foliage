@@ -4,15 +4,26 @@ export default {
   patternProperties: {
     '^.*$': {
       type: 'object',
+      additionalProperties: false,
       properties: {
         rootable: { type: 'boolean' },
-        textHostRef: { type: ['null', 'string'] },
+        properties: {
+          type: 'object',
+          additionalProperties: false,
+          patternProperties: { '^.*$': { type: 'string' } },
+        },
+        nonTreeRefs: {
+          type: 'object',
+          additionalProperties: false,
+          patternProperties: { '^.*$': { type: 'string' } },
+        },
         children: {
           type: 'object',
           additionalProperties: false,
           patternProperties: {
             '^.*$': {
               type: 'object',
+              additionalProperties: false,
               properties: {
                 collection: { type: 'boolean' },
                 syntype: {
