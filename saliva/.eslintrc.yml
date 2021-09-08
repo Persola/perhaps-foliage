@@ -58,3 +58,5 @@ settings:
       extensions:
         - '.js'
         - '.ts'
+  react:
+    version: '17.0.2'

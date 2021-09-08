@@ -52,8 +52,8 @@ export default (
   );
   const synosIdsNotAccountedFor = (
     Object.entries(synosAccountedFor)
-      .filter(([id, accountedFor]) => !accountedFor)
-      .map(([id, accountedFor]) => id)
+      .filter(([id, accountedFor]) => !accountedFor) // eslint-disable-line
+      .map(([id, accountedFor]) => id) // eslint-disable-line
   );
 
   if (synosIdsNotAccountedFor.length > 0) {

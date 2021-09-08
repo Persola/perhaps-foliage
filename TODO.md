@@ -1,5 +1,8 @@
 **currently**
+* make textHostRef a kind of synoRef (to simplify grammar)
 * make Saliva function call optionally non-tree instead of child (notably for primitives)
+  * best way: grammar stores all refs in one object, relation type is property of ref
+  * otherwise... something representing OR or at least optionality on each ref seperately?
 * extract base presenter (need to move back to shared!)
 * extract base renderer (need to move back to shared!)
 * present per presno
@@ -86,13 +89,16 @@
 
 **rearchitecture**
 * **?** diffing algorithm for syntree -> prestree transformation?
-* **?** replace react with prestree -> rendering diffing algorithm fomore appropriate for AST manipulation?
+* **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
   * first just profile it a bit
 
 **design**
 * wait, so if call graph mode is supposed to be as native as lexical mode, doesn't it have to handle graphs generally?
   * yes, but call graphs are still directed, so aiming for some kind of directed graph
-    * there are two implicit directions: tree parent ~ caller ~ referencer, tree child ~ callee ~ referent
+    * there are two implicit directions: tree parent ~ caller ~ referencer ~ dependant, tree child ~ callee ~ referent ~ dependancy
+  * the current view has children inside parents
+    * makes multiple parents/referrers impossible without visual intersections, which seem unacceptable
+      * so all non-tree views must be a separate kind? can't share interactions?
 * wait, should synos actually have IDs?
   * that is to say, should unique IDs be replaced with IDs based on the path from the root?
     * when a node is grafted, the editor can handle updating references

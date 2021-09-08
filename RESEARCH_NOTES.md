@@ -45,5 +45,14 @@
   * is the grammar iself a good expression or too indirect?
     * someone argues that here
       * https://www.antlr3.org/pipermail/antlr-interest/2004-November/010165.html
+    * example alternative
+      * http://treedl.sourceforge.net/treedl/treedl_en.html#node.name
     * Backaus-Naur form for tree grammars?
+* graph visualization (surveys)
+  * https://drops.dagstuhl.de/opus/volltexte/2012/3748/pdf/13.pdf
+  * http://papers.cumincad.org/data/works/att/b836.content.pdf
+  * https://www.researchgate.net/profile/Hans-Joerg-Schulz/publication/274633015_A_Survey_of_Multi-faceted_Graph_Visualization/links/5523cb010cf2b351d9c33836/A-Survey-of-Multi-faceted-Graph-Visualization.pdf
+  * file:///Users/lu/Downloads/cgf-dynamicgraphs.pdf
+  * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.150.5159&rep=rep1&type=pdf
+  * 
 * https://ieeexplore.ieee.org/document/4656419?arnumber=4656419
