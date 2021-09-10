@@ -1,20 +1,17 @@
 **currently**
-* make Saliva function call optionally non-tree instead of child (notably for primitives)
-  * best way: grammar stores all refs in one object, relation type is property of ref
-  * otherwise... something representing OR or at least optionality on each ref seperately?
 * extract base presenter (need to move back to shared!)
+  * with focus and validty gone, mostly just extract the overlong parameter list
 * extract base renderer (need to move back to shared!)
+  * extract classList
+  * then all that's left is order of child presnos?
+    * renderers can be static? just specify order? (or even have it implicit in syn data!?)
 * present per presno
   * presentation infastructure
   * render per presno
-* choose AST format
-  * (see 'research notes')
-  * still considering Unist
-  * ANTLR?
-  * throwing out a few lines...
 
 **maintenance**
-* modularize relation types, extract to language-integration-land
+* some of the types are ridiculous, need to parameterize
+  * e.g. RendersideUninitializedPresentLanguageIntegration
 * make Saliva function call optionally non-tree instead of child (notably for primitives)
 * break out packages
   * clean up
@@ -35,7 +32,7 @@
   * priority: lang integration interface
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
-  * **?** catch coreside errors and show on renderside
+  * surface coreside errors and show on renderside
 * force actions to go through an interface (to become API) (by encapsulating store?)
 * wrap syntrees in file with metadata (root ID)
 * **?** systematic method to generate IDs
@@ -83,33 +80,48 @@
 * [_saliva_] make types synos (beneath default visiblity level)
 * [_saliva_] wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 
-**rearchitecture**
-* **?** diffing algorithm for syntree -> prestree transformation?
-* **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
-  * first just profile it a bit
-
 **design**
+* **?** grammar stores all refs in one object, relation type is property of ref
+  * allows language integrations to provide modular 'grammar's contributing relations
+  * make Saliva function call optionally non-tree instead of child (notably for primitives)
 * patterns for AST-derived data
   * syntax -> presentation
   * custom syno labels for integrations
   * LSP? or similar pattern
   * incrementalism, language integration modularity
-* oh shit, the syntactic graph -> presentation graph
-  * is a transformation of an AST into another tree, so very similar to transforming AST into another IR
-  * I should probably be using tools/patterns from compilers for that?
-* wait, so if call graph mode is supposed to be as native as lexical mode, doesn't it have to handle graphs generally?
-  * yes, but call graphs are still directed, so aiming for some kind of directed graph
+  * I should probably be using tools/patterns from compilers?
+  * broadest pattern would be tree-derived data caches subscribing to subgraphs of the tree they were derived from
+* wait is the presentation actually a tree?
+  * it is locally, but I may need to present e.g. siblings without parent
+  * anyway I think 'locally treelike' is good enough
+* how high of a priority is call graph mode?
+  * the AST visualization is space nested, which can only visualize trees
+    * call graphs are not trees -> must use alternative presentation (verticle panes?)
+    * a single-class inheritance view could use the same rendering, though
+    * call graphs seem out of scope for the time being
+  * out of scope for this project, you could have one graph representation for both
     * there are two implicit directions: tree parent ~ caller ~ referencer ~ dependant, tree child ~ callee ~ referent ~ dependancy
-  * the current view has children inside parents
-    * makes multiple parents/referrers impossible without visual intersections, which seem unacceptable
-      * so all non-tree views must be a separate kind? can't share interactions?
 * wait, should synos actually have IDs?
   * that is to say, should unique IDs be replaced with IDs based on the path from the root?
     * when a node is grafted, the editor can handle updating references
   * simplifies IDs and node ontology (as in identity, not structure)
   * but are there times when references need to be hard? say across package boundaries
+* related to syno IDs, need more complex handling of different code sources
+  * after recent clean up, syno maps are almost (flattened) strict trees
+  * there's editable code (textual equivalent: current buffer = text from one file)
+    * but I want navagable code to be a separate set of synos
+      * because it seems so nice to have read-only, navagable versions of primitives, dependencies, dependants
+        * am I over-focusing on how much I enjoyed navigating to NOR when it orignally happened accidentally?
 * how to divise types:
   * reference assignment (name, value), reference invocation, maps/objects
+* **?** choose AST format
+  * (see 'research notes')
+  * still considering Unist
+  * ANTLR?
+  * throwing out a few lines...
+* **?** diffing algorithm for syntree -> prestree transformation?
+* **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
+  * first just profile it a bit
 
 **longview**
 * write JSON integration
@@ -119,3 +131,6 @@
   * make sure contributors give up all copyright on offering contribution
 * operationalize
 * launch minimal viable project
+
+**experimentation**
+* try always-next-line + always-(class inheritance or call graph)-bidirectional-multipane?
