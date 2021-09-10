@@ -48,7 +48,7 @@ export default (
       id: newSynoId,
     };
 
-    if (typeof childIndex !== 'undefined' && typeof childKey === 'string') {
+    if (childIndex !== null && typeof childKey === 'string') {
       (newParent[childKey] as Array<SynoRef>).splice(childIndex, 1, newChildRef);
     } else if (typeof childKey === 'string') {
       newParent[childKey] = newChildRef;

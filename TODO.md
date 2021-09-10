@@ -12,7 +12,6 @@
 **maintenance**
 * some of the types are ridiculous, need to parameterize
   * e.g. RendersideUninitializedPresentLanguageIntegration
-* make Saliva function call optionally non-tree instead of child (notably for primitives)
 * break out packages
   * clean up
     * webpack configs' HTMLplugin index path (el)
@@ -39,8 +38,8 @@
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** use proxy-memoize or another selector memoizer
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
-  * What I really need is what children each type is allowed
-    * BNF doesn't seem like a stright-forward expression of that
+  * What I really need is what children each type is allowed?
+    * well, that's probably significantly less expressive, what's needed? what do contemporary ASTs tend like?
 
 **new functionality**
 * VSCode extension

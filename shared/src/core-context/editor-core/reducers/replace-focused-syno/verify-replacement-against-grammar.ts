@@ -12,7 +12,7 @@ export default (
     const grammar = state.grammar();
 
     const typesAllowedUnderParent = (
-      Object.values(grammar[parent.syntype].children).flat().map(childEntry => childEntry.syntype)
+      Object.values(grammar[parent.syntype].children).map(childEntry => childEntry.syntype).flat()
     );
 
     if (!typesAllowedUnderParent.includes(newSynoType)) {
