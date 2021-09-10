@@ -53,6 +53,7 @@ export default (
       primitives: null,
       keyToNewSynoAttrs: null,
       interpret: null,
+      synoValidators: null,
       presenters: null,
     };
   }

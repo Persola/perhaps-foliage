@@ -22,5 +22,5 @@ export default (props: SynoRendererProps): JSX.Element => {
     );
   }
 
-  throw new Error(`missing renderer for syntype: '${presno.syntype}'`);
+  throw new Error(`Missing renderer for syntype '${presno.syntype}'`);
 };

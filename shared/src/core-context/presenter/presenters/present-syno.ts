@@ -7,6 +7,8 @@ import type { PresentSyno } from '../../../types/presenter/present-syno';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { CoresidePresentLanguageIntegration } from '../../../types/language-integration/coreside-present-language-integration';
 
+import focuses from './focuses';
+
 export default (
   state: StateSelector,
   integration: CoresidePresentLanguageIntegration,
@@ -21,9 +23,19 @@ export default (
 
   if (!(presenter instanceof Function)) {
     throw new Error(
-      `language integration missing presenter for syntype '${syno.syntype}'`,
+      `Language integration missing presenter for syntype '${syno.syntype}'`,
     );
   }
+
+  const validator = integration.synoValidators[syno.syntype];
+
+  if (!(validator instanceof Function)) {
+    throw new Error(
+      `Language integration missing validator for syntype '${syno.syntype}'`,
+    );
+  }
+
+  const valid = validator(syno, state);
 
   const presentationAttrs = presenter(
     state,
@@ -42,10 +54,16 @@ export default (
       id: parentId,
     };
 
+  const { focused, presnoFocused, charFocused } = focuses(focus, syno.id);
+
   const presentation: Presno = {
     ...presentationAttrs,
     synoId: syno.id,
     parent,
+    valid,
+    focused,
+    presnoFocused,
+    charFocused,
   };
 
   if (typeof presnoMap[presentation.synoId] !== 'undefined') {

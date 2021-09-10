@@ -12,7 +12,7 @@ export default (
   } = integrationDependencies;
   return (props: FunctionParameterRendererProps) => {
     const { presno } = props;
-    const { presnoFocused, charFocused } = presno;
+    const { presnoFocused, charFocused, valid } = presno;
     const classes = [
       'syno',
       'same-line',
@@ -20,6 +20,7 @@ export default (
       'bubble-even',
       'function-parameter',
       presno.focused ? 'focused' : 'unfocused',
+      valid ? '' : 'invalid',
     ].join(' ');
 
     return React.createElement(

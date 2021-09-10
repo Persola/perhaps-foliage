@@ -9,6 +9,7 @@ import primitives from './primitives.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import keyToNewSynoAttrs from './key-to-new-syno-attrs.yml';
 import interpret from './interpreter/interpret';
+import synoValidators from './syno-validators/syno-validators';
 import presenters from './presenters/presenters';
 import createRenderers from './renderers/create-renderers';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
@@ -23,6 +24,7 @@ export default (
     primitives,
     keyToNewSynoAttrs,
     interpret,
+    synoValidators,
     presenters,
     renderers: createRenderers(integrationDependencies),
     styles,

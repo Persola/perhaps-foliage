@@ -16,10 +16,6 @@
 **maintenance**
 * modularize relation types, extract to language-integration-land
 * make Saliva function call optionally non-tree instead of child (notably for primitives)
-* extract validity as service
-  * LSP? or similar pattern at least
-  * also move it out of presentation into syntaxland (a data structure on top of the tree)
-  * just one kind of AST-derived data among many, so develop pattern for any such thing
 * break out packages
   * clean up
     * webpack configs' HTMLplugin index path (el)
@@ -93,6 +89,11 @@
   * first just profile it a bit
 
 **design**
+* patterns for AST-derived data
+  * syntax -> presentation
+  * custom syno labels for integrations
+  * LSP? or similar pattern
+  * incrementalism, language integration modularity
 * oh shit, the syntactic graph -> presentation graph
   * is a transformation of an AST into another tree, so very similar to transforming AST into another IR
   * I should probably be using tools/patterns from compilers for that?

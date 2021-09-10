@@ -4,5 +4,6 @@ export type CoresideAbsentLanguageIntegration = {
   primitives: null;
   keyToNewSynoAttrs: null;
   interpret: null;
+  synoValidators: null;
   presenters: null;
 };

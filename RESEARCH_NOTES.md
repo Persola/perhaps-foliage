@@ -7,6 +7,8 @@
     * [ANTLR's AST interface](https://www.antlr2.org/javadoc/antlr/collections/AST.html)
       * http://www.springframework.net/docs/1.3.0-RC1/api/net-2.0/html/Spring.Core~Spring.Expressions.Parser.antlr.collections.AST.html
       * **?** https://github.com/datacamp/antlr-ast
+      * ANTLR tree PARSER interface:
+        * https://www.antlr2.org/doc/sor.html
     * Babelfish's UAST (dead)
     * Jison seems dead
     * GDK focused on Cobol family (probably too narrow)
@@ -47,12 +49,29 @@
       * https://www.antlr3.org/pipermail/antlr-interest/2004-November/010165.html
     * example alternative
       * http://treedl.sourceforge.net/treedl/treedl_en.html#node.name
-    * Backaus-Naur form for tree grammars?
+    * Backaus-Naur form for tree grammars
+      * https://www.antlr2.org/doc/sor.html
 * graph visualization (surveys)
   * https://drops.dagstuhl.de/opus/volltexte/2012/3748/pdf/13.pdf
   * http://papers.cumincad.org/data/works/att/b836.content.pdf
   * https://www.researchgate.net/profile/Hans-Joerg-Schulz/publication/274633015_A_Survey_of_Multi-faceted_Graph_Visualization/links/5523cb010cf2b351d9c33836/A-Survey-of-Multi-faceted-Graph-Visualization.pdf
   * file:///Users/lu/Downloads/cgf-dynamicgraphs.pdf
   * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.150.5159&rep=rep1&type=pdf
-  * 
-* https://ieeexplore.ieee.org/document/4656419?arnumber=4656419
+* tree diffing
+  * maybe:
+      * https://ieeexplore.ieee.org/document/4656419?arnumber=4656419
+
+why use formal mathematical notions to describe the visualization?
+  not because we actually want to limit ourselves to such a strict system
+    by formally enforcing it
+    or making it the direct target of development
+      we will require incidental auxility behavior
+    that is to say, not because the mathematical system should line up precisely with implementation
+  but because in doing so we implicitly define a visual language to the user
+    that is to say, because the mathematical system should line up precisely with the user's mental model
+      which defines what is actually import to describe mathematically: that which the user perceives
+  this is why it's good to define, as an example, behavior of the graph around
+    the edges of the screen
+    the edges of the presentation graph
+
+

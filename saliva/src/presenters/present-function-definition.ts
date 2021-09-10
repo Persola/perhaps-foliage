@@ -5,15 +5,11 @@ import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
 import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
-// @ts-ignore how do I configure TS to ignore webpacked imports?
-import primitives from '../primitives.yml';
-import focuses from './helpers/focuses';
 import presentParameters from './present-function-definition/present-parameters';
 
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
 
-const primitiveIds = Object.keys(primitives);
 export default (
   state: StateSelector,
   integration: CoresidePresentLanguageIntegration,
@@ -23,14 +19,9 @@ export default (
   focus: Focus | null,
   presentSyno: PresentSyno,
 ): FunctionDefPresAttrs => {
-  let valid = true;
   let body: PresnoRef | null = null;
 
-  if (!funkshunDef.body) {
-    if (!primitiveIds.includes(funkshunDef.id)) {
-      valid = false;
-    }
-  } else {
+  if (funkshunDef.body) {
     body = {
       presnoRef: true,
       id: presentSyno(
@@ -46,10 +37,6 @@ export default (
     };
   }
 
-  const { focused, presnoFocused, charFocused } = focuses(
-    focus,
-    funkshunDef.id,
-  );
   return {
     syntype: 'functionDefinition',
     name: funkshunDef.name,
@@ -63,10 +50,6 @@ export default (
       focus,
       presentSyno,
     ),
-    focused,
-    presnoFocused,
-    charFocused,
     body,
-    valid,
   };
 };

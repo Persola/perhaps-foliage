@@ -5,8 +5,6 @@ import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
 import type { CoresidePresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/coreside-present-language-integration';
 
-import focuses from './helpers/focuses';
-
 import type { Argument } from '../types/synos/argument';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
 
@@ -19,7 +17,6 @@ export default (
   focus: Focus | null,
   presentSyno: PresentSyno,
 ): ArgumentPresAttrs => {
-  let valid = true;
   let name = null;
 
   if (argument.parameter) {
@@ -30,8 +27,6 @@ export default (
     }
 
     name = param.name;
-  } else {
-    valid = false;
   }
 
   let value: PresnoRef | null = null;
@@ -50,18 +45,11 @@ export default (
         presentSyno,
       ),
     };
-  } else {
-    valid = false;
   }
 
-  const { focused, presnoFocused, charFocused } = focuses(focus, argument.id);
   return {
     syntype: 'argument',
     name,
     value,
-    focused,
-    presnoFocused,
-    charFocused,
-    valid,
   };
 };

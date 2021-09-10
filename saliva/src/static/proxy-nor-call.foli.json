@@ -146,11 +146,6 @@
       "relation": "parent",
       "id": "1-4"
     },
-    "callee": {
-      "synoRef": true,
-      "relation": "child",
-      "id": "salivaPrimitives-nor"
-    },
     "argumentz": [
       {
         "synoRef": true,
@@ -162,7 +157,12 @@
         "relation": "child",
         "id": "1-9a"
       }
-    ]
+    ],
+    "callee": {
+      "synoRef": true,
+      "relation": "child",
+      "id": "salivaPrimitives-nor"
+    }
   },
   "1-8a": {
     "id": "1-8a",

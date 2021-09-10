@@ -5,6 +5,7 @@ import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language
 import grammar from './grammar.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import keyToNewSynoAttrs from './key-to-new-syno-attrs.yml';
+import synoValidators from './syno-validators/syno-validators';
 import presenters from './presenters/presenters';
 import createRenderers from './renderers/create-renderers';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
@@ -19,6 +20,7 @@ export default (
     primitives: {},
     keyToNewSynoAttrs,
     interpret: null,
+    synoValidators,
     presenters,
     renderers: createRenderers(integrationDependencies),
     styles,
