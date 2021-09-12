@@ -11,7 +11,6 @@ export type PresentSyno = (
   presnoMap: MutablePresnoMap,
   synoId: SynoId | null,
   syno: Syno,
-  scope: Record<string, unknown>,
   focus: Focus | null,
   presentSyno: PresentSyno
 ) => SynoId;

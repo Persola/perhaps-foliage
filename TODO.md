@@ -6,10 +6,11 @@
   * then all that's left is order of child presnos?
     * renderers can be static? just specify order? (or even have it implicit in syn data!?)
 * present per presno
-  * presentation infastructure
   * render per presno
 
 **maintenance**
+* pres validation?
+  * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 * some of the types are ridiculous, need to parameterize
   * e.g. RendersideUninitializedPresentLanguageIntegration
 * break out packages
@@ -40,6 +41,7 @@
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
   * What I really need is what children each type is allowed?
     * well, that's probably significantly less expressive, what's needed? what do contemporary ASTs tend like?
+      * edNCE?
 
 **new functionality**
 * VSCode extension
@@ -114,6 +116,13 @@
 * how to divise types:
   * reference assignment (name, value), reference invocation, maps/objects
 * **?** choose AST format
+  * current custom format is
+    * directed/locally treelike
+    * labeled edges ('relation')
+    * labeled/typed nodes
+    * ordered children (implicit)
+    * actually a hypergraph because of child collections
+      * child collections also ordered (explicit)
   * (see 'research notes')
   * still considering Unist
   * ANTLR?

@@ -1,26 +1,20 @@
-import type { StateSelector } from '../../../types/state-selector';
-import type { Syno } from '../../../types/syntactic/syno';
 import type { SynoId } from '../../../types/syntactic/syno-id';
-import type { Presno } from '../../../types/presenter/presno';
-import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
-import type { PresentSyno } from '../../../types/presenter/present-syno';
+import type { StateSelector } from '../../../types/state-selector';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { CoresidePresentLanguageIntegration } from '../../../types/language-integration/coreside-present-language-integration';
+import type { Presno } from '../../../types/presenter/presno';
 
 import focuses from './focuses';
 
 export default (
+  synoId: SynoId,
   state: StateSelector,
   integration: CoresidePresentLanguageIntegration,
-  presnoMap: MutablePresnoMap,
-  parentId: SynoId | null,
-  syno: Syno,
-  scope: Record<string, unknown>,
-  focus: Focus | null,
-  presentSyno: PresentSyno,
-): SynoId => {
-  const presenter = integration.presenters[syno.syntype];
+  focus: Focus,
+): Presno => {
+  const syno = state.getSyno(synoId);
 
+  const presenter = integration.presenters[syno.syntype];
   if (!(presenter instanceof Function)) {
     throw new Error(
       `Language integration missing presenter for syntype '${syno.syntype}'`,
@@ -28,48 +22,29 @@ export default (
   }
 
   const validator = integration.synoValidators[syno.syntype];
-
   if (!(validator instanceof Function)) {
     throw new Error(
       `Language integration missing validator for syntype '${syno.syntype}'`,
     );
   }
 
-  const valid = validator(syno, state);
-
-  const presentationAttrs = presenter(
-    state,
-    integration,
-    presnoMap,
-    syno,
-    scope,
-    focus,
-    presentSyno,
-  );
-
-  const parent = !parentId
-    ? null
-    : {
-      presnoRef: true,
-      id: parentId,
-    };
-
-  const { focused, presnoFocused, charFocused } = focuses(focus, syno.id);
-
-  const presentation: Presno = {
-    ...presentationAttrs,
+  return {
+    ...presenter(
+      syno,
+      state,
+      integration,
+    ),
+    ...focuses(focus, syno.id),
     synoId: syno.id,
-    parent,
-    valid,
-    focused,
-    presnoFocused,
-    charFocused,
+    syntype: syno.syntype,
+    valid: validator(syno, state),
+    parent: (
+      syno.parent === null
+        ? null
+        : {
+          presnoRef: true,
+          id: syno.parent.id,
+        }
+    ),
   };
-
-  if (typeof presnoMap[presentation.synoId] !== 'undefined') {
-    throw new Error('attempted to overwrite presno!');
-  }
-
-  presnoMap[presentation.synoId] = presentation;
-  return presentation.synoId;
 };

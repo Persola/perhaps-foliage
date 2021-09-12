@@ -4,22 +4,26 @@ import type { Syno } from '../types/syntactic/syno';
 
 export default (startingSynoId: SynoId, tree: SynoMap): Syno => {
   let currentSyno = tree[startingSynoId];
+
+  if (typeof currentSyno === 'undefined') {
+    throw new Error('ascendToRoot received bad syno ID');
+  }
+
   let counter = 0;
 
-  while (currentSyno.parent) {
-    try {
+  try {
+    while (currentSyno.parent) {
       currentSyno = tree[currentSyno.parent.id];
-    } catch (e) {
-      if (e.name === 'getSyno recieved broken SynoRef for provided SynoMap') {
-        throw new Error(
-          `ascendToRoot hit broken parent reference ${counter} levels deep`,
-        );
-      } else {
-        throw e;
-      }
+      counter++;
     }
-
-    counter++;
+  } catch (e) {
+    if (e.name === 'getSyno recieved broken SynoRef for provided SynoMap') {
+      throw new Error(
+        `ascendToRoot hit broken parent reference ${counter} levels deep`,
+      );
+    } else {
+      throw e;
+    }
   }
 
   return currentSyno;

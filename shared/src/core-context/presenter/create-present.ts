@@ -1,7 +1,6 @@
 import type { Store } from 'redux';
 
-import presentFocusedSyntree from './presenters/present-focused-syntree';
-import presentSyntree from './presenters/present-syntree';
+import presentTree from './presenters/present-tree';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { EditorState } from '../../types/editor-state';
@@ -24,12 +23,12 @@ const generatePresentation = (
   ) {
     stage = null;
   } else {
-    stage = presentFocusedSyntree(
+    stage = presentTree(
       state,
-   integration as CoresidePresentLanguageIntegration,
-   focus.synoId,
-   {},
-   focus,
+      integration as CoresidePresentLanguageIntegration,
+      focus.synoId,
+      state.synoMap(),
+      focus,
     );
   }
 
@@ -38,11 +37,11 @@ const generatePresentation = (
   if (!resultSyntreeRootId) {
     result = null;
   } else {
-    result = presentSyntree(
+    result = presentTree(
       state,
       integration as CoresidePresentLanguageIntegration,
       resultSyntreeRootId,
-      {},
+      state.resultTree(),
       null,
     );
   }

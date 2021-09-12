@@ -1,6 +1,6 @@
 "salivaPrimitives-nor":
   id: "salivaPrimitives-nor"
-  parent: false
+  parent: null
   syntype: functionDefinition
   name: NOR
   parameters:
@@ -10,7 +10,7 @@
     - synoRef: true
       relation: child
       id: "salivaPrimitives-nor-param-2"
-  body: false
+  body: null
 "salivaPrimitives-nor-param-1":
   id: "salivaPrimitives-nor-param-1"
   parent:

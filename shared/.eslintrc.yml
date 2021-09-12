@@ -59,6 +59,8 @@ rules:
     - 'avoidEscape': true
   'prefer-template':
     - 'off' # there's no good way to do multiline strings without concatenation, which this bans
+  'no-restricted-syntax':
+    - 'off' # I want to use iterators
 overrides:
   -
     files:
