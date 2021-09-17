@@ -1,12 +1,10 @@
-# Saliva REPL
+# [Saliva REPL](https://gitlab.com/Persola/saliva-repl)
 
 ⚠️ *Most of the basic functionality of this project doesn't work yet.*
 
 ⚠️ *This project is highly unstable. Breaking changes are unrelenting.*
 
 ⏱️ *Note: The author plans on splitting this repo up into several new repos before too long.*
-
-[repo](https://gitlab.com/Persola/saliva-repl)
 
 ### About
 This repo contains an as-of-yet unentitled visual interface for writing and editing tree-based data structures (a structure editor). The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).

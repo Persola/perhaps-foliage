@@ -1,9 +1,9 @@
 import * as React from 'react';
-import type { NamePartProps } from '../renderer/name-part-props';
+import type { TextProps } from '../renderer/components/text-props';
 
 export type IntegrationDependencies = {
   readonly React: (typeof React);
   readonly components: {
-    readonly NamePart: React.ComponentType<NamePartProps>;
+    readonly Text: React.ComponentType<TextProps>;
   };
 };

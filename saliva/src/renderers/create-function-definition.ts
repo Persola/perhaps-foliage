@@ -6,13 +6,11 @@ export default (
 ): (
   (props: FunctionDefinitionRendererProps) => JSX.Element
 ) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+  const { React } = integrationDependencies;
+
   return (props: FunctionDefinitionRendererProps) => {
-    const { integration, getPresno, presno, SynoRenderer } = props;
-    const { name, presnoFocused, charFocused, valid } = presno;
+    const { integration, getPresno, presno, PresnoRenderer } = props;
+    const { name, valid } = presno;
     const { parameters } = presno;
     const classes = [
       'syno',
@@ -27,25 +25,26 @@ export default (
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      React.createElement(NamePart, {
-        namePart: name,
-        focused: presnoFocused === 0,
-        charFocused,
+      presno.body && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: name.id,
+        PresnoRenderer,
       }),
       parameters.map(paramRef => {
-        return React.createElement(SynoRenderer, {
+        return React.createElement(PresnoRenderer, {
           integration,
           key: paramRef.id,
           getPresno,
           synoId: paramRef.id,
-          SynoRenderer,
+          PresnoRenderer,
         });
       }),
-      presno.body && React.createElement(SynoRenderer, {
+      presno.body && React.createElement(PresnoRenderer, {
         integration,
         getPresno,
         synoId: presno.body.id,
-        SynoRenderer,
+        PresnoRenderer,
       }),
     );
   };

@@ -7,9 +7,9 @@ export default {
   fromString: (fileText: string, integration: CoresideLanguageIntegration): SynoMap => {
     const newSyntree = JSON.parse(fileText);
     validateGraph(
-      'loaded_file',
+      'drug_in_file',
       newSyntree,
-      'saliva',
+      integration.id,
       integration.grammar,
       integration.primitives,
     );
@@ -25,7 +25,7 @@ export default {
     validateGraph(
       file.name,
       newSyntree,
-      'saliva',
+      integration.id,
       integration.grammar,
       integration.primitives,
     );

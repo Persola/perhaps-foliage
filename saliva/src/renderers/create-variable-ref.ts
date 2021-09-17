@@ -6,13 +6,16 @@ export default (
 ): (
   (props: VariableRefRendererProps) => JSX.Element
 ) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+  const { React } = integrationDependencies;
+
   return (props: VariableRefRendererProps) => {
-    const { presno } = props;
-    const { presnoFocused, charFocused, valid } = presno;
+    const {
+      integration,
+      getPresno,
+      presno,
+      PresnoRenderer,
+    } = props;
+    const { valid } = presno;
     const classes = [
       'syno',
       'same-line',
@@ -29,10 +32,11 @@ export default (
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      presno.name && React.createElement(NamePart, {
-        namePart: presno.name,
-        focused: presnoFocused === 0,
-        charFocused,
+      presno.name && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: presno.name.id,
+        PresnoRenderer,
       }),
     );
   };

@@ -76,7 +76,15 @@ export default (
   grammar: Grammar,
   primitives: SynoMap,
 ): void => {
-  const graphValidationRez = graphValidator(graph, grammar, primitives);
+  let graphValidationRez;
+  try {
+    graphValidationRez = graphValidator(graph, grammar, primitives);
+  } catch (error) {
+    throw new Error(
+      `Graph validation failed with unanticipated error:\n${error.message}`,
+    );
+  }
+
   if (!graphValidationRez.valid) {
     throw new Error(
       `Validation of graph '${graphName}' failed under grammar '${grammarName}'`

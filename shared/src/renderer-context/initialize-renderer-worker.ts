@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Renderer from './renderer/renderer';
-import NamePart from './renderer/components/vis/name-part';
+import Text from './renderer/components/vis/text';
 import updateInputBindings from './update-input-bindings';
 
 import type {
@@ -24,7 +24,7 @@ export default (
   const renderer = new Renderer(document);
   const integrationDependencies: IntegrationDependencies = {
     React,
-    components: { NamePart },
+    components: { Text },
   };
   const integration: RendersideLanguageIntegration = {
     id: initialRendererIntegration ? initialRendererIntegration.id : null,

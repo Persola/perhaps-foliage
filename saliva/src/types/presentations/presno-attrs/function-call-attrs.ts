@@ -2,8 +2,8 @@ import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 
 export type FunctionCallPresAttrs = {
   readonly syntype: 'functionCall';
-  readonly name: string | null;
+  readonly name: (null | PresnoRef);
   readonly argumentz: PresnoRef[];
-  readonly callee: PresnoRef | null;
+  readonly callee: (null | PresnoRef);
   readonly resolved: boolean;
 };

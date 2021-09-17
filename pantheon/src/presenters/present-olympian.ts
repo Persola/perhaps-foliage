@@ -1,21 +1,31 @@
-import makePresnoRef from 'saliva-repl/dist/core-context/presenter/presenters/make-presno-ref';
+import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
 
 import type { Olympian } from '../types/synos/olympian';
 import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';
 
 export default (
   olympian: Olympian,
-  // state not needed
+  _: StateSelector,
+  presentAndReturnRef: PresentAndReturnRef,
 ): OlympianPresAttrs => {
-  let child = null;
-
-  if (olympian.child) {
-    child = makePresnoRef(olympian.child);
-  }
+  const name = presentAndReturnRef(
+    {
+      valid: true,
+      presnoIndex: 0,
+      prestype: 'NamePart',
+      text: olympian.name,
+    },
+    olympian,
+  );
 
   return {
     syntype: 'olympian',
-    name: olympian.name,
-    child,
+    name,
+    child: (
+      olympian.child
+        ? presentAndReturnRef(olympian.child)
+        : null
+    ),
   };
 };

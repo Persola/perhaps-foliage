@@ -1,40 +1,35 @@
 **currently**
-* extract base presenter (need to move back to shared!)
-  * with focus and validty gone, mostly just extract the overlong parameter list
 * extract base renderer (need to move back to shared!)
   * extract classList
   * then all that's left is order of child presnos?
     * renderers can be static? just specify order? (or even have it implicit in syn data!?)
-* present per presno
-  * render per presno
-
-**maintenance**
-* pres validation?
-  * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 * some of the types are ridiculous, need to parameterize
   * e.g. RendersideUninitializedPresentLanguageIntegration
+* rendering
+  * make sure all Saliva- and pantheon-valid syntax is renderable
+
+**maintenance**
+* **?** extract graph validation logic so it can be shared with modifications somehow
+* presentation read tools
+  * **?** pure functional derive from synstate
+  * **?** store presentation
+* some kind of plan for error catching
+  * e.g., right now grammar and graph validation errors force reload
+  * surface coreside errors and show on renderside
 * break out packages
   * clean up
     * webpack configs' HTMLplugin index path (el)
   * more packages
     * base language integration package
       * for extension, but should there also be scaffolding?
-      * extract base presenter (need to move back to shared!)
       * extract base renderer (need to move back to shared!)
     * extract visualization as package with editors as consumers
       * compare editor (without REPL) vs. REPL/console
       * at this point mostly just creating package boundary between code views
         * need to pass TreeId with commands
         * after store update decide which trees to present (even though react would handle it fine)
-* what does vsc do to hot load extensions?
-* **?** adopt unist
-* documentation
-  * priority: lang integration interface
-* some kind of plan for error catching
-  * e.g., right now grammar and graph validation errors force reload
-  * surface coreside errors and show on renderside
-* force actions to go through an interface (to become API) (by encapsulating store?)
 * wrap syntrees in file with metadata (root ID)
+* force actions to go through an interface (to become API) (by encapsulating store?)
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** use proxy-memoize or another selector memoizer
@@ -42,14 +37,16 @@
   * What I really need is what children each type is allowed?
     * well, that's probably significantly less expressive, what's needed? what do contemporary ASTs tend like?
       * edNCE?
+* **?** pres validation
+  * mismatching IDs was painful bug in pre after specifically guarding against it in syn
+* **?** adopt unist
 
 **new functionality**
+* documentation
+  * priority: lang integration interface
 * VSCode extension
   * implement undo/redo
   * reversion or whatever else is left
-* rendering
-  * render all existing values
-    * first just test what's missing?
 * editing
   * add buds
     * they form holes (related to syno deletion)
@@ -142,3 +139,7 @@
 
 **experimentation**
 * try always-next-line + always-(class inheritance or call graph)-bidirectional-multipane?
+
+**research**
+* are structure editors maybe already common among blind programmers?
+* what does vsc do to hot load extensions?

@@ -1,6 +1,6 @@
-import forChildSynoOf from '../../../syntree-utils/for-child-syno-of';
-import presentSyno from './present-syno';
-import ascendToRoot from '../../../syntree-utils/ascend-to-root';
+import presentationNode from './create-presentation-node';
+import createPresentAndReturnRef from './create-present-and-return-ref';
+import presnoId from './presno-id';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { SynoId } from '../../../types/syntactic/syno-id';
@@ -10,29 +10,7 @@ import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-m
 import type { PresnoMap } from '../../../types/presenter/presno-map';
 import type { CoresidePresentLanguageIntegration } from '../../../types/language-integration/coreside-present-language-integration';
 import type { Focus } from '../../../types/editor-state/focus';
-
-const subtreeNodeIds = (state: StateSelector, rootId: string) => {
-  const nodeIds = [rootId];
-
-  forChildSynoOf(state.getSyno(rootId), synoRef => {
-    nodeIds.push(...subtreeNodeIds(state, synoRef.id)); //eslint-disable-line
-  });
-
-  return nodeIds;
-};
-
-const synosToPresentIds = (
-  state: StateSelector,
-  renderEntryTree: SynoMap,
-  renderEntrySynoId: string,
-) => {
-  const rootId: SynoId = ascendToRoot(
-    renderEntrySynoId,
-    renderEntryTree,
-  ).id;
-
-  return subtreeNodeIds(state, rootId);
-};
+import type { PresnoArgs } from '../../../types/presenter/presno-args';
 
 export default (
   state: StateSelector,
@@ -42,33 +20,34 @@ export default (
   focus: Focus,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
-  synosToPresentIds(
-    state,
-    renderEntryTree,
-    renderEntrySynoId,
-  ).forEach(synoId => {
-    if (typeof mutablePresnoMap[synoId] !== 'undefined') {
+  const rootPrensoArgs: PresnoArgs = {
+    type: 'synPresno',
+    synoId: renderEntrySynoId,
+  };
+  const toPresentStack: PresnoArgs[] = [rootPrensoArgs];
+  const presentAndReturnRef = createPresentAndReturnRef(toPresentStack);
+
+  while (toPresentStack.length > 0) {
+    const args = toPresentStack.pop();
+    const id = presnoId(args);
+
+    if (typeof mutablePresnoMap[id] !== 'undefined') {
       throw new Error('attempted to overwrite presno!');
     }
 
-    mutablePresnoMap[synoId] = presentSyno(
-      synoId,
+    mutablePresnoMap[id] = presentationNode(
+      args,
       state,
       integration,
       focus,
+      presentAndReturnRef,
     );
-  });
+  }
 
   const immutablePresnoMap = mutablePresnoMap as PresnoMap;
 
-  // we don't really need this, do we?
-  const rootId: SynoId = ascendToRoot(
-    renderEntrySynoId,
-    renderEntryTree,
-  ).id;
-
   return {
-    rootId,
+    rootId: renderEntrySynoId,
     presnos: immutablePresnoMap,
   };
 };

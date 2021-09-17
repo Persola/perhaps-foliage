@@ -2,21 +2,22 @@
 
 「**syntree** || **tree**」 an AST or other data tree, usually the thing being edited
 
-「**syno**」 - a node in a syntree
+「**syno**」 a node in a *syntree*
 
-「**presentation**」 a data tree representing what information from the syntree being edited *is being presented to the user* at a given moment
+In a user's inspection of the *syntree*, there is always one  「**focused syno**」
 
-「**presno**」 a node in the presentation; something which can be focused on in the presentation. There is a presno for each syno presented (not all synos are presented), but some presnos have no syno (they are visual extensions from a presno that does have a syno).
+「**presentation**」 a data tree representing what from the syntree being edited is being represented to the user through the user interface at a given moment.
+
+「**presno**」 a node in the presentation; something which can be focused on in the user interface. All *presnos* are either a「**syntactical presno**」, which represents a *syno*, or a 「**non-syntactical presno**」, which does not.
 
 「**focus**」 Much like focus in a text document, the singular part of the document the user is "in" a the moment. Can be a syno, presno (atttached to a syno), or text character index (attached to a presno attached to a syno).
 
 「**navigate**」 moving the focus through the presentation
 
-「*root*」 as the normal usage in tree structures
-
 not really used yet:
-「*scion*」 a root of a partial ASsubT (might not be valid as the root of a complete AST) (analogy from horticultural grafting)
-「*stock*/*rootstock*」 a syno onto which a scion is grafted
+「**scion**」 a root of a partial ASsubT (might not be valid as the root of a complete AST) (analogy from horticultural grafting)
+
+「[**root**]**stock**」 a syno onto which a scion is grafted
 
 **Notes on the project name**
   * balloon twisting

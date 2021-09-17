@@ -1,4 +1,5 @@
 import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
+
 import type { BooleanLiteralRendererProps } from '../types/renderers/boolean-literal-props';
 
 export default (
@@ -8,11 +9,14 @@ export default (
 ) => {
   const {
     React,
-    components: { NamePart },
+    components: { Text },
   } = integrationDependencies;
+
   return (props: BooleanLiteralRendererProps) => {
-    const { presno } = props;
-    const { valid } = presno;
+    const {
+      presno,
+      presno: { valid },
+    } = props;
 
     if (presno.syntype !== 'booleanLiteral') {
       throw new Error('non-boolean masquerading as boolean');
@@ -34,10 +38,8 @@ export default (
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      React.createElement(NamePart, {
-        namePart: String(presno.value),
-        focused: null,
-        charFocused: null,
+      React.createElement(Text, {
+        text: String(presno.value),
       }),
     );
   };

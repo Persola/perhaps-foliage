@@ -28,7 +28,7 @@ import loadIntegrationEpic from './epics/load-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
-import NamePart from '../../renderer-context/renderer/components/vis/name-part';
+import Text from '../../renderer-context/renderer/components/vis/text';
 
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
@@ -233,7 +233,7 @@ export default (
   const integrationDependencies = {
     React, // pass in our react instance so integrations don't need to bundle their own
     components: {
-      NamePart,
+      Text,
     },
   };
 

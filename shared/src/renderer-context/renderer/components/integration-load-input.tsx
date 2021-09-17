@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import NamePart from './vis/name-part';
+import Text from './vis/text';
 
 import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
 import type { RendersideLanguageIntegration } from '../../../types/language-integration/renderside-language-integration';
+import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
@@ -15,11 +16,9 @@ const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => 
     e.target.files[0].text().then(fileText => {
       let initializeIntegration;
       eval(fileText); // eslint-disable-line no-eval
-      const integrationDependencies = {
+      const integrationDependencies: IntegrationDependencies = {
         React, // pass in our react instance so integrations don't need to bundle their own
-        components: {
-          NamePart,
-        },
+        components: { Text },
       };
       const newIntegration = initializeIntegration.default(integrationDependencies);
       Object.assign(oldIntegration, {

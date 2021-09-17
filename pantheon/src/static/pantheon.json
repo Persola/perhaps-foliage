@@ -1,0 +1,39 @@
+{
+  "cronus": {
+    "id": "cronus",
+    "syntype": "titan",
+    "parent": null,
+    "child": {
+      "synoRef": true,
+      "relation": "child",
+      "id": "zeus"
+    },
+    "name": "cronus"
+  },
+  "zeus": {
+    "id": "zeus",
+    "syntype": "olympian",
+    "parent": {
+      "synoRef": true,
+      "relation": "parent",
+      "id": "cronus"
+    },
+    "child": {
+      "synoRef": true,
+      "relation": "child",
+      "id": "athena"
+    },
+    "name": "zeus"
+  },
+  "athena": {
+    "id": "athena",
+    "syntype": "olympian",
+    "parent": {
+      "synoRef": true,
+      "relation": "parent",
+      "id": "zeus"
+    },
+    "child": null,
+    "name": "athena"
+  }
+}

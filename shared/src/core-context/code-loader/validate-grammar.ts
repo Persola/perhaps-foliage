@@ -52,7 +52,15 @@ export default (
   grammar: Grammar,
   grammarName: string,
 ): void => {
-  const grammarValidatorRez = grammarValidator(grammar);
+  let grammarValidatorRez;
+  try {
+    grammarValidatorRez = grammarValidator(grammar);
+  } catch (error) {
+    throw new Error(
+      `Grammar validation failed with unanticipated error:\n${error.message}`,
+    );
+  }
+
   if (!grammarValidatorRez.valid) {
     throw new Error(
       `Validation of grammar '${grammarName}' failed:\n${grammarValidatorRez.messages.join('\n')}`,

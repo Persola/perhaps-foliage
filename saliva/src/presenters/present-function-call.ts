@@ -1,6 +1,5 @@
-import makePresnoRef from 'saliva-repl/dist/core-context/presenter/presenters/make-presno-ref';
-
 import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
 import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
 import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
 
@@ -16,34 +15,43 @@ const primitiveIds = Object.keys(primitives);
 export default (
   funkshunCall: FunctionCall,
   state: StateSelector,
+  presentAndReturnRef: PresentAndReturnRef,
 ): FunctionCallPresAttrs => {
-  let name: string | null | undefined = null;
-  let callee: PresnoRef | null | undefined = null;
+  let name: (null | PresnoRef) = null;
+  let callee: (null | PresnoRef) = null;
   let resolved = false;
 
   if (funkshunCall.callee) {
     const calleeSyno: Syno = state.getSyno(funkshunCall.callee.id);
 
-    if (calleeSyno.syntype === 'functionDefinition') {
-      const calleeFuncDef = calleeSyno as FunctionDefinition;
-      resolved = true;
-
-      if (primitiveIds.includes(calleeFuncDef.id)) {
-        name = calleeFuncDef.name;
-      }
-
-      if (funkshunCall.callee.relation === 'child') {
-        callee = makePresnoRef(funkshunCall.callee);
-      }
-    } else {
+    if (calleeSyno.syntype !== 'functionDefinition') {
       throw new Error('new type?');
+    }
+
+    const calleeFuncDef = calleeSyno as FunctionDefinition;
+    resolved = true;
+
+    if (primitiveIds.includes(calleeFuncDef.id)) {
+      name = presentAndReturnRef(
+        {
+          valid: true,
+          presnoIndex: 0,
+          prestype: 'NamePart',
+          text: calleeFuncDef.name,
+        },
+        funkshunCall,
+      );
+    }
+
+    if (funkshunCall.callee.relation === 'child') {
+      callee = presentAndReturnRef(funkshunCall.callee);
     }
   }
 
   return {
     syntype: 'functionCall',
     name,
-    argumentz: funkshunCall.argumentz.map(argRef => makePresnoRef(argRef)),
+    argumentz: funkshunCall.argumentz.map(argRef => presentAndReturnRef(argRef)),
     callee,
     resolved,
   };

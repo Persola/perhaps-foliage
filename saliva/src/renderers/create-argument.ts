@@ -6,22 +6,18 @@ export default (
 ): (
   (props: ArgumentRendererProps) => JSX.Element
 ) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+  const { React } = integrationDependencies;
+
   return (props: ArgumentRendererProps) => {
     const {
       integration,
       getPresno,
-      SynoRenderer,
+      PresnoRenderer,
       presno: {
         focused,
         synoId,
         name,
         value,
-        presnoFocused,
-        charFocused,
         valid,
       },
     } = props;
@@ -40,16 +36,17 @@ export default (
         className: classes,
         'data-syno-id': synoId,
       },
-      name && React.createElement(NamePart, {
-        namePart: name,
-        focused: presnoFocused === 0,
-        charFocused,
+      name && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: name.id,
+        PresnoRenderer,
       }),
-      value && React.createElement(SynoRenderer, {
+      value && React.createElement(PresnoRenderer, {
         integration,
         getPresno,
         synoId: value.id,
-        SynoRenderer,
+        PresnoRenderer,
       }),
     );
   };

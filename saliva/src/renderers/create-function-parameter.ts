@@ -6,20 +6,26 @@ export default (
 ): (
   (props: FunctionParameterRendererProps) => JSX.Element
 ) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+  const { React } = integrationDependencies;
+
   return (props: FunctionParameterRendererProps) => {
-    const { presno } = props;
-    const { presnoFocused, charFocused, valid } = presno;
+    const {
+      integration,
+      getPresno,
+      presno,
+      presno: {
+        focused,
+        valid,
+      },
+      PresnoRenderer,
+    } = props;
     const classes = [
       'syno',
       'same-line',
       'leaf',
       'bubble-even',
       'function-parameter',
-      presno.focused ? 'focused' : 'unfocused',
+      focused ? 'focused' : 'unfocused',
       valid ? '' : 'invalid',
     ].join(' ');
 
@@ -29,10 +35,11 @@ export default (
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      React.createElement(NamePart, {
-        namePart: presno.slot,
-        focused: presnoFocused === 0,
-        charFocused,
+      presno.slot && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: presno.slot.id,
+        PresnoRenderer,
       }),
     );
   };

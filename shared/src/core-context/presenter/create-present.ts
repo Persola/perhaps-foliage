@@ -1,6 +1,7 @@
 import type { Store } from 'redux';
 
 import presentTree from './presenters/present-tree';
+import ascendToRoot from '../../syntree-utils/ascend-to-root';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { EditorState } from '../../types/editor-state';
@@ -23,10 +24,12 @@ const generatePresentation = (
   ) {
     stage = null;
   } else {
+    const entryId = ascendToRoot(focus.synoId, state.synoMap()).id;
+
     stage = presentTree(
       state,
       integration as CoresidePresentLanguageIntegration,
-      focus.synoId,
+      entryId,
       state.synoMap(),
       focus,
     );

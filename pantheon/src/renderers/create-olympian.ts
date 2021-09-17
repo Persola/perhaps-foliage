@@ -1,37 +1,32 @@
 import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
 import type { Presno } from 'saliva-repl/dist/types/presenter/presno';
 import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
-import type { SynoRendererProps } from 'saliva-repl/dist/types/renderer/syno-renderer-props';
+import type { PresnoRendererProps } from 'saliva-repl/dist/types/renderer/presno-renderer-props';
 import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
 import type { OlympianPres } from '../types/presentations/olympian';
 
 type Props = {
   integration: PresentLanguageIntegration;
   getPresno: (synoId: SynoId) => Presno;
-  // eslint-disable-line react/no-unused-prop-types
   presno: OlympianPres;
-  SynoRenderer: (props: SynoRendererProps) => JSX.Element;
+  PresnoRenderer: (props: PresnoRendererProps) => JSX.Element;
 };
+
+type TitanRenderer = (props: Props) => JSX.Element;
 
 export default (
   integrationDependencies: IntegrationDependencies,
-): (
-  (props: Props) => JSX.Element
-) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+): TitanRenderer => {
+  const { React } = integrationDependencies;
+
   return (props: Props) => {
     const {
       integration,
       getPresno,
-      SynoRenderer,
+      PresnoRenderer,
       presno: {
         name,
         focused,
-        presnoFocused,
-        charFocused,
         valid,
         child,
         synoId,
@@ -45,25 +40,25 @@ export default (
       focused ? 'focused' : 'unfocused',
       valid ? '' : 'invalid',
     ].join(' ');
+
     return React.createElement(
       'div',
       {
         className: classes,
         'data-syno-id': synoId,
       },
-      name
-    && React.createElement(NamePart, {
-      namePart: name,
-      focused: presnoFocused === 0,
-      charFocused,
-    }),
-      child
-    && React.createElement(SynoRenderer, {
-      integration,
-      getPresno,
-      synoId: child.id,
-      SynoRenderer,
-    }),
+      name && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: name.id,
+        PresnoRenderer,
+      }),
+      child && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: child.id,
+        PresnoRenderer,
+      }),
     );
   };
 };

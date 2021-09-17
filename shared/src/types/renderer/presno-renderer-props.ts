@@ -3,9 +3,9 @@ import type { RendersidePresentLanguageIntegration } from '../language-integrati
 import type { SynoId } from '../syntactic/syno-id';
 import type { GetPresno } from './get-presno';
 
-export type SynoRendererProps = {
+export type PresnoRendererProps = {
   readonly integration: RendersidePresentLanguageIntegration;
   readonly getPresno: GetPresno;
   readonly synoId: SynoId;
-  readonly SynoRenderer: (props: SynoRendererProps) => React.ReactElement;
+  readonly PresnoRenderer: (props: PresnoRendererProps) => React.ReactElement;
 };

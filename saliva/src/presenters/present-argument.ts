@@ -1,35 +1,37 @@
-import makePresnoRef from 'saliva-repl/dist/core-context/presenter/presenters/make-presno-ref';
-
 import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
 
 import type { Argument } from '../types/synos/argument';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
+import type { FunctionParameter } from '../types/synos/function-parameter';
 
 export default (
   argument: Argument,
   state: StateSelector,
+  presentAndReturnRef: PresentAndReturnRef,
 ): ArgumentPresAttrs => {
-  let name = null;
+  let name;
+  if (!argument.parameter) {
+    name = null;
+  } else {
+    const nameVal: string = (
+      state.getSyno(argument.parameter.id) as FunctionParameter
+    ).name;
 
-  if (argument.parameter) {
-    const param = state.getSyno(argument.parameter.id);
-
-    if (param.syntype !== 'functionParameter') {
-      throw new Error('wrong type from synomap (flow)');
-    }
-
-    name = param.name;
+    name = presentAndReturnRef(
+      {
+        valid: true,
+        presnoIndex: 0,
+        prestype: 'NamePart',
+        text: nameVal,
+      },
+      argument,
+    );
   }
-
-  const value = (
-    argument.value
-      ? makePresnoRef(argument.value)
-      : null
-  );
 
   return {
     syntype: 'argument',
     name,
-    value,
+    value: presentAndReturnRef(argument.value),
   };
 };

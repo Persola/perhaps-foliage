@@ -27,8 +27,8 @@ export default (
       newSynoMap: codeLoader.fromString(action.fileText, integration),
     };
   }),
-  catchError((err: Error) => {
-    console.warn(err.message);
+  catchError((error: Error) => {
+    console.error(error);
 
     return of({
       type: 'END_SYNTREE_LOAD',

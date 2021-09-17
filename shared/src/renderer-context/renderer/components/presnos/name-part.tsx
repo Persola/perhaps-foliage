@@ -8,13 +8,23 @@ const namePartWithCursor = (namePart, charFocused) => `${namePart.slice(0, charF
 )}`;
 
 export default (props: NamePartProps): JSX.Element => {
-  const { namePart, focused, charFocused } = props;
+  const {
+    presno: {
+      namePart,
+      focused,
+      charFocused,
+    },
+  } = props;
+
   const classes = `code-text same-line ${focused ? 'focused' : 'unfocused'}`;
+
   return (
     <div className={classes}>
-      {charFocused === null
-        ? namePart
-        : namePartWithCursor(namePart, charFocused)}
+      {
+        charFocused === null
+          ? namePart
+          : namePartWithCursor(namePart, charFocused)
+      }
     </div>
   );
 };

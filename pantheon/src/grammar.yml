@@ -1,12 +1,18 @@
 titan:
   rootable: true
   children:
-    progeny:
-      collection: true
+    child:
+      collection: false
       syntype: olympian
+  nonTreeRefs: {}
+  properties:
+    name: string
 olympian:
   rootable: false
   children:
-    progeny:
-      collection: true
+    child:
+      collection: false
       syntype: olympian
+  nonTreeRefs: {}
+  properties:
+    name: string

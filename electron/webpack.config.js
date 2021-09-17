@@ -18,11 +18,6 @@ module.exports = [
         type: 'commonjs2',
       },
     },
-    plugins: [
-      new webpack.DefinePlugin({
-        WEB_VERSION: false,
-      }),
-    ],
     devtool: 'source-map',
   },
   { // renderer process

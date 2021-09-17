@@ -11,14 +11,14 @@ const argumentEls = (
   integration: PresentLanguageIntegration,
   getPresno: (synoId: SynoId) => Presno,
   argumentz: PresnoRef[],
-  SynoRenderer,
+  PresnoRenderer,
 ) => argumentz.map((argRef: PresnoRef, ind) => {
-  return React.createElement(SynoRenderer, {
+  return React.createElement(PresnoRenderer, {
     integration,
     key: `arg_${ind + 1}`,
     getPresno,
     synoId: argRef.id,
-    SynoRenderer,
+    PresnoRenderer,
   });
 });
 
@@ -27,20 +27,17 @@ export default (
 ): (
   (props: FunctionCallRendererProps) => JSX.Element
 ) => {
-  const {
-    React,
-    components: { NamePart },
-  } = integrationDependencies;
+  const { React } = integrationDependencies;
+
   return (props: FunctionCallRendererProps) => {
-    const { integration, getPresno, presno, SynoRenderer } = props;
-    const { presnoFocused, charFocused } = presno;
+    const { integration, getPresno, presno, PresnoRenderer } = props;
     const { name, callee, resolved, focused, valid } = presno;
     const argumentz = argumentEls(
       React,
       integration,
       getPresno,
       presno.argumentz,
-      SynoRenderer,
+      PresnoRenderer,
     );
     const classes = [
       'syno',
@@ -55,17 +52,18 @@ export default (
         className: classes,
         'data-syno-id': presno.synoId,
       },
-      name && React.createElement(NamePart, {
-        namePart: name,
-        focused: presnoFocused === 0,
-        charFocused,
+      name && React.createElement(PresnoRenderer, {
+        integration,
+        getPresno,
+        synoId: name.id,
+        PresnoRenderer,
       }),
       argumentz,
-      callee && React.createElement(SynoRenderer, {
+      callee && React.createElement(PresnoRenderer, {
         integration,
         getPresno,
         synoId: callee.id,
-        SynoRenderer,
+        PresnoRenderer,
       }),
     );
   };

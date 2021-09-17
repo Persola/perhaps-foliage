@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import SyntacticNode from './syntactic-node';
+import PresnoRenderer from './presno';
 import OutdatedMessage from './outdated-message';
 import createPresnoFetcher from '../../../prestree-utils/create-presno-fetcher';
 
@@ -79,11 +79,11 @@ export default (props: Props): JSX.Element => {
     const { presnos, rootId } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
     content = (
-      <SyntacticNode
+      <PresnoRenderer
         integration={presentIntegration}
         getPresno={getPresno}
         synoId={rootId}
-        SynoRenderer={SyntacticNode}
+        PresnoRenderer={PresnoRenderer}
       />
     );
   }
