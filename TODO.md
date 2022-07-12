@@ -20,6 +20,8 @@
 * **?** extract something shared on the top level of the grammar validator and graph validator
   * too dry, perhaps
 * rename 'saliva-core-integration.js' etc. for clarity
+* clarify terminology around `shared`, `core-context`, and `editor-core`
+  * use `heart` for redux/state management?
 * presentation read tools
   * **?** pure functional derive from synstate
   * **?** store/cache presentation

@@ -9,51 +9,64 @@
 ### About
 This repo contains an as-of-yet unentitled visual interface for writing and editing tree-based data structures (a structure editor). The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
 
+To be useful, the editor must be provided with a language integration specific to this editor and the language the data being edited is written in. When editing code, that language will be a programming language.
+
 ##### Project Structure
 
 The repo contains seven NPM packages:
 
-* `./shared` contains the core of the editor
-* there are three build targets:
-  * a web app (`./web/`)
-  * a Electron app (`./electron/`)
-  * a VSCode extension (`./vscode/`)
-* To actually use the editor you also need an integration for the laguage you are editing, which are included for two (so-called) languages:
-  * Pantheon, a toy data spec used for testing (`./pantheon/`)
-  * Saliva, a rudimentary programming language implemented as part of this project in order to demonstrate the capabilities of the editor (`./saliva/`)
-* If you're using the VSCode build, you actually need an extension to knit together the editor extension and the language integration. This will soon exist for Saliva in `./vscode-saliva/`
+* `./shared/` contains most of the editor source code
+* Two language integrations:
+  * In `./pantheon/`, an integration for Pantheon, a toy data spec used for testing 
+  * In `./saliva/`, an integration for Saliva, a rudimentary programming language implemented as part of this project in order to demonstrate the capabilities of the editor
+* The VSCode base extension (`./vscode/`), which does not run independently
+* Three working builds:
+  * A web app (`./web/`), which hotloads language integrations
+  * An Electron app (`./electron/`), which hotloads language integrations
+  * A language-specific VSCode extension (`./vscode-saliva/`), which knits together the VSCode base extension and the Saliva language integration
 
 ### How To Use
 
-#### (1) Set up
-Leaving this vague for now, but if you have Node and a package manager, probably just `npm install` each package.
+#### 1. Set up
+Leaving this vague for now, but if you have Node and a package manager, roughly just `npm install` each package.
 
-#### (2) Build the editor
+#### 2. Build
 
-Choose one of the editor builds above, then `npm run build` there.
+Choose which builds and language integrations you want to use.
 
-#### (4) Build a language integration
+##### 2a. web/Electron
 
-As before, choose and language build and `npm run build` inside it. (If using `vscode-saliva`, build that, too.)
+Run `npm run build` in the subdirectory of the build and in the subdirectory of the language integration.
 
-#### (5) Run
+##### 2b. VSCode language-specific extension
 
-##### Web
+Run `npm run build` in `./vscode/` and `./saliva/`. Then, run `npm run build` in `./vscode-saliva/`.
+
+#### 3. Run
+
+##### 3a. Web
 1. `npm run start`
 2. Navigate to `localhost:8000` in a browser
+3. Use the file selector to load the language integration you built (`./saliva/built/saliva-hotloadable-integration.js` or `./pantheon/built/pantheon-integration.js`)
+4. Drag a data file into the editor panel (sample files in `./saliva/src/static/` and `./pantheon/src/static/`)
+##### 3b. Electron
+1. `npm run start` (an electron window should appear)
+2. Use the file selector to load the language integration you built (`./saliva/built/saliva-hotloadable-integration.js` or `./pantheon/built/pantheon-integration.js`)
+3. Drag-n-drop a data file into the editor panel (sample files in `./saliva/src/static/` and `./pantheon/src/static/`)
 
-##### Electron
-```shell
-npm run start
-```
-An electron window should appear.
+##### 3c. VSCode
 
-##### VSCode
-I haven't published the extension, but you can do a test run using the [VSCode's extension testing capabilities ](https://code.visualstudio.com/api/working-with-extensions/testing-extension) (basically: open the source in VSCode and press `F5`).
+1. `npm run start` (I haven't published the extension yet, so this uses [VSCode's extension testing capabilities](https://code.visualstudio.com/api/working-with-extensions/testing-extension).)
+2. In the VSCode window that appeared, open a data file (sample files in `./saliva/src/static/`)
 
-#### (6) Use
-1. Use the `load file` input to load the Pantheon or Saliva integration you built (should appear at `./`(`saliva` or `pantheon`)`/dist/`(`saliva` or `pantheon`)`Integration.js`).
-2. Drag-n-drop a file in the corresponding language into the top part of the editor. Samples are found in `./`(`pantheon` or `saliva`)`/static/`.
+#### 4. Key Bindings
+
+| Action | Input |
+| - | - |
+| Navigation | `↑`, `↓`, `←`, `→` |
+| Replace selected boolean | `t`, `f`, `0`, `1` |
+| Delete | `delete` |
+| Interpret (Saliva only) | `enter` |
 
 ### Type Check
 ```shell
