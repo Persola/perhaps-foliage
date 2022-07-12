@@ -7,7 +7,7 @@ import type { Grammar } from '../../../types/grammar/grammar';
 import type { GraphValidationResult } from '../../../types/code-loader/graph-validation-result';
 
 /**
- * Given a syntree which is locally well-formed, make sure it is a well-formed tree
+ * Given a syntree which is locally well-formed, make sure it is globally well-formed
 */
 export default (
   graph: SynoMap,

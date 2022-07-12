@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import type { Store, Action } from 'redux';
 
-import createState from '../../selectors/create-state-selector';
+import createStateSelector from '../../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
 import deriveInverseReferenceMap from './derive-inverse-reference-map';
 import ascendToRoot from '../../syntree-utils/ascend-to-root';
@@ -91,7 +91,7 @@ export default (
     loadingSyntree: false,
   };
 
-  const stateSelector: StateSelector = createState(defaultEditorState);
+  const stateSelector: StateSelector = createStateSelector(defaultEditorState);
 
   const editorStateReducer = (
     oldState: EditorState = defaultEditorState,

@@ -2,14 +2,14 @@ import type { StateSelector } from '../types/state-selector';
 import type { EditorState } from '../types/editor-state';
 import type { Syno } from '../types/syntactic/syno';
 
-export default (initialEditorState: EditorState): StateSelector => {
+export default (editorState: EditorState): StateSelector => {
   /*
-  The state selector is way most of the app accesses state. Its data should not be modified
-  anywhere except in app.js, which keeps it in sync on state update
+  The state selector is way most of the app accesses state. The 'state' property should not be
+  modified anywhere except in app.js, which keeps it in sync on state update
  */
   const languageNeutralSelectors = {
   // state
-    state: initialEditorState,
+    state: editorState,
     // first-level accessors
     integrationId: function grammar() {
       return this.state.integrationId;

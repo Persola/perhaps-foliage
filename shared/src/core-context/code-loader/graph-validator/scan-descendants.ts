@@ -51,6 +51,8 @@ const scanDescendants = (
         ));
       }
 
+      // thus we don't require a collection of children to have the same syntype,
+      // just each to appear individually on the list
       validateChildSyntype(
         grammar,
         currentSyno,

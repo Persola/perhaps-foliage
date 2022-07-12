@@ -2,17 +2,27 @@
 * extract base renderer (need to move back to shared!)
   * extract classList
   * then all that's left is order of child presnos?
-    * renderers can be static? just specify order? (or even have it implicit in syn data!?)
+    * renderers can be static then?
+    * have it implicit in syn data??
+      * maybe as default, but generally have them list names in renderer and check against child types + names
 * some of the types are ridiculous, need to parameterize
-  * e.g. RendersideUninitializedPresentLanguageIntegration
+  * e.g. _RendersideUninitializedPresentLanguageIntegration_
 * rendering
-  * make sure all Saliva- and pantheon-valid syntax is renderable
+  * make sure a lot of Saliva- and pantheon-valid syntax is renderable
+    * can maybe use more formal method to guaruntee renderability later
+      * but only meaningful if the method is sufficiently indepedant of this impl.
+        * fuzz with some existing tool for generating code under a grammar?
+* fix syno/presno terminology in renderers
+  * anywhere else lingering?
+  * also in saliva renderer, callee should be named like "inline callee" or whatever, since it must be
 
 **maintenance**
-* **?** extract graph validation logic so it can be shared with modifications somehow
+* **?** extract something shared on the top level of the grammar validator and graph validator
+  * too dry, perhaps
+* rename 'saliva-core-integration.js' etc. for clarity
 * presentation read tools
   * **?** pure functional derive from synstate
-  * **?** store presentation
+  * **?** store/cache presentation
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface coreside errors and show on renderside
@@ -30,6 +40,7 @@
         * after store update decide which trees to present (even though react would handle it fine)
 * wrap syntrees in file with metadata (root ID)
 * force actions to go through an interface (to become API) (by encapsulating store?)
+  * so there can be a CLI or other kinds of APIs later, not just GUI
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** use proxy-memoize or another selector memoizer
