@@ -15,9 +15,9 @@ import { disposeAll } from './dispose';
 export default class PerhapsFoliageEditorProvider implements vscode.CustomEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
-    coreIntegration: PresentLanguageIntegration,
+    coreLanguageIntegration: PresentLanguageIntegration,
   ): void {
-    const provider = new PerhapsFoliageEditorProvider(context, coreIntegration);
+    const provider = new PerhapsFoliageEditorProvider(context, coreLanguageIntegration);
     const providerRegistration: vscode.Disposable = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
       provider,
@@ -31,7 +31,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
 
   constructor(
     private readonly context: vscode.ExtensionContext,
-    private integrationCore: PresentLanguageIntegration,
+    private coreLanguageIntegration: PresentLanguageIntegration,
   ) { }
 
   async openCustomDocument(
@@ -107,7 +107,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
       {
         emitDocumentChange: edit => document.makeEdit(edit),
         documentStateTracker: document.documentStateTracker,
-        initialLanguageIntegration: this.integrationCore,
+        initialLanguageIntegration: this.coreLanguageIntegration,
         initialDocument: document.initialDocumentState,
       },
     );

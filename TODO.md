@@ -17,6 +17,9 @@
   * also in saliva renderer, callee should be named like "inline callee" or whatever, since it must be
 
 **maintenance**
+* rename packages from `saliva-repl-*` format to something temporary?
+  * because 'saliva' now clearly refers to the language
+  * probably rename directory/repositories too, then
 * **?** extract something shared on the top level of the grammar validator and graph validator
   * too dry, perhaps
 * rename 'saliva-core-integration.js' etc. for clarity
@@ -28,7 +31,10 @@
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface coreside errors and show on renderside
+* adopt LSP
+  * not very useful yet, but so the structure guides me
 * break out packages
+  * just keep monorepo for now?
   * clean up
     * webpack configs' HTMLplugin index path (el)
   * more packages
@@ -53,6 +59,18 @@
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 * **?** adopt unist
+  * understand data attribute
+  * are the attributes clear in general? Are some reserved/have specified meaning? e.g. tagName is in a unist-general util
+  * how to deal with children
+    * going back to having no flattened version seems infeasible
+    * so the options are:
+      * keeping just the flattened version, which unist-utils don't work for, so:
+        * just adopt unist vaugely, but don't try to use utils
+        * have steps where I unflatten and reflatten trees depending on how I need to work with them
+          * bad for complexity/accessibility
+          * bad for performance
+      * have synos refer directly to children/parents, but also have them indexed by key
+        * how to deal with limits of tree completion
 
 **new functionality**
 * documentation
@@ -140,6 +158,10 @@
 * **?** diffing algorithm for syntree -> prestree transformation?
 * **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
   * first just profile it a bit
+
+**documentation**
+* developer
+  * explain basic debugging setup
 
 **longview**
 * write JSON integration

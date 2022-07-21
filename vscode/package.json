@@ -2,7 +2,7 @@
   "name": "saliva-repl-vscode",
   "displayName": "Saliva REPL VSCode",
   "version": "0.0.2",
-  "description": "VSCode extension build of Saliva REPL",
+  "description": "VSCode base extension for the Perhaps Foliage Editor",
   "author": "Luke Persola",
   "publisher": "persola",
   "main": "./dist/extension.js",
@@ -12,7 +12,6 @@
   "scripts": {
     "clean": "mkdir -p ./dist; rm -dr ./dist/*",
     "build": "npm run clean; tsc",
-    "start": "code --extensionDevelopmentPath=$(pwd)",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."
   },
