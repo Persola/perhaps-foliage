@@ -13,4 +13,3 @@ vscode-saliva/node_modules/
 web/built/
 web/node_modules/
 **/.DS_Store
-**/*.code-workspace

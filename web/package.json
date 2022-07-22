@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "mkdir -p ./built; rm -dr ./built/*",
     "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/server.js ./built/",
-    "start": "node --inspect ./built/server.js",
+    "start": "node ./built/server.js",
     "redo": "npm run clean; npm run build; npm run start",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."

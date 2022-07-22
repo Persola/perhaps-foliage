@@ -5,11 +5,13 @@ There are three builds:
 * an Electron app (`./electron/`)
 * a VSCode extension (`./vscode/` and `./vscode-saliva/`)
 
-VSCode itself is built on top of Electron, which is built on top of web technologies. So the three builds vary, with the website being the least constrained and least supported by its dependency stack, and the VSCode extension the most. In order to share code between the builds, the architecture of the web version mirrors the architecture of Electron applications and the VSCode extension environment. Thus in all three, the shared elements of the editor (`./shared/`) are split into two workers/processes, the `core-context` and the `renderer-context`.
+VSCode itself is built on top of Electron, which is built on top of web technologies. The web build is the least constrained and least supported by its dependency stack, and the VSCode extension the most. In order to share code between the builds, the architecture of the web version mirrors the architecture of Electron applications and the VSCode extension environment. Thus in all three, the shared elements of the editor (`./shared/`) are split into two workers/processes, the `core-context` and the `renderer-context`, but each composes these parts into the full editor in a different way.
+
+It's planned that in the future a single core context instance may have multiple renderer contexts, corresponding to multiple file views in a single editor instance. This is why the web version runs a shared worker instead of a dedicated worker.
 
 ### Initialization Summaries
 
-The way the different builds initialize is a bit convoluted. Each needs to compose the editor from its parts in a different way.
+The way the different builds initialize is a bit convoluted.
 
 #### web
 

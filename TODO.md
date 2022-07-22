@@ -160,8 +160,6 @@
   * first just profile it a bit
 
 **documentation**
-* developer
-  * explain basic debugging setup
 
 **longview**
 * write JSON integration

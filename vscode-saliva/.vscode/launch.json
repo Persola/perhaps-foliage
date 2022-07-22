@@ -6,13 +6,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Run Extension",
+			"name": "vscode-saliva extension",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": ["--extensionDevelopmentPath=${workspaceFolder}"],
-			"outFiles": ["${workspaceFolder}/vscode/built/*.js"],
-			"resolveSourceMapLocations": ["${workspaceFolder}/vscode/built/*.js.map"],
-			"runtimeVersion": "14.17.1",
+			"outFiles": ["${workspaceFolder}/built/*.js"],
+			"resolveSourceMapLocations": ["${workspaceFolder}/built/*.js.map"],
 		}
 	]
 }

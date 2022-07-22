@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "shared"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"path": "electron"
+		},
+		{
+			"path": "vscode"
+		},
+		{
+			"path": "saliva"
+		},
+		{
+			"path": "pantheon"
+		},
+		{
+			"path": "vscode-saliva"
+		}
+	],
+	"settings": {}
+}
