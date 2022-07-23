@@ -8,6 +8,7 @@
     "clean": "mkdir -p ./built; rm -dr ./built/*",
     "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/server.js ./built/",
     "start": "node ./built/server.js",
+    "rdt": "node ./start-rdt-server.js",
     "redo": "npm run clean; npm run build; npm run start",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."
@@ -23,6 +24,7 @@
     "eslint-config-airbnb": "~18.2.1",
     "html-webpack-plugin": "~5.3.2",
     "json-loader": "~0.5.7",
+    "redux-devtools-cli": "^1.0.0-4",
     "source-map-loader": "^3.0.0",
     "style-loader": "~3.0.0",
     "ts-loader": "^9.2.3",

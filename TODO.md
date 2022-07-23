@@ -33,6 +33,7 @@
   * surface coreside errors and show on renderside
 * adopt LSP
   * not very useful yet, but so the structure guides me
+* language packages and shared should be peer dependencies?
 * break out packages
   * just keep monorepo for now?
   * clean up

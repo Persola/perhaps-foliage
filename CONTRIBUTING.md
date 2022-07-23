@@ -17,24 +17,33 @@ Background info
 [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
 
 * web
-  * the main process (renderer context): use your browser's dev tools
+  * the main process (renderer context): use your browser's dev tools in the window where the app is running
   * the web worker (core context): use your browser's web worker debug method
     * Firefox: [this firefox](about:debugging#/runtime/this-firefox) -> `Shared Workers`
       * not sure how to set break points in the code of a newly instantiated shared worker (to inspect app initialization)
-    * redux dev tools?
 * electron
   * [the main process (core context)](https://www.electronjs.org/docs/latest/tutorial/debugging-main-process)
-    * a launch.json is provided to work with the VSCode debugger
-    * redux dev tools?
+    * in vscode debugger, launch `main proc. electron` (a launch.json is provided)
   * the renderer process (renderer context): use dev tools built into electron window
 * vscode extensions
   * the main process (core context)
-    * a launch.json is provided to work with the VSCode debugger
-    * redux dev tools?
+    * in vscode debugger, launch `vscode-saliva extension` (a launch.json is provided)
   * the renderer process (renderer context)
     * use the dev tools in the VSCode instance running the extension (Developer: Toggle Developer Tools)
       * source maps don't work due to [a bug](https://github.com/microsoft/vscode/issues/145184)
-      * to get the built file: top -> some random string -> pending-frame (index.html) -> file+vscode-resource.vscode-cdn.net -> full filesystem path
+      * but you can use the built version: top -> some random string -> pending-frame (index.html) -> file+vscode-resource.vscode-cdn.net -> full filesystem path
+
+To use redux dev tools with any of the builds:
+* install the vscode extension [Redux DevTools for VSCode](https://marketplace.visualstudio.com/items?itemName=jingkaizhao.vscode-redux-devtools)
+* run the vscode command 'run devtools to the side' to open it
+* configure it
+  * fix "localhost" misspelling
+  * enter port 8001
+    * this correlates to port hardcoded in create-editor-state-store.js
+    * and to the port in start-rdt-server.js
+  * `npm run rdt` (keep it running while you use it)
+  * start the app of the chosen build
+
 
 ##### Known Errors
 

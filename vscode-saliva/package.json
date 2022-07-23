@@ -30,12 +30,13 @@
     "clean": "mkdir -p ./built; rm -dr ./built/*",
     "build": "npm run clean; webpack --config ./webpack.config.js",
     "start": "code --extensionDevelopmentPath=$(pwd)",
+    "rdt": "node ./start-rdt-server.js",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."
   },
   "dependencies": {
-    "saliva-repl-vscode": "file:../vscode",
-    "saliva": "file:../saliva"
+    "saliva": "file:../saliva",
+    "saliva-repl-vscode": "file:../vscode"
   },
   "devDependencies": {
     "@types/vscode": "^1.58.0",
@@ -45,6 +46,7 @@
     "eslint": "~7.30.0",
     "eslint-config-airbnb": "~18.2.1",
     "json-loader": "~0.5.7",
+    "redux-devtools-cli": "^1.0.0-4",
     "source-map-loader": "^3.0.0",
     "style-loader": "~3.0.0",
     "ts-loader": "^9.2.3",
