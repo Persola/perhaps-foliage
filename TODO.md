@@ -17,11 +17,13 @@
   * also in saliva renderer, callee should be named like "inline callee" or whatever, since it must be
 
 **maintenance**
+* switch to new redux devtools cli package
+* remove json-loader? / upgrade yaml-loader
+* fix call to render for react upgrade
+* when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
-* **?** extract something shared on the top level of the grammar validator and graph validator
-  * too dry, perhaps
 * rename 'saliva-core-integration.js' etc. for clarity
 * clarify terminology around `shared`, `core-context`, and `editor-core`
   * use `heart` for redux/state management?

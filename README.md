@@ -36,11 +36,18 @@ Choose which builds and language integrations you want to use.
 
 ##### 2a. web/Electron
 
-Run `npm run build` in the subdirectory of the build and in the subdirectory of the language integration.
+Run `npm run build` in:
+1. `./shared/`
+2. the subdirectory of the build
+3. the subdirectory of the language integration
 
 ##### 2b. VSCode language-specific extension
 
-Run `npm run build` in `./vscode/` and `./saliva/`. Then, run `npm run build` in `./vscode-saliva/`.
+Run `npm run build` in:
+1. `./shared/`
+2. `./vscode/`
+3. `./saliva/`
+4. `./vscode-saliva/`
 
 #### 3. Run
 
