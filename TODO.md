@@ -20,7 +20,8 @@
 * when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
-* make style and css loaders peer dependency of shared?
+* the fuck is going on with integration load input
+  * I load it in two places? unfinished work maybe?
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
