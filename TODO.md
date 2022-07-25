@@ -20,7 +20,6 @@
 * when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
-* switch to new redux devtools cli package
 * make style and css loaders peer dependency of shared?
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language

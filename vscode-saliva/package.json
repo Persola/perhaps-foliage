@@ -30,7 +30,7 @@
     "clean": "mkdir -p ./built; rm -dr ./built/*",
     "build": "npm run clean; webpack --config ./webpack.config.js",
     "start": "code --extensionDevelopmentPath=$(pwd)",
-    "rdt": "node ./start-rdt-server.js",
+    "rdt": "redux-devtools --hostname=localhost --port=8001",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."
   },
@@ -39,13 +39,13 @@
     "saliva-repl-vscode": "file:../vscode"
   },
   "devDependencies": {
+    "@redux-devtools/cli": "^1.0.7",
     "@types/vscode": "~1.69.0",
     "@typescript-eslint/eslint-plugin": "~5.30.7",
     "@typescript-eslint/parser": "~5.30.7",
     "css-loader": "~6.7.1",
     "eslint": "~8.20.0",
     "eslint-config-airbnb": "~19.0.4",
-    "redux-devtools-cli": "1.0.0-4",
     "source-map-loader": "~4.0.0",
     "style-loader": "~3.3.1",
     "ts-loader": "~9.3.1",

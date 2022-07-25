@@ -8,7 +8,7 @@
     "clean": "mkdir -p ./built; rm -dr ./built/*",
     "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/server.js ./built/",
     "start": "node ./built/server.js",
-    "rdt": "node ./start-rdt-server.js",
+    "rdt": "redux-devtools --hostname=localhost --port=8001",
     "redo": "npm run clean; npm run build; npm run start",
     "type": "tsc --noEmit",
     "lint": "eslint --ext ts,tsx ."
@@ -17,13 +17,13 @@
     "saliva-repl": "file:../shared"
   },
   "devDependencies": {
+    "@redux-devtools/cli": "^1.0.7",
     "@typescript-eslint/eslint-plugin": "~5.30.7",
     "@typescript-eslint/parser": "~5.30.7",
     "css-loader": "~6.7.1",
     "eslint": "~8.20.0",
     "eslint-config-airbnb": "~19.0.4",
     "html-webpack-plugin": "~5.5.0",
-    "redux-devtools-cli": "1.0.0-4",
     "source-map-loader": "~4.0.0",
     "style-loader": "~3.3.1",
     "ts-loader": "~9.3.1",
