@@ -21,8 +21,7 @@
 
 **maintenance**
 * switch to new redux devtools cli package
-* remove json-loader? / upgrade yaml-loader
-  * make style and css loaders peer dependency of shared?
+* make style and css loaders peer dependency of shared?
 * fix call to render for react upgrade
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
