@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import Editor from './components/editor';
 
@@ -8,10 +8,10 @@ import type { EditorPresentation } from '../../types/presenter/editor-presentati
 import type { RendersideLanguageIntegration } from '../../types/language-integration/renderside-language-integration';
 
 export default class {
-  editorEl;
+  reactRoot;
 
   constructor(document: Document) {
-    this.editorEl = document.getElementById('editor');
+    this.reactRoot = createRoot(document.getElementById('editor'));
   }
 
   render(
@@ -21,7 +21,7 @@ export default class {
     interpreting: boolean,
     integration: RendersideLanguageIntegration,
   ): void {
-    ReactDOM.render(
+    this.reactRoot.render(
       <Editor
         sendCrossContextMessage={sendCrossContextMessage}
         integration={integration}
@@ -29,7 +29,6 @@ export default class {
         resultOutdated={resultOutdated}
         interpreting={interpreting}
       />,
-      this.editorEl,
     );
 
     if (integration.styles) {
