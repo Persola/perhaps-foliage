@@ -16,11 +16,14 @@
   * anywhere else lingering?
   * also in saliva renderer, callee should be named like "inline callee" or whatever, since it must be
 
+**bugs**
+* when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
+
 **maintenance**
 * switch to new redux devtools cli package
 * remove json-loader? / upgrade yaml-loader
+  * make style and css loaders peer dependency of shared?
 * fix call to render for react upgrade
-* when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
