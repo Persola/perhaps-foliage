@@ -3,7 +3,6 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 import { merge } from 'rxjs';
 import { createEpicMiddleware } from 'redux-observable';
 import produce from 'immer';
-import * as React from 'react';
 
 import type { Store, Action } from 'redux';
 
@@ -27,8 +26,6 @@ import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 import loadIntegrationEpic from './epics/load-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
-
-import Text from '../../renderer-context/renderer/components/vis/text';
 
 import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
@@ -230,15 +227,9 @@ export default (
     editorStateReducer,
     composeEnhancers(applyMiddleware(epicMiddleware)),
   );
-  const integrationDependencies = {
-    React, // pass in our react instance so integrations don't need to bundle their own
-    components: {
-      Text,
-    },
-  };
 
   const rootEpic = (action$, state$) => merge(
-    loadIntegrationEpic(action$, integrationDependencies),
+    loadIntegrationEpic(action$),
     loadSyntreeEpic(action$, state$, stateSelector, integration),
     interpretEpic(action$, state$, stateSelector, integration, warnUser),
   );

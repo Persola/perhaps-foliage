@@ -1,7 +1,24 @@
-import createTitan from './create-titan';
-import createOlympian from './create-olympian';
-
 export default {
-  titan: createTitan,
-  olympian: createOlympian,
+  titan: {
+    classes: [
+      'same-line',
+      'bubble-even',
+      'titan',
+    ],
+    childPresnos: [
+      'name',
+      'child',
+    ],
+  },
+  olympian: {
+    classes: [
+      'same-line',
+      'bubble-even',
+      'olympian',
+    ],
+    childPresnos: [
+      'name',
+      'child',
+    ],
+  },
 };

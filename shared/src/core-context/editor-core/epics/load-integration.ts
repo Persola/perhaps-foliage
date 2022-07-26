@@ -2,7 +2,6 @@ import { Observable, filter, map } from 'rxjs';
 
 import type { Action } from 'redux';
 
-import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 import type { CoresideLanguageIntegration } from '../../../types/language-integration/coreside-language-integration';
 import type { StartIntegrationHotload } from '../../../types/actions/start-integration-hotload';
 import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';

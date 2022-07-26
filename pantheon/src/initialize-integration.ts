@@ -16,6 +16,6 @@ export default {
   interpret: null,
   synoValidators,
   presenters,
-  renderers: rendererCreators,
+  rendererCreators,
   styles,
 };

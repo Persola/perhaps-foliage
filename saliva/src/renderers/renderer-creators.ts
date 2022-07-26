@@ -1,15 +1,15 @@
-import createBooleanLiteral from './create-boolean-literal';
-import createFunctionCall from './create-function-call';
-import createFunctionDefinition from './create-function-definition';
-import createFunctionParameter from './create-function-parameter';
-import createArgument from './create-argument';
-import createVariableRef from './create-variable-ref';
+import argument from './argument';
+import booleanLiteral from './boolean-literal';
+import functionCall from './function-call';
+import functionDefinition from './function-definition';
+import functionParameter from './function-parameter';
+import variableRef from './variable-ref';
 
 export default {
-  booleanLiteral: createBooleanLiteral,
-  functionCall: createFunctionCall,
-  functionDefinition: createFunctionDefinition,
-  functionParameter: createFunctionParameter,
-  argument: createArgument,
-  variableRef: createVariableRef,
+  argument,
+  booleanLiteral,
+  functionCall,
+  functionDefinition,
+  functionParameter,
+  variableRef,
 };
