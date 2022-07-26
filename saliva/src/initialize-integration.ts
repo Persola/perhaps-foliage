@@ -1,6 +1,3 @@
-import type { IntegrationDependencies } from 'saliva-repl/dist/types/language-integration/integration-dependencies';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
-
 import version from './version';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import grammar from './grammar.yml';
@@ -11,22 +8,18 @@ import keyToNewSynoAttrs from './key-to-new-syno-attrs.yml';
 import interpret from './interpreter/interpret';
 import synoValidators from './syno-validators/syno-validators';
 import presenters from './presenters/presenters';
-import createRenderers from './renderers/create-renderers';
+import rendererCreators from './renderers/renderer-creators';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import styles from './stylesheet.lazy.css';
 
-export default (
-  integrationDependencies: IntegrationDependencies,
-): PresentLanguageIntegration => {
-  return {
-    id: `saliva.saliva-repl-alpha.${version}`,
-    grammar,
-    primitives,
-    keyToNewSynoAttrs,
-    interpret,
-    synoValidators,
-    presenters,
-    renderers: createRenderers(integrationDependencies),
-    styles,
-  };
+export default {
+  id: `saliva.saliva-repl-alpha.${version}`,
+  grammar,
+  primitives,
+  keyToNewSynoAttrs,
+  interpret,
+  synoValidators,
+  presenters,
+  rendererCreators,
+  styles,
 };

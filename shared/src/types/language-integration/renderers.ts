@@ -1,7 +1,5 @@
-import * as React from 'react';
+import type { Renderer } from './renderer';
 
 export type Renderers = Readonly<{
-  [syntype: string]: React.ComponentType<{
-    [propName: string]: unknown;
-  }>;
+  [syntype: string]: Renderer;
 }>;

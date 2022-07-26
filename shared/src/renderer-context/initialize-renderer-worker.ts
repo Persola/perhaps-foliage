@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import createRenderers from './create-renderers';
 import Renderer from './renderer/renderer';
 import Text from './renderer/components/vis/text';
 import updateInputBindings from './update-input-bindings';
@@ -35,7 +36,7 @@ export default (
     ),
     renderers: (
       initialRendererIntegration
-        ? initialRendererIntegration.createRenderers(integrationDependencies)
+        ? createRenderers(integrationDependencies, initialRendererIntegration)
         : null
     ),
     styles: initialRendererIntegration ? initialRendererIntegration.styles : null,

@@ -22,6 +22,8 @@
 **maintenance**
 * the fuck is going on with integration load input
   * I load it in two places? unfinished work maybe?
+    * the two places are where it loads the rendererside and coreside intergations seperately
+    * names are bad
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then

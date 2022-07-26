@@ -21,6 +21,7 @@ Background info
   * the web worker (core context): use your browser's web worker debug method
     * Firefox: [this firefox](about:debugging#/runtime/this-firefox) -> `Shared Workers`
       * not sure how to set break points in the code of a newly instantiated shared worker (to inspect app initialization)
+      * :warning: if you have multiple tabs running the web app, the core context code will not reload on refresh (because the refreshed tab will just reconnect to the existing shared worker)
 * electron
   * [the main process (core context)](https://www.electronjs.org/docs/latest/tutorial/debugging-main-process)
     * in vscode debugger, launch `main proc. electron` (a launch.json is provided)

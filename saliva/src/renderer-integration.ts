@@ -1,13 +1,13 @@
 import version from './version';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import keyToNewSynoAttrs from './key-to-new-syno-attrs.yml';
-import createRenderers from './renderers/create-renderers';
+import rendererCreators from './renderers/renderer-creators';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import styles from './stylesheet.lazy.css';
 
 export default {
   version,
   keyToNewSynoAttrs,
-  createRenderers,
+  rendererCreators,
   styles,
 };

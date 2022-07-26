@@ -1,14 +1,17 @@
 import * as React from 'react';
 
+import createRenderers from '../../create-renderers';
+
 import Text from './vis/text';
 
 import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
-import type { RendersideLanguageIntegration } from '../../../types/language-integration/renderside-language-integration';
+import type { RendersidePresentLanguageIntegration } from '../../../types/language-integration/renderside-present-language-integration';
+import type { RendersideUninitializedPresentLanguageIntegration } from '../../../types/language-integration/renderside-uninitialized-present-language-integration';
 import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
-  integration: RendersideLanguageIntegration;
+  integration: RendersidePresentLanguageIntegration;
 };
 
 const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => {
@@ -20,10 +23,12 @@ const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => 
         React, // pass in our react instance so integrations don't need to bundle their own
         components: { Text },
       };
-      const newIntegration = initializeIntegration.default(integrationDependencies);
+      const newIntegration: RendersideUninitializedPresentLanguageIntegration = (
+        initializeIntegration.default
+      );
       Object.assign(oldIntegration, {
         keyToNewSynoAttrs: newIntegration.keyToNewSynoAttrs,
-        renderers: newIntegration.renderers,
+        renderers: createRenderers(integrationDependencies, newIntegration),
         styles: newIntegration.styles,
       });
       sendCrossContextMessage(
