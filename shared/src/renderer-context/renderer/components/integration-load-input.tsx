@@ -1,13 +1,10 @@
 import * as React from 'react';
 
-import createRenderers from '../../create-renderers';
-
-import Text from './vis/text';
+import createRenderers from '../generate-renderers';
 
 import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
 import type { RendersidePresentLanguageIntegration } from '../../../types/language-integration/renderside-present-language-integration';
-import type { RendersideUninitializedPresentLanguageIntegration } from '../../../types/language-integration/renderside-uninitialized-present-language-integration';
-import type { IntegrationDependencies } from '../../../types/language-integration/integration-dependencies';
+import type { UninitializedPresentLanguageIntegration } from '../../../types/language-integration/uninitialized-present-language-integration';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
@@ -19,16 +16,12 @@ const dispatchIntegrationLoad = (e, sendCrossContextMessage, oldIntegration) => 
     e.target.files[0].text().then(fileText => {
       let initializeIntegration;
       eval(fileText); // eslint-disable-line no-eval
-      const integrationDependencies: IntegrationDependencies = {
-        React, // pass in our react instance so integrations don't need to bundle their own
-        components: { Text },
-      };
-      const newIntegration: RendersideUninitializedPresentLanguageIntegration = (
+      const newIntegration: UninitializedPresentLanguageIntegration = ( // type is lie
         initializeIntegration.default
       );
       Object.assign(oldIntegration, {
         keyToNewSynoAttrs: newIntegration.keyToNewSynoAttrs,
-        renderers: createRenderers(integrationDependencies, newIntegration),
+        renderers: createRenderers(newIntegration),
         styles: newIntegration.styles,
       });
       sendCrossContextMessage(

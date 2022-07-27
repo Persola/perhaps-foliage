@@ -1,5 +1,4 @@
-export default (
-  // receives and ignores boolean literal syno
-): boolean => {
+export default (): boolean => {
+  // receives boolean literal syno as argument but ignores it
   return true;
 };

@@ -1,10 +1,5 @@
 **currently**
-* extract base renderer (need to move back to shared!)
-  * extract classList
-  * then all that's left is order of child presnos?
-    * renderers can be static then?
-    * have it implicit in syn data??
-      * maybe as default, but generally have them list names in renderer and check against child types + names
+* move integration load out of input file
 * some of the types are ridiculous, need to parameterize
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
 * rendering
@@ -12,24 +7,27 @@
     * can maybe use more formal method to guaruntee renderability later
       * but only meaningful if the method is sufficiently indepedant of this impl.
         * fuzz with some existing tool for generating code under a grammar?
-* fix syno/presno terminology in renderers
-  * anywhere else lingering?
-  * also in saliva renderer, callee should be named like "inline callee" or whatever, since it must be
 
 **bugs**
 * when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
-* the fuck is going on with integration load input
-  * I load it in two places? unfinished work maybe?
-    * the two places are where it loads the rendererside and coreside intergations seperately
-    * names are bad
+* extract common logic from destroy syno and replace syno reducers as syntree utils
+  * probably also rewrite replace to call extracted patterns of destroy + create?
+    * no doing this is premature optimization
+* renderer should derive child presno order straight from presno attrs
+  * see LANGUAGE_INTEGRATION_SPEC
+  * but keep rendererAttrs because there will need to be config later
+    * e.g. what classes to apply for custom flags on presnos
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
 * rename 'saliva-core-integration.js' etc. for clarity
 * clarify terminology around `shared`, `core-context`, and `editor-core`
-  * use `heart` for redux/state management?
+  * rename `core-context` to `main-process` and `renderer-context` to `renderer-process`
+  * use `heart` for redux/state management? (replacing `editor-core`)
+  * use `base` instead of `shared`
+* **?** presentation tree should also have grammar
 * presentation read tools
   * **?** pure functional derive from synstate
   * **?** store/cache presentation
@@ -46,7 +44,6 @@
   * more packages
     * base language integration package
       * for extension, but should there also be scaffolding?
-      * extract base renderer (need to move back to shared!)
     * extract visualization as package with editors as consumers
       * compare editor (without REPL) vs. REPL/console
       * at this point mostly just creating package boundary between code views
@@ -55,6 +52,7 @@
 * wrap syntrees in file with metadata (root ID)
 * force actions to go through an interface (to become API) (by encapsulating store?)
   * so there can be a CLI or other kinds of APIs later, not just GUI
+  * redundant with LSP?
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** use proxy-memoize or another selector memoizer

@@ -1,8 +1,5 @@
-import * as React from 'react';
-
-import createRenderers from './create-renderers';
+import createRenderers from './renderer/generate-renderers';
 import Renderer from './renderer/renderer';
-import Text from './renderer/components/vis/text';
 import updateInputBindings from './update-input-bindings';
 
 import type {
@@ -12,7 +9,6 @@ import type {
 import type { RendersideLanguageIntegration } from '../types/language-integration/renderside-language-integration';
 import type { Render } from '../types/cross-context/messages-from-core/render';
 import type { Warn } from '../types/cross-context/messages-from-core/warn';
-import type { IntegrationDependencies } from '../types/language-integration/integration-dependencies';
 import type { RendersideUninitializedPresentLanguageIntegration } from '../types/language-integration/renderside-uninitialized-present-language-integration';
 
 import '../editor-styles.css';
@@ -23,10 +19,6 @@ export default (
   initialRendererIntegration: (RendersideUninitializedPresentLanguageIntegration | null),
 ): void => {
   const renderer = new Renderer(document);
-  const integrationDependencies: IntegrationDependencies = {
-    React,
-    components: { Text },
-  };
   const integration: RendersideLanguageIntegration = {
     id: initialRendererIntegration ? initialRendererIntegration.id : null,
     keyToNewSynoAttrs: (
@@ -36,7 +28,7 @@ export default (
     ),
     renderers: (
       initialRendererIntegration
-        ? createRenderers(integrationDependencies, initialRendererIntegration)
+        ? createRenderers(initialRendererIntegration)
         : null
     ),
     styles: initialRendererIntegration ? initialRendererIntegration.styles : null,

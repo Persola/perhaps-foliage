@@ -1,12 +1,13 @@
+import type { Grammar } from '../grammar/grammar';
 import type { KeyToNewSynoAttrs } from './key-to-new-syno-attrs';
-import type { RendererCreator } from './renderer-creator';
 import type { RendererAttrs } from './renderer-attrs';
 
 export type RendersideUninitializedPresentLanguageIntegration = {
   id: string;
+  grammar: Grammar;
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  rendererCreators: Readonly<{
-    [syntype: string]: (RendererCreator | RendererAttrs);
+  rendererAttrs: Readonly<{
+    [syntype: string]: RendererAttrs;
   }>;
   styles: string;
 };

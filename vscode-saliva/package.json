@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-vscode-saliva",
   "displayName": "Saliva REPL VSCode (Saliva)",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Saliva language integration for VSCode extension build of Saliva REPL",
   "author": "Luke Persola",
   "publisher": "persola",
