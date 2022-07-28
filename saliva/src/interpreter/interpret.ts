@@ -1,9 +1,10 @@
+import ascendToRoot from 'saliva-repl/dist/syntree-utils/read-tree/ascend-to-root';
+
 import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
 import type { EditorStateWithIntegration } from 'saliva-repl/dist/types/editor-state/editor-state-with-integration';
 import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
 
 import interpreter from './interpreter';
-import ascendToRoot from '../utils/ascend-to-root';
 
 export default (
   editorState: EditorStateWithIntegration,

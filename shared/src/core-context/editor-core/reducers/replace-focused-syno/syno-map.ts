@@ -1,4 +1,4 @@
-import forChildSynoOf from '../../../../syntree-utils/for-child-syno-of';
+import forChildSynoOf from '../../../../syntree-utils/read-node/for-child-syno-of';
 import getDraftSyno from '../draft-utils/get-draft-syno';
 
 import type { StateSelector } from '../../../../types/state-selector';

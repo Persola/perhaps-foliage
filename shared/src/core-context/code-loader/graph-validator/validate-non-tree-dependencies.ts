@@ -1,4 +1,4 @@
-import forSynoRefIn from '../../../syntree-utils/for-syno-ref-in';
+import forSynoRefIn from '../../../syntree-utils/read-node/for-syno-ref-in';
 import invalidate from './invalidate';
 
 import type { SynoMap } from '../../../types/syntactic/syno-map';

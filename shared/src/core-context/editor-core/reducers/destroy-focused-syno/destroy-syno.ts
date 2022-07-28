@@ -1,5 +1,5 @@
 import getDraftSyno from '../draft-utils/get-draft-syno';
-import forSynoRefIn from '../../../../syntree-utils/for-syno-ref-in';
+import forSynoRefIn from '../../../../syntree-utils/read-node/for-syno-ref-in';
 
 import type { StateSelector } from '../../../../types/state-selector';
 import type { DestroyFocusedSyno } from '../../../../types/actions/destroy-focused-syno';

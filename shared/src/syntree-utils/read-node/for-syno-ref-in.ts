@@ -1,5 +1,5 @@
-import type { Syno } from '../types/syntactic/syno';
-import type { SynoRef } from '../types/syntactic/syno-ref';
+import type { Syno } from '../../types/syntactic/syno';
+import type { SynoRef } from '../../types/syntactic/syno-ref';
 
 export default (
   syno: Syno,

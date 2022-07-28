@@ -1,4 +1,4 @@
-import forChildSynoOf from '../../../syntree-utils/for-child-syno-of';
+import forChildSynoOf from '../../../syntree-utils/read-node/for-child-syno-of';
 import invalidate from './invalidate';
 import printList from './print-list';
 import multipleParentsIds from './multiple-parent-ids';

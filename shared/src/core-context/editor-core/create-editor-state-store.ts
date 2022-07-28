@@ -9,7 +9,7 @@ import type { Store, Action } from 'redux';
 import createStateSelector from '../../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
 import deriveInverseReferenceMap from './derive-inverse-reference-map';
-import ascendToRoot from '../../syntree-utils/ascend-to-root';
+import ascendToRoot from '../../syntree-utils/read-tree/ascend-to-root';
 
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 import endInterpretationReducer from './reducers/end-interpretation-reducer';

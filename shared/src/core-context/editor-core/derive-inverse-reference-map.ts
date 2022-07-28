@@ -1,4 +1,4 @@
-import forSynoRefIn from '../../syntree-utils/for-syno-ref-in';
+import forSynoRefIn from '../../syntree-utils/read-node/for-syno-ref-in';
 
 import type { SynoMap } from '../../types/syntactic/syno-map';
 import type { MutableInverseReferenceMap } from '../../types/editor-state/mutable/mutable-inverse-reference-map';

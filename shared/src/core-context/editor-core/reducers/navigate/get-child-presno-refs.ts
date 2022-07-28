@@ -1,4 +1,4 @@
-import childSynos from '../../../../syntree-utils/child-synos';
+import childSynos from '../../../../syntree-utils/read-node/child-synos';
 
 import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
 import type { Syno } from '../../../../types/syntactic/syno';

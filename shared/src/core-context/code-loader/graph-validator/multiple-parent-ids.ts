@@ -1,4 +1,4 @@
-import forChildSynoOf from '../../../syntree-utils/for-child-syno-of';
+import forChildSynoOf from '../../../syntree-utils/read-node/for-child-syno-of';
 
 import type { SynoMap } from '../../../types/syntactic/syno-map';
 import type { Syno } from '../../../types/syntactic/syno';

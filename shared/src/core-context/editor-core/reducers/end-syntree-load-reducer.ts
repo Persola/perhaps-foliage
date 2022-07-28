@@ -1,5 +1,5 @@
 import deriveInverseReferenceMap from '../derive-inverse-reference-map';
-import ascendToRoot from '../../../syntree-utils/ascend-to-root';
+import ascendToRoot from '../../../syntree-utils/read-tree/ascend-to-root';
 
 import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
