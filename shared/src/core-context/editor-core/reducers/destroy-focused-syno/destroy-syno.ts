@@ -4,7 +4,6 @@ import forSynoRefIn from '../../../../syntree-utils/read-node/for-syno-ref-in';
 import type { StateSelector } from '../../../../types/state-selector';
 import type { DestroyFocusedSyno } from '../../../../types/actions/destroy-focused-syno';
 import type { MutableEditorState } from '../../../../types/mutable-editor-state';
-import type { MutableSynoMap } from '../../../../types/syntactic/mutables/mutable-syno-map';
 import type { UnistlikeEdit } from '../../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../../types/cross-context/warn';
 import type { SynoRef } from '../../../../types/syntactic/syno-ref';
@@ -33,16 +32,22 @@ export default (
     redo: { type: 'DELETE_SYNO' },
   });
 
-  const draftSynoMap: MutableSynoMap = draftState.synoMap;
-
-  if (!(focusedPresnoId in draftSynoMap)) {
+  if (!(focusedPresnoId in draftState.synoMap)) {
     throw new TypeError('Focused syno is not in editee syno map!?');
   }
 
-  delete draftSynoMap[focusedPresnoId];
+  // delete it (including its references)
+  delete draftState.synoMap[focusedPresnoId];
   // TODO: recursively delete orphaned descendants
 
-  // empty references to
+  // forget references from
+  forSynoRefIn(state.getSyno(focusedPresnoId), synoRef => {
+    if (state.synoMap()[synoRef.id]) { // referent is in this tree
+      draftState.inverseReferenceMap[synoRef.id].delete(focusedPresnoId);
+    }
+  });
+
+  // delete references to
   const referrerIds = state.inverseReferenceMap()[focusedPresnoId];
 
   referrerIds.forEach(referrerId => {
@@ -60,10 +65,6 @@ export default (
     });
   });
 
-  // forget references from
-  forSynoRefIn(state.getSyno(focusedPresnoId), synoRef => {
-    if (state.synoMap()[synoRef.id]) { // referent is in this tree
-      draftState.inverseReferenceMap[synoRef.id].delete(focusedPresnoId);
-    }
-  });
+  // forget references to
+  delete draftState.inverseReferenceMap[focusedPresnoId];
 };

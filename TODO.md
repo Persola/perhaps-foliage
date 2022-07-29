@@ -9,7 +9,7 @@
         * fuzz with some existing tool for generating code under a grammar?
 
 **bugs**
-* when replacing/deleting node, remove its list of referents and its ID in other lists from the inverse references map
+* when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
 * extract common logic from destroy syno and replace syno reducers as syntree utils

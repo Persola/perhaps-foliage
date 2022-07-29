@@ -1,5 +1,5 @@
 import type { MutableSynoMap } from './syntactic/mutables/mutable-syno-map';
-import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
+import type { MutableInverseReferenceMap } from './editor-state/mutable/mutable-inverse-reference-map';
 import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
 import type { Grammar } from './grammar/grammar';
 import type { MutableFocus } from './editor-state/mutable/mutable-focus';
@@ -13,7 +13,7 @@ export type MutableEditorState = {
   lastIntegrationBindings: string[] | null;
   synoMap: MutableSynoMap | null;
   resultTree: MutableSynoMap | null;
-  inverseReferenceMap: InverseReferenceMap | null;
+  inverseReferenceMap: MutableInverseReferenceMap | null;
   focus: MutableFocus | null;
   resultSyntreeRootId: ResultSyntreeRootId | null;
   interpreting: boolean;
