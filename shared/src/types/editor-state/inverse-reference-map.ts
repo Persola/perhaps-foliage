@@ -1,3 +1,18 @@
-import type { MutableInverseReferenceMap } from './mutable/mutable-inverse-reference-map';
+import type { SynoId } from '../syntactic/syno-id';
 
-export type InverseReferenceMap = Readonly<MutableInverseReferenceMap>;
+type ReadOnlySet<Member> = {
+  size: number;
+  // add:
+  // clear:
+  // delete:
+  entries: () => Member[][];
+  forEach: (callback: (member: Member) => void) => void;
+  has: (query: unknown) => boolean;
+  keys: () => Member[];
+  values: () => Member[];
+};
+
+export type InverseReferenceMap = Record<
+  SynoId,
+  ReadOnlySet<SynoId>
+>;

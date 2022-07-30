@@ -4,12 +4,13 @@
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
 
 **testing**
-* try rendering anything that should already be renderable
+* try rendering everything that should already be renderable
 
 **bugs**
 * when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
+* deal with BooleanLiteral exception in renderer generator
 * extract common logic from destroy syno and replace syno reducers as syntree utils
   * probably also rewrite replace to call extracted patterns of destroy + create?
     * no doing this is premature optimization

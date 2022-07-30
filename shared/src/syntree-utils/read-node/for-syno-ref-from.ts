@@ -1,3 +1,5 @@
+import isRef from '../read-other/is-ref';
+
 import type { Syno } from '../../types/syntactic/syno';
 import type { SynoRef } from '../../types/syntactic/syno-ref';
 import type { Edge } from '../../types/syntactic/edge';
@@ -7,12 +9,12 @@ export default (
   callback: (synoRef: SynoRef, edge: Edge) => void,
 ): void => {
   Object.entries(syno).forEach(([key, val]) => {
-    if (val && val.synoRef === true) {
+    if (isRef(val)) {
       const index = undefined;
-      callback(val, { key, index });
+      callback((val as SynoRef), { key, index });
     } else if (val instanceof Array) {
       val.forEach((el, index) => {
-        if (el.synoRef === true) {
+        if (isRef(el)) {
           callback(el, { key, index });
         }
       });

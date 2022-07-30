@@ -66,13 +66,8 @@ export default (
   const newSyno: Syno = {
     id: newSynoId,
     parent: parentAttr,
-    syntype: newSynoAttrs.syntype,
-    value: newSynoAttrs.value,
+    ...newSynoAttrs,
   };
-
-  if (Object.keys(draftSynoMap).includes(newSynoId)) {
-    throw new Error('tried to create syno with in-use ID');
-  }
 
   latestEdit.push({
     undo: {
@@ -87,5 +82,10 @@ export default (
     delete draftSynoMap[oldChildId];
     // TODO: recursively delete orphaned descendants
   }
+
+  if (Object.keys(draftSynoMap).includes(newSynoId)) {
+    throw new Error('tried to create syno with in-use ID');
+  }
+
   draftSynoMap[newSynoId] = newSyno;
 };
