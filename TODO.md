@@ -1,12 +1,10 @@
 **currently**
-* move integration load out of input file
+* move integration load out of integration-load-input file
 * some of the types are ridiculous, need to parameterize
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
-* rendering
-  * make sure a lot of Saliva- and pantheon-valid syntax is renderable
-    * can maybe use more formal method to guaruntee renderability later
-      * but only meaningful if the method is sufficiently indepedant of this impl.
-        * fuzz with some existing tool for generating code under a grammar?
+
+**testing**
+* try rendering anything that should already be renderable
 
 **bugs**
 * when replacing node, remove its list of referents and its ID in other lists from the inverse references map
@@ -25,20 +23,19 @@
 * rename 'saliva-core-integration.js' etc. for clarity
 * clarify terminology around `shared`, `core-context`, and `editor-core`
   * rename `core-context` to `main-process` and `renderer-context` to `renderer-process`
+    * because it's based on the electron process model, which uses those names
   * use `heart` for redux/state management? (replacing `editor-core`)
+    * conveys sense of timing and periodic updates
   * use `base` instead of `shared`
-* **?** presentation tree should also have grammar
-* presentation read tools
-  * **?** pure functional derive from synstate
-  * **?** store/cache presentation
+  * so don't use `core` anywhere then, even though the point was to have only one meaning for it
+* adopt LSP
+  * not very useful yet, but so the structure guides me
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface coreside errors and show on renderside
-* adopt LSP
-  * not very useful yet, but so the structure guides me
 * language packages and shared should be peer dependencies?
 * break out packages
-  * just keep monorepo for now?
+  * just keep monorepo for now
   * clean up
     * webpack configs' HTMLplugin index path (el)
   * more packages
@@ -53,28 +50,19 @@
 * force actions to go through an interface (to become API) (by encapsulating store?)
   * so there can be a CLI or other kinds of APIs later, not just GUI
   * redundant with LSP?
+* **?** presentation tree should also have grammar
+* presentation read tools
+  * **?** pure functional derive from synstate
+    * what?
+  * **?** store/cache presentation
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
-* **?** use proxy-memoize or another selector memoizer
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
   * What I really need is what children each type is allowed?
     * well, that's probably significantly less expressive, what's needed? what do contemporary ASTs tend like?
       * edNCE?
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
-* **?** adopt unist
-  * understand data attribute
-  * are the attributes clear in general? Are some reserved/have specified meaning? e.g. tagName is in a unist-general util
-  * how to deal with children
-    * going back to having no flattened version seems infeasible
-    * so the options are:
-      * keeping just the flattened version, which unist-utils don't work for, so:
-        * just adopt unist vaugely, but don't try to use utils
-        * have steps where I unflatten and reflatten trees depending on how I need to work with them
-          * bad for complexity/accessibility
-          * bad for performance
-      * have synos refer directly to children/parents, but also have them indexed by key
-        * how to deal with limits of tree completion
 
 **new functionality**
 * documentation
@@ -110,55 +98,70 @@
   * replace nulls in type data structures
 * add ancestor context presenter API to support context-sensative grammars but make it explicit
   * context would be provided in presentation, not done in renderer
+  * nope
+    * presentational scope isn't syntactic scope
+    * we should only support context-free grammars probably
+    * but presenters need access to things even wider than ancestors
+      * at least the entire editee graph should be accessible, e.g. function definition reference
 * [_saliva_] make types synos (beneath default visiblity level)
 * [_saliva_] wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 
 **design**
-* **?** grammar stores all refs in one object, relation type is property of ref
+* data layer(s)
+  * there's lots of interdependant state, so directly manipulating state in reducers doesn't work
+    * compare to state selector--a layer on top the raw data
+    * if we're adding a layer anyway we could store syntree data in an in-memory database or something DB-like?
+      * or just _really_ flatten it completely in redux
+        * like each property
+    * just creating a bunch of utils and importing them everywhere -> interfile spaghetti structure
+      * just use utils, but restrict imports with something like ignore-plugin or restrict-imports-loader
+        * syntree read utils restricted in renderers, command dispatchers
+        * syntree write utils only available in reducers (and other write utils)
+      * or group them under stateSelector equivalent for mindfulness
+    * could create a OO-ish layer on top
+      * not objects with state, just wrappers on top of state
+      * because I want e.g. `focusedSyno.parent`
+        * that's alos achievable by direct reference between synos
+          * but also e.g. `focusedSyno.nextSibling`
+      * so is there `focusedSyno.raw()` or something?
+        * property values would be given diretly
+        * refs are followed automatically
+        * sure, I guess
+* **?** AST format stores all refs in one object, relation type is property of ref
   * allows language integrations to provide modular 'grammar's contributing relations
-  * make Saliva function call optionally non-tree instead of child (notably for primitives)
-* patterns for AST-derived data
-  * syntax -> presentation
-  * custom syno labels for integrations
-  * LSP? or similar pattern
-  * incrementalism, language integration modularity
-  * I should probably be using tools/patterns from compilers?
-  * broadest pattern would be tree-derived data caches subscribing to subgraphs of the tree they were derived from
-* wait is the presentation actually a tree?
-  * it is locally, but I may need to present e.g. siblings without parent
-  * anyway I think 'locally treelike' is good enough
-* how high of a priority is call graph mode?
-  * the AST visualization is space nested, which can only visualize trees
-    * call graphs are not trees -> must use alternative presentation (verticle panes?)
-    * a single-class inheritance view could use the same rendering, though
-    * call graphs seem out of scope for the time being
-  * out of scope for this project, you could have one graph representation for both
-    * there are two implicit directions: tree parent ~ caller ~ referencer ~ dependant, tree child ~ callee ~ referent ~ dependancy
-* wait, should synos actually have IDs?
-  * that is to say, should unique IDs be replaced with IDs based on the path from the root?
-    * when a node is grafted, the editor can handle updating references
-  * simplifies IDs and node ontology (as in identity, not structure)
-  * but are there times when references need to be hard? say across package boundaries
-* related to syno IDs, need more complex handling of different code sources
-  * after recent clean up, syno maps are almost (flattened) strict trees
-  * there's editable code (textual equivalent: current buffer = text from one file)
-    * but I want navagable code to be a separate set of synos
-      * because it seems so nice to have read-only, navagable versions of primitives, dependencies, dependants
-        * am I over-focusing on how much I enjoyed navigating to NOR when it orignally happened accidentally?
-* how to divise types:
-  * reference assignment (name, value), reference invocation, maps/objects
-* **?** choose AST format
+    * nah, this could be done the current way too
+  * [_saliva_] make function call optionally non-tree instead of child (notably for primitives)
+* should synos have IDs?
+  * yes, for performance, at least in memory when editor is running
+  * but should they exist in the AST format?
+* handling different code sources
+  * e.g. navigate into primitive
+  * e.g. navigate into dependency
+* AST format
   * current custom format is
     * directed/locally treelike
     * labeled edges ('relation')
     * labeled/typed nodes
     * ordered children (implicit)
-    * actually a hypergraph because of child collections
-      * child collections also ordered (explicit)
-  * (see 'research notes')
-  * still considering Unist
+    * child collection
+      * could be considered hypergraph
+      * but I consider each child a seperate relation, just stored together
+      * the overall child order is {a: ref, b: [ref, ref], c: ref}.values().flatten()
+  * unist?
+    * understand data attribute
+    * are the attributes clear in general? Are some reserved/have specified meaning? e.g. tagName is in a unist-general util
+    * how to deal with children
+      * going back to having no flattened version seems infeasible
+      * so the options are:
+        * keeping just the flattened version, which unist-utils don't work for, so:
+          * just adopt unist vaugely, but don't try to use utils
+          * have steps where I unflatten and reflatten trees depending on how I need to work with them
+            * bad for complexity/accessibility
+            * bad for performance
+        * have synos refer directly to children/parents, but also have them indexed by key
+          * how to deal with limits of tree completion
+          * sort of redundant with whatever read/write layer I have on top of raw data
   * ANTLR?
-  * throwing out a few lines...
 * **?** diffing algorithm for syntree -> prestree transformation?
 * **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
   * first just profile it a bit
@@ -173,6 +176,11 @@
   * make sure contributors give up all copyright on offering contribution
 * operationalize
 * launch minimal viable project
+* veryifying valid syntax is renderable
+  * formal?
+  * fuzz based on grammar
+* **?** use proxy-memoize or another selector memoizer
+  * premature optimization for now
 
 **experimentation**
 * try always-next-line + always-(class inheritance or call graph)-bidirectional-multipane?
