@@ -7,7 +7,8 @@ export default (
   parentSyno: Syno,
   callback: (synoRef: SynoRef, key: string, index?: number) => void,
 ): void => {
-  forSynoRefIn(parentSyno, (synoRef, key, index) => {
+  forSynoRefIn(parentSyno, (synoRef, edge) => {
+    const { key, index } = edge;
     if (synoRef.relation === 'child') {
       callback(synoRef, key, index);
     }

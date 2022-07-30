@@ -16,7 +16,8 @@ export default (
   };
 
   Object.values(graph).forEach(syno => {
-    forSynoRefIn(syno, (synoRef, relation) => {
+    forSynoRefIn(syno, (synoRef, edge) => {
+      const { key } = edge;
       if (synoRef.relation === 'non-tree') {
         const referent = graph[synoRef.id];
         if (referent === undefined) {
@@ -27,13 +28,13 @@ export default (
             );
           }
         } else {
-          const expectedSyntype = grammar[syno.syntype].nonTreeRefs[relation];
+          const expectedSyntype = grammar[syno.syntype].nonTreeRefs[key];
           if (referent.syntype !== expectedSyntype) {
             invalidate(
               result,
               `Syno (ID ${syno.id}) contains reference to syno (ID ${referent.id})`
-              + ` of syntype '${referent.syntype}' under relation '${relation}',`
-              + ` but grammar restricts '${relation}' references to syntype '${expectedSyntype}'`,
+              + ` of syntype '${referent.syntype}' under '${key}',`
+              + ` but grammar restricts '${key}' references to syntype '${expectedSyntype}'`,
             );
           }
         }

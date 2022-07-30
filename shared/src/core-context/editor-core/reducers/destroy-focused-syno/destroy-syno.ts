@@ -54,7 +54,8 @@ export default (
     const oldReferrer = state.synoMap()[referrerId];
     const newExReferrer = getDraftSyno(referrerId, state, draftState); // could be primitive
 
-    forSynoRefIn(oldReferrer, (synoRef, key, index) => {
+    forSynoRefIn(oldReferrer, (synoRef, edge) => {
+      const { key, index } = edge;
       if (synoRef.id === focusedPresnoId) {
         if (typeof index !== 'undefined') { // ref in array
           (newExReferrer[key] as SynoRef[]).splice(index, 1);
