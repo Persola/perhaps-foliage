@@ -21,7 +21,6 @@
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
-* rename 'saliva-core-integration.js' etc. for clarity
 * clarify terminology around `shared`, `core-context`, and `editor-core`
   * rename `core-context` to `main-process` and `renderer-context` to `renderer-process`
     * because it's based on the electron process model, which uses those names

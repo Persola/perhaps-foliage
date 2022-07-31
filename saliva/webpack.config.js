@@ -56,7 +56,7 @@ module.exports = [
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'built'),
-      filename: 'saliva-core-integration.js',
+      filename: 'saliva-builtin-core-integration.js',
       library: {
         type: 'commonjs2',
       },
@@ -68,7 +68,7 @@ module.exports = [
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'built'),
-      filename: 'saliva-renderer-integration.js',
+      filename: 'saliva-builtin-renderer-integration.js',
       library: {
         type: 'commonjs2',
       },
