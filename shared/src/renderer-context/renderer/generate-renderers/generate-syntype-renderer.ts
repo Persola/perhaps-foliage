@@ -20,7 +20,6 @@ export default (
   const childComponentWrappers: ComponentOrVectorComponent[] = generateChildComponentWrappers(
     childPresnosInstructions,
     syntypeGrammarEntry,
-    syntypeClasses.includes('boolean-literal'),
   );
 
   return (props: SharedRendererProps) => {

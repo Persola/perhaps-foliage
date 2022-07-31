@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-web",
   "displayName": "Saliva REPL Web",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Web build of Saliva REPL",
   "author": "Luke Persola",
   "scripts": {

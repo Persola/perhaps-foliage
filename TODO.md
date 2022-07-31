@@ -1,4 +1,9 @@
 **currently**
+* extract common logic from destroy syno and replace syno reducers as syntree utils
+  * probably also rewrite replace to call extracted patterns of destroy + create?
+    * no doing this is premature optimization
+
+**next**
 * move integration load out of integration-load-input file
 * some of the types are ridiculous, need to parameterize
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
@@ -10,10 +15,9 @@
 * when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
-* deal with BooleanLiteral exception in renderer generator
-* extract common logic from destroy syno and replace syno reducers as syntree utils
-  * probably also rewrite replace to call extracted patterns of destroy + create?
-    * no doing this is premature optimization
+* extract base presenter
+  * force synPresno per syno
+  * force holes for necessary children
 * renderer should derive child presno order straight from presno attrs
   * see LANGUAGE_INTEGRATION_SPEC
   * but keep rendererAttrs because there will need to be config later
@@ -30,6 +34,8 @@
   * so don't use `core` anywhere then, even though the point was to have only one meaning for it
 * adopt LSP
   * not very useful yet, but so the structure guides me
+  * how the hell would I do this!? totally different design
+    * but a server makes more sense for the ECMAscript parts of the integration
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface coreside errors and show on renderside
@@ -65,8 +71,6 @@
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
 **new functionality**
-* documentation
-  * priority: lang integration interface
 * VSCode extension
   * implement undo/redo
   * reversion or whatever else is left
@@ -167,6 +171,7 @@
   * first just profile it a bit
 
 **documentation**
+* priority: language integration interface
 
 **longview**
 * write JSON integration

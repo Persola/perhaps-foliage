@@ -1,5 +1,7 @@
 import * as React from 'react';
 import Text from '../components/vis/text';
+import completeInstruction from './complete-instruction';
+import childComponent from './child-component';
 
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { childPresnoInstruction } from '../../../types/language-integration/child-presno-instruction';
@@ -8,23 +10,7 @@ import type { SharedRendererProps } from '../../../types/renderer/shared-rendere
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
 import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
 
-const childComponent = (parentProps: SharedRendererProps, presnoRef: PresnoRef) => {
-  const {
-    PresnoRenderer,
-    integration,
-    getPresno,
-  } = parentProps;
-
-  return React.createElement(PresnoRenderer, {
-    integration,
-    getPresno,
-    synoId: presnoRef.id,
-    PresnoRenderer,
-    key: presnoRef.id,
-  });
-};
-
-const generatorsForIntruction = (
+const presnoGenerator = (
   instruction: childPresnoFullInstruction,
   isCollection: boolean,
 ): ComponentOrVectorComponent => {
@@ -55,49 +41,40 @@ const generatorsForIntruction = (
   };
 };
 
-const completeInstruction = (
-  instruction: childPresnoInstruction,
-): childPresnoFullInstruction => {
-  if (typeof instruction === 'object') {
-    return instruction;
-  }
+const nonPresnoGenerator = (
+  instruction: childPresnoFullInstruction,
+): ComponentOrVectorComponent => {
+  return (parentProps: SharedRendererProps) => {
+    const { presno } = parentProps;
 
-  if (typeof instruction === 'string') {
-    return {
-      attr: instruction,
-      as: 'string',
-    };
-  }
-
-  throw new TypeError('Received child presno renderering instruction of unrecognized form');
+    return React.createElement(
+      Text,
+      { text: String(presno[instruction.attr]) },
+    );
+  };
 };
 
 export default (
   instructions: childPresnoInstruction[],
   syntypeGrammarEntry: GrammarSyntypeEntry,
-  isSalivaBooleanLiteral: boolean,
 ): ComponentOrVectorComponent[] => {
   const componentsGenerators = [];
 
-  if (isSalivaBooleanLiteral) {
-    componentsGenerators.push(
-      (parentProps: SharedRendererProps) => {
-        return React.createElement(
-          Text,
-          { text: String(parentProps.presno.value) },
-        );
-      },
-    );
-  } else {
-    for (const instruction of instructions) {
-      const fullInstruction = completeInstruction(instruction);
-      // we assume the pressentation data is already valid against the grammar
+  for (const instruction of instructions) {
+    const fullInstruction = completeInstruction(instruction);
+
+    if (fullInstruction.as === 'presno') {
+      // we assume the presentation data is already valid against the grammar
       // which, since it's presentational, not syntactic, means we assume
       // there is a synPresnos per presented syno
       const isCollection = !!(syntypeGrammarEntry.children[fullInstruction.attr]?.collection);
 
       componentsGenerators.push(
-        generatorsForIntruction(fullInstruction, isCollection),
+        presnoGenerator(fullInstruction, isCollection),
+      );
+    } else {
+      componentsGenerators.push(
+        nonPresnoGenerator(fullInstruction),
       );
     }
   }
