@@ -5,7 +5,7 @@ function updateproject {
   cd ..
 }
 
-updateproject shared
+updateproject core
 
 (updateproject electron) &
 (updateproject vscode) &

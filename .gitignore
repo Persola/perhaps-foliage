@@ -4,8 +4,8 @@ pantheon/built/
 pantheon/node_modules/
 saliva/built/
 saliva/node_modules/
-shared/dist/
-shared/node_modules/
+core/dist/
+core/node_modules/
 vscode/dist/
 vscode/node_modules/
 vscode-saliva/built/

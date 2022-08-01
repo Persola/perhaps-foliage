@@ -1,10 +1,7 @@
 **currently**
-* extract common logic from destroy syno and replace syno reducers as syntree utils
-  * probably also rewrite replace to call extracted patterns of destroy + create?
-    * no doing this is premature optimization
+* move integration load out of integration-load-input file
 
 **next**
-* move integration load out of integration-load-input file
 * some of the types are ridiculous, need to parameterize
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
 
@@ -15,6 +12,9 @@
 * when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
+* extract common logic from destroy syno and replace syno reducers as syntree utils
+  * probably also rewrite replace to call extracted patterns of destroy + create?
+    * no doing this is premature optimization
 * extract base presenter
   * force synPresno per syno
   * force holes for necessary children
@@ -25,10 +25,6 @@
 * rename packages from `saliva-repl-*` format to something temporary?
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
-* clarify terminology around `shared`, `core-context`, and `editor-core`
-  * use `heart` for redux/state management? (replacing `editor-core`)
-    * conveys sense of timing and periodic updates
-  * use `core` instead of `shared`
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
@@ -36,7 +32,7 @@
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface mainside errors and show on renderside
-* language packages and shared should be peer dependencies?
+* language packages and core should be peer dependencies?
 * break out packages
   * just keep monorepo for now
   * clean up

@@ -1,6 +1,6 @@
 import { enableMapSet } from 'immer';
 
-import createEditorStateStore from './editor-core/create-editor-state-store';
+import createEditorStateStore from './heart/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
 import validateGrammar from './code-loader/validate-grammar';

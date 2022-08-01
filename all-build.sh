@@ -25,7 +25,7 @@ function buildproject {
   cd ..
 }
 
-buildproject shared
+buildproject core
 
 (buildproject electron) &
 (buildproject vscode) &

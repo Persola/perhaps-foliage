@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-electron",
   "displayName": "Saliva REPL Electron",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "electron build of Saliva REPL",
   "author": "Luke Persola",
   "engines": {
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "electron": "~13.1.5",
-    "saliva-repl": "file:../shared"
+    "saliva-repl": "file:../core"
   },
   "devDependencies": {
     "@electron/typescript-definitions": "^8.9.6",

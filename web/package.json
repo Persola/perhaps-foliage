@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-web",
   "displayName": "Saliva REPL Web",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Web build of Saliva REPL",
   "author": "Luke Persola",
   "scripts": {
@@ -14,7 +14,7 @@
     "lint": "eslint --ext ts,tsx ."
   },
   "dependencies": {
-    "saliva-repl": "file:../shared"
+    "saliva-repl": "file:../core"
   },
   "devDependencies": {
     "@redux-devtools/cli": "^1.0.7",

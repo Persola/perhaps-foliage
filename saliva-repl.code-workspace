@@ -4,9 +4,6 @@
 			"path": "."
 		},
 		{
-			"path": "shared"
-		},
-		{
 			"path": "web"
 		},
 		{
@@ -23,6 +20,9 @@
 		},
 		{
 			"path": "vscode-saliva"
+		},
+		{
+			"path": "core"
 		}
 	],
 	"settings": {

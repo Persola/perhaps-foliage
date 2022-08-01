@@ -15,7 +15,7 @@ To be useful, the editor must be provided with a language integration specific t
 
 The repo contains seven NPM packages:
 
-* `./shared/` contains most of the editor source code
+* `./core/` contains most of the editor source code
 * Two language integrations:
   * In `./pantheon/`, an integration for Pantheon, a toy data spec used for testing 
   * In `./saliva/`, an integration for Saliva, a rudimentary programming language implemented as part of this project in order to demonstrate the capabilities of the editor
@@ -37,14 +37,14 @@ Choose which builds and language integrations you want to use.
 ##### 2a. web/Electron
 
 Run `npm run build` in:
-1. `./shared/`
+1. `./core/`
 2. the subdirectory of the build
 3. the subdirectory of the language integration
 
 ##### 2b. VSCode language-specific extension
 
 Run `npm run build` in:
-1. `./shared/`
+1. `./core/`
 2. `./vscode/`
 3. `./saliva/`
 4. `./vscode-saliva/`

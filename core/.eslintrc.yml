@@ -64,7 +64,7 @@ rules:
 overrides:
   -
     files:
-      - 'src/editor-core/epics/**'
+      - 'src/heart/epics/**'
     rules:
       '@typescript-eslint/explicit-module-boundary-types':
         - 'off' # better to just infer these

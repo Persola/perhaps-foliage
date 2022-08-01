@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl",
   "displayName": "Saliva REPL",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Larva of an experimental data structure editing interface",
   "author": "Luke Persola",
   "files": [

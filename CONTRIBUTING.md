@@ -49,11 +49,11 @@ To use redux dev tools with any of the builds:
 ##### Known Errors
 
 ```shell
-Module not found: Error: Can't resolve 'bufferutil' in '[...]/shared/node_modules/ws/lib'
+Module not found: Error: Can't resolve 'bufferutil' in '[...]/core/node_modules/ws/lib'
 ```
 and
 ```shell
-Module not found: Error: Can't resolve 'utf-8-validate' in '[...]/shared/node_modules/ws/lib'
+Module not found: Error: Can't resolve 'utf-8-validate' in '[...]/core/node_modules/ws/lib'
 ```
 
 See [thread](https://github.com/websockets/ws/issues/1220). You can ignore them.

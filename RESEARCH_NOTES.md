@@ -26,7 +26,7 @@
         * this work could start now
       * using the LSP and hacking in the other method types I need where they will fit
         * in which case intregation should ideally not be delayed too long
-        * would need to use in shared editor: https://www.npmjs.com/package/vscode-languageclient
+        * would need to use in editor core: https://www.npmjs.com/package/vscode-languageclient
         * would need to use in language integrations: https://www.npmjs.com/package/vscode-languageserver
 * I need a multi-language AST format/specification (currently custom)
   * maybe a custom one is fine? b/c it's so minimal it's easy to transform other formats
