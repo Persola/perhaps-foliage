@@ -1,4 +1,4 @@
-import initializeRendererWorker from 'saliva-repl/dist/renderer-context/initialize-renderer-worker';
+import initializeRendererProcess from 'saliva-repl/dist/renderer-process/initialize-renderer-process';
 
 import type {
   CrossContextMessageHandlerRegister,
@@ -9,7 +9,7 @@ if (typeof window === 'undefined') {
   throw new Error('This script must be run in the main thread, not a web worker');
 }
 
-const core = new SharedWorker('./core.js', 'saliva-repl-core');
+const main = new SharedWorker('./main.js', 'saliva-repl-main');
 
 let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
 (() => {
@@ -19,23 +19,23 @@ let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
     handlers[type] = callback;
   };
 
-  core.port.onmessage = (ev: MessageEvent) => {
+  main.port.onmessage = (ev: MessageEvent) => {
     const handler = handlers[ev.data.type];
     if (typeof handler !== 'function') {
-      throw new Error(`Received message of invalid type '${ev.data.type}' from core`);
+      throw new Error(`Received message of invalid type '${ev.data.type}' from main`);
     }
     handler(ev.data.data);
   };
 })();
 
 const sendCrossContextMessage: CrossContextMessageSender = (type, data) => {
-  core.port.postMessage({
+  main.port.postMessage({
     type,
     data,
   });
 };
 
-initializeRendererWorker(
+initializeRendererProcess(
   registerCrossContextMessageHandler,
   sendCrossContextMessage,
   null,

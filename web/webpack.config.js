@@ -8,7 +8,7 @@ const allBuildsConfig = require('../webpack.all-builds.config.js'); // eslint-di
 module.exports = {
   ...allBuildsConfig,
   entry: {
-    core: './src/core.ts',
+    main: './src/main.ts',
     renderer: './src/renderer.ts',
   },
   target: 'browserslist',

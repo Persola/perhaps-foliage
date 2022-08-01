@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
 
-import initializeCoreWorker from 'saliva-repl/dist/core-context/initialize-core-worker';
+import initializeMainProcess from 'saliva-repl/dist/main-process/initialize-main-process';
 
 import type {
   CrossContextMessageHandlerRegister,
@@ -15,9 +15,9 @@ import { disposeAll } from './dispose';
 export default class PerhapsFoliageEditorProvider implements vscode.CustomEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
-    coreLanguageIntegration: PresentLanguageIntegration,
+    mainLanguageIntegration: PresentLanguageIntegration,
   ): void {
-    const provider = new PerhapsFoliageEditorProvider(context, coreLanguageIntegration);
+    const provider = new PerhapsFoliageEditorProvider(context, mainLanguageIntegration);
     const providerRegistration: vscode.Disposable = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
       provider,
@@ -31,7 +31,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
 
   constructor(
     private readonly context: vscode.ExtensionContext,
-    private coreLanguageIntegration: PresentLanguageIntegration,
+    private mainLanguageIntegration: PresentLanguageIntegration,
   ) { }
 
   async openCustomDocument(
@@ -101,13 +101,13 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
       throw new Error('unimplemented: opening second document for editor provider: need doc state');
     }
 
-    initializeCoreWorker(
+    initializeMainProcess(
       registerCrossContextMessageHandler,
       sendCrossContextMessage,
       {
         emitDocumentChange: edit => document.makeEdit(edit),
         documentStateTracker: document.documentStateTracker,
-        initialLanguageIntegration: this.coreLanguageIntegration,
+        initialLanguageIntegration: this.mainLanguageIntegration,
         initialDocument: document.initialDocumentState,
       },
     );

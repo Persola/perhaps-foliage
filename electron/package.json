@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-electron",
   "displayName": "Saliva REPL Electron",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "electron build of Saliva REPL",
   "author": "Luke Persola",
   "engines": {
@@ -9,8 +9,8 @@
   },
   "scripts": {
     "clean": "mkdir -p built; rm -dr built/*",
-    "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/core-wrapper.js ./built/; cp ./src/renderer-preload.js ./built/",
-    "start": "electron ./built/core-wrapper.js",
+    "build": "npm run clean; webpack --config ./webpack.config.js; cp ./src/main-wrapper.js ./built/; cp ./src/renderer-preload.js ./built/",
+    "start": "electron ./built/main-wrapper.js",
     "rdt": "redux-devtools --hostname=localhost --port=8001",
     "redo": "npm run clean; npm run build; npm run start",
     "type": "tsc --noEmit",

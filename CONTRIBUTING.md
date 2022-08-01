@@ -17,19 +17,19 @@ Background info
 [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools)
 
 * web
-  * the main process (renderer context): use your browser's dev tools in the window where the app is running
-  * the web worker (core context): use your browser's web worker debug method
+  * the shared web worker (source from `main-process`): use your browser's web worker debug method
     * Firefox: [this firefox](about:debugging#/runtime/this-firefox) -> `Shared Workers`
       * not sure how to set break points in the code of a newly instantiated shared worker (to inspect app initialization)
-      * :warning: if you have multiple tabs running the web app, the core context code will not reload on refresh (because the refreshed tab will just reconnect to the existing shared worker)
+      * :warning: if you have multiple tabs running the web app, the main process code will not reload on refresh (because the refreshed tab will just reconnect to the existing shared worker)
+  * the browser tab process (source from `renderer-process`): use your browser's dev tools in the window where the app is running
 * electron
-  * [the main process (core context)](https://www.electronjs.org/docs/latest/tutorial/debugging-main-process)
+  * the electron main process (source from `main-process`)
     * in vscode debugger, launch `main proc. electron` (a launch.json is provided)
-  * the renderer process (renderer context): use dev tools built into electron window
+  * the electron renderer process (source from `renderer-process`): use dev tools built into electron window
 * vscode extensions
-  * the main process (core context)
+  * the main extension process (source from `main-process`)
     * in vscode debugger, launch `vscode-saliva extension` (a launch.json is provided)
-  * the renderer process (renderer context)
+  * the webview process (source from `renderer-process`)
     * use the dev tools in the VSCode instance running the extension (Developer: Toggle Developer Tools)
       * source maps don't work due to [a bug](https://github.com/microsoft/vscode/issues/145184)
       * but you can use the built version: top -> some random string -> pending-frame (index.html) -> file+vscode-resource.vscode-cdn.net -> full filesystem path

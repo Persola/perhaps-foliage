@@ -1,7 +1,7 @@
 {
   "name": "saliva-repl-saliva",
   "displayName": "Saliva REPL Saliva",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Saliva language integration to Saliva REPL",
   "author": "Luke Persola",
   "scripts": {

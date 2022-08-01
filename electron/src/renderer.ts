@@ -1,4 +1,4 @@
-import initializeRendererWorker from 'saliva-repl/dist/renderer-context/initialize-renderer-worker';
+import initializeRendererProcess from 'saliva-repl/dist/renderer-process/initialize-renderer-process';
 
 import type {
   CrossContextMessageHandlerRegister,
@@ -19,7 +19,7 @@ const registerCrossContextMessageHandler: CrossContextMessageHandlerRegister = (
   });
 };
 
-initializeRendererWorker(
+initializeRendererProcess(
   registerCrossContextMessageHandler,
   // @ts-ignore: bridged is provided by the preload
   (window.bridged.sendCrossContextMessage as CrossContextMessageSender),

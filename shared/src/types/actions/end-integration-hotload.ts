@@ -1,6 +1,6 @@
-import type { CoresidePresentLanguageIntegration } from '../language-integration/coreside-present-language-integration';
+import type { MainsidePresentLanguageIntegration } from '../language-integration/mainside-present-language-integration';
 
 export type EndIntegrationHotload = {
   readonly type: 'END_INTEGRATION_LOAD';
-  readonly newIntegrationAttrs: CoresidePresentLanguageIntegration;
+  readonly newIntegrationAttrs: MainsidePresentLanguageIntegration;
 };

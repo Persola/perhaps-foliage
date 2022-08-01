@@ -8,12 +8,12 @@ const allBuildsConfig = require('../webpack.all-builds.config.js'); // eslint-di
 module.exports = [
   { // main process
     ...allBuildsConfig,
-    entry: './src/core.ts',
+    entry: './src/main.ts',
     target: 'electron13.1-main',
     mode: 'development',
     output: {
       path: path.resolve(__dirname, 'built'),
-      filename: 'core.js',
+      filename: 'main.js',
       library: {
         type: 'commonjs2',
       },

@@ -12,7 +12,7 @@
       },
       "args" : ["."],
       "outputCapture": "std",
-      "program": "${workspaceFolder}/built/core-wrapper.js",
+      "program": "${workspaceFolder}/built/main-wrapper.js",
       // "skipFiles": ["<node_internals>/**"],
     }
   ]

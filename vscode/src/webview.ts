@@ -1,4 +1,4 @@
-import initializeRendererWorker from 'saliva-repl/dist/renderer-context/initialize-renderer-worker';
+import initializeRendererProcess from 'saliva-repl/dist/renderer-process/initialize-renderer-process';
 
 import type {
   CrossContextMessageHandlerRegister,
@@ -36,7 +36,7 @@ export default (
     vscode.postMessage({ type, data });
   };
 
-  initializeRendererWorker(
+  initializeRendererProcess(
     registerCrossContextMessageHandler,
     sendCrossContextMessage,
     rendererIntegration,

@@ -26,19 +26,16 @@
   * because 'saliva' now clearly refers to the language
   * probably rename directory/repositories too, then
 * clarify terminology around `shared`, `core-context`, and `editor-core`
-  * rename `core-context` to `main-process` and `renderer-context` to `renderer-process`
-    * because it's based on the electron process model, which uses those names
   * use `heart` for redux/state management? (replacing `editor-core`)
     * conveys sense of timing and periodic updates
-  * use `base` instead of `shared`
-  * so don't use `core` anywhere then, even though the point was to have only one meaning for it
+  * use `core` instead of `shared`
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
     * but a server makes more sense for the ECMAscript parts of the integration
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
-  * surface coreside errors and show on renderside
+  * surface mainside errors and show on renderside
 * language packages and shared should be peer dependencies?
 * break out packages
   * just keep monorepo for now

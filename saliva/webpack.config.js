@@ -50,19 +50,19 @@ module.exports = [
       },
     },
   },
-  { // builtin integration: for core context
+  { // builtin integration: for main process
     ...commonConfig,
-    entry: './src/core-integration.ts',
+    entry: './src/main-integration.ts',
     devtool: 'source-map',
     output: {
       path: path.resolve(__dirname, 'built'),
-      filename: 'saliva-builtin-core-integration.js',
+      filename: 'saliva-builtin-main-integration.js',
       library: {
         type: 'commonjs2',
       },
     },
   },
-  { // builtin integration: for renderer context
+  { // builtin integration: for renderer process
     ...commonConfig,
     entry: './src/renderer-integration.ts',
     devtool: 'source-map',
