@@ -4,7 +4,7 @@ import verifyReplacementAgainstGrammar from './replace-focused-syno/verify-repla
 import type { StateSelector } from '../../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../../types/actions/replace-focused-syno';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { KeyToNewSynoAttrs } from '../../../types/language-integration/key-to-new-syno-attrs';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';
@@ -13,7 +13,7 @@ export default (
   state: StateSelector,
   action: ReplaceFocusedSyno,
   draftState: MutableEditorState,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,
 ): void => {

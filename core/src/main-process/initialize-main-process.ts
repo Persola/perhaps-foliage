@@ -6,7 +6,7 @@ import createInputResolver from './input-resolver/create-input-resolver';
 import validateGrammar from './code-loader/validate-grammar';
 import validateGraph from './code-loader/validate-graph';
 
-import type { MainsideLanguageIntegration } from '../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
@@ -28,7 +28,7 @@ export default (
 
   if (
     vscodeParams
-    && vscodeParams.initialLanguageIntegration === null
+    && vscodeParams.initialLangInt === null
     && vscodeParams.initialDocument !== null
   ) {
     throw new Error('Cannot initialize editor with a document but without a language integration.');
@@ -39,13 +39,13 @@ export default (
     state independant of the editor state. It is kept in sync with language loads in
     editorStateSubscription below.
   */
-  let integration: MainsideLanguageIntegration;
+  let integration: MainsideLangInt;
   if (vscodeParams) {
     validateGrammar(
-      vscodeParams.initialLanguageIntegration.grammar,
-      vscodeParams.initialLanguageIntegration.id,
+      vscodeParams.initialLangInt.grammar,
+      vscodeParams.initialLangInt.id,
     );
-    integration = vscodeParams.initialLanguageIntegration;
+    integration = vscodeParams.initialLangInt;
   } else {
     integration = {
       id: null,

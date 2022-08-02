@@ -2,7 +2,7 @@ import { Observable, filter, map } from 'rxjs';
 
 import type { Action } from 'redux';
 
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { StartIntegrationHotload } from '../../../types/actions/start-integration-hotload';
 import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';
 
@@ -15,7 +15,7 @@ export default (
   map((action: StartIntegrationHotload) => {
   // eval'd integration strings assign the integration object module to this variable name
     let initializeIntegration: {
-      default: MainsideLanguageIntegration
+      default: MainsideLangInt
     };
     // eslint-disable-next-line no-eval
     eval(action.fileText);

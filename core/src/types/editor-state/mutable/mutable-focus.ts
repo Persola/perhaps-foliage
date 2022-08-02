@@ -4,7 +4,9 @@ export type MutableFocus = {
   synoId: FocusedPresnoId;
   presnoIndex: number | null;
   charIndex: number | null;
-}; // type FocusOnSyno = {
+};
+
+// type FocusOnSyno = {
 //  synoId: FocusedPresnoId,
 //  presnoIndex: null,
 //  charIndex: null

@@ -1,4 +1,4 @@
-export type RendersideAbsentLanguageIntegration = {
+export type RendersideAbsentLangInt = {
   id: null;
   keyToNewSynoAttrs: null;
   renderers: null;

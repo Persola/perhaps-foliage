@@ -1,4 +1,4 @@
-export type MainsideAbsentLanguageIntegration = {
+export type MainsideAbsentLangInt = {
   id: null;
   grammar: null;
   primitives: null;

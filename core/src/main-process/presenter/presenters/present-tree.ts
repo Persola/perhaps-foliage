@@ -8,13 +8,13 @@ import type { SynoMap } from '../../../types/syntactic/syno-map';
 import type { Prestree } from '../../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../../types/presenter/presno-map';
-import type { MainsidePresentLanguageIntegration } from '../../../types/language-integration/mainside-present-language-integration';
+import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
 
 export default (
   state: StateSelector,
-  integration: MainsidePresentLanguageIntegration,
+  integration: MainsidePresentLangInt,
   renderEntrySynoId: SynoId,
   renderEntryTree: SynoMap,
   focus: Focus,

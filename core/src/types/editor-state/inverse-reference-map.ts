@@ -1,10 +1,8 @@
 import type { SynoId } from '../syntactic/syno-id';
 
 type ReadOnlySet<Member> = {
+  // not included: add, clear, delete
   size: number;
-  // add:
-  // clear:
-  // delete:
   entries: () => Member[][];
   forEach: (callback: (member: Member) => void) => void;
   has: (query: unknown) => boolean;

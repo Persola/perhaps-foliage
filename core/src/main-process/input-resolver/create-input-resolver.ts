@@ -4,12 +4,12 @@ import synoCommandResolver from './input-resolver/syno-command-resolver';
 import navigationCommandResolver from './input-resolver/navigation-command-resolver';
 import textCommandResolver from './input-resolver/text-command-resolver';
 import type { StateSelector } from '../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 
 export default (
   editorStateStore: Store,
   state: StateSelector,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
 ): // eslint-disable-next-line function-paren-newline
 ((input: string) => void) => {
   return (input: string): void => {

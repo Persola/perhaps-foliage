@@ -1,8 +1,7 @@
-**currently**
-* some of the types are ridiculous, need to parameterize
-  * e.g. _RendersideUninitializedPresentLanguageIntegration_
-
 **next**
+* rename packages from `saliva-repl-*` format to something temporary?
+  * because 'saliva' now clearly refers to the language
+  * probably rename directory/repositories too, then
 * bug: when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **testing**
@@ -11,6 +10,7 @@
 **bugs**
 
 **maintenance**
+* focus should only need presnoId now?
 * extract common logic from destroy syno and replace syno reducers as syntree utils
   * probably also rewrite replace to call extracted patterns of destroy + create?
     * no doing this is premature optimization
@@ -20,9 +20,6 @@
   * see LANGUAGE_INTEGRATION_SPEC
   * but keep rendererAttrs because there will need to be config later
     * e.g. what classes to apply for custom flags on presnos
-* rename packages from `saliva-repl-*` format to something temporary?
-  * because 'saliva' now clearly refers to the language
-  * probably rename directory/repositories too, then
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design

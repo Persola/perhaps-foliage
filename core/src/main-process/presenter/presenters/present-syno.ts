@@ -3,14 +3,14 @@ import focuses from './focuses';
 import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../types/state-selector';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { MainsidePresentLanguageIntegration } from '../../../types/language-integration/mainside-present-language-integration';
+import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresentAndReturnRef } from '../../../types/presenter/present-and-return-ref';
 
 export default (
   synoId: SynoId,
   state: StateSelector,
-  integration: MainsidePresentLanguageIntegration,
+  integration: MainsidePresentLangInt,
   focus: Focus,
   presentAndReturnRef: PresentAndReturnRef,
 ): Presno => {

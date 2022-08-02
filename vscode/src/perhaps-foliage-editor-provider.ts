@@ -6,7 +6,7 @@ import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
-import type { PresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/present-language-integration';
+import type { PresentLangInt } from 'saliva-repl/dist/types/language-integration/interfaces/complete/present-lang-int';
 
 import UnistlikeDocument from './unistlike-document';
 import WebviewCollection from './webview-collection';
@@ -15,9 +15,9 @@ import { disposeAll } from './dispose';
 export default class PerhapsFoliageEditorProvider implements vscode.CustomEditorProvider {
   public static register(
     context: vscode.ExtensionContext,
-    mainLanguageIntegration: PresentLanguageIntegration,
+    mainLangInt: PresentLangInt,
   ): void {
-    const provider = new PerhapsFoliageEditorProvider(context, mainLanguageIntegration);
+    const provider = new PerhapsFoliageEditorProvider(context, mainLangInt);
     const providerRegistration: vscode.Disposable = vscode.window.registerCustomEditorProvider(
       PerhapsFoliageEditorProvider.viewType,
       provider,
@@ -31,7 +31,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
 
   constructor(
     private readonly context: vscode.ExtensionContext,
-    private mainLanguageIntegration: PresentLanguageIntegration,
+    private mainLangInt: PresentLangInt,
   ) { }
 
   async openCustomDocument(
@@ -107,7 +107,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
       {
         emitDocumentChange: edit => document.makeEdit(edit),
         documentStateTracker: document.documentStateTracker,
-        initialLanguageIntegration: this.mainLanguageIntegration,
+        initialLangInt: this.mainLangInt,
         initialDocument: document.initialDocumentState,
       },
     );

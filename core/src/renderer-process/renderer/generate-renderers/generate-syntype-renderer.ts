@@ -3,7 +3,7 @@ import * as React from 'react';
 import generateChildComponentWrappers from './generate-child-component-wrappers';
 
 import type { RendererAttrs } from '../../../types/language-integration/renderer-attrs';
-import type { Renderer } from '../../../types/language-integration/renderer';
+import type { Renderer } from '../../../types/renderer/renderer';
 import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
 import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';

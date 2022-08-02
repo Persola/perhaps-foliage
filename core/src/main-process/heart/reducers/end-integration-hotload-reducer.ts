@@ -3,15 +3,15 @@ import validateGrammar from '../../code-loader/validate-grammar';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';
 import type { StateSelector } from '../../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
-import type { MainsidePresentLanguageIntegration } from '../../../types/language-integration/mainside-present-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
+import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
 
 export default (
   state: StateSelector,
   action: EndIntegrationHotload,
   draftState: MutableEditorState,
-  mutateeIntegration: MainsideLanguageIntegration, // the integration object used by dependants
+  mutateeIntegration: MainsideLangInt, // the integration object used by dependants
 ): void => {
   if (state.loadingIntegration() === false) {
     throw new Error(
@@ -24,7 +24,7 @@ export default (
     action.newIntegrationAttrs.id,
   );
 
-  const presentMutateeIntegration: MainsidePresentLanguageIntegration = mutateeIntegration;
+  const presentMutateeIntegration: MainsidePresentLangInt = mutateeIntegration;
   Object.assign(presentMutateeIntegration, action.newIntegrationAttrs);
   const primitives: MutableSynoMap = action.newIntegrationAttrs.primitives;
   Object.assign(draftState, {

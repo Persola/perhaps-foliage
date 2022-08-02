@@ -1,12 +1,12 @@
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { StateSelector } from '../../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
   draftState: MutableEditorState,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
   warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {

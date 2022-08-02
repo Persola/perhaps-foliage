@@ -1,5 +1,5 @@
 import type { StateSelector } from '../../../types/state-selector';
-import type { MainsidePresentLanguageIntegration } from '../../../types/language-integration/mainside-present-language-integration';
+import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
@@ -11,7 +11,7 @@ import presentNonSynPresno from './present-non-syn-presno';
 export default (
   presnoArgs: PresnoArgs,
   state: StateSelector,
-  integration: MainsidePresentLanguageIntegration,
+  integration: MainsidePresentLangInt,
   focus: Focus,
   presentAndReturnRef: PresentAndReturnRef,
 ): Presno => {

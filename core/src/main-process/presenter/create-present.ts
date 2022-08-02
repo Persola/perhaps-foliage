@@ -6,13 +6,13 @@ import ascendToRoot from '../../syntree-utils/read-tree/ascend-to-root';
 import type { StateSelector } from '../../types/state-selector';
 import type { EditorState } from '../../types/editor-state';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
-import type { MainsideLanguageIntegration } from '../../types/language-integration/mainside-language-integration';
-import type { MainsidePresentLanguageIntegration } from '../../types/language-integration/mainside-present-language-integration';
+import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
+import type { MainsidePresentLangInt } from '../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 
 const generatePresentation = (
   state: StateSelector,
   editorState: EditorState,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
 ): EditorPresentation => {
   const { focus, resultSyntreeRootId } = editorState;
   let stage;
@@ -28,7 +28,7 @@ const generatePresentation = (
 
     stage = presentTree(
       state,
-      integration as MainsidePresentLanguageIntegration,
+      integration as MainsidePresentLangInt,
       entryId,
       state.synoMap(),
       focus,
@@ -42,7 +42,7 @@ const generatePresentation = (
   } else {
     result = presentTree(
       state,
-      integration as MainsidePresentLanguageIntegration,
+      integration as MainsidePresentLangInt,
       resultSyntreeRootId,
       state.resultTree(),
       null,
@@ -58,7 +58,7 @@ const generatePresentation = (
 export default (
   state: StateSelector,
   editorStateStore: Store,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
 ): (
   () => EditorPresentation
 ) => {

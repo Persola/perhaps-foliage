@@ -5,7 +5,7 @@ import type { StateObservable } from 'redux-observable';
 
 import type { EditorState } from '../../../types/editor-state';
 import type { StateSelector } from '../../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { InterpretationResolutionSuccess } from '../../../types/interpreter/interpretation-resolution-success';
 import type { Warn } from '../../../types/cross-context/warn';
 import type { Syno } from '../../../types/syntactic/syno';
@@ -14,7 +14,7 @@ export default (
   action$: Observable<Action>,
   state$: StateObservable<EditorState>,
   state: StateSelector,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
   warnUser: Warn,
 ): Observable<{
   type: string,

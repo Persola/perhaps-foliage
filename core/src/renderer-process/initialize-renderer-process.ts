@@ -6,20 +6,20 @@ import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from '../types/cross-context/cross-context-messaging';
-import type { RendersideLanguageIntegration } from '../types/language-integration/renderside-language-integration';
+import type { RendersideLangInt } from '../types/language-integration/interfaces/renderside/renderside-lang-int';
 import type { Render } from '../types/cross-context/messages-from-main/render';
 import type { Warn } from '../types/cross-context/messages-from-main/warn';
-import type { RendersideUninitializedPresentLanguageIntegration } from '../types/language-integration/renderside-uninitialized-present-language-integration';
+import type { RendersideUninitializedPresentLangInt } from '../types/language-integration/interfaces/renderside/renderside-uninitialized-present-lang-int';
 
 import '../editor-styles.css';
 
 export default (
   registerCrossContextMessageHandler: CrossContextMessageHandlerRegister,
   sendCrossContextMessage: CrossContextMessageSender,
-  initialRendererIntegration: (RendersideUninitializedPresentLanguageIntegration | null),
+  initialRendererIntegration: (RendersideUninitializedPresentLangInt | null),
 ): void => {
   const renderer = new Renderer(document);
-  const integration: RendersideLanguageIntegration = {
+  const integration: RendersideLangInt = {
     id: initialRendererIntegration ? initialRendererIntegration.id : null,
     keyToNewSynoAttrs: (
       initialRendererIntegration

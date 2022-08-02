@@ -1,17 +1,17 @@
 import createRenderers from './renderer/generate-renderers';
 
 import type { CrossContextMessageSender } from '../types/cross-context/cross-context-messaging';
-import type { RendersidePresentLanguageIntegration } from '../types/language-integration/renderside-present-language-integration';
-import type { UninitializedPresentLanguageIntegration } from '../types/language-integration/uninitialized-present-language-integration';
+import type { RendersidePresentLangInt } from '../types/language-integration/interfaces/renderside/renderside-present-lang-int';
+import type { UninitializedPresentLangInt } from '../types/language-integration/interfaces/complete/uninitialized-present-lang-int';
 
 export default (
-  oldIntegration: RendersidePresentLanguageIntegration,
+  oldIntegration: RendersidePresentLangInt,
   fileText: string,
   sendCrossContextMessage: CrossContextMessageSender,
 ): void => {
   let initializeIntegration;
   eval(fileText); // eslint-disable-line no-eval
-  const newIntegration: UninitializedPresentLanguageIntegration = (
+  const newIntegration: UninitializedPresentLangInt = (
     initializeIntegration.default
   );
 

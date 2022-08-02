@@ -1,6 +1,6 @@
 import type { UnistlikeEdit } from './unistlike/unistlike-edit';
 import type { StateSelector } from './state-selector';
-import type { MainsidePresentLanguageIntegration } from './language-integration/mainside-present-language-integration';
+import type { MainsidePresentLangInt } from './language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { SynoMap } from './syntactic/syno-map';
 
 export interface DocumentStateTrackerInterface {
@@ -11,6 +11,6 @@ export interface DocumentStateTrackerInterface {
 export type VscodeMainParams = {
   emitDocumentChange: (edit: UnistlikeEdit) => void,
   documentStateTracker: DocumentStateTrackerInterface,
-  initialLanguageIntegration: MainsidePresentLanguageIntegration,
+  initialLangInt: MainsidePresentLangInt,
   initialDocument: SynoMap,
 };

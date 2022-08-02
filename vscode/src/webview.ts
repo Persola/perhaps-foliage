@@ -4,10 +4,10 @@ import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
 } from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
-import type { RendersideUninitializedPresentLanguageIntegration } from 'saliva-repl/dist/types/language-integration/renderside-uninitialized-present-language-integration';
+import type { RendersideUninitializedPresentLangInt } from 'saliva-repl/dist/types/language-integration/interfaces/renderside/renderside-uninitialized-present-lang-int';
 
 export default (
-  rendererIntegration: RendersideUninitializedPresentLanguageIntegration,
+  rendererIntegration: RendersideUninitializedPresentLangInt,
 ): void => {
   let registerCrossContextMessageHandler: CrossContextMessageHandlerRegister;
   (() => {

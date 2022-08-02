@@ -6,12 +6,12 @@ import createPresnoFetcher from '../../../prestree-utils/create-presno-fetcher';
 
 import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
 import type { Prestree } from '../../../types/presenter/prestree';
-import type { RendersideLanguageIntegration } from '../../../types/language-integration/renderside-language-integration';
-import type { RendersidePresentLanguageIntegration } from '../../../types/language-integration/renderside-present-language-integration';
+import type { RendersideLangInt } from '../../../types/language-integration/interfaces/renderside/renderside-lang-int';
+import type { RendersidePresentLangInt } from '../../../types/language-integration/interfaces/renderside/renderside-present-lang-int';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
-  integration: RendersideLanguageIntegration;
+  integration: RendersideLangInt;
   codePresentation: Prestree | null;
   outdated: boolean;
   interpreting: boolean;
@@ -75,7 +75,7 @@ export default (props: Props): JSX.Element => {
   if (!codePresentation) {
     content = <div className="non-syntactic">(nothing to display)</div>;
   } else {
-    const presentIntegration = integration as RendersidePresentLanguageIntegration;
+    const presentIntegration = integration as RendersidePresentLangInt;
     const { presnos, rootId } = codePresentation;
     const getPresno = createPresnoFetcher(presnos);
     content = (

@@ -36,7 +36,7 @@ import type { SetFocusSyno } from '../../types/actions/set-focus-syno';
 import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
 
 import type { StateSelector } from '../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { SynoMap } from '../../types/syntactic/syno-map';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../types/cross-context/warn';
@@ -49,7 +49,7 @@ type CreateStoreReturn = {
 };
 
 export default (
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
   initialDocument: SynoMap,
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,

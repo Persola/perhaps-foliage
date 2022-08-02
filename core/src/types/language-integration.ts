@@ -1,4 +1,4 @@
-import type { PresentLanguageIntegration } from './language-integration/present-language-integration';
-import type { AbsentLanguageIntegration } from './language-integration/absent-language-integration';
+import type { PresentLangInt } from './language-integration/interfaces/complete/present-lang-int';
+import type { AbsentLangInt } from './language-integration/interfaces/complete/absent-lang-int';
 
-export type LanguageIntegration = (PresentLanguageIntegration | AbsentLanguageIntegration);
+export type LangInt = (PresentLangInt | AbsentLangInt);

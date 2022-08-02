@@ -1,10 +1,10 @@
 import validateGraph from './validate-graph';
 
 import type { SynoMap } from '../../types/syntactic/syno-map';
-import type { MainsideLanguageIntegration } from '../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 
 export default {
-  fromString: (fileText: string, integration: MainsideLanguageIntegration): SynoMap => {
+  fromString: (fileText: string, integration: MainsideLangInt): SynoMap => {
     const newSyntree = JSON.parse(fileText);
     validateGraph(
       'drug_in_file',
@@ -18,7 +18,7 @@ export default {
 
   fromFileObject: async (
     file: File,
-    integration: MainsideLanguageIntegration,
+    integration: MainsideLangInt,
   ): Promise<SynoMap> => {
     const fileText = await file.text();
     const newSyntree = JSON.parse(fileText);

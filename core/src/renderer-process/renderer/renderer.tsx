@@ -5,7 +5,7 @@ import Editor from './components/editor';
 
 import type { CrossContextMessageSender } from '../../types/cross-context/cross-context-messaging';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
-import type { RendersideLanguageIntegration } from '../../types/language-integration/renderside-language-integration';
+import type { RendersideLangInt } from '../../types/language-integration/interfaces/renderside/renderside-lang-int';
 
 export default class {
   reactRoot;
@@ -19,7 +19,7 @@ export default class {
     presentation: EditorPresentation,
     resultOutdated: boolean,
     interpreting: boolean,
-    integration: RendersideLanguageIntegration,
+    integration: RendersideLangInt,
   ): void {
     this.reactRoot.render(
       <Editor

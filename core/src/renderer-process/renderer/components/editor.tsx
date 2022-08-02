@@ -6,11 +6,11 @@ import IntegrationLoadInput from './integration-load-input';
 
 import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
 import type { EditorPresentation } from '../../../types/presenter/editor-presentation';
-import type { RendersideLanguageIntegration } from '../../../types/language-integration/renderside-language-integration';
+import type { RendersideLangInt } from '../../../types/language-integration/interfaces/renderside/renderside-lang-int';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
-  integration: RendersideLanguageIntegration;
+  integration: RendersideLangInt;
   presentation: EditorPresentation;
   resultOutdated: boolean;
   interpreting: boolean;

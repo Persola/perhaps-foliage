@@ -8,14 +8,14 @@ import codeLoader from '../../code-loader/code-loader';
 import type { EditorState } from '../../../types/editor-state';
 import type { StartAsyncSyntreeLoad } from '../../../types/actions/start-syntree-load';
 import type { StateSelector } from '../../../types/state-selector';
-import type { MainsideLanguageIntegration } from '../../../types/language-integration/mainside-language-integration';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
 
 export default (
   action$: Observable<Action>,
   state$: StateObservable<EditorState>,
   state: StateSelector,
-  integration: MainsideLanguageIntegration,
+  integration: MainsideLangInt,
   // @ts-ignore: TS isn't matching the type properties inside the objects inside the observables
 ): Observable<EndAsyncSyntreeLoad> => action$.pipe(
   filter((action: Action) => {
