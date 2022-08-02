@@ -1,8 +1,8 @@
 {
-  "name": "saliva-repl-saliva",
-  "displayName": "Saliva REPL Saliva",
-  "version": "0.0.6",
-  "description": "Saliva language integration to Saliva REPL",
+  "name": "perhaps-foliage-saliva",
+  "displayName": "Perhaps Foliage Saliva",
+  "version": "0.0.7",
+  "description": "Saliva language integration to Perhaps Foliage",
   "author": "Luke Persola",
   "scripts": {
     "clean": "mkdir -p ./built; rm -dr ./built/*",
@@ -11,7 +11,7 @@
     "lint": "eslint --ext ts,tsx ."
   },
   "dependencies": {
-    "saliva-repl": "file:../core"
+    "perhaps-foliage": "file:../core"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "~5.30.7",

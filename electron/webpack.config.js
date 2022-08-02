@@ -32,7 +32,7 @@ module.exports = [
     plugins: [
       new HtmlWebpackPlugin({
         inject: false,
-        template: './node_modules/saliva-repl/dist/index.html',
+        template: './node_modules/perhaps-foliage/dist/index.html',
         scriptSrc: './renderer.js',
       }),
     ],

@@ -1,9 +1,9 @@
-import initializeRendererProcess from 'saliva-repl/dist/renderer-process/initialize-renderer-process';
+import initializeRendererProcess from 'perhaps-foliage/dist/renderer-process/initialize-renderer-process';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
+} from 'perhaps-foliage/dist/types/cross-context/cross-context-messaging';
 
 if (typeof window === 'undefined') {
   throw new Error('This script must be run in a renderer process, not the main process');

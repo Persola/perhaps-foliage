@@ -1,5 +1,5 @@
-import type { SynoMap } from 'saliva-repl/dist/types/syntactic/syno-map';
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { SynoMap } from 'perhaps-foliage/dist/types/syntactic/syno-map';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
 
 export default class DocumentStateTracker {
   public constructor() {

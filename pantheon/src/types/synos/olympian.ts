@@ -1,5 +1,5 @@
-import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
-import type { SynoRef } from 'saliva-repl/dist/types/syntactic/syno-ref';
+import type { SynoId } from 'perhaps-foliage/dist/types/syntactic/syno-id';
+import type { SynoRef } from 'perhaps-foliage/dist/types/syntactic/syno-ref';
 
 export type Olympian = {
   readonly id: SynoId;

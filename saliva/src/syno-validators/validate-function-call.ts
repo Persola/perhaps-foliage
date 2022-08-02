@@ -1,5 +1,5 @@
-import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
 
 import { Argument } from '../types/synos/argument';
 import { FunctionCall } from '../types/synos/function-call';

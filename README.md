@@ -1,4 +1,4 @@
-# [Saliva REPL](https://gitlab.com/Persola/saliva-repl)
+# [Perhaps Foliage](https://gitlab.com/Persola/perhaps-foliage)
 
 ⚠️ *Most of the basic functionality of this project doesn't work yet.*
 

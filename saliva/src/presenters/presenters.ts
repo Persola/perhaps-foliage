@@ -1,4 +1,4 @@
-import type { Presenters } from 'saliva-repl/dist/types/language-integration/presenters';
+import type { Presenters } from 'perhaps-foliage/dist/types/language-integration/presenters';
 
 import presentBooleanLiteral from './present-boolean-literal';
 import presentFunctionCall from './present-function-call';

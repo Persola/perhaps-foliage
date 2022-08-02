@@ -1,4 +1,4 @@
-import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
+import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
 
 export type OlympianPresAttrs = {
   readonly syntype: 'olympian';

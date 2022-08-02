@@ -1,5 +1,5 @@
-import type { Focus } from 'saliva-repl/dist/types/editor-state/focus';
-import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
+import type { Focus } from 'perhaps-foliage/dist/types/editor-state/focus';
+import type { SynoId } from 'perhaps-foliage/dist/types/syntactic/syno-id';
 
 export default (
   focus: Focus | null,

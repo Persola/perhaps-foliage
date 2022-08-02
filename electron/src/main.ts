@@ -1,10 +1,10 @@
 import 'electron';
-import initializeMainProcess from 'saliva-repl/dist/main-process/initialize-main-process';
+import initializeMainProcess from 'perhaps-foliage/dist/main-process/initialize-main-process';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
+} from 'perhaps-foliage/dist/types/cross-context/cross-context-messaging';
 
 if (typeof window !== 'undefined') {
   throw new Error('This script must be run in the main process, not the renderer');

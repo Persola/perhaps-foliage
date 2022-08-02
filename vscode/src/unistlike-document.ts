@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
-import type { SynoMap } from 'saliva-repl/dist/types/syntactic/syno-map';
-import type { UnistlikeEdit } from 'saliva-repl/dist/types/unistlike/unistlike-edit';
-import type { DocumentStateTrackerInterface } from 'saliva-repl/dist/types/vscode-main-params';
+import type { SynoMap } from 'perhaps-foliage/dist/types/syntactic/syno-map';
+import type { UnistlikeEdit } from 'perhaps-foliage/dist/types/unistlike/unistlike-edit';
+import type { DocumentStateTrackerInterface } from 'perhaps-foliage/dist/types/vscode-main-params';
 
 import { Disposable } from './dispose';
 import DocumentStateTracker from './document-state-tracker';

@@ -1,8 +1,8 @@
 {
-  "name": "saliva-repl-electron",
-  "displayName": "Saliva REPL Electron",
-  "version": "0.0.6",
-  "description": "electron build of Saliva REPL",
+  "name": "perhaps-foliage-electron",
+  "displayName": "Perhaps Foliage Electron",
+  "version": "0.0.7",
+  "description": "electron build of Perhaps Foliage",
   "author": "Luke Persola",
   "engines": {
     "node": "14.17.1"
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "electron": "~13.1.5",
-    "saliva-repl": "file:../core"
+    "perhaps-foliage": "file:../core"
   },
   "devDependencies": {
     "@electron/typescript-definitions": "^8.9.6",

@@ -10,7 +10,7 @@ import synoValidators from './syno-validators/syno-validators';
 import presenters from './presenters/presenters';
 
 export default {
-  id: `saliva.saliva-repl-alpha.${version}`,
+  id: `saliva.perhaps-foliage-alpha.${version}`,
   grammar,
   primitives,
   keyToNewSynoAttrs,

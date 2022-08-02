@@ -1,8 +1,8 @@
-import ascendToRoot from 'saliva-repl/dist/syntree-utils/read-tree/ascend-to-root';
+import ascendToRoot from 'perhaps-foliage/dist/syntree-utils/read-tree/ascend-to-root';
 
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
-import type { EditorStateWithIntegration } from 'saliva-repl/dist/types/editor-state/editor-state-with-integration';
-import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import type { EditorStateWithIntegration } from 'perhaps-foliage/dist/types/editor-state/editor-state-with-integration';
+import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
 import interpreter from './interpreter';
 

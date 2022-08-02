@@ -1,5 +1,5 @@
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
-import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../../primitives.yml';

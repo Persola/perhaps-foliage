@@ -1,7 +1,7 @@
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
-import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
-import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
+import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
 
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../primitives.yml';

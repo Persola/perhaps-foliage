@@ -1,7 +1,7 @@
-import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
-import type { Presno } from 'saliva-repl/dist/types/presenter/presno';
-import type { PresentLangInt } from 'saliva-repl/dist/types/language-integration/interfaces/complete/present-lang-int';
-import type { PresnoRendererProps } from 'saliva-repl/dist/types/renderer/presno-renderer-props';
+import type { SynoId } from 'perhaps-foliage/dist/types/syntactic/syno-id';
+import type { Presno } from 'perhaps-foliage/dist/types/presenter/presno';
+import type { PresentLangInt } from 'perhaps-foliage/dist/types/language-integration/interfaces/complete/present-lang-int';
+import type { PresnoRendererProps } from 'perhaps-foliage/dist/types/renderer/presno-renderer-props';
 import type { VariableRefPres } from '../presentations/variable-ref';
 
 export type VariableRefRendererProps = {

@@ -1,6 +1,6 @@
-import type { SynoMap } from 'saliva-repl/dist/types/syntactic/syno-map';
-import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
-import type { Syno } from 'saliva-repl/dist/types/syntactic/syno';
+import type { SynoMap } from 'perhaps-foliage/dist/types/syntactic/syno-map';
+import type { SynoId } from 'perhaps-foliage/dist/types/syntactic/syno-id';
+import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
 
 export default (startingSynoId: SynoId, tree: SynoMap): Syno => {
   let currentSyno = tree[startingSynoId];

@@ -1,7 +1,4 @@
 **next**
-* rename packages from `saliva-repl-*` format to something temporary?
-  * because 'saliva' now clearly refers to the language
-  * probably rename directory/repositories too, then
 * bug: when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **testing**

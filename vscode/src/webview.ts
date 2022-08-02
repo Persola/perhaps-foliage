@@ -1,10 +1,10 @@
-import initializeRendererProcess from 'saliva-repl/dist/renderer-process/initialize-renderer-process';
+import initializeRendererProcess from 'perhaps-foliage/dist/renderer-process/initialize-renderer-process';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
-import type { RendersideUninitializedPresentLangInt } from 'saliva-repl/dist/types/language-integration/interfaces/renderside/renderside-uninitialized-present-lang-int';
+} from 'perhaps-foliage/dist/types/cross-context/cross-context-messaging';
+import type { RendersideUninitializedPresentLangInt } from 'perhaps-foliage/dist/types/language-integration/interfaces/renderside/renderside-uninitialized-present-lang-int';
 
 export default (
   rendererIntegration: RendersideUninitializedPresentLangInt,

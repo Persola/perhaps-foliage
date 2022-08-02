@@ -13,7 +13,7 @@ import rendererAttrs from './renderers/renderer-attrs';
 import styles from './stylesheet.lazy.css';
 
 export default {
-  id: `saliva.saliva-repl-alpha.${version}`,
+  id: `saliva.perhaps-foliage-alpha.${version}`,
   grammar,
   primitives,
   keyToNewSynoAttrs,

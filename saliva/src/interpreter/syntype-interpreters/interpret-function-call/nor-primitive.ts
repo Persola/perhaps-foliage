@@ -1,4 +1,4 @@
-import type { InterpretationResolution } from 'saliva-repl/dist/types/interpreter/interpretation-resolution';
+import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
 import isBoolean from './is-boolean';
 

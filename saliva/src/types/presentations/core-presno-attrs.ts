@@ -1,5 +1,5 @@
-import type { SynoId } from 'saliva-repl/dist/types/syntactic/syno-id';
-import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
+import type { SynoId } from 'perhaps-foliage/dist/types/syntactic/syno-id';
+import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
 
 export type CorePresnoAttrs = {
   readonly synoId: SynoId;

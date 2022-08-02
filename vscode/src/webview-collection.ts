@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
-import type { CrossContextMessageSender } from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
+import type { CrossContextMessageSender } from 'perhaps-foliage/dist/types/cross-context/cross-context-messaging';
 
 type WebviewEntry = {
   resource: string,

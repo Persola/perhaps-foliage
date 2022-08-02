@@ -1,7 +1,7 @@
 {
-  "name": "saliva-repl",
-  "displayName": "Saliva REPL",
-  "version": "0.0.6",
+  "name": "perhaps-foliage",
+  "displayName": "Perhaps Foliage",
+  "version": "0.0.7",
   "description": "Larva of an experimental data structure editing interface",
   "author": "Luke Persola",
   "files": [

@@ -1,12 +1,12 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
 
-import initializeMainProcess from 'saliva-repl/dist/main-process/initialize-main-process';
+import initializeMainProcess from 'perhaps-foliage/dist/main-process/initialize-main-process';
 
 import type {
   CrossContextMessageHandlerRegister,
   CrossContextMessageSender,
-} from 'saliva-repl/dist/types/cross-context/cross-context-messaging';
-import type { PresentLangInt } from 'saliva-repl/dist/types/language-integration/interfaces/complete/present-lang-int';
+} from 'perhaps-foliage/dist/types/cross-context/cross-context-messaging';
+import type { PresentLangInt } from 'perhaps-foliage/dist/types/language-integration/interfaces/complete/present-lang-int';
 
 import UnistlikeDocument from './unistlike-document';
 import WebviewCollection from './webview-collection';
@@ -25,7 +25,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
     context.subscriptions.push(providerRegistration);
   }
 
-  private static readonly viewType = 'saliva-repl.saliva-repl-custom-editor';
+  private static readonly viewType = 'perhaps-foliage.perhaps-foliage-custom-editor';
 
   private readonly webviews = new WebviewCollection();
 
@@ -179,7 +179,7 @@ export default class PerhapsFoliageEditorProvider implements vscode.CustomEditor
       <html>
         <head>
           <meta charset="utf-8" />
-          <title>Saliva REPL</title>
+          <title>Perhaps Foliage</title>
         </head>
         <body>
           <div id="editor" />

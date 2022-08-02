@@ -1,4 +1,4 @@
-import type { SynoRef } from 'saliva-repl/dist/types/syntactic/syno-ref';
+import type { SynoRef } from 'perhaps-foliage/dist/types/syntactic/syno-ref';
 import type { Syntype } from '../syntype';
 
 export type ArgumentAttrs = {

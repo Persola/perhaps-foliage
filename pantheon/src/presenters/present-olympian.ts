@@ -1,5 +1,5 @@
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
 
 import type { Olympian } from '../types/synos/olympian';
 import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';

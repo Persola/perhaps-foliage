@@ -1,4 +1,4 @@
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
 
 import type { Interpreter } from '../../../types/interpreter/interpreter';
 import type { Scope } from '../../../types/interpreter/scope';

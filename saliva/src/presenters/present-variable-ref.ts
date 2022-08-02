@@ -1,6 +1,6 @@
-import type { StateSelector } from 'saliva-repl/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'saliva-repl/dist/types/presenter/present-and-return-ref';
-import type { PresnoRef } from 'saliva-repl/dist/types/presenter/presno-ref';
+import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
 
 import type { VariableRef } from '../types/synos/variable-ref';
 import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs';
