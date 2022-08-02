@@ -1,15 +1,14 @@
 **currently**
-* move integration load out of integration-load-input file
-
-**next**
 * some of the types are ridiculous, need to parameterize
   * e.g. _RendersideUninitializedPresentLanguageIntegration_
+
+**next**
+* bug: when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **testing**
 * try rendering everything that should already be renderable
 
 **bugs**
-* when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 
 **maintenance**
 * extract common logic from destroy syno and replace syno reducers as syntree utils
@@ -17,7 +16,6 @@
     * no doing this is premature optimization
 * extract base presenter
   * force synPresno per syno
-  * force holes for necessary children
 * renderer should derive child presno order straight from presno attrs
   * see LANGUAGE_INTEGRATION_SPEC
   * but keep rendererAttrs because there will need to be config later
@@ -68,6 +66,15 @@
   * implement undo/redo
   * reversion or whatever else is left
 * editing
+  * add holes for required children
+    * appear whenever a required child is missing
+      * should be two places, both for saliva:
+        * arguments without values
+        * function defitions without bodies
+    * just the circle
+    * correct color for child edge
+    * is presno (can be focused)
+    * next step: command(s) to fill them
   * add buds
     * they form holes (related to syno deletion)
     * they can be placed and moved arbitarily to create synos
