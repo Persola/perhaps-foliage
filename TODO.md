@@ -1,16 +1,35 @@
 **next**
 * bug: when replacing node, remove its list of referents and its ID in other lists from the inverse references map
+* editing
+  * add holes for required children
+    * appear whenever a required child is missing
+      * should be two places, both for saliva:
+        * arguments without values
+        * function defitions without bodies
+    * just the circle
+    * correct color for child edge
+    * is presno (can be focused)
 
 **testing**
 * try rendering everything that should already be renderable
 
 **bugs**
+* syntree-utils revision -> can't delete because isRef barfs on proxies
+  * proxies feel bad
 
 **maintenance**
 * focus should only need presnoId now?
 * extract common logic from destroy syno and replace syno reducers as syntree utils
   * probably also rewrite replace to call extracted patterns of destroy + create?
-    * no doing this is premature optimization
+    * not doing this is premature optimization
+    * oh wait the reson I did it this way is how I thought of buds
+      * the simple command for creating a bud doesn't give it type or anything
+      * it's a blank with fill details into, a placeholder for growth
+      * so adding a bud would be creating, but specifying a type is replacing
+      * and showing holes/buds for necessary children happens automatically
+      * but buds shouldn't be in the syntree anyway, right?
+      * I was thinking they would be, but they're never part of a _complete_ program/structure
+      * so they should probably just be presnos
 * extract base presenter
   * force synPresno per syno
 * renderer should derive child presno order straight from presno attrs
