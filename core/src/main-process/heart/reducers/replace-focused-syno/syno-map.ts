@@ -9,6 +9,7 @@ import type { SynoRef } from '../../../../types/syntactic/syno-ref';
 import type { Syno } from '../../../../types/syntactic/syno';
 import type { MutableSyntypeAttrs } from '../../../../types/syntactic/mutables/mutable-syntype-attrs';
 import type { SynoId } from '../../../../types/syntactic/syno-id';
+import type { Edge } from '../../../../types/syntactic/edge';
 import type { UnistlikeEdit } from '../../../../types/unistlike/unistlike-edit';
 
 export default (
@@ -32,10 +33,10 @@ export default (
     let childIndex: number | null = null;
     forChildSynoOf(
       parent,
-      (oldChildRef: SynoRef, key: string, index: number | null) => {
+      (oldChildRef: SynoRef, edge: Edge) => {
         if (oldChildRef.id === state.focusedSynoId()) {
-          childKey = key;
-          childIndex = index || null;
+          childKey = edge.key;
+          childIndex = edge.index || null;
           oldChildId = oldChildRef.id;
         }
       },

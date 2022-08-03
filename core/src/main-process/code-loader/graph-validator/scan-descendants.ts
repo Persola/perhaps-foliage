@@ -34,7 +34,7 @@ const scanDescendants = (
 
   synosAccountedFor[currentSyno.id] = true;
 
-  forChildSynoOf(currentSyno, (childRef, childKey) => {
+  forChildSynoOf(currentSyno, (childRef, childEdge) => {
     if (graph[childRef.id] === undefined) {
       if (primitives[childRef.id] === undefined) {
         invalidate(result, (
@@ -56,7 +56,7 @@ const scanDescendants = (
       validateChildSyntype(
         grammar,
         currentSyno,
-        childKey,
+        childEdge.key,
         child,
         result,
         childRef,
