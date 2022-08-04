@@ -1,5 +1,5 @@
-import synoMapReducer from './replace-focused-syno/syno-map';
 import verifyReplacementAgainstGrammar from './replace-focused-syno/verify-replacement-against-grammar';
+import replaceSyno from '../../../syntree-utils/exposed/replace-syno';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../../types/actions/replace-focused-syno';
@@ -35,16 +35,25 @@ export default (
     keyToNewSynoAttrs,
   );
 
-  const newSynoAttrs = keyToNewSynoAttrs[action.input];
+  latestEdit.push({
+    undo: {
+      type: 'REPLACE_SYNO',
+    },
+    redo: {
+      type: 'REPLACE_SYNO',
+    },
+  });
+
+  const newSynoSyntypeAttrs = keyToNewSynoAttrs[action.input];
   const newSynoId = `inputValue-${String(Math.random()).substring(2)}`;
-  synoMapReducer(
+  replaceSyno( // syno map updates
     state,
-    action,
-    draftState.synoMap,
     draftState,
-    newSynoAttrs,
+    draftState.synoMap,
+    state.focusedSyno().id,
+    state.focusedSyno().parent?.id,
     newSynoId,
-    latestEdit,
+    newSynoSyntypeAttrs,
   );
   draftState.focus = {
     synoId: newSynoId,

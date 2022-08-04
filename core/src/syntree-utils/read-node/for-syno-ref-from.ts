@@ -1,12 +1,12 @@
-import isRef from '../read-other/is-ref';
+import isRef from '../read-ref/is-ref';
 
 import type { Syno } from '../../types/syntactic/syno';
 import type { SynoRef } from '../../types/syntactic/syno-ref';
-import type { Edge } from '../../types/syntactic/edge';
+import type { ChildEdge } from '../../types/syntactic/child-edge';
 
 export default (
   syno: Syno,
-  callback: (synoRef: SynoRef, edge: Edge) => void,
+  callback: (synoRef: SynoRef, edge: ChildEdge) => void,
 ): void => {
   Object.entries(syno).forEach(([key, val]) => {
     if (isRef(val)) {

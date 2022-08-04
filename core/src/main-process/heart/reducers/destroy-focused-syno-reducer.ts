@@ -1,5 +1,5 @@
 import navOut from './navigate/nav-out';
-import destroySyno from './destroy-focused-syno/destroy-syno';
+import destroySyno from '../../../syntree-utils/exposed/destroy-syno';
 
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
@@ -41,7 +41,13 @@ export default (
     return;
   }
 
+  latestEdit.push({
+    undo: { type: 'CREATE_SYNO' },
+    redo: { type: 'DELETE_SYNO' },
+  });
+
+  const { focusedPresnoId } = action;
   const focus: MutableFocus = draftState.focus;
-  destroySyno(state, action, draftState, latestEdit, warnUser);
+  destroySyno(focusedPresnoId, state, draftState);
   navOut(state, focus, warnUser);
 };

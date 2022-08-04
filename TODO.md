@@ -1,5 +1,4 @@
 **next**
-* bug: when replacing node, remove its list of referents and its ID in other lists from the inverse references map
 * editing
   * add holes for required children
     * appear whenever a required child is missing

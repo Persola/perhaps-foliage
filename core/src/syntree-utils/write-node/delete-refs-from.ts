@@ -1,43 +1,21 @@
-import getRef from '../read-node/get-ref';
 import forSynoRefFrom from '../read-node/for-syno-ref-from';
 import deleteRef from './delete-ref';
 
-import type { MutableSyno } from '../../types/syntactic/mutables/mutable-syno';
-import type { SynoRef } from '../../types/syntactic/syno-ref';
-import type { Edge } from '../../types/syntactic/edge';
-import type { MutableInverseReferenceMap } from '../../types/editor-state/mutable/mutable-inverse-reference-map';
+import type { StateSelector } from '../../types/state-selector';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 
 export default (
-  referer: MutableSyno,
-  referentId: string,
-  inverseReferenceMap: MutableInverseReferenceMap,
-  edge: (Edge | null),
-): SynoRef[] => {
-  const edges = [];
-
-  if (edge) {
-    const ref = getRef(referer, edge);
-    if (ref.id !== referentId) {
-      throw new TypeError(
-        `Syno's (${referer.id}) ref at edge (${edge})`
-        + ` did not match provided referentId (${referentId})`,
+  state: StateSelector,
+  draftState: MutableEditorState,
+  focusedPresnoId: string,
+): void => {
+  forSynoRefFrom(state.getSyno(focusedPresnoId), (synoRef, edge) => {
+    if (state.synoMap()[synoRef.id]) { // referent is in this tree
+      deleteRef(
+        draftState.synoMap[focusedPresnoId],
+        edge,
+        draftState.inverseReferenceMap,
       );
     }
-    edges.push(edge);
-  } else {
-    forSynoRefFrom(referer, (synoRef, refEdge) => {
-      if (synoRef.id === referentId) {
-        edges.push(refEdge);
-      }
-    });
-  }
-
-  const refs = [];
-  for (edge of edges) {
-    refs.push(
-      deleteRef(referer, edge, inverseReferenceMap),
-    );
-  }
-
-  return refs;
+  });
 };

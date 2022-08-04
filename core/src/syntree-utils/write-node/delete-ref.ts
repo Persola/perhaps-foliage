@@ -1,14 +1,14 @@
-import ensureRef from '../read-node/ensure-ref';
+import ensureRef from '../read-ref/ensure-ref';
 
 import type { SynoAttrVal } from '../../types/syntactic/mutables/syno-attr-val';
 import type { MutableSyno } from '../../types/syntactic/mutables/mutable-syno';
 import type { SynoRef } from '../../types/syntactic/syno-ref';
-import type { Edge } from '../../types/syntactic/edge';
+import type { ChildEdge } from '../../types/syntactic/child-edge';
 import type { MutableInverseReferenceMap } from '../../types/editor-state/mutable/mutable-inverse-reference-map';
 
 export default (
   referer: MutableSyno,
-  edge: Edge,
+  edge: ChildEdge,
   inverseReferenceMap: MutableInverseReferenceMap,
 ): SynoRef => {
   const { key, index } = edge;

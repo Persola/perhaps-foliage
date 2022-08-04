@@ -1,9 +1,9 @@
-import getDraftSyno from '../draft-utils/get-draft-syno';
-import forSynoRefTo from '../../../../syntree-utils/read-node/for-syno-ref-to';
-import deleteRef from '../../../../syntree-utils/write-node/delete-ref';
+import getDraftSyno from '../../main-process/heart/reducers/draft-utils/get-draft-syno';
+import forSynoRefTo from '../read-node/for-syno-ref-to';
+import deleteRef from './delete-ref';
 
-import type { StateSelector } from '../../../../types/state-selector';
-import type { MutableEditorState } from '../../../../types/mutable-editor-state';
+import type { StateSelector } from '../../types/state-selector';
+import type { MutableEditorState } from '../../types/mutable-editor-state';
 
 export default (
   state: StateSelector,

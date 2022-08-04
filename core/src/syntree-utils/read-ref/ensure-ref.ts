@@ -1,4 +1,4 @@
-import isRef from '../read-other/is-ref';
+import isRef from './is-ref';
 
 import type { SynoAttrVal } from '../../types/syntactic/mutables/syno-attr-val';
 import type { SynoRef } from '../../types/syntactic/syno-ref';

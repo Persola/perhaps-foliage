@@ -1,4 +1,4 @@
-export type Edge = {
+export type ChildEdge = {
   readonly key: string;
   readonly index: (number | null);
 };
