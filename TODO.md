@@ -13,9 +13,6 @@
 * try rendering everything that should already be renderable
 
 **bugs**
-* trying to navigate past second argument to NOR call -> error and bad state
-  * probably because of unavagable NOR body
-    * which shouldn't be displayed anyway...
 
 **maintenance**
 * focus should only need presnoId now?
@@ -29,6 +26,10 @@
     * but keep rendererAttrs because there will be need for config later
       * e.g. what classes to apply for custom flags on presnos
     * see LANGUAGE_INTEGRATION_SPEC
+  * this change should also fix getChildPresnoRefs bullshit
+    * dedup logic
+      * at minimum, extract from both
+      * maybe start storing prestree?
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
@@ -68,6 +69,7 @@
         * (or) have wrapper types that themselves have long lists
           * also unacceptable because we don't want to dictate syntactic structure like that
     * edNCE?
+  * **?** need to support OR in grammar? e.g. function call has child def OR non-tree ref callee
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
@@ -154,7 +156,6 @@
 * **?** AST format stores all refs in one object, relation type is property of ref
   * allows language integrations to provide modular 'grammar's contributing relations
     * nah, this could be done the current way too
-  * [_saliva_] make function call optionally non-tree instead of child (notably for primitives)
 * should synos have IDs?
   * yes, for performance, at least in memory when editor is running
   * but should they exist in the AST format?

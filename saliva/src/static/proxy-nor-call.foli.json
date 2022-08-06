@@ -160,7 +160,7 @@
     ],
     "callee": {
       "synoRef": true,
-      "relation": "child",
+      "relation": "non-tree",
       "id": "salivaPrimitives-nor"
     }
   },

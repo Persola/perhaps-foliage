@@ -26,7 +26,8 @@ functionCall:
     callee:
       collection: false
       syntype: functionDefinition
-  nonTreeRefs: {}
+  nonTreeRefs:
+    callee: functionDefinition
   properties: {}
 argument:
   rootable: false

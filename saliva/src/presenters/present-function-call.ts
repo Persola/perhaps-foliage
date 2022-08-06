@@ -3,14 +3,9 @@ import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/p
 import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
 import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
 
-// @ts-ignore how do I configure TS to ignore webpacked imports?
-import primitives from '../primitives.yml';
-
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/function-call-attrs';
-
-const primitiveIds = Object.keys(primitives);
 
 export default (
   funkshunCall: FunctionCall,
@@ -31,7 +26,9 @@ export default (
     const calleeFuncDef = calleeSyno as FunctionDefinition;
     resolved = true;
 
-    if (primitiveIds.includes(calleeFuncDef.id)) {
+    if (funkshunCall.callee.relation === 'child') {
+      callee = presentAndReturnRef(funkshunCall.callee);
+    } else {
       name = presentAndReturnRef(
         {
           valid: true,
@@ -41,10 +38,6 @@ export default (
         },
         funkshunCall,
       );
-    }
-
-    if (funkshunCall.callee.relation === 'child') {
-      callee = presentAndReturnRef(funkshunCall.callee);
     }
   }
 
