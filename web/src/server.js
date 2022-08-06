@@ -5,11 +5,9 @@ const path = require('path');
 const PORT = 8000;
 const ROOT_PATH = './built';
 const DEFAULT_PATH = `${ROOT_PATH}/index.html`;
-const FAVICON_PATH = './favicon.ico';
+const FAVICON_PATH = `${ROOT_PATH}/favicon.ico`;
 
 http.createServer((request, response) => {
-  console.log('request ', request.url);
-
   let filePath = ROOT_PATH + request.url;
   if (request.url === '/') filePath = DEFAULT_PATH;
   else if (request.url === '/favicon.ico') filePath = FAVICON_PATH;
@@ -29,7 +27,7 @@ http.createServer((request, response) => {
 
   contentType = mimeTypes[extname] || 'application/octet-stream';
 
-  console.log(filePath);
+  console.log(`request: "${request.url}" resolved to: "${filePath}"`);
   fs.readFile(filePath, (error, content) => {
     if (error) {
       console.log(error);
@@ -46,4 +44,5 @@ http.createServer((request, response) => {
     }
   });
 }).listen(PORT);
-console.log(`HTTP server: http://127.0.0.1:${PORT}/`);
+
+console.log(`HTTP server launched at: http://127.0.0.1:${PORT}/\n`);
