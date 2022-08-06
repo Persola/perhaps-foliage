@@ -9,7 +9,7 @@ export default (
   edge: ChildEdge,
 ): SynoRef => {
   const { key, index } = edge;
-  if (index) {
+  if (index !== undefined) {
     return referer[key][index];
   }
 

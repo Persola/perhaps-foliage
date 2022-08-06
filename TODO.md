@@ -13,28 +13,22 @@
 * try rendering everything that should already be renderable
 
 **bugs**
-* syntree-utils revision -> can't delete because isRef barfs on proxies
-  * proxies feel bad
+* trying to navigate past second argument to NOR call -> error and bad state
+  * probably because of unavagable NOR body
+    * which shouldn't be displayed anyway...
 
 **maintenance**
 * focus should only need presnoId now?
-* extract common logic from destroy syno and replace syno reducers as syntree utils
-  * probably also rewrite replace to call extracted patterns of destroy + create?
-    * not doing this is premature optimization
-    * oh wait the reson I did it this way is how I thought of buds
-      * the simple command for creating a bud doesn't give it type or anything
-      * it's a blank with fill details into, a placeholder for growth
-      * so adding a bud would be creating, but specifying a type is replacing
-      * and showing holes/buds for necessary children happens automatically
-      * but buds shouldn't be in the syntree anyway, right?
-      * I was thinking they would be, but they're never part of a _complete_ program/structure
-      * so they should probably just be presnos
 * extract base presenter
-  * force synPresno per syno
-* renderer should derive child presno order straight from presno attrs
-  * see LANGUAGE_INTEGRATION_SPEC
-  * but keep rendererAttrs because there will need to be config later
-    * e.g. what classes to apply for custom flags on presnos
+  * ensures:
+    * one synpresno per presented syno
+    * all and only children rendered as synpresnos
+    * synpresno child order
+  * but integration presenters need to be able to intersperse other presnos
+  * renderer derives child order directly from ECMAscript object attr order?
+    * but keep rendererAttrs because there will be need for config later
+      * e.g. what classes to apply for custom flags on presnos
+    * see LANGUAGE_INTEGRATION_SPEC
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
@@ -68,8 +62,12 @@
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
   * What I really need is what children each type is allowed?
-    * well, that's probably significantly less expressive, what's needed? what do contemporary ASTs tend like?
-      * edNCE?
+    * no, syntypes will have to be grouped in at least one layer
+      * not doing this requires you to either:
+        * have long lists of acceptable child types in many places
+        * (or) have wrapper types that themselves have long lists
+          * also unacceptable because we don't want to dictate syntactic structure like that
+    * edNCE?
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
@@ -91,6 +89,19 @@
     * they form holes (related to syno deletion)
     * they can be placed and moved arbitarily to create synos
       * they could autocomplete come info based on context
+      * place: direction from current syno (held) + [space OR insert]
+        * on release: focused on bud
+        * [space OR insert alone] -> replace current with bud
+        * wait, in lieu of space/insert... all letters to immediate autocomplete?
+          * but then can't use them for directions
+        * and so arrows don't navigate until keyup
+        * consider other key holding and ordering patterns
+          * sequence of directions could be used for separating the cursor from the focused syno
+            * if you want to keep your view while doing something e.g. selecting
+            * so some uncommon option key to combo?
+      * **?** switch between on and between nodes ('insert mode')--or should that be done through navigation as currently?
+        * can we do without given the shift? I don't think so, b/c copy/paste needs to be in between nodes
+          * can holes be used for what insert mode would be?
 * navigation
   * enter eigensyno
   * alt keys:
@@ -99,9 +110,6 @@
     * move/shift/reorder selected nodes [option key]
       * e.g. move up/down in list
       * group selected nodes?
-    * **?** switch been on and between nodes ('insert mode')--or should that be done through navigation as currently?
-      * can we do without given the shift? I don't think so, b/c copy/paste needs to be in between nodes
-        * can holes be used for what insert mode would be?
   * add selection (in addition to focus)
   * **?** traversing nav history
   * **?** navigating non-tree syno references (how see references of current focus?)
@@ -178,8 +186,22 @@
           * how to deal with limits of tree completion
           * sort of redundant with whatever read/write layer I have on top of raw data
   * ANTLR?
-* **?** diffing algorithm for syntree -> prestree transformation?
+* **?** reachitecturing presentation
+  * currently a big pure function between application state and react input
+    * runs every update
+  * diffing algorithm for syntree -> prestree transformation?
+    * has same problem with prestree -> UI with one layer change at the top
+  * store prestree in a store?
+    * in the sam redux instance
+      * weird to have part of app state from pure function taking another part
+      * do it with middleware?
+    * a new store
+      * just caching on top of redux?
+      * an independant store only helps avoid rerendering code view during other behavior
 * **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
+  * notably, navigation in and out constantly changes component tree representing code
+    * we're constantly losing or gaining one layer at the root
+    * is there a way to deal with that in react? seems like an assumption of reconciliation
   * first just profile it a bit
 
 **documentation**

@@ -14,7 +14,7 @@ export default (
   const { key, index } = edge;
   let attrVal: SynoAttrVal;
   let ref: SynoRef;
-  if (index) {
+  if (index !== undefined) {
     attrVal = referer[key][index];
     ref = ensureRef(attrVal);
     (referer[key] as SynoRef[]).splice(index, 1);
