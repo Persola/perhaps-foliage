@@ -30,7 +30,6 @@ const generatePresentation = (
       state,
       integration as MainsidePresentLangInt,
       entryId,
-      state.synoMap(),
       focus,
     );
   }
@@ -44,7 +43,6 @@ const generatePresentation = (
       state,
       integration as MainsidePresentLangInt,
       resultSyntreeRootId,
-      state.resultTree(),
       null,
     );
   }

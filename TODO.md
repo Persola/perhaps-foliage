@@ -16,6 +16,7 @@
 
 **maintenance**
 * focus should only need presnoId now?
+* make name presnos internal
 * extract base presenter
   * ensures:
     * one synpresno per presented syno
@@ -153,9 +154,6 @@
         * property values would be given diretly
         * refs are followed automatically
         * sure, I guess
-* **?** AST format stores all refs in one object, relation type is property of ref
-  * allows language integrations to provide modular 'grammar's contributing relations
-    * nah, this could be done the current way too
 * should synos have IDs?
   * yes, for performance, at least in memory when editor is running
   * but should they exist in the AST format?
@@ -163,6 +161,9 @@
   * e.g. navigate into primitive
   * e.g. navigate into dependency
 * AST format
+  * current format issues
+    * **?** AST format stores all refs in one object, relation type is property of ref
+  * incremental/modular format using Cue?
   * current custom format is
     * directed/locally treelike
     * labeled edges ('relation')
@@ -193,7 +194,7 @@
   * diffing algorithm for syntree -> prestree transformation?
     * has same problem with prestree -> UI with one layer change at the top
   * store prestree in a store?
-    * in the sam redux instance
+    * in the same redux instance
       * weird to have part of app state from pure function taking another part
       * do it with middleware?
     * a new store

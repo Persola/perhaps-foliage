@@ -1,4 +1,4 @@
-import type { SynoId } from '../syntactic/syno-id';
+import type { SynoId } from '../../syntactic/syno-id';
 
 export type SynPresnoArgs = {
   type: 'synPresno',

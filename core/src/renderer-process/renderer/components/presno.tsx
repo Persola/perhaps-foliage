@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import NamePart from './presnos/name-part';
+import Bud from './presnos/bud';
 
 import type { Presno } from '../../../types/presenter/presno';
 import type { PresnoRendererProps } from '../../../types/renderer/presno-renderer-props';
@@ -12,6 +13,8 @@ export default (props: PresnoRendererProps): JSX.Element => {
   let SyntypeRenderer;
   if (presno.prestype === 'NamePart') {
     SyntypeRenderer = NamePart;
+  } else if (presno.prestype === 'bud') {
+    SyntypeRenderer = Bud;
   } else {
     SyntypeRenderer = integration.renderers[presno.prestype];
   }

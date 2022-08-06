@@ -4,7 +4,6 @@ import presnoId from './presno-id';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { SynoId } from '../../../types/syntactic/syno-id';
-import type { SynoMap } from '../../../types/syntactic/syno-map';
 import type { Prestree } from '../../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
 import type { PresnoMap } from '../../../types/presenter/presno-map';
@@ -16,7 +15,6 @@ export default (
   state: StateSelector,
   integration: MainsidePresentLangInt,
   renderEntrySynoId: SynoId,
-  renderEntryTree: SynoMap,
   focus: Focus,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};

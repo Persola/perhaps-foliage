@@ -146,3 +146,7 @@ button.interpreting {
 .code-view.hovering-file {
  background-color: #444444;
 }
+
+.code-view .bud {
+ background-color: #888888;
+}

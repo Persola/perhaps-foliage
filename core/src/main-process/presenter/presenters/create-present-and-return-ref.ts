@@ -4,8 +4,8 @@ import type { PresentAndReturnRef } from '../../../types/presenter/present-and-r
 import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
-import type { SynPresnoArgs } from '../../../types/presenter/syn-presno-args';
-import type { NonSynPresnoArgs } from '../../../types/presenter/non-syn-presno-args';
+import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
+import type { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
 import type { Syno } from '../../../types/syntactic/syno';
 
 const synPresnoArgs = (synoRef: SynoRef): SynPresnoArgs => {

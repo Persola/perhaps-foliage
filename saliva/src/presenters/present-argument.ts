@@ -28,7 +28,14 @@ export default (
       argument,
     );
   }
-
+  {
+    id: string;
+    parent: PresnoRef;
+    prestype: 'bud';
+    focused: boolean;
+    valid: boolean;
+  };
+  
   return {
     syntype: 'argument',
     name,
