@@ -27,7 +27,7 @@ export default (
     // TODO: check presno.syntype
 
     const {
-      presno: { focused, valid, synoId },
+      presno: { focused, valid, id },
     } = props;
 
     const classes = syntypeClasses.concat([
@@ -42,7 +42,7 @@ export default (
       'div',
       {
         className: classes.join(' '),
-        'data-syno-id': synoId,
+        'data-presno-id': id,
       },
       ...childComponents,
     );

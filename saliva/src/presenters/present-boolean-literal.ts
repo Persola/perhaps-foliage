@@ -4,7 +4,7 @@ import type { BooleanLiteralPresAttrs } from '../types/presentations/presno-attr
 export default (
   booleanLiteral: BooleanLiteral,
   // state selector uneeded
-  // presentAndReturnRef uneeded
+  // enstackForPresentation uneeded
 ): BooleanLiteralPresAttrs => {
   return {
     syntype: 'booleanLiteral',

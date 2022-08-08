@@ -1,22 +1,27 @@
 import presnoId from '../presno-id';
 
-import type { NamePartPresAttrs } from '../../../../types/presenter/presno-attrs/name-part-attrs';
+import type { NamePart } from '../../../../types/presenter/presnos/non-syn-presnos/name-part';
+import { Focus } from '../../../../types/editor-state/focus';
+import { NonSynPresnoArgs } from '../../../../types/presenter/presno-args/non-syn-presno-args';
 import { NamePartArgs } from '../../../../types/presenter/presno-args/name-part-args';
 
 export default (
-  presnoArgs: NamePartArgs,
+  presnoArgs: NonSynPresnoArgs,
   focused: boolean,
-): NamePartPresAttrs => {
+  focus: Focus,
+): NamePart => {
+  const { valid } = presnoArgs.presnoArgs;
+
   return {
     id: presnoId(presnoArgs),
     parent: {
       presnoRef: true,
       id: presnoArgs.parentId,
     },
-    prestype: 'NamePart',
+    prestype: 'namePart',
     focused,
     charFocused: focused ? focus.charIndex : null,
-    valid: presnoArgs.valid,
-    namePart: presnoArgs.text,
+    valid,
+    namePart: (presnoArgs.presnoArgs as NamePartArgs).text,
   };
 };

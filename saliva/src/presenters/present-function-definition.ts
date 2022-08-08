@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
@@ -7,22 +7,33 @@ import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/f
 export default (
   funkshunDef: FunctionDefinition,
   _: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): FunctionDefPresAttrs => {
-  const name = presentAndReturnRef(
+  const name = enstackForPresentation(
     {
       valid: true,
       presnoIndex: 0,
-      prestype: 'NamePart',
+      prestype: 'namePart',
       text: funkshunDef.name,
     },
     funkshunDef,
   );
 
+  const body = funkshunDef.body !== null
+    ? enstackForPresentation(funkshunDef.body)
+    : enstackForPresentation(
+      {
+        valid: true,
+        presnoIndex: funkshunDef.parameters.length + 1,
+        prestype: 'bud',
+      },
+      funkshunDef,
+    );
+
   return {
     syntype: 'functionDefinition',
     name,
-    parameters: funkshunDef.parameters.map(paramRef => presentAndReturnRef(paramRef)),
-    body: presentAndReturnRef(funkshunDef.body),
+    parameters: funkshunDef.parameters.map(paramRef => enstackForPresentation(paramRef)),
+    body,
   };
 };

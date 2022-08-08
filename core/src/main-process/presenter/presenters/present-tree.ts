@@ -1,12 +1,12 @@
-import presentationNode from './create-presentation-node';
-import createPresentAndReturnRef from './create-present-and-return-ref';
+import presentationNode from './presentation-node';
+import createenstackForPresentation from './create-enstack-for-presentation';
 import presnoId from './presno-id';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { Prestree } from '../../../types/presenter/prestree';
-import type { MutablePresnoMap } from '../../../types/presenter/mutable-presno-map';
-import type { PresnoMap } from '../../../types/presenter/presno-map';
+import type { MutablePresnoMap } from '../../../types/presenter/presno-map/mutable-presno-map';
+import type { PresnoMap } from '../../../types/presenter/presno-map/presno-map';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
@@ -23,7 +23,7 @@ export default (
     synoId: renderEntrySynoId,
   };
   const toPresentStack: PresnoArgs[] = [rootPrensoArgs];
-  const presentAndReturnRef = createPresentAndReturnRef(toPresentStack);
+  const enstackForPresentation = createenstackForPresentation(toPresentStack);
 
   while (toPresentStack.length > 0) {
     const args = toPresentStack.pop();
@@ -38,7 +38,7 @@ export default (
       state,
       integration,
       focus,
-      presentAndReturnRef,
+      enstackForPresentation,
     );
   }
 

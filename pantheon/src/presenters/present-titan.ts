@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { Titan } from '../types/synos/titan';
 import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-attrs';
@@ -7,13 +7,13 @@ import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-a
 export default (
   titan: Titan,
   _: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): TitanPresAttrs => {
-  const name = presentAndReturnRef(
+  const name = enstackForPresentation(
     {
       valid: true,
       presnoIndex: 0,
-      prestype: 'NamePart',
+      prestype: 'namePart',
       text: titan.name,
     },
     titan,
@@ -24,7 +24,7 @@ export default (
     name,
     child: (
       titan.child
-        ? presentAndReturnRef(titan.child)
+        ? enstackForPresentation(titan.child)
         : null
     ),
   };

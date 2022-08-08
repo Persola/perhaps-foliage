@@ -1,12 +1,14 @@
 import presnoId from '../presno-id';
 
-import type { BudPresAttrs } from '../../../../types/presenter/presno-attrs/bud-attrs';
-import { BudArgs } from '../../../../types/presenter/presno-args/bud-args';
+import type { Bud } from '../../../../types/presenter/presnos/non-syn-presnos/bud';
+import { NonSynPresnoArgs } from '../../../../types/presenter/presno-args/non-syn-presno-args';
 
 export default (
-  presnoArgs: BudArgs,
+  presnoArgs: NonSynPresnoArgs,
   focused: boolean,
-): BudPresAttrs => {
+): Bud => {
+  const { valid } = presnoArgs.presnoArgs;
+
   return {
     id: presnoId(presnoArgs),
     parent: {
@@ -15,6 +17,6 @@ export default (
     },
     prestype: 'bud',
     focused,
-    valid: presnoArgs.valid,
+    valid,
   };
 };

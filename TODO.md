@@ -8,6 +8,18 @@
     * just the circle
     * correct color for child edge
     * is presno (can be focused)
+  1. buds are navigable
+      * requires getChildPresnoRefs to mirror presenters...
+      * so instead need to fix getChildPresnoRefs problem, options:
+        * have getChildPresnoRefs call presenters
+          * regenerating just to read in reducer!?
+          * but only for like a few presnos per command
+          * functional style justifies it?
+          * method:
+            * inject stub enstackForPresentation to avoid rendering subtree
+            * then just filter presno down to child refs
+        * store presentation
+  2. required children in grammar/extract bud from integration presenters
 
 **testing**
 * try rendering everything that should already be renderable
@@ -15,6 +27,8 @@
 **bugs**
 
 **maintenance**
+* in dev mode (only mode), validate syntree after every update
+  * to test if syntrees are closed under available editing commands
 * focus should only need presnoId now?
 * make name presnos internal
 * extract base presenter
@@ -56,10 +70,6 @@
   * so there can be a CLI or other kinds of APIs later, not just GUI
   * redundant with LSP?
 * **?** presentation tree should also have grammar
-* presentation read tools
-  * **?** pure functional derive from synstate
-    * what?
-  * **?** store/cache presentation
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
@@ -77,6 +87,7 @@
 **new functionality**
 * VSCode extension
   * implement undo/redo
+    * immer patches relevant?
   * reversion or whatever else is left
 * editing
   * add holes for required children
@@ -193,13 +204,29 @@
     * runs every update
   * diffing algorithm for syntree -> prestree transformation?
     * has same problem with prestree -> UI with one layer change at the top
-  * store prestree in a store?
-    * in the same redux instance
-      * weird to have part of app state from pure function taking another part
-      * do it with middleware?
-    * a new store
-      * just caching on top of redux?
-      * an independant store only helps avoid rerendering code view during other behavior
+  * how to read presentation in reducers (see getChildPresnoRefs clusterfuck)
+    * just regenerate the part you need using presenters
+      * possibly presenters need restructering to allow piece by piece presenting
+      * I guess not that expensive since it should only be small bits?
+    * store presentation?
+      * because if there are non-syntactic presnos we need to read them in reducers
+        * well, if presnos remain shallow they're easy to regen piecemeal from parent synos
+        * ...but I might remove non-syntactic presnos?
+          * reasons 'balloons' can't be 1-to-1 with synos (justifying non-syntactic presnos):
+            * keep eigensyno navigation consistent with tree--only one user interface
+            * omitting synos in presentation, like if the AST has a wrapper type
+              * e.g. type keyValuePair, but user just wants to edit key and edit value
+                * navigating through two layers feels pretty cumbersome... but acceptable?
+                * or insist they have a user-friendly AST format!
+            * adding balloons for general extensibility
+      * where to store
+        * in the same redux instance
+          * weird to have part of app state from pure function taking another part
+          * do it with middleware?
+        * a new (non-Redux) store
+          * just caching? backup to presenters as above?
+          * an independant store
+            * can be optimized for above-mentioned 'diffing algorithm'
 * **?** replace react with prestree -> rendering diffing algorithm more appropriate for AST manipulation?
   * notably, navigation in and out constantly changes component tree representing code
     * we're constantly losing or gaining one layer at the root

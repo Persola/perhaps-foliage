@@ -1,5 +1,5 @@
-import type { BudPresAttrs } from '../../presenter/presno-attrs/bud-attrs';
+import type { Bud } from '../../presenter/presnos/non-syn-presnos/bud';
 
 export type BudProps = {
-  readonly presno: BudPresAttrs;
+  readonly presno: Bud;
 };

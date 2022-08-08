@@ -16,10 +16,14 @@ export default (props: NamePartProps): JSX.Element => {
     },
   } = props;
 
-  const classes = `code-text same-line ${focused ? 'focused' : 'unfocused'}`;
+  const classes = [
+    'code-text',
+    'same-line',
+    focused ? 'focused' : 'unfocused',
+  ];
 
   return (
-    <div className={classes}>
+    <div className={classes.join(' ')}>
       {
         charFocused === null
           ? namePart

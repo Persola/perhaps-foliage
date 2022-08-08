@@ -37,7 +37,7 @@ export default (editorStateStore: Store) => {
     if (syno) {
       editorStateStore.dispatch({
         type: 'SET_FOCUS_SYNO',
-        synoId: String(syno.attributes.getNamedItem('data-syno-id').nodeValue),
+        synoId: String(syno.attributes.getNamedItem('data-presno-id').nodeValue),
       });
     }
   };

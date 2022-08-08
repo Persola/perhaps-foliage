@@ -1,6 +1,7 @@
 import presnoId from './presno-id';
+import isRef from '../../../syntree-utils/read-ref/is-ref';
 
-import type { PresentAndReturnRef } from '../../../types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
@@ -39,15 +40,15 @@ const presnoRef = (presnoArgs: PresnoArgs) => {
   throw new Error('Bad presno args');
 };
 
-export default (stack: PresnoArgs[]): PresentAndReturnRef => {
-  function presentAndReturnRef(/* syn presno */
-    synoRef: (null | SynoRef), /* null when ref is missing */
+export default (stack: PresnoArgs[]): EnstackForPresentation => {
+  function enstackForPresentation(// syn presno
+    synoRef: (null | SynoRef), // null when syno has null in a key for synoRefs
   ): PresnoRef;
-  function presentAndReturnRef(/* non syn presno */
+  function enstackForPresentation(// non syn presno
     presnoArgs: NonSynPresnoArgs['presnoArgs'],
     parent: Syno,
   ): PresnoRef;
-  function presentAndReturnRef(
+  function enstackForPresentation(
     synoRefOrArgs: (SynoRef | NonSynPresnoArgs['presnoArgs']),
     parentOrUndefined?: Syno,
   ): PresnoRef {
@@ -56,13 +57,14 @@ export default (stack: PresnoArgs[]): PresentAndReturnRef => {
     }
 
     const presnoArgs: PresnoArgs = (
-      Object.prototype.hasOwnProperty.call(synoRefOrArgs, 'synoRef')
+      isRef(synoRefOrArgs)
         ? synPresnoArgs(synoRefOrArgs as SynoRef)
         : nonSynPresnoArgs(synoRefOrArgs as NonSynPresnoArgs['presnoArgs'], parentOrUndefined)
     );
     stack.push(presnoArgs);
+
     return presnoRef(presnoArgs);
   }
 
-  return presentAndReturnRef;
+  return enstackForPresentation;
 };

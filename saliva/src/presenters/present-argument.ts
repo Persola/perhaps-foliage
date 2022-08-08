@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { Argument } from '../types/synos/argument';
 import type { ArgumentPresAttrs } from '../types/presentations/presno-attrs/argument-attrs';
@@ -8,7 +8,7 @@ import type { FunctionParameter } from '../types/synos/function-parameter';
 export default (
   argument: Argument,
   state: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): ArgumentPresAttrs => {
   let name;
   if (!argument.parameter) {
@@ -18,27 +18,31 @@ export default (
       state.getSyno(argument.parameter.id) as FunctionParameter
     ).name;
 
-    name = presentAndReturnRef(
+    name = enstackForPresentation(
       {
         valid: true,
         presnoIndex: 0,
-        prestype: 'NamePart',
+        prestype: 'namePart',
         text: nameVal,
       },
       argument,
     );
   }
-  {
-    id: string;
-    parent: PresnoRef;
-    prestype: 'bud';
-    focused: boolean;
-    valid: boolean;
-  };
-  
+
+  const value = argument.value !== null
+    ? enstackForPresentation(argument.value)
+    : enstackForPresentation(
+      {
+        valid: true,
+        presnoIndex: name ? 1 : 0,
+        prestype: 'bud',
+      },
+      argument,
+    );
+
   return {
     syntype: 'argument',
     name,
-    value: presentAndReturnRef(argument.value),
+    value,
   };
 };

@@ -1,5 +1,5 @@
-import type { NamePartPresAttrs } from '../presenter/presno-attrs/name-part-attrs';
+import type { NamePart } from '../presenter/presnos/non-syn-presnos/name-part';
 
 export type NamePartProps = {
-  readonly presno: NamePartPresAttrs;
+  readonly presno: NamePart;
 };

@@ -2,6 +2,6 @@ export type NamePartArgs = {
   // reserved: 'synoRef'
   presnoIndex: number,
   valid: boolean,
-  prestype: 'NamePart',
+  prestype: 'namePart',
   text: string,
 };

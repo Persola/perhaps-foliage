@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
 import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
 
@@ -10,7 +10,7 @@ import type { FunctionCallPresAttrs } from '../types/presentations/presno-attrs/
 export default (
   funkshunCall: FunctionCall,
   state: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): FunctionCallPresAttrs => {
   let name: (null | PresnoRef) = null;
   let callee: (null | PresnoRef) = null;
@@ -27,13 +27,13 @@ export default (
     resolved = true;
 
     if (funkshunCall.callee.relation === 'child') {
-      callee = presentAndReturnRef(funkshunCall.callee);
+      callee = enstackForPresentation(funkshunCall.callee);
     } else {
-      name = presentAndReturnRef(
+      name = enstackForPresentation(
         {
           valid: true,
           presnoIndex: 0,
-          prestype: 'NamePart',
+          prestype: 'namePart',
           text: calleeFuncDef.name,
         },
         funkshunCall,
@@ -44,7 +44,7 @@ export default (
   return {
     syntype: 'functionCall',
     name,
-    argumentz: funkshunCall.argumentz.map(argRef => presentAndReturnRef(argRef)),
+    argumentz: funkshunCall.argumentz.map(argRef => enstackForPresentation(argRef)),
     callee,
     resolved,
   };

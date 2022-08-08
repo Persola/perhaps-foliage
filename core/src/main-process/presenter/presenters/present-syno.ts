@@ -4,15 +4,15 @@ import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../types/state-selector';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
-import type { Presno } from '../../../types/presenter/presno';
-import type { PresentAndReturnRef } from '../../../types/presenter/present-and-return-ref';
+import type { Presno } from '../../../types/presenter/presnos/presno';
+import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 
 export default (
   synoId: SynoId,
   state: StateSelector,
   integration: MainsidePresentLangInt,
   focus: Focus,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): Presno => {
   const syno = state.getSyno(synoId);
 
@@ -33,7 +33,7 @@ export default (
   const presentation = presenter(
     syno,
     state,
-    presentAndReturnRef,
+    enstackForPresentation,
   );
 
   const parent = (

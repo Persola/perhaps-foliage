@@ -3,7 +3,7 @@ import * as React from 'react';
 import NamePart from './presnos/name-part';
 import Bud from './presnos/bud';
 
-import type { Presno } from '../../../types/presenter/presno';
+import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { PresnoRendererProps } from '../../../types/renderer/presno-renderer-props';
 
 export default (props: PresnoRendererProps): JSX.Element => {
@@ -11,7 +11,7 @@ export default (props: PresnoRendererProps): JSX.Element => {
   const presno: Presno = getPresno(synoId);
 
   let SyntypeRenderer;
-  if (presno.prestype === 'NamePart') {
+  if (presno.prestype === 'namePart') {
     SyntypeRenderer = NamePart;
   } else if (presno.prestype === 'bud') {
     SyntypeRenderer = Bud;
@@ -31,5 +31,5 @@ export default (props: PresnoRendererProps): JSX.Element => {
     );
   }
 
-  throw new Error(`Missing renderer for syntype '${presno.syntype}'`);
+  throw new Error(`Missing renderer for syntype '${presno.prestype}'`);
 };

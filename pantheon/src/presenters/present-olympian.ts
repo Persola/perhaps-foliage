@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { Olympian } from '../types/synos/olympian';
 import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';
@@ -7,13 +7,13 @@ import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olym
 export default (
   olympian: Olympian,
   _: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): OlympianPresAttrs => {
-  const name = presentAndReturnRef(
+  const name = enstackForPresentation(
     {
       valid: true,
       presnoIndex: 0,
-      prestype: 'NamePart',
+      prestype: 'namePart',
       text: olympian.name,
     },
     olympian,
@@ -24,7 +24,7 @@ export default (
     name,
     child: (
       olympian.child
-        ? presentAndReturnRef(olympian.child)
+        ? enstackForPresentation(olympian.child)
         : null
     ),
   };

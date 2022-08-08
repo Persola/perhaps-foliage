@@ -1,4 +1,4 @@
-import type { Presno } from '../types/presenter/presno';
+import type { Presno } from '../types/presenter/presnos/presno';
 import type { PresnoRef } from '../types/presenter/presno-ref';
 
 export default (parentSyno: Presno, attr: string): PresnoRef[] => {

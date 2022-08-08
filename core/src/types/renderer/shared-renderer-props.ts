@@ -1,6 +1,6 @@
 import type { SynoId } from '../syntactic/syno-id';
 import type { PresentLangInt } from '../language-integration/interfaces/complete/present-lang-int';
-import type { Presno } from '../presenter/presno';
+import type { Presno } from '../presenter/presnos/presno';
 import type { PresnoRendererProps } from './presno-renderer-props';
 
 export type SharedRendererProps = {

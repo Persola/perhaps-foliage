@@ -1,19 +1,19 @@
 import type { StateSelector } from '../../../types/state-selector';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { Presno } from '../../../types/presenter/presno';
+import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { PresnoArgs } from '../../../types/presenter/presno-args';
-import type { PresentAndReturnRef } from '../../../types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 
 import presentSyno from './present-syno';
-import presentNonSynPresno from './present-non-syn-presno';
+import presentNonSyno from './present-non-syno';
 
 export default (
   presnoArgs: PresnoArgs,
   state: StateSelector,
   integration: MainsidePresentLangInt,
   focus: Focus,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): Presno => {
   if (presnoArgs.type === 'synPresno') {
     return presentSyno(
@@ -21,12 +21,12 @@ export default (
       state,
       integration,
       focus,
-      presentAndReturnRef,
+      enstackForPresentation,
     );
   }
 
   if (presnoArgs.type === 'nonSynPresno') {
-    return presentNonSynPresno(presnoArgs, focus);
+    return presentNonSyno(presnoArgs, focus);
   }
 
   throw new Error('bad presno prop');

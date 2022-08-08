@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { PresentAndReturnRef } from 'perhaps-foliage/dist/types/presenter/present-and-return-ref';
+import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { FunctionParameter } from '../types/synos/function-parameter';
 import type { FunctionParameterPresAttrs } from '../types/presentations/presno-attrs/function-parameter-attrs';
@@ -7,13 +7,13 @@ import type { FunctionParameterPresAttrs } from '../types/presentations/presno-a
 export default (
   parameter: FunctionParameter,
   _: StateSelector,
-  presentAndReturnRef: PresentAndReturnRef,
+  enstackForPresentation: EnstackForPresentation,
 ): FunctionParameterPresAttrs => {
-  const name = presentAndReturnRef(
+  const name = enstackForPresentation(
     {
       valid: true,
       presnoIndex: 0,
-      prestype: 'NamePart',
+      prestype: 'namePart',
       text: parameter.name,
     },
     parameter,
