@@ -5,7 +5,7 @@ export default {
     'bubble-even',
     'function-parameter',
   ],
-  childPresnos: [
+  content: [
     'slot',
   ],
 };

@@ -46,10 +46,15 @@ const nonPresnoGenerator = (
 ): ComponentOrVectorComponent => {
   return (parentProps: SharedRendererProps) => {
     const { presno } = parentProps;
+    const textVal = presno[instruction.attr];
+
+    if (textVal === null) {
+      return null;
+    }
 
     return React.createElement(
       Text,
-      { text: String(presno[instruction.attr]) },
+      { text: String(textVal) },
     );
   };
 };

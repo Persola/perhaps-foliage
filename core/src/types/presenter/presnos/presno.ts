@@ -7,7 +7,7 @@ export type SynPresno = Readonly<{
   id: string;
   parent: (null | PresnoRef);
   prestype: string;
-  [index: string]: PresnoAttrVal;
+  [prestypeSpecificPresnoAttr: string]: PresnoAttrVal;
 }>;
 
 export type NonSynPresno = (

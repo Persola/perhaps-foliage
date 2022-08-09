@@ -40,7 +40,10 @@ const presnoRef = (presnoArgs: PresnoArgs) => {
   throw new Error('Bad presno args');
 };
 
-export default (stack: PresnoArgs[]): EnstackForPresentation => {
+export default (
+  stack: PresnoArgs[],
+  stub?: true,
+): EnstackForPresentation => {
   function enstackForPresentation(// syn presno
     synoRef: (null | SynoRef), // null when syno has null in a key for synoRefs
   ): PresnoRef;
@@ -61,7 +64,10 @@ export default (stack: PresnoArgs[]): EnstackForPresentation => {
         ? synPresnoArgs(synoRefOrArgs as SynoRef)
         : nonSynPresnoArgs(synoRefOrArgs as NonSynPresnoArgs['presnoArgs'], parentOrUndefined)
     );
-    stack.push(presnoArgs);
+
+    if (!stub) {
+      stack.push(presnoArgs);
+    }
 
     return presnoRef(presnoArgs);
   }

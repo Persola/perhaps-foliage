@@ -1,5 +1,5 @@
 import presentationNode from './presentation-node';
-import createenstackForPresentation from './create-enstack-for-presentation';
+import createEnstackForPresentation from './create-enstack-for-presentation';
 import presnoId from './presno-id';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -23,7 +23,7 @@ export default (
     synoId: renderEntrySynoId,
   };
   const toPresentStack: PresnoArgs[] = [rootPrensoArgs];
-  const enstackForPresentation = createenstackForPresentation(toPresentStack);
+  const enstackForPresentation = createEnstackForPresentation(toPresentStack);
 
   while (toPresentStack.length > 0) {
     const args = toPresentStack.pop();

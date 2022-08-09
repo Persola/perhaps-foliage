@@ -2,7 +2,7 @@ export default {
   classes: [
     'function-definition',
   ],
-  childPresnos: [
+  content: [
     'name',
     'parameters',
     'body',

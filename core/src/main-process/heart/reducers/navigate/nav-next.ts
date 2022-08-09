@@ -3,14 +3,16 @@ import nextChar from './next/char';
 
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
+import type { PresnoRef } from '../../../../types/presenter/presno-ref';
 import type { Syno } from '../../../../types/syntactic/syno';
 import type { Warn } from '../../../../types/cross-context/warn';
+import type { MainsideLangInt } from '../../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 
 export default (
   state: StateSelector,
   draftFocus: MutableFocus,
   warnUser: Warn,
+  integration: MainsideLangInt,
 ): void => {
   if (state.inText()) {
     nextChar(state, draftFocus, warnUser);
@@ -30,18 +32,18 @@ export default (
     oldParent = state.getSyno(state.focusedSyno().parent.id);
   }
 
-  const siblingRefz = getChildPresnoRefs(oldParent, state);
+  const siblingRefz = getChildPresnoRefs(oldParent, state, integration);
 
   if (siblingRefz.length <= 0) {
     throw new Error('navigate failed; parent has no children!?');
   }
 
-  const oldFocusedPresnoBirthOrder = siblingRefz.findIndex(siblingRef => {
-    if (siblingRef.synoRef === true) {
+  const oldFocusedPresnoBirthOrder = siblingRefz.findIndex((siblingRef, sibIndex) => {
+    if (state.synoMap()[siblingRef.id]) {
       return siblingRef.id === state.focusedSynoId();
     }
 
-    return siblingRef.index === state.focusedPresnoIndex();
+    return sibIndex === state.focusedPresnoIndex();
   });
 
   if (oldFocusedPresnoBirthOrder === -1) {
@@ -51,14 +53,15 @@ export default (
   } else if (oldFocusedPresnoBirthOrder >= siblingRefz.length - 1) {
     warnUser('Ignoring navigation to next sibling: already focused on last sibling');
   } else {
-    const newFocusPresnoRef: ChildPresnoRef = siblingRefz[oldFocusedPresnoBirthOrder + 1];
+    const newFocusPresnoIndex = oldFocusedPresnoBirthOrder + 1;
+    const newFocusPresnoRef: PresnoRef = siblingRefz[newFocusPresnoIndex];
 
-    if (newFocusPresnoRef.synoRef === true) {
+    if (state.synoMap()[newFocusPresnoRef.id]) {
       draftFocus.synoId = newFocusPresnoRef.id;
       draftFocus.presnoIndex = null;
     } else {
       draftFocus.synoId = oldParent.id;
-      draftFocus.presnoIndex = newFocusPresnoRef.index;
+      draftFocus.presnoIndex = newFocusPresnoIndex;
     }
   }
 };

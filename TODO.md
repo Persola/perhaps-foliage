@@ -1,4 +1,7 @@
 **next**
+* presnos for real
+  * focus on presnoId not synoId
+  * revise non-syno presentation
 * editing
   * add holes for required children
     * appear whenever a required child is missing
@@ -8,29 +11,7 @@
     * just the circle
     * correct color for child edge
     * is presno (can be focused)
-  1. buds are navigable
-      * requires getChildPresnoRefs to mirror presenters...
-      * so instead need to fix getChildPresnoRefs problem, options:
-        * have getChildPresnoRefs call presenters
-          * regenerating just to read in reducer!?
-          * but only for like a few presnos per command
-          * functional style justifies it?
-          * method:
-            * inject stub enstackForPresentation to avoid rendering subtree
-            * then just filter presno down to child refs
-        * store presentation
   2. required children in grammar/extract bud from integration presenters
-
-**testing**
-* try rendering everything that should already be renderable
-
-**bugs**
-
-**maintenance**
-* in dev mode (only mode), validate syntree after every update
-  * to test if syntrees are closed under available editing commands
-* focus should only need presnoId now?
-* make name presnos internal
 * extract base presenter
   * ensures:
     * one synpresno per presented syno
@@ -41,10 +22,22 @@
     * but keep rendererAttrs because there will be need for config later
       * e.g. what classes to apply for custom flags on presnos
     * see LANGUAGE_INTEGRATION_SPEC
-  * this change should also fix getChildPresnoRefs bullshit
-    * dedup logic
-      * at minimum, extract from both
-      * maybe start storing prestree?
+    * to make this reliable, disallow and invalidate presno attr keys that
+      * aren't string (of course)
+      * are strings of integers as defined by the property order logic
+
+**testing**
+* try rendering everything that should already be renderable
+
+**bugs**
+
+**maintenance**
+* replace custom invalid styles with overlayed background-image property
+* in dev mode (only mode), validate syntree after every update
+  * to test if syntrees are closed under available editing commands
+* make name presnos internal
+* extract common logic between editor renderers and integration (generated) renderers
+  * especially focused and valid flags
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
@@ -65,7 +58,6 @@
       * at this point mostly just creating package boundary between code views
         * need to pass TreeId with commands
         * after store update decide which trees to present (even though react would handle it fine)
-* wrap syntrees in file with metadata (root ID)
 * force actions to go through an interface (to become API) (by encapsulating store?)
   * so there can be a CLI or other kinds of APIs later, not just GUI
   * redundant with LSP?
@@ -85,6 +77,8 @@
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
 **new functionality**
+* extensions/plugins
+  * text hosts should be model, since it's a bit specific
 * VSCode extension
   * implement undo/redo
     * immer patches relevant?
@@ -134,13 +128,7 @@
     * [_saliva_] singular arguments
 * [_saliva_] add Nothing type
   * replace nulls in type data structures
-* add ancestor context presenter API to support context-sensative grammars but make it explicit
-  * context would be provided in presentation, not done in renderer
-  * nope
-    * presentational scope isn't syntactic scope
-    * we should only support context-free grammars probably
-    * but presenters need access to things even wider than ancestors
-      * at least the entire editee graph should be accessible, e.g. function definition reference
+* **?** make presenters opt into the scope of the syntree they read from?
 * [_saliva_] make types synos (beneath default visiblity level)
 * [_saliva_] wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 
@@ -173,6 +161,7 @@
   * e.g. navigate into dependency
 * AST format
   * current format issues
+    * wrap syntrees in file with metadata (root ID)
     * **?** AST format stores all refs in one object, relation type is property of ref
   * incremental/modular format using Cue?
   * current custom format is
@@ -204,10 +193,8 @@
     * runs every update
   * diffing algorithm for syntree -> prestree transformation?
     * has same problem with prestree -> UI with one layer change at the top
-  * how to read presentation in reducers (see getChildPresnoRefs clusterfuck)
-    * just regenerate the part you need using presenters
-      * possibly presenters need restructering to allow piece by piece presenting
-      * I guess not that expensive since it should only be small bits?
+  * how to read presentation in reducers
+    * currently calling presenters in reducers
     * store presentation?
       * because if there are non-syntactic presnos we need to read them in reducers
         * well, if presnos remain shallow they're easy to regen piecemeal from parent synos

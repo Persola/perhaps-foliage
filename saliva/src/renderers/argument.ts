@@ -4,8 +4,8 @@ export default {
     'bubble-even',
     'argument',
   ],
-  childPresnos: [
-    'name',
+  content: [
+    { attr: 'name', as: 'string' },
     'value',
   ],
 };

@@ -90,3 +90,6 @@
 * tree diffing
   * maybe:
       * https://ieeexplore.ieee.org/document/4656419?arnumber=4656419
+* related projects
+  * (I'm aware of many but want to organize thoughts about them)
+  * [MPS](https://www.jetbrains.com/help/mps/language-definition.html)

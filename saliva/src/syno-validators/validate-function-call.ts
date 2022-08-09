@@ -25,13 +25,7 @@ export default (
     argumentParameterMismatch(
       calleeFuncDef,
       funkshunCall.argumentz.map(argRef => {
-        const arg = state.getSyno(argRef.id);
-
-        if (arg.syntype !== 'argument') {
-          throw new Error('wrong type from synomap (flow)');
-        }
-
-        return (arg as Argument);
+        return state.getSyno(argRef.id) as Argument;
       }),
       state,
     )

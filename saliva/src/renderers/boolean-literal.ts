@@ -5,7 +5,7 @@ export default {
     'bubble-even',
     'boolean-literal',
   ],
-  childPresnos: [
+  content: [
     { attr: 'value', as: 'string' },
   ],
 };

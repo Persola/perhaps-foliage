@@ -2,13 +2,15 @@ import getChildPresnoRefs from './get-child-presno-refs';
 
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
+import type { PresnoRef } from '../../../../types/presenter/presno-ref';
 import type { Warn } from '../../../../types/cross-context/warn';
+import type { MainsideLangInt } from '../../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 
 export default (
   state: StateSelector,
   draftFocus: MutableFocus,
   warnUser: Warn,
+  integration: MainsideLangInt,
 ): void => {
   if (state.inText()) {
     warnUser('cannot navigate down: editing text');
@@ -21,16 +23,16 @@ export default (
     return;
   }
 
-  const childPresnoRefs = getChildPresnoRefs(state.focusedSyno(), state);
+  const childPresnoRefs = getChildPresnoRefs(state.focusedSyno(), state, integration);
 
   if (childPresnoRefs.length === 0) {
     warnUser('ignoring navigation inwards: no children');
     return;
   }
 
-  const newFocusPresnoRef: ChildPresnoRef = childPresnoRefs[0];
+  const newFocusPresnoRef: PresnoRef = childPresnoRefs[0];
 
-  if (newFocusPresnoRef.synoRef === true) {
+  if (state.synoMap()[newFocusPresnoRef.id]) {
     draftFocus.synoId = newFocusPresnoRef.id;
     return;
   }

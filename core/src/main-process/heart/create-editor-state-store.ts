@@ -150,6 +150,7 @@ export default (
             (action as Navigate),
             draftState,
             warnUser,
+            integration,
           );
           break;
         }

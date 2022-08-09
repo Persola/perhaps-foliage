@@ -14,19 +14,9 @@ export default (
   if (!argument.parameter) {
     name = null;
   } else {
-    const nameVal: string = (
+    name = (
       state.getSyno(argument.parameter.id) as FunctionParameter
     ).name;
-
-    name = enstackForPresentation(
-      {
-        valid: true,
-        presnoIndex: 0,
-        prestype: 'namePart',
-        text: nameVal,
-      },
-      argument,
-    );
   }
 
   const value = argument.value !== null
@@ -34,7 +24,7 @@ export default (
     : enstackForPresentation(
       {
         valid: true,
-        presnoIndex: name ? 1 : 0,
+        presnoIndex: 0,
         prestype: 'bud',
       },
       argument,

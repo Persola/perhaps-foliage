@@ -1,52 +1,51 @@
-import childSynos from '../../../../syntree-utils/read-node/child-synos';
+import createEnstackForPresentation from '../../../presenter/presenters/create-enstack-for-presentation';
+import presentationNode from '../../../presenter/presenters/presentation-node';
 
-import type { ChildPresnoRef } from '../../../../types/child-presno-ref';
 import type { Syno } from '../../../../types/syntactic/syno';
 import type { StateSelector } from '../../../../types/state-selector';
-import type { SynoRef } from '../../../../types/syntactic/syno-ref';
-
-const genNamePresnos = (syno: Syno): ReadonlyArray<ChildPresnoRef> => [
-  {
-    synoRef: false,
-    parent: {
-      synoRef: true,
-      id: syno.id,
-      relation: 'parent',
-    },
-    index: 0, // once names are divided into parts, need to find all of them
-  },
-];
+import type { MainsideLangInt } from '../../../../types/language-integration/interfaces/mainside/mainside-lang-int';
+import type { PresnoRef } from '../../../../types/presenter/presno-ref';
+import type { PresnoArgs } from '../../../../types/presenter/presno-args';
 
 export default (
   syno: Syno,
   state: StateSelector,
-): ReadonlyArray<ChildPresnoRef> => {
-  const { textHostRef } = state.grammar()[syno.syntype].nonTreeRefs;
-  let nameFocusable;
+  integration: MainsideLangInt,
+): PresnoRef[] => {
+  const stubEnstack = createEnstackForPresentation([], true);
 
-  if (!textHostRef) {
-    nameFocusable = syno.name && !state.isPrimitive(syno.id);
-  } else if (!syno[textHostRef]) {
-    nameFocusable = false;
-  } else {
-  // Raised because we don't validate that synos have textHostRef attrs matching their grammars
-  // @ts-ignore
-    nameFocusable = !state.isPrimitive(syno[textHostRef].id);
+  const synoPrensoArgs: PresnoArgs = {
+    type: 'synPresno',
+    synoId: syno.id,
+  };
+
+  const presno = presentationNode(
+    synoPrensoArgs,
+    state,
+    integration,
+    state.focus(),
+    stubEnstack,
+  );
+
+  const childPresnoRefs = [];
+
+  for (const [attrKey, attrVal] of Object.entries(presno)) {
+    if (
+      typeof attrVal === 'object'
+      && attrVal !== null
+      && 'presnoRef' in attrVal
+      && attrVal.presnoRef === true
+      && attrKey !== 'parent'
+    ) {
+      childPresnoRefs.push(attrVal);
+    } else if (
+      typeof attrVal === 'object'
+      && attrVal !== null
+      && attrVal.constructor === Array
+    ) {
+      childPresnoRefs.push(...attrVal);
+    }
   }
 
-  let namePresnos;
-
-  if (nameFocusable) {
-    namePresnos = genNamePresnos(syno);
-  } else {
-    namePresnos = [];
-  }
-
-  const childSynoRefs: ReadonlyArray<ChildPresnoRef> = childSynos(
-    syno,
-  ) as SynoRef[];
-  return [
-    ...namePresnos, // put all name parts first (for now)
-    ...childSynoRefs,
-  ];
+  return childPresnoRefs;
 };

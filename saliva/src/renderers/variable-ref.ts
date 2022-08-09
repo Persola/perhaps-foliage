@@ -5,7 +5,7 @@ export default {
     'bubble-even',
     'variable-ref',
   ],
-  childPresnos: [
-    'name',
+  content: [
+    { attr: 'name', as: 'string' },
   ],
 };

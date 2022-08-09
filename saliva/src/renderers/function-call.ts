@@ -2,9 +2,9 @@ export default {
   classes: [
     'function-call',
   ],
-  childPresnos: [
-    'name',
+  content: [
+    { attr: 'name', as: 'string' },
     'argumentz',
-    'callee',
+    'childCallee',
   ],
 };

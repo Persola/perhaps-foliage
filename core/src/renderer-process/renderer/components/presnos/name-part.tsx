@@ -12,6 +12,7 @@ export default (props: NamePartProps): JSX.Element => {
     presno: {
       namePart,
       focused,
+      valid,
       charFocused,
     },
   } = props;
@@ -20,6 +21,7 @@ export default (props: NamePartProps): JSX.Element => {
     'code-text',
     'same-line',
     focused ? 'focused' : 'unfocused',
+    valid ? '' : 'invalid',
   ];
 
   return (

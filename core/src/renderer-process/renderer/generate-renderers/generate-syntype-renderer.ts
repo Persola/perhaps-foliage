@@ -14,7 +14,7 @@ export default (
 ): Renderer => {
   const {
     classes: syntypeClasses,
-    childPresnos: childPresnosInstructions,
+    content: childPresnosInstructions,
   } = attrs;
 
   const childComponentWrappers: ComponentOrVectorComponent[] = generateChildComponentWrappers(

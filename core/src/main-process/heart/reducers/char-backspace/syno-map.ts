@@ -9,13 +9,13 @@ export default (
   draftSynoMap: MutableSynoMap,
   latestEdit: UnistlikeEdit[],
 ): void => {
-  const { textHostRef } = state.grammar()[state.focusedSyno().syntype].nonTreeRefs;
-  let textHostSyno: Syno;
+  const { textHost } = state.grammar()[state.focusedSyno().syntype].nonTreeRefs;
 
-  if (!textHostRef) {
+  let textHostSyno: Syno;
+  if (!textHost) {
     textHostSyno = state.focusedSyno();
   } else {
-    const ref = state.focusedSyno()[textHostRef] as SynoRef;
+    const ref = state.focusedSyno()[textHost] as SynoRef;
     textHostSyno = state.getSyno(ref.id);
   }
 

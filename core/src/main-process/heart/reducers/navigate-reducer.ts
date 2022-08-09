@@ -7,6 +7,7 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { Navigate } from '../../../types/actions/navigate';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
+import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 
 export default (
@@ -14,6 +15,7 @@ export default (
   action: Navigate,
   draftState: MutableEditorState,
   warnUser: Warn,
+  integration: MainsideLangInt,
 ): void => {
   if (state.integrationLoaded() === false) {
     warnUser('Ignoring NAVIGATE action: no integration loaded');
@@ -35,17 +37,17 @@ export default (
     }
 
     case 'in': {
-      navIn(state, focus, warnUser);
+      navIn(state, focus, warnUser, integration);
       break;
     }
 
     case 'prev': {
-      navPrev(state, focus, warnUser);
+      navPrev(state, focus, warnUser, integration);
       break;
     }
 
     case 'next': {
-      navNext(state, focus, warnUser);
+      navNext(state, focus, warnUser, integration);
       break;
     }
 

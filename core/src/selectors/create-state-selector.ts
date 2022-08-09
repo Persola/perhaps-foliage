@@ -5,7 +5,7 @@ import type { Syno } from '../types/syntactic/syno';
 export default (editorState: EditorState): StateSelector => {
   /*
   The state selector is way most of the app accesses state. The 'state' property should not be
-  modified anywhere except in app.js, which keeps it in sync on state update
+  modified anywhere except in initialize-main-process.ts, which keeps it in sync on state update
  */
   const languageNeutralSelectors = {
   // state

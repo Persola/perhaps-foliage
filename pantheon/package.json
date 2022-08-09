@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage-pantheon",
   "displayName": "Perhaps Foliage Pantheon",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Pantheon language integration for Perhaps Foliage",
   "author": "Luke Persola",
   "scripts": {

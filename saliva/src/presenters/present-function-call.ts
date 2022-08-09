@@ -12,8 +12,8 @@ export default (
   state: StateSelector,
   enstackForPresentation: EnstackForPresentation,
 ): FunctionCallPresAttrs => {
-  let name: (null | PresnoRef) = null;
-  let callee: (null | PresnoRef) = null;
+  let name: (null | string) = null;
+  let childCallee: (null | PresnoRef) = null;
   let resolved = false;
 
   if (funkshunCall.callee) {
@@ -22,30 +22,22 @@ export default (
     if (calleeSyno.syntype !== 'functionDefinition') {
       throw new Error('new type?');
     }
-
     const calleeFuncDef = calleeSyno as FunctionDefinition;
+
     resolved = true;
 
     if (funkshunCall.callee.relation === 'child') {
-      callee = enstackForPresentation(funkshunCall.callee);
+      childCallee = enstackForPresentation(funkshunCall.callee);
     } else {
-      name = enstackForPresentation(
-        {
-          valid: true,
-          presnoIndex: 0,
-          prestype: 'namePart',
-          text: calleeFuncDef.name,
-        },
-        funkshunCall,
-      );
+      name = calleeFuncDef.name;
     }
   }
 
   return {
     syntype: 'functionCall',
+    resolved,
     name,
     argumentz: funkshunCall.argumentz.map(argRef => enstackForPresentation(argRef)),
-    callee,
-    resolved,
+    childCallee,
   };
 };
