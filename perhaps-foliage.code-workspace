@@ -4,6 +4,9 @@
 			"path": "."
 		},
 		{
+			"path": "core"
+		},
+		{
 			"path": "web"
 		},
 		{
@@ -13,18 +16,13 @@
 			"path": "vscode"
 		},
 		{
-			"path": "saliva"
-		},
-		{
 			"path": "pantheon"
 		},
 		{
-			"path": "vscode-saliva"
+			"path": "saliva"
 		},
 		{
-			"path": "core"
+			"path": "vscode-saliva"
 		}
-	],
-	"settings": {
-	}
+	]
 }
