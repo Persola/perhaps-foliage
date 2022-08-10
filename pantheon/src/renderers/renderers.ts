@@ -1,22 +1,22 @@
 export default {
   titan: {
-    classes: [
+    htmlClasses: [
       'same-line',
       'bubble-even',
       'titan',
     ],
-    childPresnos: [
+    content: [
       'name',
       'child',
     ],
   },
   olympian: {
-    classes: [
+    htmlClasses: [
       'same-line',
       'bubble-even',
       'olympian',
     ],
-    childPresnos: [
+    content: [
       'name',
       'child',
     ],

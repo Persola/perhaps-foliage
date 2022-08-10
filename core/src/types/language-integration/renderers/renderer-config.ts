@@ -1,6 +1,6 @@
 import type { childPresnoInstruction } from './child-presno-instruction';
 
-export type RendererAttrs = {
-  classes: string[];
+export type RendererConfig = {
+  htmlClasses: string[];
   content: childPresnoInstruction[];
 };

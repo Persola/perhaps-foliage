@@ -3,7 +3,7 @@ import type { SynoMap } from '../../../syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from '../../key-to-new-syno-attrs';
 import type { Interpret } from '../../interpret';
 import type { SynoValidators } from '../../syno-validators';
-import type { Presenters } from '../../presenters';
+import type { PresenterProvisions } from '../../presenters/presenters-provisions';
 import type { Renderers } from '../../../renderer/renderers';
 
 export type PresentLangInt = {
@@ -13,7 +13,7 @@ export type PresentLangInt = {
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
   interpret: Interpret | null;
   synoValidators: SynoValidators;
-  presenters: Presenters;
+  presenters: PresenterProvisions;
   renderers: Renderers;
   styles: string;
 };

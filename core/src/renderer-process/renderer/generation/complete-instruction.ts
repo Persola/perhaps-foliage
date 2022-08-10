@@ -1,5 +1,5 @@
-import type { childPresnoInstruction } from '../../../types/language-integration/child-presno-instruction';
-import type { childPresnoFullInstruction } from '../../../types/language-integration/child-presno-full-instruction';
+import type { childPresnoInstruction } from '../../../types/language-integration/renderers/child-presno-instruction';
+import type { childPresnoFullInstruction } from '../../../types/language-integration/renderers/child-presno-full-instruction';
 
 export default (
   instruction: childPresnoInstruction,

@@ -1,4 +1,4 @@
-import type { Presenters } from 'perhaps-foliage/dist/types/language-integration/presenters';
+import type { PresenterProvisions } from 'perhaps-foliage/dist/types/language-integration/presenters/presenters-provisions';
 
 import presentBooleanLiteral from './present-boolean-literal';
 import presentFunctionCall from './present-function-call';
@@ -14,4 +14,4 @@ export default ({
   functionParameter: presentFunctionParameter,
   argument: presentArgument,
   variableRef: presentVariableRef,
-} as Presenters);
+} as PresenterProvisions);

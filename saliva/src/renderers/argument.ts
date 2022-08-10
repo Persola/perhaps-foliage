@@ -1,5 +1,5 @@
 export default {
-  classes: [
+  htmlClasses: [
     'same-line',
     'bubble-even',
     'argument',

@@ -4,8 +4,8 @@ import completeInstruction from './complete-instruction';
 import childComponent from './child-component';
 
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
-import type { childPresnoInstruction } from '../../../types/language-integration/child-presno-instruction';
-import type { childPresnoFullInstruction } from '../../../types/language-integration/child-presno-full-instruction';
+import type { childPresnoInstruction } from '../../../types/language-integration/renderers/child-presno-instruction';
+import type { childPresnoFullInstruction } from '../../../types/language-integration/renderers/child-presno-full-instruction';
 import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
 import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';

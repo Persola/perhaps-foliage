@@ -1,4 +1,4 @@
-import createRenderers from './renderer/generate-renderers';
+import createRenderers from './renderer/generation/generate-renderers';
 import Renderer from './renderer/renderer';
 import updateInputBindings from './update-input-bindings';
 

@@ -3,7 +3,7 @@ import type { SynoMap } from '../../../syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from '../../key-to-new-syno-attrs';
 import type { Interpret } from '../../interpret';
 import type { SynoValidators } from '../../syno-validators';
-import type { Presenters } from '../../presenters';
+import type { Presenters } from '../../../presenter/presenters';
 
 export type MainsidePresentLangInt = {
   id: string;

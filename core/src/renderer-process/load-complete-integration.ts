@@ -1,4 +1,4 @@
-import createRenderers from './renderer/generate-renderers';
+import createRenderers from './renderer/generation/generate-renderers';
 
 import type { CrossContextMessageSender } from '../types/cross-context/cross-context-messaging';
 import type { RendersidePresentLangInt } from '../types/language-integration/interfaces/renderside/renderside-present-lang-int';

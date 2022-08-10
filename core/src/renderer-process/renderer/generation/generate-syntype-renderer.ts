@@ -2,18 +2,18 @@ import * as React from 'react';
 
 import generateChildComponentWrappers from './generate-child-component-wrappers';
 
-import type { RendererAttrs } from '../../../types/language-integration/renderer-attrs';
+import type { RendererConfig } from '../../../types/language-integration/renderers/renderer-config';
 import type { Renderer } from '../../../types/renderer/renderer';
 import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
 import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
 
 export default (
-  attrs: RendererAttrs,
+  attrs: RendererConfig,
   syntypeGrammarEntry: GrammarSyntypeEntry,
 ): Renderer => {
   const {
-    classes: syntypeClasses,
+    htmlClasses,
     content: childPresnosInstructions,
   } = attrs;
 
@@ -30,7 +30,7 @@ export default (
       presno: { focused, valid, id },
     } = props;
 
-    const classes = syntypeClasses.concat([
+    const classes = htmlClasses.concat([
       'syno',
       focused ? 'focused' : 'unfocused',
       valid ? '' : 'invalid',

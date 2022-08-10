@@ -1,5 +1,5 @@
 export default {
-  classes: [
+  htmlClasses: [
     'function-call',
   ],
   content: [

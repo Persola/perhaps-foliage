@@ -5,6 +5,7 @@ import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
 import validateGrammar from './code-loader/validate-grammar';
 import validateGraph from './code-loader/validate-graph';
+import initializePresenters from './presenter/generation/initialize-presenters';
 
 import type { MainsideLangInt } from '../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type {
@@ -45,7 +46,15 @@ export default (
       vscodeParams.initialLangInt.grammar,
       vscodeParams.initialLangInt.id,
     );
-    integration = vscodeParams.initialLangInt;
+    integration = {
+      ...vscodeParams.initialLangInt,
+      ...{
+        presenters: initializePresenters(
+          integration.grammar,
+          integration.presenters,
+        ),
+      },
+    };
   } else {
     integration = {
       id: null,
