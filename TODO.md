@@ -9,7 +9,6 @@
     * just the circle
     * correct color for child edge
     * is presno (can be focused)
-  2. required children in grammar/extract bud from integration presenters
 * extract base presenter
   * ensures:
     * one synpresno per presented syno
@@ -30,6 +29,7 @@
 **bugs**
 
 **maintenance**
+* type presenters better
 * replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands

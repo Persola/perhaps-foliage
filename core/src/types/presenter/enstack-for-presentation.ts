@@ -1,9 +1,7 @@
-import type { SynoRef } from '../syntactic/syno-ref';
-import type { Syno } from '../syntactic/syno';
-import type { NonSynPresnoArgs } from './presno-args/non-syn-presno-args';
 import type { PresnoRef } from './presno-ref';
+import { PresnoArgs } from './presno-args/presno-args';
 
 export type EnstackForPresentation = (
-  synoOrArgs: (SynoRef | NonSynPresnoArgs['nonSynoArgs']),
-  parentOrUndefined?: Syno,
+  presnoIndex: number,
+  presnoArgs: PresnoArgs
 ) => PresnoRef;

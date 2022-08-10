@@ -2,7 +2,7 @@ import type { JSONSchema7Type } from 'json-schema';
 
 import synoRef from './syno-ref';
 
-import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
+import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 
 type ChildRelationEntry = { collection: boolean };
 

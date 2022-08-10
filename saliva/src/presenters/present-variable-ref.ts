@@ -1,5 +1,4 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
 
 import type { VariableRef } from '../types/synos/variable-ref';
 import type { VariableRefPresAttrs } from '../types/presentations/presno-attrs/variable-ref-attrs';
@@ -8,7 +7,6 @@ import type { FunctionParameter } from '../types/synos/function-parameter';
 export default (
   variableRef: VariableRef,
   state: StateSelector,
-  _: EnstackForPresentation,
 ): VariableRefPresAttrs => {
   let name: (null | string) = null;
 
@@ -21,8 +19,11 @@ export default (
   }
 
   return {
-    syntype: 'variableRef',
-    valueSyntype: 'booleanLiteral',
-    name,
+    attrs: {
+      syntype: 'variableRef',
+      valueSyntype: 'booleanLiteral',
+      name,
+    },
+    childPresnoArgs: {},
   };
 };

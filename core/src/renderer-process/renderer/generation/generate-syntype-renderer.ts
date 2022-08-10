@@ -5,7 +5,7 @@ import generateChildComponentWrappers from './generate-child-component-wrappers'
 import type { RendererConfig } from '../../../types/language-integration/renderers/renderer-config';
 import type { Renderer } from '../../../types/renderer/renderer';
 import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
-import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
+import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
 
 export default (

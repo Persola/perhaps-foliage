@@ -1,5 +1,5 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
+import { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 import type { FunctionParameter } from '../types/synos/function-parameter';
 import type { FunctionParameterPresAttrs } from '../types/presentations/presno-attrs/function-parameter-attrs';
@@ -7,21 +7,26 @@ import type { FunctionParameterPresAttrs } from '../types/presentations/presno-a
 export default (
   parameter: FunctionParameter,
   _: StateSelector,
-  enstackForPresentation: EnstackForPresentation,
+  childSynPresnoArgs: Record<string, never>,
 ): FunctionParameterPresAttrs => {
-  const name = enstackForPresentation(
-    {
+  const name: UnindexedNonSynPresnoArgs = {
+    type: 'nonSynPresno',
+    parentId: parameter.id,
+    nonSynoArgs: {
       valid: true,
-      presnoIndex: 0,
       prestype: 'namePart',
       text: parameter.name,
     },
-    parameter,
-  );
+  };
 
   return {
-    syntype: 'functionParameter',
-    slot: name,
-    valueSyntype: parameter.valueSyntype,
+    attrs: {
+      syntype: 'functionParameter',
+      valueSyntype: parameter.valueSyntype,
+    },
+    childPresnoArgs: {
+      slot: name,
+      ...childSynPresnoArgs,
+    },
   };
 };

@@ -1,4 +1,7 @@
 export type BooleanLiteralPresAttrs = {
-  readonly syntype: 'booleanLiteral';
-  readonly value: boolean;
+  attrs: {
+    readonly syntype: 'booleanLiteral';
+    readonly value: boolean;
+    },
+  childPresnoArgs: Record<string, never>,
 };

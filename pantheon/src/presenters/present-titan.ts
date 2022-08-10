@@ -1,5 +1,6 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
+import { SynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/syn-presno-args';
+import { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 import type { Titan } from '../types/synos/titan';
 import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-attrs';
@@ -7,25 +8,25 @@ import type { TitanPresAttrs } from '../types/presentations/presno-attrs/titan-a
 export default (
   titan: Titan,
   _: StateSelector,
-  enstackForPresentation: EnstackForPresentation,
+  childSynPresnoArgs: { child: SynPresnoArgs },
 ): TitanPresAttrs => {
-  const name = enstackForPresentation(
-    {
+  const name: UnindexedNonSynPresnoArgs = {
+    type: 'nonSynPresno',
+    parentId: titan.id,
+    nonSynoArgs: {
       valid: true,
-      presnoIndex: 0,
       prestype: 'namePart',
       text: titan.name,
     },
-    titan,
-  );
+  };
 
   return {
-    syntype: 'titan',
-    name,
-    child: (
-      titan.child
-        ? enstackForPresentation(titan.child)
-        : null
-    ),
+    attrs: {
+      syntype: 'titan',
+    },
+    childPresnoArgs: {
+      name,
+      ...childSynPresnoArgs,
+    },
   };
 };

@@ -6,12 +6,12 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { Presno } from '../../../types/presenter/presnos/presno';
 
 export default (
-  presnoArgs: NonSynPresnoArgs,
+  presnoArgs: NonSynPresnoArgs & { presnoIndex: number },
   focus: Focus,
 ): Presno => {
   const focused = (
     focus.synoId === presnoArgs.parentId
-    && focus.presnoIndex === presnoArgs.nonSynoArgs.presnoIndex
+    && focus.presnoIndex === presnoArgs.presnoIndex
   );
 
   if (presnoArgs.nonSynoArgs.prestype === 'namePart') {

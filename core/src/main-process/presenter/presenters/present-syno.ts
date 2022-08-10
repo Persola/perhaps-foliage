@@ -1,4 +1,5 @@
 import focuses from './focuses';
+import presnoArgsForChildSynos from './presno-args-for-child-synos';
 
 import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../types/state-selector';
@@ -6,6 +7,7 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
+import { PresnoRef } from '../../../types/presenter/presno-ref';
 
 export default (
   synoId: SynoId,
@@ -16,8 +18,8 @@ export default (
 ): Presno => {
   const syno = state.getSyno(synoId);
 
-  const presenter = integration.presenters[syno.syntype];
-  if (!(presenter instanceof Function)) {
+  const integrationPresenter = integration.presenters[syno.syntype];
+  if (!(integrationPresenter instanceof Function)) {
     throw new Error(
       `Language integration missing presenter for syntype '${syno.syntype}'`,
     );
@@ -30,11 +32,32 @@ export default (
     );
   }
 
-  const presentation = presenter(
+  const childSynPresnoArgs = presnoArgsForChildSynos(syno, integration);
+
+  const integrationPresentation = integrationPresenter(
     syno,
     state,
+    childSynPresnoArgs,
     enstackForPresentation,
   );
+
+  const childPresnoRefs: Record<string, (PresnoRef | PresnoRef[])> = {};
+  let ind = 0;
+  Object.entries(integrationPresentation.childPresnoArgs).forEach(entry => {
+    const [key, val] = entry;
+    if (val.constructor !== Array) {
+      // @ts-ignore
+      childPresnoRefs[key] = enstackForPresentation(ind, val);
+      ind += 1;
+    } else {
+      childPresnoRefs[key] = [];
+      for (const args of val) {
+        // @ts-ignore
+        childPresnoRefs[key].push(enstackForPresentation(ind, args));
+        ind += 1;
+      }
+    }
+  });
 
   const parent = (
     syno.parent === null
@@ -46,7 +69,8 @@ export default (
   );
 
   return {
-    ...presentation,
+    ...integrationPresentation.attrs,
+    ...childPresnoRefs,
     ...focuses(focus, syno.id),
     id: syno.id,
     parent,

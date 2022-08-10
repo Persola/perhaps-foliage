@@ -1,7 +1,12 @@
-import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
+import type { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
+import type { SynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/syn-presno-args';
 
 export type TitanPresAttrs = {
-  readonly syntype: 'titan';
-  readonly name: (null | PresnoRef);
-  readonly child: (null | PresnoRef);
+  attrs: {
+    readonly syntype: 'titan';
+  },
+  childPresnoArgs: {
+    readonly name: (null | UnindexedNonSynPresnoArgs);
+    readonly child: (null | SynPresnoArgs);
+  },
 };

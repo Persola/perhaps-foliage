@@ -5,7 +5,7 @@ import type { Syno } from '../../../../types/syntactic/syno';
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MainsideLangInt } from '../../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { PresnoRef } from '../../../../types/presenter/presno-ref';
-import type { PresnoArgs } from '../../../../types/presenter/presno-args';
+import type { PresnoArgs } from '../../../../types/presenter/presno-args/presno-args';
 
 export default (
   syno: Syno,

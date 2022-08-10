@@ -1,9 +1,13 @@
-import type { PresnoRef } from 'perhaps-foliage/dist/types/presenter/presno-ref';
+import type { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 import type { Syntype } from '../../synos/syntype';
 
 export type FunctionParameterPresAttrs = {
-  readonly syntype: 'functionParameter';
-  readonly slot: (null | PresnoRef);
-  readonly valueSyntype: Syntype;
+  attrs: {
+    readonly syntype: 'functionParameter';
+    readonly valueSyntype: Syntype;
+    },
+  childPresnoArgs: {
+    readonly slot: (null | UnindexedNonSynPresnoArgs);
+  },
 };

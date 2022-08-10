@@ -1,16 +1,16 @@
 import * as React from 'react';
 import Text from '../components/vis/text';
 import completeInstruction from './complete-instruction';
-import childComponent from './child-component';
+import childPresnoComponent from './child-presno-component';
 
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
 import type { childPresnoInstruction } from '../../../types/language-integration/renderers/child-presno-instruction';
 import type { childPresnoFullInstruction } from '../../../types/language-integration/renderers/child-presno-full-instruction';
 import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
 import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
-import type { GrammarSyntypeEntry } from '../../../types/grammar/grammar-syntype-entry';
+import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 
-const presnoGenerator = (
+const childPresnoGenerator = (
   instruction: childPresnoFullInstruction,
   isCollection: boolean,
 ): ComponentOrVectorComponent => {
@@ -24,7 +24,7 @@ const presnoGenerator = (
       }
 
       return val.map(childRef => {
-        return childComponent(parentProps, childRef);
+        return childPresnoComponent(parentProps, childRef);
       });
     };
   }
@@ -33,11 +33,19 @@ const presnoGenerator = (
     // @ts-ignore promised by grammar
     const val: (PresnoRef | null) = parentProps.presno[instruction.attr];
 
+    if (val === undefined) {
+      console.warn(
+        `Skipping rendering of syno (${parentProps.presno.id}) attr '${instruction.attr}'`
+        + ' for lack of a child presno reference',
+      );
+      return null;
+    }
+
     if (val === null) {
       return null;
     }
 
-    return childComponent(parentProps, val);
+    return childPresnoComponent(parentProps, val);
   };
 };
 
@@ -63,7 +71,7 @@ export default (
   instructions: childPresnoInstruction[],
   syntypeGrammarEntry: GrammarSyntypeEntry,
 ): ComponentOrVectorComponent[] => {
-  const componentsGenerators = [];
+  const childComponentsGenerators = [];
 
   for (const instruction of instructions) {
     const fullInstruction = completeInstruction(instruction);
@@ -74,15 +82,15 @@ export default (
       // there is a synPresnos per presented syno
       const isCollection = !!(syntypeGrammarEntry.children[fullInstruction.attr]?.collection);
 
-      componentsGenerators.push(
-        presnoGenerator(fullInstruction, isCollection),
+      childComponentsGenerators.push(
+        childPresnoGenerator(fullInstruction, isCollection),
       );
     } else {
-      componentsGenerators.push(
+      childComponentsGenerators.push(
         nonPresnoGenerator(fullInstruction),
       );
     }
   }
 
-  return componentsGenerators;
+  return childComponentsGenerators;
 };

@@ -1,5 +1,6 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
+import { SynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/syn-presno-args';
+import { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/function-definition-attrs';
@@ -7,33 +8,25 @@ import type { FunctionDefPresAttrs } from '../types/presentations/presno-attrs/f
 export default (
   funkshunDef: FunctionDefinition,
   _: StateSelector,
-  enstackForPresentation: EnstackForPresentation,
+  childSynPresnoArgs: { parameters: SynPresnoArgs[], body: SynPresnoArgs },
 ): FunctionDefPresAttrs => {
-  const name = enstackForPresentation(
-    {
+  const name: UnindexedNonSynPresnoArgs = {
+    type: 'nonSynPresno',
+    parentId: funkshunDef.id,
+    nonSynoArgs: {
       valid: true,
-      presnoIndex: 0,
       prestype: 'namePart',
       text: funkshunDef.name,
     },
-    funkshunDef,
-  );
-
-  const body = funkshunDef.body !== null
-    ? enstackForPresentation(funkshunDef.body)
-    : enstackForPresentation(
-      {
-        valid: true,
-        presnoIndex: funkshunDef.parameters.length + 1,
-        prestype: 'bud',
-      },
-      funkshunDef,
-    );
+  };
 
   return {
-    syntype: 'functionDefinition',
-    name,
-    parameters: funkshunDef.parameters.map(paramRef => enstackForPresentation(paramRef)),
-    body,
+    attrs: {
+      syntype: 'functionDefinition',
+    },
+    childPresnoArgs: {
+      name,
+      ...childSynPresnoArgs,
+    },
   };
 };

@@ -9,7 +9,7 @@ import type { MutablePresnoMap } from '../../../types/presenter/presno-map/mutab
 import type { PresnoMap } from '../../../types/presenter/presno-map/presno-map';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';
-import type { PresnoArgs } from '../../../types/presenter/presno-args';
+import type { PresnoArgs } from '../../../types/presenter/presno-args/presno-args';
 
 export default (
   state: StateSelector,

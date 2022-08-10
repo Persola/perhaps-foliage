@@ -10,8 +10,11 @@ export default (
     // enstackForPresentation uneeded
   ) => {
     return {
-      syntype: 'booleanLiteral',
-      value: booleanLiteral.value,
+      attrs: {
+        value: booleanLiteral.value,
+        syntype: 'booleanLiteral',
+      },
+      childPresnoArgs: {},
     };
   };
 };

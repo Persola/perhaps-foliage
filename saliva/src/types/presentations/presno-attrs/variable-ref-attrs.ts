@@ -1,5 +1,8 @@
 export type VariableRefPresAttrs = {
-  readonly syntype: 'variableRef';
-  readonly valueSyntype: 'booleanLiteral';
-  readonly name: (null | string);
+  attrs: {
+    readonly syntype: 'variableRef';
+    readonly valueSyntype: 'booleanLiteral';
+    readonly name: (null | string);
+    },
+  childPresnoArgs: Record<string, never>;
 };

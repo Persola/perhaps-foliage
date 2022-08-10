@@ -53,6 +53,9 @@
       * https://github.com/tree-sitter/tree-sitter/blob/aea35461b1c5c1d47615759080aac1168ce03ec0/lib/include/tree_sitter/api.h
     * not language independant (JS) but kind of cool https://github.com/benjamn/ast-types
     * some more leads: https://tomassetti.me/parsing-in-javascript/
+  * gradual/modular typing/specification
+    * cue or similar math?
+    * [Gradual Typing (Siek & Taha)](http://scheme2006.cs.uchicago.edu/13-siek.pdf)
   * https://webia.lip6.fr/~phw//aGrUM/docs/last/doxygen/d5/dd1/using_graphs.html
   * [Toward an engineering discipline for GRAMMARWARE](https://www.cs.vu.nl/grammarware/agenda/paper.pdf)
   * https://stackoverflow.com/questions/556085/standard-format-for-concrete-and-abstract-syntax-trees

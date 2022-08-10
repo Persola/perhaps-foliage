@@ -1,5 +1,6 @@
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EnstackForPresentation } from 'perhaps-foliage/dist/types/presenter/enstack-for-presentation';
+import { SynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/syn-presno-args';
+import { UnindexedNonSynPresnoArgs } from 'perhaps-foliage/dist/types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 import type { Olympian } from '../types/synos/olympian';
 import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olympian-attrs';
@@ -7,25 +8,25 @@ import type { OlympianPresAttrs } from '../types/presentations/presno-attrs/olym
 export default (
   olympian: Olympian,
   _: StateSelector,
-  enstackForPresentation: EnstackForPresentation,
+  childSynPresnoArgs: { child: SynPresnoArgs },
 ): OlympianPresAttrs => {
-  const name = enstackForPresentation(
-    {
+  const name: UnindexedNonSynPresnoArgs = {
+    type: 'nonSynPresno',
+    parentId: olympian.id,
+    nonSynoArgs: {
       valid: true,
-      presnoIndex: 0,
       prestype: 'namePart',
       text: olympian.name,
     },
-    olympian,
-  );
+  };
 
   return {
-    syntype: 'olympian',
-    name,
-    child: (
-      olympian.child
-        ? enstackForPresentation(olympian.child)
-        : null
-    ),
+    attrs: {
+      syntype: 'olympian',
+    },
+    childPresnoArgs: {
+      name,
+      ...childSynPresnoArgs,
+    },
   };
 };
