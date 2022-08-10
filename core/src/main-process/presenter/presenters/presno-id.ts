@@ -6,7 +6,7 @@ export default (presnoArgs: PresnoArgs): string => {
   }
 
   if (presnoArgs.type === 'nonSynPresno') {
-    return `${presnoArgs.parentId}-${presnoArgs.presnoArgs.prestype}`; // TODO: uniquify
+    return `${presnoArgs.parentId}-${presnoArgs.nonSynoArgs.prestype}`; // TODO: uniquify
   }
 
   throw new Error('Bad presno args');

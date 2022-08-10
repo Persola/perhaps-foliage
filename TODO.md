@@ -1,7 +1,5 @@
 **next**
-* presnos for real
-  * focus on presnoId not synoId
-  * revise non-syno presentation
+* **?** focus on presnoId not synoId
 * editing
   * add holes for required children
     * appear whenever a required child is missing

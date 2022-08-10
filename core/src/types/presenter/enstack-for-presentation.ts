@@ -4,6 +4,6 @@ import type { NonSynPresnoArgs } from './presno-args/non-syn-presno-args';
 import type { PresnoRef } from './presno-ref';
 
 export type EnstackForPresentation = (
-  synoOrArgs: (SynoRef | NonSynPresnoArgs['presnoArgs']),
+  synoOrArgs: (SynoRef | NonSynPresnoArgs['nonSynoArgs']),
   parentOrUndefined?: Syno,
 ) => PresnoRef;

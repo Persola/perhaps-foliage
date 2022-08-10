@@ -7,7 +7,7 @@ export default (
   presnoArgs: NonSynPresnoArgs,
   focused: boolean,
 ): Bud => {
-  const { valid } = presnoArgs.presnoArgs;
+  const { valid } = presnoArgs.nonSynoArgs;
 
   return {
     id: presnoId(presnoArgs),

@@ -17,13 +17,13 @@ const synPresnoArgs = (synoRef: SynoRef): SynPresnoArgs => {
 };
 
 const nonSynPresnoArgs = (
-  args: NonSynPresnoArgs['presnoArgs'],
+  args: NonSynPresnoArgs['nonSynoArgs'],
   parent: Syno,
 ): NonSynPresnoArgs => {
   return {
     type: 'nonSynPresno',
     parentId: parent.id,
-    presnoArgs: args,
+    nonSynoArgs: args,
   };
 };
 
@@ -48,11 +48,11 @@ export default (
     synoRef: (null | SynoRef), // null when syno has null in a key for synoRefs
   ): PresnoRef;
   function enstackForPresentation(// non syn presno
-    presnoArgs: NonSynPresnoArgs['presnoArgs'],
+    presnoArgs: NonSynPresnoArgs['nonSynoArgs'],
     parent: Syno,
   ): PresnoRef;
   function enstackForPresentation(
-    synoRefOrArgs: (SynoRef | NonSynPresnoArgs['presnoArgs']),
+    synoRefOrArgs: (SynoRef | NonSynPresnoArgs['nonSynoArgs']),
     parentOrUndefined?: Syno,
   ): PresnoRef {
     if (synoRefOrArgs === null) {
@@ -62,7 +62,7 @@ export default (
     const presnoArgs: PresnoArgs = (
       isRef(synoRefOrArgs)
         ? synPresnoArgs(synoRefOrArgs as SynoRef)
-        : nonSynPresnoArgs(synoRefOrArgs as NonSynPresnoArgs['presnoArgs'], parentOrUndefined)
+        : nonSynPresnoArgs(synoRefOrArgs as NonSynPresnoArgs['nonSynoArgs'], parentOrUndefined)
     );
 
     if (!stub) {

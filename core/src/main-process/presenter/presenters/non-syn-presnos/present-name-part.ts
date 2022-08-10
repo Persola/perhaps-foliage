@@ -10,7 +10,7 @@ export default (
   focused: boolean,
   focus: Focus,
 ): NamePart => {
-  const { valid } = presnoArgs.presnoArgs;
+  const { valid } = presnoArgs.nonSynoArgs;
 
   return {
     id: presnoId(presnoArgs),
@@ -22,6 +22,6 @@ export default (
     focused,
     charFocused: focused ? focus.charIndex : null,
     valid,
-    namePart: (presnoArgs.presnoArgs as NamePartArgs).text,
+    namePart: (presnoArgs.nonSynoArgs as NamePartArgs).text,
   };
 };

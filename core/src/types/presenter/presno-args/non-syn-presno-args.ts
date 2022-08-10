@@ -5,7 +5,7 @@ import type { BudArgs } from './bud-args';
 export type NonSynPresnoArgs = {
   type: 'nonSynPresno',
   parentId: SynoId,
-  presnoArgs: (
+  nonSynoArgs: (
     NamePartArgs
     | BudArgs
   ),

@@ -11,14 +11,14 @@ export default (
 ): Presno => {
   const focused = (
     focus.synoId === presnoArgs.parentId
-    && focus.presnoIndex === presnoArgs.presnoArgs.presnoIndex
+    && focus.presnoIndex === presnoArgs.nonSynoArgs.presnoIndex
   );
 
-  if (presnoArgs.presnoArgs.prestype === 'namePart') {
+  if (presnoArgs.nonSynoArgs.prestype === 'namePart') {
     return presentNamePart(presnoArgs, focused, focus);
   }
 
-  if (presnoArgs.presnoArgs.prestype === 'bud') {
+  if (presnoArgs.nonSynoArgs.prestype === 'bud') {
     return presentBud(presnoArgs, focused);
   }
 
