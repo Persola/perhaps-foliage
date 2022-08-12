@@ -29,6 +29,8 @@
 **bugs**
 
 **maintenance**
+* syntype -> prestype in presenters
+* extract integration loading from init scripts and load-complete
 * type presenters better
 * replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update

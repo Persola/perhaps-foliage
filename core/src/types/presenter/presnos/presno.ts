@@ -1,5 +1,5 @@
 import type { PresnoRef } from '../presno-ref';
-import type { PresnoAttrVal } from './presno-attr-val';
+import type { PresnoAttrVal } from './presno-attrs';
 import type { Bud } from './non-syn-presnos/bud';
 import type { NamePart } from './non-syn-presnos/name-part';
 

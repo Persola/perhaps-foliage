@@ -7,9 +7,17 @@ type Simple = (
   | string
 );
 
-export type PresnoAttrVal = (
+export type PresnoNonChildAttrVal = (
   Simple
   | Record<string, Simple>
+);
+
+export type PresnoChildAttrVal = (
   | PresnoRef
   | PresnoRef[]
+);
+
+export type PresnoAttrVal = (
+  | PresnoNonChildAttrVal
+  | PresnoChildAttrVal
 );
