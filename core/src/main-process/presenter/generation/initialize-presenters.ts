@@ -1,4 +1,4 @@
-import generateSyntypePresenter from './generation/generate-syntype-presenter';
+import generateSyntypePresenter from './generate-syntype-presenter';
 
 import { Grammar } from '../../../types/grammar/grammar';
 import { PresenterProvisions } from '../../../types/language-integration/presenters/presenters-provisions';

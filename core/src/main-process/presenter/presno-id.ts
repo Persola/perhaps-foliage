@@ -1,4 +1,4 @@
-import type { PresnoArgs } from '../../../types/presenter/presno-args/presno-args';
+import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 
 export default (presnoArgs: PresnoArgs): string => {
   if (presnoArgs.type === 'synPresno') {

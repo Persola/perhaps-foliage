@@ -1,7 +1,7 @@
-import type { PresnoNonChildAttrInstruction } from '../../../../types/language-integration/presenters/presno-non-child-attr-instruction';
-import type { PresnoNonChildAttrFullInstruction } from '../../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
-import type { PresnoChildAttrInstruction } from '../../../../types/language-integration/presenters/presno-child-attr-instruction';
-import type { PresnoChildAttrFullInstruction } from '../../../../types/language-integration/presenters/presno-child-attr-full-instruction';
+import type { PresnoNonChildAttrInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-instruction';
+import type { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
+import type { PresnoChildAttrInstruction } from '../../../types/language-integration/presenters/presno-child-attr-instruction';
+import type { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-child-attr-full-instruction';
 
 export function completeAttrInstruction(
   instruction: PresnoNonChildAttrInstruction,

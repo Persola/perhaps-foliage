@@ -1,7 +1,7 @@
 import presnoId from '../presno-id';
 
-import type { Bud } from '../../../../types/presenter/presnos/non-syn-presnos/bud';
-import { NonSynPresnoArgs } from '../../../../types/presenter/presno-args/non-syn-presno-args';
+import type { Bud } from '../../../types/presenter/presnos/non-syn-presnos/bud';
+import { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
 
 export default (
   presnoArgs: NonSynPresnoArgs,

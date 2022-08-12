@@ -1,9 +1,9 @@
 import presnoId from '../presno-id';
 
-import type { NamePart } from '../../../../types/presenter/presnos/non-syn-presnos/name-part';
-import { Focus } from '../../../../types/editor-state/focus';
-import { NonSynPresnoArgs } from '../../../../types/presenter/presno-args/non-syn-presno-args';
-import { NamePartArgs } from '../../../../types/presenter/presno-args/name-part-args';
+import type { NamePart } from '../../../types/presenter/presnos/non-syn-presnos/name-part';
+import { Focus } from '../../../types/editor-state/focus';
+import { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
+import { NamePartArgs } from '../../../types/presenter/presno-args/name-part-args';
 
 export default (
   presnoArgs: NonSynPresnoArgs,

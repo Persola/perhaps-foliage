@@ -1,9 +1,9 @@
 import presnoId from './presno-id';
 
-import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
-import type { PresnoRef } from '../../../types/presenter/presno-ref';
-import type { PresnoArgs } from '../../../types/presenter/presno-args/presno-args';
-import { UnindexedPresnoArgs } from '../../../types/presenter/presno-args/unindexed-presno-args';
+import type { EnstackForPresentation } from '../../types/presenter/enstack-for-presentation';
+import type { PresnoRef } from '../../types/presenter/presno-ref';
+import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
+import { UnindexedPresnoArgs } from '../../types/presenter/presno-args/unindexed-presno-args';
 
 const presnoRef = (presnoArgs: PresnoArgs) => {
   return {

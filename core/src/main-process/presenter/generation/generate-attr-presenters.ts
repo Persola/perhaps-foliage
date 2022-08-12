@@ -1,12 +1,12 @@
 import { completeAttrInstruction, completeChildInstruction } from './complete-instruction';
 
-import type { GrammarSyntypeEntry } from '../../../../types/grammar/syntype';
-import type { PresenterConfig } from '../../../../types/language-integration/presenters/presenter-config';
-import { PresnoChildAttrVal, PresnoNonChildAttrVal } from '../../../../types/presenter/presnos/presno-attrs';
-import { PresnoNonChildAttrFullInstruction } from '../../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
-import { Syno } from '../../../../types/syntactic/syno';
-import { PresnoChildAttrFullInstruction } from '../../../../types/language-integration/presenters/presno-child-attr-full-instruction';
-import { StateSelector } from '../../../../types/state-selector';
+import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
+import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
+import { PresnoChildAttrVal, PresnoNonChildAttrVal } from '../../../types/presenter/presnos/presno-attrs';
+import { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
+import { Syno } from '../../../types/syntactic/syno';
+import { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-child-attr-full-instruction';
+import { StateSelector } from '../../../types/state-selector';
 
 const attrPresenter = (
   attrInstruction: PresnoNonChildAttrFullInstruction,

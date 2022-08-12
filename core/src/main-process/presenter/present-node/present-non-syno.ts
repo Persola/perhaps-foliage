@@ -1,5 +1,5 @@
-import presentNamePart from './non-syn-presnos/present-name-part';
-import presentBud from './non-syn-presnos/present-bud';
+import presentNamePart from '../non-syn-presenters/present-name-part';
+import presentBud from '../non-syn-presenters/present-bud';
 
 import type { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
 import type { Focus } from '../../../types/editor-state/focus';

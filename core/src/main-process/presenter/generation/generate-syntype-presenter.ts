@@ -1,9 +1,9 @@
-import type { GrammarSyntypeEntry } from '../../../../types/grammar/syntype';
-import type { Presenter } from '../../../../types/presenter/presenter';
-import type { PresenterConfig } from '../../../../types/language-integration/presenters/presenter-config';
-import { Syno } from '../../../../types/syntactic/syno';
-import { StateSelector } from '../../../../types/state-selector';
-import { SynPresnoArgs } from '../../../../types/presenter/presno-args/syn-presno-args';
+import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
+import type { Presenter } from '../../../types/presenter/presenter';
+import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
+import { Syno } from '../../../types/syntactic/syno';
+import { StateSelector } from '../../../types/state-selector';
+import { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 import generateAttrPresenters from './generate-attr-presenters';
 
 export default (

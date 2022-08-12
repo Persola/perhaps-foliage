@@ -8,6 +8,32 @@ import type { MainsidePresentLangInt } from '../../../types/language-integration
 import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 import { PresnoRef } from '../../../types/presenter/presno-ref';
+import { Presenter } from '../../../types/presenter/presenter';
+
+const indexPresnoChildren = (
+  childPresnoArgs: ReturnType<Presenter>['childPresnoArgs'],
+  enstackForPresentation: EnstackForPresentation,
+): { [childPresnoAttrName: string]: (PresnoRef | PresnoRef[])} => { // eslint-disable-line
+  const childPresnoRefs: Record<string, (PresnoRef | PresnoRef[])> = {};
+  let ind = 0;
+  Object.entries(childPresnoArgs).forEach(entry => {
+    const [key, val] = entry;
+    if (val.constructor !== Array) {
+      // @ts-ignore
+      childPresnoRefs[key] = enstackForPresentation(ind, val);
+      ind += 1;
+    } else {
+      childPresnoRefs[key] = [];
+      for (const args of val) {
+        // @ts-ignore
+        childPresnoRefs[key].push(enstackForPresentation(ind, args));
+        ind += 1;
+      }
+    }
+  });
+
+  return childPresnoRefs;
+};
 
 export default (
   synoId: SynoId,
@@ -41,23 +67,10 @@ export default (
     enstackForPresentation,
   );
 
-  const childPresnoRefs: Record<string, (PresnoRef | PresnoRef[])> = {};
-  let ind = 0;
-  Object.entries(integrationPresentation.childPresnoArgs).forEach(entry => {
-    const [key, val] = entry;
-    if (val.constructor !== Array) {
-      // @ts-ignore
-      childPresnoRefs[key] = enstackForPresentation(ind, val);
-      ind += 1;
-    } else {
-      childPresnoRefs[key] = [];
-      for (const args of val) {
-        // @ts-ignore
-        childPresnoRefs[key].push(enstackForPresentation(ind, args));
-        ind += 1;
-      }
-    }
-  });
+  const childPresnoRefs = indexPresnoChildren(
+    integrationPresentation.childPresnoArgs,
+    enstackForPresentation,
+  );
 
   const parent = (
     syno.parent === null

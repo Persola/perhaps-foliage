@@ -1,5 +1,5 @@
-import createEnstackForPresentation from '../../../presenter/presenters/create-enstack-for-presentation';
-import presentationNode from '../../../presenter/presenters/presentation-node';
+import createEnstackForPresentation from '../../../presenter/create-enstack-for-presentation';
+import presentationNode from '../../../presenter/present-node/presentation-node';
 
 import type { Syno } from '../../../../types/syntactic/syno';
 import type { StateSelector } from '../../../../types/state-selector';

@@ -1,15 +1,15 @@
-import presentationNode from './presentation-node';
+import presentationNode from './present-node/presentation-node';
 import createEnstackForPresentation from './create-enstack-for-presentation';
 import presnoId from './presno-id';
 
-import type { StateSelector } from '../../../types/state-selector';
-import type { SynoId } from '../../../types/syntactic/syno-id';
-import type { Prestree } from '../../../types/presenter/prestree';
-import type { MutablePresnoMap } from '../../../types/presenter/presno-map/mutable-presno-map';
-import type { PresnoMap } from '../../../types/presenter/presno-map/presno-map';
-import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
-import type { Focus } from '../../../types/editor-state/focus';
-import type { PresnoArgs } from '../../../types/presenter/presno-args/presno-args';
+import type { StateSelector } from '../../types/state-selector';
+import type { SynoId } from '../../types/syntactic/syno-id';
+import type { Prestree } from '../../types/presenter/prestree';
+import type { MutablePresnoMap } from '../../types/presenter/presno-map/mutable-presno-map';
+import type { PresnoMap } from '../../types/presenter/presno-map/presno-map';
+import type { MainsidePresentLangInt } from '../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
+import type { Focus } from '../../types/editor-state/focus';
+import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 
 export default (
   state: StateSelector,

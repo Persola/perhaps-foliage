@@ -22,6 +22,13 @@
     * to make this reliable, disallow and invalidate presno attr keys that
       * aren't string (of course)
       * are strings of integers as defined by the property order logic
+  * unite presenter return subobjects?
+    * I split them for indexPresnoChildren
+    * either:
+      * search for presnos by extracting filtering from getChildPresnoRefs
+      * or lookup based on config, which would need to stored (don't overwrite in integrations)
+        * but then what for integration presenters provided as functions?
+
 
 **testing**
 * try rendering everything that should already be renderable

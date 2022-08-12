@@ -1,6 +1,6 @@
 import type { Store } from 'redux';
 
-import presentTree from './presenters/present-tree';
+import presentTree from './present-tree';
 import ascendToRoot from '../../syntree-utils/read-tree/ascend-to-root';
 
 import type { StateSelector } from '../../types/state-selector';
