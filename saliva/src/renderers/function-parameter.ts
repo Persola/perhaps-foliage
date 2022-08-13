@@ -1,9 +1,9 @@
 export default {
   htmlClasses: [
+    'function-parameter',
     'same-line',
     'leaf',
     'bubble-even',
-    'function-parameter',
   ],
   content: [
     'slot',

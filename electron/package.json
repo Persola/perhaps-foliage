@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage-electron",
   "displayName": "Perhaps Foliage Electron",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "electron build of Perhaps Foliage",
   "author": "Luke Persola",
   "engines": {

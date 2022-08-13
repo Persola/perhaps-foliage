@@ -1,53 +1,37 @@
 import { completeAttrInstruction, completeChildInstruction } from './complete-instruction';
+import namePart from './child-attr-presenters/name-part';
+import copy from './non-child-attr-presenters/copy';
+import readRefAttr from './non-child-attr-presenters/read-ref-attr';
 
 import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
-import { PresnoChildAttrVal, PresnoNonChildAttrVal } from '../../../types/presenter/presnos/presno-attrs';
-import { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
-import { Syno } from '../../../types/syntactic/syno';
-import { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-child-attr-full-instruction';
-import { StateSelector } from '../../../types/state-selector';
+import type { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';
+import type { AttrPresenters, ChildAttrPresenter, NonChildAttrPresenter } from '../../../types/language-integration/presenters/attr-presenters';
+import type { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/instructions/presno-child-attr-full-instruction';
 
-const attrPresenter = (
+const nonChildAttrPresenter = (
   attrInstruction: PresnoNonChildAttrFullInstruction,
-) => { // eslint-disable-line
-  return (
-    syno: Syno,
-    // state: StateSelector,
-  ): PresnoNonChildAttrVal => {
-    if (typeof syno[attrInstruction.from] !== 'boolean') {
-      throw new Error(
-        `presenter config told me to copy syno's (${syno.id}) attr '${attrInstruction.from}'`
-        + ' but it was not a boolean',
-      );
-    }
+): NonChildAttrPresenter => { // eslint-disable-line
+  if (attrInstruction.from === 'attr') {
+    return copy(attrInstruction);
+  }
 
-    return syno[attrInstruction.from] as boolean;
-  };
+  if (attrInstruction.from === 'refAttr') {
+    return readRefAttr(attrInstruction);
+  }
+
+  throw new TypeError('unrecognized presno attr instruction');
 };
 
 const childAttrPresenter = (
-  attrInstruction: PresnoChildAttrFullInstruction,
-) => { // eslint-disable-line
-  return (
-    syno: Syno,
-    state: StateSelector,
-  ): PresnoChildAttrVal => {
-    return {
-      presnoRef: true,
-      id: '1',
-    };
-  };
-};
-
-type AttrPresenters = [
-  {
-    [a: string]: (syno: Syno, state: StateSelector) => PresnoNonChildAttrVal,
-  },
-  {
-    [b: string]: (syno: Syno, state: StateSelector) => PresnoChildAttrVal,
+  instruction: PresnoChildAttrFullInstruction,
+): ChildAttrPresenter => { // eslint-disable-line
+  if (instruction.from === 'attr') {
+    return namePart(instruction);
   }
-];
+
+  throw new TypeError('unrecognized presno child attr instruction');
+};
 
 export default (
   instructions: PresenterConfig,
@@ -61,7 +45,7 @@ export default (
     attrInstruction,
   ] of Object.entries(instructions.attrs)) {
     const fullInstruction = completeAttrInstruction(attrInstruction);
-    attrPresenters[attrName] = attrPresenter(fullInstruction);
+    attrPresenters[attrName] = nonChildAttrPresenter(fullInstruction);
   }
 
   for (const [
@@ -69,7 +53,7 @@ export default (
     childAttrInstruction,
   ] of Object.entries(instructions.childPresnoArgs)) {
     const fullInstruction = completeChildInstruction(childAttrInstruction);
-    attrPresenters[childAttrName] = childAttrPresenter(fullInstruction);
+    childAttrPresenters[childAttrName] = childAttrPresenter(fullInstruction);
   }
 
   return [

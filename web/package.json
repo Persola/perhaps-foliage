@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage-web",
   "displayName": "Perhaps Foliage Web",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Web build of Perhaps Foliage",
   "author": "Luke Persola",
   "scripts": {

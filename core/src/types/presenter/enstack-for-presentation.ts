@@ -1,7 +1,7 @@
 import type { PresnoRef } from './presno-ref';
-import { PresnoArgs } from './presno-args/presno-args';
+import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';
 
 export type EnstackForPresentation = (
   presnoIndex: number,
-  presnoArgs: PresnoArgs
+  presnoArgs: UnindexedPresnoArgs
 ) => PresnoRef;

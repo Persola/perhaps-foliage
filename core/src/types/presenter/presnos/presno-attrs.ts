@@ -1,6 +1,6 @@
 import type { PresnoRef } from '../presno-ref';
 
-type Simple = (
+export type Simple = (
   null
   | boolean
   | number

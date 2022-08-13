@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage",
   "displayName": "Perhaps Foliage",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Larva of an experimental data structure editing interface",
   "author": "Luke Persola",
   "files": [

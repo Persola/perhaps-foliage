@@ -4,12 +4,12 @@ import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';
 import { PresnoNonChildAttrVal } from './presnos/presno-attrs';
 
 // eslint-disable-next-line
-export type Presenter = (...SynoPresenterArgs) => {
-  attrs: {
+export type Presenter = (...SynoPresenterArgs) => [
+  {
     syntype: string;
     [index: string]: PresnoNonChildAttrVal;
   },
-  childPresnoArgs: {
+  {
     [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[]);
   },
-};
+];

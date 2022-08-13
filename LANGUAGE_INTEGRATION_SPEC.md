@@ -1,1 +1,5 @@
-presentation return values' attributes must be ordered, so no numbers or strings that will be converted to numbers
+Integrations
+
+* presenters
+  * presno attr keys must be strings
+  * presno attr keys cannot consist of only digits, because that affects ordering  

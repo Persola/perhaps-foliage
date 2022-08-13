@@ -1,5 +1,5 @@
+import enstackChildPresnos from './enstack-child-presnos';
 import focuses from './focuses';
-import presnoArgsForChildSynos from './presno-args-for-child-synos';
 
 import type { SynoId } from '../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../types/state-selector';
@@ -7,33 +7,6 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
-import { PresnoRef } from '../../../types/presenter/presno-ref';
-import { Presenter } from '../../../types/presenter/presenter';
-
-const indexPresnoChildren = (
-  childPresnoArgs: ReturnType<Presenter>['childPresnoArgs'],
-  enstackForPresentation: EnstackForPresentation,
-): { [childPresnoAttrName: string]: (PresnoRef | PresnoRef[])} => { // eslint-disable-line
-  const childPresnoRefs: Record<string, (PresnoRef | PresnoRef[])> = {};
-  let ind = 0;
-  Object.entries(childPresnoArgs).forEach(entry => {
-    const [key, val] = entry;
-    if (val.constructor !== Array) {
-      // @ts-ignore
-      childPresnoRefs[key] = enstackForPresentation(ind, val);
-      ind += 1;
-    } else {
-      childPresnoRefs[key] = [];
-      for (const args of val) {
-        // @ts-ignore
-        childPresnoRefs[key].push(enstackForPresentation(ind, args));
-        ind += 1;
-      }
-    }
-  });
-
-  return childPresnoRefs;
-};
 
 export default (
   synoId: SynoId,
@@ -58,17 +31,18 @@ export default (
     );
   }
 
-  const childSynPresnoArgs = presnoArgsForChildSynos(syno, integration);
-
-  const integrationPresentation = integrationPresenter(
+  const [
+    attrsFromIntegration,
+    childPresnoArgsFromIntegration,
+  ] = integrationPresenter(
     syno,
     state,
-    childSynPresnoArgs,
-    enstackForPresentation,
   );
 
-  const childPresnoRefs = indexPresnoChildren(
-    integrationPresentation.childPresnoArgs,
+  const childPresnoRefs = enstackChildPresnos(
+    syno,
+    integration,
+    childPresnoArgsFromIntegration,
     enstackForPresentation,
   );
 
@@ -82,7 +56,7 @@ export default (
   );
 
   return {
-    ...integrationPresentation.attrs,
+    ...attrsFromIntegration,
     ...childPresnoRefs,
     ...focuses(focus, syno.id),
     id: syno.id,

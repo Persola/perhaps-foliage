@@ -26,7 +26,10 @@ export default (
   }
 
   if (presnoArgs.type === 'nonSynPresno') {
-    return presentNonSyno(presnoArgs, focus);
+    return presentNonSyno(
+      presnoArgs,
+      focus,
+    );
   }
 
   throw new Error('bad presno prop');

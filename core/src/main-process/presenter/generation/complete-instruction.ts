@@ -1,7 +1,7 @@
-import type { PresnoNonChildAttrInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-instruction';
-import type { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-non-child-attr-full-instruction';
-import type { PresnoChildAttrInstruction } from '../../../types/language-integration/presenters/presno-child-attr-instruction';
-import type { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/presno-child-attr-full-instruction';
+import type { PresnoNonChildAttrInstruction } from '../../../types/language-integration/presenters/instructions/presno-non-child-attr-instruction';
+import type { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';
+import type { PresnoChildAttrInstruction } from '../../../types/language-integration/presenters/instructions/presno-child-attr-instruction';
+import type { PresnoChildAttrFullInstruction } from '../../../types/language-integration/presenters/instructions/presno-child-attr-full-instruction';
 
 export function completeAttrInstruction(
   instruction: PresnoNonChildAttrInstruction,
@@ -12,7 +12,8 @@ export function completeAttrInstruction(
 
   if (typeof instruction === 'string') {
     return {
-      from: instruction,
+      from: 'attr',
+      attr: instruction,
     };
   }
 
@@ -22,16 +23,17 @@ export function completeAttrInstruction(
 export function completeChildInstruction(
   instruction: PresnoChildAttrInstruction,
 ): PresnoChildAttrFullInstruction {
-  // if (typeof instruction === 'object') {
-  //   return instruction;
-  // }
+  if (typeof instruction === 'object') {
+    return instruction;
+  }
 
-  // if (typeof instruction === 'string') {
-  //   return {
-  //     attr: instruction,
-  //     from: instruction,
-  //   };
-  // }
+  if (typeof instruction === 'string') {
+    return {
+      from: 'attr',
+      attr: 'who said you could have a default?!',
+      as: 'NamePart',
+    };
+  }
 
   throw new TypeError('Received syno presentation instruction of unrecognized form');
 }

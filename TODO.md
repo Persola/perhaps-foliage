@@ -1,34 +1,15 @@
 **next**
-* **?** focus on presnoId not synoId
 * editing
-  * add holes for required children
-    * appear whenever a required child is missing
-      * should be two places, both for saliva:
-        * arguments without values
-        * function defitions without bodies
-    * just the circle
-    * correct color for child edge
-    * is presno (can be focused)
-* extract base presenter
-  * ensures:
-    * one synpresno per presented syno
-    * all and only children rendered as synpresnos
-    * synpresno child order
-  * but integration presenters need to be able to intersperse other presnos
-  * renderer derives child order directly from ECMAscript object attr order?
-    * but keep rendererAttrs because there will be need for config later
-      * e.g. what classes to apply for custom flags on presnos
-    * see LANGUAGE_INTEGRATION_SPEC
-    * to make this reliable, disallow and invalidate presno attr keys that
-      * aren't string (of course)
-      * are strings of integers as defined by the property order logic
-  * unite presenter return subobjects?
-    * I split them for indexPresnoChildren
-    * either:
-      * search for presnos by extracting filtering from getChildPresnoRefs
-      * or lookup based on config, which would need to stored (don't overwrite in integrations)
-        * but then what for integration presenters provided as functions?
-
+  * add holes for missing children types
+    * their color is as if they had correct edge label
+    * when focused, typing -> autocomplete menu
+      * menu of types (in eigensyno?)
+        * enter -> make bud that type
+      * then another menu? choose among:
+        * argument value (boolean) -> possible values (so among primitives--which True and salse should become)
+        * function argument (argument) -> among parameters of call's callee (extension dependency)
+        * function definition body (function call) -> which callee
+        * function definition parameter (parameter) -> what slot (name)
 
 **testing**
 * try rendering everything that should already be renderable
@@ -36,13 +17,15 @@
 **bugs**
 
 **maintenance**
-* syntype -> prestype in presenters
-* extract integration loading from init scripts and load-complete
+* simplify renderer config re: child order
+* allow, in general, any syno to be child of any other syno in any order
+  * then make restrictions based on langauge integration
+* **?** focus on presnoId not synoId
 * type presenters better
+* extract integration loading from init scripts and load-complete
 * replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands
-* make name presnos internal
 * extract common logic between editor renderers and integration (generated) renderers
   * especially focused and valid flags
 * adopt LSP
@@ -119,6 +102,7 @@
           * can holes be used for what insert mode would be?
 * navigation
   * enter eigensyno
+    * name parts should live there?
   * alt keys:
     * binary seek [command/whatever key]
     * select set (focus nudges boundary to include focused node) [shift key]

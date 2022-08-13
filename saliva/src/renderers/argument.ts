@@ -1,8 +1,8 @@
 export default {
   htmlClasses: [
+    'argument',
     'same-line',
     'bubble-even',
-    'argument',
   ],
   content: [
     { attr: 'name', as: 'string' },
