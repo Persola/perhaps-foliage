@@ -82,6 +82,31 @@
       * https://www.antlr3.org/pipermail/antlr-interest/2004-November/010165.html
     * example alternative
       * http://treedl.sourceforge.net/treedl/treedl_en.html#node.name
+  * it should be a regular tree grammar
+    * every context-free sequence grammar can be expressed as a regular tree grammar
+      * so regular tree grammars are correct for handling my target class of languages, which are context-free languages when expressed as text
+      * but also we could just use context free textual grammars
+      * but the entire point of this project is to express documents as tree structures,
+      so my little heart just can't bear representing them using what feels like a non-native form
+      * most programmer know nothing to little about sequence grammars anyway, so for the target audience of language implementers I'm not sure it matters too much
+    * they should be in normal form
+      * so each production rule either:
+        * N → t
+        * (or) N → t[N₁...Nₙ] (Nₙ may = N)
+      * but I should allow Nₙ → Nₙ in the future
+        * Cleophas calls these U₊
+        * grammars will likely be too verbose without
+        * allows language implementers to specify syntactic subtypes, which we may want to use directly in the editor?
+      * also consider allowing terminals as leaf children of RHS
+        * but multiple levels of children in one production rule should be disallowed
+        * Cleophas's Z₊ allows both of those
+      * add ORs/unions later
+    * but how to deal with an arbitrary number of children?
+      * e.g. a function can have an arbitrary number of arguments
+      * this is impossible under the formal descriptions of tree grammars I've seen
+        * ranked alphabets assign a finite number of ranks to each symbol (~ syntype)
+        * and likewise there are a finite number of production rules
+      * not immediate problem because Saliva functions are binary
 * graph visualization 
   * my visualization is "space nested" (as opposed to e.g. node-and-wire)
   * surveys:
@@ -96,3 +121,32 @@
 * related projects
   * (I'm aware of many but want to organize thoughts about them)
   * [MPS](https://www.jetbrains.com/help/mps/language-definition.html)
+* Saliva being original motivation for Perhaps Foliage
+  * the "arguments interspersed with functional names" thing might seem particular
+  * but could it not free code from a needlessly verbose Polish notation?
+    * that is, current code uses Polish notation in that ordering
+    * but your symbols are made of multiple text characters, so we need to define boundaries between them
+    * which we do for some reason with both whitespace in general, but then also with parens and commas for function calls
+    * some prefer true Polish notation, figuring it elimnates the redundancy
+    * but instead, to make languages more expressive, perhaps we should be embracing arbitrary ordering
+      * to make that work (note we have >2-ary functions), we need to have all these parens or whatever--very verbose
+      * which is why all that structure needs to be built into the editor, as basic part of both expression and manipulation, clear but not overpowering
+  * this is all just a form of recognizing trees as the true structure of code
+    * but in fact code is in many way ahead of mathematical notation and such
+      * at least we indent! those barbarians just have a bunch of implicit order of operations rules for every subfield!
+      * (I often feel linear mathematical notation is better thought of as trees first, and flattening it is backwards premodern practice)
+    * maybe I should pay some attention to structuring even natural language text this way
+      * speaking and listening are natural, but reading/writing need an update ;>
+      * lines up with ideas I've had about how I would like to structure texts
+        * like books, maybe not most novels but like educational texts, would often be better organized so the reader can skip aroud appropriately based on what they already know and don't need to review, or what they want to dig further into
+        * the dream of a book-length argument condensed to a single sentence, that can be piecemeal expanded into its full length based on whether you aleady agree with certain lemmas
+      * could I write the documentation in this style?
+        * very self-indulgent
+        * but eating its own dog food?
+        * kind of an excuse to make people learn interface?
+      * hypertext is cool, but ignoring the specific substring that links out, it's kind fo just arbirary graphs, little structure
+        * on the web the closest we've come to tree is fragment identifiers
+* tree stuff
+  * Cleophas, L. G. W. A., & Hemerik, C. (2009). Taxonomies of regular tree algorithms. In J. Holub, & J. Zdarek (Eds.), Proceedings of the Prague Stringology Conference 200 (PSC'09, Prague, Czech Republic, August 31-September 2, 2009) (pp. 146-159). Czech Technical University in Prague.
+  * http://alexandria.tue.nl/extra2/200810270.pdf
+  * BOTTOM-UP TREE ACCEPTORS C. HEMERIK and J.P. KATOEN

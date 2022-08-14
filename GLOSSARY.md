@@ -39,31 +39,38 @@ not really used yet:
     * the idea of removing an intermediary
       * 'scales fell from eyes' is inadequate, but something like that
       * myth or story trickster figure whose trick is mucking around as an intermediary?
-  * colorful trees
-    * Eucalyptus deglupta
-    * chlorophyll/autumn/**foliage**
-  * brachiation
-    * a brachiator? (gibbons, siamangs)
-      *  also a trichromat?
-        * gibbons [1]
-      * "gibbon" taken by open source edu project
-      * there are some cool looking species, but names are iffy
-      * "**ulna**"
-        * because the freeing of the ulna was important for the development of brachiation [2]
-        * Latin for "elbow"
-        * not memorable enough?
-        * shit, it's really close to "Luna"
-          * cool, Luna already changed their name to "Enso" lol
-      * silhouette of a gibbon during the flight phase of ricochetal brachiation
-      * just "gib"?
-      * other interpretations of brachiation?
-        * "swing"
-        * "lope"
-        * "reach"
-        * "armstep"
-        * "hometree" or "treehome" or "treenest"
-    * other forms of arboreal locomotion
-      * the tree pangolin
+  * tree stuff
+    * colorful trees
+      * Eucalyptus deglupta
+      * chlorophyll/autumn/**foliage**
+    * "pulp"
+    * animals related to trees
+      * tree dwellers (insects inside?), tree eaters, nests made in trees from parts of trees, arboreal locamotion, sense perception specialized to arboreal environments, etc.
+        * insects that bore and nest inside tree limbs?
+          * seems like most only bore during larval stage--bad look
+          * Buprestidae is flashy
+      * arboreal locamotion
+        * the tree pangolin
+        * brachiation
+          * a brachiator? (gibbons, siamangs)
+            *  also a trichromat?
+              * gibbons [1]
+            * "gibbon" taken by open source edu project
+            * there are some cool looking species, but names are iffy
+            * "**ulna**"
+              * because the freeing of the ulna was important for the development of brachiation [2]
+              * Latin for "elbow"
+              * not memorable enough?
+              * shit, it's really close to "Luna"
+                * cool, Luna already changed their name to "Enso" lol
+            * silhouette of a gibbon during the flight phase of ricochetal brachiation
+            * just "gib"?
+            * other interpretations of brachiation?
+              * "swing"
+              * "lope"
+              * "reach"
+              * "armstep"
+              * "hometree" or "treehome" or "treenest"
   * if I pick something totally non-analagous, what do I want?
     * obviously homologous variants
       * project name
@@ -78,7 +85,7 @@ not really used yet:
       * standard enough
       * minimum two color areas
       * minimum one decently chromatic color
-    * relatively easy for non-English speakers
+    * relatively easy for speakers of many languages
     * phonetic spelling
     * spellable pronunciation
     * simple spelling/pronunciation

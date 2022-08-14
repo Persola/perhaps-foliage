@@ -1,15 +1,5 @@
 **next**
-* editing
-  * add holes for missing children types
-    * their color is as if they had correct edge label
-    * when focused, typing -> autocomplete menu
-      * menu of types (in eigensyno?)
-        * enter -> make bud that type
-      * then another menu? choose among:
-        * argument value (boolean) -> possible values (so among primitives--which True and salse should become)
-        * function argument (argument) -> among parameters of call's callee (extension dependency)
-        * function definition body (function call) -> which callee
-        * function definition parameter (parameter) -> what slot (name)
+* grammars become regular tree grammars in normal form
 
 **testing**
 * try rendering everything that should already be renderable
@@ -20,6 +10,7 @@
 * simplify renderer config re: child order
 * allow, in general, any syno to be child of any other syno in any order
   * then make restrictions based on langauge integration
+  * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
 * type presenters better
 * extract integration loading from init scripts and load-complete
@@ -52,6 +43,8 @@
   * so there can be a CLI or other kinds of APIs later, not just GUI
   * redundant with LSP?
 * **?** presentation tree should also have grammar
+  * will be a probablem that it's only locally treelike? 
+  * actually, maybe it will always be an actual tree, just with ellisions optionally attached to root and leaves
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
@@ -62,11 +55,30 @@
         * (or) have wrapper types that themselves have long lists
           * also unacceptable because we don't want to dictate syntactic structure like that
     * edNCE?
-  * **?** need to support OR in grammar? e.g. function call has child def OR non-tree ref callee
+  * **?** need to unfuck my support for 'or' in grammar
+    * maybe just remove it for now
+      * requires new type for norProxyCall, ordered expressions list or map
+    * need very general theory of specifying in grammar
+      * cover at least 'or' and 'and'
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
 **new functionality**
+* editing
+  * add holes for missing children types
+    * their color is as if they had correct edge label
+      * well, bacgkround color is theoretically the edge label
+        * but currently I actually assign it based on syntype
+        * maybe it should be based on non-terminal syntypes?
+          * or at least as a default
+    * when focused, typing -> autocomplete menu
+      * menu of types (in eigensyno?)
+        * enter -> make bud that type
+      * then another menu? choose among:
+        * argument value (boolean) -> possible values (so among primitives--which True and False should become)
+        * function argument (argument) -> among parameters of call's callee (extension dependency)
+        * function definition body (function call) -> which callee
+        * function definition parameter (parameter) (no options, just type slot name)
 * extensions/plugins
   * text hosts should be model, since it's a bit specific
 * VSCode extension
@@ -103,6 +115,11 @@
 * navigation
   * enter eigensyno
     * name parts should live there?
+    * eigensynos have to be truly metadata, the domain of the language integrater
+      * I was thinking of having extended comments from the (end) programmer in there so you can tuck them away, but that could evolve into a complicated subtree, and then you've just gotten one extra subtree for every syno--but hidden! and now we have three kinds of edges, but the eigenedges are redundant to the tree structure :(
+      * so the eigensyno is strictly things the integration implementer derives from the node itself
+        * well, also potentially from its subtree
+        * well, also potentially editable by the end programmer, but the state is storde in the subtree (maybe autocollapsed) and integrater is responsible for mappings between the two
   * alt keys:
     * binary seek [command/whatever key]
     * select set (focus nudges boundary to include focused node) [shift key]
@@ -227,6 +244,10 @@
   * fuzz based on grammar
 * **?** use proxy-memoize or another selector memoizer
   * premature optimization for now
+* give every syno a fragment identifier
+  * structural (path) or nominal (ID)?
+    * well, structural presumably
+    * I probably need to kill syno IDs (and use indices for easy access instead)
 
 **experimentation**
 * try always-next-line + always-(class inheritance or call graph)-bidirectional-multipane?
