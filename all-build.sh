@@ -1,4 +1,3 @@
-
 printRed ()
 {
   red=`tput setaf 1`
@@ -20,19 +19,25 @@ function buildproject {
   then
     printGreen "$1 built"
   else
-    printRed "$1 failed"
+    printRed "$1 failed to build"
+    return -1
   fi
   cd ..
+  return 0
 }
 
 buildproject core
 
-(buildproject electron) &
-(buildproject vscode) &
-(buildproject web) &
-(buildproject saliva) &
-(buildproject pantheon) &
+if [ $? -eq 0 ]
+then
+  (buildproject electron) &
+  (buildproject vscode) &
+  (buildproject web) &
+  (buildproject saliva) &
+  (buildproject pantheon) &
 
-wait
+  wait
 
-buildproject vscode-saliva
+  buildproject vscode-saliva
+fi
+
