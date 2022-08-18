@@ -1,4 +1,3 @@
-import verifyReplacementAgainstGrammar from './replace-focused-syno/verify-replacement-against-grammar';
 import replaceSyno from '../../../syntree-utils/exposed/replace-syno';
 
 import type { StateSelector } from '../../../types/state-selector';
@@ -28,12 +27,6 @@ export default (
   }
 
   const keyToNewSynoAttrs: KeyToNewSynoAttrs = integration.keyToNewSynoAttrs;
-
-  verifyReplacementAgainstGrammar(
-    state,
-    action.input,
-    keyToNewSynoAttrs,
-  );
 
   latestEdit.push({
     undo: {

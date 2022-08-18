@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import type { PresnoRef } from '../../../types/presenter/presno-ref';
-import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
+import type { SynPresnoRendererProps } from '../../../types/renderer/syn-presno-renderer-props';
 
 export default (
-  parentProps: SharedRendererProps,
+  parentProps: SynPresnoRendererProps,
   presnoRef: PresnoRef,
 ): React.ReactElement => {
   const {

@@ -5,7 +5,5 @@ export default {
     'leaf',
     'bubble-even',
   ],
-  content: [
-    'slot',
-  ],
+  content: [],
 };

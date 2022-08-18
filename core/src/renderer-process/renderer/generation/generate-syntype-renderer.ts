@@ -4,29 +4,28 @@ import generateChildComponentWrappers from './generate-child-component-wrappers'
 
 import type { RendererConfig } from '../../../types/language-integration/renderers/renderer-config';
 import type { Renderer } from '../../../types/renderer/renderer';
-import type { SharedRendererProps } from '../../../types/renderer/shared-renderer-props';
-import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
-import type { ComponentOrVectorComponent } from '../../../types/renderer/component-or-vector-component';
+import type { SynPresnoRendererProps } from '../../../types/renderer/syn-presno-renderer-props';
+import type { RendererComponent } from '../../../types/renderer/renderer-component';
+import childPresnoComponent from './child-presno-component';
 
 export default (
   attrs: RendererConfig,
-  syntypeGrammarEntry: GrammarSyntypeEntry,
 ): Renderer => {
   const {
     htmlClasses,
     content: childPresnosInstructions,
   } = attrs;
 
-  const childComponentWrappers: ComponentOrVectorComponent[] = generateChildComponentWrappers(
+  const nonPresnoChildComponents: RendererComponent[] = generateChildComponentWrappers(
     childPresnosInstructions,
-    syntypeGrammarEntry,
   );
 
-  return (props: SharedRendererProps) => {
+  return (props: SynPresnoRendererProps) => {
     // TODO: check props (b/c they aren't typed anymore), ideally against provided presenter
     // TODO: check presno.syntype
 
     const {
+      presno,
       presno: { focused, valid, id },
     } = props;
 
@@ -36,7 +35,10 @@ export default (
       valid ? '' : 'invalid',
     ]);
 
-    const childComponents = childComponentWrappers.map(gen => gen(props)).flat();
+    const nonPresnoChildren = nonPresnoChildComponents.map(comp => comp(props)).flat();
+    const presnoChildren = presno.children.map(child => {
+      return childPresnoComponent(props, child.childRef);
+    });
 
     return React.createElement(
       'div',
@@ -44,7 +46,8 @@ export default (
         className: classes.join(' '),
         'data-presno-id': id,
       },
-      ...childComponents,
+      ...nonPresnoChildren,
+      ...presnoChildren,
     );
   };
 };

@@ -1,4 +1,3 @@
-import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 import type { Presenter } from '../../../types/presenter/presenter';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
 import { Syno } from '../../../types/syntactic/syno';
@@ -8,11 +7,9 @@ import generateAttrPresenters from './generate-attr-presenters';
 export default (
   syntype: string,
   presenterConfig: PresenterConfig,
-  syntypeGrammarEntry: GrammarSyntypeEntry,
 ): Presenter => {
   const [attrPresenters, childPresnoPresenters] = generateAttrPresenters(
     presenterConfig,
-    syntypeGrammarEntry,
   );
 
   return (

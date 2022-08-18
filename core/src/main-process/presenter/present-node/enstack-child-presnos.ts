@@ -1,12 +1,18 @@
+import forChildSynoOf from '../../../syntree-utils/read-node/for-child-syno-of';
+
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 import type { Syno } from '../../../types/syntactic/syno';
-import type { PresnoRef } from '../../../types/presenter/presno-ref';
-import type { SyntypeChildren } from '../../../types/grammar/syntype-children';
+import type {
+  LabledChildPresno,
+  SynPresno,
+} from '../../../types/presenter/presnos/presno';
 import type { SynoRef } from '../../../types/syntactic/syno-ref';
-import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 import type { UnindexedNonSynPresnoArgs } from '../../../types/presenter/presno-args/unindexed-non-syn-presno-args';
 import type { UnindexedPresnoArgs } from '../../../types/presenter/presno-args/unindexed-presno-args';
+import type { ActualGrammar } from '../../../types/grammar/actual-grammar';
+import type { ProductionRule } from '../../../types/grammar/production-rule';
+import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 
 const budArgs = (parent): UnindexedNonSynPresnoArgs => {
   return {
@@ -26,51 +32,85 @@ const synPresnoArgs = (synoRef: SynoRef): SynPresnoArgs => {
   };
 };
 
+const childrenFromGrammar = (
+  parent: Syno,
+  actualGrammar: ActualGrammar,
+) => {
+  const rulesProducingSyntype = actualGrammar.productionRules.filter(rule => {
+    return rule.rhs.parent === parent.syntype;
+  });
+
+  const rulesMatchingChildren = rulesProducingSyntype.filter(rule => {
+    const childEdgeLabels = [];
+    forChildSynoOf(parent, (synoRef, edge) => {
+      childEdgeLabels.push(edge.key);
+    });
+
+    const grammarChildEdgeLabels = rule.rhs.children.map(child => child.edgeLabel);
+
+    return (
+      childEdgeLabels.length === grammarChildEdgeLabels.length
+      && childEdgeLabels.every((label, index) => label === grammarChildEdgeLabels[index])
+    );
+  });
+
+  if (rulesMatchingChildren.length === 1) {
+    return rulesMatchingChildren[0].rhs.children;
+  }
+
+  // guess
+  return rulesProducingSyntype[0].rhs.children;
+};
+
 export default (
   syno: Syno,
   integration: MainsidePresentLangInt,
-  childPresnoArgs: { [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[]) },
+  nonSynChildPresnoArgs: { [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[]) },
   enstackForPresentation: EnstackForPresentation,
   // eslint-disable-next-line
-): { [childPresnoAttrName: string]: (PresnoRef | PresnoRef[]) } => {
-  const syntypeChildren: SyntypeChildren = integration.grammar[syno.syntype].children;
-
-  const childRefs = {};
+): SynPresno['children'] => {
+  const childPresnoRefs: LabledChildPresno[] = [];
   let ind = 0;
 
-  for (const [childKey, childArgs] of Object.entries(childPresnoArgs)) {
-    childRefs[childKey] = enstackForPresentation(ind, childArgs as UnindexedNonSynPresnoArgs);
+  for (const [childKey, childArgs] of Object.entries(nonSynChildPresnoArgs)) {
+    childPresnoRefs.push({
+      edgeLabel: childKey,
+      childRef: enstackForPresentation(ind, childArgs as UnindexedNonSynPresnoArgs),
+    });
     ind += 1;
   }
 
-  for (const [childKey, childEntry] of Object.entries(syntypeChildren)) {
-    if (!childEntry.collection) {
-      if (syno[childKey] === null) {
-        childRefs[childKey] = enstackForPresentation(ind, budArgs(syno));
-        ind += 1;
-      // @ts-ignore: promised by grammar
-      } else if (syno[childKey].relation === 'child') { // b/c key might also represent non-tree refs
-        // @ts-ignore: promised by grammar
-        childRefs[childKey] = enstackForPresentation(ind, synPresnoArgs(syno[childKey]));
-        ind += 1;
-      }
-    } else {
-      const childCollection = syno[childKey] as SynoRef[]; // promised by grammar
-      childRefs[childKey] = [];
+  forChildSynoOf(syno, (childSynoRef, edge) => {
+    const { key } = edge;
+    childPresnoRefs.push({
+      edgeLabel: key,
+      childRef: enstackForPresentation(ind, synPresnoArgs(childSynoRef)),
+    });
+    ind += 1;
+  });
 
-      if (childCollection.length === 0) {
-        // @ts-ignore: see "= []" above
-        childRefs[childKey].push(enstackForPresentation(ind, budArgs(syno)));
-        ind += 1;
-      } else if (childCollection.every(ref => ref.relation === 'child')) { // b/c key might also represent non-tree refs
-        for (const synoRef of childCollection) {
-          // @ts-ignore: see "= []" above
-          childRefs[childKey].push(enstackForPresentation(ind, synPresnoArgs(synoRef)));
-          ind += 1;
-        }
-      }
+  const grammarChildren: ProductionRule['rhs']['children'] = childrenFromGrammar(
+    syno,
+    integration.actualGrammar,
+  );
+
+  const grammarChildEdgeLabels = new Set(grammarChildren.map(child => child.edgeLabel));
+
+  for (const grammarEdgeLabel of grammarChildEdgeLabels) {
+    const matchingGrammarChildren = grammarChildren.filter(child => {
+      return child.edgeLabel === grammarEdgeLabel;
+    });
+    const matchingRefs = childPresnoRefs.filter(ref => {
+      return ref.edgeLabel === grammarEdgeLabel;
+    });
+    if (matchingRefs.length < matchingGrammarChildren.length) {
+      childPresnoRefs.push({
+        edgeLabel: grammarEdgeLabel,
+        childRef: enstackForPresentation(ind, budArgs(syno)),
+      });
+      ind += 1;
     }
   }
 
-  return childRefs;
+  return childPresnoRefs;
 };

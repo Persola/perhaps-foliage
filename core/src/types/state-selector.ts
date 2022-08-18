@@ -1,5 +1,5 @@
 import type { EditorState } from './editor-state';
-import type { Grammar } from './grammar/grammar';
+import type { ActualGrammar } from './grammar/actual-grammar';
 import type { SynoMap } from './syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
 import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
@@ -7,13 +7,15 @@ import type { Focus } from './editor-state/focus';
 import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
 import type { Syno } from './syntactic/syno';
 import type { SynoId } from './syntactic/syno-id';
+import type { SyntypeSchema } from './syntype-schema/syntype-schema';
 
 export type StateSelector = {
   // state
   state: EditorState;
   // first-level accessors
   integrationId: () => string;
-  grammar: () => Grammar;
+  actualGrammar: () => ActualGrammar;
+  syntypeSchema: () => SyntypeSchema;
   primitives: () => SynoMap;
   keyToNewSynoAttrs: () => KeyToNewSynoAttrs;
   lastIntegrationBindings: () => string[];

@@ -3,6 +3,7 @@ import type { Store } from 'redux';
 import synoCommandResolver from './input-resolver/syno-command-resolver';
 import navigationCommandResolver from './input-resolver/navigation-command-resolver';
 import textCommandResolver from './input-resolver/text-command-resolver';
+
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 

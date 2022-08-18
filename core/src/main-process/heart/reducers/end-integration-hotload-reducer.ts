@@ -29,7 +29,8 @@ export default (
 
   Object.assign(draftState, {
     integrationId: newIntegrationAttrs.id,
-    grammar: newIntegrationAttrs.grammar,
+    actualGrammar: newIntegrationAttrs.actualGrammar,
+    syntypeSchema: newIntegrationAttrs.syntypeSchema,
     primitives: newIntegrationAttrs.primitives,
     keyToNewSynoAttrs: newIntegrationAttrs.keyToNewSynoAttrs,
     lastIntegrationBindings: state.keyToNewSynoAttrs()

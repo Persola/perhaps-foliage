@@ -1,0 +1,8 @@
+titan:
+  properties:
+    name: string
+  nonTreeRefs: {}
+olympian:
+  properties:
+    name: string
+  nonTreeRefs: {}

@@ -1,0 +1,76 @@
+nonTerminals:
+  - 'expression'
+  - 'nonTerminalFunctionDefinition'
+  - 'nonTerminalArgument'
+  - 'nonTerminalParameter'
+terminals:
+  - 'functionCall'
+  - 'functionDefinition'
+  - 'argument'
+  - 'functionParameter'
+  - 'variableRef'
+  - 'booleanLiteral'
+startingNonTerminal: 'expression'
+productionRules:
+  -
+    lhs: 'expression'
+    rhs:
+      parent: 'functionCall'
+      children:
+        -
+          edgeLabel: 'argumentz'
+          childNonTerminal: 'nonTerminalArgument'
+        -
+          edgeLabel: 'argumentz'
+          childNonTerminal: 'nonTerminalArgument'
+        -
+          edgeLabel: 'callee'
+          childNonTerminal: 'nonTerminalFunctionDefinition'
+  -
+    lhs: 'expression'
+    rhs:
+      parent: 'functionCall'
+      children:
+        -
+          edgeLabel: 'argumentz'
+          childNonTerminal: 'nonTerminalArgument'
+        -
+          edgeLabel: 'argumentz'
+          childNonTerminal: 'nonTerminalArgument'
+  -
+    lhs: 'nonTerminalFunctionDefinition'
+    rhs:
+      parent: 'functionDefinition'
+      children:
+        -
+          edgeLabel: 'parameters'
+          childNonTerminal: 'nonTerminalParameter'
+        -
+          edgeLabel: 'parameters'
+          childNonTerminal: 'nonTerminalParameter'
+        -
+          edgeLabel: 'body'
+          childNonTerminal: 'expression'
+  -
+    lhs: 'nonTerminalArgument'
+    rhs:
+      parent: 'argument'
+      children:
+        -
+          edgeLabel: 'value'
+          childNonTerminal: 'expression'
+  -
+    lhs: 'nonTerminalParameter'
+    rhs:
+      parent: 'functionParameter'
+      children: []
+  -
+    lhs: 'expression'
+    rhs:
+      parent: 'variableRef'
+      children: []
+  -
+    lhs: 'expression'
+    rhs:
+      parent: 'booleanLiteral'
+      children: []

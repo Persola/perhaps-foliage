@@ -5,10 +5,7 @@ export default {
       'bubble-even',
       'titan',
     ],
-    content: [
-      'name',
-      'child',
-    ],
+    content: [],
   },
   olympian: {
     htmlClasses: [
@@ -16,9 +13,6 @@ export default {
       'bubble-even',
       'olympian',
     ],
-    content: [
-      'name',
-      'child',
-    ],
+    content: [],
   },
 };

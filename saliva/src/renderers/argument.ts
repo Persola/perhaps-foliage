@@ -6,6 +6,5 @@ export default {
   ],
   content: [
     { attr: 'name', as: 'string' },
-    'value',
   ],
 };

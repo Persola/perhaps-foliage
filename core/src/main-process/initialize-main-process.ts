@@ -4,7 +4,6 @@ import updateMainsideIntegration from './update-mainside-integration';
 import createEditorStateStore from './heart/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
-import validateGraph from './code-loader/validate-graph';
 
 import type { MainsideLangInt } from '../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type {
@@ -41,7 +40,8 @@ export default (
   */
   const integration: MainsideLangInt = {
     id: null,
-    grammar: null,
+    actualGrammar: null,
+    syntypeSchema: null,
     primitives: null,
     keyToNewSynoAttrs: null,
     interpret: null,
@@ -61,13 +61,7 @@ export default (
 
   let initialDocument = null;
   if (vscodeParams) {
-    validateGraph(
-      'document loaded through VSCode',
-      vscodeParams.initialDocument,
-      integration.id,
-      integration.grammar,
-      integration.primitives,
-    );
+    console.warn('Hopefully that graph is recognized by the grammar');
     initialDocument = vscodeParams.initialDocument;
   }
 

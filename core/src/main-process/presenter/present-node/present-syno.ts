@@ -57,11 +57,11 @@ export default (
 
   return {
     ...attrsFromIntegration,
-    ...childPresnoRefs,
     ...focuses(focus, syno.id),
     id: syno.id,
-    parent,
     prestype: syno.syntype,
+    parent,
+    children: childPresnoRefs,
     valid: validator(syno, state),
   };
 };

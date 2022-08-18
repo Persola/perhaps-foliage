@@ -1,3 +1,13 @@
+* it's not a structure editor
+  * because at this point I'm pretty commited to allowing mutations that disobey the grammar
+  * and instead just:
+    * showing them as invalid
+    * (or) only allowing them before an action is commited (generally: until key up)
+  * I guess it's still a structure editor for _trees_
+    * but not for the grammar
+* should I be formalizing tree edits according to tree rewriting stuff?
+  * probably not necessary but maybe I should do some reading
+  * to make sure I have a reasonably compatible set of transformations
 * solving the N x M problem
   * i.e., combinatorial complexity between languages and development environments
   * Microsoft's [Language Server Protocol](https://github.com/microsoft/language-server-protocol) does a good job of solving this problem for current editors/languages

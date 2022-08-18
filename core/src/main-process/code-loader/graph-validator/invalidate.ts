@@ -1,7 +1,7 @@
-import type { GraphValidationResult } from '../../../types/code-loader/graph-validation-result';
+import type { ValidationResult } from '../../../types/code-loader/validation-result';
 
 export default (
-  result: GraphValidationResult,
+  result: ValidationResult,
   message: (string | string[]),
 ): void => {
   result.valid = false;

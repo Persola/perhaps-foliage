@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage-vscode",
   "displayName": "Saliva REPL VSCode",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "VSCode base extension for the Perhaps Foliage Editor",
   "author": "Luke Persola",
   "publisher": "persola",

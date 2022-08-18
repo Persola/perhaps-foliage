@@ -3,7 +3,6 @@ import namePart from './child-attr-presenters/name-part';
 import copy from './non-child-attr-presenters/copy';
 import readRefAttr from './non-child-attr-presenters/read-ref-attr';
 
-import type { GrammarSyntypeEntry } from '../../../types/grammar/syntype';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
 import type { PresnoNonChildAttrFullInstruction } from '../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';
 import type { AttrPresenters, ChildAttrPresenter, NonChildAttrPresenter } from '../../../types/language-integration/presenters/attr-presenters';
@@ -35,7 +34,6 @@ const childAttrPresenter = (
 
 export default (
   instructions: PresenterConfig,
-  syntypeGrammarEntry: GrammarSyntypeEntry,
 ): AttrPresenters => {
   const attrPresenters = {};
   const childAttrPresenters = {};

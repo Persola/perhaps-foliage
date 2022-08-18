@@ -3,10 +3,10 @@ import * as Ajv from 'ajv';
 import invalidate from './graph-validator/invalidate';
 import grammarSchema from './schemas/grammar-schema';
 
-import type { Grammar } from '../../types/grammar/grammar';
-import type { GraphValidationResult } from '../../types/code-loader/graph-validation-result';
+import type { ActualGrammar } from '../../types/grammar/actual-grammar';
+import type { ValidationResult } from '../../types/code-loader/validation-result';
 
-const grammarValidator = (grammar: Grammar): GraphValidationResult => {
+const grammarValidator = (actualGrammar: ActualGrammar): ValidationResult => {
   const result = {
     valid: true,
     messages: [],
@@ -19,42 +19,78 @@ const grammarValidator = (grammar: Grammar): GraphValidationResult => {
   });
 
   const validateGrammar = ajv.compile(grammarSchema);
-  const valid = validateGrammar(grammar);
-
-  if (!valid) {
+  if (!validateGrammar(actualGrammar)) {
     invalidate(result, validateGrammar.errors.map(e => `${e.dataPath} ${e.message}`));
     return result;
   }
 
-  // validate texthost refs have names to read
-  Object.entries(grammar).forEach(([syntypeName, syntypeEntry]): void => {
-    const textHostSyntype = syntypeEntry.nonTreeRefs.textHost;
-    if (typeof textHostSyntype === 'string') {
-      const hostSyntypeEntry = grammar[textHostSyntype];
-      if (!Object.keys(hostSyntypeEntry.properties).includes('name')) {
+  const terminalAndNonTerminalIntersection = actualGrammar.terminals.filter(symbol => {
+    return actualGrammar.nonTerminals.includes(symbol);
+  });
+  if (terminalAndNonTerminalIntersection.length !== 0) {
+    invalidate(result, (
+      'Symbols may not appear in both the terminals and non-terminals lists, but these do: '
+      + terminalAndNonTerminalIntersection.map(sym => `'${sym}'`).join(', ')
+    ));
+  }
+
+  if (!actualGrammar.nonTerminals.includes(actualGrammar.startingNonTerminal)) {
+    invalidate(result, (
+      `The starting non-terminal ('${actualGrammar.startingNonTerminal}') must be`
+      + ' listed among the non-terminals'
+    ));
+  }
+
+  actualGrammar.productionRules.forEach((rule, ruleIndex) => {
+    if (!actualGrammar.nonTerminals.includes(rule.lhs)) {
+      invalidate(result, (
+        `Production rule #${ruleIndex + 1} has left hand side`
+        + ` '${rule.lhs}' which is impermissibly not listed among the non-terminals`
+      ));
+    }
+    if (!actualGrammar.terminals.includes(rule.rhs.parent)) {
+      invalidate(result, (
+        `Production rule #${ruleIndex + 1} has right hand side parent`
+        + ` '${rule.rhs.parent}' which is impermissibly not listed among the terminals`
+      ));
+    }
+    for (const rhsChild of rule.rhs.children) {
+      if (!actualGrammar.nonTerminals.includes(rhsChild.childNonTerminal)) {
         invalidate(result, (
-          `Syntype '${syntypeName}' has textHost ref of syntype '${textHostSyntype}'`
-          + ` but ${textHostSyntype} has no property named 'name'`
-        ));
-      } else if (hostSyntypeEntry.properties.name !== 'string') {
-        invalidate(result, (
-          `Syntype '${syntypeName}' has textHost ref syntype '${textHostSyntype}'`
-          + ` but ${textHostSyntype}'s 'name' property is not typed as string`
+          `Production rule #${ruleIndex + 1} has right hand side child`
+          + ` with child non-terminal '${rhsChild.childNonTerminal}' which is impermissibly`
+          + ' not listed among the non-terminals'
         ));
       }
     }
   });
 
+  for (const terminal of actualGrammar.terminals) {
+    const nonTerminalsProducing = actualGrammar.productionRules.filter(rule => {
+      return rule.rhs.parent === terminal;
+    }).map(rule => {
+      return rule.lhs;
+    });
+    const uniqueNonTerminalsProducing = [...new Set(nonTerminalsProducing)];
+
+    if (uniqueNonTerminalsProducing.length > 1) {
+      invalidate(result, (
+        `Terminal '${terminal}' is impermissibly produced by multiple non-terminals`
+        + ` (${uniqueNonTerminalsProducing.map(nt => `'${nt}'`).join(', ')})`
+      ));
+    }
+  }
+
   return result;
 };
 
 export default (
-  grammar: Grammar,
+  actualGrammar: ActualGrammar,
   grammarName: string,
 ): void => {
   let grammarValidatorRez;
   try {
-    grammarValidatorRez = grammarValidator(grammar);
+    grammarValidatorRez = grammarValidator(actualGrammar);
   } catch (error) {
     throw new Error(
       `Grammar validation failed with unanticipated error:\n${error.message}`,
