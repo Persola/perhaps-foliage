@@ -1,12 +1,10 @@
 import generateSyntypePresenter from './generate-syntype-presenter';
 
-import { Grammar } from '../../../types/grammar/grammar';
 import { PresenterProvisions } from '../../../types/language-integration/presenters/presenters-provisions';
 import { Presenters } from '../../../types/presenter/presenters';
 import { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
 
 export default (
-  grammar: Grammar,
   presenterProvisions: PresenterProvisions,
 ): Presenters => {
   const initializedPresenters = {};
@@ -18,7 +16,6 @@ export default (
       initializedPresenters[syntypeName] = generateSyntypePresenter(
         syntypeName,
         provision as PresenterConfig,
-        grammar[syntypeName],
       );
     }
   }

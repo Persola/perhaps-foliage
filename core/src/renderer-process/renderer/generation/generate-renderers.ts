@@ -10,7 +10,7 @@ export default (
     UninitializedPresentLangInt | RendersideUninitializedPresentLangInt
   ),
 ): Renderers => {
-  const { renderers: rendererProvisions, grammar } = initialRendererIntegration;
+  const { renderers: rendererProvisions } = initialRendererIntegration;
 
   const renderers = {};
 
@@ -20,7 +20,6 @@ export default (
     } else {
       renderers[syntypeName] = generateSyntypeRenderer(
         rendererProvisions[syntypeName],
-        grammar[syntypeName],
       );
     }
   }

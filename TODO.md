@@ -1,5 +1,5 @@
 **next**
-* grammars become regular tree grammars in normal form
+  * replace synoMap with new syntactical data layer
 
 **testing**
 * try rendering everything that should already be renderable
@@ -7,7 +7,6 @@
 **bugs**
 
 **maintenance**
-* simplify renderer config re: child order
 * allow, in general, any syno to be child of any other syno in any order
   * then make restrictions based on langauge integration
   * probably means changing syntree data layer
@@ -52,19 +51,6 @@
   * actually, maybe it will always be an actual tree, just with ellisions optionally attached to root and leaves
 * **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
-* **?** adopt some tree version of Backaus-Naur form for grammar? (move other info into new file)
-  * What I really need is what children each type is allowed?
-    * no, syntypes will have to be grouped in at least one layer
-      * not doing this requires you to either:
-        * have long lists of acceptable child types in many places
-        * (or) have wrapper types that themselves have long lists
-          * also unacceptable because we don't want to dictate syntactic structure like that
-    * edNCE?
-  * **?** need to unfuck my support for 'or' in grammar
-    * maybe just remove it for now
-      * requires new type for norProxyCall, ordered expressions list or map
-    * need very general theory of specifying in grammar
-      * cover at least 'or' and 'and'
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
 
@@ -241,7 +227,8 @@
 * write integration for a real, in-use general-purpose programming language (Scheme?)
   * need bidirectional transformation between AST and text code (can use unist?)
 * pick license
-  * make sure contributors give up all copyright on offering contribution
+  * probably just MIT
+  * make sure contributors give up all copyright on offering contribution?
 * operationalize
 * launch minimal viable project
 * veryifying valid syntax is renderable

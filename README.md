@@ -7,7 +7,7 @@
 ⏱️ *Note: The author plans on splitting this repo up into several new repos before too long.*
 
 ### About
-This repo contains an as-of-yet unentitled visual interface for writing and editing tree-based data structures (a structure editor). The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
+This repo contains an as-of-yet unentitled visual interface for writing and editing tree-based data structures. The primary use case is as a visual programming interface, in which case the data structure is an [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
 
 To be useful, the editor must be provided with a language integration specific to this editor and the language the data being edited is written in. When editing code, that language will be a programming language.
 

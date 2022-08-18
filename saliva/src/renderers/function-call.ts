@@ -4,7 +4,5 @@ export default {
   ],
   content: [
     { attr: 'name', as: 'string' },
-    'argumentz',
-    'callee',
   ],
 };

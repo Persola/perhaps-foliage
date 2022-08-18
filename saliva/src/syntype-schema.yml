@@ -1,0 +1,28 @@
+functionDefinition:
+  nonTreeRefs: {}
+  properties:
+    name: string
+functionParameter:
+  nonTreeRefs: {}
+  properties:
+    name: string
+    valueSyntype: string
+functionCall:
+  nonTreeRefs:
+    callee: functionDefinition
+  properties: {}
+argument:
+  nonTreeRefs:
+    parameter: functionParameter
+    textHost: functionParameter
+  properties: {}
+booleanLiteral:
+  nonTreeRefs: {}
+  properties:
+    value: boolean
+variableRef:
+  nonTreeRefs:
+    referent: functionParameter
+    textHost: functionParameter
+  properties:
+    valueSyntype: string

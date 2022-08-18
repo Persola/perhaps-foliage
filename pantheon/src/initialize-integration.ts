@@ -1,5 +1,7 @@
 // @ts-ignore how do I configure TS to ignore webpacked imports?
-import grammar from './grammar.yml';
+import actualGrammar from './actual-grammar.yml';
+// @ts-ignore how do I configure TS to ignore webpacked imports?
+import syntypeSchema from './syntype-schema.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import keyToNewSynoAttrs from './key-to-new-syno-attrs.yml';
 import synoValidators from './syno-validators/syno-validators';
@@ -9,8 +11,9 @@ import renderers from './renderers/renderers';
 import styles from './stylesheet.lazy.css';
 
 export default {
-  id: 'pantheon.0.0.1',
-  grammar,
+  id: 'pantheon.0.0.14',
+  actualGrammar,
+  syntypeSchema,
   primitives: {},
   keyToNewSynoAttrs,
   interpret: null,

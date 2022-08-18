@@ -9,7 +9,7 @@ export default (
   draftSynoMap: MutableSynoMap,
   latestEdit: UnistlikeEdit[],
 ): void => {
-  const { textHost } = state.grammar()[state.focusedSyno().syntype].nonTreeRefs;
+  const { textHost } = state.syntypeSchema()[state.focusedSyno().syntype].nonTreeRefs;
 
   let textHostSyno: Syno;
   if (!textHost) {

@@ -10,14 +10,14 @@ export default (
 ): void => {
   const {
     id,
-    grammar,
+    actualGrammar,
     keyToNewSynoAttrs,
     styles,
   } = newIntegration;
 
   Object.assign(mutateeIntegration, {
     id,
-    grammar,
+    actualGrammar,
     keyToNewSynoAttrs,
     renderers: generateRenderers(newIntegration),
     styles,

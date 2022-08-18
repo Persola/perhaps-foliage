@@ -11,11 +11,14 @@ export default (editorState: EditorState): StateSelector => {
   // state
     state: editorState,
     // first-level accessors
-    integrationId: function grammar() {
+    integrationId: function integrationId() {
       return this.state.integrationId;
     },
-    grammar: function grammar() {
-      return this.state.grammar;
+    actualGrammar: function actualGrammar() {
+      return this.state.actualGrammar;
+    },
+    syntypeSchema: function syntypeSchema() {
+      return this.state.syntypeSchema;
     },
     primitives: function primitives() {
       return this.state.primitives;

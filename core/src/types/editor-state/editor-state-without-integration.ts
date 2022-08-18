@@ -1,6 +1,7 @@
 export type EditorStateWithoutIntegration = {
   readonly integrationId: null;
-  readonly grammar: null;
+  readonly actualGrammar: null;
+  readonly syntypeSchema: null;
   readonly primitives: null;
   readonly keyToNewSynoAttrs: null;
   readonly lastIntegrationBindings: string[] | null;

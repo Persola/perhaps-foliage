@@ -73,7 +73,8 @@ export default (
   }
   const defaultEditorState: EditorState = {
     integrationId: integration.id,
-    grammar: integration.grammar,
+    actualGrammar: integration.actualGrammar,
+    syntypeSchema: integration.syntypeSchema,
     primitives: integration.primitives,
     keyToNewSynoAttrs: integration.keyToNewSynoAttrs,
     lastIntegrationBindings: null,

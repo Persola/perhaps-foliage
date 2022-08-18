@@ -1,0 +1,29 @@
+nonTerminals:
+  - 'nonTerminalTitan'
+  - 'nonTerminalOlympian'
+terminals:
+  - 'titan'
+  - 'olympian'
+startingNonTerminal: 'nonTerminalTitan'
+productionRules:
+  -
+    lhs: 'nonTerminalTitan'
+    rhs:
+      parent: 'titan'
+      children:
+        -
+          edgeLabel: 'child'
+          childNonTerminal: 'nonTerminalOlympian'
+  -
+    lhs: 'nonTerminalOlympian'
+    rhs:
+      parent: 'olympian'
+      children:
+        -
+          edgeLabel: 'child'
+          childNonTerminal: 'nonTerminalOlympian'
+  -
+    lhs: 'nonTerminalOlympian'
+    rhs:
+      parent: 'olympian'
+      children: []
