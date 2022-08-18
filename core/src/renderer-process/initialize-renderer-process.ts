@@ -1,4 +1,4 @@
-import createRenderers from './renderer/generation/generate-renderers';
+import updateRendersideIntegration from './update-renderside-integration';
 import Renderer from './renderer/renderer';
 import updateInputBindings from './update-input-bindings';
 
@@ -18,21 +18,18 @@ export default (
   sendCrossContextMessage: CrossContextMessageSender,
   initialRendererIntegration: (RendersideUninitializedPresentLangInt | null),
 ): void => {
-  const renderer = new Renderer(document);
   const integration: RendersideLangInt = {
-    id: initialRendererIntegration ? initialRendererIntegration.id : null,
-    keyToNewSynoAttrs: (
-      initialRendererIntegration
-        ? initialRendererIntegration.keyToNewSynoAttrs
-        : null
-    ),
-    renderers: (
-      initialRendererIntegration
-        ? createRenderers(initialRendererIntegration)
-        : null
-    ),
-    styles: initialRendererIntegration ? initialRendererIntegration.styles : null,
+    id: null,
+    keyToNewSynoAttrs: null,
+    renderers: null,
+    styles: null,
   };
+
+  if (initialRendererIntegration) {
+    updateRendersideIntegration(integration, initialRendererIntegration);
+  }
+
+  const renderer = new Renderer(document);
 
   registerCrossContextMessageHandler('render', (data: Render) => {
     renderer.render(
@@ -45,7 +42,9 @@ export default (
 
     updateInputBindings(
       sendCrossContextMessage,
-      integration.keyToNewSynoAttrs ? Object.keys(integration.keyToNewSynoAttrs) : [],
+      integration.keyToNewSynoAttrs
+        ? Object.keys((integration as RendersideLangInt).keyToNewSynoAttrs)
+        : [],
       data.inputsToUnbind || [],
     );
   });

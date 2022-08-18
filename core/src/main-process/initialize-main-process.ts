@@ -1,11 +1,10 @@
 import { enableMapSet } from 'immer';
 
+import updateMainsideIntegration from './update-mainside-integration';
 import createEditorStateStore from './heart/create-editor-state-store';
 import createPresent from './presenter/create-present';
 import createInputResolver from './input-resolver/create-input-resolver';
-import validateGrammar from './code-loader/validate-grammar';
 import validateGraph from './code-loader/validate-graph';
-import initializePresenters from './presenter/generation/initialize-presenters';
 
 import type { MainsideLangInt } from '../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type {
@@ -40,31 +39,18 @@ export default (
     state independant of the editor state. It is kept in sync with language loads in
     editorStateSubscription below.
   */
-  let integration: MainsideLangInt;
+  const integration: MainsideLangInt = {
+    id: null,
+    grammar: null,
+    primitives: null,
+    keyToNewSynoAttrs: null,
+    interpret: null,
+    synoValidators: null,
+    presenters: null,
+  };
+
   if (vscodeParams) {
-    validateGrammar(
-      vscodeParams.initialLangInt.grammar,
-      vscodeParams.initialLangInt.id,
-    );
-    integration = {
-      ...vscodeParams.initialLangInt,
-      ...{
-        presenters: initializePresenters(
-          integration.grammar,
-          integration.presenters,
-        ),
-      },
-    };
-  } else {
-    integration = {
-      id: null,
-      grammar: null,
-      primitives: null,
-      keyToNewSynoAttrs: null,
-      interpret: null,
-      synoValidators: null,
-      presenters: null,
-    };
+    updateMainsideIntegration(integration, vscodeParams.initialLangInt);
   }
 
   const warnUser: Warn = (warning: string) => {
@@ -135,6 +121,7 @@ export default (
     }
 
     const { resultOutdated, interpreting } = editorStateStore.getState();
+
     sendCrossContextMessage(
       'render',
       {

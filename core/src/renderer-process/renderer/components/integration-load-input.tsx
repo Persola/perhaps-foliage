@@ -1,12 +1,13 @@
 import * as React from 'react';
 
-import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
-import type { RendersidePresentLangInt } from '../../../types/language-integration/interfaces/renderside/renderside-present-lang-int';
 import loadCompleteIntegration from '../../load-complete-integration';
+
+import type { CrossContextMessageSender } from '../../../types/cross-context/cross-context-messaging';
+import type { RendersideLangInt } from '../../../types/language-integration/interfaces/renderside/renderside-lang-int';
 
 type Props = {
   sendCrossContextMessage: CrossContextMessageSender;
-  integration: RendersidePresentLangInt;
+  integration: RendersideLangInt;
 };
 
 const loadIntegration = (e, sendCrossContextMessage, oldIntegration) => {

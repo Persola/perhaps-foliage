@@ -1,30 +1,10 @@
-import validateGrammar from '../../code-loader/validate-grammar';
-import initializePresenters from '../../presenter/generation/initialize-presenters';
+import updateMainsideIntegration from '../../update-mainside-integration';
 
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
-import type { MainsideUninitializedPresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-uninitialized-present-lang-int';
-
-const updateIntegration = (
-  mutateeIntegration: MainsidePresentLangInt,
-  newIntegrationAttrs: MainsideUninitializedPresentLangInt,
-) => {
-  Object.assign(mutateeIntegration, {
-    id: newIntegrationAttrs.id,
-    grammar: newIntegrationAttrs.grammar,
-    primitives: newIntegrationAttrs.primitives,
-    keyToNewSynoAttrs: newIntegrationAttrs.keyToNewSynoAttrs,
-    interpret: newIntegrationAttrs.interpret,
-    synoValidators: newIntegrationAttrs.synoValidators,
-    presenters: initializePresenters(
-      newIntegrationAttrs.grammar,
-      newIntegrationAttrs.presenters,
-    ),
-  });
-};
 
 export default (
   state: StateSelector,
@@ -33,19 +13,16 @@ export default (
   mutateeIntegration: MainsideLangInt, // the integration object used by dependants
 ): void => {
   const { newIntegrationAttrs } = action;
+
   if (state.loadingIntegration() === false) {
     throw new Error(
       'Tried to end integration load while there was no integration being loaded',
     );
   }
 
-  validateGrammar(
-    newIntegrationAttrs.grammar,
-    newIntegrationAttrs.id,
-  );
-
   const presentMutateeIntegration: MainsidePresentLangInt = mutateeIntegration;
-  updateIntegration(
+
+  updateMainsideIntegration(
     presentMutateeIntegration,
     newIntegrationAttrs,
   );

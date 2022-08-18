@@ -6,6 +6,5 @@ export default {
       attr: 'name',
       as: 'NamePart',
     },
-    child: 'child',
   },
 };

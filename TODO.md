@@ -13,7 +13,6 @@
   * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
 * type presenters better
-* extract integration loading from init scripts and load-complete
 * replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands
@@ -23,6 +22,12 @@
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
     * but a server makes more sense for the ECMAscript parts of the integration
+* rewire startup
+  * INITIALIZE becomes message that trigger integration load
+  * only update integration in integration load reducer to keep in sync with state
+    * so integration always starts absent (nulls)
+    * one way to update it, triggered by INITIALIZE
+    * also need to load initial document afterwards
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface mainside errors and show on renderside

@@ -23,7 +23,7 @@ import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 import charBackspaceReducer from './reducers/char-backspace-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 
-import loadIntegrationEpic from './epics/load-integration';
+import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
@@ -230,7 +230,7 @@ export default (
   );
 
   const rootEpic = (action$, state$) => merge(
-    loadIntegrationEpic(action$),
+    hotloadIntegrationEpic(action$),
     loadSyntreeEpic(action$, state$, stateSelector, integration),
     interpretEpic(action$, state$, stateSelector, integration, warnUser),
   );
