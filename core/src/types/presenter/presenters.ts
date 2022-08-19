@@ -1,5 +1,5 @@
-import { Presenter } from './presenter';
+import { SynoPresenter } from './presenter';
 
 export type Presenters = Readonly<{
-  [syntype: string]: Presenter
+  [syntype: string]: SynoPresenter
 }>;

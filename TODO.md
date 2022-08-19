@@ -11,7 +11,6 @@
   * then make restrictions based on langauge integration
   * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
-* type presenters better
 * replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands

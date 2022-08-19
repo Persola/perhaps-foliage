@@ -1,4 +1,4 @@
-import type { Presenter } from '../../../types/presenter/presenter';
+import type { SynoPresenter } from '../../../types/presenter/presenter';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
 import { Syno } from '../../../types/syntactic/syno';
 import { StateSelector } from '../../../types/state-selector';
@@ -7,7 +7,7 @@ import generateAttrPresenters from './generate-attr-presenters';
 export default (
   syntype: string,
   presenterConfig: PresenterConfig,
-): Presenter => {
+): SynoPresenter => {
   const [attrPresenters, childPresnoPresenters] = generateAttrPresenters(
     presenterConfig,
   );
