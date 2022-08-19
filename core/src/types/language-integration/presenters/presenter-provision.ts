@@ -1,7 +1,7 @@
 import type { PresenterConfig } from './presenter-config';
-import type { Presenter } from '../../presenter/presenter';
+import type { SynoPresenter } from '../../presenter/presenter';
 
 export type PresenterProvision = (
   | PresenterConfig
-  | Presenter
+  | SynoPresenter
 );

@@ -1,10 +1,13 @@
-// eslint-disable-next-line
-import type { SynoPresenterArgs } from './syno-presenter-args';
-import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';
+import type { Syno } from '../syntactic/syno';
+import type { StateSelector } from '../state-selector';
 import type { PresnoAttrVal } from './presnos/presno-attrs';
+import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';
 
 // eslint-disable-next-line
-export type Presenter = (...SynoPresenterArgs) => [
+export type SynoPresenter = (
+  syno: Syno,
+  state: StateSelector
+) => [
   {
     syntype: string;
     [index: string]: PresnoAttrVal;
