@@ -8,6 +8,10 @@
 * should I be formalizing tree edits according to tree rewriting stuff?
   * probably not necessary but maybe I should do some reading
   * to make sure I have a reasonably compatible set of transformations
+  * trees _must_ be closed under edits
+  * edits could also guide the user towards obeying the grammar
+    * but maybe this should be strictly integrationland
+    * user's ability to mutate fluidly vs. editor's grammar-awareness
 * solving the N x M problem
   * i.e., combinatorial complexity between languages and development environments
   * Microsoft's [Language Server Protocol](https://github.com/microsoft/language-server-protocol) does a good job of solving this problem for current editors/languages
@@ -63,7 +67,7 @@
       * https://github.com/tree-sitter/tree-sitter/blob/aea35461b1c5c1d47615759080aac1168ce03ec0/lib/include/tree_sitter/api.h
     * not language independant (JS) but kind of cool https://github.com/benjamn/ast-types
     * some more leads: https://tomassetti.me/parsing-in-javascript/
-  * gradual/modular typing/specification
+  * modular typing/specification
     * cue or similar math?
     * [Gradual Typing (Siek & Taha)](http://scheme2006.cs.uchicago.edu/13-siek.pdf)
   * https://webia.lip6.fr/~phw//aGrUM/docs/last/doxygen/d5/dd1/using_graphs.html
@@ -129,8 +133,14 @@
   * maybe:
       * https://ieeexplore.ieee.org/document/4656419?arnumber=4656419
 * related projects
-  * (I'm aware of many but want to organize thoughts about them)
-  * [MPS](https://www.jetbrains.com/help/mps/language-definition.html)
+  * non-textual arbitrary language editors
+    * [MPS](https://www.jetbrains.com/help/mps/language-definition.html)
+  * projection editors
+    * paredit
+  * tree editors
+    * https://jaredforsyth.com/treed/
+  * Unison does the hashing dependencies thing
+    * develop integration for unison to try color hash visualization?
 * Saliva being original motivation for Perhaps Foliage
   * the "arguments interspersed with functional names" thing might seem particular
   * but could it not free code from a needlessly verbose Polish notation?
@@ -160,3 +170,9 @@
   * Cleophas, L. G. W. A., & Hemerik, C. (2009). Taxonomies of regular tree algorithms. In J. Holub, & J. Zdarek (Eds.), Proceedings of the Prague Stringology Conference 200 (PSC'09, Prague, Czech Republic, August 31-September 2, 2009) (pp. 146-159). Czech Technical University in Prague.
   * http://alexandria.tue.nl/extra2/200810270.pdf
   * BOTTOM-UP TREE ACCEPTORS C. HEMERIK and J.P. KATOEN
+* syno IDs
+  * presumably getting rids of syno IDs as-is
+  * I think replaced by paths, but that brings up idenitity issues
+  * will need to add content addressing (hash subsyntrees)
+    * but that can only serve for certain purposes b/c it changes
+    * the limitations applied by focus might make it more generally useful?

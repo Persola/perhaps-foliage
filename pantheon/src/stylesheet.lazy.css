@@ -3,6 +3,15 @@
   --mint: #2a7;
   --pumpkin: #841;
   --pearl-shell: #e87;
+  --transparent: rgba(0, 0, 0, 0);
+  --invalid-color: rgba(0, 0, 0, 0.7);
+  --invalid-overlay: repeating-linear-gradient(
+    45deg,
+    var(--transparent),
+    var(--transparent) 3px,
+    var(--invalid-color) 3px,
+    var(--invalid-color) 6px
+  );
 }
 
 .code-view .titan {
@@ -10,7 +19,23 @@
   color: var(--mint);
 }
 
+.code-view .invalid.argument {
+  background-image: var(--invalid-overlay),
+                    linear-gradient(var(--villian-laser-magenta), var(--villian-laser-magenta));
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
 .code-view .olympian {
   background-color: var(--pumpkin);
   color: var(--pearl-shell);
 }
+
+.code-view .invalid.argument {
+  background-image: var(--invalid-overlay),
+                    linear-gradient(var(--pumpkin), var(--pumpkin));
+  background-attachment: fixed;
+  box-shadow: inset 0 0 0 1px var(--charcoal);
+}
+
+
