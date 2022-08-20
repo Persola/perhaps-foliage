@@ -8,10 +8,9 @@
 
 **maintenance**
 * allow, in general, any syno to be child of any other syno in any order
-  * then make restrictions based on langauge integration
+  * then make restrictions based on language integration
   * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
-* replace custom invalid styles with overlayed background-image property
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands
 * extract common logic between editor renderers and integration (generated) renderers
@@ -48,7 +47,6 @@
 * **?** presentation tree should also have grammar
   * will be a probablem that it's only locally treelike? 
   * actually, maybe it will always be an actual tree, just with ellisions optionally attached to root and leaves
-* **?** systematic method to generate IDs
 * **?** use for child syno of in inverse reference map and destroy syno (combine with getChildpresnos?)
 * **?** pres validation
   * mismatching IDs was painful bug in pre after specifically guarding against it in syn
@@ -151,9 +149,6 @@
         * property values would be given diretly
         * refs are followed automatically
         * sure, I guess
-* should synos have IDs?
-  * yes, for performance, at least in memory when editor is running
-  * but should they exist in the AST format?
 * handling different code sources
   * e.g. navigate into primitive
   * e.g. navigate into dependency
@@ -161,7 +156,6 @@
   * current format issues
     * wrap syntrees in file with metadata (root ID)
     * **?** AST format stores all refs in one object, relation type is property of ref
-  * incremental/modular format using Cue?
   * current custom format is
     * directed/locally treelike
     * labeled edges ('relation')
@@ -222,23 +216,20 @@
 * priority: language integration interface
 
 **longview**
-* write JSON integration
-* write integration for a real, in-use general-purpose programming language (Scheme?)
-  * need bidirectional transformation between AST and text code (can use unist?)
 * pick license
   * probably just MIT
   * make sure contributors give up all copyright on offering contribution?
+* write JSON integration
 * operationalize
 * launch minimal viable project
+* write integration for a real, in-use general-purpose programming language (Scheme?)
+  * need bidirectional transformation between AST and text code (can use unist?)
 * veryifying valid syntax is renderable
   * formal?
   * fuzz based on grammar
 * **?** use proxy-memoize or another selector memoizer
   * premature optimization for now
 * give every syno a fragment identifier
-  * structural (path) or nominal (ID)?
-    * well, structural presumably
-    * I probably need to kill syno IDs (and use indices for easy access instead)
 
 **experimentation**
 * try always-next-line + always-(class inheritance or call graph)-bidirectional-multipane?
