@@ -1,4 +1,5 @@
 import forChildSynoOf from '../../../syntree-utils/read-node/for-child-syno-of';
+import matchProductionRule from '../../../syntree-utils/match-production-rule';
 
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
@@ -10,7 +11,6 @@ import type {
 import type { SynoRef } from '../../../types/syntactic/syno-ref';
 import type { UnindexedNonSynPresnoArgs } from '../../../types/presenter/presno-args/unindexed-non-syn-presno-args';
 import type { UnindexedPresnoArgs } from '../../../types/presenter/presno-args/unindexed-presno-args';
-import type { ActualGrammar } from '../../../types/grammar/actual-grammar';
 import type { ProductionRule } from '../../../types/grammar/production-rule';
 import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 
@@ -30,36 +30,6 @@ const synPresnoArgs = (synoRef: SynoRef): SynPresnoArgs => {
     type: 'synPresno',
     synoId: synoRef.id,
   };
-};
-
-const childrenFromGrammar = (
-  parent: Syno,
-  actualGrammar: ActualGrammar,
-) => {
-  const rulesProducingSyntype = actualGrammar.productionRules.filter(rule => {
-    return rule.rhs.parent === parent.syntype;
-  });
-
-  const rulesMatchingChildren = rulesProducingSyntype.filter(rule => {
-    const childEdgeLabels = [];
-    forChildSynoOf(parent, (synoRef, edge) => {
-      childEdgeLabels.push(edge.key);
-    });
-
-    const grammarChildEdgeLabels = rule.rhs.children.map(child => child.edgeLabel);
-
-    return (
-      childEdgeLabels.length === grammarChildEdgeLabels.length
-      && childEdgeLabels.every((label, index) => label === grammarChildEdgeLabels[index])
-    );
-  });
-
-  if (rulesMatchingChildren.length === 1) {
-    return rulesMatchingChildren[0].rhs.children;
-  }
-
-  // guess
-  return rulesProducingSyntype[0].rhs.children;
 };
 
 export default (
@@ -89,10 +59,10 @@ export default (
     ind += 1;
   });
 
-  const grammarChildren: ProductionRule['rhs']['children'] = childrenFromGrammar(
+  const grammarChildren: ProductionRule['rhs']['children'] = matchProductionRule(
     syno,
     integration.actualGrammar,
-  );
+  ).rhs.children;
 
   const grammarChildEdgeLabels = new Set(grammarChildren.map(child => child.edgeLabel));
 

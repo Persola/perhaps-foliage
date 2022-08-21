@@ -15,7 +15,7 @@
   --tomato: #b03820;
   --pearl-shell: #e87;
   --transparent: rgba(0, 0, 0, 0);
-  --invalid-color: rgba(0, 0, 0, 0.8);
+  --invalid-color: rgba(0, 0, 0, 0.5);
   --invalid-overlay: repeating-linear-gradient(
     45deg,
     var(--transparent),
