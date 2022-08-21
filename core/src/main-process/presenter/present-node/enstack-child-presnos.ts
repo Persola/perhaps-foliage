@@ -40,46 +40,66 @@ export default (
   // eslint-disable-next-line
 ): SynPresno['children'] => {
   const childPresnoRefs: LabledChildPresno[] = [];
-  let ind = 0;
+  let presnoChildIndex = 0;
 
+  // push all non-syntactical presnos first
   for (const [childKey, childArgs] of Object.entries(nonSynChildPresnoArgs)) {
     childPresnoRefs.push({
       edgeLabel: childKey,
-      childRef: enstackForPresentation(ind, childArgs as UnindexedNonSynPresnoArgs),
+      childRef: enstackForPresentation(presnoChildIndex, childArgs as UnindexedNonSynPresnoArgs),
     });
-    ind += 1;
+    presnoChildIndex += 1;
   }
-
-  forChildSynoOf(syno, (childSynoRef, edge) => {
-    const { key } = edge;
-    childPresnoRefs.push({
-      edgeLabel: key,
-      childRef: enstackForPresentation(ind, synPresnoArgs(childSynoRef)),
-    });
-    ind += 1;
-  });
 
   const grammarChildren: ProductionRule['rhs']['children'] = matchProductionRule(
     syno,
     integration.actualGrammar,
   ).rhs.children;
 
-  const grammarChildEdgeLabels = new Set(grammarChildren.map(child => child.edgeLabel));
+  const childSynoRefs = [];
+  const childSynoEdges = [];
+  forChildSynoOf(syno, (childSynoRef, edge) => {
+    const { key } = edge;
+    childSynoRefs.push(childSynoRef);
+    childSynoEdges.push(key);
+  });
 
-  for (const grammarEdgeLabel of grammarChildEdgeLabels) {
-    const matchingGrammarChildren = grammarChildren.filter(child => {
-      return child.edgeLabel === grammarEdgeLabel;
-    });
-    const matchingRefs = childPresnoRefs.filter(ref => {
-      return ref.edgeLabel === grammarEdgeLabel;
-    });
-    if (matchingRefs.length < matchingGrammarChildren.length) {
+  let synoChildIndex = 0;
+
+  for (const grammarChild of grammarChildren) {
+    if (childSynoEdges[synoChildIndex] === grammarChild.edgeLabel) {
       childPresnoRefs.push({
-        edgeLabel: grammarEdgeLabel,
-        childRef: enstackForPresentation(ind, budArgs(syno)),
+        edgeLabel: grammarChild.edgeLabel,
+        childRef: enstackForPresentation(
+          presnoChildIndex,
+          synPresnoArgs(childSynoRefs[synoChildIndex]),
+        ),
       });
-      ind += 1;
+
+      synoChildIndex += 1;
+    } else {
+      childPresnoRefs.push({
+        edgeLabel: grammarChild.edgeLabel,
+        childRef: enstackForPresentation(
+          presnoChildIndex,
+          budArgs(syno),
+        ),
+      });
     }
+
+    presnoChildIndex += 1;
+  }
+
+  while (synoChildIndex < childSynoRefs.length) {
+    childPresnoRefs.push({
+      edgeLabel: childSynoEdges[synoChildIndex],
+      childRef: enstackForPresentation(
+        presnoChildIndex,
+        synPresnoArgs(childSynoRefs[synoChildIndex]),
+      ),
+    });
+    synoChildIndex += 1;
+    presnoChildIndex += 1;
   }
 
   return childPresnoRefs;

@@ -135,6 +135,10 @@
 * related projects
   * non-textual arbitrary language editors
     * [MPS](https://www.jetbrains.com/help/mps/language-definition.html)
+      * mbeddr
+    * [Synthesizer Generator](https://dl.acm.org/doi/pdf/10.1145/390011.808247)
+    * [CENTAUR](https://dl.acm.org/doi/pdf/10.1145/64140.65005)
+    * [Barista](https://d1wqtxts1xzle7.cloudfront.net/31004935/viewcontent-with-cover-page-v2.pdf?Expires=1661294375&Signature=cSp9nPYUMhj8Q9uh672z~EeanJCFnYju35K6Q88EhxJttKN7hfAJzt5FCnmCnvESFmIieqtLkdKbT8UfeL4OYBgVic6uqkQ9Mb~22ePIGCDX8iLZIiVphxAohYTe4rUw7r2t~F6YiQLijPV185~W-pHy3Oz1YoNFnbq3Nl1HwvLd13V2-4-cAS4BuMidE~qk7SkXCx~e1nZWrCBPO-DrOUIZzrrvY85eXEziupIT38KieTtpCL26ezh0NSvvLoZdbQhwkqxVLBSZAa2v-e84huIU~ATUbKvw0DuqmLxQuub5c2aIseM556l7hMflLMHNPNkFTlVeYirysC21JI3rJg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
   * projection editors
     * paredit
   * tree editors

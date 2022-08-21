@@ -1,5 +1,8 @@
 **next**
-  * replace synoMap with new syntactical data layer
+* change how background color is assigned
+  * currently: node type
+  * planned: edge label
+  * alternative: non-terminal (consider root)
 
 **testing**
 * try rendering everything that should already be renderable
@@ -7,14 +10,15 @@
 **bugs**
 
 **maintenance**
+* extract common logic between editor renderers and integration (generated) renderers
+  * presno ID, parent attr, focused, valid
+* replace synoMap with new syntactical data layer
 * allow, in general, any syno to be child of any other syno in any order
   * then make restrictions based on language integration
   * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands
-* extract common logic between editor renderers and integration (generated) renderers
-  * especially focused and valid flags
 * adopt LSP
   * not very useful yet, but so the structure guides me
   * how the hell would I do this!? totally different design
@@ -67,6 +71,9 @@
         * function argument (argument) -> among parameters of call's callee (extension dependency)
         * function definition body (function call) -> which callee
         * function definition parameter (parameter) (no options, just type slot name)
+  * after delete, focus on the resulting hole
+    * it should be in the same place
+    * if you don't fill it but instead move focus away, resort to non-remembering placement (may jump)
 * extensions/plugins
   * text hosts should be model, since it's a bit specific
 * VSCode extension
@@ -222,6 +229,7 @@
 * write JSON integration
 * operationalize
 * launch minimal viable project
+* constraint-based layout?
 * write integration for a real, in-use general-purpose programming language (Scheme?)
   * need bidirectional transformation between AST and text code (can use unist?)
 * veryifying valid syntax is renderable
