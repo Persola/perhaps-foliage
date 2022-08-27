@@ -1,6 +1,6 @@
 import type { PresnoRef } from '../presno-ref';
 import type { PresnoAttrVal } from './presno-attrs';
-import type { Bud } from './non-syn-presnos/bud';
+import type { Gap } from './non-syn-presnos/gap';
 import type { NamePart } from './non-syn-presnos/name-part';
 
 export type LabledChildPresno = Readonly<{
@@ -17,7 +17,7 @@ export type SynPresno = Readonly<{
 }>;
 
 export type NonSynPresno = (
-  | Bud
+  | Gap
   | NamePart
 );
 

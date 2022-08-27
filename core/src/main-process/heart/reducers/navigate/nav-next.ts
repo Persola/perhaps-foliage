@@ -20,7 +20,7 @@ export default (
   }
 
   if (state.focusedSynoIsRoot() && !state.inPresno()) {
-    warnUser('Ignoring navigation to next sibling: focus syno is root');
+    warnUser('Ignoring navigation to next sibling: focused syno is root');
     return;
   }
 

@@ -49,7 +49,7 @@ export default (
   const { focusedPresnoId } = action;
   const focus: MutableFocus = draftState.focus;
   destroySyno(focusedPresnoId, state, draftState);
-  // here we need to know whether a required child bud will be presented
+  // here we need to know whether a required child gap will be presented
   // so we can remain focused on it
   navOut(state, focus, warnUser);
 };

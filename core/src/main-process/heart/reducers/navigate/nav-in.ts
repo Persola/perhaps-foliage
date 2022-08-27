@@ -13,7 +13,7 @@ export default (
   integration: MainsideLangInt,
 ): void => {
   if (state.inText()) {
-    warnUser('cannot navigate down: editing text');
+    warnUser('Ignoring navigation inwards: editing text');
     return;
   }
 
@@ -26,7 +26,7 @@ export default (
   const childPresnoRefs = getChildPresnoRefs(state.focusedSyno(), state, integration);
 
   if (childPresnoRefs.length === 0) {
-    warnUser('ignoring navigation inwards: no children');
+    warnUser('Ignoring navigation inwards: no children');
     return;
   }
 

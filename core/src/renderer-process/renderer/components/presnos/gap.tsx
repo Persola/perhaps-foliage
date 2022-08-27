@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import type { BudProps } from '../../../../types/renderer/components/bud-props';
+import type { GapProps } from '../../../../types/renderer/components/gap-props';
 
-export default (props: BudProps): JSX.Element => {
+export default (props: GapProps): JSX.Element => {
   const { presno: { focused, valid, expectedSyntype } } = props;
 
   const classes = [
     'same-line',
     'leaf',
-    'bud',
+    'gap',
     'syno',
     expectedSyntype,
     focused ? 'focused' : 'unfocused',

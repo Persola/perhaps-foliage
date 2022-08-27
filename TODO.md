@@ -1,5 +1,4 @@
 **next**
-* turn buds into gaps
 * add real buds
   * real buds only exist under focus
   * can be created with spacebar + arrow
@@ -58,7 +57,7 @@
 
 **new functionality**
 * editing
-  * add holes for missing children types
+  * add buds for missing children types
     * when focused, typing -> autocomplete menu
       * menu of types (in eigensyno?)
         * enter -> make bud that type
@@ -67,7 +66,7 @@
         * function argument (argument) -> among parameters of call's callee (extension dependency)
         * function definition body (function call) -> which callee
         * function definition parameter (parameter) (no options, just type slot name)
-  * after delete, focus on the resulting hole
+  * after delete, focus on the resulting bud
     * it should be in the same place
       * this would be easy if buds didn't appear automatically for missing children
         * goes along with non-syntactical stuff only existing under focus

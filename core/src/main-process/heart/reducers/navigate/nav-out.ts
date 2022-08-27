@@ -17,8 +17,8 @@ export default (
     return;
   }
 
-  if (!state.focusedSyno().parent) {
-    warnUser('Ignoring navigation outwards: no parent (tree root)');
+  if (state.focusedSynoIsRoot()) {
+    warnUser('Ignoring navigation outwards: no parent (focused on root)');
     return;
   }
 

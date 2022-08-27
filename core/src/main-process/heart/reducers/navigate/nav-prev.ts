@@ -13,11 +13,6 @@ export default (
   warnUser: Warn,
   integration: MainsideLangInt,
 ): void => {
-  if (state.focusedSynoIsRoot()) {
-    warnUser('ignoring navigation to previous sibling: focus syno is root');
-    return;
-  }
-
   if (state.inText()) {
     if (state.focusedCharIndex() === 0) {
       warnUser('Ignoring navigation to previous sibling: already on first character');
@@ -25,6 +20,11 @@ export default (
     }
 
     draftFocus.charIndex -= 1;
+    return;
+  }
+
+  if (state.focusedSynoIsRoot() && !state.inPresno()) {
+    warnUser('Ignoring navigation to previous sibling: focused syno is root');
     return;
   }
 

@@ -15,7 +15,7 @@ import type { ProductionRule } from '../../../types/grammar/production-rule';
 import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 import type { ChildEdge } from '../../../types/syntactic/child-edge';
 
-const budArgs = (
+const gapArgs = (
   parent: Syno,
   childSyntype: string,
 ): UnindexedNonSynPresnoArgs => {
@@ -24,7 +24,7 @@ const budArgs = (
     parentId: parent.id,
     nonSynoArgs: {
       valid: true,
-      prestype: 'bud',
+      prestype: 'gap',
       expectedSyntype: childSyntype,
     },
   };
@@ -63,7 +63,7 @@ export default (
     integration.actualGrammar,
   ).rhs.children;
 
-  // TODO: based on edit distance match in matchProductionRule, use edits to add buds and
+  // TODO: based on edit distance match in matchProductionRule, use edits to add gaps and
   // label invalidities. Also maybe get non-terminal type back from matchProductionRule?
   let childSynoIndex = 0;
   const childSynoRefs: SynoRef[] = [];
@@ -95,7 +95,7 @@ export default (
         edgeLabel,
         childRef: enstackForPresentation(
           childPresnoIndex,
-          budArgs(syno, childSyntype),
+          gapArgs(syno, childSyntype),
         ),
       });
     }

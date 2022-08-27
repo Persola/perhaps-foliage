@@ -1,6 +1,6 @@
-export type BudArgs = {
+export type GapArgs = {
   // reserved: 'synoRef'
   valid: boolean,
-  prestype: 'bud',
+  prestype: 'gap',
   expectedSyntype: string;
 };
