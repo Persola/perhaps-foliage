@@ -8,15 +8,11 @@ export type LabledChildPresno = Readonly<{
   childRef: PresnoRef;
 }>;
 
-// export type SynPresnoChildren = Readonly<{
-//   children: LabledChildPresno[];
-// }>;
-
 export type SynPresno = Readonly<{
   id: string;
   prestype: string;
-  parent: (null | PresnoRef);
   children: LabledChildPresno[];
+  // prestypeSpecificPresnoAttr shouldn't include LabledChildPresno[] but how to type?
   [prestypeSpecificPresnoAttr: string]: (PresnoAttrVal | LabledChildPresno[]);
 }>;
 

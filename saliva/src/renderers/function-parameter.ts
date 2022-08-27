@@ -1,9 +1,8 @@
 export default {
   htmlClasses: [
-    'function-parameter',
+    'functionParameter',
     'same-line',
     'leaf',
-    'bubble-even',
   ],
   content: [],
 };

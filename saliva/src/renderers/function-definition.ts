@@ -1,6 +1,6 @@
 export default {
   htmlClasses: [
-    'function-definition',
+    'functionDefinition',
   ],
   content: [],
 };

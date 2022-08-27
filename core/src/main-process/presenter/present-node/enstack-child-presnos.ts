@@ -13,14 +13,19 @@ import type { UnindexedNonSynPresnoArgs } from '../../../types/presenter/presno-
 import type { UnindexedPresnoArgs } from '../../../types/presenter/presno-args/unindexed-presno-args';
 import type { ProductionRule } from '../../../types/grammar/production-rule';
 import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
+import type { ChildEdge } from '../../../types/syntactic/child-edge';
 
-const budArgs = (parent): UnindexedNonSynPresnoArgs => {
+const budArgs = (
+  parent: Syno,
+  childSyntype: string,
+): UnindexedNonSynPresnoArgs => {
   return {
     type: 'nonSynPresno',
     parentId: parent.id,
     nonSynoArgs: {
       valid: true,
       prestype: 'bud',
+      expectedSyntype: childSyntype,
     },
   };
 };
@@ -35,20 +40,22 @@ const synPresnoArgs = (synoRef: SynoRef): SynPresnoArgs => {
 export default (
   syno: Syno,
   integration: MainsidePresentLangInt,
-  nonSynChildPresnoArgs: { [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[]) },
+  childPresnoArgsFromIntegration: {
+    [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[])
+  },
   enstackForPresentation: EnstackForPresentation,
   // eslint-disable-next-line
 ): SynPresno['children'] => {
   const childPresnoRefs: LabledChildPresno[] = [];
-  let presnoChildIndex = 0;
+  let childPresnoIndex = 0;
 
-  // push all non-syntactical presnos first
-  for (const [childKey, childArgs] of Object.entries(nonSynChildPresnoArgs)) {
+  // first push all presnos from integration
+  for (const [childKey, childArgs] of Object.entries(childPresnoArgsFromIntegration)) {
     childPresnoRefs.push({
       edgeLabel: childKey,
-      childRef: enstackForPresentation(presnoChildIndex, childArgs as UnindexedNonSynPresnoArgs),
+      childRef: enstackForPresentation(childPresnoIndex, childArgs as UnindexedNonSynPresnoArgs),
     });
-    presnoChildIndex += 1;
+    childPresnoIndex += 1;
   }
 
   const grammarChildren: ProductionRule['rhs']['children'] = matchProductionRule(
@@ -56,50 +63,58 @@ export default (
     integration.actualGrammar,
   ).rhs.children;
 
-  const childSynoRefs = [];
-  const childSynoEdges = [];
+  // TODO: based on edit distance match in matchProductionRule, use edits to add buds and
+  // label invalidities. Also maybe get non-terminal type back from matchProductionRule?
+  let childSynoIndex = 0;
+  const childSynoRefs: SynoRef[] = [];
+  const childSynoEdges: ChildEdge[] = [];
   forChildSynoOf(syno, (childSynoRef, edge) => {
-    const { key } = edge;
     childSynoRefs.push(childSynoRef);
-    childSynoEdges.push(key);
+    childSynoEdges.push(edge);
   });
 
-  let synoChildIndex = 0;
-
   for (const grammarChild of grammarChildren) {
-    if (childSynoEdges[synoChildIndex] === grammarChild.edgeLabel) {
+    const { edgeLabel, childNonTerminal } = grammarChild;
+
+    if (childSynoEdges[childSynoIndex]?.key === edgeLabel) {
       childPresnoRefs.push({
-        edgeLabel: grammarChild.edgeLabel,
+        edgeLabel,
         childRef: enstackForPresentation(
-          presnoChildIndex,
-          synPresnoArgs(childSynoRefs[synoChildIndex]),
+          childPresnoIndex,
+          synPresnoArgs(childSynoRefs[childSynoIndex]),
         ),
       });
 
-      synoChildIndex += 1;
+      childSynoIndex += 1;
     } else {
+      const childSyntype = integration.actualGrammar.productionRules.find(rule => {
+        return rule.lhs === childNonTerminal;
+      }).rhs.parent;
+
       childPresnoRefs.push({
-        edgeLabel: grammarChild.edgeLabel,
+        edgeLabel,
         childRef: enstackForPresentation(
-          presnoChildIndex,
-          budArgs(syno),
+          childPresnoIndex,
+          budArgs(syno, childSyntype),
         ),
       });
     }
 
-    presnoChildIndex += 1;
+    childPresnoIndex += 1;
   }
 
-  while (synoChildIndex < childSynoRefs.length) {
+  while (childSynoIndex < childSynoRefs.length) {
+    const edgeLabel = childSynoEdges[childSynoIndex].key;
+
     childPresnoRefs.push({
-      edgeLabel: childSynoEdges[synoChildIndex],
+      edgeLabel,
       childRef: enstackForPresentation(
-        presnoChildIndex,
-        synPresnoArgs(childSynoRefs[synoChildIndex]),
+        childPresnoIndex,
+        synPresnoArgs(childSynoRefs[childSynoIndex]),
       ),
     });
-    synoChildIndex += 1;
-    presnoChildIndex += 1;
+    childSynoIndex += 1;
+    childPresnoIndex += 1;
   }
 
   return childPresnoRefs;

@@ -26,7 +26,7 @@ export default (
 
     const {
       presno,
-      presno: { focused, valid, id },
+      presno: { id, valid, focused },
     } = props;
 
     const classes = htmlClasses.concat([

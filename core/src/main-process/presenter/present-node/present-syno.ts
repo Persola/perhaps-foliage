@@ -1,20 +1,21 @@
 import enstackChildPresnos from './enstack-child-presnos';
 import focuses from './focuses';
 
-import type { SynoId } from '../../../types/syntactic/syno-id';
+import type { SynPresnoArgs } from '../../../types/presenter/presno-args/syn-presno-args';
 import type { StateSelector } from '../../../types/state-selector';
 import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
-import type { Presno } from '../../../types/presenter/presnos/presno';
+import type { SynPresno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
 
 export default (
-  synoId: SynoId,
+  synPresnoArgs: SynPresnoArgs,
   state: StateSelector,
   integration: MainsidePresentLangInt,
   focus: Focus,
   enstackForPresentation: EnstackForPresentation,
-): Presno => {
+): SynPresno => {
+  const { synoId } = synPresnoArgs;
   const syno = state.getSyno(synoId);
 
   const integrationPresenter = integration.presenters[syno.syntype];
@@ -57,8 +58,8 @@ export default (
 
   return {
     ...attrsFromIntegration,
-    ...focuses(focus, syno.id),
-    id: syno.id,
+    ...focuses(focus, synoId),
+    id: synoId,
     prestype: syno.syntype,
     parent,
     children: childPresnoRefs,

@@ -17,7 +17,7 @@ export default (
 ): Presno => {
   if (presnoArgs.type === 'synPresno') {
     return presentSyno(
-      presnoArgs.synoId,
+      presnoArgs,
       state,
       integration,
       focus,
@@ -32,5 +32,5 @@ export default (
     );
   }
 
-  throw new Error('bad presno prop');
+  throw new Error('Bad presno args');
 };

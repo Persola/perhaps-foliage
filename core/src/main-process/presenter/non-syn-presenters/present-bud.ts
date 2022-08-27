@@ -1,22 +1,12 @@
-import presnoId from '../presno-id';
-
-import type { Bud } from '../../../types/presenter/presnos/non-syn-presnos/bud';
-import { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
+import type { NonSynPresnoArgs } from '../../../types/presenter/presno-args/non-syn-presno-args';
+import type { BudArgs } from '../../../types/presenter/presno-args/bud-args';
+import type { BudAttrs } from '../../../types/presenter/presnos/non-syn-presnos/attrs/bud';
 
 export default (
-  presnoArgs: NonSynPresnoArgs,
-  focused: boolean,
-): Bud => {
-  const { valid } = presnoArgs.nonSynoArgs;
-
+  presnoArgs: NonSynPresnoArgs<BudArgs>,
+): BudAttrs => {
   return {
-    id: presnoId(presnoArgs),
-    parent: {
-      presnoRef: true,
-      id: presnoArgs.parentId,
-    },
     prestype: 'bud',
-    focused,
-    valid,
+    expectedSyntype: presnoArgs.nonSynoArgs.expectedSyntype,
   };
 };

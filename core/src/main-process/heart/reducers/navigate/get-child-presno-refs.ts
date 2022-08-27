@@ -15,13 +15,13 @@ export default (
 ): PresnoRef[] => {
   const stubEnstack = createEnstackForPresentation([], true);
 
-  const synoPrensoArgs: PresnoArgs = {
+  const synPresnoArgs: PresnoArgs = {
     type: 'synPresno',
     synoId: syno.id,
   };
 
   const presno = presentationNode(
-    synoPrensoArgs,
+    synPresnoArgs,
     state,
     integration,
     state.focus(),

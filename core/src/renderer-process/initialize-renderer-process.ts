@@ -1,6 +1,7 @@
 import updateRendersideIntegration from './update-renderside-integration';
 import Renderer from './renderer/renderer';
 import updateInputBindings from './update-input-bindings';
+import onPointerMove from './on-pointer-move';
 
 import type {
   CrossContextMessageHandlerRegister,
@@ -52,6 +53,8 @@ export default (
   registerCrossContextMessageHandler('warn', (data: Warn) => {
     console.warn(data.warning);
   });
+
+  document.body.onpointermove = onPointerMove;
 
   window.addEventListener('load', () => {
     updateInputBindings(

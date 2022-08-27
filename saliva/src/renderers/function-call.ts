@@ -1,6 +1,6 @@
 export default {
   htmlClasses: [
-    'function-call',
+    'functionCall',
   ],
   content: [
     { attr: 'name', as: 'string' },

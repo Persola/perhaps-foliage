@@ -37,60 +37,60 @@
   box-shadow: inset 0 0 0 1px var(--charcoal);
 }
 
-.code-view .boolean-literal {
+.code-view .booleanLiteral {
   background-color: var(--antique-velvet);
   color: var(--mustard-yellow);
 }
 
-.code-view .invalid.boolean-literal {
+.code-view .invalid.booleanLiteral {
   background-image: var(--invalid-overlay),
                     linear-gradient(var(--antique-velvet), var(--antique-velvet));
   background-attachment: fixed;
   box-shadow: inset 0 0 0 1px var(--charcoal);
 }
 
-.code-view .function-call {
+.code-view .functionCall {
   background-color: var(--pumpkin);
   color: var(--bubblegum);
 }
 
-.code-view .invalid.function-call {
+.code-view .invalid.functionCall {
   background-image: var(--invalid-overlay),
                     linear-gradient(var(--pumpkin), var(--pumpkin));
   background-attachment: fixed;
   box-shadow: inset 0 0 0 1px var(--charcoal);
 }
 
-.code-view .function-definition {
+.code-view .functionDefinition {
   background-color: var(--sea-blue);
   color: var(--popsicle-orange);
 }
 
-.code-view .invalid.function-definition {
+.code-view .invalid.functionDefinition {
   background-image: var(--invalid-overlay),
                     linear-gradient(var(--sea-blue), var(--sea-blue));
   background-attachment: fixed;
   box-shadow: inset 0 0 0 1px var(--charcoal);
 }
 
-.code-view .function-parameter {
+.code-view .functionParameter {
   background-color: var(--tomato);
   color: var(--mint);
 }
 
-.code-view .invalid.function-parameter {
+.code-view .invalid.functionParameter {
   background-image: var(--invalid-overlay),
                     linear-gradient(var(--tomato), var(--tomato));
   background-attachment: fixed;
   box-shadow: inset 0 0 0 1px var(--charcoal);
 }
 
-.code-view .variable-ref {
+.code-view .variableRef {
   background-color: var(--dream-violet);
   color: var(--teal);
 }
 
-.code-view .invalid.variable-ref {
+.code-view .invalid.variableRef {
   background-image: var(--invalid-overlay),
                     linear-gradient(var(--dream-violet), var(--dream-violet));
   background-attachment: fixed;

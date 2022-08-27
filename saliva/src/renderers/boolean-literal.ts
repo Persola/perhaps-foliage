@@ -1,9 +1,8 @@
 export default {
   htmlClasses: [
-    'boolean-literal',
+    'booleanLiteral',
     'same-line',
     'leaf',
-    'bubble-even',
   ],
   content: [
     { attr: 'value', as: 'string' },

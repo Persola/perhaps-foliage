@@ -1,8 +1,8 @@
 **next**
-* change how background color is assigned
-  * currently: node type
-  * planned: edge label
-  * alternative: non-terminal (consider root)
+* turn buds into gaps
+* add real buds
+  * real buds only exist under focus
+  * can be created with spacebar + arrow
 
 **testing**
 * try rendering everything that should already be renderable
@@ -12,6 +12,7 @@
 **maintenance**
 * extract common logic between editor renderers and integration (generated) renderers
   * presno ID, parent attr, focused, valid
+* move text ordering into presenter?
 * replace synoMap with new syntactical data layer
 * allow, in general, any syno to be child of any other syno in any order
   * then make restrictions based on language integration
@@ -58,11 +59,6 @@
 **new functionality**
 * editing
   * add holes for missing children types
-    * their color is as if they had correct edge label
-      * well, bacgkround color is theoretically the edge label
-        * but currently I actually assign it based on syntype
-        * maybe it should be based on non-terminal syntypes?
-          * or at least as a default
     * when focused, typing -> autocomplete menu
       * menu of types (in eigensyno?)
         * enter -> make bud that type
@@ -73,6 +69,8 @@
         * function definition parameter (parameter) (no options, just type slot name)
   * after delete, focus on the resulting hole
     * it should be in the same place
+      * this would be easy if buds didn't appear automatically for missing children
+        * goes along with non-syntactical stuff only existing under focus
     * if you don't fill it but instead move focus away, resort to non-remembering placement (may jump)
 * extensions/plugins
   * text hosts should be model, since it's a bit specific
@@ -81,17 +79,7 @@
     * immer patches relevant?
   * reversion or whatever else is left
 * editing
-  * add holes for required children
-    * appear whenever a required child is missing
-      * should be two places, both for saliva:
-        * arguments without values
-        * function defitions without bodies
-    * just the circle
-    * correct color for child edge
-    * is presno (can be focused)
-    * next step: command(s) to fill them
   * add buds
-    * they form holes (related to syno deletion)
     * they can be placed and moved arbitarily to create synos
       * they could autocomplete come info based on context
       * place: direction from current syno (held) + [space OR insert]
@@ -136,6 +124,12 @@
 * [_saliva_] wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 
 **design**
+* color assignment
+  * background
+    * currently: syntype
+    * could be: edge labels
+    * could depend on: non-terminal type
+  * should probably be quite flexible for integration implementers
 * data layer(s)
   * there's lots of interdependant state, so directly manipulating state in reducers doesn't work
     * compare to state selector--a layer on top the raw data

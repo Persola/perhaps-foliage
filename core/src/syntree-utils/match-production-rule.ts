@@ -74,6 +74,7 @@ export default (
   syno: Syno,
   actualGrammar: ActualGrammar,
 ): ProductionRule => {
+  // TODO: find holistic solution based on edit distance (Damerau–Levenshtein?)
   const rulesProducingSyntype = actualGrammar.productionRules.filter(rule => {
     return rule.rhs.parent === syno.syntype;
   });
