@@ -1,6 +1,6 @@
-import type { StateSelector } from '../../../../../types/state-selector';
-import type { MutableFocus } from '../../../../../types/editor-state/mutable/mutable-focus';
-import type { Warn } from '../../../../../types/cross-context/warn';
+import type { StateSelector } from '../../../../types/state-selector';
+import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
+import type { Warn } from '../../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,

@@ -92,6 +92,7 @@ export default (
     editorStateStore,
     stateSelector,
     integration,
+    warnUser,
   );
 
   registerCrossContextMessageHandler('dispatchAction', (data: DispatchAction) => {

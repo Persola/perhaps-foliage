@@ -4,7 +4,7 @@ import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
 
 import type { StateSelector } from '../../../types/state-selector';
-import type { Navigate } from '../../../types/actions/navigate';
+import type { Navigate } from '../../../types/actions/commands/navigate';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';

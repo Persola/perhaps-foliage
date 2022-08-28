@@ -12,12 +12,7 @@ export default (
   warnUser: Warn,
   integration: MainsideLangInt,
 ): void => {
-  if (state.inText()) {
-    warnUser('Ignoring navigation inwards: editing text');
-    return;
-  }
-
-  if (state.inPresno()) {
+  if (state.inNonSynPresno()) { // assume any non-syn presno is a text presno
     draftFocus.charIndex = 0; // enter beginning of name
 
     return;

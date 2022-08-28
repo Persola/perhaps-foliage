@@ -99,7 +99,7 @@ export default (editorState: EditorState): StateSelector => {
       return Object.keys(this.state.primitives).includes(synoId);
     },
     // focus
-    inPresno: function inPresno() {
+    inNonSynPresno: function inNonSynPresno() {
       return this.state.focus.presnoIndex !== null;
     },
     inText: function inText() {

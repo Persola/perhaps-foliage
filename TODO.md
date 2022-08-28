@@ -222,6 +222,7 @@
 * write JSON integration
 * operationalize
 * launch minimal viable project
+* implement extensible nested key bindings scopes
 * constraint-based layout?
 * write integration for a real, in-use general-purpose programming language (Scheme?)
   * need bidirectional transformation between AST and text code (can use unist?)

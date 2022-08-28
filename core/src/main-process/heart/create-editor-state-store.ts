@@ -21,19 +21,22 @@ import startInterpretationReducer from './reducers/start-interpretation-reducer'
 import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 import charBackspaceReducer from './reducers/char-backspace-reducer';
+import textNavigateReducer from './reducers/text-navigate-reducer';
+import exitTextPresno from './reducers/exit-text-presno-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 
 import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
-import type { ReplaceFocusedSyno } from '../../types/actions/replace-focused-syno';
+import type { ReplaceFocusedSyno } from '../../types/actions/commands/replace-focused-syno';
 import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
-import type { Navigate } from '../../types/actions/navigate';
-import type { SetFocusSyno } from '../../types/actions/set-focus-syno';
-import type { DestroyFocusedSyno } from '../../types/actions/destroy-focused-syno';
+import type { Navigate } from '../../types/actions/commands/navigate';
+import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
+import type { TextNavigate } from '../../types/actions/commands/text-navigate';
+import type { DestroyFocusedSyno } from '../../types/actions/commands/destroy-focused-syno';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
@@ -196,6 +199,25 @@ export default (
             draftState,
             latestEdit,
             warnUser,
+          );
+          break;
+        }
+
+        case 'TEXT_NAVIGATE': {
+          textNavigateReducer(
+            stateSelector,
+            action as TextNavigate,
+            draftState,
+            latestEdit,
+            warnUser,
+          );
+          break;
+        }
+
+        case 'EXIT_TEXT_PRESNO': {
+          exitTextPresno(
+            stateSelector,
+            draftState,
           );
           break;
         }

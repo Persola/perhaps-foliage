@@ -1,7 +1,7 @@
 import replaceSyno from '../../../syntree-utils/exposed/replace-syno';
 
 import type { StateSelector } from '../../../types/state-selector';
-import type { ReplaceFocusedSyno } from '../../../types/actions/replace-focused-syno';
+import type { ReplaceFocusedSyno } from '../../../types/actions/commands/replace-focused-syno';
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { KeyToNewSynoAttrs } from '../../../types/language-integration/key-to-new-syno-attrs';

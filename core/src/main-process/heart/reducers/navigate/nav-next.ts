@@ -1,5 +1,4 @@
 import getChildPresnoRefs from './get-child-presno-refs';
-import nextChar from './next/char';
 
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
@@ -14,19 +13,14 @@ export default (
   warnUser: Warn,
   integration: MainsideLangInt,
 ): void => {
-  if (state.inText()) {
-    nextChar(state, draftFocus, warnUser);
-    return;
-  }
-
-  if (state.focusedSynoIsRoot() && !state.inPresno()) {
+  if (state.focusedSynoIsRoot() && !state.inNonSynPresno()) {
     warnUser('Ignoring navigation to next sibling: focused syno is root');
     return;
   }
 
   let oldParent: Syno;
 
-  if (state.inPresno()) {
+  if (state.inNonSynPresno()) {
     oldParent = state.focusedSyno();
   } else {
     oldParent = state.getSyno(state.focusedSyno().parent.id);

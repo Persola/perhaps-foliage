@@ -40,7 +40,7 @@ export type StateSelector = {
   focusedSyno: () => Syno;
   isPrimitive: (synoId: SynoId) => boolean;
   // focus
-  inPresno: () => boolean;
+  inNonSynPresno: () => boolean;
   inText: () => boolean;
   focusedSynoIsRoot: () => boolean;
 };

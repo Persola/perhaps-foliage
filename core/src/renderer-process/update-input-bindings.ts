@@ -6,15 +6,13 @@ export default (
   inputsToBind: string[],
   inputsToUnbind: string[],
 ): void => {
-  Mousetrap.bind(inputsToBind, (e, key) => {
-    if (['up', 'down', 'backspace'].includes(key)) {
+  inputsToUnbind.forEach(input => Mousetrap.unbind(input));
+
+  Mousetrap.bind(inputsToBind, (e, input) => {
+    if (['up', 'down', 'backspace'].includes(input)) {
       e.preventDefault();
     }
 
-    sendCrossContextMessage('resolveInput', {
-      input: key,
-    });
+    sendCrossContextMessage('resolveInput', { input });
   });
-
-  inputsToUnbind.forEach(input => Mousetrap.unbind(input));
 };

@@ -7,12 +7,7 @@ export default (
   draftFocus: MutableFocus,
   warnUser: Warn,
 ): void => {
-  if (state.inText()) {
-    draftFocus.charIndex = null;
-    return;
-  }
-
-  if (state.inPresno()) {
+  if (state.inNonSynPresno()) {
     draftFocus.presnoIndex = null;
     return;
   }

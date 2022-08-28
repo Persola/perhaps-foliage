@@ -2,7 +2,7 @@ import navOut from './navigate/nav-out';
 import destroySyno from '../../../syntree-utils/exposed/destroy-syno';
 
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { DestroyFocusedSyno } from '../../../types/actions/destroy-focused-syno';
+import type { DestroyFocusedSyno } from '../../../types/actions/commands/destroy-focused-syno';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
@@ -25,7 +25,7 @@ export default (
     return;
   }
 
-  if (state.inPresno()) {
+  if (state.inNonSynPresno()) {
     throw new TypeError(
       'DESTROY_FOCUSED_SYNO action received while not focused on syno level',
     );
