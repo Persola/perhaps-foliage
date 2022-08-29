@@ -51,6 +51,7 @@ export default (
   draftState.focus = {
     synoId: newSynoId,
     presnoIndex: null,
+    budIndex: null,
     charIndex: null,
   };
   draftState.resultOutdated = true;

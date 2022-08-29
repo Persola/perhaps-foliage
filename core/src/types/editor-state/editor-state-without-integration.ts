@@ -4,7 +4,6 @@ export type EditorStateWithoutIntegration = {
   readonly syntypeSchema: null;
   readonly primitives: null;
   readonly keyToNewSynoAttrs: null;
-  readonly lastIntegrationBindings: string[] | null;
   readonly synoMap: null;
   readonly resultTree: null;
   readonly inverseReferenceMap: null;

@@ -2,7 +2,6 @@ import navOut from './navigate/nav-out';
 import destroySyno from '../../../syntree-utils/exposed/destroy-syno';
 
 import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { DestroyFocusedSyno } from '../../../types/actions/commands/destroy-focused-syno';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
@@ -10,7 +9,6 @@ import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
   state: StateSelector,
-  action: DestroyFocusedSyno,
   draftState: MutableEditorState,
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,
@@ -46,7 +44,7 @@ export default (
     redo: { type: 'DELETE_SYNO' },
   });
 
-  const { focusedPresnoId } = action;
+  const focusedPresnoId = state.focusedSynoId();
   const focus: MutableFocus = draftState.focus;
   destroySyno(focusedPresnoId, state, draftState);
   // here we need to know whether a required child gap will be presented

@@ -33,9 +33,6 @@ export default (
     syntypeSchema: newIntegrationAttrs.syntypeSchema,
     primitives: newIntegrationAttrs.primitives,
     keyToNewSynoAttrs: newIntegrationAttrs.keyToNewSynoAttrs,
-    lastIntegrationBindings: state.keyToNewSynoAttrs()
-      ? Object.keys(state.keyToNewSynoAttrs())
-      : [],
     synoMap: null,
     resultTree: null,
     inverseReferenceMap: null,

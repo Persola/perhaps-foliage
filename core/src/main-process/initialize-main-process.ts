@@ -100,7 +100,7 @@ export default (
   });
 
   registerCrossContextMessageHandler('resolveInput', (data: ResolveInput) => {
-    inputResolver(data.input);
+    inputResolver(data);
   });
 
   editorStateStore.subscribe(() => {
@@ -123,7 +123,6 @@ export default (
         presentation: present(),
         resultOutdated,
         interpreting,
-        inputsToUnbind: stateSelector.lastIntegrationBindings(),
       },
     );
   });

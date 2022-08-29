@@ -18,7 +18,6 @@ export type StateSelector = {
   syntypeSchema: () => SyntypeSchema;
   primitives: () => SynoMap;
   keyToNewSynoAttrs: () => KeyToNewSynoAttrs;
-  lastIntegrationBindings: () => string[];
   synoMap: () => SynoMap;
   resultTree: () => SynoMap;
   inverseReferenceMap: () => InverseReferenceMap;

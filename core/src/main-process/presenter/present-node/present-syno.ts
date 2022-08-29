@@ -43,6 +43,7 @@ export default (
   const childPresnoRefs = enstackChildPresnos(
     syno,
     integration,
+    focus,
     childPresnoArgsFromIntegration,
     enstackForPresentation,
   );

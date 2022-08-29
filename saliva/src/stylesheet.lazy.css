@@ -1,13 +1,13 @@
 :root {
   --stage-background: #040404;
   --charcoal: #111;
-  --sea-blue: #045;
+  --sea-blue: rgb(4, 79, 98);
   --ever-green: #352;
   --mustard-yellow: #da4;
   --bubblegum: #e8a;
   --villian-laser-magenta: #d14;
   --teal: #2ad;
-  --pumpkin: #841;
+  --pumpkin: rgb(121, 58, 10);
   --antique-velvet: #832;
   --mint: #2a7;
   --popsicle-orange: #e84;

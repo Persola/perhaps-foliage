@@ -10,7 +10,6 @@ export type MutableEditorState = {
   actualGrammar: ActualGrammar | null;
   primitives: MutableSynoMap | null;
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  lastIntegrationBindings: string[] | null;
   synoMap: MutableSynoMap | null;
   resultTree: MutableSynoMap | null;
   inverseReferenceMap: MutableInverseReferenceMap | null;

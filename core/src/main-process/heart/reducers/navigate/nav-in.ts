@@ -9,6 +9,11 @@ export default (
   draftFocus: MutableFocus,
   warnUser: Warn,
 ): void => {
+  if (state.inNonSynPresno()) {
+    warnUser('Ignoring inward navigation: in non syntactical presno');
+    return;
+  }
+
   const children = childSynos(state.focusedSyno());
   if (children.length === 0) {
     warnUser('Ignoring inward navigation: no children');

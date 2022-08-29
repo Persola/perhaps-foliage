@@ -24,6 +24,7 @@ import charBackspaceReducer from './reducers/char-backspace-reducer';
 import textNavigateReducer from './reducers/text-navigate-reducer';
 import exitTextPresno from './reducers/exit-text-presno-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
+import insertBudReducer from './reducers/insert-bud-reducer';
 
 import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
@@ -36,7 +37,7 @@ import type { EndIntegrationHotload } from '../../types/actions/end-integration-
 import type { Navigate } from '../../types/actions/commands/navigate';
 import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
 import type { TextNavigate } from '../../types/actions/commands/text-navigate';
-import type { DestroyFocusedSyno } from '../../types/actions/commands/destroy-focused-syno';
+import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
@@ -45,6 +46,7 @@ import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../types/cross-context/warn';
 import type { EditorState } from '../../types/editor-state';
 import type { MutableEditorState } from '../../types/mutable-editor-state';
+import type { Focus } from '../../types/editor-state/focus';
 
 type CreateStoreReturn = {
   editorStateStore: Store;
@@ -57,7 +59,7 @@ export default (
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,
 ): CreateStoreReturn => {
-  let focus;
+  let focus: Focus;
   let synoMap;
   let inverseReferenceMap;
   if (initialDocument) {
@@ -65,6 +67,7 @@ export default (
     focus = {
       synoId: rootSyno.id,
       presnoIndex: null,
+      budIndex: null,
       charIndex: null,
     };
     synoMap = initialDocument;
@@ -80,7 +83,6 @@ export default (
     syntypeSchema: integration.syntypeSchema,
     primitives: integration.primitives,
     keyToNewSynoAttrs: integration.keyToNewSynoAttrs,
-    lastIntegrationBindings: null,
     synoMap,
     resultTree: null,
     inverseReferenceMap,
@@ -225,7 +227,17 @@ export default (
         case 'DESTROY_FOCUSED_SYNO': {
           destroyFocusedSynoReducer(
             stateSelector,
-            (action as DestroyFocusedSyno),
+            draftState,
+            latestEdit,
+            warnUser,
+          );
+          break;
+        }
+
+        case 'INSERT_BUD': {
+          insertBudReducer(
+            stateSelector,
+            (action as InsertBud),
             draftState,
             latestEdit,
             warnUser,

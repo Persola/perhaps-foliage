@@ -123,6 +123,36 @@
 * [_saliva_] wrap some features (e.g., named parameters) in language (e.g., always pass a map or list), see Nothing above
 
 **design**
+* do presnos deserve to exist?
+  * motivation: allowing interaction with synos that's not AST manipulation
+    * e.g. use a presno submenu to select type, which is stored on syno but not as a child syno
+    * alternative: these things become AST nodes (highly untraditional, but maybe it's future)
+  * problems as is
+    * fundemental additional complexity undesirable
+    * can you move presnos around arbitrarily?
+      * if so, it has to be stored in the AST, so why are they presnos? stored in syno attributes?
+      * if not
+        * original case of interleaved function names/args doesn't work?
+          * that can be inside eigensyno? which would mean you can reorganize them inside eigensyno
+        * well then how do you place buds
+          * maybe buds are an exception--and they are only under focus/ephemeral, which locks it down
+        * for equivalency you can't move buds/synos around presnos
+          * like if you can't move a presno to be after a syno then you can't place a syno before a presno, and therefore not a bud either
+      * maybe text presnos are their own exception
+        * they are saved among syno's children, but aren't a syno?
+          * so no children, no arbitrary attrs, all have the same edge label
+    * just feels like I'm designing too much around them when basic syno stuff doesn't work yet
+    * I've put off having the integretion presenters dictate synpresno/nonsynpresno ordering
+      * but maybe I have to do that now, seems important
+      * easier when each syntype had one child ordering
+        * how each has multiple production rules
+        * maybe for now I just let the user set the matching production rule explicitly
+          * can always add better matching later
+        * provide production rule to integration presenter
+          * then it knows all the slots and can interleave nonsynpresnos easily
+          * but that makes nonsynpresno order independable--flip around based on
+      * integration provides functions mapping both ways between syno attrs (not children) and its presnos
+        * could map to one level of presnos or to any number of prestrees
 * color assignment
   * background
     * currently: syntype

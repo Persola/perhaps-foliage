@@ -27,6 +27,7 @@ export default (
   draftState.focus = {
     synoId: action.synoId,
     presnoIndex: null,
+    budIndex: null,
     charIndex: null,
   };
 };

@@ -1,6 +1,6 @@
 import updateRendersideIntegration from './update-renderside-integration';
 import Renderer from './renderer/renderer';
-import updateInputBindings from './update-input-bindings';
+import bindKeys from './bind-keys';
 import onPointerMove from './on-pointer-move';
 
 import type {
@@ -40,14 +40,6 @@ export default (
       data.interpreting,
       integration,
     );
-
-    updateInputBindings(
-      sendCrossContextMessage,
-      integration.keyToNewSynoAttrs
-        ? Object.keys((integration as RendersideLangInt).keyToNewSynoAttrs)
-        : [],
-      data.inputsToUnbind || [],
-    );
   });
 
   registerCrossContextMessageHandler('warn', (data: Warn) => {
@@ -57,11 +49,7 @@ export default (
   document.body.onpointermove = onPointerMove;
 
   window.addEventListener('load', () => {
-    updateInputBindings(
-      sendCrossContextMessage,
-      ['enter', 'left', 'right', 'up', 'down', 'backspace'],
-      [],
-    );
+    bindKeys(sendCrossContextMessage);
     document.documentElement.click(); // bindings don't work before this (focus?)
     // document.addEventListener('click', createFocusSyno(editorStateStore));
     sendCrossContextMessage(

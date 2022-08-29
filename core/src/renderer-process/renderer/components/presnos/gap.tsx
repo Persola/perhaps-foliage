@@ -9,7 +9,6 @@ export default (props: GapProps): JSX.Element => {
     'same-line',
     'leaf',
     'gap',
-    'syno',
     expectedSyntype,
     focused ? 'focused' : 'unfocused',
     valid ? '' : 'invalid',

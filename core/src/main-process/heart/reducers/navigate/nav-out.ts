@@ -9,6 +9,7 @@ export default (
 ): void => {
   if (state.inNonSynPresno()) {
     draftFocus.presnoIndex = null;
+    draftFocus.budIndex = null;
     return;
   }
 

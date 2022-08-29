@@ -1,3 +1,4 @@
 export type ResolveInput = {
-  input: string,
+  key: string,
+  type: string,
 };

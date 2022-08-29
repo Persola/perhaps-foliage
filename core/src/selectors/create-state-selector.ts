@@ -26,9 +26,6 @@ export default (editorState: EditorState): StateSelector => {
     keyToNewSynoAttrs: function keyToNewSynoAttrs() {
       return this.state.keyToNewSynoAttrs;
     },
-    lastIntegrationBindings: function lastIntegrationBindings() {
-      return this.state.lastIntegrationBindings;
-    },
     synoMap: function synoMap() {
       return this.state.synoMap;
     },
@@ -100,7 +97,10 @@ export default (editorState: EditorState): StateSelector => {
     },
     // focus
     inNonSynPresno: function inNonSynPresno() {
-      return this.state.focus.presnoIndex !== null;
+      return (
+        this.state.focus.presnoIndex !== null
+        || this.state.focus.budIndex !== null
+      );
     },
     inText: function inText() {
       return this.state.focus.charIndex !== null;

@@ -18,7 +18,6 @@
   "dependencies": {
     "ajv": "~6.12.6",
     "immer": "~9.0.15",
-    "mousetrap": "~1.6.5",
     "react": "~18.2.0",
     "react-dom": "~18.2.0",
     "redux": "~4.2.0",

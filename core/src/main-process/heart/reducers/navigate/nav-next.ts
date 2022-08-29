@@ -28,6 +28,19 @@ export default (
 
   const siblingRefz = childSynos(oldParent);
 
+  const oldBudIndex = state.focus().budIndex;
+
+  if (oldBudIndex !== null) {
+    if (oldBudIndex === siblingRefz.length) {
+      warnUser('Ignoring navigation to next sibling: focused bud is last under parent');
+      return;
+    }
+
+    draftFocus.budIndex = null;
+    draftFocus.synoId = siblingRefz[oldBudIndex].id;
+    return;
+  }
+
   if (siblingRefz.length <= 0) {
     throw new Error('navigate failed; parent has no children!?');
   }

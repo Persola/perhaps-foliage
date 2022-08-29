@@ -24,7 +24,7 @@ export default (props: Props): JSX.Element => {
     interpreting,
   } = props;
   return (
-    <div className="editor mousetrap">
+    <div className="editor">
       <IntegrationLoadInput
         sendCrossContextMessage={sendCrossContextMessage}
         integration={integration}

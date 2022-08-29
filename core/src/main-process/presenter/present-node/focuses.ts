@@ -14,7 +14,10 @@ export default (
   let charFocused;
 
   if (!!focus && synoId === focus.synoId) {
-    focused = focus.presnoIndex === null;
+    focused = (
+      focus.presnoIndex === null
+      && focus.budIndex === null
+    );
     presnoFocused = focus.presnoIndex;
     charFocused = focus.charIndex;
   } else {

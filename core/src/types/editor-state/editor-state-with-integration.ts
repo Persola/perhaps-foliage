@@ -12,7 +12,6 @@ export type EditorStateWithIntegration = {
   readonly syntypeSchema: SyntypeSchema;
   readonly primitives: SynoMap;
   readonly keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  readonly lastIntegrationBindings: string[] | null;
   readonly synoMap: SynoMap;
   readonly resultTree: SynoMap;
   readonly inverseReferenceMap: InverseReferenceMap;

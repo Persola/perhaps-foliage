@@ -1,34 +1,48 @@
 import { Store } from 'redux';
 
-import textModeInputResolver from './input-resolvers/text-mode-input-resolver';
-import treeModeInputResolver from './input-resolvers/tree-mode-input-resolver';
+import createCommandResolver from './input-resolvers/create-command-resolver';
+import coreTextModeBindings from './input-resolvers/core-bindings/core-text-mode-bindings';
+import coreTreeModeBindings from './input-resolvers/core-bindings/core-tree-mode-bindings';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { Warn } from '../../types/cross-context/warn';
-import type { CommandResolver } from '../../types/input-resolver/command-resolver';
+import type { ResolveInput } from '../../types/cross-context/messages-from-renderer/resolve-input';
+import type { Command } from '../../types/actions/command';
+
+const lastEventTypeToKeyState = {
+  keyup: 'up',
+  keydown: 'down',
+};
+const keyStates: {[key: string]: ('up' | 'down' | 'used')} = {};
 
 export default (
   editorStateStore: Store,
   state: StateSelector,
   integration: MainsideLangInt,
   warnUser: Warn,
-) => {
-  return (input: string): void => {
-    let commandResolver: CommandResolver;
+  // eslint-disable-next-line
+): (message: ResolveInput) => void => {
+  const textModeInputResolver = createCommandResolver(coreTextModeBindings);
+  const treeModeInputResolver = createCommandResolver(coreTreeModeBindings);
 
-    if (state.inText()) {
-      commandResolver = textModeInputResolver(input);
-    } else {
-      commandResolver = treeModeInputResolver(input, integration);
+  return ({ key, type }: ResolveInput): void => {
+    if (type === 'keyup' && keyStates[key] !== 'used') {
+      let command: Command | void;
+
+      if (state.inText()) {
+        command = textModeInputResolver(key, keyStates);
+      } else {
+        command = treeModeInputResolver(key, keyStates);
+      }
+
+      if (!command) {
+        warnUser(`Ignoring input '${key}': did not resolve to command`);
+      } else {
+        editorStateStore.dispatch(command);
+      }
     }
 
-    if (commandResolver === null) {
-      warnUser(`Ignoring bound input '${input}': did not resolve to command`);
-    } else {
-      editorStateStore.dispatch(
-        commandResolver(input, state, integration),
-      );
-    }
+    keyStates[key] = lastEventTypeToKeyState[type];
   };
 };

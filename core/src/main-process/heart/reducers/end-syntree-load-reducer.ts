@@ -32,6 +32,7 @@ export default (
     focus: {
       synoId: rootSyno.id,
       presnoIndex: null,
+      budIndex: null,
       charIndex: null,
     },
     resultSyntreeRootId: null,
