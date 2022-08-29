@@ -37,12 +37,12 @@ export default (
     }
 
     case 'in': {
-      navIn(state, focus, warnUser, integration);
+      navIn(state, focus, warnUser);
       break;
     }
 
     case 'prev': {
-      navPrev(state, focus, warnUser, integration);
+      navPrev(state, focus, warnUser);
       break;
     }
 
