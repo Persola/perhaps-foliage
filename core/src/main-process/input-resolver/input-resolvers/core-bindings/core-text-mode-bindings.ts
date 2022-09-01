@@ -6,18 +6,18 @@ const bindings: KeyBindingList = [
     command: { type: 'EXIT_TEXT_PRESNO' },
   },
   {
-    keys: ['ArrowLeft'],
+    keys: ['ArrowUp'],
     command: { type: 'EXIT_TEXT_PRESNO' },
   },
   {
-    keys: ['ArrowUp'],
+    keys: ['ArrowLeft'],
     command: {
       type: 'TEXT_NAVIGATE',
       direction: 'prev',
     },
   },
   {
-    keys: ['ArrowDown'],
+    keys: ['ArrowRight'],
     command: {
       type: 'TEXT_NAVIGATE',
       direction: 'next',

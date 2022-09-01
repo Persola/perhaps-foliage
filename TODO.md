@@ -1,7 +1,6 @@
 **next**
-* add real buds
-  * real buds only exist under focus
-  * can be created with spacebar + arrow
+* replace synoMap with new syntactical data layer
+* allow, in general, any syno to be child of any other syno in any order
 
 **testing**
 * try rendering everything that should already be renderable
@@ -12,10 +11,6 @@
 * extract common logic between editor renderers and integration (generated) renderers
   * presno ID, parent attr, focused, valid
 * move text ordering into presenter?
-* replace synoMap with new syntactical data layer
-* allow, in general, any syno to be child of any other syno in any order
-  * then make restrictions based on language integration
-  * probably means changing syntree data layer
 * **?** focus on presnoId not synoId
 * in dev mode (only mode), validate syntree after every update
   * to test if syntrees are closed under available editing commands
@@ -33,6 +28,22 @@
   * e.g., right now grammar and graph validation errors force reload
   * surface mainside errors and show on renderside
 * language packages and core should be peer dependencies?
+* implement key bindings scopes
+  * store nested scopes as path in state tree in app state
+  * input resolution reads state to determine which bindings to read
+    * parent scope bindings override children
+    * integrations give bindings per core scope
+      * within level, core bindings override integration bindings
+      * but parent integation overrides child core
+  * various actions need to update the state
+    * basic things like clicking outside the code view
+    * commands that change mode
+    * incomplete key combos, because child states can be used to represent them
+      * in which case, a completed command must both do its thing and reset key state
+      * this allows visual previews
+    * all these should pass through a layer which checks its a valid move within the state tree
+      * so store explicit version of state tree to check against--also good for reference
+  * until this there's extra-Redux state in the input resolver for key combos
 * break out packages
   * just keep monorepo for now
   * clean up
@@ -160,7 +171,7 @@
     * could depend on: non-terminal type
   * should probably be quite flexible for integration implementers
 * data layer(s)
-  * there's lots of interdependant state, so directly manipulating state in reducers doesn't work
+  * there's lots of interdependant state, so directly manipulating syntactical state in reducers doesn't work
     * compare to state selector--a layer on top the raw data
     * if we're adding a layer anyway we could store syntree data in an in-memory database or something DB-like?
       * or just _really_ flatten it completely in redux
@@ -252,7 +263,6 @@
 * write JSON integration
 * operationalize
 * launch minimal viable project
-* implement extensible nested key bindings scopes
 * constraint-based layout?
 * write integration for a real, in-use general-purpose programming language (Scheme?)
   * need bidirectional transformation between AST and text code (can use unist?)

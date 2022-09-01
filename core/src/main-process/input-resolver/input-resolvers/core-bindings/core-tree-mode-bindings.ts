@@ -10,31 +10,31 @@ const bindings: KeyBindingList = [
     command: { type: 'DESTROY_FOCUSED_SYNO' },
   },
   {
-    keys: ['ArrowUp'],
-    command: {
-      type: 'NAVIGATE',
-      direction: 'prev',
-    },
-  },
-  {
     keys: ['ArrowDown'],
     command: {
       type: 'NAVIGATE',
-      direction: 'next',
+      direction: 'in',
     },
   },
   {
-    keys: ['ArrowLeft'],
+    keys: ['ArrowUp'],
     command: {
       type: 'NAVIGATE',
       direction: 'out',
     },
   },
   {
+    keys: ['ArrowLeft'],
+    command: {
+      type: 'NAVIGATE',
+      direction: 'prev',
+    },
+  },
+  {
     keys: ['ArrowRight'],
     command: {
       type: 'NAVIGATE',
-      direction: 'in',
+      direction: 'next',
     },
   },
   {
