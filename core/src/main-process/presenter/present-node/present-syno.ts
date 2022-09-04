@@ -16,19 +16,19 @@ export default (
   enstackForPresentation: EnstackForPresentation,
 ): SynPresno => {
   const { synoId } = synPresnoArgs;
-  const syno = state.getSyno(synoId);
+  const syno = state.editeeTree().getSyno(synoId);
 
-  const integrationPresenter = integration.presenters[syno.syntype];
+  const integrationPresenter = integration.presenters[syno.type];
   if (!(integrationPresenter instanceof Function)) {
     throw new Error(
-      `Language integration missing presenter for syntype '${syno.syntype}'`,
+      `Missing language integration  presenter for syntactic node type '${syno.type}'`,
     );
   }
 
-  const validator = integration.synoValidators[syno.syntype];
+  const validator = integration.synoValidators[syno.type];
   if (!(validator instanceof Function)) {
     throw new Error(
-      `Language integration missing validator for syntype '${syno.syntype}'`,
+      `Missing language integration validator for syntactic node type '${syno.type}'`,
     );
   }
 
@@ -53,15 +53,15 @@ export default (
       ? null
       : {
         presnoRef: true,
-        id: syno.parent.id,
+        id: syno.parent().id,
       }
   );
 
   return {
     ...attrsFromIntegration,
     ...focuses(focus, synoId),
-    id: synoId,
-    prestype: syno.syntype,
+    id: String(synoId),
+    prestype: syno.type,
     parent,
     children: childPresnoRefs,
     valid: validator(syno, state),

@@ -82,7 +82,7 @@ export default (props: Props): JSX.Element => {
       <PresnoRenderer
         integration={presentIntegration}
         getPresno={getPresno}
-        synoId={rootId}
+        presnoId={rootId}
         PresnoRenderer={PresnoRenderer}
       />
     );

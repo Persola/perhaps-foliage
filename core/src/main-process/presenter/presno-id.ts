@@ -2,7 +2,7 @@ import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 
 export default (presnoArgs: PresnoArgs): string => {
   if (presnoArgs.type === 'synPresno') {
-    return presnoArgs.synoId;
+    return String(presnoArgs.synoId);
   }
 
   if (presnoArgs.type === 'nonSynPresno') {

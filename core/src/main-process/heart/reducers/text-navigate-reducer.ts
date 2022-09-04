@@ -2,7 +2,7 @@ import nextChar from './text-navigate/next-char';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { TextNavigate } from '../../../types/actions/commands/text-navigate';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';
 

@@ -1,6 +1,6 @@
-import childSynos from '../../../syntree-utils/read-node/child-synos';
+import childSynos from '../../syntactic-interface/read-node/child-synos';
 
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { InsertBud } from '../../../types/actions/commands/insert-bud';
 import type { StateSelector } from '../../../types/state-selector';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';

@@ -1,8 +1,8 @@
-import replaceSyno from '../../../syntree-utils/exposed/replace-syno';
+import replaceSyno from '../../syntactic-interface/exposed/replace-syno';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { ReplaceFocusedSyno } from '../../../types/actions/commands/replace-focused-syno';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { KeyToNewSynoAttrs } from '../../../types/language-integration/key-to-new-syno-attrs';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';

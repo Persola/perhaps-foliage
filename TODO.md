@@ -1,6 +1,7 @@
 **next**
 * replace synoMap with new syntactical data layer
 * allow, in general, any syno to be child of any other syno in any order
+* getSyno takes path
 
 **testing**
 * try rendering everything that should already be renderable
@@ -8,6 +9,8 @@
 **bugs**
 
 **maintenance**
+* enable noImplicitAny
+* group imports (e.g. createEditorStateStore)
 * extract common logic between editor renderers and integration (generated) renderers
   * presno ID, parent attr, focused, valid
 * move text ordering into presenter?
@@ -24,6 +27,7 @@
     * so integration always starts absent (nulls)
     * one way to update it, triggered by INITIALIZE
     * also need to load initial document afterwards
+  * initial document from vscode should be dispatched as end_syntree_load at end of main init
 * some kind of plan for error catching
   * e.g., right now grammar and graph validation errors force reload
   * surface mainside errors and show on renderside
@@ -164,6 +168,23 @@
           * but that makes nonsynpresno order independable--flip around based on
       * integration provides functions mapping both ways between syno attrs (not children) and its presnos
         * could map to one level of presnos or to any number of prestrees
+* syno IDs
+  * presumably getting rids of syno IDs as-is
+  * I think replaced by paths, but that brings up idenitity issues
+    * should probably be URIs (or IRIs)
+    * ugh, but... how? not a straight forward topic to approach
+    * custom URI scheme?
+    * trees are mostly defined on a social level
+      * "By social convention, URI ownership is delegated from the IANA URI scheme registry IANASchemes, itself a social entity, to IANA-registered URI scheme specifications."
+    * then nodes are subpaths
+    * the pressing issues
+      * I can do refs within one tree simple as relative URIs
+      * but for ones outside the tree, which I need for Saliva primitives...
+        * we need to get the tree ID that gets resolved by the editor the primitives provided
+          * language integration chould have URI
+  * will need to add content addressing (hash subsyntrees)
+    * but that can only serve for certain purposes b/c it changes
+    * the limitations applied by focus might make it more generally useful?
 * color assignment
   * background
     * currently: syntype

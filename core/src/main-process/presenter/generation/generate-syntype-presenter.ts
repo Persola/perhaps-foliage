@@ -1,8 +1,9 @@
+import generateAttrPresenters from './generate-attr-presenters';
+import Syno from '../../syntactic-interface/newnew/syno';
+
 import type { SynoPresenter } from '../../../types/presenter/presenter';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
-import { Syno } from '../../../types/syntactic/syno';
-import { StateSelector } from '../../../types/state-selector';
-import generateAttrPresenters from './generate-attr-presenters';
+import type { StateSelector } from '../../../types/state-selector';
 
 export default (
   syntype: string,

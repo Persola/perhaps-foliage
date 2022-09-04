@@ -1,8 +1,8 @@
-import dup from '../../../syntree-utils/dup';
+import dup from '../../syntactic-interface/dup';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { EndInterpretation } from '../../../types/actions/end-interpretation';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { MutableSyno } from '../../../types/syntactic/mutables/mutable-syno';
 import type { Warn } from '../../../types/cross-context/warn';
 

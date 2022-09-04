@@ -1,8 +1,6 @@
-import type { SynoId } from '../../syntactic/syno-id';
-
-export interface NonSynPresnoArgs<SyntypeArgs> {
+export type NonSynPresnoArgs<SyntypeArgs> = {
   type: 'nonSynPresno',
-  parentId: SynoId,
+  parentId: number,
   presnoIndex: number,
   nonSynoArgs: SyntypeArgs,
 }

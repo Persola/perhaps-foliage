@@ -1,6 +1,6 @@
-import type { MutableSynoMap } from '../syntactic/mutables/mutable-syno-map';
+import type { IngestedTree } from '../code-loader/ingested-tree';
 
 export type EndAsyncSyntreeLoad = {
   readonly type: 'END_SYNTREE_LOAD';
-  readonly newSynoMap: (MutableSynoMap | null); // null on failure
+  readonly newIngestedTree: IngestedTree | null; // null on failure
 };

@@ -174,9 +174,4 @@
   * Cleophas, L. G. W. A., & Hemerik, C. (2009). Taxonomies of regular tree algorithms. In J. Holub, & J. Zdarek (Eds.), Proceedings of the Prague Stringology Conference 200 (PSC'09, Prague, Czech Republic, August 31-September 2, 2009) (pp. 146-159). Czech Technical University in Prague.
   * http://alexandria.tue.nl/extra2/200810270.pdf
   * BOTTOM-UP TREE ACCEPTORS C. HEMERIK and J.P. KATOEN
-* syno IDs
-  * presumably getting rids of syno IDs as-is
-  * I think replaced by paths, but that brings up idenitity issues
-  * will need to add content addressing (hash subsyntrees)
-    * but that can only serve for certain purposes b/c it changes
-    * the limitations applied by focus might make it more generally useful?
+

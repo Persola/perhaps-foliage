@@ -1,8 +1,8 @@
 {
-  "1-1": {
-    "id": "1-1",
-    "parent": null,
-    "syntype": "booleanLiteral",
+  "type": "booleanLiteral",
+  "children": [],
+  "extraTreeRefs": {},
+  "attrs": {
     "value": false
   }
 }

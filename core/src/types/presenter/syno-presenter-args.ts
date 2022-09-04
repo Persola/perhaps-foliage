@@ -1,5 +1,6 @@
+import Syno from '../../main-process/syntactic-interface/newnew/syno';
+
 import { StateSelector } from '../state-selector';
-import { Syno } from '../syntactic/syno';
 
 export type SynoPresenterArgs = {
   syno: Syno,

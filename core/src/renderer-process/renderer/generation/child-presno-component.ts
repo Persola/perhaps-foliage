@@ -16,7 +16,7 @@ export default (
   return React.createElement(PresnoRenderer, {
     integration,
     getPresno,
-    synoId: presnoRef.id,
+    presnoId: presnoRef.id,
     PresnoRenderer,
     key: presnoRef.id,
   });

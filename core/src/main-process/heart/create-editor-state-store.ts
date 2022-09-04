@@ -6,10 +6,9 @@ import produce from 'immer';
 
 import type { Store, Action } from 'redux';
 
-import createStateSelector from '../../selectors/create-state-selector';
+import codeLoader from '../code-loader/code-loader';
+import createStateSelector from '../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
-import deriveInverseReferenceMap from './derive-inverse-reference-map';
-import ascendToRoot from '../../syntree-utils/read-tree/ascend-to-root';
 
 import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 import endInterpretationReducer from './reducers/end-interpretation-reducer';
@@ -41,12 +40,12 @@ import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
-import type { SynoMap } from '../../types/syntactic/syno-map';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../types/cross-context/warn';
-import type { EditorState } from '../../types/editor-state';
-import type { MutableEditorState } from '../../types/mutable-editor-state';
+import type { EditorState } from '../../types/editor-state/editor-state';
+import type { MutableEditorState } from '../../types/editor-state/mutable/mutable-editor-state';
 import type { Focus } from '../../types/editor-state/focus';
+import type { SerializedSyno } from '../../types/syntactic/newnew/serialized-syno';
 
 type CreateStoreReturn = {
   editorStateStore: Store;
@@ -55,39 +54,37 @@ type CreateStoreReturn = {
 
 export default (
   integration: MainsideLangInt,
-  initialDocument: SynoMap,
+  initialSerializedTree: null | SerializedSyno,
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,
 ): CreateStoreReturn => {
+  let editeeTreeId;
+  const trees = {};
   let focus: Focus;
-  let synoMap;
-  let inverseReferenceMap;
-  if (initialDocument) {
-    const rootSyno = ascendToRoot(Object.keys(initialDocument)[0], initialDocument);
+  if (initialSerializedTree) {
+    const initialTree = codeLoader.fromSerializedTree(initialSerializedTree);
+    editeeTreeId = 'intialDocumentFromVscode';
+    trees[editeeTreeId] = initialTree;
     focus = {
-      synoId: rootSyno.id,
+      synoId: initialTree.rootId,
       presnoIndex: null,
       budIndex: null,
       charIndex: null,
     };
-    synoMap = initialDocument;
-    inverseReferenceMap = deriveInverseReferenceMap(initialDocument);
   } else {
+    editeeTreeId = null;
     focus = null;
-    synoMap = null;
-    inverseReferenceMap = null;
   }
   const defaultEditorState: EditorState = {
     integrationId: integration.id,
     actualGrammar: integration.actualGrammar,
     syntypeSchema: integration.syntypeSchema,
-    primitives: integration.primitives,
     keyToNewSynoAttrs: integration.keyToNewSynoAttrs,
-    synoMap,
-    resultTree: null,
-    inverseReferenceMap,
+    trees,
+    primitivesTreeId: null,
+    editeeTreeId,
+    resultTreeId: null,
     focus,
-    resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,
     loadingIntegration: false,

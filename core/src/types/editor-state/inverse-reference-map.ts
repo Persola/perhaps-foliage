@@ -1,5 +1,3 @@
-import type { SynoId } from '../syntactic/syno-id';
-
 type ReadOnlySet<Member> = {
   // not included: add, clear, delete
   size: number;
@@ -11,6 +9,6 @@ type ReadOnlySet<Member> = {
 };
 
 export type InverseReferenceMap = Record<
-  SynoId,
-  ReadOnlySet<SynoId>
+  number,
+  ReadOnlySet<number>
 >;

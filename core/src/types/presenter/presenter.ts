@@ -1,4 +1,5 @@
-import type { Syno } from '../syntactic/syno';
+import Syno from '../../main-process/syntactic-interface/newnew/syno';
+
 import type { StateSelector } from '../state-selector';
 import type { PresnoAttrVal } from './presnos/presno-attrs';
 import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';

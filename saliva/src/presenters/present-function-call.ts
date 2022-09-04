@@ -4,7 +4,6 @@ export default {
       from: 'refAttr',
       ref: 'callee',
       attr: 'name',
-      ifEdgeType: 'non-tree',
     },
   },
   childPresnoArgs: {},

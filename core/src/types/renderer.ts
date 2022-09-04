@@ -2,7 +2,7 @@ import type { Store } from 'redux';
 import type { EditorPresentation } from './presenter/editor-presentation';
 import type { LangInt } from './language-integration';
 
-export interface Renderer {
+export type Renderer = {
  render(
   editorStateStore: Store,
   presentation: EditorPresentation,

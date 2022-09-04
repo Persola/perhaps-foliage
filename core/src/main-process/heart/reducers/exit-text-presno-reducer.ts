@@ -1,5 +1,5 @@
 import type { StateSelector } from '../../../types/state-selector';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 
 export default (
   state: StateSelector,

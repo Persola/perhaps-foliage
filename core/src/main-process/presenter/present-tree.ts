@@ -3,7 +3,6 @@ import createEnstackForPresentation from './create-enstack-for-presentation';
 import presnoId from './presno-id';
 
 import type { StateSelector } from '../../types/state-selector';
-import type { SynoId } from '../../types/syntactic/syno-id';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/presno-map/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map/presno-map';
@@ -14,7 +13,7 @@ import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 export default (
   state: StateSelector,
   integration: MainsidePresentLangInt,
-  renderEntrySynoId: SynoId,
+  renderEntrySynoId: number,
   focus: Focus,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
@@ -27,7 +26,7 @@ export default (
 
   while (toPresentStack.length > 0) {
     const args = toPresentStack.pop();
-    const id = presnoId(args);
+    const id: string = presnoId(args);
 
     if (typeof mutablePresnoMap[id] !== 'undefined') {
       throw new Error('attempted to overwrite presno!');
@@ -42,10 +41,8 @@ export default (
     );
   }
 
-  const immutablePresnoMap = mutablePresnoMap as PresnoMap;
-
   return {
-    rootId: renderEntrySynoId,
-    presnos: immutablePresnoMap,
+    rootId: String(renderEntrySynoId),
+    presnos: mutablePresnoMap as PresnoMap,
   };
 };

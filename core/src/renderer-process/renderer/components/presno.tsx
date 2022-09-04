@@ -8,8 +8,8 @@ import type { Presno } from '../../../types/presenter/presnos/presno';
 import type { PresnoRendererProps } from '../../../types/renderer/presno-renderer-props';
 
 export default (props: PresnoRendererProps): JSX.Element => {
-  const { integration, synoId, getPresno, PresnoRenderer } = props;
-  const presno: Presno = getPresno(synoId);
+  const { integration, presnoId, getPresno, PresnoRenderer } = props;
+  const presno: Presno = getPresno(presnoId);
 
   let SyntypeRenderer;
   if (presno.prestype === 'namePart') {

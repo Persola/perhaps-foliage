@@ -1,8 +1,9 @@
-import { ChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';
+import Syno from '../../../syntactic-interface/newnew/syno';
+
 import type { NamePartInstruction } from '../../../../types/language-integration/presenters/instructions/presno-child-attr-full-instruction';
-import type { UnindexedNonSynPresnoArgs } from '../../../../types/presenter/presno-args/unindexed-non-syn-presno-args';
+import type { ChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';
 import type { StateSelector } from '../../../../types/state-selector';
-import type { Syno } from '../../../../types/syntactic/syno';
+import type { UnindexedNonSynPresnoArgs } from '../../../../types/presenter/presno-args/unindexed-non-syn-presno-args';
 
 export default (instruction: NamePartInstruction): ChildAttrPresenter => {
   return (
@@ -16,7 +17,7 @@ export default (instruction: NamePartInstruction): ChildAttrPresenter => {
         valid: true,
         prestype: 'namePart',
         // TODO: validate that from field is a string
-        text: (syno[instruction.attr] as string),
+        text: (syno.attrs[instruction.attr] as string),
       },
     };
   };

@@ -1,7 +1,7 @@
 import navOut from './navigate/nav-out';
-import destroySyno from '../../../syntree-utils/exposed/destroy-syno';
+import destroySyno from '../../syntactic-interface/exposed/destroy-syno';
 
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';

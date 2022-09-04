@@ -1,4 +1,3 @@
-// import forSynoRefFrom from '../../../syntree-utils/read-node/for-syno-ref-from';
 // import invalidate from './invalidate';
 
 // import type { SynoMap } from '../../../types/syntactic/syno-map';

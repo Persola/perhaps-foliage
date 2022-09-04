@@ -1,5 +1,5 @@
-import type { MutableSyntypeAttrs } from '../syntactic/mutables/mutable-syntype-attrs';
+import type { TypeAttrs } from '../syntactic/newnew/type-attrs';
 
 export type KeyToNewSynoAttrs = Readonly<{
-  [input: string]: MutableSyntypeAttrs;
+  [input: string]: TypeAttrs;
 }>;

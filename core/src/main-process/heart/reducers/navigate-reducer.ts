@@ -5,7 +5,7 @@ import navNext from './navigate/nav-next';
 
 import type { StateSelector } from '../../../types/state-selector';
 import type { Navigate } from '../../../types/actions/commands/navigate';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';

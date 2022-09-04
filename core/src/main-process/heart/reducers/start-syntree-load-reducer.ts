@@ -1,4 +1,4 @@
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { StateSelector } from '../../../types/state-selector';
 import type { Warn } from '../../../types/cross-context/warn';
 

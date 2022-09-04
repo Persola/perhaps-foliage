@@ -1,13 +1,12 @@
-import type { EditorState } from './editor-state';
+import Syno from '../main-process/syntactic-interface/newnew/syno';
+import SyntaxTree from '../main-process/syntactic-interface/newnew/syntax-tree';
+
+import type { EditorState } from './editor-state/editor-state';
 import type { ActualGrammar } from './grammar/actual-grammar';
-import type { SynoMap } from './syntactic/syno-map';
 import type { KeyToNewSynoAttrs } from './language-integration/key-to-new-syno-attrs';
-import type { InverseReferenceMap } from './editor-state/inverse-reference-map';
 import type { Focus } from './editor-state/focus';
-import type { ResultSyntreeRootId } from './editor-state/result-syntree-root-id';
-import type { Syno } from './syntactic/syno';
-import type { SynoId } from './syntactic/syno-id';
 import type { SyntypeSchema } from './syntype-schema/syntype-schema';
+import type { AbsoluteSynoUri } from './syntactic/newnew/syno-uri';
 
 export type StateSelector = {
   // state
@@ -16,28 +15,26 @@ export type StateSelector = {
   integrationId: () => string;
   actualGrammar: () => ActualGrammar;
   syntypeSchema: () => SyntypeSchema;
-  primitives: () => SynoMap;
   keyToNewSynoAttrs: () => KeyToNewSynoAttrs;
-  synoMap: () => SynoMap;
-  resultTree: () => SynoMap;
-  inverseReferenceMap: () => InverseReferenceMap;
+  editeeTree: () => SyntaxTree;
+  resultTree: () => SyntaxTree;
   focus: () => Focus;
-  resultSyntreeRootId: () => ResultSyntreeRootId;
   interpreting: () => boolean;
   resultOutdated: () => boolean;
   loadingIntegration: () => boolean;
   loadingSyntree: () => boolean;
   // deeper accessors
-  focusedSynoId: () => SynoId;
+  focusedSynoId: () => number;
   focusedPresnoIndex: () => number;
   focusedCharIndex: () => number;
   // loaded
   treeLoaded: () => boolean;
   integrationLoaded: () => boolean;
   // synos
-  getSyno: (synoId: SynoId) => Syno;
+  getEditeeSyno: (synoId: number) => Syno;
+  getSynoByUri: (synoUri: AbsoluteSynoUri) => Syno;
   focusedSyno: () => Syno;
-  isPrimitive: (synoId: SynoId) => boolean;
+  isPrimitive: (synoId: number) => boolean;
   // focus
   inNonSynPresno: () => boolean;
   inText: () => boolean;

@@ -9,9 +9,7 @@ import type { EndIntegrationHotload } from '../../../types/actions/end-integrati
 export default (
   action$: Observable<Action>,
 ): Observable<EndIntegrationHotload> => action$.pipe(
-  filter((action: Action) => {
-    return action.type === 'START_INTEGRATION_HOTLOAD';
-  }),
+  filter((action: Action) => action.type === 'START_INTEGRATION_HOTLOAD'),
   map((action: StartIntegrationHotload) => {
   // eval'd integration strings assign the integration object module to this variable name
     let initializeIntegration: {

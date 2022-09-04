@@ -5,7 +5,7 @@ import type { StateObservable } from 'redux-observable';
 
 import codeLoader from '../../code-loader/code-loader';
 
-import type { EditorState } from '../../../types/editor-state';
+import type { EditorState } from '../../../types/editor-state/editor-state';
 import type { StartAsyncSyntreeLoad } from '../../../types/actions/start-syntree-load';
 import type { StateSelector } from '../../../types/state-selector';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
@@ -18,13 +18,12 @@ export default (
   integration: MainsideLangInt,
   // @ts-ignore: TS isn't matching the type properties inside the objects inside the observables
 ): Observable<EndAsyncSyntreeLoad> => action$.pipe(
-  filter((action: Action) => {
-    return action.type === 'START_SYNTREE_LOAD' && state.integrationLoaded();
-  }),
+  filter((action: Action) => action.type === 'START_SYNTREE_LOAD'),
   map((action: StartAsyncSyntreeLoad) => {
+    const serializedTree = JSON.parse(action.fileText);
     return {
       type: 'END_SYNTREE_LOAD',
-      newSynoMap: codeLoader.fromString(action.fileText, integration),
+      newIngestedTree: codeLoader.fromSerializedTree(serializedTree),
     };
   }),
   catchError((error: Error) => {

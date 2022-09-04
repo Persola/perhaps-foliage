@@ -1,9 +1,8 @@
 import type { Focus } from '../../../types/editor-state/focus';
-import type { SynoId } from '../../../types/syntactic/syno-id';
 
 export default (
   focus: Focus | null,
-  synoId: SynoId,
+  synoId: number,
 ): {
   focused: boolean;
   presnoFocused: number | null;

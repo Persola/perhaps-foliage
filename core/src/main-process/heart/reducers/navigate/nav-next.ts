@@ -1,4 +1,4 @@
-import childSynos from '../../../../syntree-utils/read-node/child-synos';
+import childSynos from '../../../syntactic-interface/read-node/child-synos';
 
 import type { StateSelector } from '../../../../types/state-selector';
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';

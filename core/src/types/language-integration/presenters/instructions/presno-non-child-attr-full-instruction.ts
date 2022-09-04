@@ -7,7 +7,6 @@ export type ReadRefAttrInstruction = {
   readonly from: 'refAttr';
   readonly ref: string;
   readonly attr: string;
-  readonly ifEdgeType: string;
 };
 
 export type PresnoNonChildAttrFullInstruction = (

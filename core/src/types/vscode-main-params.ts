@@ -1,16 +1,17 @@
+import SyntaxTree from '../main-process/syntactic-interface/newnew/syntax-tree';
+
 import type { UnistlikeEdit } from './unistlike/unistlike-edit';
 import type { StateSelector } from './state-selector';
 import type { MainsidePresentLangInt } from './language-integration/interfaces/mainside/mainside-present-lang-int';
-import type { SynoMap } from './syntactic/syno-map';
 
-export interface DocumentStateTrackerInterface {
+export type DocumentStateTrackerInterface = {
   setStateSelector(stateSelector: StateSelector): void,
-  getState(): SynoMap,
+  getState(): SyntaxTree,
 }
 
 export type VscodeMainParams = {
   emitDocumentChange: (edit: UnistlikeEdit) => void,
   documentStateTracker: DocumentStateTrackerInterface,
   initialLangInt: MainsidePresentLangInt,
-  initialDocument: SynoMap,
+  initialDocument: SyntaxTree,
 };

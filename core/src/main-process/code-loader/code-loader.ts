@@ -1,11 +1,42 @@
-// import validateGraph from './validate-graph';
+import type { IngestedTree } from '../../types/code-loader/ingested-tree';
+import type { RawSyntaxTree } from '../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { SerializedSyno } from '../../types/syntactic/newnew/serialized-syno';
 
-import type { SynoMap } from '../../types/syntactic/syno-map';
-import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
+const readTree = (uningestedTree: SerializedSyno): IngestedTree => {
+  const idIterator = (function* generateIterator(): Generator<number> {
+    let nextId = 1;
+    while (true) {
+      yield nextId;
+      nextId++;
+    }
+  }());
+
+  const rawTree: RawSyntaxTree = {};
+  const rootId: number = idIterator.next().value;
+
+  rawTree[rootId] = {
+    ...uningestedTree,
+    id: rootId,
+    rootwardEdgeLabel: null,
+    parentId: null,
+    childIds: [],
+    intratreeRefs: {},
+    intertreeRefs: {},
+    attrs: {},
+  };
+
+  return {
+    rawTree,
+    inverseExtraTreeEdges: {},
+    rootId,
+  };
+};
 
 export default {
-  fromString: (fileText: string, integration: MainsideLangInt): SynoMap => {
-    const newSyntree = JSON.parse(fileText);
+  fromSerializedTree: (
+    serializedTree: SerializedSyno,
+  ): IngestedTree => {
+    const ingestedTree = readTree(serializedTree);
     console.warn('graph not validated');
     // validateGraph(
     //   'drug_in_file',
@@ -14,22 +45,15 @@ export default {
     //   integration.actualGrammar,
     //   integration.primitives,
     // );
-    return newSyntree;
+    return ingestedTree;
   },
 
   fromFileObject: async (
     file: File,
-    integration: MainsideLangInt,
-  ): Promise<SynoMap> => {
+  ): Promise<IngestedTree> => {
     const fileText = await file.text();
     const newSyntree = JSON.parse(fileText);
-    // validateGraph(
-    //   file.name,
-    //   newSyntree,
-    //   integration.id,
-    //   integration.actualGrammar,
-    //   integration.primitives,
-    // );
+    // validateGraph
     return newSyntree;
   },
 };

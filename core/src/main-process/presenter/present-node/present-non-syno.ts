@@ -46,7 +46,7 @@ export default (
     id: presnoId(presnoArgs),
     parent: {
       presnoRef: true,
-      id: presnoArgs.parentId,
+      id: String(presnoArgs.parentId),
     },
     valid,
     focused,

@@ -1,6 +1,6 @@
 import synoMapReducer from './char-backspace/syno-map';
 
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { StateSelector } from '../../../types/state-selector';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';

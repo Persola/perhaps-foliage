@@ -1,6 +1,6 @@
 import type { SynoId } from '../../../../types/syntactic/syno-id';
 import type { StateSelector } from '../../../../types/state-selector';
-import type { MutableEditorState } from '../../../../types/mutable-editor-state';
+import type { MutableEditorState } from '../../../../types/editor-state/mutable/mutable-editor-state';
 import type { MutableSyno } from '../../../../types/syntactic/mutables/mutable-syno';
 
 export default (

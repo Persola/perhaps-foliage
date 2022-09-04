@@ -1,30 +1,34 @@
+import Syno from '../../../syntactic-interface/newnew/syno';
+
 import type { NonChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';
 import type { ReadRefAttrInstruction } from '../../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';
 import type { PresnoAttrVal } from '../../../../types/presenter/presnos/presno-attrs';
 import type { StateSelector } from '../../../../types/state-selector';
-import type { Syno } from '../../../../types/syntactic/syno';
-import type { SynoRef } from '../../../../types/syntactic/syno-ref';
 
 export default (instruction: ReadRefAttrInstruction): NonChildAttrPresenter => {
   return (
     syno: Syno,
     state: StateSelector,
   ): PresnoAttrVal => {
-    // TODO: validate ref key is syno ref
-    const ref = syno[instruction.ref] as SynoRef;
-    if (ref === null) {
-      return null;
+    let referentSyno;
+    if (syno.hasRef(instruction.ref) === 'intratree') {
+      const referentId = syno.intratreeRefs[instruction.ref];
+      if (referentId === null) {
+        return null;
+      }
+      referentSyno = state.getEditeeSyno(referentId);
     }
 
-    if (
-      Object.keys(instruction).includes('ifEdgeType')
-      && instruction.ifEdgeType !== ref.relation
-    ) {
-      return null;
+    if (syno.hasRef(instruction.ref) === 'intertree') {
+      const referentUri = syno.intertreeRefs[instruction.ref];
+      if (referentUri === null) {
+        return null;
+      }
+      referentSyno = state.getSynoByUri(referentUri);
     }
 
-    // TODO: ref type has attr and attr is non child attr
-    const refAttrVal = state.getSyno(ref.id)[instruction.attr] as PresnoAttrVal;
+    // TODO: ref type has attr and attr has correct type
+    const refAttrVal = referentSyno.attrs[instruction.attr];
 
     return refAttrVal;
   };

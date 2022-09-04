@@ -1,11 +1,8 @@
-import deriveInverseReferenceMap from '../derive-inverse-reference-map';
-import ascendToRoot from '../../../syntree-utils/read-tree/ascend-to-root';
-
-import type { MutableSynoMap } from '../../../types/syntactic/mutables/mutable-syno-map';
-import type { MutableEditorState } from '../../../types/mutable-editor-state';
-import type { Warn } from '../../../types/cross-context/warn';
-import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
 import type { StateSelector } from '../../../types/state-selector';
+import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
+import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
+import type { Warn } from '../../../types/cross-context/warn';
+import type { IngestedTree } from '../../../types/code-loader/ingested-tree';
 
 export default (
   state: StateSelector,
@@ -18,24 +15,30 @@ export default (
     return;
   }
 
-  if (action.newSynoMap === null) {
-    // load failed, just stop loading
+  if (action.newIngestedTree === null) {
+    // load failed, just stop loading (error already surfaced in epic)
     draftState.loadingSyntree = false;
     return;
   }
 
-  const newSyntree: MutableSynoMap = action.newSynoMap;
-  const rootSyno = ascendToRoot(Object.keys(newSyntree)[0], newSyntree);
+  const treeId = 'drug_in_tree';
+  const newSyntree: IngestedTree = action.newIngestedTree;
+  const treeToAdd = {};
+  treeToAdd[treeId] = newSyntree;
+
   Object.assign(draftState, {
-    synoMap: newSyntree,
-    inverseReferenceMap: deriveInverseReferenceMap(newSyntree),
+    trees: {
+      ...draftState.trees,
+      ...treeToAdd,
+    },
+    editeeTreeId: treeId,
+    resultTreeId: null,
     focus: {
-      synoId: rootSyno.id,
+      synoId: newSyntree.rootId,
       presnoIndex: null,
       budIndex: null,
       charIndex: null,
     },
-    resultSyntreeRootId: null,
     interpreting: false,
     resultOutdated: false,
     loadingSyntree: false,

@@ -1,6 +1,6 @@
 import type { Action } from 'redux';
 
-export interface UnistlikeEdit {
+export type UnistlikeEdit = {
   readonly undo: Action;
   readonly redo: Action;
 }

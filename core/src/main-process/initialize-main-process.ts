@@ -85,9 +85,9 @@ export default (
 
   const present = createPresent(
     stateSelector,
-    editorStateStore,
     integration,
   );
+
   const inputResolver = createInputResolver(
     editorStateStore,
     stateSelector,
