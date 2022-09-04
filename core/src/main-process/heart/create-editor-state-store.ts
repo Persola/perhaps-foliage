@@ -10,33 +10,33 @@ import codeLoader from '../code-loader/code-loader';
 import createStateSelector from '../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
 
-import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
-import endInterpretationReducer from './reducers/end-interpretation-reducer';
+// import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
+// import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
 import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
-import navigateReducer from './reducers/navigate-reducer';
-import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
-import startInterpretationReducer from './reducers/start-interpretation-reducer';
+// import navigateReducer from './reducers/navigate-reducer';
+// import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
+// import startInterpretationReducer from './reducers/start-interpretation-reducer';
 import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
-import charBackspaceReducer from './reducers/char-backspace-reducer';
-import textNavigateReducer from './reducers/text-navigate-reducer';
-import exitTextPresno from './reducers/exit-text-presno-reducer';
-import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
-import insertBudReducer from './reducers/insert-bud-reducer';
+// import charBackspaceReducer from './reducers/char-backspace-reducer';
+// import textNavigateReducer from './reducers/text-navigate-reducer';
+// import exitTextPresno from './reducers/exit-text-presno-reducer';
+// import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
+// import insertBudReducer from './reducers/insert-bud-reducer';
 
 import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
-import type { ReplaceFocusedSyno } from '../../types/actions/commands/replace-focused-syno';
-import type { EndInterpretation } from '../../types/actions/end-interpretation';
+// import type { ReplaceFocusedSyno } from '../../types/actions/commands/replace-focused-syno';
+// import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
-import type { Navigate } from '../../types/actions/commands/navigate';
-import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
-import type { TextNavigate } from '../../types/actions/commands/text-navigate';
-import type { InsertBud } from '../../types/actions/commands/insert-bud';
+// import type { Navigate } from '../../types/actions/commands/navigate';
+// import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
+// import type { TextNavigate } from '../../types/actions/commands/text-navigate';
+// import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
@@ -105,27 +105,27 @@ export default (
           break;
         }
 
-        case 'REPLACE_FOCUSED_SYNO': {
-          replaceFocusedSynoReducer(
-            stateSelector,
-            (action as ReplaceFocusedSyno),
-            draftState,
-            integration,
-            latestEdit,
-            warnUser,
-          );
-          break;
-        }
+        // case 'REPLACE_FOCUSED_SYNO': {
+        //   replaceFocusedSynoReducer(
+        //     stateSelector,
+        //     (action as ReplaceFocusedSyno),
+        //     draftState,
+        //     integration,
+        //     latestEdit,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
-        case 'END_INTERPRETATION': {
-          endInterpretationReducer(
-            stateSelector,
-            (action as EndInterpretation),
-            draftState,
-            warnUser,
-          );
-          break;
-        }
+        // case 'END_INTERPRETATION': {
+        //   endInterpretationReducer(
+        //     stateSelector,
+        //     (action as EndInterpretation),
+        //     draftState,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
         case 'END_SYNTREE_LOAD': {
           endSyntreeLoadReducer(
@@ -147,36 +147,36 @@ export default (
           break;
         }
 
-        case 'NAVIGATE': {
-          navigateReducer(
-            stateSelector,
-            (action as Navigate),
-            draftState,
-            warnUser,
-            integration,
-          );
-          break;
-        }
+        // case 'NAVIGATE': {
+        //   navigateReducer(
+        //     stateSelector,
+        //     (action as Navigate),
+        //     draftState,
+        //     warnUser,
+        //     integration,
+        //   );
+        //   break;
+        // }
 
-        case 'SET_FOCUS_SYNO': {
-          setFocusSynoReducer(
-            stateSelector,
-            (action as SetFocusSyno),
-            draftState,
-            warnUser,
-          );
-          break;
-        }
+        // case 'SET_FOCUS_SYNO': {
+        //   setFocusSynoReducer(
+        //     stateSelector,
+        //     (action as SetFocusSyno),
+        //     draftState,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
-        case 'START_INTERPRETATION': {
-          startInterpretationReducer(
-            stateSelector,
-            draftState,
-            integration,
-            warnUser,
-          );
-          break;
-        }
+        // case 'START_INTERPRETATION': {
+        //   startInterpretationReducer(
+        //     stateSelector,
+        //     draftState,
+        //     integration,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
         case 'START_SYNTREE_LOAD': {
           startSyntreeLoadReducer(
@@ -192,55 +192,55 @@ export default (
           break;
         }
 
-        case 'CHAR_BACKSPACE': {
-          charBackspaceReducer(
-            stateSelector,
-            draftState,
-            latestEdit,
-            warnUser,
-          );
-          break;
-        }
+        // case 'CHAR_BACKSPACE': {
+        //   charBackspaceReducer(
+        //     stateSelector,
+        //     draftState,
+        //     latestEdit,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
-        case 'TEXT_NAVIGATE': {
-          textNavigateReducer(
-            stateSelector,
-            action as TextNavigate,
-            draftState,
-            latestEdit,
-            warnUser,
-          );
-          break;
-        }
+        // case 'TEXT_NAVIGATE': {
+        //   textNavigateReducer(
+        //     stateSelector,
+        //     action as TextNavigate,
+        //     draftState,
+        //     latestEdit,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
-        case 'EXIT_TEXT_PRESNO': {
-          exitTextPresno(
-            stateSelector,
-            draftState,
-          );
-          break;
-        }
+        // case 'EXIT_TEXT_PRESNO': {
+        //   exitTextPresno(
+        //     stateSelector,
+        //     draftState,
+        //   );
+        //   break;
+        // }
 
-        case 'DESTROY_FOCUSED_SYNO': {
-          destroyFocusedSynoReducer(
-            stateSelector,
-            draftState,
-            latestEdit,
-            warnUser,
-          );
-          break;
-        }
+        // case 'DESTROY_FOCUSED_SYNO': {
+        //   destroyFocusedSynoReducer(
+        //     stateSelector,
+        //     draftState,
+        //     latestEdit,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
-        case 'INSERT_BUD': {
-          insertBudReducer(
-            stateSelector,
-            (action as InsertBud),
-            draftState,
-            latestEdit,
-            warnUser,
-          );
-          break;
-        }
+        // case 'INSERT_BUD': {
+        //   insertBudReducer(
+        //     stateSelector,
+        //     (action as InsertBud),
+        //     draftState,
+        //     latestEdit,
+        //     warnUser,
+        //   );
+        //   break;
+        // }
 
         default: {
           verifyType(action.type);
