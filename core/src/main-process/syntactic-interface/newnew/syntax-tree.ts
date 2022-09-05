@@ -1,33 +1,29 @@
-import findRoot from './find-root';
 import Syno from './syno';
 
 import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import type { TreeList } from '../../../types/syntactic/newnew/tree-list';
-import { InverseEdgeMap } from '../../../types/syntactic/newnew/inverse-edge-map';
 
 export default class SyntaxTree {
 // this isn't written to work across state updates--reinstantiate instead
   readonly id: string;
   readonly raw: RawSyntaxTree;
   readonly rootId: number;
-  readonly inverseExtraTreeRefs: InverseEdgeMap;
 
   constructor(
-    trees: TreeList,
+    raw: RawSyntaxTree,
     id: string,
-    rootId?: number,
   ) {
     this.id = id;
-    this.raw = trees[id];
-    this.rootId = rootId || findRoot(this.raw).id;
+    this.raw = raw;
+    this.rootId = raw.rootId;
   }
 
   hasSyno(synoId: number): boolean {
-    return this.raw[synoId] !== undefined;
+    return this.raw.synoMap[synoId] !== undefined;
   }
 
   getSyno(synoId: number): Syno {
-    if (this.raw[synoId] === undefined) {
+    // cache them?
+    if (this.raw.synoMap[synoId] === undefined) {
       throw new Error(`Syno of ID '${synoId}' not found in tree '${this.id}'`);
     }
     return new Syno(this, synoId);

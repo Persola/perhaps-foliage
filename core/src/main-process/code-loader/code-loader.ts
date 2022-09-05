@@ -1,42 +1,13 @@
-import type { IngestedTree } from '../../types/code-loader/ingested-tree';
-import type { RawSyntaxTree } from '../../types/syntactic/newnew/raw/raw-syntax-tree';
+import deserializeTree from './deserializer/deserialize-tree';
+
 import type { SerializedSyno } from '../../types/syntactic/newnew/serialized-syno';
-
-const readTree = (uningestedTree: SerializedSyno): IngestedTree => {
-  const idIterator = (function* generateIterator(): Generator<number> {
-    let nextId = 1;
-    while (true) {
-      yield nextId;
-      nextId++;
-    }
-  }());
-
-  const rawTree: RawSyntaxTree = {};
-  const rootId: number = idIterator.next().value;
-
-  rawTree[rootId] = {
-    ...uningestedTree,
-    id: rootId,
-    rootwardEdgeLabel: null,
-    parentId: null,
-    childIds: [],
-    intratreeRefs: {},
-    intertreeRefs: {},
-    attrs: {},
-  };
-
-  return {
-    rawTree,
-    inverseExtraTreeEdges: {},
-    rootId,
-  };
-};
+import type { RawSyntaxTree } from '../../types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default {
   fromSerializedTree: (
     serializedTree: SerializedSyno,
-  ): IngestedTree => {
-    const ingestedTree = readTree(serializedTree);
+  ): RawSyntaxTree => {
+    const ingestedTree = deserializeTree(serializedTree);
     console.warn('graph not validated');
     // validateGraph(
     //   'drug_in_file',
@@ -50,7 +21,7 @@ export default {
 
   fromFileObject: async (
     file: File,
-  ): Promise<IngestedTree> => {
+  ): Promise<RawSyntaxTree> => {
     const fileText = await file.text();
     const newSyntree = JSON.parse(fileText);
     // validateGraph

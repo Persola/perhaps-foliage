@@ -28,16 +28,37 @@ export default (editorState: EditorState): StateSelector => {
       return this.state.syntypeSchema;
     },
     primitives: function primitives(): SyntaxTree {
-      return this.state.trees[this.state.primitivesTreeId];
+      if (this.state.primitivesTreeId === null) {
+        return null;
+      }
+
+      return new SyntaxTree(
+        this.state.trees[this.state.primitivesTreeId],
+        this.state.primitivesTreeId,
+      );
     },
     keyToNewSynoAttrs: function keyToNewSynoAttrs(): KeyToNewSynoAttrs {
       return this.state.keyToNewSynoAttrs;
     },
     editeeTree: function editeeTree(): SyntaxTree {
-      return this.state.trees[this.state.editeeTreeId];
+      if (this.state.editeeTreeId === null) {
+        return null;
+      }
+
+      return new SyntaxTree(
+        this.state.trees[this.state.editeeTreeId],
+        this.state.editeeTreeId,
+      );
     },
     resultTree: function resultTree(): SyntaxTree {
-      return this.state.trees[this.state.resultTreeId];
+      if (this.state.resultTreeId === null) {
+        return null;
+      }
+
+      return new SyntaxTree(
+        this.state.trees[this.state.resultTreeId],
+        this.state.resultTreeId,
+      );
     },
     focus: function focus(): Focus {
       return this.state.focus;

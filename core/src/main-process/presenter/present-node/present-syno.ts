@@ -49,7 +49,7 @@ export default (
   );
 
   const parent = (
-    syno.parent === null
+    syno.parent() === null
       ? null
       : {
         presnoRef: true,

@@ -1,5 +1,8 @@
-import type { RawSyno } from './raw-syno';
+import { SynoMap } from './syno-map';
+import { InverseEdgeMap } from './inverse-edge-map';
 
 export type RawSyntaxTree = {
-  [id: string]: RawSyno;
+  synoMap: SynoMap;
+  inverseExtraTreeEdges: InverseEdgeMap;
+  rootId: number;
 };

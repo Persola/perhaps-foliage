@@ -23,10 +23,10 @@ export default class Syno {
   ) {
     this.tree = tree;
     this.id = id;
-    if (tree.raw[id] === undefined) {
+    if (!tree.hasSyno(id)) {
       throw new Error(`Syno constructor found no syno data in tree for ID '${id}'`);
     }
-    this.raw = tree.raw[id];
+    this.raw = tree.raw.synoMap[id];
     this.type = this.raw.type;
     this.rootwardEdgeLabel = this.raw.rootwardEdgeLabel;
     this.parentId = this.raw.parentId;
@@ -56,12 +56,14 @@ export default class Syno {
   }
 
   parent(): Syno {
-    // TODO: cache?
-    return new Syno(this.tree, this.parentId);
+    if (this.parentId === null) {
+      return null;
+    }
+
+    return this.tree.getSyno(this.parentId);
   }
 
   children(filter?: { label: string, type: string }): Syno[] {
-    // TODO: cache?
     return this.childIds.map(
       id => this.tree.getSyno(id),
     ).filter(
@@ -76,7 +78,14 @@ export default class Syno {
   }
 
   childAt(index: number): Syno {
-    return new Syno(this.tree, this.childIds[index]);
+    if (index > this.childIds.length - 1) {
+      throw new Error(
+        `Syno ('${this.id}') has ${this.childIds.length} children`
+        + ` but was asked for child at index ${index}`,
+      );
+    }
+
+    return this.tree.getSyno(this.childIds[index]);
   }
 
   index(): number {

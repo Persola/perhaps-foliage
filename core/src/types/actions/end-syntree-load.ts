@@ -1,6 +1,6 @@
-import type { IngestedTree } from '../code-loader/ingested-tree';
+import type { RawSyntaxTree } from '../syntactic/newnew/raw/raw-syntax-tree';
 
 export type EndAsyncSyntreeLoad = {
   readonly type: 'END_SYNTREE_LOAD';
-  readonly newIngestedTree: IngestedTree | null; // null on failure
+  readonly newIngestedTree: RawSyntaxTree | null; // null on failure
 };

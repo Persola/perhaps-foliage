@@ -2,7 +2,7 @@ import type { StateSelector } from '../../../types/state-selector';
 import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
 import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
-import type { IngestedTree } from '../../../types/code-loader/ingested-tree';
+import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default (
   state: StateSelector,
@@ -22,7 +22,7 @@ export default (
   }
 
   const treeId = 'drug_in_tree';
-  const newSyntree: IngestedTree = action.newIngestedTree;
+  const newSyntree: RawSyntaxTree = action.newIngestedTree;
   const treeToAdd = {};
   treeToAdd[treeId] = newSyntree;
 

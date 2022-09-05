@@ -1,18 +1,21 @@
 import type { SynoAttrVal } from './syno-attr-val';
-import type { SynoUri } from './syno-uri';
+
+type Attrs = {
+  [attrName: string]: SynoAttrVal
+};
+
+export type ExtraTreeRefs = {
+  [edgeLabel: string]: string // value is stringified syno URI
+};
 
 type LabeledChild = [
-  string,
-  SerializedSyno
+  string, // edgeLabel
+  SerializedSyno, // child
 ];
 
 export type SerializedSyno = {
   type: string;
+  attrs: Attrs;
+  extratreeRefs: ExtraTreeRefs;
   children: LabeledChild[];
-  extraTreeRefs: {
-    [edgeLabel: string]: SynoUri
-  };
-  attrs: {
-    [attrName: string]: SynoAttrVal
-  };
 };
