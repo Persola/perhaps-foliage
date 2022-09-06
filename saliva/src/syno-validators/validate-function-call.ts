@@ -1,32 +1,31 @@
-import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
+import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-
-import { Argument } from '../types/synos/argument';
-import { FunctionCall } from '../types/synos/function-call';
-import { FunctionDefinition } from '../types/synos/function-definition';
 
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
 export default (
-  funkshunCall: FunctionCall,
+  funkshunCall: Syno,
   state: StateSelector,
 ): boolean => {
-  if (!funkshunCall.callee) {
+  let callee: Syno;
+  if (funkshunCall.children({ label: 'callee' }).length === 1) {
+    callee = funkshunCall.children({ label: 'callee' })[0];
+  } else if (funkshunCall.children({ label: 'callee' }).length !== 0) {
     return false;
+  } else if (funkshunCall.hasRef('callee') === false) {
+    return false;
+  } else if (funkshunCall.hasRef('callee') === 'intratree') {
+    callee = funkshunCall.followIntratreeRef('callee');
+  } else if (funkshunCall.hasRef('callee') === 'intertree') {
+    callee = state.getSynoByUri(funkshunCall.intertreeRefs.callee);
+  } else {
+    throw new Error('hasRef interface changed');
   }
-
-  const calleeSyno: Syno = state.getSyno(funkshunCall.callee.id);
-  if (calleeSyno.syntype !== 'functionDefinition') {
-    throw new TypeError('bad callee');
-  }
-  const calleeFuncDef = calleeSyno as FunctionDefinition;
 
   if (
     argumentParameterMismatch(
-      calleeFuncDef,
-      funkshunCall.argumentz.map(argRef => {
-        return state.getSyno(argRef.id) as Argument;
-      }),
+      callee,
+      funkshunCall.children({ label: 'argument' }),
       state,
     )
   ) {

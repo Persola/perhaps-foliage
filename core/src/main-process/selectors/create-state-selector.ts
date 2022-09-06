@@ -102,25 +102,21 @@ export default (editorState: EditorState): StateSelector => {
         this.editeeTree(),
         this.primitives(),
         this.resultTree(),
-      ].find(t => t.id === uriTreeHost);
+      ].find(t => t !== null && t.id === uriTreeHost);
 
       if (!tree) {
         throw new Error(`Cannot retrieve syno from unloaded tree '${uriTreeHost}'`);
       }
 
-      if (uri.path.length > 1) {
-        throw new Error('unimplemented: deep paths in syno URIs');
+      let currentSyno = tree.root();
+      for (const step of uri.path) {
+        if (!currentSyno.hasChildAt(step)) {
+          throw new TypeError(`Tree ('${uriTreeHost}') has no syno at '${uri.path.join('/')}'`);
+        }
+        currentSyno = currentSyno.childAt(step);
       }
 
-      if (typeof uri.path[0] !== 'number') {
-        throw new Error("bad syno URI: path doesn't start with child index");
-      }
-
-      const syno = tree.root().children()[uri.path[0]];
-
-      if (syno === undefined) {
-        throw new TypeError(`Tree ('${uriTreeHost}') has no syno at '${uri.treeHost[0]}'`);
-      }
+      const syno = currentSyno;
 
       return syno;
     },

@@ -1,4 +1,4 @@
-import type { Syno } from 'perhaps-foliage/dist/types/syntactic/syno';
+import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
 import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
@@ -14,7 +14,7 @@ const interpreter = (
   scope: Scope,
   state: StateSelector,
 ): InterpretationResolution => {
-  switch (interpretee.syntype) {
+  switch (interpretee.type) {
     case 'booleanLiteral': {
       return {
         success: true,
@@ -39,22 +39,7 @@ const interpreter = (
     }
 
     case 'variableRef': {
-      if (!interpretee.referent) {
-        return {
-          success: false,
-          error: {
-            message: `variableRef (ID ${interpretee.id}) has no referent`,
-          },
-        };
-      }
-
       const value = resolveRef(scope, (interpretee as VariableRef).referent);
-
-      if (typeof value !== 'object' || value.syntype !== 'booleanLiteral') {
-        throw new Error(
-          `Variable Reference with ID #'${interpretee.id}' resolved to an invalid value: ${value}`,
-        );
-      }
 
       return {
         success: true,

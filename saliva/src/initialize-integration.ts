@@ -15,7 +15,7 @@ import renderers from './renderers/renderers';
 import styles from './stylesheet.lazy.css';
 
 export default {
-  id: `saliva.perhaps-foliage-alpha.${version}`,
+  id: `saliva.${version}`,
   actualGrammar,
   syntypeSchema,
   primitives,

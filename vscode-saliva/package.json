@@ -1,7 +1,7 @@
 {
   "name": "perhaps-foliage-vscode-saliva",
   "displayName": "Perhaps Foliage VSCode (Saliva)",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Saliva language integration for VSCode extension build of Perhaps Foliage",
   "author": "Luke Persola",
   "publisher": "persola",

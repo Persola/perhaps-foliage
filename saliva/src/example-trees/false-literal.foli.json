@@ -1,8 +1,4 @@
 {
   "type": "booleanLiteral",
-  "attrs": {
-    "value": false
-  },
-  "extratreeRefs": {},
-  "children": []
+  "attrs": { "value": false  }
 }

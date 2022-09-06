@@ -10,6 +10,7 @@ import renderers from './renderers/renderers';
 import styles from './stylesheet.lazy.css';
 
 export default {
+  id: `saliva.${version}`,
   version,
   actualGrammar,
   syntypeSchema,

@@ -11,20 +11,26 @@ export default (instruction: ReadRefAttrInstruction): NonChildAttrPresenter => {
     state: StateSelector,
   ): PresnoAttrVal => {
     let referentSyno;
-    if (syno.hasRef(instruction.ref) === 'intratree') {
-      const referentId = syno.intratreeRefs[instruction.ref];
-      if (referentId === null) {
+    switch (syno.hasRef(instruction.ref)) {
+      case 'intratree': {
+        const referentId = syno.intratreeRefs[instruction.ref];
+        if (referentId === null) {
+          return null;
+        }
+        referentSyno = state.getEditeeSyno(referentId);
+        break;
+      } case 'intertree': {
+        const referentUri = syno.intertreeRefs[instruction.ref];
+        if (referentUri === null) {
+          return null;
+        }
+        referentSyno = state.getSynoByUri(referentUri);
+        break;
+      } case false: {
         return null;
+      } default: {
+        throw new Error();
       }
-      referentSyno = state.getEditeeSyno(referentId);
-    }
-
-    if (syno.hasRef(instruction.ref) === 'intertree') {
-      const referentUri = syno.intertreeRefs[instruction.ref];
-      if (referentUri === null) {
-        return null;
-      }
-      referentSyno = state.getSynoByUri(referentUri);
     }
 
     // TODO: ref type has attr and attr has correct type

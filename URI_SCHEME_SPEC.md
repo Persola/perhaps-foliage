@@ -1,6 +1,6 @@
 Here's how URIs identifying ASTs and their nodes are used in the project:
 
-e.g. `foli://editor-instance.integrations.saliva.0.0.15.primitives/proxy-nor-call/arg-1`
+e.g. `foli://editor-instance.integrations.saliva.0.0.15.primitives/nor/arg-1`
 
 **Full URIs**
 * scheme: `foli`

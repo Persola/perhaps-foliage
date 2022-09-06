@@ -68,7 +68,7 @@ export default (
 
   const resolvedCallee = calleeResolution.result;
 
-  if (resolvedCallee.syntype !== 'functionDefinition') {
+  if (resolvedCallee.type !== 'functionDefinition') {
   // remove when typesafe
     throw new Error('invalid function ref (returned syno of wrong syntype)');
   }

@@ -7,10 +7,10 @@ export type IntertreeRefs = {[edgeLabel: string]: null | AbsoluteSynoUri};
 
 export type RawSyno = {
   id: number;
-  // should be include a ref to the raw tree?
+  // should include a ref to its raw tree?
   type: string;
   attrs: {[syntypeSpecificSynoAttr: string]: SynoAttrVal};
-  rootwardEdgeLabel: string; // 'labelOfEdgeToParent'? 'toParentEdgeLabel'? 'parentwardEdgeLabel'?
+  rootwardEdgeLabel: string; // 'labelOfEdgeToParent'? 'toParentEdgeLabel'? 'parentEdgeLabel'?
   parentId: number; // sync with childIds
   childIds: number[]; // sync with childIds
   intratreeRefs: IntratreeRefs;

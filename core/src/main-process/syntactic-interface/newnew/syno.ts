@@ -55,6 +55,14 @@ export default class Syno {
     return false;
   }
 
+  followIntratreeRef(refLabel: string): Syno {
+    if (refLabel in this.intratreeRefs) {
+      return this.tree.getSyno(this.intratreeRefs[refLabel]);
+    }
+
+    throw new Error('bad ref label');
+  }
+
   parent(): Syno {
     if (this.parentId === null) {
       return null;
@@ -63,29 +71,30 @@ export default class Syno {
     return this.tree.getSyno(this.parentId);
   }
 
-  children(filter?: { label: string, type: string }): Syno[] {
+  children(filter?: { label?: string, type?: string }): Syno[] {
     return this.childIds.map(
       id => this.tree.getSyno(id),
     ).filter(
       child => (
-        !filter
-        || (
-          (!filter.label || filter.label === child.rootwardEdgeLabel)
-          && (!filter.type || filter.type === child.type)
-        )
+        (!filter?.label || filter.label === child.rootwardEdgeLabel)
+        && (!filter?.type || filter.type === child.type)
       ),
     );
   }
 
+  hasChildAt(index: number): boolean {
+    return index < this.childIds.length;
+  }
+
   childAt(index: number): Syno {
-    if (index > this.childIds.length - 1) {
-      throw new Error(
-        `Syno ('${this.id}') has ${this.childIds.length} children`
-        + ` but was asked for child at index ${index}`,
-      );
+    if (this.hasChildAt(index)) {
+      return this.tree.getSyno(this.childIds[index]);
     }
 
-    return this.tree.getSyno(this.childIds[index]);
+    throw new Error(
+      `Syno ('${this.id}') has ${this.childIds.length} children`
+      + ` but was asked for child at (0-based) index ${index}`,
+    );
   }
 
   index(): number {

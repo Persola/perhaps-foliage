@@ -1,4 +1,4 @@
-type treeNavigationStep = (
+export type TreeNavigationStep = (
   | number // child index
   | '..' // parent
 );
@@ -6,12 +6,12 @@ type treeNavigationStep = (
 export type AbsoluteSynoUri = {
   type: 'absolute',
   treeHost: string[];
-  path: treeNavigationStep[];
+  path: number[];
 };
 
 export type RelativeSynoUri = {
   type: 'relative',
-  path: treeNavigationStep[];
+  path: TreeNavigationStep[];
 };
 
 export type SynoUri = AbsoluteSynoUri | RelativeSynoUri;

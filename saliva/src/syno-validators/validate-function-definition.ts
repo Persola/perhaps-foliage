@@ -1,18 +1,7 @@
-import { FunctionDefinition } from '../types/synos/function-definition';
-
-// @ts-ignore how do I configure TS to ignore webpacked imports?
-import primitives from '../primitives.yml';
-
-const primitiveIds = Object.keys(primitives);
+import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
 
 export default (
-  funkshunDef: FunctionDefinition,
+  funkshunDef: Syno,
 ): boolean => {
-  if (!funkshunDef.body) {
-    if (!primitiveIds.includes(funkshunDef.id)) {
-      return false;
-    }
-  }
-
-  return true;
+  return funkshunDef.children({ label: 'body' }).length === 1;
 };

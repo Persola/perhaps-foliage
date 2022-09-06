@@ -10,7 +10,10 @@ const recursivelyDeserializeSubtree = (
   idIterator: Generator<number>,
 ): number => {
   const synoId = idIterator.next().value;
-  const { type, attrs, extratreeRefs, children } = serializedTree;
+  const { type } = serializedTree;
+  const attrs = serializedTree?.attrs || {};
+  const extratreeRefs = serializedTree?.extratreeRefs || {};
+  const children = serializedTree?.children || [];
   const childIds: number[] = [];
 
   children.forEach((entry, childIndex) => {

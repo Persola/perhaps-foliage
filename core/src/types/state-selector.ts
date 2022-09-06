@@ -16,6 +16,7 @@ export type StateSelector = {
   actualGrammar: () => ActualGrammar;
   syntypeSchema: () => SyntypeSchema;
   keyToNewSynoAttrs: () => KeyToNewSynoAttrs;
+  primitives: () => SyntaxTree;
   editeeTree: () => SyntaxTree;
   resultTree: () => SyntaxTree;
   focus: () => Focus;

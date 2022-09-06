@@ -12,7 +12,7 @@ import synoValidators from './syno-validators/syno-validators';
 import presenters from './presenters/presenters';
 
 export default {
-  id: `saliva.perhaps-foliage-alpha.${version}`,
+  id: `saliva.${version}`,
   actualGrammar,
   syntypeSchema,
   primitives,
