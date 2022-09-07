@@ -1,6 +1,6 @@
 export type NonSynPresnoArgs<SyntypeArgs> = {
   type: 'nonSynPresno',
-  parentId: number,
+  parentId: string,
   presnoIndex: number,
   nonSynoArgs: SyntypeArgs,
 }

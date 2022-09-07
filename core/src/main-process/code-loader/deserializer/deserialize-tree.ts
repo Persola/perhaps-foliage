@@ -5,10 +5,10 @@ import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-synt
 import type { SerializedSyno } from '../../../types/syntactic/newnew/serialized-syno';
 import { SynoMapWithStructuralRefs } from '../../../types/code-loader/deserialization/syno-map-with-structural-refs';
 
-const idIteratorGenerator = function* generateIterator(): Generator<number> {
+const idIteratorGenerator = function* generateIterator(): Generator<string> {
   let nextId = 1;
   while (true) {
-    yield nextId;
+    yield String(nextId);
     nextId++;
   }
 };

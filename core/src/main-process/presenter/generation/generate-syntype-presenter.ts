@@ -1,5 +1,5 @@
 import generateAttrPresenters from './generate-attr-presenters';
-import Syno from '../../syntactic-interface/newnew/syno';
+import Syno from '../../syntactic-interface/newnew/readable/syno';
 
 import type { SynoPresenter } from '../../../types/presenter/presenter';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';

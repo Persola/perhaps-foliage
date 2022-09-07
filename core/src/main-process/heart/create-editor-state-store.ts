@@ -14,7 +14,7 @@ import verifyType from './reducers/util/verify-action-type';
 // import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
 import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
-// import navigateReducer from './reducers/navigate-reducer';
+import navigateReducer from './reducers/navigate-reducer';
 // import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
 // import startInterpretationReducer from './reducers/start-interpretation-reducer';
 import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
@@ -22,7 +22,7 @@ import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 // import charBackspaceReducer from './reducers/char-backspace-reducer';
 // import textNavigateReducer from './reducers/text-navigate-reducer';
 // import exitTextPresno from './reducers/exit-text-presno-reducer';
-// import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
+import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
 // import insertBudReducer from './reducers/insert-bud-reducer';
 
 import hotloadIntegrationEpic from './epics/hotload-integration';
@@ -33,7 +33,7 @@ import interpretEpic from './epics/interpret';
 // import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
-// import type { Navigate } from '../../types/actions/commands/navigate';
+import type { Navigate } from '../../types/actions/commands/navigate';
 // import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
 // import type { TextNavigate } from '../../types/actions/commands/text-navigate';
 // import type { InsertBud } from '../../types/actions/commands/insert-bud';
@@ -147,16 +147,15 @@ export default (
           break;
         }
 
-        // case 'NAVIGATE': {
-        //   navigateReducer(
-        //     stateSelector,
-        //     (action as Navigate),
-        //     draftState,
-        //     warnUser,
-        //     integration,
-        //   );
-        //   break;
-        // }
+        case 'NAVIGATE': {
+          navigateReducer(
+            stateSelector,
+            (action as Navigate),
+            draftState,
+            warnUser,
+          );
+          break;
+        }
 
         // case 'SET_FOCUS_SYNO': {
         //   setFocusSynoReducer(
@@ -221,15 +220,15 @@ export default (
         //   break;
         // }
 
-        // case 'DESTROY_FOCUSED_SYNO': {
-        //   destroyFocusedSynoReducer(
-        //     stateSelector,
-        //     draftState,
-        //     latestEdit,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
+        case 'DESTROY_FOCUSED_SYNO': {
+          destroyFocusedSynoReducer(
+            stateSelector,
+            draftState,
+            latestEdit,
+            warnUser,
+          );
+          break;
+        }
 
         // case 'INSERT_BUD': {
         //   insertBudReducer(

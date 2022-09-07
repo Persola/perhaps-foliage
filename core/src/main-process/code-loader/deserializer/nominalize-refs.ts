@@ -8,7 +8,7 @@ import { AbsoluteSynoUri } from '../../../types/syntactic/newnew/syno-uri';
 
 const derivePathToId = (
   synoMap: SynoMapWithStructuralRefs,
-): {[path: string]: number} => {
+): {[path: string]: string} => {
   const pathToId = {};
 
   for (const syno of Object.values(synoMap)) {
@@ -38,8 +38,8 @@ const rootifyPath = (path: string) => {
 
 const addInverse = (
   inverseExtraTreeEdges: InverseEdgeMap,
-  referentId: number,
-  refererId: number,
+  referentId: string,
+  refererId: string,
 ) => {
   if (inverseExtraTreeEdges[referentId] === undefined) {
     inverseExtraTreeEdges[referentId] = new Set();

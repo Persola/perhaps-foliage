@@ -1,4 +1,4 @@
-import Syno from '../../main-process/syntactic-interface/newnew/syno';
+import Syno from '../../main-process/syntactic-interface/newnew/readable/syno';
 
 import type { StateSelector } from '../state-selector';
 import type { MainsidePresentLangInt } from '../language-integration/interfaces/mainside/mainside-present-lang-int';

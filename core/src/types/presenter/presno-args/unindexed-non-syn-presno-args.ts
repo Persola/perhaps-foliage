@@ -4,7 +4,7 @@ import type { BudArgs } from './bud-args';
 
 export type UnindexedNonSynPresnoArgs = {
   type: 'nonSynPresno',
-  parentId: number,
+  parentId: string,
   nonSynoArgs: (
     | NamePartArgs
     | GapArgs

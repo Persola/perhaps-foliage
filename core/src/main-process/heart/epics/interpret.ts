@@ -3,7 +3,7 @@ import { Observable, filter, map } from 'rxjs';
 import type { Action } from 'redux';
 import type { StateObservable } from 'redux-observable';
 
-import Syno from '../../syntactic-interface/newnew/syno';
+import Syno from '../../syntactic-interface/newnew/readable/syno';
 
 import type { EditorState } from '../../../types/editor-state/editor-state';
 import type { StateSelector } from '../../../types/state-selector';

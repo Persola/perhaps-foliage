@@ -1,12 +1,12 @@
 import Syno from './syno';
 
-import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default class SyntaxTree {
 // this isn't written to work across state updates--reinstantiate instead
-  readonly id: string;
   readonly raw: RawSyntaxTree;
-  readonly rootId: number;
+  readonly id: string;
+  readonly rootId: string;
 
   constructor(
     raw: RawSyntaxTree,
@@ -17,11 +17,15 @@ export default class SyntaxTree {
     this.rootId = raw.rootId;
   }
 
-  hasSyno(synoId: number): boolean {
+  is(tree: SyntaxTree): boolean {
+    return this.id === tree.id;
+  }
+
+  hasSyno(synoId: string): boolean {
     return this.raw.synoMap[synoId] !== undefined;
   }
 
-  getSyno(synoId: number): Syno {
+  getSyno(synoId: string): Syno {
     // cache them?
     if (this.raw.synoMap[synoId] === undefined) {
       throw new Error(`Syno of ID '${synoId}' not found in tree '${this.id}'`);

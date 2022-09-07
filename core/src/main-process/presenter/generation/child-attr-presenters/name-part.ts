@@ -1,4 +1,4 @@
-import Syno from '../../../syntactic-interface/newnew/syno';
+import Syno from '../../../syntactic-interface/newnew/readable/syno';
 
 import type { NamePartInstruction } from '../../../../types/language-integration/presenters/instructions/presno-child-attr-full-instruction';
 import type { ChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';

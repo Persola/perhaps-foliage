@@ -1,4 +1,4 @@
-import SyntaxTree from '../../../main-process/syntactic-interface/newnew/syntax-tree';
+import WritableSyntaxTree from '../../../main-process/syntactic-interface/newnew/writable/writable-syntax-tree';
 
 import type { KeyToNewSynoAttrs } from '../../language-integration/key-to-new-syno-attrs';
 import type { ActualGrammar } from '../../grammar/actual-grammar';
@@ -8,7 +8,7 @@ export type MutableEditorState = {
   integrationId: string | null;
   actualGrammar: ActualGrammar | null;
   keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  trees: { [syntaxTreeId: string]: SyntaxTree};
+  trees: { [syntaxTreeId: string]: WritableSyntaxTree};
   primitivesTreeId: string;
   editeeTreeId: null | string;
   resultTreeId: null | string;

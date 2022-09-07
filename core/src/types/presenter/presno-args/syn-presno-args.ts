@@ -1,4 +1,4 @@
 export type SynPresnoArgs = {
   type: 'synPresno',
-  synoId: number, // implicit graph OK?
+  synoId: string, // implicit graph OK?
 };

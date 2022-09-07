@@ -4,17 +4,17 @@ import type { SerializedSyno } from '../../../types/syntactic/newnew/serialized-
 const recursivelyDeserializeSubtree = (
   serializedTree: SerializedSyno,
   rootwardEdgeLabel: string | null,
-  parentId: number | null,
+  parentId: string | null,
   pathFromRoot: number[],
   synoMap: SynoMapWithStructuralRefs,
-  idIterator: Generator<number>,
-): number => {
-  const synoId = idIterator.next().value;
+  idIterator: Generator<string>,
+): string => {
+  const synoId: string = idIterator.next().value;
   const { type } = serializedTree;
   const attrs = serializedTree?.attrs || {};
   const extratreeRefs = serializedTree?.extratreeRefs || {};
   const children = serializedTree?.children || [];
-  const childIds: number[] = [];
+  const childIds: string[] = [];
 
   children.forEach((entry, childIndex) => {
     const [edgeLabel, child] = entry;

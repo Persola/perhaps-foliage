@@ -1,4 +1,4 @@
-import Syno from '../../main-process/syntactic-interface/newnew/syno';
+import Syno from '../../main-process/syntactic-interface/newnew/readable/syno';
 
 import { StateSelector } from '../state-selector';
 

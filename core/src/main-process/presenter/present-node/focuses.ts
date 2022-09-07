@@ -2,7 +2,7 @@ import type { Focus } from '../../../types/editor-state/focus';
 
 export default (
   focus: Focus | null,
-  synoId: number,
+  synoId: string,
 ): {
   focused: boolean;
   presnoFocused: number | null;

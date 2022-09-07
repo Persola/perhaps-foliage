@@ -1,5 +1,5 @@
-import Syno from '../syntactic-interface/newnew/syno';
-import SyntaxTree from '../syntactic-interface/newnew/syntax-tree';
+import Syno from '../syntactic-interface/newnew/readable/syno';
+import SyntaxTree from '../syntactic-interface/newnew/readable/syntax-tree';
 
 import type { StateSelector } from '../../types/state-selector';
 import type { EditorState } from '../../types/editor-state/editor-state';
@@ -76,7 +76,7 @@ export default (editorState: EditorState): StateSelector => {
       return this.state.loadingSyntree;
     },
     // deeper accessors
-    focusedSynoId: function focusedSynoId(): number {
+    focusedSynoId: function focusedSynoId(): string {
       return this.state.focus?.synoId;
     },
     focusedPresnoIndex: function focusedPresnoIndex(): null | number {
@@ -93,7 +93,7 @@ export default (editorState: EditorState): StateSelector => {
       return !!this.state.integrationId;
     },
     // synos
-    getEditeeSyno: function getEditeeSyno(synoId: number): Syno {
+    getEditeeSyno: function getEditeeSyno(synoId: string): Syno {
       return this.editeeTree().getSyno(synoId);
     },
     getSynoByUri: function getSynoByUri(uri: AbsoluteSynoUri): Syno {
@@ -124,7 +124,7 @@ export default (editorState: EditorState): StateSelector => {
       return this.editeeTree().getSyno(this.focusedSynoId());
     },
     isPrimitive: function isPrimitive(synoId): boolean {
-      return Object.keys(this.primitives().getSyno(synoId)).includes(synoId);
+      return this.primitives().hasSyno(synoId);
     },
     // focus
     inNonSynPresno: function inNonSynPresno(): boolean {
@@ -135,9 +135,6 @@ export default (editorState: EditorState): StateSelector => {
     },
     inText: function inText(): boolean {
       return this.state.focus.charIndex !== null;
-    },
-    focusedSynoIsRoot: function focusedSynoIsRoot(): boolean {
-      return this.focusedSyno().parent === null;
     },
   };
 

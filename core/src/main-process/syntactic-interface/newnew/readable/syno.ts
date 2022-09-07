@@ -1,25 +1,27 @@
 import SyntaxTree from './syntax-tree';
 
-import type { RawSyno } from '../../../types/syntactic/newnew/raw/raw-syno';
-import type { AbsoluteSynoUri } from '../../../types/syntactic/newnew/syno-uri';
-import type { SynoAttrVal } from '../../../types/syntactic/newnew/syno-attr-val';
+import subtreeSynoIds from '../utils/subtree-syno-ids';
+
+import type { RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
+import type { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
+import type { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
 
 export default class Syno {
 // this isn't written to work across state updates--reinstantiate instead
-  readonly id: number;
+  readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawSyno;
   readonly type: string;
   readonly rootwardEdgeLabel: string;
-  readonly parentId: number | null;
-  readonly childIds: number[];
-  readonly intratreeRefs: {[edgeLabel: string]: number};
+  readonly parentId: string | null;
+  readonly childIds: string[];
+  readonly intratreeRefs: {[edgeLabel: string]: string};
   readonly intertreeRefs: {[edgeLabel: string]: AbsoluteSynoUri};
   readonly attrs: {[synoAttr: string]: SynoAttrVal};
 
   constructor(
     tree: SyntaxTree,
-    id: number,
+    id: string,
   ) {
     this.tree = tree;
     this.id = id;
@@ -99,5 +101,17 @@ export default class Syno {
 
   index(): number {
     return this.parent().childIds.indexOf(this.id);
+  }
+
+  isRoot(): boolean {
+    return this.id === this.tree.rootId;
+  }
+
+  destroy(): void {
+    for (const descendantId of subtreeSynoIds(this.id, this.tree.raw)) {
+      delete this.tree.raw.synoMap[descendantId];
+    }
+
+    this.parent().raw.childIds.splice(this.index(), 1);
   }
 }

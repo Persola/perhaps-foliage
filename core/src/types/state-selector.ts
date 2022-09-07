@@ -1,5 +1,5 @@
-import Syno from '../main-process/syntactic-interface/newnew/syno';
-import SyntaxTree from '../main-process/syntactic-interface/newnew/syntax-tree';
+import Syno from '../main-process/syntactic-interface/newnew/readable/syno';
+import SyntaxTree from '../main-process/syntactic-interface/newnew/readable/syntax-tree';
 
 import type { EditorState } from './editor-state/editor-state';
 import type { ActualGrammar } from './grammar/actual-grammar';
@@ -25,19 +25,18 @@ export type StateSelector = {
   loadingIntegration: () => boolean;
   loadingSyntree: () => boolean;
   // deeper accessors
-  focusedSynoId: () => number;
+  focusedSynoId: () => string;
   focusedPresnoIndex: () => number;
   focusedCharIndex: () => number;
   // loaded
   treeLoaded: () => boolean;
   integrationLoaded: () => boolean;
   // synos
-  getEditeeSyno: (synoId: number) => Syno;
+  getEditeeSyno: (synoId: string) => Syno;
   getSynoByUri: (synoUri: AbsoluteSynoUri) => Syno;
   focusedSyno: () => Syno;
-  isPrimitive: (synoId: number) => boolean;
+  isPrimitive: (synoId: string) => boolean;
   // focus
   inNonSynPresno: () => boolean;
   inText: () => boolean;
-  focusedSynoIsRoot: () => boolean;
 };

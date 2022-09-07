@@ -13,7 +13,7 @@ import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 export default (
   state: StateSelector,
   integration: MainsidePresentLangInt,
-  renderEntrySynoId: number,
+  renderEntrySynoId: string,
   focus: Focus,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
