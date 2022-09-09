@@ -1,0 +1,74 @@
+type: "functionCall"
+children:
+  -
+    - "argument"
+    - type: "argument"
+      extratreeRefs:
+        parameter: "../2/0"
+      children:
+        -
+          - "value"
+          - type: "booleanLiteral"
+            attrs:
+              value: true
+  -
+    - "argument"
+    - type: "argument"
+      extratreeRefs:
+        parameter: "../2/1"
+      children:
+        -
+          - "value"
+          - type: "booleanLiteral"
+            attrs:
+              value: false
+  -
+    - "callee"
+    - type: "functionDefinition"
+      attrs:
+        name: "proxyNor"
+      children:
+        -
+          - "parameter"
+          - type: "functionParameter"
+            attrs:
+              valueType: "booleanLiteral"
+              name: "first"
+        -
+          - "parameter"
+          - type: "functionParameter"
+            attrs:
+              valueType: "booleanLiteral"
+              name: "second"
+        -
+          - "body"
+          - type: "functionCall"
+            extratreeRefs:
+              callee: "foli://editor-instance.integrations.saliva.0.0.16.primitives"
+            children:
+              -
+                - "argument"
+                - type: "argument"
+                  extratreeRefs:
+                    parameter: "foli://editor-instance.integrations.saliva.0.0.16.primitives/0"
+                  children:
+                    -
+                      - "value"
+                      - type: "variableRef"
+                        extratreeRefs:
+                          referent: "../../../0"
+                        attrs:
+                          valueType: "booleanLiteral"
+              -
+                - "argument"
+                - type: "argument"
+                  extratreeRefs:
+                    parameter: "foli://editor-instance.integrations.saliva.0.0.16.primitives/1"
+                  children:
+                    -
+                      - "value"
+                      - type: "variableRef"
+                        extratreeRefs:
+                          referent: "../../../1"
+                        attrs:
+                          valueType: "booleanLiteral"

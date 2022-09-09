@@ -40,19 +40,25 @@ const dropCodeView = (sendCrossContextMessage, e) => {
   e.stopPropagation();
   e.preventDefault();
   e.target.classList.remove('hovering-file');
-  e.dataTransfer.files[0].text().then(fileText => {
-    sendCrossContextMessage(
-      'dispatchAction',
-      {
-        action: {
-          type: 'START_SYNTREE_LOAD',
-          fileText,
+  const file = e.dataTransfer.files[0];
+  if (!['application/json', 'application/x-yaml'].includes(file.type)) {
+    console.warn(`Ignoring drug in file of undigestable type '${file.type}'`);
+  } else {
+    e.dataTransfer.files[0].text().then(fileText => {
+      sendCrossContextMessage(
+        'dispatchAction',
+        {
+          action: {
+            type: 'START_SYNTREE_LOAD',
+            fileText,
+            fileType: file.type,
+          },
         },
-      },
-    );
-  });
-  if (document.activeElement instanceof HTMLElement) {
-    (document.activeElement as HTMLElement).blur();
+      );
+    });
+    if (document.activeElement instanceof HTMLElement) {
+      (document.activeElement as HTMLElement).blur();
+    }
   }
 };
 

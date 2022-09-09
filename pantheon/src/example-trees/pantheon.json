@@ -1,28 +1,18 @@
 {
   "type": "titan",
-  "attrs": {
-    "name": "cronus"
-  },
-  "extratreeRefs": {},
+  "attrs": {  "name": "cronus" },
   "children": [
     [
       "child",
       {
         "type": "olympian",
-        "attrs": {
-          "name": "zeus"
-        },
-        "extratreeRefs": {},
+        "attrs": { "name": "zeus" },
         "children": [
           [
             "child",
             {
               "type": "olympian",
-              "attrs": {
-                "name": "athena"
-              },
-              "extratreeRefs": {},
-              "children": []
+              "attrs": { "name": "athena" }
             }  
           ]
         ]

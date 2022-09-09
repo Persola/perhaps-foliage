@@ -1,5 +1,7 @@
+import { Olympian } from '../types/synos/olympian';
+
 export default (
-  // receives and ignores olympian syno
+  olympian: Olympian,
 ): boolean => {
-  return true;
+  return !olympian.attrs.name.match(/^\w*$/);
 };

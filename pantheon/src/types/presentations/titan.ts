@@ -1,4 +1,5 @@
+import type { CorePresnoAttrs } from 'perhaps-foliage/dist/types/presenter/presnos/core-presno-attrs';
+
 import type { TitanPresAttrs } from './presno-attrs/titan-attrs';
-import type { CorePresnoAttrs } from './core-presno-attrs';
 
 export type TitanPres = CorePresnoAttrs & TitanPresAttrs;

@@ -3,7 +3,7 @@ import type { Syntype } from '../syntype';
 
 export type ArgumentAttrs = {
   syntype: 'argument';
-  valueSyntype: Syntype | null;
+  valueType: Syntype | null;
   value: SynoRef | null;
   parameter: SynoRef | null;
 };

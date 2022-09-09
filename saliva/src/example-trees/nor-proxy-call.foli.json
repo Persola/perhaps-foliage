@@ -44,7 +44,7 @@
             {
               "type": "functionParameter",
               "attrs": {
-                "valueSyntype": "booleanLiteral",
+                "valueType": "booleanLiteral",
                 "name": "first"
               }
             }
@@ -54,7 +54,7 @@
             {
               "type": "functionParameter",
               "attrs": {
-                "valueSyntype": "booleanLiteral",
+                "valueType": "booleanLiteral",
                 "name": "second"
               }
             }
@@ -74,8 +74,9 @@
                       [
                         "value",
                         {
-                          "type": "booleanLiteral",
-                          "attrs": { "value": false }
+                          "type": "variableRef",
+                          "extratreeRefs": { "referent": "../../../0" },
+                          "attrs": { "valueType": "booleanLiteral" }
                         }            
                       ]
                     ]
@@ -90,8 +91,9 @@
                       [
                         "value",
                         {
-                          "type": "booleanLiteral",
-                          "attrs": { "value": false }
+                          "type": "variableRef",
+                          "extratreeRefs": { "referent": "../../../1" },
+                          "attrs": { "valueType": "booleanLiteral" }
                         }            
                       ]
                     ]

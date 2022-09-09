@@ -1,10 +1,10 @@
 import type { RawSyntaxTreeWithStructuralRefs } from '../../../types/code-loader/deserialization/raw-syntax-tree-with-structural-refs';
-import { SynoMapWithStructuralRefs } from '../../../types/code-loader/deserialization/syno-map-with-structural-refs';
-import { InverseEdgeMap } from '../../../types/syntactic/newnew/raw/inverse-edge-map';
-import { IntertreeRefs, IntratreeRefs } from '../../../types/syntactic/newnew/raw/raw-syno';
+import type { SynoMapWithStructuralRefs } from '../../../types/code-loader/deserialization/syno-map-with-structural-refs';
+import type { InverseEdgeMap } from '../../../types/syntactic/newnew/raw/inverse-edge-map';
+import type { IntertreeRefs, IntratreeRefs } from '../../../types/syntactic/newnew/raw/raw-syno';
 import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import { SynoMap } from '../../../types/syntactic/newnew/raw/syno-map';
-import { AbsoluteSynoUri } from '../../../types/syntactic/newnew/syno-uri';
+import type { SynoMap } from '../../../types/syntactic/newnew/raw/syno-map';
+import type { AbsoluteSynoUri } from '../../../types/syntactic/newnew/syno-uri';
 
 const derivePathToId = (
   synoMap: SynoMapWithStructuralRefs,
@@ -18,6 +18,26 @@ const derivePathToId = (
   return pathToId;
 };
 
+const getFullPath = (
+  referentRelativePathString: string,
+  refererFullPath: number[],
+): number[] => {
+  const referentRelativePath = referentRelativePathString.split('/');
+
+  let stepsUp = 0;
+
+  while (referentRelativePath[stepsUp] === '..') {
+    stepsUp += 1;
+  }
+
+  return refererFullPath.slice(
+    0,
+    stepsUp === 0 ? refererFullPath.length : -stepsUp,
+  ).concat(
+    referentRelativePath.slice(stepsUp).map(step => Number(step)),
+  );
+};
+
 const matchesRelativeUri = (str: string) => {
   return /^(\.\.\/)*\d+(\/\d+)*$/.test(str);
 };
@@ -26,26 +46,16 @@ const matchesAbsoluteUri = (str: string) => {
   return /^foli:\/\/editor-instance\.integrations\.\w+(\.\d+)+\.primitives(\/\d+)*\/?$/.test(str);
 };
 
-const rootifyPath = (path: string) => {
-  let pathFromRoot = path;
-
-  while (pathFromRoot.substring(0, 3) === '../') {
-    pathFromRoot = pathFromRoot.substring(3);
-  }
-
-  return pathFromRoot;
-};
-
 const addInverse = (
   inverseExtratreeEdges: InverseEdgeMap,
   referentId: string,
   refererId: string,
 ) => {
   if (inverseExtratreeEdges[referentId] === undefined) {
-    inverseExtratreeEdges[referentId] = new Set();
+    inverseExtratreeEdges[referentId] = {};
   }
 
-  inverseExtratreeEdges[referentId].add(refererId);
+  inverseExtratreeEdges[referentId][refererId] = true;
 };
 
 const deserializeAbsoluteUri = (uri: string): AbsoluteSynoUri => {
@@ -78,13 +88,14 @@ export default (
     const intratreeRefs: IntratreeRefs = {};
     const intertreeRefs: IntertreeRefs = {};
 
-    for (const [edgeLabel, referentUri] of Object.entries(syno.extratreeRefs)) {
-      if (matchesRelativeUri(referentUri)) {
-        const referentId = pathToId[rootifyPath(referentUri)];
+    for (const [edgeLabel, referentUriString] of Object.entries(syno.extratreeRefs)) {
+      if (matchesRelativeUri(referentUriString)) {
+        const fullPath = getFullPath(referentUriString, syno.pathFromRoot);
+        const referentId = pathToId[fullPath.join('/')];
         intratreeRefs[edgeLabel] = referentId;
         addInverse(inverseExtratreeEdges, referentId, syno.id);
-      } else if (matchesAbsoluteUri(referentUri)) {
-        intertreeRefs[edgeLabel] = deserializeAbsoluteUri(referentUri);
+      } else if (matchesAbsoluteUri(referentUriString)) {
+        intertreeRefs[edgeLabel] = deserializeAbsoluteUri(referentUriString);
       } else {
         throw new Error(
           'Serialized syno contains bad extratree ref'

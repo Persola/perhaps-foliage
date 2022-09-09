@@ -5,6 +5,14 @@
 * introduce tree dependencies?
 * check for tree validity before interpretation?
 * improve abstract syno and ast typing? (remove casts)
+* reorder attrs lower in syno?
+* core's validation responsibilities - validate inputs, keep closed within app to guaruntee
+  * syno type
+  * tree structure according to grammar (parents, children, edge labels)
+    * syntype schema must specify optionality
+      * ...and possibly functionCall child/ref OR?
+  * attrs and extratree refs according to syntype schema
+* core provides integrations with user interfaces for attrs, extratree refs according to syntype schema
 
 **testing**
 * try rendering everything that should already be renderable

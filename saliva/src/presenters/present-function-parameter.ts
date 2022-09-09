@@ -1,6 +1,6 @@
 export default {
   attrs: {
-    valueSyntype: 'valueSyntype',
+    valueType: 'valueType',
   },
   childPresnoArgs: {
     slot: {

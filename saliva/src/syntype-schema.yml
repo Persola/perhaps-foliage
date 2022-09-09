@@ -6,7 +6,7 @@ functionParameter:
   nonTreeRefs: {}
   properties:
     name: string
-    valueSyntype: string
+    valueType: string
 functionCall:
   nonTreeRefs:
     callee: functionDefinition
@@ -14,7 +14,6 @@ functionCall:
 argument:
   nonTreeRefs:
     parameter: functionParameter
-    textHost: functionParameter
   properties: {}
 booleanLiteral:
   nonTreeRefs: {}
@@ -23,6 +22,5 @@ booleanLiteral:
 variableRef:
   nonTreeRefs:
     referent: functionParameter
-    textHost: functionParameter
   properties:
-    valueSyntype: string
+    valueType: string

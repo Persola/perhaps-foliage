@@ -1,6 +1,6 @@
 export default {
   attrs: {
-    valueSyntype: 'booleanLiteral',
+    valueType: 'valueType',
     name: {
       from: 'refAttr',
       ref: 'referent',

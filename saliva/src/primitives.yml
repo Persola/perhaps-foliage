@@ -7,10 +7,10 @@ children:
     - type: 'functionParameter'
       attrs:
         name: '1'
-        valueSyntype: booleanLiteral
+        valueType: booleanLiteral
   -
     - 'parameter'
     - type: 'functionParameter'
       attrs:
         name: '2'
-        valueSyntype: booleanLiteral
+        valueType: booleanLiteral

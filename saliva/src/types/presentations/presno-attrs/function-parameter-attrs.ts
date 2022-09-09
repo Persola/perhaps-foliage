@@ -5,7 +5,7 @@ import type { Syntype } from '../../synos/syntype';
 export type FunctionParameterPresAttrs = {
   attrs: {
     readonly syntype: 'functionParameter';
-    readonly valueSyntype: Syntype;
+    readonly valueType: Syntype;
     },
   childPresnoArgs: {
     readonly slot: (null | UnindexedNonSynPresnoArgs);

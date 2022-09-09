@@ -1,5 +1,7 @@
+import { Titan } from '../types/synos/titan';
+
 export default (
-  // receives and ignores titan syno
+  titan: Titan,
 ): boolean => {
-  return true;
+  return !titan.attrs.name.match(/^\w*$/);
 };
