@@ -1,10 +1,9 @@
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
-import type { StateSelector } from '../../../types/state-selector';
+import StateMutator from '../../mutators/state-mutator';
+
 import type { Warn } from '../../../types/cross-context/warn';
 
 export default (
-  state: StateSelector,
-  draftState: MutableEditorState,
+  state: StateMutator,
   warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
@@ -12,5 +11,5 @@ export default (
     return;
   }
 
-  draftState.loadingSyntree = true;
+  state.state.loadingSyntree = true;
 };

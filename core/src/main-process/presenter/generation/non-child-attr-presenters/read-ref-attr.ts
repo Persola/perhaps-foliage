@@ -1,9 +1,9 @@
+import StateSelector from '../../../selectors/state-selector';
 import Syno from '../../../syntactic-interface/newnew/readable/syno';
 
 import type { NonChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';
 import type { ReadRefAttrInstruction } from '../../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';
 import type { PresnoAttrVal } from '../../../../types/presenter/presnos/presno-attrs';
-import type { StateSelector } from '../../../../types/state-selector';
 
 export default (instruction: ReadRefAttrInstruction): NonChildAttrPresenter => {
   return (

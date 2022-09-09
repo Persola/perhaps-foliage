@@ -1,10 +1,10 @@
 **next**
 * replace synoMap with new syntactical data layer
 * allow, in general, any syno to be child of any other syno in any order
-* getSyno takes path
 * rename 'nontreerefs' in grammar
 * introduce tree dependencies?
 * check for tree validity before interpretation?
+* improve abstract syno and ast typing? (remove casts)
 
 **testing**
 * try rendering everything that should already be renderable

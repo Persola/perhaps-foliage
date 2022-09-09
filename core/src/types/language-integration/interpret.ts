@@ -1,10 +1,11 @@
-import type { EditorStateWithIntegration } from '../editor-state/editor-state-with-integration';
-import type { StateSelector } from '../state-selector';
+import StateSelector from '../../main-process/selectors/state-selector';
+
+import { EditorState } from '../editor-state/editor-state';
 import type { InterpretationResolution } from '../interpreter/interpretation-resolution';
 
 export type Interpret = (
   (
-    editorState: EditorStateWithIntegration,
+    editorState: EditorState,
     stateSelector: StateSelector,
   ) => InterpretationResolution
 );

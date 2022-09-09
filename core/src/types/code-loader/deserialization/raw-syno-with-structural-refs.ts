@@ -1,4 +1,4 @@
-import type { ExtraTreeRefs } from '../../syntactic/newnew/serialized-syno';
+import type { ExtratreeRefs } from '../../syntactic/newnew/serialized-syno';
 import type { SynoAttrVal } from '../../syntactic/newnew/syno-attr-val';
 
 export type RawSynoWithStructuralRefs = {
@@ -10,5 +10,5 @@ export type RawSynoWithStructuralRefs = {
   rootwardEdgeLabel: string; // 'labelOfEdgeToParent'? 'toParentEdgeLabel'? 'parentwardEdgeLabel'?
   parentId: string; // sync with childIds
   childIds: string[]; // sync with childIds
-  extratreeRefs: ExtraTreeRefs;
+  extratreeRefs: ExtratreeRefs;
 }

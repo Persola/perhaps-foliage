@@ -37,15 +37,15 @@ const rootifyPath = (path: string) => {
 };
 
 const addInverse = (
-  inverseExtraTreeEdges: InverseEdgeMap,
+  inverseExtratreeEdges: InverseEdgeMap,
   referentId: string,
   refererId: string,
 ) => {
-  if (inverseExtraTreeEdges[referentId] === undefined) {
-    inverseExtraTreeEdges[referentId] = new Set();
+  if (inverseExtratreeEdges[referentId] === undefined) {
+    inverseExtratreeEdges[referentId] = new Set();
   }
 
-  inverseExtraTreeEdges[referentId].add(refererId);
+  inverseExtratreeEdges[referentId].add(refererId);
 };
 
 const deserializeAbsoluteUri = (uri: string): AbsoluteSynoUri => {
@@ -71,7 +71,7 @@ export default (
 ): RawSyntaxTree => {
   const { rootId } = tree;
   const synoMapWithNominalRefs: SynoMap = {};
-  const inverseExtraTreeEdges: InverseEdgeMap = {};
+  const inverseExtratreeEdges: InverseEdgeMap = {};
   const pathToId = derivePathToId(tree.synoMap);
 
   for (const syno of Object.values(tree.synoMap)) {
@@ -82,7 +82,7 @@ export default (
       if (matchesRelativeUri(referentUri)) {
         const referentId = pathToId[rootifyPath(referentUri)];
         intratreeRefs[edgeLabel] = referentId;
-        addInverse(inverseExtraTreeEdges, referentId, syno.id);
+        addInverse(inverseExtratreeEdges, referentId, syno.id);
       } else if (matchesAbsoluteUri(referentUri)) {
         intertreeRefs[edgeLabel] = deserializeAbsoluteUri(referentUri);
       } else {
@@ -109,7 +109,7 @@ export default (
 
   return {
     synoMap: synoMapWithNominalRefs,
-    inverseExtraTreeEdges,
+    inverseExtratreeEdges,
     rootId,
   };
 };

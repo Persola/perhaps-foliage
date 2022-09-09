@@ -6,8 +6,10 @@ import produce from 'immer';
 
 import type { Store, Action } from 'redux';
 
+import StateSelector from '../selectors/state-selector';
+import StateMutator from '../mutators/state-mutator';
+
 import codeLoader from '../code-loader/code-loader';
-import createStateSelector from '../selectors/create-state-selector';
 import verifyType from './reducers/util/verify-action-type';
 
 // import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
@@ -38,7 +40,6 @@ import type { Navigate } from '../../types/actions/commands/navigate';
 // import type { TextNavigate } from '../../types/actions/commands/text-navigate';
 // import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
-import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../types/cross-context/warn';
@@ -91,7 +92,7 @@ export default (
     loadingSyntree: false,
   };
 
-  const stateSelector: StateSelector = createStateSelector(defaultEditorState);
+  const stateSelector = new StateSelector(defaultEditorState);
 
   const editorStateReducer = (
     oldState: EditorState = defaultEditorState,
@@ -99,6 +100,7 @@ export default (
   ): EditorState => {
     return produce(oldState, untypedDraftState => {
       const draftState = untypedDraftState as MutableEditorState;
+      const stateMutator = new StateMutator(draftState);
 
       switch (action.type) {
         case 'INITIALIZE': {
@@ -107,9 +109,8 @@ export default (
 
         // case 'REPLACE_FOCUSED_SYNO': {
         //   replaceFocusedSynoReducer(
-        //     stateSelector,
         //     (action as ReplaceFocusedSyno),
-        //     draftState,
+        //     stateMutator,
         //     integration,
         //     latestEdit,
         //     warnUser,
@@ -119,9 +120,8 @@ export default (
 
         // case 'END_INTERPRETATION': {
         //   endInterpretationReducer(
-        //     stateSelector,
         //     (action as EndInterpretation),
-        //     draftState,
+        //     stateMutator,
         //     warnUser,
         //   );
         //   break;
@@ -129,9 +129,8 @@ export default (
 
         case 'END_SYNTREE_LOAD': {
           endSyntreeLoadReducer(
-            stateSelector,
+            stateMutator,
             (action as EndAsyncSyntreeLoad),
-            draftState,
             warnUser,
           );
           break;
@@ -139,9 +138,8 @@ export default (
 
         case 'END_INTEGRATION_LOAD': {
           endIntegrationHotloadReducer(
-            stateSelector,
+            stateMutator,
             (action as EndIntegrationHotload),
-            draftState,
             integration,
           );
           break;
@@ -149,9 +147,8 @@ export default (
 
         case 'NAVIGATE': {
           navigateReducer(
-            stateSelector,
+            stateMutator,
             (action as Navigate),
-            draftState,
             warnUser,
           );
           break;
@@ -159,9 +156,8 @@ export default (
 
         // case 'SET_FOCUS_SYNO': {
         //   setFocusSynoReducer(
-        //     stateSelector,
         //     (action as SetFocusSyno),
-        //     draftState,
+        //     stateMutator,
         //     warnUser,
         //   );
         //   break;
@@ -169,8 +165,7 @@ export default (
 
         // case 'START_INTERPRETATION': {
         //   startInterpretationReducer(
-        //     stateSelector,
-        //     draftState,
+        //     stateMutator,
         //     integration,
         //     warnUser,
         //   );
@@ -179,22 +174,22 @@ export default (
 
         case 'START_SYNTREE_LOAD': {
           startSyntreeLoadReducer(
-            stateSelector,
-            draftState,
+            stateMutator,
             warnUser,
           );
           break;
         }
 
         case 'START_INTEGRATION_HOTLOAD': {
-          startIntegrationHotloadReducer(draftState);
+          startIntegrationHotloadReducer(
+            stateMutator,
+          );
           break;
         }
 
         // case 'CHAR_BACKSPACE': {
         //   charBackspaceReducer(
-        //     stateSelector,
-        //     draftState,
+        //     stateMutator,
         //     latestEdit,
         //     warnUser,
         //   );
@@ -203,9 +198,8 @@ export default (
 
         // case 'TEXT_NAVIGATE': {
         //   textNavigateReducer(
-        //     stateSelector,
         //     action as TextNavigate,
-        //     draftState,
+        //     stateMutator,
         //     latestEdit,
         //     warnUser,
         //   );
@@ -214,8 +208,7 @@ export default (
 
         // case 'EXIT_TEXT_PRESNO': {
         //   exitTextPresno(
-        //     stateSelector,
-        //     draftState,
+        //     stateMutator,
         //   );
         //   break;
         // }
@@ -223,7 +216,7 @@ export default (
         case 'DESTROY_FOCUSED_SYNO': {
           destroyFocusedSynoReducer(
             stateSelector,
-            draftState,
+            stateMutator,
             latestEdit,
             warnUser,
           );
@@ -232,9 +225,8 @@ export default (
 
         // case 'INSERT_BUD': {
         //   insertBudReducer(
-        //     stateSelector,
         //     (action as InsertBud),
-        //     draftState,
+        //     stateMutator,
         //     latestEdit,
         //     warnUser,
         //   );

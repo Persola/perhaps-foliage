@@ -1,38 +1,37 @@
-import navOut from './navigate/nav-out';
+import StateMutator from '../../mutators/state-mutator';
 
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
-import type { StateSelector } from '../../../types/state-selector';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';
+import StateSelector from '../../selectors/state-selector';
 
 export default (
-  state: StateSelector,
-  draftState: MutableEditorState,
+  readState: StateSelector,
+  writeState: StateMutator,
   latestEdit: UnistlikeEdit[],
   warnUser: Warn,
 ): void => {
-  if (state.integrationLoaded() === false) {
+  if (readState.integrationLoaded() === false) {
     warnUser('Ignoring DESTROY_FOCUSED_SYNO action: no integration loaded');
     return;
   }
 
-  if (state.treeLoaded() === false) {
+  if (readState.treeLoaded() === false) {
     warnUser('Ignoring DESTROY_FOCUSED_SYNO action: no tree loaded');
     return;
   }
 
-  if (state.inNonSynPresno()) {
+  if (readState.inNonSynPresno()) {
     throw new TypeError(
       'DESTROY_FOCUSED_SYNO action received while not focused on syno level',
     );
   }
 
-  if (state.focusedSyno().isRoot()) {
+  if (readState.focusedSyno().isRoot()) {
     warnUser('Ignoring syno destruction: can\'t destroy root syno');
     return;
   }
 
-  if (!state.focusedSyno().tree.is(state.editeeTree())) {
+  if (!readState.focusedSyno().tree.is(readState.editeeTree())) {
     warnUser('Ignoring syno destruction: can\'t destroy primitive or children');
     return;
   }
@@ -42,6 +41,6 @@ export default (
     redo: { type: 'DELETE_SYNO' },
   });
 
-  draftState.focusedSyno().destroy();
-  navOut(state, draftState.focus, warnUser);
+  writeState.focusedSyno().destroy();
+  writeState.focus().synoId = readState.focusedSyno().parent().id;
 };

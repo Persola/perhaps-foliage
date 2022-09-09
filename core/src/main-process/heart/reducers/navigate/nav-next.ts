@@ -1,9 +1,10 @@
-import type { StateSelector } from '../../../../types/state-selector';
+import StateMutator from '../../../mutators/state-mutator';
+
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
 import type { Warn } from '../../../../types/cross-context/warn';
 
 export default (
-  state: StateSelector,
+  state: StateMutator,
   draftFocus: MutableFocus,
   warnUser: Warn,
 ): void => {

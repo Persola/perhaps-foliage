@@ -1,16 +1,15 @@
+import StateMutator from '../../mutators/state-mutator';
+
+import codeLoader from '../../code-loader/code-loader';
 import updateMainsideIntegration from '../../update-mainside-integration';
 
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { EndIntegrationHotload } from '../../../types/actions/end-integration-hotload';
-import type { StateSelector } from '../../../types/state-selector';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
-import codeLoader from '../../code-loader/code-loader';
 
 export default (
-  state: StateSelector,
+  state: StateMutator,
   action: EndIntegrationHotload,
-  draftState: MutableEditorState,
   mutateeIntegration: MainsideLangInt, // the integration object used by dependants
 ): void => {
   const { newIntegrationAttrs } = action;
@@ -32,13 +31,13 @@ export default (
   const treesToAdd = {};
   treesToAdd[primitivesTreeId] = codeLoader.fromSerializedTree(newIntegrationAttrs.primitives);
 
-  Object.assign(draftState, {
+  Object.assign(state.state, {
     integrationId: newIntegrationAttrs.id,
     actualGrammar: newIntegrationAttrs.actualGrammar,
     syntypeSchema: newIntegrationAttrs.syntypeSchema,
     keyToNewSynoAttrs: newIntegrationAttrs.keyToNewSynoAttrs,
     trees: {
-      ...draftState.trees,
+      ...state.state.trees,
       ...treesToAdd,
     },
     primitivesTreeId,

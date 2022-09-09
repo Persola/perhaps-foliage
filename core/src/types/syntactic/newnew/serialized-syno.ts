@@ -4,7 +4,7 @@ type Attrs = {
   [attrName: string]: SynoAttrVal
 };
 
-export type ExtraTreeRefs = {
+export type ExtratreeRefs = {
   [edgeLabel: string]: string // value is stringified syno URI
 };
 
@@ -16,6 +16,6 @@ type LabeledChild = [
 export type SerializedSyno = {
   type: string;
   attrs: Attrs;
-  extratreeRefs: ExtraTreeRefs;
+  extratreeRefs: ExtratreeRefs;
   children: LabeledChild[];
 };

@@ -1,13 +1,12 @@
-import type { StateSelector } from '../../../types/state-selector';
+import StateMutator from '../../mutators/state-mutator';
+
 import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
 import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default (
-  state: StateSelector,
+  state: StateMutator,
   action: EndAsyncSyntreeLoad,
-  draftState: MutableEditorState,
   warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
@@ -17,7 +16,7 @@ export default (
 
   if (action.newIngestedTree === null) {
     // load failed, just stop loading (error already surfaced in epic)
-    draftState.loadingSyntree = false;
+    state.state.loadingSyntree = false;
     return;
   }
 
@@ -26,9 +25,9 @@ export default (
   const treeToAdd = {};
   treeToAdd[treeId] = newSyntree;
 
-  Object.assign(draftState, {
+  Object.assign(state.state, {
     trees: {
-      ...draftState.trees,
+      ...state.state.trees,
       ...treeToAdd,
     },
     editeeTreeId: treeId,

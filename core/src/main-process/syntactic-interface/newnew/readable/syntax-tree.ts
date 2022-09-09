@@ -1,39 +1,20 @@
 import Syno from './syno';
 
-import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import AbstractSyntaxTree from '../abstract/abstract-syntax-tree';
 
-export default class SyntaxTree {
-// this isn't written to work across state updates--reinstantiate instead
-  readonly raw: RawSyntaxTree;
-  readonly id: string;
-  readonly rootId: string;
+import { TreeList } from '../../../../types/syntactic/newnew/tree-list';
+
+export default class SyntaxTree extends AbstractSyntaxTree<Syno> {
+  /*
+    SyntaxTree instances can only be used from when they are instantiated until
+    the next state update because they reference a specific version of the state
+  */
 
   constructor(
-    raw: RawSyntaxTree,
     id: string,
+    treeList: TreeList,
   ) {
-    this.id = id;
-    this.raw = raw;
-    this.rootId = raw.rootId;
-  }
-
-  is(tree: SyntaxTree): boolean {
-    return this.id === tree.id;
-  }
-
-  hasSyno(synoId: string): boolean {
-    return this.raw.synoMap[synoId] !== undefined;
-  }
-
-  getSyno(synoId: string): Syno {
-    // cache them?
-    if (this.raw.synoMap[synoId] === undefined) {
-      throw new Error(`Syno of ID '${synoId}' not found in tree '${this.id}'`);
-    }
-    return new Syno(this, synoId);
-  }
-
-  root(): Syno {
-    return this.getSyno(this.rootId);
+    super(id, treeList);
+    this.SynoClass = Syno;
   }
 }

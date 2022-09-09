@@ -1,8 +1,9 @@
+import StateSelector from '../selectors/state-selector';
+
 import presentationNode from './present-node/presentation-node';
 import createEnstackForPresentation from './create-enstack-for-presentation';
 import presnoId from './presno-id';
 
-import type { StateSelector } from '../../types/state-selector';
 import type { Prestree } from '../../types/presenter/prestree';
 import type { MutablePresnoMap } from '../../types/presenter/presno-map/mutable-presno-map';
 import type { PresnoMap } from '../../types/presenter/presno-map/presno-map';

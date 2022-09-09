@@ -3,7 +3,7 @@ import Syno from '../../syntactic-interface/newnew/readable/syno';
 
 import type { SynoPresenter } from '../../../types/presenter/presenter';
 import type { PresenterConfig } from '../../../types/language-integration/presenters/presenter-config';
-import type { StateSelector } from '../../../types/state-selector';
+import StateSelector from '../../selectors/state-selector';
 
 export default (
   syntype: string,

@@ -1,18 +1,17 @@
+import StateMutator from '../../mutators/state-mutator';
+
 import navOut from './navigate/nav-out';
 import navIn from './navigate/nav-in';
 import navPrev from './navigate/nav-prev';
 import navNext from './navigate/nav-next';
 
-import type { StateSelector } from '../../../types/state-selector';
 import type { Navigate } from '../../../types/actions/commands/navigate';
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
 import type { Warn } from '../../../types/cross-context/warn';
 import type { MutableFocus } from '../../../types/editor-state/mutable/mutable-focus';
 
 export default (
-  state: StateSelector,
+  state: StateMutator,
   action: Navigate,
-  draftState: MutableEditorState,
   warnUser: Warn,
 ): void => {
   if (state.integrationLoaded() === false) {
@@ -25,7 +24,7 @@ export default (
     return;
   }
 
-  const focus: MutableFocus = draftState.focus;
+  const focus: MutableFocus = state.focus();
   const { direction } = action;
 
   switch (direction) {

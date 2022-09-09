@@ -1,5 +1,7 @@
-import type { MutableEditorState } from '../../../types/editor-state/mutable/mutable-editor-state';
+import StateMutator from '../../mutators/state-mutator';
 
-export default (draftState: MutableEditorState): void => {
-  draftState.loadingIntegration = true;
+export default (
+  state: StateMutator,
+): void => {
+  state.state.loadingIntegration = true;
 };

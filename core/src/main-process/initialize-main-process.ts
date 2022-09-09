@@ -104,7 +104,7 @@ export default (
   });
 
   editorStateStore.subscribe(() => {
-    stateSelector.state = editorStateStore.getState();
+    stateSelector.updateState(editorStateStore.getState());
 
     if (vscodeParams && lastestEdit.length !== 0) {
       if (lastestEdit.length !== 1) {

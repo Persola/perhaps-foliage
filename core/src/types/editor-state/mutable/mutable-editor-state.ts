@@ -1,17 +1,19 @@
-import WritableSyntaxTree from '../../../main-process/syntactic-interface/newnew/writable/writable-syntax-tree';
-
-import type { KeyToNewSynoAttrs } from '../../language-integration/key-to-new-syno-attrs';
-import type { ActualGrammar } from '../../grammar/actual-grammar';
-import type { MutableFocus } from './mutable-focus';
+import { ActualGrammar } from '../../grammar/actual-grammar';
+import { SyntypeSchema } from '../../syntype-schema/syntype-schema';
+import { KeyToNewSynoAttrs } from '../../language-integration/key-to-new-syno-attrs';
+import { TreeList } from '../../syntactic/newnew/tree-list';
+import { MutableFocus } from './mutable-focus';
 
 export type MutableEditorState = {
+  // MutableEditorState instances are immer'd proxies
   integrationId: string | null;
   actualGrammar: ActualGrammar | null;
-  keyToNewSynoAttrs: KeyToNewSynoAttrs;
-  trees: { [syntaxTreeId: string]: WritableSyntaxTree};
-  primitivesTreeId: string;
-  editeeTreeId: null | string;
-  resultTreeId: null | string;
+  syntypeSchema: SyntypeSchema | null;
+  keyToNewSynoAttrs: KeyToNewSynoAttrs | null;
+  trees: TreeList | null;
+  primitivesTreeId: string | null;
+  editeeTreeId: string | null;
+  resultTreeId: string | null;
   focus: MutableFocus | null;
   interpreting: boolean;
   resultOutdated: boolean;

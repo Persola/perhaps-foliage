@@ -3,6 +3,6 @@ import { InverseEdgeMap } from './inverse-edge-map';
 
 export type RawSyntaxTree = {
   synoMap: SynoMap;
-  inverseExtraTreeEdges: InverseEdgeMap;
+  inverseExtratreeEdges: InverseEdgeMap;
   rootId: string;
 };

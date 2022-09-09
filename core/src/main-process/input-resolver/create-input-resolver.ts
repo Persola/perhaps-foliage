@@ -1,10 +1,11 @@
 import { Store } from 'redux';
 
+import StateSelector from '../selectors/state-selector';
+
 import createCommandResolver from './input-resolvers/create-command-resolver';
 import coreTextModeBindings from './input-resolvers/core-bindings/core-text-mode-bindings';
 import coreTreeModeBindings from './input-resolvers/core-bindings/core-tree-mode-bindings';
 
-import type { StateSelector } from '../../types/state-selector';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { Warn } from '../../types/cross-context/warn';
 import type { ResolveInput } from '../../types/cross-context/messages-from-renderer/resolve-input';

@@ -1,6 +1,6 @@
+import StateSelector from '../../main-process/selectors/state-selector';
 import Syno from '../../main-process/syntactic-interface/newnew/readable/syno';
 
-import type { StateSelector } from '../state-selector';
 import type { MainsidePresentLangInt } from '../language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { MutablePresnoMap } from './presno-map/mutable-presno-map';
 import type { Focus } from '../editor-state/focus';

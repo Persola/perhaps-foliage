@@ -1,6 +1,7 @@
+import StateSelector from '../selectors/state-selector';
+
 import presentTree from './present-tree';
 
-import type { StateSelector } from '../../types/state-selector';
 import type { EditorPresentation } from '../../types/presenter/editor-presentation';
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { MainsidePresentLangInt } from '../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
