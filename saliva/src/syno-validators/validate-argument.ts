@@ -1,10 +1,7 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
+import { Argument } from '../types/synos/argument';
 
 export default (
-  argument: Syno,
+  argument: Argument,
 ): boolean => {
-  return !!(
-    argument.hasRef('parameter')
-    && argument.children({ label: 'value' }).length === 1
-  );
+  return true;
 };

@@ -4,12 +4,12 @@ import type { Action } from 'redux';
 import type { StateObservable } from 'redux-observable';
 
 import StateSelector from '../../selectors/state-selector';
-import Syno from '../../syntactic-interface/newnew/readable/syno';
 
 import type { EditorState } from '../../../types/editor-state/editor-state';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { InterpretationResolutionSuccess } from '../../../types/interpreter/interpretation-resolution-success';
 import type { Warn } from '../../../types/cross-context/warn';
+import { InterpretationResolution } from '../../../types/interpreter/interpretation-resolution';
 
 export default (
   action$: Observable<Action>,
@@ -17,10 +17,7 @@ export default (
   state: StateSelector,
   integration: MainsideLangInt,
   warnUser: Warn,
-): Observable<{
-  type: string,
-  result: Syno,
-}> => action$.pipe(
+): Observable<InterpretationResolutionSuccess> => action$.pipe(
   filter((action: Action) => {
     if (action.type !== 'START_INTERPRETATION') {
       return false;

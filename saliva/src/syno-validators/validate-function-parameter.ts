@@ -1,4 +1,7 @@
-export default (): boolean => {
-  // receives function parameter syno as argument but ignores it
+import { FunctionParameter } from '../types/synos/function-parameter';
+
+export default (
+  functionParameter: FunctionParameter,
+): boolean => {
   return true;
 };

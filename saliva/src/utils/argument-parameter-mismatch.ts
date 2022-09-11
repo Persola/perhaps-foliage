@@ -1,12 +1,25 @@
-import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
+import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
 
 import type { FunctionDefinition } from '../types/synos/function-definition';
 import type { Argument } from '../types/synos/argument';
+import { FunctionParameter } from '../types/synos/function-parameter';
+
+const paramRefOf = (
+  arg: Argument,
+) => {
+  if ('parameter' in arg.intertreeRefs) {
+    return arg.intertreeRefs.parameter;
+  }
+
+  if ('parameter' in arg.intratreeRefs) {
+    return arg.intratreeRefs.parameter;
+  }
+
+  return null;
+};
 
 const paramOf = (
-  arg: Syno,
+  arg: Argument,
   state: StateSelector,
 ) => {
   if ('parameter' in arg.intertreeRefs) {
@@ -25,58 +38,65 @@ export default (
   argumentz: ReadonlyArray<Argument>,
   state: StateSelector,
 ): false | string => {
-  return false;
-  // // eslint-disable-line function-paren-newline
-  // const argsWithoutParams = argumentz.filter(arg => paramOf(arg, state) === null);
+  const argsWithoutParams = argumentz.filter(arg => paramRefOf(arg) === null);
 
-  // if (argsWithoutParams.length > 0) {
-  //   return (
-  //     `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-  //  + `arguments (IDs ${argsWithoutParams.map(arg => arg.id).join(', ')}) `
-  //  + 'lack parameters'
-  //   );
-  // }
+  if (argsWithoutParams.length > 0) {
+    return (
+      `arguments (IDs ${argsWithoutParams.map(arg => `'${arg.id}'`).join(', ')}) lack parameters`
+    );
+  }
 
-  // const argumentsWithSameParams = argumentz.filter((arg: Argument) => {
-  //   argumentz.filter(otherArg => arg.parameter.id === otherArg.parameter.id).length > 1,
+  // const argumentsWithWrongFunctionParams = argumentz.filter((arg: Argument) => {
+  //   return argumentz.filter(
+  //     otherArg => arg.parent() paramOf(arg).parent,
+  //   ).length > 1;
   // });
 
   // if (argumentsWithSameParams.length > 0) {
   //   return (
-  //     `failed to interpret '${functionDefinition.name}' (ID ${functionDefinition.id}): `
-  //  + `arguments (IDs ${argumentsWithSameParams
-  //    .map(arg => arg.id)
-  //    .join(', ')}) `
-  //  + 'refer to same parameter(s) '
-  //  + `(ID(s) ${[
-  //    ...new Set(argumentsWithSameParams.map(arg => arg.parameter.id)),
-  //  ].join(', ')})`
+  //     `arguments (IDs ${argumentsWithSameParams.map(arg => arg.id).join(', ')})`
+  //     + ' refer to same parameter(s) '
+  //     + `(ID(s) ${[
+  //       ...new Set(argumentsWithSameParams.map(arg => paramOf(arg, state).id)),
+  //     ].join(', ')})`
   //   );
   // }
 
-  // const paramIdsRefdByArgs = argumentz
-  //   .map(arg => arg.parameter)
-  //   .filter(x => x)
-  //   .map(paramAttrs => paramAttrs.id);
-  // const unsatisfiedParamRefs = functionDefinition.parameters.filter(
-  //   (paramRef: SynoRef) => !paramIdsRefdByArgs.includes(paramRef.id),
-  // );
-  // const extraArgs = argumentz.filter(
-  //   (arg: Argument) => !functionDefinition.parameters
-  //     .map(paramRef => paramRef.id)
-  //     .includes(arg.parameter && arg.parameter.id),
-  // );
-  // const unsatisfiedParamNames = unsatisfiedParamRefs.map(paramRef => {
-  //   const param = state.getSyno(paramRef.id);
-  //   if (param.syntype !== 'functionParameter') throw new Error();
-  //   return param.name;
-  // });
+  const argumentsWithSameParams = argumentz.filter((arg: Argument) => {
+    return argumentz.filter(
+      otherArg => paramRefOf(arg) === paramRefOf(otherArg),
+    ).length > 1;
+  });
 
-  // if (unsatisfiedParamRefs.length !== 0 || extraArgs.length !== 0) {
-  //   let errorMessage = (
-  //     `Failed to interpret function '${functionDefinition.name}' (ID ${functionDefinition.id}):`
-  //     + " arguments don't match parameters"
-  //   );
+  if (argumentsWithSameParams.length > 0) {
+    return (
+      `arguments (IDs ${argumentsWithSameParams.map(arg => arg.id).join(', ')})`
+      + ' refer to same parameter(s) '
+      + `(ID(s) ${[
+        ...new Set(argumentsWithSameParams.map(arg => paramOf(arg, state).id)),
+      ].join(', ')})`
+    );
+  }
+
+  const paramIdsRefdByArgs = argumentz.map(arg => paramOf(arg, state).id);
+
+  const unsatisfiedParamRefs = (
+    functionDefinition.children({ label: 'parameter' }) as unknown[] as FunctionParameter[]
+  ).filter(
+    (param: FunctionParameter) => !paramIdsRefdByArgs.includes(param.id),
+  );
+
+  const extraArgs = argumentz.filter(
+    (arg: Argument) => !functionDefinition.children({ label: 'parameter' })
+      .map(param => param.id)
+      .includes(arg.parameter && arg.parameter.id),
+  );
+
+  const unsatisfiedParamNames = unsatisfiedParamRefs.map(paramRef => {
+    const param = state.getSyno(paramRef.id);
+    if (param.syntype !== 'functionParameter') throw new Error();
+    return param.name;
+  });
 
   //   if (unsatisfiedParamNames.length !== 0) {
   //     errorMessage += '\n  unsatisfied parameters: ';

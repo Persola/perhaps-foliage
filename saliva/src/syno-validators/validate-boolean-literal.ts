@@ -1,4 +1,7 @@
-export default (): boolean => {
-  // receives boolean literal syno as argument but ignores it
+import { BooleanLiteral } from '../types/synos/boolean-literal';
+
+export default (
+  booleanLiteral: BooleanLiteral,
+): boolean => {
   return true;
 };

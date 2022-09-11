@@ -18,10 +18,10 @@ productionRules:
       parent: 'functionCall'
       children:
         -
-          edgeLabel: 'argumentz'
+          edgeLabel: 'argument'
           childNonTerminal: 'nonTerminalArgument'
         -
-          edgeLabel: 'argumentz'
+          edgeLabel: 'argument'
           childNonTerminal: 'nonTerminalArgument'
         -
           edgeLabel: 'callee'
@@ -32,10 +32,10 @@ productionRules:
       parent: 'functionCall'
       children:
         -
-          edgeLabel: 'argumentz'
+          edgeLabel: 'argument'
           childNonTerminal: 'nonTerminalArgument'
         -
-          edgeLabel: 'argumentz'
+          edgeLabel: 'argument'
           childNonTerminal: 'nonTerminalArgument'
   -
     lhs: 'nonTerminalFunctionDefinition'
@@ -43,10 +43,10 @@ productionRules:
       parent: 'functionDefinition'
       children:
         -
-          edgeLabel: 'parameters'
+          edgeLabel: 'parameter'
           childNonTerminal: 'nonTerminalParameter'
         -
-          edgeLabel: 'parameters'
+          edgeLabel: 'parameter'
           childNonTerminal: 'nonTerminalParameter'
         -
           edgeLabel: 'body'

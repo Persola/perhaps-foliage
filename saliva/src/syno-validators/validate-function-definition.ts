@@ -1,7 +1,7 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/syno';
+import { FunctionDefinition } from '../types/synos/function-definition';
 
 export default (
-  funkshunDef: Syno,
+  funkshunDef: FunctionDefinition,
 ): boolean => {
-  return funkshunDef.children({ label: 'body' }).length === 1;
+  return true;
 };

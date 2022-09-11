@@ -1,7 +1,7 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+import { VariableRef } from '../types/synos/variable-ref';
 
 export default (
-  variableRef: Syno,
+  variableRef: VariableRef,
 ): boolean => {
-  return !!(variableRef.hasRef('referent'));
+  return true;
 };
