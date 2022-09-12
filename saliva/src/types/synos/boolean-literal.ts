@@ -3,7 +3,7 @@ import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/ne
 
 import { RawBooleanLiteral } from './raw/boolean-literal';
 
-export type BooleanLiteral = Syno & {
+export type BooleanLiteral = {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawBooleanLiteral;
@@ -14,4 +14,4 @@ export type BooleanLiteral = Syno & {
   readonly intratreeRefs: RawBooleanLiteral['intratreeRefs'];
   readonly intertreeRefs: RawBooleanLiteral['intertreeRefs'];
   readonly attrs: RawBooleanLiteral['attrs'];
-};
+} & Syno;

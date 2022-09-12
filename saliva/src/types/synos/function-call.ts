@@ -3,7 +3,7 @@ import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/ne
 
 import { RawFunctionCall } from './raw/function-call';
 
-export type FunctionCall = Syno & {
+export type FunctionCall = {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawFunctionCall;
@@ -14,4 +14,4 @@ export type FunctionCall = Syno & {
   readonly intratreeRefs: RawFunctionCall['intratreeRefs'];
   readonly intertreeRefs: RawFunctionCall['intertreeRefs'];
   readonly attrs: RawFunctionCall['attrs'];
-};
+} & Syno;

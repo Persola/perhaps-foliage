@@ -1,4 +1,4 @@
-import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
 
 import type { Interpreter } from '../../../types/interpreter/interpreter';
 import type { Scope } from '../../../types/interpreter/scope';
@@ -12,13 +12,14 @@ export default (
   state: StateSelector,
 ): [Argument, BooleanLiteral][] => {
   const interpretedArgs: [Argument, BooleanLiteral][] = [];
+
   argumentz.forEach((arg: Argument) => {
-    if (arg.syntype !== 'argument') {
-      throw new Error(`expected argument, got ${arg.syntype}`);
+    if (arg.type !== 'argument') {
+      throw new Error(`Expected argument, got ${arg.type}`);
     }
 
-    if (!arg.value) {
-      throw new Error(`unassigned argument of ID ${arg.id}`);
+    if (!arg.attrs.value) {
+      throw new Error(`Unassigned argument of ID ${arg.id}`);
     }
 
     const argResolution = interpreter(

@@ -3,7 +3,7 @@ import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/ne
 
 import { RawVariableRef } from './raw/variable-ref';
 
-export type VariableRef = Syno & {
+export type VariableRef = {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawVariableRef;
@@ -14,4 +14,4 @@ export type VariableRef = Syno & {
   readonly intratreeRefs: RawVariableRef['intratreeRefs'];
   readonly intertreeRefs: RawVariableRef['intertreeRefs'];
   readonly attrs: RawVariableRef['attrs'];
-};
+} & Syno;

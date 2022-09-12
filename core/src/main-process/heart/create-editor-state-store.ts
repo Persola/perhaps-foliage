@@ -12,7 +12,6 @@ import StateMutator from '../mutators/state-mutator';
 import codeLoader from '../code-loader/code-loader';
 import verifyType from './reducers/util/verify-action-type';
 
-// import replaceFocusedSynoReducer from './reducers/replace-focused-syno-reducer';
 // import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
 import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
@@ -31,7 +30,6 @@ import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
-// import type { ReplaceFocusedSyno } from '../../types/actions/commands/replace-focused-syno';
 // import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
@@ -106,17 +104,6 @@ export default (
         case 'INITIALIZE': {
           break;
         }
-
-        // case 'REPLACE_FOCUSED_SYNO': {
-        //   replaceFocusedSynoReducer(
-        //     (action as ReplaceFocusedSyno),
-        //     stateMutator,
-        //     integration,
-        //     latestEdit,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
 
         // case 'END_INTERPRETATION': {
         //   endInterpretationReducer(

@@ -1,5 +1,4 @@
 import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
-import { Argument } from '../types/synos/argument';
 
 import type { FunctionCall } from '../types/synos/function-call';
 import type { FunctionDefinition } from '../types/synos/function-definition';
@@ -25,8 +24,8 @@ export default (
 
   if (
     argumentParameterMismatch(
+      funkshunCall,
       callee,
-      funkshunCall.children({ label: 'argument' }) as unknown[] as Argument[],
       state,
     )
   ) {

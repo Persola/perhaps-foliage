@@ -3,7 +3,7 @@ import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/ne
 
 import { RawArgument } from './raw/argument';
 
-export type Argument = Syno & {
+export type Argument = {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawArgument;
@@ -14,4 +14,4 @@ export type Argument = Syno & {
   readonly intratreeRefs: RawArgument['intratreeRefs'];
   readonly intertreeRefs: RawArgument['intertreeRefs'];
   readonly attrs: RawArgument['attrs'];
-};
+} & Syno;
