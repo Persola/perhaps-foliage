@@ -64,7 +64,7 @@
 //     },
 //   );
 
-//   Object.keys(syntypeGrammarEntry.nonTreeRefs).forEach(nonTreeRefName => {
+//   Object.keys(syntypeGrammarEntry.extratreeRefs).forEach(nonTreeRefName => {
 //     mergeProps(props, {
 //       [nonTreeRefName]: synoRef('non-tree'),
 //     });

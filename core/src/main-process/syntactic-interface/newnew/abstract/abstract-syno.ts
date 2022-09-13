@@ -1,4 +1,4 @@
-import type { RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
+import type { IntertreeRefs, IntratreeRefs, RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
 import type { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
 import type { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
 import AbstractSyntaxTree from './abstract-syntax-tree';
@@ -20,8 +20,8 @@ export default class AbstractSyno<
   readonly rootwardEdgeLabel: string;
   readonly parentId: string | null;
   readonly childIds: string[];
-  readonly intratreeRefs: {[edgeLabel: string]: string};
-  readonly intertreeRefs: {[edgeLabel: string]: AbsoluteSynoUri};
+  readonly intratreeRefs: IntratreeRefs;
+  readonly intertreeRefs: IntertreeRefs;
   readonly attrs: {[synoAttr: string]: SynoAttrVal};
   TreeClass;
 
@@ -51,24 +51,8 @@ export default class AbstractSyno<
     );
   }
 
-  hasRef(refName: string): (false | 'intratree' | 'intertree') {
-    if (Object.keys(this.intratreeRefs).includes(refName)) {
-      return 'intratree';
-    }
-
-    if (Object.keys(this.intertreeRefs).includes(refName)) {
-      return 'intertree';
-    }
-
-    return false;
-  }
-
-  followIntratreeRef(refLabel: string): this {
-    if (refLabel in this.intratreeRefs) {
-      return this.tree.getSyno(this.intratreeRefs[refLabel]) as this;
-    }
-
-    throw new Error('bad ref label');
+  isRoot(): boolean {
+    return this.id === this.tree.rootId;
   }
 
   parent(): this {
@@ -77,6 +61,10 @@ export default class AbstractSyno<
     }
 
     return this.tree.getSyno(this.parentId) as this;
+  }
+
+  index(): number {
+    return this.parent().childIds.indexOf(this.id);
   }
 
   children(filter?: { label?: string, type?: string }): this[] {
@@ -105,11 +93,53 @@ export default class AbstractSyno<
     );
   }
 
-  index(): number {
-    return this.parent().childIds.indexOf(this.id);
+  hasRef(refName: string): (false | 'intratree' | 'intertree') {
+    if (Object.keys(this.intratreeRefs).includes(refName)) {
+      return 'intratree';
+    }
+
+    if (Object.keys(this.intertreeRefs).includes(refName)) {
+      return 'intertree';
+    }
+
+    return false;
   }
 
-  isRoot(): boolean {
-    return this.id === this.tree.rootId;
+  followIntratreeRef(refLabel: string): this {
+    if (refLabel in this.intratreeRefs) {
+      return this.tree.getSyno(this.intratreeRefs[refLabel]) as this;
+    }
+
+    throw new Error(`Syno (ID ${this.id}) has no intratree reference labeled '${refLabel}'`);
+  }
+
+  followIntertreeRef(refLabel: string): this {
+    if (!(refLabel in this.intertreeRefs)) {
+      throw new Error(`Syno (ID ${this.id}) has no intertree reference labeled '${refLabel}'`);
+    }
+
+    const synoUri = this.intertreeRefs[refLabel];
+    const refTree = this.tree.treeList[synoUri.treeHost.join('.')];
+    if (this.raw.synoMap[synoId] === undefined) {
+      throw new Error(`Syno of ID '${synoId}' not found in tree '${this.id}'`);
+    }
+
+    return new this.SynoClass(synoId, this);
+  }
+
+  followRef(refLabel: string): this {
+    if (refLabel in this.intratreeRefs) {
+      if (refLabel in this.intertreeRefs) {
+        throw new Error(`Syno (ID ${this.id}) has multiple refs labeled '${refLabel}'`);
+      }
+
+      return this.followIntertreeRef(refLabel);
+    }
+
+    if (refLabel in this.intertreeRefs) {
+      return 
+    }
+
+    throw new Error(`Syno (ID ${this.id}) has no extratree reference labeled '${refLabel}'`);
   }
 }

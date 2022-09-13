@@ -1,5 +1,5 @@
-import type { SynoMap } from 'perhaps-foliage/dist/types/syntactic/syno-map';
-import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+import { RawSyntaxTree } from 'perhaps-foliage/dist/types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default class DocumentStateTracker {
   public constructor() {
@@ -12,11 +12,8 @@ export default class DocumentStateTracker {
     this._stateSelector = stateSelector;
   }
 
-  public getState(): SynoMap {
-    if (this._stateSelector === null) {
-      throw new Error('Document state has not been set yet');
-    }
-
-    return this._stateSelector.synoMap();
+  public getState(): RawSyntaxTree {
+    console.log(this && null);
+    throw new Error('unimplemented');
   }
 }

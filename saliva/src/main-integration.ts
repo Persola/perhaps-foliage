@@ -2,7 +2,7 @@ import version from './version';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import actualGrammar from './actual-grammar.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
-import syntypeSchema from './syntype-schema.yml';
+import syntacticTypeSchema from './syntactic-type-schema.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from './primitives.yml';
 // @ts-ignore how do I configure TS to ignore webpacked imports?
@@ -14,7 +14,7 @@ import presenters from './presenters/presenters';
 export default {
   id: `saliva.${version}`,
   actualGrammar,
-  syntypeSchema,
+  syntacticTypeSchema,
   primitives,
   keyToNewSynoAttrs,
   interpret,

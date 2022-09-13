@@ -3,7 +3,7 @@ import MutableSyntaxTree from '../syntactic-interface/newnew/writable/mutable-sy
 import MutableSyno from '../syntactic-interface/newnew/writable/mutable-syno';
 
 import type { ActualGrammar } from '../../types/grammar/actual-grammar';
-import type { SyntypeSchema } from '../../types/syntype-schema/syntype-schema';
+import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 import type { AbsoluteSynoUri } from '../../types/syntactic/newnew/syno-uri';
 import type { MutableEditorState } from '../../types/editor-state/mutable/mutable-editor-state';
@@ -97,7 +97,7 @@ export default class StateMutator {
   // forward reads to selector
   integrationId(): string { return this.selector.integrationId(); }
   actualGrammar(): ActualGrammar { return this.selector.actualGrammar(); }
-  syntypeSchema(): SyntypeSchema { return this.selector.syntypeSchema(); }
+  syntacticTypeSchema(): SyntacticTypeSchema { return this.selector.syntacticTypeSchema(); }
   keyToNewSynoAttrs(): KeyToNewSynoAttrs { return this.selector.keyToNewSynoAttrs(); }
   interpreting(): boolean { return this.selector.interpreting(); }
   resultOutdated(): boolean { return this.selector.resultOutdated(); }

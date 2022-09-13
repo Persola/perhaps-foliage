@@ -82,6 +82,7 @@ export default (
   const { rootId } = tree;
   const synoMapWithNominalRefs: SynoMap = {};
   const inverseExtratreeEdges: InverseEdgeMap = {};
+  const dependencies: AbsoluteSynoUri[] = [];
   const pathToId = derivePathToId(tree.synoMap);
 
   for (const syno of Object.values(tree.synoMap)) {
@@ -95,7 +96,19 @@ export default (
         intratreeRefs[edgeLabel] = referentId;
         addInverse(inverseExtratreeEdges, referentId, syno.id);
       } else if (matchesAbsoluteUri(referentUriString)) {
-        intertreeRefs[edgeLabel] = deserializeAbsoluteUri(referentUriString);
+        const refUri = deserializeAbsoluteUri(referentUriString);
+        intertreeRefs[edgeLabel] = refUri;
+        if (
+          !dependencies.some(
+            uri => uri.treeHost.join('.') === refUri.treeHost.join('.'),
+          )
+        ) {
+          dependencies.push({
+            type: 'absolute',
+            treeHost: [...refUri.treeHost],
+            path: [],
+          });
+        }
       } else {
         throw new Error(
           'Serialized syno contains bad extratree ref'
@@ -122,5 +135,6 @@ export default (
     synoMap: synoMapWithNominalRefs,
     inverseExtratreeEdges,
     rootId,
+    dependencies,
   };
 };

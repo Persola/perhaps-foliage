@@ -13,6 +13,7 @@ import type { Warn } from '../types/cross-context/messages-from-main/warn';
 import type { RendersideUninitializedPresentLangInt } from '../types/language-integration/interfaces/renderside/renderside-uninitialized-present-lang-int';
 
 import '../editor-styles.css';
+import createFocusSyno from '../main-process/input-resolver/create-focus-syno';
 
 export default (
   registerCrossContextMessageHandler: CrossContextMessageHandlerRegister,
@@ -51,7 +52,7 @@ export default (
   window.addEventListener('load', () => {
     bindKeys(sendCrossContextMessage);
     document.documentElement.click(); // bindings don't work before this (focus?)
-    // document.addEventListener('click', createFocusSyno(editorStateStore));
+    document.addEventListener('click', createFocusSyno(sendCrossContextMessage));
     sendCrossContextMessage(
       'dispatchAction',
       {

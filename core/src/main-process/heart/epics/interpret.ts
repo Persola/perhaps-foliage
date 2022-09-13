@@ -33,6 +33,11 @@ export default (
       return false;
     }
 
+    if (!state.treeLoaded()) {
+      warnUser('Ignoring START_INTERPRETATION action: no tree loaded');
+      return false;
+    }
+
     return true;
   }),
   map(() => integration.interpret(state$.value, state)),

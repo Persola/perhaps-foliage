@@ -1,7 +1,7 @@
 export type MainsideAbsentLangInt = {
   id: null;
   actualGrammar: null;
-  syntypeSchema: null;
+  syntacticTypeSchema: null;
   primitives: null;
   keyToNewSynoAttrs: null;
   interpret: null;

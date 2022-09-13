@@ -1,7 +1,6 @@
 **next**
 * replace synoMap with new syntactical data layer
 * allow, in general, any syno to be child of any other syno in any order
-* rename 'nontreerefs' in grammar
 * introduce tree dependencies?
 * check for tree validity before interpretation?
 * improve abstract syno and ast typing? (remove casts)
@@ -136,7 +135,7 @@
       * group selected nodes?
   * add selection (in addition to focus)
   * **?** traversing nav history
-  * **?** navigating non-tree syno references (how see references of current focus?)
+  * **?** navigating extratree references (how see references of current focus?)
 * function signatures
   * name part and argument order, both in call and def
     * [_saliva_] optional arguments

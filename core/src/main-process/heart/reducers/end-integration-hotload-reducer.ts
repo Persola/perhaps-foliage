@@ -34,7 +34,7 @@ export default (
   Object.assign(state.state, {
     integrationId: newIntegrationAttrs.id,
     actualGrammar: newIntegrationAttrs.actualGrammar,
-    syntypeSchema: newIntegrationAttrs.syntypeSchema,
+    syntacticTypeSchema: newIntegrationAttrs.syntacticTypeSchema,
     keyToNewSynoAttrs: newIntegrationAttrs.keyToNewSynoAttrs,
     trees: {
       ...state.state.trees,

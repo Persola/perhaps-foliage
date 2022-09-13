@@ -1,4 +1,5 @@
 import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
 import type { TreeList } from '../../../../types/syntactic/newnew/tree-list';
 import AbstractSyno from './abstract-syno';
 
@@ -16,6 +17,8 @@ export default class AbstractSyntaxTree<
   readonly treeList: TreeList;
   readonly raw: RawSyntaxTree;
   readonly rootId: string;
+  readonly dependencies: AbsoluteSynoUri[];
+  readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
   SynoClass;
 
   constructor(
@@ -26,6 +29,14 @@ export default class AbstractSyntaxTree<
     this.treeList = treeList;
     this.raw = treeList[id];
     this.rootId = this.raw.rootId;
+    this.dependencyTrees = {};
+    for (const uri of this.raw.dependencies) {
+      const strTreeHost = uri.treeHost.join('.');
+      if (treeList[strTreeHost] === undefined) {
+        throw new Error(`Cannot link unloaded dependency tree '${strTreeHost}'`);
+      }
+      this.dependencyTrees[strTreeHost] = treeList[strTreeHost];
+    }
   }
 
   is(tree: AbstractSyntaxTree<SynoType>): boolean {
@@ -48,4 +59,13 @@ export default class AbstractSyntaxTree<
   root(): SynoType {
     return this.getSyno(this.rootId);
   }
+
+  // getDependencyTree(uri: AbsoluteSynoUri): this {
+  //   if (uri.path.length !== 0) {
+  //     throw new Error('Unimplemented: retrieving subtree of dependency tree');
+  //   }
+
+  //   return new this()
+  //   // (this.dependencyTrees[uri.treeHost.join('.')]);
+  // }
 }

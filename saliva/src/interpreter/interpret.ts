@@ -1,23 +1,22 @@
-import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
-import type { EditorStateWithIntegration } from 'perhaps-foliage/dist/types/editor-state/editor-state-with-integration';
+import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+
+import type { EditorState } from 'perhaps-foliage/dist/types/editor-state/editor-state';
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
 import interpreter from './interpreter';
 
-const ascendToRoot = () => { throw new Error('unimplemented'); };
-
 export default (
-  editorState: EditorStateWithIntegration,
+  editorState: EditorState,
   state: StateSelector,
 ): InterpretationResolution => {
   let resolution: InterpretationResolution;
 
   try {
-    const rootOfFocused = ascendToRoot(
-      editorState.focus.synoId,
-      state.synoMap(),
+    resolution = interpreter(
+      state.editeeTree().root(),
+      [],
+      state,
     );
-    resolution = interpreter(rootOfFocused, [], state);
   } catch (error) {
     throw new Error(
       `unexpected error during interpretation: "${error.message}"`,

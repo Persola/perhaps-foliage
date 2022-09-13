@@ -41,7 +41,7 @@ export default (
   const integration: MainsideLangInt = {
     id: null,
     actualGrammar: null,
-    syntypeSchema: null,
+    syntacticTypeSchema: null,
     primitives: null,
     keyToNewSynoAttrs: null,
     interpret: null,

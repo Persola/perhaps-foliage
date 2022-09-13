@@ -3,7 +3,7 @@ import SyntaxTree from '../syntactic-interface/newnew/readable/syntax-tree';
 
 import type { EditorState } from '../../types/editor-state/editor-state';
 import type { ActualGrammar } from '../../types/grammar/actual-grammar';
-import type { SyntypeSchema } from '../../types/syntype-schema/syntype-schema';
+import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 import type { Focus } from '../../types/editor-state/focus';
 import type { AbsoluteSynoUri } from '../../types/syntactic/newnew/syno-uri';
@@ -33,8 +33,8 @@ export default class StateSelector {
     return this.state.actualGrammar;
   }
 
-  syntypeSchema(): SyntypeSchema {
-    return this.state.syntypeSchema;
+  syntacticTypeSchema(): SyntacticTypeSchema {
+    return this.state.syntacticTypeSchema;
   }
 
   keyToNewSynoAttrs(): KeyToNewSynoAttrs {

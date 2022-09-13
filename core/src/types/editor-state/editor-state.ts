@@ -1,5 +1,5 @@
 import { ActualGrammar } from '../grammar/actual-grammar';
-import { SyntypeSchema } from '../syntype-schema/syntype-schema';
+import { SyntacticTypeSchema } from '../syntactic-type-schema/syntactic-type-schema';
 import { KeyToNewSynoAttrs } from '../language-integration/key-to-new-syno-attrs';
 import { TreeList } from '../syntactic/newnew/tree-list';
 import { Focus } from './focus';
@@ -7,7 +7,7 @@ import { Focus } from './focus';
 export type EditorState = {
   readonly integrationId: string | null;
   readonly actualGrammar: ActualGrammar | null;
-  readonly syntypeSchema: SyntypeSchema | null;
+  readonly syntacticTypeSchema: SyntacticTypeSchema | null;
   readonly keyToNewSynoAttrs: KeyToNewSynoAttrs | null;
   readonly trees: TreeList | null;
   readonly primitivesTreeId: string | null;

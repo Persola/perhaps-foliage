@@ -1,12 +1,12 @@
 import * as Ajv from 'ajv';
 
 import invalidate from './graph-validator/invalidate';
-import syntypeSchemaSchema from './schemas/syntype-schema-schema';
+import syntacticTypeSchemaSchema from './schemas/syntactic-type-schema-schema';
 
-import type { SyntypeSchema } from '../../types/syntype-schema/syntype-schema';
+import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
 import type { ValidationResult } from '../../types/code-loader/validation-result';
 
-const grammarValidator = (syntypeSchema: SyntypeSchema): ValidationResult => {
+const grammarValidator = (syntacticTypeSchema: SyntacticTypeSchema): ValidationResult => {
   const result = {
     valid: true,
     messages: [],
@@ -18,18 +18,18 @@ const grammarValidator = (syntypeSchema: SyntypeSchema): ValidationResult => {
     validateSchema: true,
   });
 
-  const validateGrammar = ajv.compile(syntypeSchemaSchema);
-  if (!validateGrammar(syntypeSchema)) {
+  const validateGrammar = ajv.compile(syntacticTypeSchemaSchema);
+  if (!validateGrammar(syntacticTypeSchema)) {
     invalidate(result, validateGrammar.errors.map(e => `${e.dataPath} ${e.message}`));
     return result;
   }
 
-  // validate nonTreeRefs match syntypes
-  Object.entries(syntypeSchema).forEach(([syntypeName, syntypeEntry]): void => {
-    Object.entries(syntypeEntry.nonTreeRefs).forEach(([edgeLabel, referentSyntype]): void => {
-      if (!Object.keys(syntypeSchema).includes(referentSyntype)) {
+  // validate extratreeRefs match syntypes
+  Object.entries(syntacticTypeSchema).forEach(([syntypeName, syntypeEntry]): void => {
+    Object.entries(syntypeEntry.extratreeRefs).forEach(([edgeLabel, referentSyntype]): void => {
+      if (!Object.keys(syntacticTypeSchema).includes(referentSyntype)) {
         invalidate(result, (
-          `Syntype '${syntypeName}' has non-tree ref '${edgeLabel}'`
+          `Syntype '${syntypeName}' has extratree ref '${edgeLabel}'`
           + ` to missing syntype '${referentSyntype}'`
         ));
       }
@@ -41,16 +41,16 @@ const grammarValidator = (syntypeSchema: SyntypeSchema): ValidationResult => {
   }
 
   // validate texthost refs have names to read
-  Object.entries(syntypeSchema).forEach(([syntypeName, syntypeEntry]): void => {
-    const textHostSyntype = syntypeEntry.nonTreeRefs.textHost;
+  Object.entries(syntacticTypeSchema).forEach(([syntypeName, syntypeEntry]): void => {
+    const textHostSyntype = syntypeEntry.extratreeRefs.textHost;
     if (typeof textHostSyntype === 'string') {
-      const hostSyntypeEntry = syntypeSchema[textHostSyntype];
-      if (!Object.keys(hostSyntypeEntry.properties).includes('name')) {
+      const hostSyntypeEntry = syntacticTypeSchema[textHostSyntype];
+      if (!Object.keys(hostSyntypeEntry.attrs).includes('name')) {
         invalidate(result, (
           `Syntype '${syntypeName}' has textHost ref of syntype '${textHostSyntype}'`
           + ` but ${textHostSyntype} has no property named 'name'`
         ));
-      } else if (hostSyntypeEntry.properties.name !== 'string') {
+      } else if (hostSyntypeEntry.attrs.name !== 'string') {
         invalidate(result, (
           `Syntype '${syntypeName}' has textHost ref syntype '${textHostSyntype}'`
           + ` but ${textHostSyntype}'s 'name' property is not typed as string`
@@ -63,12 +63,12 @@ const grammarValidator = (syntypeSchema: SyntypeSchema): ValidationResult => {
 };
 
 export default (
-  syntypeSchema: SyntypeSchema,
+  syntacticTypeSchema: SyntacticTypeSchema,
   schemaName: string,
 ): void => {
   let grammarValidatorRez;
   try {
-    grammarValidatorRez = grammarValidator(syntypeSchema);
+    grammarValidatorRez = grammarValidator(syntacticTypeSchema);
   } catch (error) {
     throw new Error(
       `Syntype schema validation failed with unanticipated error:\n${error.message}`,

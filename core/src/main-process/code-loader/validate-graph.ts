@@ -6,7 +6,7 @@
 // import updateResult from './graph-validator/update-result';
 // import validateMapKeysMatchIds from './graph-validator/validate-map-keys-match-ids';
 // import validateTreeStructure from './graph-validator/validate-tree-structure';
-// import validateNonTreeDependencies from './graph-validator/validate-non-tree-dependencies';
+// import validateNondependencies from './graph-validator/validate-extra-tree-dependencies';
 
 // import type { SynoMap } from '../../types/syntactic/syno-map';
 // import type { Grammar } from '../../types/grammar/grammar';
@@ -63,7 +63,7 @@
 //   );
 //   updateResult(
 //     result,
-//     validateNonTreeDependencies(contextlesslyValidGraph, grammar, primitives),
+//     validateNondependencies(contextlesslyValidGraph, grammar, primitives),
 //   );
 
 //   return result;

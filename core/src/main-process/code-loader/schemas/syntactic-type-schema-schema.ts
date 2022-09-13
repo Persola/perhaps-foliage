@@ -2,7 +2,6 @@ export default {
   type: 'object',
   additionalProperties: false,
   patternProperties: {
-    // per syntype that can appear under the grammar
     '^.*$': {
       type: 'object',
       additionalProperties: false,
@@ -10,13 +9,13 @@ export default {
         properties: {
           type: 'object',
           additionalProperties: false,
-          // per property the syntype can have
+          // per property the syntactic type can have
           patternProperties: { '^.*$': { type: 'string' } },
         },
-        nonTreeRefs: {
+        extratreeRefs: {
           type: 'object',
           additionalProperties: false,
-          // per nonTreeRef relation the syntype can have
+          // per extratree reference the syntactic type can have
           patternProperties: { '^.*$': { type: 'string' } },
         },
       },

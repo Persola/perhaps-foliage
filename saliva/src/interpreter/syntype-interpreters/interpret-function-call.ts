@@ -1,9 +1,11 @@
-import type { StateSelector } from 'perhaps-foliage/dist/types/state-selector';
+import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
 // @ts-ignore how do I configure TS to ignore webpacked imports?
 import primitives from '../../primitives.yml';
 import interpretArgs from './interpret-function-call/interpret-args';
+import generateScope from './interpret-function-call/generate-scope';
 import norPrimitive from './interpret-function-call/nor-primitive';
 import argumentParameterMismatch from '../../utils/argument-parameter-mismatch';
 
@@ -15,31 +17,6 @@ import type { BooleanLiteral } from '../../types/synos/boolean-literal';
 import type { FunctionDefinition } from '../../types/synos/function-definition';
 
 const primitiveIds = Object.keys(primitives);
-
-const generateScope = (resolvedCallee, interpretedArgs, state): Scope => {
-  const interpreteeScope = [];
-  const params = resolvedCallee.parameters.map(paramRef => {
-    const param = state.getSyno(paramRef.id);
-
-    if (param.syntype !== 'functionParameter') {
-      throw new Error('wrong type from synomap (flow)');
-    }
-
-    return param;
-  });
-  params.forEach(param => {
-    const matchingPair = interpretedArgs.find(
-      argRes => argRes[0].parameter && argRes[0].parameter.id === param.id,
-    );
-
-    if (matchingPair === undefined) {
-      throw new Error();
-    }
-
-    interpreteeScope.push([param, matchingPair[1]]);
-  });
-  return interpreteeScope;
-};
 
 export default (
   interpreter: Interpreter,

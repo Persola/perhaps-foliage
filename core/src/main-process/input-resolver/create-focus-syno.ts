@@ -1,4 +1,4 @@
-import type { Store } from 'redux';
+import { CrossContextMessageSender } from '../../types/cross-context/cross-context-messaging';
 
 const isSyno = el => {
   if (!el) {
@@ -30,15 +30,20 @@ const containingSyno = (clickedEl: EventTarget) => {
   return isSyno(currentEl) ? currentEl : false;
 };
 
-export default (editorStateStore: Store) => {
+export default (sendCrossContextMessage: CrossContextMessageSender) => {
   return (event: Event): void => {
     const syno = containingSyno(event.target);
 
     if (syno) {
-      editorStateStore.dispatch({
-        type: 'SET_FOCUS_SYNO',
-        synoId: String(syno.attributes.getNamedItem('data-presno-id').nodeValue),
-      });
+      sendCrossContextMessage(
+        'dispatchAction',
+        {
+          action: {
+            type: 'SET_FOCUS_SYNO',
+            synoId: String(syno.attributes.getNamedItem('data-presno-id').nodeValue),
+          },
+        },
+      );
     }
   };
 };

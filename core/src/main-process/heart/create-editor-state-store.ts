@@ -16,7 +16,7 @@ import verifyType from './reducers/util/verify-action-type';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
 import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
 import navigateReducer from './reducers/navigate-reducer';
-// import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
+import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
 // import startInterpretationReducer from './reducers/start-interpretation-reducer';
 import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
@@ -34,7 +34,7 @@ import interpretEpic from './epics/interpret';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
 import type { Navigate } from '../../types/actions/commands/navigate';
-// import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
+import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
 // import type { TextNavigate } from '../../types/actions/commands/text-navigate';
 // import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
@@ -77,7 +77,7 @@ export default (
   const defaultEditorState: EditorState = {
     integrationId: integration.id,
     actualGrammar: integration.actualGrammar,
-    syntypeSchema: integration.syntypeSchema,
+    syntacticTypeSchema: integration.syntacticTypeSchema,
     keyToNewSynoAttrs: integration.keyToNewSynoAttrs,
     trees,
     primitivesTreeId: null,
@@ -141,14 +141,14 @@ export default (
           break;
         }
 
-        // case 'SET_FOCUS_SYNO': {
-        //   setFocusSynoReducer(
-        //     (action as SetFocusSyno),
-        //     stateMutator,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
+        case 'SET_FOCUS_SYNO': {
+          setFocusSynoReducer(
+            (action as SetFocusSyno),
+            stateMutator,
+            warnUser,
+          );
+          break;
+        }
 
         // case 'START_INTERPRETATION': {
         //   startInterpretationReducer(

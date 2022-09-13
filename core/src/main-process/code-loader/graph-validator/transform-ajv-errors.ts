@@ -74,7 +74,7 @@
 //   syntypeMismatchErrorRootDataPaths.forEach(syntypeMismatchRootPath => {
 //     const thisDataPathErrors = errorsOfDataPath(ajvErrors, syntypeMismatchRootPath);
 
-//     const syntypeSchemaWithoutSyntypePropErrorIndex = range(syntypeCount).find(syntypeInd => {
+//     const syntacticTypeSchemaWithoutSyntypePropErrorIndex = range(syntypeCount).find(syntypeInd => {
 //       return thisDataPathErrors.every(error => {
 //         return !error.schemaPath.match(
 //           new RegExp(
@@ -85,7 +85,7 @@
 //       });
 //     });
 
-//     if (syntypeSchemaWithoutSyntypePropErrorIndex === undefined) {
+//     if (syntacticTypeSchemaWithoutSyntypePropErrorIndex === undefined) {
 //       // if there wasn't a path without a syntype error it probably actually was a syntype error
 //       const validSyntypes = Object.keys(grammar);
 //       const badSyntypeSynoId = syntypeMismatchRootPath.match(/\['([^']*)'\]/)[1];
@@ -105,7 +105,7 @@
 //         return e.schemaPath.match(
 //           new RegExp(
 //             // this is (and must remain) in sync with schemas
-//             `^#/patternProperties/%5E.*%24/oneOf/${syntypeSchemaWithoutSyntypePropErrorIndex}`,
+//             `^#/patternProperties/%5E.*%24/oneOf/${syntacticTypeSchemaWithoutSyntypePropErrorIndex}`,
 //           ),
 //         );
 //       }).forEach(e => {

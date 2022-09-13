@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'; // eslint-disable-line import/no-unresolved
-import type { SynoMap } from 'perhaps-foliage/dist/types/syntactic/syno-map';
 import type { UnistlikeEdit } from 'perhaps-foliage/dist/types/unistlike/unistlike-edit';
 import type { DocumentStateTrackerInterface } from 'perhaps-foliage/dist/types/vscode-main-params';
 
@@ -86,12 +85,14 @@ export default class UnistlikeDocument extends Disposable implements vscode.Cust
     targetResource: vscode.Uri,
     cancellation: vscode.CancellationToken,
   ): Promise<void> {
-    const stringified = JSON.stringify(this._documentStateTracker.getState());
+    throw new Error('Need to serialize state');
+
+    this._documentStateTracker.getState();
 
     await undefined;
     if (cancellation.isCancellationRequested) { return; }
 
-    const encoded = (new TextEncoder()).encode(stringified);
+    const encoded = (new TextEncoder()).encode();
 
     await undefined;
     if (cancellation.isCancellationRequested) { return; }

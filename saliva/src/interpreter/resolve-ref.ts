@@ -1,12 +1,12 @@
-import type { SynoRef } from 'perhaps-foliage/dist/types/syntactic/syno-ref';
+import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 
 import type { Scope } from '../types/interpreter/scope';
-import type { LiteralValue } from '../types/synos/literal-value';
+import { BooleanLiteral } from '../types/synos/boolean-literal';
 
 export default (
   parentScope: Scope,
-  ref: SynoRef,
-): LiteralValue => {
+  ref: Syno,
+): BooleanLiteral => {
   const matchingParamRes = parentScope.find(
     paramRes => paramRes[0].id === ref.id,
   );

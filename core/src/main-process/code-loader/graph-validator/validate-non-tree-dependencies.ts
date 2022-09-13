@@ -27,7 +27,7 @@
 //             );
 //           }
 //         } else {
-//           const expectedSyntype = grammar[syno.syntype].nonTreeRefs[key];
+//           const expectedSyntype = grammar[syno.syntype].extratreeRefs[key];
 //           if (referent.syntype !== expectedSyntype) {
 //             invalidate(
 //               result,

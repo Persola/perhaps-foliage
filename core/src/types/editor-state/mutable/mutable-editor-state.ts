@@ -1,5 +1,5 @@
 import { ActualGrammar } from '../../grammar/actual-grammar';
-import { SyntypeSchema } from '../../syntype-schema/syntype-schema';
+import { SyntacticTypeSchema } from '../../syntactic-type-schema/syntactic-type-schema';
 import { KeyToNewSynoAttrs } from '../../language-integration/key-to-new-syno-attrs';
 import { TreeList } from '../../syntactic/newnew/tree-list';
 import { MutableFocus } from './mutable-focus';
@@ -8,7 +8,7 @@ export type MutableEditorState = {
   // MutableEditorState instances are immer'd proxies
   integrationId: string | null;
   actualGrammar: ActualGrammar | null;
-  syntypeSchema: SyntypeSchema | null;
+  syntacticTypeSchema: SyntacticTypeSchema | null;
   keyToNewSynoAttrs: KeyToNewSynoAttrs | null;
   trees: TreeList | null;
   primitivesTreeId: string | null;

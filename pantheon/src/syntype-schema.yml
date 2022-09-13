@@ -1,8 +1,8 @@
 titan:
   properties:
     name: string
-  nonTreeRefs: {}
+  extratreeRefs: {}
 olympian:
   properties:
     name: string
-  nonTreeRefs: {}
+  extratreeRefs: {}

@@ -1,26 +1,26 @@
 functionDefinition:
-  nonTreeRefs: {}
+  extratreeRefs: {}
   properties:
     name: string
 functionParameter:
-  nonTreeRefs: {}
+  extratreeRefs: {}
   properties:
     name: string
     valueType: string
 functionCall:
-  nonTreeRefs:
+  extratreeRefs:
     callee: functionDefinition
   properties: {}
 argument:
-  nonTreeRefs:
+  extratreeRefs:
     parameter: functionParameter
   properties: {}
 booleanLiteral:
-  nonTreeRefs: {}
+  extratreeRefs: {}
   properties:
     value: boolean
 variableRef:
-  nonTreeRefs:
+  extratreeRefs:
     referent: functionParameter
   properties:
     valueType: string
