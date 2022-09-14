@@ -134,17 +134,7 @@ export default class StateSelector {
       throw new Error(`Cannot retrieve syno from unloaded tree '${uriTreeHost}'`);
     }
 
-    let currentSyno = tree.root();
-    for (const step of uri.path) {
-      if (!currentSyno.hasChildAt(step)) {
-        throw new TypeError(`Tree ('${uriTreeHost}') has no syno at '${uri.path.join('/')}'`);
-      }
-      currentSyno = currentSyno.childAt(step);
-    }
-
-    const syno = currentSyno;
-
-    return syno;
+    return tree.getSynoByPath(uri.path);
   }
 
   focusedSyno(): Syno {

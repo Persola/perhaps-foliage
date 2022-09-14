@@ -1,9 +1,9 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import { RawVariableRef } from './raw/variable-ref';
+import { RawVariableRef } from '../types/synos/raw/variable-ref';
 
-export type VariableRef = {
+export default class VariableRef extends Syno {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawVariableRef;
@@ -14,4 +14,4 @@ export type VariableRef = {
   readonly intratreeRefs: RawVariableRef['intratreeRefs'];
   readonly intertreeRefs: RawVariableRef['intertreeRefs'];
   readonly attrs: RawVariableRef['attrs'];
-} & Syno;
+}

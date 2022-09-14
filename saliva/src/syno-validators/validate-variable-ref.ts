@@ -1,4 +1,4 @@
-import { VariableRef } from '../types/synos/variable-ref';
+import VariableRef from '../synos/variable-ref';
 
 export default (
   variableRef: VariableRef,

@@ -1,9 +1,9 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import { RawFunctionParameter } from './raw/function-parameter';
+import { RawFunctionParameter } from '../types/synos/raw/function-parameter';
 
-export type FunctionParameter = {
+export default class FunctionParameter extends Syno {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawFunctionParameter;
@@ -14,4 +14,4 @@ export type FunctionParameter = {
   readonly intratreeRefs: RawFunctionParameter['intratreeRefs'];
   readonly intertreeRefs: RawFunctionParameter['intertreeRefs'];
   readonly attrs: RawFunctionParameter['attrs'];
-} & Syno;
+}

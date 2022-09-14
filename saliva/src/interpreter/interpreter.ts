@@ -3,11 +3,11 @@ import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-sel
 
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
+import FunctionCall from '../synos/function-call';
 import interpretFunctionCall from './syntype-interpreters/interpret-function-call';
 import resolveRef from './resolve-ref';
 
 import type { Scope } from '../types/interpreter/scope';
-import type { FunctionCall } from '../types/synos/function-call';
 
 const interpreter = (
   interpretee: Syno,
@@ -18,15 +18,27 @@ const interpreter = (
     case 'booleanLiteral': {
       return {
         success: true,
-        result: interpretee,
+        result: {
+          synoMap: {
+            1: JSON.parse(
+              JSON.stringify(
+                interpretee.raw,
+              ),
+            ),
+          },
+          inverseExtratreeEdges: {},
+          rootId: '1',
+          dependencies: [],
+        },
       };
     }
 
     case 'functionDefinition': {
-      return {
-        success: true,
-        result: interpretee,
-      };
+      throw new Error('unimplemented: duplicate raw subtree');
+      // return {
+      //   success: true,
+      //   result: 1,
+      // };
     }
 
     case 'variableRef': {
@@ -34,7 +46,18 @@ const interpreter = (
 
       return {
         success: true,
-        result: value,
+        result: {
+          synoMap: {
+            1: JSON.parse(
+              JSON.stringify(
+                value,
+              ),
+            ),
+          },
+          inverseExtratreeEdges: {},
+          rootId: '1',
+          dependencies: [],
+        },
       };
     }
 

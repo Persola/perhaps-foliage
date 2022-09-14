@@ -1,4 +1,4 @@
-import { Argument } from '../types/synos/argument';
+import Argument from '../synos/argument';
 
 export default (
   argument: Argument,

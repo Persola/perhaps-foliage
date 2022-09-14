@@ -1,6 +1,6 @@
-import { RawSyno } from '../syntactic/newnew/raw/raw-syno';
+import { RawSyntaxTree } from '../syntactic/newnew/raw/raw-syntax-tree';
 
 export type InterpretationResolutionSuccess = {
   readonly success: true;
-  readonly result: RawSyno;
+  readonly result: RawSyntaxTree;
 };

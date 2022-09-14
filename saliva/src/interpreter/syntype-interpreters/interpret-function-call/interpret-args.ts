@@ -1,9 +1,12 @@
 import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+import type { InterpretationResolutionFailure } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution-failure';
+
+import Argument from '../../../synos/argument';
+import BooleanLiteral from '../../../synos/boolean-literal';
 
 import type { Interpreter } from '../../../types/interpreter/interpreter';
 import type { Scope } from '../../../types/interpreter/scope';
-import type { Argument } from '../../../types/synos/argument';
-import type { BooleanLiteral } from '../../../types/synos/boolean-literal';
+import type { Expression } from '../../../types/synos/expression';
 
 export default (
   interpreter: Interpreter,
@@ -18,12 +21,14 @@ export default (
       throw new Error(`Expected argument, got ${arg.type}`);
     }
 
-    if (!arg.attrs.value) {
+    const value: Expression = arg.value();
+
+    if (!value) {
       throw new Error(`Unassigned argument of ID ${arg.id}`);
     }
 
     const argResolution = interpreter(
-      state.getSyno(arg.value.id),
+      value,
       parentScope,
       state,
     );
@@ -31,10 +36,11 @@ export default (
     if (argResolution.success) {
       interpretedArgs.push([
         arg,
-        argResolution.result as BooleanLiteral,
+        argResolution.result.synoMap['1'] as BooleanLiteral,
       ]);
     } else {
-      throw new Error('arg interp failed');
+      const errorMessage = (argResolution as InterpretationResolutionFailure).error.message;
+      throw new Error(`Argument interpretation failed: ${errorMessage}`);
     }
   });
 

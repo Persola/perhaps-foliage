@@ -9,7 +9,7 @@ import type { EditorState } from '../../../types/editor-state/editor-state';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { InterpretationResolutionSuccess } from '../../../types/interpreter/interpretation-resolution-success';
 import type { Warn } from '../../../types/cross-context/warn';
-import type { RawSyno } from '../../../types/syntactic/newnew/raw/raw-syno';
+import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
 
 export default (
   action$: Observable<Action>,
@@ -17,7 +17,7 @@ export default (
   state: StateSelector,
   integration: MainsideLangInt,
   warnUser: Warn,
-): Observable<{type: string, result: RawSyno}> => action$.pipe(
+): Observable<{type: string, result: RawSyntaxTree}> => action$.pipe(
   filter((action: Action) => {
     if (action.type !== 'START_INTERPRETATION') {
       return false;

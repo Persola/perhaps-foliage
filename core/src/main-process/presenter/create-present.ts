@@ -23,7 +23,7 @@ const generatePresentation = (
     stage = presentTree(
       state,
       integration as MainsidePresentLangInt,
-      state.editeeTree().rootId,
+      state.editeeTree(),
       focus,
     );
   }
@@ -36,7 +36,7 @@ const generatePresentation = (
     result = presentTree(
       state,
       integration as MainsidePresentLangInt,
-      state.resultTree().rootId,
+      state.resultTree(),
       null,
     );
   }

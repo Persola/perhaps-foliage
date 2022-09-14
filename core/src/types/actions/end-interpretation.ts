@@ -1,6 +1,6 @@
-import Syno from '../../main-process/syntactic-interface/newnew/readable/syno';
+import { RawSyntaxTree } from '../syntactic/newnew/raw/raw-syntax-tree';
 
 export type EndInterpretation = {
   readonly type: 'END_INTERPRETATION';
-  readonly result: Syno;
+  readonly result: RawSyntaxTree;
 };

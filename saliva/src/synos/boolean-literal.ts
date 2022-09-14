@@ -1,9 +1,9 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import { RawBooleanLiteral } from './raw/boolean-literal';
+import { RawBooleanLiteral } from '../types/synos/raw/boolean-literal';
 
-export type BooleanLiteral = {
+export default class BooleanLiteral extends Syno {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawBooleanLiteral;
@@ -14,4 +14,4 @@ export type BooleanLiteral = {
   readonly intratreeRefs: RawBooleanLiteral['intratreeRefs'];
   readonly intertreeRefs: RawBooleanLiteral['intertreeRefs'];
   readonly attrs: RawBooleanLiteral['attrs'];
-} & Syno;
+}

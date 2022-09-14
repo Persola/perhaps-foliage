@@ -8,16 +8,18 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { SynPresno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
+import SyntaxTree from '../../syntactic-interface/newnew/readable/syntax-tree';
 
 export default (
   synPresnoArgs: SynPresnoArgs,
   state: StateSelector,
+  tree: SyntaxTree,
   integration: MainsidePresentLangInt,
-  focus: Focus,
+  focus: Focus | null,
   enstackForPresentation: EnstackForPresentation,
 ): SynPresno => {
   const { synoId } = synPresnoArgs;
-  const syno = state.editeeTree().getSyno(synoId);
+  const syno = tree.getSyno(synoId);
 
   const integrationPresenter = integration.presenters[syno.type];
   if (!(integrationPresenter instanceof Function)) {

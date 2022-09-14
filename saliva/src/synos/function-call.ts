@@ -1,9 +1,12 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import { RawFunctionCall } from './raw/function-call';
+import FunctionDefinition from './function-definition';
+import Argument from './argument';
 
-export type FunctionCall = {
+import { RawFunctionCall } from '../types/synos/raw/function-call';
+
+export default class FunctionCall extends Syno {
   readonly id: string;
   readonly tree: SyntaxTree;
   readonly raw: RawFunctionCall;
@@ -14,4 +17,16 @@ export type FunctionCall = {
   readonly intratreeRefs: RawFunctionCall['intratreeRefs'];
   readonly intertreeRefs: RawFunctionCall['intertreeRefs'];
   readonly attrs: RawFunctionCall['attrs'];
-} & Syno;
+
+  callee(): FunctionDefinition | null {
+    return (
+      this.hasRef('callee')
+        ? this.followRef('callee')
+        : this.children({ label: 'callee' })[0] || null
+    ) as unknown as FunctionDefinition | null;
+  }
+
+  argumentz(): Argument[] {
+    return this.children({ label: 'argument' }) as unknown as Argument[];
+  }
+}

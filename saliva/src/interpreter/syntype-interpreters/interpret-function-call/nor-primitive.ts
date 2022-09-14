@@ -34,6 +34,13 @@ export default (
 
   return {
     success: true,
-    result: nor(argumentz[0], argumentz[1]),
+    result: {
+      synoMap: {
+        1: nor(argumentz[0], argumentz[1]),
+      },
+      inverseExtratreeEdges: {},
+      rootId: '1',
+      dependencies: [],
+    },
   };
 };

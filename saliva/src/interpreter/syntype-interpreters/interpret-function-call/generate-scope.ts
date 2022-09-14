@@ -1,28 +1,21 @@
+import Argument from '../../../synos/argument';
+import BooleanLiteral from '../../../synos/boolean-literal';
+import FunctionDefinition from '../../../synos/function-definition';
+
 import type { Scope } from '../../../types/interpreter/scope';
 
-export default (resolvedCallee, interpretedArgs, state): Scope => {
+export default (
+  resolvedCallee: FunctionDefinition,
+  interpretedArgs: [Argument, BooleanLiteral][],
+): Scope => {
   const interpreteeScope = [];
 
-  const params = resolvedCallee.parameters.map(paramRef => {
-    const param = state.getSyno(paramRef.id);
-
-    if (param.syntype !== 'functionParameter') {
-      throw new Error('wrong type from synomap (flow)');
-    }
-
-    return param;
-  });
-
-  params.forEach(param => {
-    const matchingPair = interpretedArgs.find(
-      argRes => argRes[0].parameter && argRes[0].parameter.id === param.id,
+  resolvedCallee.parameters().forEach(param => {
+    const argResolution = interpretedArgs.find(
+      argRes => argRes[0].followRef('parameter').id === param.id,
     );
 
-    if (matchingPair === undefined) {
-      throw new Error();
-    }
-
-    interpreteeScope.push([param, matchingPair[1]]);
+    interpreteeScope.push([param, argResolution[1]]);
   });
 
   return interpreteeScope;

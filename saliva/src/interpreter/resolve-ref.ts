@@ -1,7 +1,7 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+import BooleanLiteral from '../synos/boolean-literal';
 
 import type { Scope } from '../types/interpreter/scope';
-import { BooleanLiteral } from '../types/synos/boolean-literal';
 
 export default (
   parentScope: Scope,

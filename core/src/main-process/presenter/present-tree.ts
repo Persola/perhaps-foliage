@@ -1,4 +1,5 @@
 import StateSelector from '../selectors/state-selector';
+import SyntaxTree from '../syntactic-interface/newnew/readable/syntax-tree';
 
 import presentationNode from './present-node/presentation-node';
 import createEnstackForPresentation from './create-enstack-for-presentation';
@@ -14,13 +15,13 @@ import type { PresnoArgs } from '../../types/presenter/presno-args/presno-args';
 export default (
   state: StateSelector,
   integration: MainsidePresentLangInt,
-  renderEntrySynoId: string,
-  focus: Focus,
+  tree: SyntaxTree,
+  focus: Focus | null,
 ): Prestree => {
   const mutablePresnoMap: MutablePresnoMap = {};
   const rootPrensoArgs: PresnoArgs = {
     type: 'synPresno',
-    synoId: renderEntrySynoId,
+    synoId: tree.rootId,
   };
   const toPresentStack: PresnoArgs[] = [rootPrensoArgs];
   const enstackForPresentation = createEnstackForPresentation(toPresentStack);
@@ -36,6 +37,7 @@ export default (
     mutablePresnoMap[id] = presentationNode(
       args,
       state,
+      tree,
       integration,
       focus,
       enstackForPresentation,
@@ -43,7 +45,7 @@ export default (
   }
 
   return {
-    rootId: String(renderEntrySynoId),
+    rootId: presnoId(rootPrensoArgs),
     presnos: mutablePresnoMap as PresnoMap,
   };
 };

@@ -1,4 +1,4 @@
-import { BooleanLiteral } from '../types/synos/boolean-literal';
+import BooleanLiteral from '../synos/boolean-literal';
 
 export default (
   booleanLiteral: BooleanLiteral,

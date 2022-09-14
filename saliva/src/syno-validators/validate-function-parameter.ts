@@ -1,4 +1,4 @@
-import { FunctionParameter } from '../types/synos/function-parameter';
+import FunctionParameter from '../synos/function-parameter';
 
 export default (
   functionParameter: FunctionParameter,

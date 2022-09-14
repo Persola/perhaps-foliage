@@ -56,6 +56,18 @@ export default class AbstractSyntaxTree<
     return new this.SynoClass(synoId, this);
   }
 
+  getSynoByPath(synoPath: number[]): SynoType {
+    let currentSyno = this.root();
+    for (const step of synoPath) {
+      if (!currentSyno.hasChildAt(step)) {
+        throw new TypeError(`Tree ('${this.id}') has no syno at '${synoPath.join('/')}'`);
+      }
+      currentSyno = currentSyno.childAt(step);
+    }
+
+    return currentSyno;
+  }
+
   root(): SynoType {
     return this.getSyno(this.rootId);
   }

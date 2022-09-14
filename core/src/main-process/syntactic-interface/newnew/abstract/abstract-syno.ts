@@ -1,5 +1,4 @@
 import type { IntertreeRefs, IntratreeRefs, RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
-import type { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
 import type { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
 import AbstractSyntaxTree from './abstract-syntax-tree';
 
@@ -105,41 +104,41 @@ export default class AbstractSyno<
     return false;
   }
 
-  followIntratreeRef(refLabel: string): this {
-    if (refLabel in this.intratreeRefs) {
-      return this.tree.getSyno(this.intratreeRefs[refLabel]) as this;
+  followIntratreeRef(refLabel: string): this | null {
+    if (!(refLabel in this.intratreeRefs)) {
+      throw new Error(`Syno (ID ${this.id}) has no intratree reference labeled '${refLabel}'`);
     }
 
-    throw new Error(`Syno (ID ${this.id}) has no intratree reference labeled '${refLabel}'`);
+    if (this.intratreeRefs[refLabel] === null) {
+      return null;
+    }
+
+    return this.tree.getSyno(this.intratreeRefs[refLabel]) as this;
   }
 
-  followIntertreeRef(refLabel: string): this {
+  followIntertreeRef(refLabel: string): this | null {
     if (!(refLabel in this.intertreeRefs)) {
       throw new Error(`Syno (ID ${this.id}) has no intertree reference labeled '${refLabel}'`);
     }
 
     const synoUri = this.intertreeRefs[refLabel];
-    const refTree = this.tree.treeList[synoUri.treeHost.join('.')];
-    if (this.raw.synoMap[synoId] === undefined) {
-      throw new Error(`Syno of ID '${synoId}' not found in tree '${this.id}'`);
+    if (synoUri === null) {
+      return null;
     }
-
-    return new this.SynoClass(synoId, this);
+    const treeId = synoUri.treeHost.join('.');
+    const refTree = new this.TreeClass(treeId, this.tree.treeList);
+    return refTree.getSynoByPath(synoUri.path);
   }
 
-  followRef(refLabel: string): this {
+  followRef(refLabel: string): this | null {
     if (refLabel in this.intratreeRefs) {
-      if (refLabel in this.intertreeRefs) {
-        throw new Error(`Syno (ID ${this.id}) has multiple refs labeled '${refLabel}'`);
-      }
-
-      return this.followIntertreeRef(refLabel);
+      return this.followIntratreeRef(refLabel);
     }
 
     if (refLabel in this.intertreeRefs) {
-      return 
+      return this.followIntertreeRef(refLabel);
     }
 
-    throw new Error(`Syno (ID ${this.id}) has no extratree reference labeled '${refLabel}'`);
+    throw new Error(`Syno (ID ${this.id}) has no reference labeled '${refLabel}'`);
   }
 }

@@ -56,8 +56,8 @@ export default (
 
   syno.children().forEach((childSyno: Syno, childSynoIndex: number) => {
     if (
-      syno.id === focus.synoId
-      && childSynoIndex === focus.budIndex
+      syno.id === focus?.synoId
+      && childSynoIndex === focus?.budIndex
     ) {
       childPresnoRefs.push({
         edgeLabel: 'bud',
@@ -84,8 +84,8 @@ export default (
   });
 
   if (
-    syno.id === focus.synoId
-    && focus.budIndex === syno.childIds.length
+    syno.id === focus?.synoId
+    && focus?.budIndex === syno.childIds.length
   ) {
     childPresnoRefs.push({
       edgeLabel: 'bud',

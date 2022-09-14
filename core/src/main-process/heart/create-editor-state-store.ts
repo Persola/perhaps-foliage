@@ -12,12 +12,12 @@ import StateMutator from '../mutators/state-mutator';
 import codeLoader from '../code-loader/code-loader';
 import verifyType from './reducers/util/verify-action-type';
 
-// import endInterpretationReducer from './reducers/end-interpretation-reducer';
+import endInterpretationReducer from './reducers/end-interpretation-reducer';
 import endSyntreeLoadReducer from './reducers/end-syntree-load-reducer';
 import endIntegrationHotloadReducer from './reducers/end-integration-hotload-reducer';
 import navigateReducer from './reducers/navigate-reducer';
 import setFocusSynoReducer from './reducers/set-focus-syno-reducer';
-// import startInterpretationReducer from './reducers/start-interpretation-reducer';
+import startInterpretationReducer from './reducers/start-interpretation-reducer';
 import startIntegrationHotloadReducer from './reducers/start-integration-hotload-reducer';
 import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 // import charBackspaceReducer from './reducers/char-backspace-reducer';
@@ -30,7 +30,7 @@ import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
 import interpretEpic from './epics/interpret';
 
-// import type { EndInterpretation } from '../../types/actions/end-interpretation';
+import type { EndInterpretation } from '../../types/actions/end-interpretation';
 import type { EndAsyncSyntreeLoad } from '../../types/actions/end-syntree-load';
 import type { EndIntegrationHotload } from '../../types/actions/end-integration-hotload';
 import type { Navigate } from '../../types/actions/commands/navigate';
@@ -105,14 +105,15 @@ export default (
           break;
         }
 
-        // case 'END_INTERPRETATION': {
-        //   endInterpretationReducer(
-        //     (action as EndInterpretation),
-        //     stateMutator,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
+        case 'END_INTERPRETATION': {
+          endInterpretationReducer(
+            stateMutator,
+            (action as EndInterpretation),
+            stateSelector,
+            warnUser,
+          );
+          break;
+        }
 
         case 'END_SYNTREE_LOAD': {
           endSyntreeLoadReducer(
@@ -150,14 +151,15 @@ export default (
           break;
         }
 
-        // case 'START_INTERPRETATION': {
-        //   startInterpretationReducer(
-        //     stateMutator,
-        //     integration,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
+        case 'START_INTERPRETATION': {
+          startInterpretationReducer(
+            stateSelector,
+            stateMutator,
+            integration,
+            warnUser,
+          );
+          break;
+        }
 
         case 'START_SYNTREE_LOAD': {
           startSyntreeLoadReducer(

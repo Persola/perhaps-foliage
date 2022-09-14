@@ -1,4 +1,5 @@
 import StateSelector from '../../selectors/state-selector';
+import SyntaxTree from '../../syntactic-interface/newnew/readable/syntax-tree';
 
 import presentSyno from './present-syno';
 import presentNonSyno from './present-non-syno';
@@ -12,14 +13,16 @@ import type { EnstackForPresentation } from '../../../types/presenter/enstack-fo
 export default (
   presnoArgs: PresnoArgs,
   state: StateSelector,
+  tree: SyntaxTree,
   integration: MainsidePresentLangInt,
-  focus: Focus,
+  focus: Focus | null,
   enstackForPresentation: EnstackForPresentation,
 ): Presno => {
   if (presnoArgs.type === 'synPresno') {
     return presentSyno(
       presnoArgs,
       state,
+      tree,
       integration,
       focus,
       enstackForPresentation,

@@ -1,48 +1,16 @@
-import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
-
-import type { FunctionDefinition } from '../types/synos/function-definition';
-import type { Argument } from '../types/synos/argument';
-import type { FunctionParameter } from '../types/synos/function-parameter';
-import type { FunctionCall } from '../types/synos/function-call';
-
-const paramRefOf = (
-  arg: Argument,
-) => {
-  if ('parameter' in arg.intertreeRefs) {
-    return arg.intertreeRefs.parameter;
-  }
-
-  if ('parameter' in arg.intratreeRefs) {
-    return arg.intratreeRefs.parameter;
-  }
-
-  return null;
-};
-
-const paramOf = (
-  arg: Argument,
-  state: StateSelector,
-) => {
-  if ('parameter' in arg.intertreeRefs) {
-    return state.getSynoByUri(arg.intertreeRefs.parameter);
-  }
-
-  if ('parameter' in arg.intratreeRefs) {
-    return arg.followIntratreeRef('parameter');
-  }
-
-  return null;
-};
+import Argument from '../synos/argument';
+import FunctionCall from '../synos/function-call';
+import FunctionDefinition from '../synos/function-definition';
+import FunctionParameter from '../synos/function-parameter';
 
 export default (
   functionCall: FunctionCall,
   functionDefinition: FunctionDefinition,
-  state: StateSelector,
 ): false | string => {
-  const argumentz: Argument[] = functionCall.children({ label: 'argument' }) as unknown as Argument[];
+  const argumentz = functionCall.argumentz();
 
   const argsWithWrongFuncDefParams = argumentz.filter((arg: Argument) => {
-    return !paramOf(arg, state).parent().is(functionDefinition);
+    return !arg.parameter().parent().is(functionDefinition);
   });
 
   if (argsWithWrongFuncDefParams.length > 0) {
@@ -54,7 +22,7 @@ export default (
 
   const argumentsWithSameParams = argumentz.filter((arg: Argument) => {
     return argumentz.filter(
-      otherArg => paramRefOf(arg) === paramRefOf(otherArg),
+      otherArg => arg.parameter().is(otherArg.parameter()),
     ).length > 1;
   });
 
@@ -63,15 +31,13 @@ export default (
       `Arguments (IDs ${argumentsWithSameParams.map(arg => arg.id).join(', ')})`
       + ' refer to same parameter(s)'
       + ' (ID(s)'
-      + [...new Set(argumentsWithSameParams.map(arg => paramOf(arg, state).id))].join(', ')
+      + [...new Set(argumentsWithSameParams.map(arg => arg.parameter().id))].join(', ')
     );
   }
 
-  const paramIdsRefdByArgs = argumentz.map(arg => paramOf(arg, state).id);
+  const paramIdsRefdByArgs = argumentz.map(arg => arg.parameter().id);
 
-  const unsatisfiedParams = (
-    functionDefinition.children({ label: 'parameter' }) as unknown[] as FunctionParameter[]
-  ).filter(
+  const unsatisfiedParams = functionDefinition.parameters().filter(
     (param: FunctionParameter) => !paramIdsRefdByArgs.includes(param.id),
   );
 

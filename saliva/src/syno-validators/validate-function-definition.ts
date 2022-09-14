@@ -1,4 +1,4 @@
-import { FunctionDefinition } from '../types/synos/function-definition';
+import FunctionDefinition from '../synos/function-definition';
 
 export default (
   funkshunDef: FunctionDefinition,
