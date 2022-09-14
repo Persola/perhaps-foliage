@@ -13,6 +13,17 @@ export default (
     return;
   }
 
+  if (typeof state.focus().budIndex === 'number') {
+    if (state.focus().budIndex === state.focusedSyno().childIds.length) {
+      warnUser('Ignoring navigation to next sibling: focused bud last among siblings');
+      return;
+    }
+
+    state.focus().synoId = state.focusedSyno().childAt(state.focus().budIndex).id;
+    state.focus().budIndex = null;
+    return;
+  }
+
   if (state.inNonSynPresno()) {
     throw new Error('unimplemented: nav in non syn presno');
   }

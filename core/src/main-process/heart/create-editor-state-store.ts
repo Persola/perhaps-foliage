@@ -24,7 +24,7 @@ import startSyntreeLoadReducer from './reducers/start-syntree-load-reducer';
 // import textNavigateReducer from './reducers/text-navigate-reducer';
 // import exitTextPresno from './reducers/exit-text-presno-reducer';
 import destroyFocusedSynoReducer from './reducers/destroy-focused-syno-reducer';
-// import insertBudReducer from './reducers/insert-bud-reducer';
+import insertBudReducer from './reducers/insert-bud-reducer';
 
 import hotloadIntegrationEpic from './epics/hotload-integration';
 import loadSyntreeEpic from './epics/load-syntree';
@@ -36,7 +36,7 @@ import type { EndIntegrationHotload } from '../../types/actions/end-integration-
 import type { Navigate } from '../../types/actions/commands/navigate';
 import type { SetFocusSyno } from '../../types/actions/commands/set-focus-syno';
 // import type { TextNavigate } from '../../types/actions/commands/text-navigate';
-// import type { InsertBud } from '../../types/actions/commands/insert-bud';
+import type { InsertBud } from '../../types/actions/commands/insert-bud';
 
 import type { MainsideLangInt } from '../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { UnistlikeEdit } from '../../types/unistlike/unistlike-edit';
@@ -212,15 +212,16 @@ export default (
           break;
         }
 
-        // case 'INSERT_BUD': {
-        //   insertBudReducer(
-        //     (action as InsertBud),
-        //     stateMutator,
-        //     latestEdit,
-        //     warnUser,
-        //   );
-        //   break;
-        // }
+        case 'INSERT_BUD': {
+          insertBudReducer(
+            stateSelector,
+            stateMutator,
+            (action as InsertBud),
+            latestEdit,
+            warnUser,
+          );
+          break;
+        }
 
         default: {
           verifyType(action.type);

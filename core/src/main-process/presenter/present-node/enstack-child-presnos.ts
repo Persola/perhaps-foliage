@@ -35,7 +35,7 @@ const synPresnoArgs = (syno: Syno): SynPresnoArgs => {
 export default (
   syno: Syno,
   integration: MainsidePresentLangInt,
-  focus: Focus,
+  focus: Focus | null,
   childPresnoArgsFromIntegration: {
     [index: string]: (UnindexedPresnoArgs | UnindexedPresnoArgs[])
   },
