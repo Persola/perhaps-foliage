@@ -1,12 +1,16 @@
 "0":
-  syntype: booleanLiteral
-  value: false
+  type: booleanLiteral
+  attrs:
+    value: false
 "1":
-  syntype: booleanLiteral
-  value: true
+  type: booleanLiteral
+  attrs:
+    value: true
 f:
-  syntype: booleanLiteral
-  value: false
+  type: booleanLiteral
+  attrs:
+    value: false
 t:
-  syntype: booleanLiteral
-  value: true
+  type: booleanLiteral
+  attrs:
+    value: true

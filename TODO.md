@@ -1,10 +1,12 @@
 **next**
-* replace synoMap with new syntactical data layer
-* allow, in general, any syno to be child of any other syno in any order
 * introduce tree dependencies?
-* check for tree validity before interpretation?
-* improve abstract syno and ast typing? (remove casts)
-* reorder attrs lower in syno?
+* clean up
+  * review new files
+  * syntax tree/syno attr ordering
+  * use type for class imports where appropriate
+* fix syntax tree/syno typing
+  * break into two?
+  * permanent solution?
 * core's validation responsibilities - validate inputs, keep closed within app to guaruntee
   * syno type
   * tree structure according to grammar (parents, children, edge labels)
@@ -12,6 +14,7 @@
       * ...and possibly functionCall child/ref OR?
   * attrs and extratree refs according to syntype schema
 * core provides integrations with user interfaces for attrs, extratree refs according to syntype schema
+* check for tree validity before interpretation
 
 **testing**
 * try rendering everything that should already be renderable
