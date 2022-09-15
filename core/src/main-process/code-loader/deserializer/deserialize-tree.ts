@@ -26,8 +26,11 @@ export default (serializedTree: SerializedSyno): RawSyntaxTree => {
     idIterator,
   );
 
-  return nominalizeRefs({
-    synoMap,
-    rootId,
-  });
+  return nominalizeRefs(
+    {
+      synoMap,
+      rootId,
+    },
+    idIterator.next().value - 1,
+  );
 };

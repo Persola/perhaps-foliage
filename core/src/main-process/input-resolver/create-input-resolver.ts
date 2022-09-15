@@ -37,6 +37,13 @@ export default (
         command = treeModeInputResolver(key, keyStates);
       }
 
+      if (!command && key in integration.keyToNewSynoAttrs) {
+        command = {
+          type: 'REPLACE_FOCUSED_SYNO',
+          newSynoAttrs: integration.keyToNewSynoAttrs[key],
+        };
+      }
+
       if (!command) {
         warnUser(`Ignoring input '${key}': did not resolve to command`);
       } else {

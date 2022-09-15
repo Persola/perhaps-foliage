@@ -78,6 +78,7 @@ const deserializeAbsoluteUri = (uri: string): AbsoluteSynoUri => {
 
 export default (
   tree: RawSyntaxTreeWithStructuralRefs,
+  lastId: number,
 ): RawSyntaxTree => {
   const { rootId } = tree;
   const synoMapWithNominalRefs: SynoMap = {};
@@ -132,9 +133,10 @@ export default (
   }
 
   return {
+    dependencies,
     synoMap: synoMapWithNominalRefs,
     inverseExtratreeEdges,
     rootId,
-    dependencies,
+    lastId,
   };
 };

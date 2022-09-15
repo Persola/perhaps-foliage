@@ -5,6 +5,8 @@ import type { MutableTreeList } from '../../../../types/syntactic/newnew/mutable
 import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
 import type { RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
 import type { InverseEdgeMapEntry } from '../../../../types/syntactic/newnew/raw/inverse-edge-map';
+import type { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
+import { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
 
 export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   /*
@@ -17,6 +19,9 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   readonly treeList: MutableTreeList;
   readonly raw: RawSyntaxTree; // see above
   readonly rootId: string;
+  lastId: number;
+  readonly dependencies: AbsoluteSynoUri[];
+  readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
 
   constructor(
     id: string,
@@ -24,6 +29,36 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   ) {
     super(id, treeList);
     this.SynoClass = MutableSyno;
+  }
+
+  nextId(): string {
+    const next = this.lastId + 1;
+    this.lastId = next;
+    return String(next);
+  }
+
+  addSyno(
+    parentId: string,
+    insertIndex: number,
+    edgeLabel: string,
+    syno: { type: string, attrs: { [attrName: string]: SynoAttrVal } }, // RawSyno,
+  ): void {
+    // update inverse refs based on extratree refs
+    // update dependency trees
+    // update rootid
+    // validate raw syno?
+    const newId = this.nextId();
+    const parent = this.getSyno(parentId);
+    parent.raw.childIds.splice(insertIndex, 0, newId);
+    this.raw.synoMap[newId] = {
+      ...syno,
+      id: newId,
+      parentId,
+      rootwardEdgeLabel: edgeLabel,
+      childIds: [],
+      intratreeRefs: {},
+      intertreeRefs: {},
+    };
   }
 
   deleteExtratreeRefsTo(synoId: string): void {

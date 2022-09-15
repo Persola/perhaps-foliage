@@ -24,8 +24,6 @@ export default (
     return;
   }
 
-  const keyToNewSynoAttrs: KeyToNewSynoAttrs = integration.keyToNewSynoAttrs;
-
   latestEdit.push({
     undo: {
       type: 'REPLACE_SYNO',
@@ -35,13 +33,12 @@ export default (
     },
   });
 
-  const newSynoSyntypeAttrs = keyToNewSynoAttrs[action.input];
-
   writeState.focusedSyno().destroy();
-  writeState.editeeTree().graft(
-    parent: readState.focusedSyno().parent(),
-    index: readState.focusedSyno().index,
-    graftee: newSynoSyntypeAttrs,
+  writeState.editeeTree().addSyno(
+    readState.focusedSyno().parent().id,
+    readState.focusedSyno().index(),
+    readState.focusedSyno().rootwardEdgeLabel,
+    action.newSynoAttrs,
   );
   writeState.state.resultOutdated = true;
 };

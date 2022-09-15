@@ -1,14 +1,16 @@
 import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
 
+import type Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+
+import FunctionCall from '../synos/function-call';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';
 
-import type FunctionCall from '../synos/function-call';
-
 export default (
-  funkshunCall: FunctionCall,
+  funkshunCallAsSyno: Syno,
   state: StateSelector,
 ): boolean => {
-  const callee = funkshunCall.callee();
+  const functionCall = new FunctionCall(funkshunCallAsSyno.id, funkshunCallAsSyno.tree);
+  const callee = functionCall.callee();
 
   if (callee === null) {
     return false;
@@ -16,7 +18,7 @@ export default (
 
   if (
     argumentParameterMismatch(
-      funkshunCall,
+      functionCall,
       callee,
     )
   ) {

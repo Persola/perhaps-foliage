@@ -41,6 +41,7 @@ export default (
       inverseExtratreeEdges: {},
       rootId: '1',
       dependencies: [],
+      lastId: 1,
     },
   };
 };

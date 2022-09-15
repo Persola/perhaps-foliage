@@ -11,6 +11,8 @@ export default class AbstractSyno<
   /*
     AbstractSyno instances can only be used from when they are instantiated until
     the next state update because they reference a specific version of the state
+
+    But wait even then they're not really up to date if you modify things in multiple steps...
   */
   readonly id: string;
   readonly tree: TreeType;

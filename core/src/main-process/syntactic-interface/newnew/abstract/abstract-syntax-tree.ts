@@ -17,6 +17,7 @@ export default class AbstractSyntaxTree<
   readonly treeList: TreeList;
   readonly raw: RawSyntaxTree;
   readonly rootId: string;
+  readonly lastId: number;
   readonly dependencies: AbsoluteSynoUri[];
   readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
   SynoClass;
@@ -29,6 +30,7 @@ export default class AbstractSyntaxTree<
     this.treeList = treeList;
     this.raw = treeList[id];
     this.rootId = this.raw.rootId;
+    this.lastId = this.raw.lastId;
     this.dependencyTrees = {};
     for (const uri of this.raw.dependencies) {
       const strTreeHost = uri.treeHost.join('.');

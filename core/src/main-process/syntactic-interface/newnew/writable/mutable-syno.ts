@@ -1,8 +1,7 @@
+import AbstractSyno from '../abstract/abstract-syno';
 import MutableSyntaxTree from './mutable-syntax-tree';
 
 import subtreeSynoIds from '../utils/subtree-syno-ids';
-
-import AbstractSyno from '../abstract/abstract-syno';
 
 export default class MutableSyno extends AbstractSyno<MutableSyntaxTree> {
   /*

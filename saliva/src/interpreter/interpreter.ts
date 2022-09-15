@@ -29,6 +29,7 @@ const interpreter = (
           inverseExtratreeEdges: {},
           rootId: '1',
           dependencies: [],
+          lastId: 1,
         },
       };
     }
@@ -57,6 +58,7 @@ const interpreter = (
           inverseExtratreeEdges: {},
           rootId: '1',
           dependencies: [],
+          lastId: 1,
         },
       };
     }
