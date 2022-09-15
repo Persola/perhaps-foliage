@@ -1,4 +1,4 @@
-import StateMutator from '../../mutators/state-mutator';
+import StateMutator from '../../state-interface/state-mutator';
 
 import codeLoader from '../../code-loader/code-loader';
 import updateMainsideIntegration from '../../update-mainside-integration';

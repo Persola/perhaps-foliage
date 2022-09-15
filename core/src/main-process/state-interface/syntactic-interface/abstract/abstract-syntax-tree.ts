@@ -1,6 +1,6 @@
-import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
-import type { TreeList } from '../../../../types/syntactic/newnew/tree-list';
+import type { RawSyntaxTree } from '../../../../types/syntactic/raw/raw-syntax-tree';
+import { AbsoluteSynoUri } from '../../../../types/syntactic/syno-uri';
+import type { TreeList } from '../../../../types/syntactic/tree-list';
 import AbstractSyno from './abstract-syno';
 
 export default class AbstractSyntaxTree<
@@ -16,11 +16,10 @@ export default class AbstractSyntaxTree<
   readonly id: string;
   readonly treeList: TreeList;
   readonly raw: RawSyntaxTree;
-  readonly rootId: string;
   readonly lastId: number;
-  readonly dependencies: AbsoluteSynoUri[];
   readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
   SynoClass;
+  TreeClass;
 
   constructor(
     id: string,
@@ -29,7 +28,6 @@ export default class AbstractSyntaxTree<
     this.id = id;
     this.treeList = treeList;
     this.raw = treeList[id];
-    this.rootId = this.raw.rootId;
     this.lastId = this.raw.lastId;
     this.dependencyTrees = {};
     for (const uri of this.raw.dependencies) {
@@ -40,6 +38,10 @@ export default class AbstractSyntaxTree<
       this.dependencyTrees[strTreeHost] = treeList[strTreeHost];
     }
   }
+
+  rootId(): string { return this.raw.rootId; }
+
+  dependencies(): AbsoluteSynoUri[] { return this.raw.dependencies; }
 
   is(tree: AbstractSyntaxTree<SynoType>): boolean {
     return this.id === tree.id;
@@ -71,7 +73,7 @@ export default class AbstractSyntaxTree<
   }
 
   root(): SynoType {
-    return this.getSyno(this.rootId);
+    return this.getSyno(this.rootId());
   }
 
   // getDependencyTree(uri: AbsoluteSynoUri): this {

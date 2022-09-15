@@ -1,8 +1,8 @@
-import StateMutator from '../../mutators/state-mutator';
+import StateMutator from '../../state-interface/state-mutator';
 
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';
-import StateSelector from '../../selectors/state-selector';
+import StateSelector from '../../state-interface/state-selector';
 
 export default (
   readState: StateSelector,

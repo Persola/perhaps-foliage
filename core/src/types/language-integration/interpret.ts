@@ -1,4 +1,4 @@
-import StateSelector from '../../main-process/selectors/state-selector';
+import StateSelector from '../../main-process/state-interface/state-selector';
 
 import { EditorState } from '../editor-state/editor-state';
 import type { InterpretationResolution } from '../interpreter/interpretation-resolution';

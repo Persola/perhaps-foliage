@@ -1,5 +1,5 @@
-import type { IntertreeRefs, IntratreeRefs, RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
-import type { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
+import type { IntertreeRefs, IntratreeRefs, RawSyno } from '../../../../types/syntactic/raw/raw-syno';
+import type { SynoAttrVal } from '../../../../types/syntactic/syno-attr-val';
 import AbstractSyntaxTree from './abstract-syntax-tree';
 
 export default class AbstractSyno<
@@ -25,6 +25,7 @@ export default class AbstractSyno<
   readonly intertreeRefs: IntertreeRefs;
   readonly attrs: {[synoAttr: string]: SynoAttrVal};
   TreeClass;
+  SynoClass;
 
   constructor(
     id: string,
@@ -53,7 +54,7 @@ export default class AbstractSyno<
   }
 
   isRoot(): boolean {
-    return this.id === this.tree.rootId;
+    return this.id === this.tree.rootId();
   }
 
   parent(): this {

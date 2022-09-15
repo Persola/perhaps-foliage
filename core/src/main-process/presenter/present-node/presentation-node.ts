@@ -1,5 +1,5 @@
-import StateSelector from '../../selectors/state-selector';
-import SyntaxTree from '../../syntactic-interface/newnew/readable/syntax-tree';
+import StateSelector from '../../state-interface/state-selector';
+import SyntaxTree from '../../state-interface/syntactic-interface/readable/syntax-tree';
 
 import presentSyno from './present-syno';
 import presentNonSyno from './present-non-syno';

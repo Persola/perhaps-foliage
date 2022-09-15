@@ -15,7 +15,7 @@ type LabeledChild = [
 
 export type SerializedSyno = {
   type: string;
-  attrs: Attrs;
-  extratreeRefs: ExtratreeRefs;
-  children: LabeledChild[];
+  attrs?: Attrs; // not included is equivalent to empty
+  extratreeRefs?: ExtratreeRefs; // not included is equivalent to empty
+  children?: LabeledChild[]; // not included is equivalent to empty
 };

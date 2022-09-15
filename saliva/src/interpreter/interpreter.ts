@@ -1,4 +1,3 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
 
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
@@ -8,9 +7,10 @@ import interpretFunctionCall from './syntype-interpreters/interpret-function-cal
 import resolveRef from './resolve-ref';
 
 import type { Scope } from '../types/interpreter/scope';
+import type { SalivaType } from '../types/synos/saliva-type';
 
 const interpreter = (
-  interpretee: Syno,
+  interpretee: SalivaType,
   scope: Scope,
   state: StateSelector,
 ): InterpretationResolution => {

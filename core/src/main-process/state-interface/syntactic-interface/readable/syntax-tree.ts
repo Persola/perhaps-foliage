@@ -2,7 +2,7 @@ import Syno from './syno';
 
 import AbstractSyntaxTree from '../abstract/abstract-syntax-tree';
 
-import { TreeList } from '../../../../types/syntactic/newnew/tree-list';
+import { TreeList } from '../../../../types/syntactic/tree-list';
 
 export default class SyntaxTree extends AbstractSyntaxTree<Syno> {
   /*
@@ -15,6 +15,7 @@ export default class SyntaxTree extends AbstractSyntaxTree<Syno> {
     treeList: TreeList,
   ) {
     super(id, treeList);
+    this.TreeClass = SyntaxTree;
     this.SynoClass = Syno;
   }
 }

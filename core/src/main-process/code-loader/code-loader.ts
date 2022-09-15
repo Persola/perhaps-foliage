@@ -1,7 +1,7 @@
 import deserializeTree from './deserializer/deserialize-tree';
 
-import type { SerializedSyno } from '../../types/syntactic/newnew/serialized-syno';
-import type { RawSyntaxTree } from '../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { SerializedSyno } from '../../types/syntactic/serialized-syno';
+import type { RawSyntaxTree } from '../../types/syntactic/raw/raw-syntax-tree';
 
 export default {
   fromSerializedTree: (

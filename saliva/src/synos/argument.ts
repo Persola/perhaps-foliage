@@ -2,7 +2,9 @@ import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/r
 
 import type SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import type FunctionParameter from './function-parameter';
+import FunctionParameter from './function-parameter';
+import reinstantiateAsExpression from './reinstantiate-as-expression';
+
 import type { Expression } from '../types/synos/expression';
 import type { RawArgument } from '../types/synos/raw/argument';
 
@@ -22,11 +24,12 @@ export default class Argument extends Syno {
     const valueChildren = this.children({ label: 'value' });
 
     return valueChildren.length === 1
-      ? valueChildren[0] as unknown as Expression
+      ? reinstantiateAsExpression(valueChildren[0]) as unknown as Expression
       : null;
   }
 
   parameter(): FunctionParameter | null {
-    return this.followRef('parameter') as unknown as FunctionParameter;
+    const param = this.followRef('parameter');
+    return new FunctionParameter(param.id, param.tree);
   }
 }

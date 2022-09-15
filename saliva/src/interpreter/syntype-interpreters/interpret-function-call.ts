@@ -31,20 +31,18 @@ export default (
     };
   }
 
-  const argumentz = interpretee.argumentz();
-
-  const interpretedArgs: [Argument, BooleanLiteral][] = interpretArgs(
-    interpreter,
-    parentScope,
-    argumentz,
-    state,
-  );
-
   const apm: false | string = argumentParameterMismatch(interpretee, callee);
 
   if (apm) {
     throw new Error(apm);
   }
+
+  const interpretedArgs: [Argument, BooleanLiteral][] = interpretArgs(
+    interpreter,
+    parentScope,
+    interpretee.argumentz(),
+    state,
+  );
 
   const interpreteeScope = generateScope(
     callee,
@@ -59,24 +57,11 @@ export default (
         throw new Error();
       }
     });
-    const argValues: BooleanLiteral[] = interpretedArgs.map(
-      argRes => argRes[1],
-    );
-    functionResolution = norPrimitive(argValues);
+
+    functionResolution = norPrimitive(interpretedArgs.map(argRes => argRes[1]));
   } else {
-    const bodyChildren = callee.children({ label: 'body' });
-
-    if (bodyChildren.length === 0) {
-      return {
-        success: false,
-        error: {
-          message: `Non-primitive function definition (ID ${callee.id}) has no body`,
-        },
-      };
-    }
-
     functionResolution = interpreter(
-      bodyChildren[0],
+      callee.body(),
       interpreteeScope,
       state,
     );
@@ -92,7 +77,7 @@ export default (
   return {
     success: false,
     error: {
-      message: `function '${callee.attrs.name}' failed: \n${functionResolution.error.message}`,
+      message: `Function '${callee.attrs.name}' failed: \n${functionResolution.error.message}`,
     },
   };
 };

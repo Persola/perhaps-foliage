@@ -6,8 +6,8 @@ import produce from 'immer';
 
 import type { Store, Action } from 'redux';
 
-import StateSelector from '../selectors/state-selector';
-import StateMutator from '../mutators/state-mutator';
+import StateSelector from '../state-interface/state-selector';
+import StateMutator from '../state-interface/state-mutator';
 
 import codeLoader from '../code-loader/code-loader';
 import verifyType from './reducers/util/verify-action-type';
@@ -46,7 +46,7 @@ import type { Warn } from '../../types/cross-context/warn';
 import type { EditorState } from '../../types/editor-state/editor-state';
 import type { MutableEditorState } from '../../types/editor-state/mutable/mutable-editor-state';
 import type { Focus } from '../../types/editor-state/focus';
-import type { SerializedSyno } from '../../types/syntactic/newnew/serialized-syno';
+import type { SerializedSyno } from '../../types/syntactic/serialized-syno';
 
 type CreateStoreReturn = {
   editorStateStore: Store;

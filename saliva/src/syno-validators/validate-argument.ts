@@ -3,5 +3,9 @@ import Argument from '../synos/argument';
 export default (
   argument: Argument,
 ): boolean => {
-  return true;
+  return [
+    'booleanLiteral',
+    'functionCall',
+    'variableRef',
+  ].includes(argument.value().type);
 };

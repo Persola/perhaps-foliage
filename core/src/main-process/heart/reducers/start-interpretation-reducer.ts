@@ -1,5 +1,5 @@
-import StateSelector from '../../selectors/state-selector';
-import StateMutator from '../../mutators/state-mutator';
+import StateSelector from '../../state-interface/state-selector';
+import StateMutator from '../../state-interface/state-mutator';
 
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { Warn } from '../../../types/cross-context/warn';

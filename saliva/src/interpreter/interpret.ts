@@ -3,6 +3,7 @@ import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-sel
 import type { EditorState } from 'perhaps-foliage/dist/types/editor-state/editor-state';
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 
+import reinstantiateAsSalivaType from '../synos/reinstantiate-as-saliva-type';
 import interpreter from './interpreter';
 
 export default (
@@ -13,7 +14,9 @@ export default (
 
   try {
     resolution = interpreter(
-      state.editeeTree().root(),
+      reinstantiateAsSalivaType(
+        state.editeeTree().root(),
+      ),
       [],
       state,
     );

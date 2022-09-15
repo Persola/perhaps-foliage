@@ -1,4 +1,4 @@
-import StateSelector from '../../selectors/state-selector';
+import StateSelector from '../../state-interface/state-selector';
 
 import enstackChildPresnos from './enstack-child-presnos';
 import focuses from './focuses';
@@ -8,7 +8,7 @@ import type { Focus } from '../../../types/editor-state/focus';
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { SynPresno } from '../../../types/presenter/presnos/presno';
 import type { EnstackForPresentation } from '../../../types/presenter/enstack-for-presentation';
-import SyntaxTree from '../../syntactic-interface/newnew/readable/syntax-tree';
+import SyntaxTree from '../../state-interface/syntactic-interface/readable/syntax-tree';
 
 export default (
   synPresnoArgs: SynPresnoArgs,

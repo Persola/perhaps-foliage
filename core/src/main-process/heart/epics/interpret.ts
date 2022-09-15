@@ -3,13 +3,13 @@ import { Observable, filter, map } from 'rxjs';
 import type { Action } from 'redux';
 import type { StateObservable } from 'redux-observable';
 
-import StateSelector from '../../selectors/state-selector';
+import StateSelector from '../../state-interface/state-selector';
 
 import type { EditorState } from '../../../types/editor-state/editor-state';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
 import type { InterpretationResolutionSuccess } from '../../../types/interpreter/interpretation-resolution-success';
 import type { Warn } from '../../../types/cross-context/warn';
-import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyntaxTree } from '../../../types/syntactic/raw/raw-syntax-tree';
 
 export default (
   action$: Observable<Action>,

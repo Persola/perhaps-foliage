@@ -13,6 +13,7 @@ export default class Syno extends AbstractSyno<SyntaxTree> {
     tree: SyntaxTree,
   ) {
     super(id, tree);
+    this.SynoClass = Syno;
     this.TreeClass = SyntaxTree;
   }
 }

@@ -1,5 +1,5 @@
-import StateSelector from '../selectors/state-selector';
-import SyntaxTree from '../syntactic-interface/newnew/readable/syntax-tree';
+import StateSelector from '../state-interface/state-selector';
+import SyntaxTree from '../state-interface/syntactic-interface/readable/syntax-tree';
 
 import presentationNode from './present-node/presentation-node';
 import createEnstackForPresentation from './create-enstack-for-presentation';
@@ -21,7 +21,7 @@ export default (
   const mutablePresnoMap: MutablePresnoMap = {};
   const rootPrensoArgs: PresnoArgs = {
     type: 'synPresno',
-    synoId: tree.rootId,
+    synoId: tree.rootId(),
   };
   const toPresentStack: PresnoArgs[] = [rootPrensoArgs];
   const enstackForPresentation = createEnstackForPresentation(toPresentStack);

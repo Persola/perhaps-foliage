@@ -4,7 +4,7 @@ import { parse as parseYaml } from 'yaml';
 import type { Action } from 'redux';
 import type { StateObservable } from 'redux-observable';
 
-import StateSelector from '../../selectors/state-selector';
+import StateSelector from '../../state-interface/state-selector';
 
 import codeLoader from '../../code-loader/code-loader';
 

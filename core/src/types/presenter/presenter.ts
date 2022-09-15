@@ -1,8 +1,8 @@
-import Syno from '../../main-process/syntactic-interface/newnew/readable/syno';
+import Syno from '../../main-process/state-interface/syntactic-interface/readable/syno';
 
 import type { PresnoAttrVal } from './presnos/presno-attrs';
 import type { UnindexedPresnoArgs } from './presno-args/unindexed-presno-args';
-import StateSelector from '../../main-process/selectors/state-selector';
+import StateSelector from '../../main-process/state-interface/state-selector';
 
 // eslint-disable-next-line
 export type SynoPresenter = (

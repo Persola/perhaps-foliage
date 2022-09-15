@@ -1,4 +1,4 @@
-import StateMutator from '../../mutators/state-mutator';
+import StateMutator from '../../state-interface/state-mutator';
 
 import navOut from './navigate/nav-out';
 import navIn from './navigate/nav-in';

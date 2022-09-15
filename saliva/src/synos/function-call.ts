@@ -19,14 +19,20 @@ export default class FunctionCall extends Syno {
   readonly attrs: RawFunctionCall['attrs'];
 
   callee(): FunctionDefinition | null {
-    return (
+    const callee = (
       this.hasRef('callee')
         ? this.followRef('callee')
         : this.children({ label: 'callee' })[0] || null
-    ) as unknown as FunctionDefinition | null;
+    );
+
+    if (callee === null) {
+      return null;
+    }
+
+    return new FunctionDefinition(callee.id, callee.tree);
   }
 
   argumentz(): Argument[] {
-    return this.children({ label: 'argument' }) as unknown as Argument[];
+    return this.children({ label: 'argument' }).map(arg => new Argument(arg.id, arg.tree));
   }
 }

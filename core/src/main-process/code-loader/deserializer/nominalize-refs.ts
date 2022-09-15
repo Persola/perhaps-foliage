@@ -1,10 +1,10 @@
 import type { RawSyntaxTreeWithStructuralRefs } from '../../../types/code-loader/deserialization/raw-syntax-tree-with-structural-refs';
 import type { SynoMapWithStructuralRefs } from '../../../types/code-loader/deserialization/syno-map-with-structural-refs';
-import type { InverseEdgeMap } from '../../../types/syntactic/newnew/raw/inverse-edge-map';
-import type { IntertreeRefs, IntratreeRefs } from '../../../types/syntactic/newnew/raw/raw-syno';
-import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import type { SynoMap } from '../../../types/syntactic/newnew/raw/syno-map';
-import type { AbsoluteSynoUri } from '../../../types/syntactic/newnew/syno-uri';
+import type { InverseEdgeMap } from '../../../types/syntactic/raw/inverse-edge-map';
+import type { IntertreeRefs, IntratreeRefs } from '../../../types/syntactic/raw/raw-syno';
+import type { RawSyntaxTree } from '../../../types/syntactic/raw/raw-syntax-tree';
+import type { SynoMap } from '../../../types/syntactic/raw/syno-map';
+import type { AbsoluteSynoUri } from '../../../types/syntactic/syno-uri';
 
 const derivePathToId = (
   synoMap: SynoMapWithStructuralRefs,

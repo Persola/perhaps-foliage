@@ -1,12 +1,12 @@
-import Syno from '../syntactic-interface/newnew/readable/syno';
-import SyntaxTree from '../syntactic-interface/newnew/readable/syntax-tree';
+import Syno from './syntactic-interface/readable/syno';
+import SyntaxTree from './syntactic-interface/readable/syntax-tree';
 
 import type { EditorState } from '../../types/editor-state/editor-state';
 import type { ActualGrammar } from '../../types/grammar/actual-grammar';
-import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
+import type { SyntacticTypeSchema } from '../../types/language-integration/syntactic-type-schema/syntactic-type-schema';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
 import type { Focus } from '../../types/editor-state/focus';
-import type { AbsoluteSynoUri } from '../../types/syntactic/newnew/syno-uri';
+import type { AbsoluteSynoUri } from '../../types/syntactic/syno-uri';
 
 export default class StateSelector {
   // state is synced in updateState to point to the Redux state

@@ -1,4 +1,4 @@
-import type { RawSyntaxTree } from '../syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyntaxTree } from '../syntactic/raw/raw-syntax-tree';
 
 export type EndAsyncSyntreeLoad = {
   readonly type: 'END_SYNTREE_LOAD';

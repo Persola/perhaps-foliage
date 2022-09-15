@@ -1,5 +1,5 @@
-import StateSelector from '../../../selectors/state-selector';
-import Syno from '../../../syntactic-interface/newnew/readable/syno';
+import StateSelector from '../../../state-interface/state-selector';
+import Syno from '../../../state-interface/syntactic-interface/readable/syno';
 
 import type { NonChildAttrPresenter } from '../../../../types/language-integration/presenters/attr-presenters';
 import type { ReadRefAttrInstruction } from '../../../../types/language-integration/presenters/instructions/presno-non-child-attr-full-instruction';

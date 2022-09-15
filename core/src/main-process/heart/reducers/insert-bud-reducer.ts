@@ -1,5 +1,5 @@
-import type StateSelector from '../../selectors/state-selector';
-import type StateMutator from '../../mutators/state-mutator';
+import type StateSelector from '../../state-interface/state-selector';
+import type StateMutator from '../../state-interface/state-mutator';
 import type { InsertBud } from '../../../types/actions/commands/insert-bud';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';

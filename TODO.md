@@ -1,5 +1,4 @@
 **next**
-* introduce tree dependencies?
 * clean up
   * review new files
   * syntax tree/syno attr ordering
@@ -7,14 +6,6 @@
 * fix syntax tree/syno typing
   * break into two?
   * permanent solution?
-* core's validation responsibilities - validate inputs, keep closed within app to guaruntee
-  * syno type
-  * tree structure according to grammar (parents, children, edge labels)
-    * syntype schema must specify optionality
-      * ...and possibly functionCall child/ref OR?
-  * attrs and extratree refs according to syntype schema
-* core provides integrations with user interfaces for attrs, extratree refs according to syntype schema
-* check for tree validity before interpretation
 
 **testing**
 * try rendering everything that should already be renderable
@@ -23,6 +14,13 @@
 
 **maintenance**
 * enable noImplicitAny
+* check for tree validity before interpretation
+* validate syntactic data during deserialization
+* core's validation marking responsibilities
+  * tree structure according to grammar (parents, children, edge labels)
+    * syntype schema must specify optionality
+  * attrs and extratree refs according to syntactic type schema
+* core provides integrations with user interfaces for attrs, extratree refs according to syntype schema
 * group imports (e.g. createEditorStateStore)
 * extract common logic between editor renderers and integration (generated) renderers
   * presno ID, parent attr, focused, valid

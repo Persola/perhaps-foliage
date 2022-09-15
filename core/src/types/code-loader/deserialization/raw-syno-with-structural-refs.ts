@@ -1,5 +1,5 @@
-import type { ExtratreeRefs } from '../../syntactic/newnew/serialized-syno';
-import type { SynoAttrVal } from '../../syntactic/newnew/syno-attr-val';
+import type { ExtratreeRefs } from '../../syntactic/serialized-syno';
+import type { SynoAttrVal } from '../../syntactic/syno-attr-val';
 
 export type RawSynoWithStructuralRefs = {
   id: string;

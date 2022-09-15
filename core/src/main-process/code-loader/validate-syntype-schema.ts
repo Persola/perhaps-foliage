@@ -3,7 +3,7 @@ import * as Ajv from 'ajv';
 import invalidate from './graph-validator/invalidate';
 import syntacticTypeSchemaSchema from './schemas/syntactic-type-schema-schema';
 
-import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
+import type { SyntacticTypeSchema } from '../../types/language-integration/syntactic-type-schema/syntactic-type-schema';
 import type { ValidationResult } from '../../types/code-loader/validation-result';
 
 const grammarValidator = (syntacticTypeSchema: SyntacticTypeSchema): ValidationResult => {

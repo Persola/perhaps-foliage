@@ -1,5 +1,5 @@
-import type { RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
-import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyno } from '../../../../types/syntactic/raw/raw-syno';
+import type { RawSyntaxTree } from '../../../../types/syntactic/raw/raw-syntax-tree';
 
 export default (tree: RawSyntaxTree): RawSyno => {
   const { synoMap } = tree;

@@ -1,5 +1,5 @@
-import type { TypeAttrs } from '../syntactic/newnew/type-attrs';
+import { SerializedSyno } from '../syntactic/serialized-syno';
 
 export type KeyToNewSynoAttrs = Readonly<{
-  [input: string]: TypeAttrs;
+  [input: string]: SerializedSyno;
 }>;

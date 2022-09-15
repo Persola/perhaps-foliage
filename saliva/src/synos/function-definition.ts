@@ -1,8 +1,10 @@
 import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
 import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
 
-import type FunctionParameter from './function-parameter';
+import FunctionParameter from './function-parameter';
 import type { RawFunctionDefinition } from '../types/synos/raw/function-definition';
+import { Expression } from '../types/synos/expression';
+import reinstantiateAsExpression from './reinstantiate-as-expression';
 
 export default class FunctionDefinition extends Syno {
   readonly id: string;
@@ -16,7 +18,17 @@ export default class FunctionDefinition extends Syno {
   readonly intertreeRefs: RawFunctionDefinition['intertreeRefs'];
   readonly attrs: RawFunctionDefinition['attrs'];
 
+  body(): Expression | null {
+    const body = this.children({ label: 'body' })[0] || null;
+
+    if (body === null) {
+      return null;
+    }
+
+    return reinstantiateAsExpression(body);
+  }
+
   parameters(): FunctionParameter[] {
-    return this.children({ label: 'parameter' }) as unknown as FunctionParameter[];
+    return this.children({ label: 'parameter' }).map(arg => new FunctionParameter(arg.id, arg.tree));
   }
 }

@@ -1,12 +1,11 @@
 import AbstractSyntaxTree from '../abstract/abstract-syntax-tree';
 import MutableSyno from './mutable-syno';
 
-import type { MutableTreeList } from '../../../../types/syntactic/newnew/mutables/mutable-tree-list';
-import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import type { RawSyno } from '../../../../types/syntactic/newnew/raw/raw-syno';
-import type { InverseEdgeMapEntry } from '../../../../types/syntactic/newnew/raw/inverse-edge-map';
-import type { AbsoluteSynoUri } from '../../../../types/syntactic/newnew/syno-uri';
-import { SynoAttrVal } from '../../../../types/syntactic/newnew/syno-attr-val';
+import type { MutableTreeList } from '../../../../types/syntactic/mutables/mutable-tree-list';
+import type { RawSyntaxTree } from '../../../../types/syntactic/raw/raw-syntax-tree';
+import type { RawSyno } from '../../../../types/syntactic/raw/raw-syno';
+import type { InverseEdgeMapEntry } from '../../../../types/syntactic/raw/inverse-edge-map';
+import type { SerializedSyno } from '../../../../types/syntactic/serialized-syno';
 
 export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   /*
@@ -18,9 +17,6 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   readonly id: string;
   readonly treeList: MutableTreeList;
   readonly raw: RawSyntaxTree; // see above
-  readonly rootId: string;
-  lastId: number;
-  readonly dependencies: AbsoluteSynoUri[];
   readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
 
   constructor(
@@ -28,21 +24,21 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
     treeList: MutableTreeList, // see above
   ) {
     super(id, treeList);
+    this.TreeClass = MutableSyntaxTree;
     this.SynoClass = MutableSyno;
   }
 
   nextId(): string {
-    const next = this.lastId + 1;
-    this.lastId = next;
-    return String(next);
+    this.raw.lastId += 1;
+    return String(this.raw.lastId);
   }
 
   addSyno(
     parentId: string,
     insertIndex: number,
     edgeLabel: string,
-    syno: { type: string, attrs: { [attrName: string]: SynoAttrVal } }, // RawSyno,
-  ): void {
+    syno: SerializedSyno,
+  ): string {
     // update inverse refs based on extratree refs
     // update dependency trees
     // update rootid
@@ -51,6 +47,7 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
     const parent = this.getSyno(parentId);
     parent.raw.childIds.splice(insertIndex, 0, newId);
     this.raw.synoMap[newId] = {
+      attrs: {},
       ...syno,
       id: newId,
       parentId,
@@ -59,6 +56,8 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
       intratreeRefs: {},
       intertreeRefs: {},
     };
+
+    return newId;
   }
 
   deleteExtratreeRefsTo(synoId: string): void {

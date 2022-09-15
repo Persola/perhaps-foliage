@@ -1,7 +1,7 @@
 import { ActualGrammar } from '../../grammar/actual-grammar';
-import { SyntacticTypeSchema } from '../../syntactic-type-schema/syntactic-type-schema';
+import { SyntacticTypeSchema } from '../../language-integration/syntactic-type-schema/syntactic-type-schema';
 import { KeyToNewSynoAttrs } from '../../language-integration/key-to-new-syno-attrs';
-import { TreeList } from '../../syntactic/newnew/tree-list';
+import { TreeList } from '../../syntactic/tree-list';
 import { MutableFocus } from './mutable-focus';
 
 export type MutableEditorState = {

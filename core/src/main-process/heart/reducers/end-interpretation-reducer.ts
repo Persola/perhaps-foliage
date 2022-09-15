@@ -1,10 +1,10 @@
-import StateSelector from '../../selectors/state-selector';
-import StateMutator from '../../mutators/state-mutator';
+import StateSelector from '../../state-interface/state-selector';
+import StateMutator from '../../state-interface/state-mutator';
 
 import type { EndInterpretation } from '../../../types/actions/end-interpretation';
 import type { Warn } from '../../../types/cross-context/warn';
-import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
-import type { TreeList } from '../../../types/syntactic/newnew/tree-list';
+import type { RawSyntaxTree } from '../../../types/syntactic/raw/raw-syntax-tree';
+import type { TreeList } from '../../../types/syntactic/tree-list';
 
 export default (
   writeState: StateMutator,

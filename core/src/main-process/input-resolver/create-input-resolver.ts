@@ -1,6 +1,6 @@
 import { Store } from 'redux';
 
-import StateSelector from '../selectors/state-selector';
+import StateSelector from '../state-interface/state-selector';
 
 import createCommandResolver from './input-resolvers/create-command-resolver';
 import coreTextModeBindings from './input-resolvers/core-bindings/core-text-mode-bindings';

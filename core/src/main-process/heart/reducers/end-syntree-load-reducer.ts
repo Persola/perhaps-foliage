@@ -1,8 +1,8 @@
-import StateMutator from '../../mutators/state-mutator';
+import StateMutator from '../../state-interface/state-mutator';
 
 import type { EndAsyncSyntreeLoad } from '../../../types/actions/end-syntree-load';
 import type { Warn } from '../../../types/cross-context/warn';
-import type { RawSyntaxTree } from '../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyntaxTree } from '../../../types/syntactic/raw/raw-syntax-tree';
 
 export default (
   state: StateMutator,

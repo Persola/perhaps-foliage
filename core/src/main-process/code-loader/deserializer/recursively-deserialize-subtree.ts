@@ -1,5 +1,5 @@
 import type { SynoMapWithStructuralRefs } from '../../../types/code-loader/deserialization/syno-map-with-structural-refs';
-import type { SerializedSyno } from '../../../types/syntactic/newnew/serialized-syno';
+import type { SerializedSyno } from '../../../types/syntactic/serialized-syno';
 
 const recursivelyDeserializeSubtree = (
   serializedTree: SerializedSyno,

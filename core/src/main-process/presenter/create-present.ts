@@ -1,4 +1,4 @@
-import StateSelector from '../selectors/state-selector';
+import StateSelector from '../state-interface/state-selector';
 
 import presentTree from './present-tree';
 

@@ -1,4 +1,4 @@
-import StateMutator from '../../mutators/state-mutator';
+import StateMutator from '../../state-interface/state-mutator';
 
 export default (
   state: StateMutator,

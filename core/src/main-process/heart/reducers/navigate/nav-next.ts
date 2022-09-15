@@ -1,4 +1,4 @@
-import StateMutator from '../../../mutators/state-mutator';
+import StateMutator from '../../../state-interface/state-mutator';
 
 import type { MutableFocus } from '../../../../types/editor-state/mutable/mutable-focus';
 import type { Warn } from '../../../../types/cross-context/warn';

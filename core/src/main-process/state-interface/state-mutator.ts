@@ -1,11 +1,11 @@
-import StateSelector from '../selectors/state-selector';
-import MutableSyntaxTree from '../syntactic-interface/newnew/writable/mutable-syntax-tree';
-import MutableSyno from '../syntactic-interface/newnew/writable/mutable-syno';
+import StateSelector from './state-selector';
+import MutableSyntaxTree from './syntactic-interface/writable/mutable-syntax-tree';
+import MutableSyno from './syntactic-interface/writable/mutable-syno';
 
 import type { ActualGrammar } from '../../types/grammar/actual-grammar';
-import type { SyntacticTypeSchema } from '../../types/syntactic-type-schema/syntactic-type-schema';
+import type { SyntacticTypeSchema } from '../../types/language-integration/syntactic-type-schema/syntactic-type-schema';
 import type { KeyToNewSynoAttrs } from '../../types/language-integration/key-to-new-syno-attrs';
-import type { AbsoluteSynoUri } from '../../types/syntactic/newnew/syno-uri';
+import type { AbsoluteSynoUri } from '../../types/syntactic/syno-uri';
 import type { MutableEditorState } from '../../types/editor-state/mutable/mutable-editor-state';
 import type { MutableFocus } from '../../types/editor-state/mutable/mutable-focus';
 

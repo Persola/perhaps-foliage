@@ -1,4 +1,4 @@
-import type { RawSyntaxTree } from '../../../../types/syntactic/newnew/raw/raw-syntax-tree';
+import type { RawSyntaxTree } from '../../../../types/syntactic/raw/raw-syntax-tree';
 
 const recursivelyAddDescendants = (
   synoId: string,

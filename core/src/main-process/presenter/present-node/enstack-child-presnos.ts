@@ -1,4 +1,4 @@
-import Syno from '../../syntactic-interface/newnew/readable/syno';
+import Syno from '../../state-interface/syntactic-interface/readable/syno';
 
 import type { MainsidePresentLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-present-lang-int';
 import type { Focus } from '../../../types/editor-state/focus';

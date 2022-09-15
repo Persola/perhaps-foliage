@@ -1,10 +1,9 @@
 import type { ReplaceFocusedSyno } from '../../../types/actions/commands/replace-focused-syno';
 import type { MainsideLangInt } from '../../../types/language-integration/interfaces/mainside/mainside-lang-int';
-import type { KeyToNewSynoAttrs } from '../../../types/language-integration/key-to-new-syno-attrs';
 import type { UnistlikeEdit } from '../../../types/unistlike/unistlike-edit';
 import type { Warn } from '../../../types/cross-context/warn';
-import type StateMutator from '../../mutators/state-mutator';
-import type StateSelector from '../../selectors/state-selector';
+import type StateMutator from '../../state-interface/state-mutator';
+import type StateSelector from '../../state-interface/state-selector';
 
 export default (
   action: ReplaceFocusedSyno,
@@ -24,6 +23,11 @@ export default (
     return;
   }
 
+  if (readState.focusedSyno().isRoot()) {
+    warnUser('Ignoring REPLACE_FOCUSED_SYNO action: cannot replace root syno');
+    return;
+  }
+
   latestEdit.push({
     undo: {
       type: 'REPLACE_SYNO',
@@ -34,11 +38,12 @@ export default (
   });
 
   writeState.focusedSyno().destroy();
-  writeState.editeeTree().addSyno(
+  const newSynoId = writeState.editeeTree().addSyno(
     readState.focusedSyno().parent().id,
     readState.focusedSyno().index(),
     readState.focusedSyno().rootwardEdgeLabel,
     action.newSynoAttrs,
   );
+  writeState.focus().synoId = newSynoId;
   writeState.state.resultOutdated = true;
 };

@@ -16,10 +16,15 @@ export default class MutableSyno extends AbstractSyno<MutableSyntaxTree> {
     tree: MutableSyntaxTree,
   ) {
     super(id, tree);
+    this.SynoClass = MutableSyno;
     this.TreeClass = MutableSyntaxTree;
   }
 
   destroy(): void {
+    if (this.isRoot()) {
+      throw new Error(`Cannot destroy root syno (${this.id})`);
+    }
+
     for (const descendantId of subtreeSynoIds(this.id, this.tree.raw)) {
       this.tree.deleteExtratreeRefsTo(descendantId);
       this.tree.deleteExtratreeRefsFrom(descendantId);
