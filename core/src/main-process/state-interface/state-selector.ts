@@ -118,10 +118,6 @@ export default class StateSelector {
   }
 
   // synos
-  getEditeeSyno(synoId: string): Syno {
-    return this.editeeTree().getSyno(synoId);
-  }
-
   getSynoByUri(uri: AbsoluteSynoUri): Syno {
     const uriTreeHost = uri.treeHost.join('.');
     const tree = [

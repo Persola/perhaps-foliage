@@ -1,6 +1,6 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+import Syno from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syno';
 
-import type SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
+import type SyntaxTree from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syntax-tree';
 
 import FunctionParameter from './function-parameter';
 import reinstantiateAsExpression from './reinstantiate-as-expression';
@@ -30,6 +30,11 @@ export default class Argument extends Syno {
 
   parameter(): FunctionParameter | null {
     const param = this.followRef('parameter');
+
+    if (param === null) {
+      return null;
+    }
+
     return new FunctionParameter(param.id, param.tree);
   }
 }

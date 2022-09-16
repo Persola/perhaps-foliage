@@ -1,11 +1,13 @@
 import Argument from '../synos/argument';
 
 export default (
-  argument: Argument,
+  argumentAsSyno: Argument,
 ): boolean => {
+  const funkshunDef = new Argument(argumentAsSyno.id, argumentAsSyno.tree);
+
   return [
     'booleanLiteral',
     'functionCall',
     'variableRef',
-  ].includes(argument.value().type);
+  ].includes(funkshunDef.value()?.type);
 };

@@ -17,7 +17,7 @@ export default (instruction: ReadRefAttrInstruction): NonChildAttrPresenter => {
         if (referentId === null) {
           return null;
         }
-        referentSyno = state.getEditeeSyno(referentId);
+        referentSyno = state.editeeTree().getSyno(referentId);
         break;
       } case 'intertree': {
         const referentUri = syno.intertreeRefs[instruction.ref];

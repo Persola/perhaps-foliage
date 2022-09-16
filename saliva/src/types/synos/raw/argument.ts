@@ -1,4 +1,4 @@
-import { AbsoluteSynoUri } from 'perhaps-foliage/dist/types/syntactic/newnew/syno-uri';
+import { AbsoluteSynoUri } from 'perhaps-foliage/dist/types/syntactic/syno-uri';
 
 export type RawArgument = {
   readonly id: string;

@@ -1,5 +1,5 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
-import SyntaxTree from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syntax-tree';
+import Syno from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syno';
+import SyntaxTree from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syntax-tree';
 
 import { RawBooleanLiteral } from '../types/synos/raw/boolean-literal';
 

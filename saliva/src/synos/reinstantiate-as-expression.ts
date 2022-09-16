@@ -1,4 +1,4 @@
-import Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+import Syno from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syno';
 
 import BooleanLiteral from './boolean-literal';
 import FunctionCall from './function-call';

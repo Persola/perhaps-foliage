@@ -1,4 +1,4 @@
-import AbstractSyntaxTree from '../abstract/abstract-syntax-tree';
+import SyntaxTree from '../readable/syntax-tree';
 import MutableSyno from './mutable-syno';
 
 import type { MutableTreeList } from '../../../../types/syntactic/mutables/mutable-tree-list';
@@ -6,8 +6,9 @@ import type { RawSyntaxTree } from '../../../../types/syntactic/raw/raw-syntax-t
 import type { RawSyno } from '../../../../types/syntactic/raw/raw-syno';
 import type { InverseEdgeMapEntry } from '../../../../types/syntactic/raw/inverse-edge-map';
 import type { SerializedSyno } from '../../../../types/syntactic/serialized-syno';
+import { AbsoluteSynoUri } from '../../../../types/syntactic/syno-uri';
 
-export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
+export default class MutableSyntaxTree {
   /*
     The raw property and treeList constructor arg are immer'd proxies.
 
@@ -17,15 +18,25 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
   readonly id: string;
   readonly treeList: MutableTreeList;
   readonly raw: RawSyntaxTree; // see above
+  readonly readable: SyntaxTree;
   readonly dependencyTrees: { [treeHost: string]: RawSyntaxTree };
 
   constructor(
     id: string,
-    treeList: MutableTreeList, // see above
+    treeList: MutableTreeList,
   ) {
-    super(id, treeList);
-    this.TreeClass = MutableSyntaxTree;
-    this.SynoClass = MutableSyno;
+    this.id = id;
+    this.treeList = treeList;
+    this.raw = treeList[id];
+    this.readable = new SyntaxTree(id, treeList);
+    this.dependencyTrees = {};
+    for (const uri of this.raw.dependencies) {
+      const strTreeHost = uri.treeHost.join('.');
+      if (treeList[strTreeHost] === undefined) {
+        throw new Error(`Cannot link unloaded dependency tree '${strTreeHost}'`);
+      }
+      this.dependencyTrees[strTreeHost] = treeList[strTreeHost];
+    }
   }
 
   nextId(): string {
@@ -77,7 +88,7 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
       if (key === null) {
         throw new Error();
       }
-      delete rawReferer.intratreeRefs[key];
+      rawReferer.intratreeRefs[key] = null;
     };
 
     const refererIds: InverseEdgeMapEntry = this.raw.inverseExtratreeEdges[synoId];
@@ -100,5 +111,28 @@ export default class MutableSyntaxTree extends AbstractSyntaxTree<MutableSyno> {
     }
 
     rawSyno.intertreeRefs = {};
+  }
+
+  // forwards
+
+  rootId(): string { return this.readable.rootId(); }
+
+  dependencies(): AbsoluteSynoUri[] { return this.readable.dependencies(); }
+
+  is(tree: SyntaxTree): boolean { return this.readable.is(tree); }
+
+  hasSyno(synoId: string): boolean { return this.readable.hasSyno(synoId); }
+
+  getSyno(synoId: string): MutableSyno {
+    return new MutableSyno(synoId, this); // NOT FORWARDED
+  }
+
+  getSynoByPath(synoPath: number[]): MutableSyno {
+    const readable = this.readable.getSynoByPath(synoPath);
+    return new MutableSyno(readable.id, this); // NOT FORWARDED
+  }
+
+  root(): MutableSyno {
+    return new MutableSyno(this.rootId(), this); // NOT FORWARDED
   }
 }

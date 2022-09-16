@@ -9,6 +9,15 @@ export default (
 ): false | string => {
   const argumentz = functionCall.argumentz();
 
+  const argsWithoutParams = argumentz.filter(arg => arg.parameter() === null);
+
+  if (argsWithoutParams.length > 0) {
+    return (
+      `Argument(s) (IDs ${argsWithoutParams.map(arg => `${arg.id}`).join(', ')})`
+      + ' lack(s) (a) parameter(s)'
+    );
+  }
+
   const argsWithWrongFuncDefParams = argumentz.filter((arg: Argument) => {
     return !arg.parameter().parent().is(functionDefinition);
   });

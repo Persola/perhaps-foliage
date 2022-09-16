@@ -1,5 +1,5 @@
-import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
-import { RawSyntaxTree } from 'perhaps-foliage/dist/types/syntactic/newnew/raw/raw-syntax-tree';
+import StateSelector from 'perhaps-foliage/dist/main-process/state-interface/state-selector';
+import { RawSyntaxTree } from 'perhaps-foliage/dist/types/syntactic/raw/raw-syntax-tree';
 
 export default class DocumentStateTracker {
   public constructor() {

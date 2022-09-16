@@ -1,6 +1,6 @@
-import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+import StateSelector from 'perhaps-foliage/dist/main-process/state-interface/state-selector';
 
-import type Syno from 'perhaps-foliage/dist/main-process/syntactic-interface/newnew/readable/syno';
+import type Syno from 'perhaps-foliage/dist/main-process/state-interface/syntactic-interface/readable/syno';
 
 import FunctionCall from '../synos/function-call';
 import argumentParameterMismatch from '../utils/argument-parameter-mismatch';

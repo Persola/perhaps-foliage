@@ -1,4 +1,4 @@
-import StateSelector from 'perhaps-foliage/dist/main-process/selectors/state-selector';
+import StateSelector from 'perhaps-foliage/dist/main-process/state-interface/state-selector';
 
 import type { InterpretationResolution } from 'perhaps-foliage/dist/types/interpreter/interpretation-resolution';
 

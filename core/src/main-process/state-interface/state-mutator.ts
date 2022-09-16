@@ -59,10 +59,6 @@ export default class StateMutator {
   }
 
   // synos
-  getEditeeSyno(synoId: string): MutableSyno {
-    return this.editeeTree().getSyno(synoId);
-  }
-
   getSynoByUri(uri: AbsoluteSynoUri): MutableSyno {
     const uriTreeHost = uri.treeHost.join('.');
     const tree = [
@@ -89,7 +85,7 @@ export default class StateMutator {
   }
 
   focusedSyno(): MutableSyno {
-    return this.getEditeeSyno(this.focusedSynoId());
+    return this.editeeTree().getSyno(this.focusedSynoId());
   }
 
   focus(): MutableFocus { return this.selector.focus(); }
