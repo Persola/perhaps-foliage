@@ -1,11 +1,11 @@
 {
   "name": "perhaps-foliage-electron",
   "displayName": "Perhaps Foliage Electron",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "electron build of Perhaps Foliage",
   "author": "Luke Persola",
   "engines": {
-    "node": "14.17.1"
+    "node": "18.11.0"
   },
   "scripts": {
     "clean": "mkdir -p built; rm -dr built/*",

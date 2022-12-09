@@ -11,7 +11,7 @@ import renderers from './renderers/renderers';
 import styles from './stylesheet.lazy.css';
 
 export default {
-  id: 'pantheon.0.0.14',
+  id: 'pantheon.0.0.15',
   actualGrammar,
   syntypeSchema,
   primitives: {},
